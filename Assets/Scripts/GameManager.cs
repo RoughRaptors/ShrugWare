@@ -131,12 +131,10 @@ namespace ShrugWare
             {
                 timeInMainScene = 0.0f;
 
-                // list starts at 0 while our scenes start at miniGameStart. we need to subtract that out for proper list indexing
-                int minigameStart = (int)DataManager.Scenes.MainScene + 1;
-                int nextMinigameSceneIndex = Random.Range(minigameStart, (int)DataManager.Scenes.MINIGAME_END + 1) - minigameStart;
-                int nextMinigameScene = (int)minigameList[nextMinigameSceneIndex];
-                minigameList.RemoveAt(nextMinigameSceneIndex);
-                LoadScene(nextMinigameScene);
+                int minigameSceneIndex = Random.Range(0, minigameList.Count);
+                DataManager.Scenes scene = minigameList[minigameSceneIndex];
+                minigameList.RemoveAt(minigameSceneIndex);
+                LoadScene((int)scene);
             }
         }
 
