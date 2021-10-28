@@ -24,12 +24,20 @@ namespace ShrugWare
         [SerializeField]
         GameObject debugObject;
 
+        [SerializeField]
+        Canvas mainCanvas;
+
+        [SerializeField]
+        Button startGameButton;
+
+        [SerializeField]
+        Text scoreText;
+
         public static GameManager Instance;
 
         private float curTimeScale = 1.0f;
         public float GetCurTimeScale() { return curTimeScale; }
 
-        private int numMinigamesAttempted = 0;
         private int numMinigamesWon = 0;
         private int numMinigamesLost = 0;
 
@@ -65,7 +73,6 @@ namespace ShrugWare
 
                 // set all of our shit back - figure out a better solution later if there is one - TODO MAKE THIS BETTER
                 curTimeScale = GameManager.Instance.curTimeScale;
-                numMinigamesAttempted = GameManager.Instance.numMinigamesAttempted;
                 numMinigamesWon = GameManager.Instance.numMinigamesWon;
                 numMinigamesLost = GameManager.Instance.numMinigamesLost;
                 minigameList = GameManager.Instance.minigameList;
@@ -80,6 +87,7 @@ namespace ShrugWare
         private void Start()
         {
             timeToNextMinigameText.enabled = false;
+            scoreText.enabled = false;
             timeScaleInputField.text = "Time Scale: " + curTimeScale.ToString("F3");
             Time.timeScale = curTimeScale;
 
@@ -134,6 +142,8 @@ namespace ShrugWare
                 int minigameSceneIndex = Random.Range(0, minigameList.Count);
                 DataManager.Scenes scene = minigameList[minigameSceneIndex];
                 minigameList.RemoveAt(minigameSceneIndex);
+
+                mainCanvas.enabled = false;
                 LoadScene((int)scene);
             }
         }
@@ -150,29 +160,43 @@ namespace ShrugWare
             timeScaleInputField.text = "Time Scale: " + curTimeScale.ToString("F3");
         }
 
-        public void MinigameSucceeded()
+        public void MinigameCompleted(bool wonMinigame)
         {
-            ++numMinigamesAttempted;
-            ++numMinigamesWon;
-        }
+            if(wonMinigame)
+            {
+                ++numMinigamesWon;
+            }
+            else
+            {
+                ++numMinigamesLost;
+            }
 
-        public void MinigameFailed()
-        {
-            ++numMinigamesAttempted;
-            ++numMinigamesLost;
+            scoreText.text = "Minigames Won: " + numMinigamesWon.ToString() + " Minigames Lost: " + numMinigamesLost.ToString();
+            mainCanvas.enabled = true;
         }
 
         // would be nice to get some kind of transition/animation for this to be smooth, something like warioware curtains opening and closing
         public void LoadScene(int sceneIndex)
         {
+            if (sceneIndex == (int)DataManager.Scenes.MainScene)
+            {
+                mainCanvas.enabled = true;
+            }
+            else
+            {
+                mainCanvas.enabled = false;
+            }
+
             curSceneIndex = sceneIndex;
             SceneManager.LoadScene(sceneIndex);
         }
 
         public void StartGame()
         {
+            scoreText.enabled = true;
             timeToNextMinigameText.enabled = true;
             debugObject.SetActive(false);
+            startGameButton.gameObject.SetActive(false);
             
             gameStarted = true;
             PickAndStartNextMinigame();

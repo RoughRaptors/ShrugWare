@@ -15,27 +15,26 @@ namespace ShrugWare
         protected float minigameDurationRemaining;
         protected MinigameCategory minigameCategory;
 
+        // used to restrict player input and introduce a delay to the beginning of a minigame
+        protected float timeElapsed = 0.0f;
+
         protected void Start()
         {
-            Time.timeScale = GameManager.Instance.GetCurTimeScale();
-        }
+            minigameDurationRemaining = DataManager.MINIGAME_DURATION_SECONDS;
 
-        protected void HandleMinigameSuccess()
-        {
-            // should only be null if running the minigame scene on its own
+            // will be null if individually loading scenes
             if (GameManager.Instance)
             {
-                GameManager.Instance.MinigameSucceeded();
-                GameManager.Instance.LoadScene((int)DataManager.Scenes.MainScene);
+                Time.timeScale = GameManager.Instance.GetCurTimeScale();
             }
         }
 
-        protected void HandleMinigameFailure()
+        protected void HandleMinigameEnd(bool wonMinigame)
         {
             // should only be null if running the minigame scene on its own
             if (GameManager.Instance)
             {
-                GameManager.Instance.MinigameFailed();
+                GameManager.Instance.MinigameCompleted(wonMinigame);
                 GameManager.Instance.LoadScene((int)DataManager.Scenes.MainScene);
             }
         }
