@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-/* to add a new minigame: 
-1: copy an existing minigame scene and rename it
-2: create/copy a script for the new minigame and open the scene
+/* to add a new microgame: 
+1: copy an existing microgame scene and rename it
+2: create/copy a script for the new microgame and open the scene
 3: in unity -> file -> build settings -> add open scene
-4: in DataManager.cs -> add the new scene name to the enum Scenes and update the MINIGAME_END value
+4: in DataManager.cs -> add the new scene name to the enum Scenes and update the MICROGAME_END value
 */
 
 namespace ShrugWare
@@ -19,7 +19,7 @@ namespace ShrugWare
         InputField timeScaleInputField;
 
         [SerializeField]
-        Text timeToNextMinigameText;
+        Text timeToNextMicrogameText;
 
         [SerializeField]
         GameObject debugObject;
@@ -38,22 +38,22 @@ namespace ShrugWare
         private float curTimeScale = 1.0f;
         public float GetCurTimeScale() { return curTimeScale; }
 
-        private int numMinigamesWon = 0;
-        private int numMinigamesLost = 0;
+        private int numMicrogamesWon = 0;
+        private int numMicrogamesLost = 0;
 
         // keep track of this so we can always know our scene index from anywhere - maybe useful later
         private int curSceneIndex = 0;
         public int GetCurSceneIndex() { return curSceneIndex; }
 
         // we could use a queue for this, but that makes randomization a bit more involved
-        // for now, we can make this a stupid random and just add all of our minigame indices to it
-        // to pick a minigame, pick an index at random and remove that index from the list (a little expensive with large lists, meh)
-        // if our list is empty when we go to pick our next minigame, we reconstruct the list
-        private List<DataManager.Scenes> minigameList = new List<DataManager.Scenes>();
+        // for now, we can make this a stupid random and just add all of our microgame indices to it
+        // to pick a microgame, pick an index at random and remove that index from the list (a little expensive with large lists, meh)
+        // if our list is empty when we go to pick our next microgame, we reconstruct the list
+        private List<DataManager.Scenes> microgameList = new List<DataManager.Scenes>();
 
         private bool gameStarted = false;
 
-        // for now until we find something better, hold this so we know when to transition to our next minigame - TODO MAKE THIS BETTER
+        // for now until we find something better, hold this so we know when to transition to our next microgame - TODO MAKE THIS BETTER
         private float timeInMainScene = 0.0f;
 
         // 0 is still alive, it's your last life
@@ -73,9 +73,9 @@ namespace ShrugWare
 
                 // set all of our shit back - figure out a better solution later if there is one - TODO MAKE THIS BETTER
                 curTimeScale = GameManager.Instance.curTimeScale;
-                numMinigamesWon = GameManager.Instance.numMinigamesWon;
-                numMinigamesLost = GameManager.Instance.numMinigamesLost;
-                minigameList = GameManager.Instance.minigameList;
+                numMicrogamesWon = GameManager.Instance.numMicrogamesWon;
+                numMicrogamesLost = GameManager.Instance.numMicrogamesLost;
+                microgameList = GameManager.Instance.microgameList;
                 gameStarted = GameManager.Instance.gameStarted;
                 livesLeft = GameManager.Instance.livesLeft;
                 timeInMainScene = 0.0f;
@@ -86,29 +86,29 @@ namespace ShrugWare
 
         private void Start()
         {
-            timeToNextMinigameText.enabled = false;
+            timeToNextMicrogameText.enabled = false;
             scoreText.enabled = false;
             timeScaleInputField.text = "Time Scale: " + curTimeScale.ToString("F3");
             Time.timeScale = curTimeScale;
 
-            // initialize our minigame queue if this is our first time starting
-            if (minigameList.Count == 0)
+            // initialize our microgame queue if this is our first time starting
+            if (microgameList.Count == 0)
             {
-                PopulateMinigameList();
+                PopulateMicrogameList();
             }
         }
 
         private void Update()
         {            
-            // we will come back here whenever we load back from a minigame to the main scene
-            // we need to keep playing, which means to pick and start a new minigame if we're not dead
+            // we will come back here whenever we load back from a microgame to the main scene
+            // we need to keep playing, which means to pick and start a new microgame if we're not dead
             if (gameStarted && curSceneIndex == (int)DataManager.Scenes.MainScene)
             {
                 timeInMainScene += Time.deltaTime;
-                timeToNextMinigameText.text = "Next Level In: " + (DataManager.SECONDS_BETWEEN_MINIGAMES - timeInMainScene).ToString("F2") + "s";
-                if (livesLeft > 0 && timeInMainScene > DataManager.SECONDS_BETWEEN_MINIGAMES)
+                timeToNextMicrogameText.text = "Next Level In: " + (DataManager.SECONDS_BETWEEN_MICROGAMES - timeInMainScene).ToString("F2") + "s";
+                if (livesLeft > 0 && timeInMainScene > DataManager.SECONDS_BETWEEN_MICROGAMES)
                 {
-                    PickAndStartNextMinigame();
+                    PickAndStartNextMicrogame();
                 }
                 else
                 {
@@ -117,31 +117,31 @@ namespace ShrugWare
             }
         }
 
-        private void PopulateMinigameList()
+        private void PopulateMicrogameList()
         {
-            // add all of our minigames to a list,
-            DataManager.Scenes minigameStart= DataManager.Scenes.MainScene + 1;
-            for(; minigameStart <= DataManager.Scenes.MINIGAME_END; ++minigameStart)
+            // add all of our microgames to a list,
+            DataManager.Scenes microgameStart= DataManager.Scenes.MainScene + 1;
+            for(; microgameStart <= DataManager.Scenes.MICROGAME_END; ++microgameStart)
             {
-                minigameList.Add(minigameStart);
+                microgameList.Add(microgameStart);
             }
         }
 
-        private void PickAndStartNextMinigame()
+        private void PickAndStartNextMicrogame()
         {
-            // populate our minigame list if it's empty
-            if(minigameList.Count == 0)
+            // populate our microgame list if it's empty
+            if(microgameList.Count == 0)
             {
-                PopulateMinigameList();
+                PopulateMicrogameList();
             }
 
-            if (minigameList.Count > 0)
+            if (microgameList.Count > 0)
             {
                 timeInMainScene = 0.0f;
 
-                int minigameSceneIndex = Random.Range(0, minigameList.Count);
-                DataManager.Scenes scene = minigameList[minigameSceneIndex];
-                minigameList.RemoveAt(minigameSceneIndex);
+                int microgameSceneIndex = Random.Range(0, microgameList.Count);
+                DataManager.Scenes scene = microgameList[microgameSceneIndex];
+                microgameList.RemoveAt(microgameSceneIndex);
 
                 mainCanvas.enabled = false;
                 LoadScene((int)scene);
@@ -160,18 +160,18 @@ namespace ShrugWare
             timeScaleInputField.text = "Time Scale: " + curTimeScale.ToString("F3");
         }
 
-        public void MinigameCompleted(bool wonMinigame)
+        public void MicrogameCompleted(bool wonMicrogame)
         {
-            if(wonMinigame)
+            if(wonMicrogame)
             {
-                ++numMinigamesWon;
+                ++numMicrogamesWon;
             }
             else
             {
-                ++numMinigamesLost;
+                ++numMicrogamesLost;
             }
 
-            scoreText.text = "Minigames Won: " + numMinigamesWon.ToString() + " Minigames Lost: " + numMinigamesLost.ToString();
+            scoreText.text = "Microgames Won: " + numMicrogamesWon.ToString() + " Microgames Lost: " + numMicrogamesLost.ToString();
             mainCanvas.enabled = true;
         }
 
@@ -194,12 +194,12 @@ namespace ShrugWare
         public void StartGame()
         {
             scoreText.enabled = true;
-            timeToNextMinigameText.enabled = true;
+            timeToNextMicrogameText.enabled = true;
             debugObject.SetActive(false);
             startGameButton.gameObject.SetActive(false);
             
             gameStarted = true;
-            PickAndStartNextMinigame();
+            PickAndStartNextMicrogame();
         }
     }
 }

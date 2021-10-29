@@ -626,8 +626,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 401966219}
-  - component: {fileID: 401966218}
   - component: {fileID: 401966220}
+  - component: {fileID: 401966218}
   m_Layer: 0
   m_Name: Minigame Object
   m_TagString: Untagged
