@@ -17,7 +17,8 @@ namespace ShrugWare
         public enum StatEffectType
         {
             PlayerHealth = 0,
-            BossHealth
+            BossHealth,
+            TimeScale
         }
 
         public struct StatEffect

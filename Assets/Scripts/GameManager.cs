@@ -244,5 +244,12 @@ namespace ShrugWare
                 // ¯\_(ツ)_/¯
             }
         }
+
+        public void ModifyTimeScale(float amount)
+        {
+            curTimeScale += amount;
+            Time.timeScale = curTimeScale;
+            timeScaleInputField.text = "Time Scale: " + curTimeScale.ToString("F3");
+        }
     }
 }
