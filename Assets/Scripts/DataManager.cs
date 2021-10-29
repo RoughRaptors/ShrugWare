@@ -11,11 +11,11 @@ namespace ShrugWare
         {
             MainScene = 0, // DO NOT CHANGE THIS
             GetOutOfFire = 1,
-            MINIGAME_END = 1 // PUT ALL MINIGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            MICROGAME_END = 1 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
-        public static float MINIGAME_DURATION_SECONDS = 3.0f; // we can override this in the child Minigame's Start() - minigameDurationRemaining
-        public static float SECONDS_TO_START_MINIGAME = 1.0f; // how long we wait for the minigame to start when on the scene - to orient the player
-        public static float SECONDS_BETWEEN_MINIGAMES = 3.0f; // how long we wait before starting another minigame inside of GameManager
+        public static float MICROGAME_DURATION_SECONDS = 3.0f; // we can override this in the child Microgame's Start() - microgameDurationRemaining
+        public static float SECONDS_TO_START_MICROGAME = 1.0f; // how long we wait for the microgame to start when on the scene - to orient the player
+        public static float SECONDS_BETWEEN_MICROGAMES = 3.0f; // how long we wait before starting another microgame inside of GameManager
     }
 }

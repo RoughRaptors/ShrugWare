@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace ShrugWare
 {
-    public class GetOutOfFireMinigame : Minigame
+    public class GetOutOfFireMicrogame : Microgame
     {
         [SerializeField]
         Text instructionsText;
@@ -24,7 +24,7 @@ namespace ShrugWare
         {
             base.Start();
 
-            minigameCategory = MinigameCategory.Friendly;
+            microgameCategory = MicrogameCategory.Friendly;
             StartCoroutine("DisableInstructionsText");
         }
 
@@ -32,18 +32,18 @@ namespace ShrugWare
         {
             timeElapsed += Time.deltaTime;
 
-            // don't "start" the minigame until we can orient the player to the minigame
-            if (timeElapsed >= DataManager.SECONDS_TO_START_MINIGAME)
+            // don't "start" the microgame until we can orient the player to the microgame
+            if (timeElapsed >= DataManager.SECONDS_TO_START_MICROGAME)
             {
-                minigameDurationRemaining -= Time.deltaTime;
-                timerText.text = minigameDurationRemaining.ToString("F2") + "s";
+                microgameDurationRemaining -= Time.deltaTime;
+                timerText.text = microgameDurationRemaining.ToString("F2") + "s";
 
                 HandleInput();
 
-                if (minigameDurationRemaining <= 0.0f)
+                if (microgameDurationRemaining <= 0.0f)
                 {
                     // out of time
-                    HandleMinigameEnd(!inFire);
+                    HandleMicrogameEnd(!inFire);
                 }
             }
         }
@@ -51,7 +51,7 @@ namespace ShrugWare
         // easier to make this a coroutine since Update() will keep trying to disable it (for now at least)
         IEnumerator DisableInstructionsText()
         {
-            yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MINIGAME);
+            yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
             instructionsText.gameObject.SetActive(false);
         }
 
