@@ -7,12 +7,15 @@ using UnityEngine.SceneManagement;
 /*
     game structure:
     each raid is composed of multiple bosses
+        contains a list of bosses and a curBossIndex
     each boss is composed of multiple mechanics
-        each boss has health and outgoing damage
+        contains a list of scene IDs and a curSceneId
+        each boss has health
     each mechanic is a scene - a microgame
         each mechanic contains a list of effects to be ran that can modify the following either positively or negatively:
             modify player raid hp
             modify boss hp
+            modify timescale
     progress through that bosses minigames and perform well enough to not wipe and defeat the boss
     progress through each raid by defeating all bosses
 */
