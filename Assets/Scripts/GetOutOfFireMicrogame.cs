@@ -24,7 +24,17 @@ namespace ShrugWare
         {
             base.Start();
 
-            microgameCategory = MicrogameCategory.Friendly;
+            DataManager.StatEffect damagePlayerEffect;
+            damagePlayerEffect.effectType = DataManager.StatEffectType.PlayerHealth;
+            damagePlayerEffect.amount = 20.0f;
+
+            DataManager.StatEffect damageBossEffect;
+            damageBossEffect.effectType = DataManager.StatEffectType.BossHealth;
+            damageBossEffect.amount = 10.0f;
+
+            winEffects.Add(damageBossEffect);
+            lossEffects.Add(damagePlayerEffect);
+
             StartCoroutine("DisableInstructionsText");
         }
 

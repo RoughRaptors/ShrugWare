@@ -1,14 +1,28 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-/* to add a new microgame: 
-1: copy an existing microgame scene and rename it
-2: create/copy a script for the new microgame and open the scene
-3: in unity -> file -> build settings -> add open scene
-4: in DataManager.cs -> add the new scene name to the enum Scenes and update the MICROGAME_END value
+/*
+    game structure:
+    each raid is composed of multiple bosses
+    each boss is composed of multiple mechanics
+        each boss has health and outgoing damage
+    each mechanic is a scene - a microgame
+        each mechanic contains a list of effects to be ran that can modify the following either positively or negatively:
+            modify player raid hp
+            modify boss hp
+    progress through that bosses minigames and perform well enough to not wipe and defeat the boss
+    progress through each raid by defeating all bosses
+*/
+
+/* 
+    to add a new microgame: 
+    1: copy an existing microgame scene and rename it
+    2: create/copy a script for the new microgame and open the scene
+    3: in unity -> file -> build settings -> add open scene
+    4: in DataManager.cs -> add the new scene name to the enum Scenes and update the MICROGAME_END value
 */
 
 namespace ShrugWare
@@ -57,7 +71,10 @@ namespace ShrugWare
         private float timeInMainScene = 0.0f;
 
         // 0 is still alive, it's your last life
+        private float health;
         private int livesLeft = 3;
+
+        List<Raid> raidList = new List<Raid>();
 
         private void Awake()
         {
@@ -96,6 +113,12 @@ namespace ShrugWare
             {
                 PopulateMicrogameList();
             }
+
+            // initialize our raids if this is our first time starting
+            if (raidList.Count == 0)
+            {
+                PopulateRaidList();
+            }
         }
 
         private void Update()
@@ -125,6 +148,12 @@ namespace ShrugWare
             {
                 microgameList.Add(microgameStart);
             }
+        }
+
+        private void PopulateRaidList()
+        {
+            InfernalDawn infernalDawn = new InfernalDawn();
+            raidList.Add(infernalDawn);
         }
 
         private void PickAndStartNextMicrogame()
@@ -200,6 +229,20 @@ namespace ShrugWare
             
             gameStarted = true;
             PickAndStartNextMicrogame();
+        }
+
+        public void TakeDamage(float amount)
+        {
+            health -= amount;
+            if(health < 0)
+            {
+                --livesLeft;
+            }
+
+            if(livesLeft <= 0)
+            {
+                // ¯\_(ツ)_/¯
+            }
         }
     }
 }
