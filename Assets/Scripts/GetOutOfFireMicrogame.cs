@@ -32,8 +32,15 @@ namespace ShrugWare
             damageBossEffect.effectType = DataManager.StatEffectType.BossHealth;
             damageBossEffect.amount = 10.0f;
 
+            DataManager.StatEffect timeScaleEffect;
+            timeScaleEffect.effectType = DataManager.StatEffectType.TimeScale;
+            timeScaleEffect.amount = 0.05f;
+
             winEffects.Add(damageBossEffect);
+            winEffects.Add(timeScaleEffect);
+
             lossEffects.Add(damagePlayerEffect);
+            lossEffects.Add(timeScaleEffect);
 
             StartCoroutine("DisableInstructionsText");
         }
