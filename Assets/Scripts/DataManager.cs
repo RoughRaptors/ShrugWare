@@ -4,14 +4,26 @@ using UnityEngine;
 
 namespace ShrugWare
 {
-    public static class DataManager
+    public class DataManager
     {
         // KEEP IN SYNC WITH BUILD SETTINGS
         public enum Scenes
         {
             MainScene = 0, // DO NOT CHANGE THIS
-            GetOutOfFire = 1,
+            InfernalDawnGetOutOfFire = 1,
             MICROGAME_END = 1 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+        }
+
+        public enum StatEffectType
+        {
+            PlayerHealth = 0,
+            BossHealth
+        }
+
+        public struct StatEffect
+        {
+            public StatEffectType effectType;
+            public float amount;
         }
 
         public static float MICROGAME_DURATION_SECONDS = 3.0f; // we can override this in the child Microgame's Start() - microgameDurationRemaining
