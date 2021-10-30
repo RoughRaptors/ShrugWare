@@ -5,20 +5,18 @@ using UnityEngine.UI;
 
 namespace ShrugWare
 {
-    public class GetOutOfFireMicrogame : Microgame
+    public class CastFrostboltMicrogame : Microgame
     {
         [SerializeField]
-        Text instructionsText;
+        Text instructionsText = null;
         
         [SerializeField]
-        Text timerText;
+        Text timerText = null;
 
         [SerializeField]
-        GameObject playerObject;
+        Button frostboltButton;
 
-        private const float PLAYER_MOVE_SPEED = 2.5f;
-
-        private bool inFire = true;
+        private bool castedFrostbolt = false;
 
         new private void Start()
         {
@@ -55,12 +53,10 @@ namespace ShrugWare
                 microgameDurationRemaining -= Time.deltaTime;
                 timerText.text = microgameDurationRemaining.ToString("F2") + "s";
 
-                HandleInput();
-
                 if (microgameDurationRemaining <= 0.0f)
                 {
                     // out of time
-                    HandleMicrogameEnd(!inFire);
+                    HandleMicrogameEnd(castedFrostbolt);
                 }
             }
         }
@@ -72,39 +68,12 @@ namespace ShrugWare
             instructionsText.gameObject.SetActive(false);
         }
 
-        private void HandleInput()
+        public void CastFrostboltButtonPressed()
         {
-            Vector3 newPos = playerObject.transform.position;
-            if (Input.GetKey(KeyCode.W))
-            {
-                newPos.y += PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.S))
-            {
-                newPos.y -= PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                newPos.x -= PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.D))
-            {
-                newPos.x += PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            playerObject.transform.position = newPos;
-        }
-
-        // once they're out, we don't care if they go back in
-        private void OnTriggerExit(Collider other)
-        {
-            inFire = false;
+            castedFrostbolt = true;
 
             instructionsText.gameObject.SetActive(true);
-            instructionsText.text = "No noms for dargon";
+            instructionsText.text = "Ice Cold Boss";
         }
     }
 }

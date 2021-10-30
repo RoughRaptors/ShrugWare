@@ -11,7 +11,7 @@ namespace ShrugWare
         {
             bossName = "Warboss Kard";
             health = 100.0f;
-            mechanics.Add(DataManager.Scenes.InfernalDawnGetOutOfFire);
+            mechanics.Add(DataManager.Scenes.DauntingInfernoGetOutOfFire);
         }
 
         public void StartBoss()

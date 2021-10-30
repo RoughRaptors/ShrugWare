@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace ShrugWare
 {
-    public class InfernalDawn : Raid
+    public class DauntingInferno : Raid
     {
         // Start is called before the first frame update
         void Start()
         {
-            raidName = "Infernal Dawn";
+            raidName = "Daunting Inferno";
 
             WarbossKard warbossKard = new WarbossKard();
             bosses.Add(warbossKard);
