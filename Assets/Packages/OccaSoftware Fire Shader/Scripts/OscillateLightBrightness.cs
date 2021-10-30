@@ -6,10 +6,10 @@ public class OscillateLightBrightness : MonoBehaviour
 {
     Light lightComponent;
     [SerializeField, Range(0f, 10f)]
-    float lower;
+    float lower = 0;
 
     [SerializeField, Range(0f, 10f)]
-    float upper;
+    float upper = 0;
     // Start is called before the first frame update
     void Start()
     {

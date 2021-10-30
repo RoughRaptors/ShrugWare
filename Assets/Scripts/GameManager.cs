@@ -33,22 +33,22 @@ namespace ShrugWare
     public class GameManager : MonoBehaviour
     {
         [SerializeField]
-        InputField timeScaleInputField;
+        InputField timeScaleInputField = null;
 
         [SerializeField]
-        Text timeToNextMicrogameText;
+        Text timeToNextMicrogameText = null;
 
         [SerializeField]
-        GameObject debugObject;
+        GameObject debugObject = null;
 
         [SerializeField]
-        Canvas mainCanvas;
+        Canvas mainCanvas = null;
 
         [SerializeField]
-        Button startGameButton;
+        Button startGameButton = null;
 
         [SerializeField]
-        Text scoreText;
+        Text scoreText = null;
 
         public static GameManager Instance;
 
@@ -155,8 +155,8 @@ namespace ShrugWare
 
         private void PopulateRaidList()
         {
-            InfernalDawn infernalDawn = new InfernalDawn();
-            raidList.Add(infernalDawn);
+            DauntingInferno DauntingInferno = new DauntingInferno();
+            raidList.Add(DauntingInferno);
         }
 
         private void PickAndStartNextMicrogame()
