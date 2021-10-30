@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 /*
     game structure:
@@ -106,6 +107,14 @@ namespace ShrugWare
 
         private void Start()
         {
+            EventSystem sceneEventSystem = FindObjectOfType<EventSystem>();
+            if (sceneEventSystem == null)
+            {
+                GameObject eventSystem = new GameObject("EventSystem");
+                eventSystem.AddComponent<EventSystem>();
+                eventSystem.AddComponent<StandaloneInputModule>();
+            }
+
             timeToNextMicrogameText.enabled = false;
             scoreText.enabled = false;
             timeScaleInputField.text = "Time Scale: " + curTimeScale.ToString("F3");
