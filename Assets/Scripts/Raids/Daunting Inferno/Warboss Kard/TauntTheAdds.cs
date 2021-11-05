@@ -133,8 +133,8 @@ namespace ShrugWare
                 if(enemy1.taunted && enemy2.taunted)
                 {
                     won = true;
-                    
-                    instructionsText.enabled = true;
+
+                    instructionsText.gameObject.SetActive(true);
                     instructionsText.text = "Healer Says Thanks";
                 }
             }
