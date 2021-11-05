@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Raids/Daunting Inferno/Warboss Kard/InterceptTheFireball.unity
     guid: 00c3b4ee2b4934e489d2a961b478ee81
+  - enabled: 1
+    path: Assets/Scenes/Raids/Daunting Inferno/Warboss Kard/PerformTheRotation.unity
+    guid: 95ab459b495cb7447be4637f61a3a150
   m_configObjects: {}

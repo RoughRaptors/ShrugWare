@@ -14,7 +14,8 @@ namespace ShrugWare
             DauntingInfernoCastFrostbolt,
             TauntTheAdds,
             InterceptTheFireball,
-            MICROGAME_END = 4 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            PerformTheRotation,
+            MICROGAME_END = 5 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatEffectType
