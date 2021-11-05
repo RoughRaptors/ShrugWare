@@ -13,7 +13,8 @@ namespace ShrugWare
             DauntingInfernoGetOutOfFire = 1,
             DauntingInfernoCastFrostbolt,
             TauntTheAdds,
-            MICROGAME_END = 3 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            InterceptTheFireball,
+            MICROGAME_END = 4 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatEffectType
