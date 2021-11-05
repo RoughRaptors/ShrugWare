@@ -6,7 +6,6 @@ namespace ShrugWare
 {
     public class DauntingInferno : Raid
     {
-        // Start is called before the first frame update
         void Start()
         {
             raidName = "Daunting Inferno";
