@@ -12,7 +12,8 @@ namespace ShrugWare
             MainScene = 0, // DO NOT CHANGE THIS
             DauntingInfernoGetOutOfFire = 1,
             DauntingInfernoCastFrostbolt,
-            MICROGAME_END = 2 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            TauntTheAdds,
+            MICROGAME_END = 3 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatEffectType

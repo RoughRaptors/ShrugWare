@@ -8,5 +8,6 @@ namespace ShrugWare
     {
         protected string raidName;
         protected List<Boss> bosses = new List<Boss>();
+        public List<Boss> GetBosses() { return bosses; }
     }
 }

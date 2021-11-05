@@ -78,7 +78,9 @@ namespace ShrugWare
         private float health;
         private int livesLeft = 3;
 
-        List<Raid> raidList = new List<Raid>();
+        private int curRaidListIndex = -1;
+        public int GetCurRaidListIndex() { return curRaidListIndex; }
+        private List<Raid> raidList = new List<Raid>();
 
         private void Awake()
         {
@@ -126,10 +128,10 @@ namespace ShrugWare
                 PopulateMicrogameList();
             }
 
-            // initialize our raids if this is our first time starting
+            // initialize our data if this is our first time starting
             if (raidList.Count == 0)
             {
-                PopulateRaidList();
+                PopulateRaidAndBossData();
             }
         }
 
@@ -162,8 +164,9 @@ namespace ShrugWare
             }
         }
 
-        private void PopulateRaidList()
+        private void PopulateRaidAndBossData()
         {
+            curRaidListIndex = 0;
             DauntingInferno DauntingInferno = new DauntingInferno();
             raidList.Add(DauntingInferno);
         }
@@ -262,6 +265,16 @@ namespace ShrugWare
             curTimeScale += amount;
             Time.timeScale = curTimeScale;
             timeScaleInputField.text = "Time Scale: " + curTimeScale.ToString("F3");
+        }
+
+        public Raid GetRaidAtIndex(int index)
+        {
+            if(index < raidList.Count)
+            {
+                return raidList[index];
+            }
+
+            return null;
         }
     }
 }

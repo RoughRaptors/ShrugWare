@@ -8,6 +8,17 @@ namespace ShrugWare
     {
         protected string bossName;
         protected float health;
+
+        private int curMechanicIndex = -1;
         protected List<DataManager.Scenes> mechanics = new List<DataManager.Scenes>();
+
+        public void TakeDamage(float amount)
+        {
+            health -= amount;
+            if(health <= 0)
+            {
+
+            }
+        }
     }
 }

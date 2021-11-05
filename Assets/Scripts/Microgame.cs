@@ -62,10 +62,14 @@ namespace ShrugWare
             }
             else if (effect.effectType == DataManager.StatEffectType.BossHealth)
             {
-                // we somehow need a reference to the current boss we're on talking out loud here for myself later
-                // GameManager contains a list of Raids and we can store our curRaidIndex
-                // our raid will know our status of bosses, and what boss we are current on via a curBossIndex
-                // grab that here once set up and modify hp
+                Raid curRaid = GameManager.Instance.GetRaidAtIndex(GameManager.Instance.GetCurRaidListIndex());
+                if(curRaid)
+                {
+                    foreach(Boss boss in curRaid.GetBosses())
+                    {
+                        boss.TakeDamage(effect.amount);
+                    }
+                }
             }
             else if(effect.effectType == DataManager.StatEffectType.TimeScale)
             {
