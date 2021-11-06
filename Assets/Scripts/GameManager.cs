@@ -99,6 +99,8 @@ namespace ShrugWare
 
         private void Start()
         {
+            Screen.SetResolution(1920, 1080, false);
+
             EventSystem sceneEventSystem = FindObjectOfType<EventSystem>();
             if (sceneEventSystem == null)
             {
