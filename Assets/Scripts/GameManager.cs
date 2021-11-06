@@ -40,34 +40,22 @@ namespace ShrugWare
         Text timeToNextMicrogameText = null;
 
         [SerializeField]
-        GameObject debugObject = null;
-
-        [SerializeField]
         Canvas mainCanvas = null;
 
         [SerializeField]
         Button startGameButton = null;
 
         [SerializeField]
-        Text scoreText = null;
+        Text gameInfoText = null;
 
         public static GameManager Instance;
 
         private float curTimeScale = 1.0f;
         public float GetCurTimeScale() { return curTimeScale; }
 
-        private int numMicrogamesWon = 0;
-        private int numMicrogamesLost = 0;
-
         // keep track of this so we can always know our scene index from anywhere - maybe useful later
         private int curSceneIndex = 0;
         public int GetCurSceneIndex() { return curSceneIndex; }
-
-        // we could use a queue for this, but that makes randomization a bit more involved
-        // for now, we can make this a stupid random and just add all of our microgame indices to it
-        // to pick a microgame, pick an index at random and remove that index from the list (a little expensive with large lists, meh)
-        // if our list is empty when we go to pick our next microgame, we reconstruct the list
-        private List<DataManager.Scenes> microgameList = new List<DataManager.Scenes>();
 
         private bool gameStarted = false;
 
@@ -75,12 +63,15 @@ namespace ShrugWare
         private float timeInMainScene = 0.0f;
 
         // 0 is still alive, it's your last life
-        private float health;
+        private float curRaidHealth = 100.0f;
+        private float maxRaidHealth = 100.0f;
         private int livesLeft = 3;
 
         private int curRaidListIndex = -1;
         public int GetCurRaidListIndex() { return curRaidListIndex; }
         private List<Raid> raidList = new List<Raid>();
+
+        private Raid curRaid = null;
 
         private void Awake()
         {
@@ -96,9 +87,8 @@ namespace ShrugWare
 
                 // set all of our shit back - figure out a better solution later if there is one - TODO MAKE THIS BETTER
                 curTimeScale = GameManager.Instance.curTimeScale;
-                numMicrogamesWon = GameManager.Instance.numMicrogamesWon;
-                numMicrogamesLost = GameManager.Instance.numMicrogamesLost;
-                microgameList = GameManager.Instance.microgameList;
+                timeScaleInputField.text = "Time Scale: " + curTimeScale.ToString("F3");
+
                 gameStarted = GameManager.Instance.gameStarted;
                 livesLeft = GameManager.Instance.livesLeft;
                 timeInMainScene = 0.0f;
@@ -117,79 +107,43 @@ namespace ShrugWare
                 eventSystem.AddComponent<StandaloneInputModule>();
             }
 
+            gameInfoText.enabled = false;
             timeToNextMicrogameText.enabled = false;
-            scoreText.enabled = false;
             timeScaleInputField.text = "Time Scale: " + curTimeScale.ToString("F3");
             Time.timeScale = curTimeScale;
-
-            // initialize our microgame queue if this is our first time starting
-            if (microgameList.Count == 0)
-            {
-                PopulateMicrogameList();
-            }
 
             // initialize our data if this is our first time starting
             if (raidList.Count == 0)
             {
-                PopulateRaidAndBossData();
+                PopulateData();
             }
+
+            // our raid and boss data needs to be populated by this point
+            FillBossInfoText();
         }
 
         private void Update()
         {            
             // we will come back here whenever we load back from a microgame to the main scene
-            // we need to keep playing, which means to pick and start a new microgame if we're not dead
+            // we need to keep playing, which means to pick and start a new microgame from our raid and boss if we're not dead
             if (gameStarted && curSceneIndex == (int)DataManager.Scenes.MainScene)
             {
                 timeInMainScene += Time.deltaTime;
                 timeToNextMicrogameText.text = "Next Level In: " + (DataManager.SECONDS_BETWEEN_MICROGAMES - timeInMainScene).ToString("F2") + "s";
-                if (livesLeft > 0 && timeInMainScene > DataManager.SECONDS_BETWEEN_MICROGAMES)
+                if (livesLeft > 0 && timeInMainScene >= DataManager.SECONDS_BETWEEN_MICROGAMES && !(curRaid is null) && !(curRaid.curBoss is null))
                 {
-                    PickAndStartNextMicrogame();
-                }
-                else
-                {
-                    // dead
+                    DataManager.Scenes nextScene = curRaid.curBoss.PickNextMicrogame(); 
+                    LoadScene((int)nextScene);
                 }
             }
         }
 
-        private void PopulateMicrogameList()
-        {
-            // add all of our microgames to a list,
-            DataManager.Scenes microgameStart= DataManager.Scenes.MainScene + 1;
-            for(; microgameStart <= DataManager.Scenes.MICROGAME_END; ++microgameStart)
-            {
-                microgameList.Add(microgameStart);
-            }
-        }
-
-        private void PopulateRaidAndBossData()
+        private void PopulateData()
         {
             curRaidListIndex = 0;
-            DauntingInferno DauntingInferno = new DauntingInferno();
-            raidList.Add(DauntingInferno);
-        }
-
-        private void PickAndStartNextMicrogame()
-        {
-            // populate our microgame list if it's empty
-            if(microgameList.Count == 0)
-            {
-                PopulateMicrogameList();
-            }
-
-            if (microgameList.Count > 0)
-            {
-                timeInMainScene = 0.0f;
-
-                int microgameSceneIndex = Random.Range(0, microgameList.Count);
-                DataManager.Scenes scene = microgameList[microgameSceneIndex];
-                microgameList.RemoveAt(microgameSceneIndex);
-
-                mainCanvas.enabled = false;
-                LoadScene((int)scene);
-            }
+            DauntingInferno dauntingInferno = new DauntingInferno();
+            raidList.Add(dauntingInferno);
+            curRaid = dauntingInferno;
         }
 
         public void ConfirmTimeScaleButtonClicked()
@@ -206,22 +160,47 @@ namespace ShrugWare
 
         public void MicrogameCompleted(bool wonMicrogame)
         {
-            if(wonMicrogame)
-            {
-                ++numMicrogamesWon;
-            }
-            else
-            {
-                ++numMicrogamesLost;
-            }
-
-            scoreText.text = "Microgames Won: " + numMicrogamesWon.ToString() + " Microgames Lost: " + numMicrogamesLost.ToString();
+            FillBossInfoText();
             mainCanvas.enabled = true;
+
+            CheckAndHandleEndCondition();
+        }
+
+        private void FillBossInfoText()
+        {
+            if (!(curRaid is null) && !(curRaid.curBoss is null))
+            {
+                gameInfoText.text = curRaid.raidName + "\n" + curRaid.curBoss.bossName + "\n"
+                    + "Health: " + curRaid.curBoss.curHealth.ToString() + " / " + curRaid.curBoss.maxHealth + "\n"
+                    + "Raid Health: " + curRaidHealth.ToString() + " / " + maxRaidHealth.ToString() + "\n"
+                    + "Rezzes Left: " + livesLeft.ToString();
+            }
+        }
+
+        private void CheckAndHandleEndCondition()
+        {
+            // todo - scale this up
+            if (curRaid.curBoss.curHealth <= 0)
+            {
+                timeToNextMicrogameText.enabled = false;
+                gameInfoText.text += "\n \n CONGLADURATION. YOU ARE WIN";
+
+                // temp hack to stop the game when you win/lose
+                gameStarted = false;
+            }
+            else if(livesLeft == 0)
+            {
+                timeToNextMicrogameText.enabled = false;
+                gameInfoText.text += "\n \n 50 DKP MINUS!";
+
+                // temp hack to stop the game when you win/lose
+                gameStarted = false;
+            }
         }
 
         // would be nice to get some kind of transition/animation for this to be smooth, something like warioware curtains opening and closing
         public void LoadScene(int sceneIndex)
-        {
+        {            
             if (sceneIndex == (int)DataManager.Scenes.MainScene)
             {
                 mainCanvas.enabled = true;
@@ -230,6 +209,8 @@ namespace ShrugWare
             {
                 mainCanvas.enabled = false;
             }
+            
+            timeInMainScene = 0.0f;
 
             curSceneIndex = sceneIndex;
             SceneManager.LoadScene(sceneIndex);
@@ -237,26 +218,32 @@ namespace ShrugWare
 
         public void StartGame()
         {
-            scoreText.enabled = true;
             timeToNextMicrogameText.enabled = true;
-            debugObject.SetActive(false);
             startGameButton.gameObject.SetActive(false);
-            
+            gameInfoText.enabled = true;
+
             gameStarted = true;
-            PickAndStartNextMicrogame();
         }
 
         public void TakeDamage(float amount)
         {
-            health -= amount;
-            if(health < 0)
+            curRaidHealth -= amount;
+            if(curRaidHealth < 0)
             {
                 --livesLeft;
-            }
 
-            if(livesLeft <= 0)
+                if (livesLeft > 0)
+                {
+                    curRaidHealth = maxRaidHealth;
+                }
+            }
+        }
+
+        public void DamageBoss(float amount)
+        {
+            if (!(curRaid is null) && !(curRaid.curBoss is null))
             {
-                // ¯\_(ツ)_/¯
+                curRaid.curBoss.TakeDamage(amount);
             }
         }
 

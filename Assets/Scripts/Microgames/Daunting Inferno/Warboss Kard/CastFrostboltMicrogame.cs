@@ -14,7 +14,13 @@ namespace ShrugWare
         Text timerText = null;
 
         [SerializeField]
+        Button fireballButton;
+
+        [SerializeField]
         Button frostboltButton;
+
+        [SerializeField]
+        Button healButton;
 
         private bool castedFrostbolt = false;
 
@@ -24,11 +30,11 @@ namespace ShrugWare
 
             DataManager.StatEffect damagePlayerEffect;
             damagePlayerEffect.effectType = DataManager.StatEffectType.PlayerHealth;
-            damagePlayerEffect.amount = 20.0f;
+            damagePlayerEffect.amount = 34.0f;
 
             DataManager.StatEffect damageBossEffect;
             damageBossEffect.effectType = DataManager.StatEffectType.BossHealth;
-            damageBossEffect.amount = 10.0f;
+            damageBossEffect.amount = 20.0f;
 
             DataManager.StatEffect timeScaleEffect;
             timeScaleEffect.effectType = DataManager.StatEffectType.TimeScale;
@@ -71,6 +77,10 @@ namespace ShrugWare
         public void CastFrostboltButtonPressed()
         {
             castedFrostbolt = true;
+
+            fireballButton.gameObject.SetActive(false);
+            frostboltButton.gameObject.SetActive(false);
+            healButton.gameObject.SetActive(false);
 
             instructionsText.gameObject.SetActive(true);
             instructionsText.text = "Ice Cold Boss";

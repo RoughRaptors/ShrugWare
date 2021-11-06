@@ -7,18 +7,20 @@ namespace ShrugWare
     public class WarbossKard : Boss
     {
         // Start is called before the first frame update
-        void Start()
+        public WarbossKard()
         {
             bossName = "Warboss Kard";
-            health = 100.0f;
-            mechanics.Add(DataManager.Scenes.DauntingInfernoGetOutOfFire);
+            curHealth = 100.0f;
+            maxHealth = 100.0f;
+
+            PopulateMechanicsList();
         }
 
-        public void StartBoss()
+        protected override void PopulateMechanicsList()
         {
-            foreach(DataManager.Scenes scene in mechanics)
+            for (int sceneIndex = (int)DataManager.Scenes.MainScene + 1; sceneIndex <= (int)DataManager.Scenes.MICROGAME_END; ++sceneIndex)
             {
-
+                mechanics.Add((DataManager.Scenes)sceneIndex);
             }
         }
     }

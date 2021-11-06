@@ -26,11 +26,11 @@ namespace ShrugWare
 
             DataManager.StatEffect damagePlayerEffect;
             damagePlayerEffect.effectType = DataManager.StatEffectType.PlayerHealth;
-            damagePlayerEffect.amount = 20.0f;
+            damagePlayerEffect.amount = 34.0f;
 
             DataManager.StatEffect damageBossEffect;
             damageBossEffect.effectType = DataManager.StatEffectType.BossHealth;
-            damageBossEffect.amount = 10.0f;
+            damageBossEffect.amount = 20.0f;
 
             DataManager.StatEffect timeScaleEffect;
             timeScaleEffect.effectType = DataManager.StatEffectType.TimeScale;
