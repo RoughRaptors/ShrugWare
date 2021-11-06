@@ -46,6 +46,10 @@ namespace ShrugWare
             lossEffects.Add(damagePlayerEffect);
             lossEffects.Add(timeScaleEffect);
 
+            fireballButton.gameObject.SetActive(false);
+            frostboltButton.gameObject.SetActive(false);
+            healButton.gameObject.SetActive(false);
+
             StartCoroutine("DisableInstructionsText");
         }
 
@@ -72,6 +76,10 @@ namespace ShrugWare
         {
             yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
             instructionsText.gameObject.SetActive(false);
+
+            fireballButton.gameObject.SetActive(true);
+            frostboltButton.gameObject.SetActive(true);
+            healButton.gameObject.SetActive(true);
         }
 
         public void CastFrostboltButtonPressed()
@@ -83,7 +91,7 @@ namespace ShrugWare
             healButton.gameObject.SetActive(false);
 
             instructionsText.gameObject.SetActive(true);
-            instructionsText.text = "Ice Cold Boss";
+            instructionsText.text = "Chilled Out";
         }
     }
 }

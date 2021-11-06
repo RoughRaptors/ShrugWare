@@ -25,9 +25,9 @@ namespace ShrugWare
         private bool intercepted = false;
 
         private const float X_MIN = -50.0f;
-        private const float X_MAX = 50.0f; 
-        private const float Y_MIN = -25.0f;
-        private const float Y_MAX = 10.0f;
+        private const float X_MAX = 50.0f;
+        private const float Y_MIN = -30.0f;
+        private const float Y_MAX = 0.0f;
 
         private const float FIREBALL_MOVE_SPEED = 10.0f;
         private const float PLAYER_MOVE_SPEED = 15.0f;
@@ -83,7 +83,7 @@ namespace ShrugWare
                 else
                 {
                     fireballObject.transform.position = 
-                        Vector2.MoveTowards(fireballObject.transform.position, healerObject.transform.position, PLAYER_MOVE_SPEED * Time.deltaTime);
+                        Vector3.MoveTowards(fireballObject.transform.position, healerObject.transform.position, PLAYER_MOVE_SPEED * Time.deltaTime);
 
                     HandleInput();
                 }
@@ -123,7 +123,7 @@ namespace ShrugWare
         {
             float xPos = Random.Range(X_MIN, X_MAX);
             float yPos = Random.Range(Y_MIN, Y_MAX);
-            playerObject.transform.position = new Vector3(xPos, yPos, 95.0f);
+            playerObject.transform.position = new Vector3(xPos, yPos, 0.0f);
         }
 
         // easier to make this a coroutine since Update() will keep trying to disable it (for now at least)

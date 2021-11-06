@@ -18,11 +18,11 @@ namespace ShrugWare
         bool won = false;
 
         private const float ENEMY_MOVE_SPEED = 10f;
-
-        private const float X_MIN = -55.0f;
-        private const float X_MAX = 55.0f;
-        private const float Y_MIN = -38.0f;
-        private const float Y_MAX = 33;
+        
+        private const float X_MIN = -50.0f;
+        private const float X_MAX = 50.0f;
+        private const float Y_MIN = -15.0f;
+        private const float Y_MAX = 40.0f;
 
         private struct Enemy
         {
@@ -91,20 +91,20 @@ namespace ShrugWare
         private void SetupEnemies()
         {
             float enemy1XPos = Random.Range(X_MIN, X_MAX);
-            float enemy1YPos = Random.Range(X_MIN, X_MAX);
+            float enemy1YPos = Random.Range(Y_MIN, Y_MAX);
             Vector3 enemy1Pos = new Vector3(enemy1XPos, enemy1YPos, 100.0f);
             enemy1.enemyObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
             enemy1.enemyObj.transform.position = enemy1Pos;
-            enemy1.enemyObj.transform.localScale = new Vector3(7.5f, 7.5f, 7.5f);
+            enemy1.enemyObj.transform.localScale = new Vector3(3.33f, 3.33f, 3.33f);
             enemy1.enemyObj.GetComponent<Renderer>().material.color = new Color(255, 0, 0);
             enemy1.taunted = false;
 
-            float enemy2XPos = Random.Range(Y_MIN, Y_MAX);
+            float enemy2XPos = Random.Range(X_MIN, X_MAX);
             float enemy2YPos = Random.Range(Y_MIN, Y_MAX);
             Vector3 enemy2Pos = new Vector3(enemy2XPos, enemy2YPos, 100.0f);
             enemy2.enemyObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
             enemy2.enemyObj.transform.position = enemy2Pos;
-            enemy2.enemyObj.transform.localScale = new Vector3(7.5f, 7.5f, 7.5f);
+            enemy2.enemyObj.transform.localScale = new Vector3(3.33f, 3.33f, 3.33f);
             enemy2.enemyObj.GetComponent<Renderer>().material.color = new Color(255, 0, 0);
             enemy2.taunted = false;
         }
