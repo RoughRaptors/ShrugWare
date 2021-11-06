@@ -171,7 +171,7 @@ namespace ShrugWare
             if (!(curRaid is null) && !(curRaid.curBoss is null))
             {
                 gameInfoText.text = curRaid.raidName + "\n" + curRaid.curBoss.bossName + "\n"
-                    + "Health: " + curRaid.curBoss.curHealth.ToString() + " / " + curRaid.curBoss.maxHealth + "\n"
+                    + "Health: " + curRaid.curBoss.curHealth.ToString() + " / " + curRaid.curBoss.maxHealth + "\n \n"
                     + "Raid Health: " + curRaidHealth.ToString() + " / " + maxRaidHealth.ToString() + "\n"
                     + "Rezzes Left: " + livesLeft.ToString();
             }
