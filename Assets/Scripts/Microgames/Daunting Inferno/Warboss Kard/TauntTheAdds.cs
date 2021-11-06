@@ -13,22 +13,23 @@ namespace ShrugWare
         [SerializeField]
         Text timerText = null;
 
-        private Enemy enemy1;
-        private Enemy enemy2;
+        [SerializeField]
+        GameObject enemy1 = null;
+
+        [SerializeField]
+        GameObject enemy2 = null;
+
         bool won = false;
 
         private const float ENEMY_MOVE_SPEED = 10f;
         
-        private const float X_MIN = -50.0f;
-        private const float X_MAX = 50.0f;
-        private const float Y_MIN = -15.0f;
-        private const float Y_MAX = 40.0f;
+        private const float X_MIN = -25.0f;
+        private const float X_MAX = 25.0f;
+        private const float Y_MIN = -10.0f;
+        private const float Y_MAX = 10.0f;
 
-        private struct Enemy
-        {
-            public bool taunted;
-            public GameObject enemyObj;
-        }
+        private bool enemy1Taunted = false;
+        private bool enemy2Taunted = false;
 
         new private void Start()
         {
@@ -77,36 +78,36 @@ namespace ShrugWare
                 else
                 {
                     // move towards the middle - arbitrary point
-                    enemy1.enemyObj.transform.position = 
-                        Vector3.MoveTowards(enemy1.enemyObj.transform.position,
-                        new Vector3(0, 0, 100), ENEMY_MOVE_SPEED * Time.deltaTime);
+                    enemy1.transform.position = 
+                        Vector3.MoveTowards(enemy1.transform.position,
+                        new Vector3(0, 0, 30), ENEMY_MOVE_SPEED * Time.deltaTime);
 
-                    enemy2.enemyObj.transform.position =
-                        Vector3.MoveTowards(enemy2.enemyObj.transform.position, 
-                        new Vector3(0, 0, 100), ENEMY_MOVE_SPEED * Time.deltaTime);
+                    enemy2.transform.position =
+                        Vector3.MoveTowards(enemy2.transform.position, 
+                        new Vector3(0, 0, 30), ENEMY_MOVE_SPEED * Time.deltaTime);
                 }
             }
         }
 
         private void SetupEnemies()
         {
+            // enemy 1
             float enemy1XPos = Random.Range(X_MIN, X_MAX);
             float enemy1YPos = Random.Range(Y_MIN, Y_MAX);
-            Vector3 enemy1Pos = new Vector3(enemy1XPos, enemy1YPos, 100.0f);
-            enemy1.enemyObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            enemy1.enemyObj.transform.position = enemy1Pos;
-            enemy1.enemyObj.transform.localScale = new Vector3(3.33f, 3.33f, 3.33f);
-            enemy1.enemyObj.GetComponent<Renderer>().material.color = new Color(255, 0, 0);
-            enemy1.taunted = false;
+            Vector3 enemy1Pos = new Vector3(enemy1XPos, enemy1YPos, 30.0f);
+            enemy1.transform.position = enemy1Pos;
 
+            MeshFilter filter1 = enemy1.GetComponent<MeshFilter>();
+            filter1.GetComponent<MeshRenderer>().material.color = Color.red;
+
+            // enemy 2
             float enemy2XPos = Random.Range(X_MIN, X_MAX);
             float enemy2YPos = Random.Range(Y_MIN, Y_MAX);
-            Vector3 enemy2Pos = new Vector3(enemy2XPos, enemy2YPos, 100.0f);
-            enemy2.enemyObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            enemy2.enemyObj.transform.position = enemy2Pos;
-            enemy2.enemyObj.transform.localScale = new Vector3(3.33f, 3.33f, 3.33f);
-            enemy2.enemyObj.GetComponent<Renderer>().material.color = new Color(255, 0, 0);
-            enemy2.taunted = false;
+            Vector3 enemy2Pos = new Vector3(enemy2XPos, enemy2YPos, 30.0f);
+            enemy2.transform.position = enemy2Pos;
+
+            MeshFilter filter2 = enemy2.GetComponent<MeshFilter>();
+            filter2.GetComponent<MeshRenderer>().material.color = Color.red;
         }
 
         private void HandleInput()
@@ -118,19 +119,23 @@ namespace ShrugWare
                 if (Physics.Raycast(ray, out hit))
                 {
                     //Select stage    
-                    if (hit.transform.gameObject == enemy1.enemyObj)
+                    if (hit.transform.gameObject == enemy1)
                     {
-                        enemy1.taunted = true;
-                        enemy1.enemyObj.GetComponent<Renderer>().material.color = new Color(0, 255, 0);
+                        enemy1Taunted = true;
+
+                        MeshFilter filter = enemy1.GetComponent<MeshFilter>();
+                        filter.GetComponent<MeshRenderer>().material.color = Color.green;
                     }
-                    else if(hit.transform.gameObject == enemy2.enemyObj)
+                    else if(hit.transform.gameObject == enemy2)
                     {
-                        enemy2.taunted = true;
-                        enemy2.enemyObj.GetComponent<Renderer>().material.color = new Color(0, 255, 0);
+                        enemy2Taunted = true;
+
+                        MeshFilter filter = enemy2.GetComponent<MeshFilter>();
+                        filter.GetComponent<MeshRenderer>().material.color = Color.green;
                     }
                 }
                
-                if(enemy1.taunted && enemy2.taunted)
+                if(enemy1Taunted && enemy2Taunted)
                 {
                     won = true;
 
