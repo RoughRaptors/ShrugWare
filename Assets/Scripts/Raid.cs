@@ -4,9 +4,12 @@ using UnityEngine;
 
 namespace ShrugWare
 {
-    public abstract class Raid : MonoBehaviour
+    public abstract class Raid
     {
-        protected string raidName;
+        public string raidName { get; set; }
+
+        public Boss curBoss { get; set; } = null;
+
         protected List<Boss> bosses = new List<Boss>();
         public List<Boss> GetBosses() { return bosses; }
     }

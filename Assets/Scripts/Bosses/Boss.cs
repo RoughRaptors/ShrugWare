@@ -4,21 +4,40 @@ using UnityEngine;
 
 namespace ShrugWare
 {
-    public abstract class Boss : MonoBehaviour
+    public abstract class Boss
     {
-        protected string bossName;
-        protected float health;
+        public string bossName { get; set; }
 
-        private int curMechanicIndex = -1;
+        public float curHealth { get; set; }
+        public float maxHealth { get; set; }
+
+        // the microgames associated with this boss
         protected List<DataManager.Scenes> mechanics = new List<DataManager.Scenes>();
+
+        protected abstract void PopulateMechanicsList();
 
         public void TakeDamage(float amount)
         {
-            health -= amount;
-            if(health <= 0)
+            curHealth -= amount;
+            if(curHealth <= 0)
             {
 
             }
+        }
+
+        public DataManager.Scenes PickNextMicrogame()
+        {
+            if(mechanics.Count == 0)
+            {
+                PopulateMechanicsList();
+            }
+
+            // randomly grab one and remove it from our list
+            int microgameSceneIndex = Random.Range(0, mechanics.Count); // exclusive max
+            DataManager.Scenes scene = mechanics[microgameSceneIndex];
+            mechanics.RemoveAt(microgameSceneIndex);
+
+            return scene;
         }
     }
 }

@@ -6,20 +6,14 @@ namespace ShrugWare
 {
     public class DauntingInferno : Raid
     {
-        void Start()
+        public DauntingInferno()
         {
             raidName = "Daunting Inferno";
 
             WarbossKard warbossKard = new WarbossKard();
             bosses.Add(warbossKard);
-        }
 
-        public void StartRaid()
-        {
-            foreach(Boss boss in bosses)
-            {
-
-            }
+            curBoss = warbossKard;
         }
     }
 }

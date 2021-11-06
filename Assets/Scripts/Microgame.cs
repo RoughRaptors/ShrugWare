@@ -62,14 +62,7 @@ namespace ShrugWare
             }
             else if (effect.effectType == DataManager.StatEffectType.BossHealth)
             {
-                Raid curRaid = GameManager.Instance.GetRaidAtIndex(GameManager.Instance.GetCurRaidListIndex());
-                if(curRaid)
-                {
-                    foreach(Boss boss in curRaid.GetBosses())
-                    {
-                        boss.TakeDamage(effect.amount);
-                    }
-                }
+                GameManager.Instance.DamageBoss(effect.amount);
             }
             else if(effect.effectType == DataManager.StatEffectType.TimeScale)
             {
