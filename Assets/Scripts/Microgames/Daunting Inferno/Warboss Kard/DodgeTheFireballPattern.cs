@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace ShrugWare
 {
-    public class InterceptTheFireball : Microgame
+    public class DodgeTheFireballPattern : Microgame
     {
         [SerializeField]
         Text instructionsText = null;
@@ -17,10 +17,13 @@ namespace ShrugWare
         GameObject playerObject = null;
 
         [SerializeField]
-        GameObject fireballObject = null;
+        GameObject fireballObject1 = null;
 
         [SerializeField]
-        GameObject healerObject = null;
+        GameObject fireballObject2 = null;
+
+        [SerializeField]
+        GameObject fireballObject3 = null;
 
         private bool intercepted = false;
 
@@ -29,8 +32,8 @@ namespace ShrugWare
         private const float Y_MIN = -30.0f;
         private const float Y_MAX = 0.0f;
 
-        private const float FIREBALL_MOVE_SPEED = 15.0f;
-        private const float PLAYER_MOVE_SPEED = 15.0f;
+        private const float FIREBALL_MOVE_SPEED = 60.0f;
+        private const float PLAYER_MOVE_SPEED = 10.0f;
 
         new private void Start()
         {
@@ -54,8 +57,6 @@ namespace ShrugWare
             lossEffects.Add(damagePlayerEffect);
             lossEffects.Add(timeScaleEffect);
 
-            SetupPlayerObject();
-
             StartCoroutine("DisableInstructionsText");
         }
 
@@ -69,18 +70,27 @@ namespace ShrugWare
                 if (microgameDurationRemaining <= 0.0f)
                 {
                     // out of time
-                    if(!intercepted)
+                    if (playerObject.GetComponent<MeshRenderer>().enabled)
                     {
                         instructionsText.gameObject.SetActive(true);
-                        instructionsText.text = "I smell healer";
+                        instructionsText.text = "Threaded";
                     }
 
-                    HandleMicrogameEnd(intercepted);
+                    HandleMicrogameEnd(playerObject.GetComponent<MeshRenderer>().enabled);
                 }
                 else
                 {
-                    fireballObject.transform.position = 
-                        Vector3.MoveTowards(fireballObject.transform.position, healerObject.transform.position, FIREBALL_MOVE_SPEED * Time.deltaTime);
+                    fireballObject1.transform.position = 
+                        Vector3.MoveTowards(fireballObject1.transform.position, new Vector3(-100, fireballObject1.transform.position.y, 0),
+                        FIREBALL_MOVE_SPEED * (Random.Range(1, 1.5f) * Time.deltaTime));
+
+                    fireballObject2.transform.position =
+                        Vector3.MoveTowards(fireballObject2.transform.position, new Vector3(-100, fireballObject2.transform.position.y, 0),
+                        FIREBALL_MOVE_SPEED * (Random.Range(1, 1.5f) * Time.deltaTime));
+
+                    fireballObject3.transform.position =
+                        Vector3.MoveTowards(fireballObject3.transform.position, new Vector3(-100, fireballObject3.transform.position.y, 0),
+                        FIREBALL_MOVE_SPEED * (Random.Range(1, 1.5f) * Time.deltaTime));
 
                     microgameDurationRemaining -= Time.deltaTime;
                     timerText.text = microgameDurationRemaining.ToString("F2") + "s";
@@ -104,25 +114,8 @@ namespace ShrugWare
                     newPos.y -= PLAYER_MOVE_SPEED * Time.deltaTime;
                 }
 
-                if (Input.GetKey(KeyCode.A))
-                {
-                    newPos.x -= PLAYER_MOVE_SPEED * Time.deltaTime;
-                }
-
-                if (Input.GetKey(KeyCode.D))
-                {
-                    newPos.x += PLAYER_MOVE_SPEED * Time.deltaTime;
-                }
-
                 playerObject.transform.position = newPos;
             }
-        }
-
-        private void SetupPlayerObject()
-        {
-            float xPos = Random.Range(X_MIN, X_MAX);
-            float yPos = Random.Range(Y_MIN, Y_MAX);
-            playerObject.transform.position = new Vector3(xPos, yPos, 0.0f);
         }
 
         // easier to make this a coroutine since Update() will keep trying to disable it (for now at least)
@@ -134,15 +127,10 @@ namespace ShrugWare
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject == fireballObject)
-            {
-                intercepted = true;
+            playerObject.GetComponent<MeshRenderer>().enabled = false;
 
-                instructionsText.gameObject.SetActive(true);
-                instructionsText.text = "Good tank";
-
-                fireballObject.SetActive(false);
-            }
+            instructionsText.gameObject.SetActive(true);
+            instructionsText.text = "Like a leaf on the wind";
         }
     }
 }

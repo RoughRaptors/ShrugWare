@@ -26,4 +26,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Raids/Daunting Inferno/Exploit/StackPowerstones.unity
     guid: 008b61ca4b59ccc4d825a3db0092ec77
+  - enabled: 1
+    path: Assets/Scenes/Raids/Daunting Inferno/Warboss Kard/SidestepTheFireball.unity
+    guid: c671ac6363b1aeb4fa988e7dbd0aefb3
+  - enabled: 1
+    path: Assets/Scenes/Raids/Daunting Inferno/Warboss Kard/DodgeTheFireballPattern.unity
+    guid: 74b348f30a13919469adc6cbc0a5520d
   m_configObjects: {}

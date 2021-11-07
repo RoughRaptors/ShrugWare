@@ -15,6 +15,9 @@ namespace ShrugWare
         protected List<DataManager.StatEffect> winEffects = new List<DataManager.StatEffect>();
         protected List<DataManager.StatEffect> lossEffects = new List<DataManager.StatEffect>();
 
+        // temp hack to allow for a brief pause in between microgame timers running out
+        private bool hasRunEndCondition = false;
+
         protected void Start()
         {
             microgameDurationRemaining = DataManager.MICROGAME_DURATION_SECONDS;
@@ -29,10 +32,10 @@ namespace ShrugWare
         protected void HandleMicrogameEnd(bool wonMicrogame)
         {
             // should only be null if running the microgame scene on its own
-            if (GameManager.Instance)
+            if (GameManager.Instance && !hasRunEndCondition)
             {
-
-                if(wonMicrogame)
+                hasRunEndCondition = true;
+                if (wonMicrogame)
                 {
                     RunEffects(winEffects);
                 }
@@ -41,9 +44,17 @@ namespace ShrugWare
                     RunEffects(lossEffects);
                 }
 
-                GameManager.Instance.MicrogameCompleted(wonMicrogame);
-                GameManager.Instance.LoadScene((int)DataManager.Scenes.MainScene);
+                // defer this a bit to allow the player to see the results at the end of the time limit
+                StartCoroutine("LoadScene", wonMicrogame);
             }
+        }
+
+        public IEnumerator LoadScene(bool wonMicrogame)
+        {
+            yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
+            
+            GameManager.Instance.MicrogameCompleted(wonMicrogame);
+            GameManager.Instance.LoadScene((int)DataManager.Scenes.MainScene);
         }
 
         private void RunEffects(List<DataManager.StatEffect> effects)

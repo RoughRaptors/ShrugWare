@@ -65,14 +65,15 @@ namespace ShrugWare
             // don't "start" the microgame until we can orient the player to the microgame
             if (timeElapsed >= DataManager.SECONDS_TO_START_MICROGAME)
             {
-                microgameDurationRemaining -= Time.deltaTime;
-                timerText.text = microgameDurationRemaining.ToString("F2") + "s";
-
-                HandleInput();
-
                 if (microgameDurationRemaining <= 0.0f)
                 {
                     // out of time
+                    if (!won)
+                    {
+                        instructionsText.gameObject.SetActive(true);
+                        instructionsText.text = "RIP healers";
+                    }
+
                     HandleMicrogameEnd(won);
                 }
                 else
@@ -85,6 +86,10 @@ namespace ShrugWare
                     enemy2.transform.position =
                         Vector3.MoveTowards(enemy2.transform.position, 
                         new Vector3(0, 0, 30), ENEMY_MOVE_SPEED * Time.deltaTime);
+
+                    microgameDurationRemaining -= Time.deltaTime;
+                    timerText.text = microgameDurationRemaining.ToString("F2") + "s";
+                    HandleInput();
                 }
             }
         }

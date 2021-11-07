@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace ShrugWare
 {
-    public class StackPowerstones : Microgame
+    public class SidestepTheFireball : Microgame
     {
         [SerializeField]
         Text instructionsText = null;
@@ -17,17 +17,17 @@ namespace ShrugWare
         GameObject playerObject = null;
 
         [SerializeField]
-        GameObject powerstoneObj = null;
+        GameObject fireballObject = null;
 
-        private const float PLAYER_MOVE_SPEED = 5.0f;
+        private bool intercepted = false;
 
-        private const float X_MIN = -5.0f;
-        private const float X_MAX = 5.0f;
-        private const float Y_MIN = -2.5f;
-        private const float Y_MAX = 2.5f;
+        private const float X_MIN = -50.0f;
+        private const float X_MAX = 50.0f;
+        private const float Y_MIN = -30.0f;
+        private const float Y_MAX = 0.0f;
 
-        private const float NUM_POWERSTONES_TOTAL = 3;
-        private float numPowerstonesCollected = 0;
+        private const float FIREBALL_MOVE_SPEED = 30.0f;
+        private const float PLAYER_MOVE_SPEED = 10.0f;
 
         new private void Start()
         {
@@ -51,8 +51,6 @@ namespace ShrugWare
             lossEffects.Add(damagePlayerEffect);
             lossEffects.Add(timeScaleEffect);
 
-            SpawnPowerstones();
-
             StartCoroutine("DisableInstructionsText");
         }
 
@@ -66,15 +64,19 @@ namespace ShrugWare
                 if (microgameDurationRemaining <= 0.0f)
                 {
                     // out of time
-                    playerObject.GetComponent<MeshRenderer>().enabled = false;
-                    
-                    instructionsText.gameObject.SetActive(true);
-                    instructionsText.text = "Casual";
+                    if (playerObject.GetComponent<MeshRenderer>().enabled)
+                    {
+                        instructionsText.gameObject.SetActive(true);
+                        instructionsText.text = "Slightly singed";
+                    }
 
-                    HandleMicrogameEnd(numPowerstonesCollected == NUM_POWERSTONES_TOTAL);
+                    HandleMicrogameEnd(playerObject.GetComponent<MeshRenderer>().enabled);
                 }
                 else
                 {
+                    fireballObject.transform.position = 
+                        Vector3.MoveTowards(fireballObject.transform.position, new Vector3(0, -60, 0), FIREBALL_MOVE_SPEED * Time.deltaTime);
+
                     microgameDurationRemaining -= Time.deltaTime;
                     timerText.text = microgameDurationRemaining.ToString("F2") + "s";
                     HandleInput();
@@ -82,15 +84,22 @@ namespace ShrugWare
             }
         }
 
-        private void SpawnPowerstones()
+        private void HandleInput()
         {
-            for (int i = 0; i < NUM_POWERSTONES_TOTAL; ++i)
+            if (!intercepted)
             {
-                float xPos = Random.Range(X_MIN, X_MAX);
-                float yPos = Random.Range(Y_MIN, Y_MAX);
-                Vector3 powerstonePos = new Vector3(xPos, yPos, 15.0f);
-                GameObject powerstone = Instantiate(powerstoneObj);
-                powerstone.transform.position = powerstonePos;
+                Vector3 newPos = playerObject.transform.position;
+                if (Input.GetKey(KeyCode.A))
+                {
+                    newPos.x -= PLAYER_MOVE_SPEED * Time.deltaTime;
+                }
+
+                if (Input.GetKey(KeyCode.D))
+                {
+                    newPos.x += PLAYER_MOVE_SPEED * Time.deltaTime;
+                }
+
+                playerObject.transform.position = newPos;
             }
         }
 
@@ -101,40 +110,14 @@ namespace ShrugWare
             instructionsText.gameObject.SetActive(false);
         }
 
-        private void HandleInput()
-        {
-            Vector3 newPos = playerObject.transform.position;
-            if (Input.GetKey(KeyCode.W))
-            {
-                newPos.y += PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.S))
-            {
-                newPos.y -= PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                newPos.x -= PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.D))
-            {
-                newPos.x += PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            playerObject.transform.position = newPos;
-        }
-
         private void OnTriggerEnter(Collider other)
         {
-            other.gameObject.SetActive(false);
-
-            if (++numPowerstonesCollected == NUM_POWERSTONES_TOTAL)
+            if (other.gameObject == fireballObject)
             {
+                playerObject.GetComponent<MeshRenderer>().enabled = false;
+
                 instructionsText.gameObject.SetActive(true);
-                instructionsText.text = "Oops banned";
+                instructionsText.text = "Be faster";
             }
         }
     }
