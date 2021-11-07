@@ -52,15 +52,23 @@ namespace ShrugWare
             // don't "start" the microgame until we can orient the player to the microgame
             if (timeElapsed >= DataManager.SECONDS_TO_START_MICROGAME)
             {
-                microgameDurationRemaining -= Time.deltaTime;
-                timerText.text = microgameDurationRemaining.ToString("F2") + "s";
-
-                HandleInput();
-
                 if (microgameDurationRemaining <= 0.0f)
                 {
                     // out of time
+                    if (inFire)
+                    {
+                        instructionsText.gameObject.SetActive(true);
+                        instructionsText.text = "Be faster";
+                    }
+
                     HandleMicrogameEnd(!inFire);
+                }
+                else
+                {
+                    microgameDurationRemaining -= Time.deltaTime;
+                    timerText.text = microgameDurationRemaining.ToString("F2") + "s";
+
+                    HandleInput();
                 }
             }
         }

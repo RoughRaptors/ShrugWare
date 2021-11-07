@@ -16,7 +16,9 @@ namespace ShrugWare
             InterceptTheFireball,
             PerformTheRotation,
             StackPowerstones,
-            MICROGAME_END = 6 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            SidestepTheFireball,
+            DodgeTheFireballPattern,
+            MICROGAME_END = 8 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatEffectType

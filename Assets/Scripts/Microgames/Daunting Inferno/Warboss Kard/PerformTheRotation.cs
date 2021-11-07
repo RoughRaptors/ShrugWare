@@ -71,13 +71,21 @@ namespace ShrugWare
             // don't "start" the microgame until we can orient the player to the microgame
             if (timeElapsed >= DataManager.SECONDS_TO_START_MICROGAME)
             {
-                microgameDurationRemaining -= Time.deltaTime;
-                timerText.text = microgameDurationRemaining.ToString("F2") + "s";
-
                 if (microgameDurationRemaining <= 0.0f)
                 {
                     // out of time
+                    if (rotation.Count > 0)
+                    {
+                        instructionsText.gameObject.SetActive(true);
+                        instructionsText.text = "Bad DPS";
+                    }
+
                     HandleMicrogameEnd(rotation.Count == 0);
+                }
+                else
+                {
+                    microgameDurationRemaining -= Time.deltaTime;
+                    timerText.text = microgameDurationRemaining.ToString("F2") + "s";
                 }
             }
         }
