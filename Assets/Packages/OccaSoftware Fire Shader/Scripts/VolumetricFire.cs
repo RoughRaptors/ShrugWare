@@ -88,12 +88,12 @@ public class VolumetricFire : MonoBehaviour
         {
             newRot *= rotationForBillboard;
             Vector3 direction = (transform.position - cam.position).normalized;
-            position = transform.position - (direction * item * spacing);
+            position = transform.position - (item * spacing * direction);
         }
         else
         {
             newRot = transform.rotation;
-            position = transform.position - (transform.forward * item * spacing);
+            position = transform.position - (item * spacing * transform.forward);
         }
         
 
