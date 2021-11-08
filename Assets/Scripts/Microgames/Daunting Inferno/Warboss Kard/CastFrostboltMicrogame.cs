@@ -50,7 +50,7 @@ namespace ShrugWare
             frostboltButton.gameObject.SetActive(false);
             healButton.gameObject.SetActive(false);
 
-            StartCoroutine("DisableInstructionsText");
+            StartCoroutine(DisableInstructionsText());
         }
 
         private void Update()

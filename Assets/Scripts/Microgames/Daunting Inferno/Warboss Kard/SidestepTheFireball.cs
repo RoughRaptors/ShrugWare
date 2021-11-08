@@ -51,7 +51,7 @@ namespace ShrugWare
             lossEffects.Add(damagePlayerEffect);
             lossEffects.Add(timeScaleEffect);
 
-            StartCoroutine("DisableInstructionsText");
+            StartCoroutine(DisableInstructionsText());
         }
 
         private void Update()

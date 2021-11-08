@@ -10,15 +10,17 @@ namespace ShrugWare
         public enum Scenes
         {
             MainScene = 0, // DO NOT CHANGE THIS
-            DauntingInfernoGetOutOfFire = 1,
-            DauntingInfernoCastFrostbolt,
+            GetOutOfFire = 1,
+            CastFrostbolt,
             TauntTheAdds,
             InterceptTheFireball,
             PerformTheRotation,
             StackPowerstones,
             SidestepTheFireball,
             DodgeTheFireballPattern,
-            MICROGAME_END = 8 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            StackUpForMeteor,
+            SpreadOutFromMeteor,
+            MICROGAME_END = 10 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatEffectType

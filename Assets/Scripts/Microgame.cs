@@ -6,6 +6,8 @@ namespace ShrugWare
 {
     public abstract class Microgame : MonoBehaviour
     {
+        // todo - add string instructionsTextString field to allow for cleaner, more data driven code
+
         protected float microgameDurationRemaining;
 
         // used to restrict player input and introduce a delay to the beginning of a microgame
@@ -45,7 +47,7 @@ namespace ShrugWare
                 }
 
                 // defer this a bit to allow the player to see the results at the end of the time limit
-                StartCoroutine("LoadScene", wonMicrogame);
+                StartCoroutine(LoadScene(wonMicrogame));
             }
         }
 

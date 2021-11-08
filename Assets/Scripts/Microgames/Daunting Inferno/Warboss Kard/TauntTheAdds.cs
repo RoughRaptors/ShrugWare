@@ -55,7 +55,7 @@ namespace ShrugWare
 
             SetupEnemies();
 
-            StartCoroutine("DisableInstructionsText");
+            StartCoroutine(DisableInstructionsText());
         }
 
         private void Update()

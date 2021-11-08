@@ -32,4 +32,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Raids/Daunting Inferno/Warboss Kard/DodgeTheFireballPattern.unity
     guid: 74b348f30a13919469adc6cbc0a5520d
+  - enabled: 1
+    path: Assets/Scenes/Raids/Daunting Inferno/Warboss Kard/StackUpForMeteor.unity
+    guid: ef193a3a6e392e941822b48bf3b560f8
+  - enabled: 1
+    path: Assets/Scenes/Raids/Daunting Inferno/Warboss Kard/SpreadOutForMeteor.unity
+    guid: 24cf4d3570f7282409dcb6d206285008
   m_configObjects: {}
