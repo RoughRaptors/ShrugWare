@@ -9,33 +9,33 @@ EditorBuildSettings:
     path: Assets/Scenes/MainScene 1.unity
     guid: 2724fc1884c1ac04b939f5b7df9ffed6
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/Warboss Kard/GetOutOfFireScene.unity
+    path: Assets/Scenes/Raids/Daunting Inferno/GetOutOfFireScene.unity
     guid: e2ad56e2653a17b449b892aaaf7dde53
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/Warboss Kard/CastFrostboltMicrogame.unity
+    path: Assets/Scenes/Raids/Daunting Inferno/CastFrostboltMicrogame.unity
     guid: bf3a9ec2b9f669d4b90d5421e4d57544
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/Warboss Kard/TauntTheAdds.unity
+    path: Assets/Scenes/Raids/Daunting Inferno/TauntTheAdds.unity
     guid: 777b6ab6aa978904d81bdf23fe6a2c1f
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/Warboss Kard/InterceptTheFireball.unity
+    path: Assets/Scenes/Raids/Daunting Inferno/InterceptTheFireball.unity
     guid: 00c3b4ee2b4934e489d2a961b478ee81
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/Warboss Kard/PerformTheRotation.unity
+    path: Assets/Scenes/Raids/Daunting Inferno/PerformTheRotation.unity
     guid: 95ab459b495cb7447be4637f61a3a150
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/Exploit/StackPowerstones.unity
+    path: Assets/Scenes/Raids/Daunting Inferno/StackPowerstones.unity
     guid: 008b61ca4b59ccc4d825a3db0092ec77
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/Warboss Kard/SidestepTheFireball.unity
+    path: Assets/Scenes/Raids/Daunting Inferno/SidestepTheFireball.unity
     guid: c671ac6363b1aeb4fa988e7dbd0aefb3
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/Warboss Kard/DodgeTheFireballPattern.unity
+    path: Assets/Scenes/Raids/Daunting Inferno/DodgeTheFireballPattern.unity
     guid: 74b348f30a13919469adc6cbc0a5520d
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/Warboss Kard/StackUpForMeteor.unity
+    path: Assets/Scenes/Raids/Daunting Inferno/StackUpForMeteor.unity
     guid: ef193a3a6e392e941822b48bf3b560f8
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/Warboss Kard/SpreadOutForMeteor.unity
+    path: Assets/Scenes/Raids/Daunting Inferno/SpreadOutForMeteor.unity
     guid: 24cf4d3570f7282409dcb6d206285008
   m_configObjects: {}

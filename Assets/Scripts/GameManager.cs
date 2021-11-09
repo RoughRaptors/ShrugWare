@@ -95,11 +95,6 @@ namespace ShrugWare
             }
 
             curSceneIndex = (int)DataManager.Scenes.MainScene;
-        }
-
-        private void Start()
-        {
-            Screen.SetResolution(1920, 1080, false);
 
             EventSystem sceneEventSystem = FindObjectOfType<EventSystem>();
             if (sceneEventSystem == null)
@@ -108,6 +103,11 @@ namespace ShrugWare
                 eventSystem.AddComponent<EventSystem>();
                 eventSystem.AddComponent<StandaloneInputModule>();
             }
+        }
+
+        private void Start()
+        {
+            Screen.SetResolution(1920, 1080, false);
 
             gameInfoText.enabled = false;
             timeToNextMicrogameText.enabled = false;
@@ -163,9 +163,7 @@ namespace ShrugWare
         public void MicrogameCompleted(bool wonMicrogame)
         {
             FillBossInfoText();
-            mainCanvas.enabled = true;
-
-            CheckAndHandleEndCondition();
+            HandleFromMicrogameTransition();
         }
 
         private void FillBossInfoText()
@@ -177,15 +175,45 @@ namespace ShrugWare
                     + "Raid Health: " + curRaidHealth.ToString() + " / " + maxRaidHealth.ToString() + "\n"
                     + "Rezzes Left: " + livesLeft.ToString();
             }
+            else
+            {
+                Debug.Log("Raid or Boss null in FillBossInfoText");
+            }
+        }
+
+        private void HandleFromMicrogameTransition()
+        {
+            mainCanvas.enabled = true;
+            
+            if (!(curRaid is null) && !(curRaid.curBoss is null))
+            {
+                CheckAndHandleEndCondition();
+            }
+            else
+            {
+                Debug.Log("Raid or Boss null in HandleFromMicrogameTransition");
+            }
         }
 
         private void CheckAndHandleEndCondition()
         {
-            // todo - scale this up
             if (curRaid.curBoss.curHealth <= 0)
             {
-                timeToNextMicrogameText.enabled = false;
-                gameInfoText.text += "\n \n CONGLADURATION. YOU ARE WIN";
+                // go to next boss
+                curRaid.curBoss.isDead = true;
+                curRaid.curBoss = curRaid.GetNextBoss();
+
+                if (curRaid.IsComplete)
+                {
+                    timeToNextMicrogameText.enabled = false;
+                    gameInfoText.text += "\n \n CONGLADURATION. YOU ARE WIN";
+                }
+                else
+                {
+                    // pause the game and wait for the player to hit the continue button
+                    startGameButton.GetComponentInChildren<Text>().text = "Continue to " + curRaid.curBoss.bossName;
+                    startGameButton.gameObject.SetActive(true);
+                }
 
                 // temp hack to stop the game when you win/lose
                 gameStarted = false;
