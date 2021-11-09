@@ -133,12 +133,23 @@ namespace ShrugWare
             if (gameRunning && curSceneIndex == (int)DataManager.Scenes.MainScene)
             {
                 timeInMainScene += Time.deltaTime;
-                betweenMicrogameText.text = "Next Level In: " + (DataManager.SECONDS_BETWEEN_MICROGAMES - timeInMainScene).ToString("F2") + "s";
+
+                UpdateBetweenMicrogameText();
                 if (livesLeft > 0 && timeInMainScene >= DataManager.SECONDS_BETWEEN_MICROGAMES && !(curRaid is null) && !(curRaid.curBoss is null))
                 {
                     DataManager.Scenes nextScene = curRaid.curBoss.PickNextMicrogame(); 
                     LoadScene((int)nextScene);
                 }
+            }
+        }
+
+        private void UpdateBetweenMicrogameText()
+        {
+            betweenMicrogameText.enabled = true;
+            betweenMicrogameText.text = "Next Level In: " + (DataManager.SECONDS_BETWEEN_MICROGAMES - timeInMainScene).ToString("F2") + "s";
+            if (previouslyRanEffects.Count > 0)
+            {
+                betweenMicrogameText.text += "\n" + GetPreviousEffectInfoString();
             }
         }
 
@@ -208,17 +219,18 @@ namespace ShrugWare
 
                 if (curRaid.IsComplete)
                 {
+                    gameRunning = false;
+
                     betweenMicrogameText.enabled = false;
                     gameInfoText.text += "\n \n CONGLADURATION. YOU ARE WIN";
                 }
                 else
                 {
                     // pause the game and wait for the player to hit the continue button
+                    gameRunning = false;
                     continueGameButton.GetComponentInChildren<Text>().text = "Continue to " + curRaid.curBoss.bossName;
                     continueGameButton.gameObject.SetActive(true);
                 }
-
-                gameRunning = false;
             }
             else if(livesLeft == 0)
             {
@@ -245,14 +257,10 @@ namespace ShrugWare
 
             curSceneIndex = sceneIndex;
             SceneManager.LoadScene(sceneIndex);
-
-            PauseAndDisplayPreviousEffectInfo();
         }
 
-        private void PauseAndDisplayPreviousEffectInfo()
+        private string GetPreviousEffectInfoString()
         {
-            gameRunning = false;
-
             float raidDamageTaken = 0.0f;
             float bossDamageTaken = 0.0f;
             float timeScaleModification = 0.0f;
@@ -273,12 +281,10 @@ namespace ShrugWare
                 }
             }
 
-            betweenMicrogameText.enabled = true;
-            betweenMicrogameText.text = "Raid Damage: " + raidDamageTaken.ToString() + 
-                "\nBoss Damage: " + bossDamageTaken.ToString() + "\nTimescale Mod: " + timeScaleModification.ToString();
+            string effectInfoStr = "Raid Damage: " + raidDamageTaken.ToString() + 
+                "\nBoss Damage: " + bossDamageTaken.ToString() + "\nTimescale Mod: " + timeScaleModification.ToString() + "\n";
 
-            continueGameButton.GetComponentInChildren<Text>().text = "Continue";
-            continueGameButton.gameObject.SetActive(true);
+            return effectInfoStr;
         }
 
         public void ClearPreviousEffects()
