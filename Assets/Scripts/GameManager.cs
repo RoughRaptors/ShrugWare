@@ -308,7 +308,7 @@ namespace ShrugWare
                 }
             }
 
-            Debug.Log("Raid health modified by " + amount.ToString());
+            //Debug.Log("Raid health modified by " + amount.ToString());
         }
 
         public void DamageBoss(float amount)
@@ -317,7 +317,7 @@ namespace ShrugWare
             {
                 curRaid.curBoss.TakeDamage(amount);
 
-                Debug.Log("Current boss " + curRaid.curBoss.bossName + " health modified by " + amount.ToString());
+                //Debug.Log("Current boss " + curRaid.curBoss.bossName + " health modified by " + amount.ToString());
             }
         }
 
@@ -327,7 +327,7 @@ namespace ShrugWare
             Time.timeScale = curTimeScale;
             timeScaleInputField.text = "Time Scale: " + curTimeScale.ToString("F3");
 
-            Debug.Log("Timescale modified by " + amount.ToString());
+            //Debug.Log("Timescale modified by " + amount.ToString());
         }
 
         public Raid GetRaidAtIndex(int index)
