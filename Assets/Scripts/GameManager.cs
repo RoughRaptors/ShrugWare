@@ -37,13 +37,13 @@ namespace ShrugWare
         InputField timeScaleInputField = null;
 
         [SerializeField]
-        Text timeToNextMicrogameText = null;
+        Text betweenMicrogameText = null;
 
         [SerializeField]
         Canvas mainCanvas = null;
 
         [SerializeField]
-        Button startGameButton = null;
+        Button continueGameButton = null;
 
         [SerializeField]
         Text gameInfoText = null;
@@ -57,7 +57,7 @@ namespace ShrugWare
         private int curSceneIndex = 0;
         public int GetCurSceneIndex() { return curSceneIndex; }
 
-        private bool gameStarted = false;
+        private bool gameRunning = false;
 
         // for now until we find something better, hold this so we know when to transition to our next microgame - TODO MAKE THIS BETTER
         private float timeInMainScene = 0.0f;
@@ -72,6 +72,8 @@ namespace ShrugWare
         private List<Raid> raidList = new List<Raid>();
 
         private Raid curRaid = null;
+
+        public List<DataManager.StatEffect> previouslyRanEffects = new List<DataManager.StatEffect>();
 
         private void Awake()
         {
@@ -89,7 +91,7 @@ namespace ShrugWare
                 curTimeScale = GameManager.Instance.curTimeScale;
                 timeScaleInputField.text = "Time Scale: " + curTimeScale.ToString("F3");
 
-                gameStarted = GameManager.Instance.gameStarted;
+                gameRunning = GameManager.Instance.gameRunning;
                 livesLeft = GameManager.Instance.livesLeft;
                 timeInMainScene = 0.0f;
             }
@@ -110,7 +112,7 @@ namespace ShrugWare
             Screen.SetResolution(1920, 1080, false);
 
             gameInfoText.enabled = false;
-            timeToNextMicrogameText.enabled = false;
+            betweenMicrogameText.enabled = false;
             timeScaleInputField.text = "Time Scale: " + curTimeScale.ToString("F3");
             Time.timeScale = curTimeScale;
 
@@ -128,10 +130,10 @@ namespace ShrugWare
         {            
             // we will come back here whenever we load back from a microgame to the main scene
             // we need to keep playing, which means to pick and start a new microgame from our raid and boss if we're not dead
-            if (gameStarted && curSceneIndex == (int)DataManager.Scenes.MainScene)
+            if (gameRunning && curSceneIndex == (int)DataManager.Scenes.MainScene)
             {
                 timeInMainScene += Time.deltaTime;
-                timeToNextMicrogameText.text = "Next Level In: " + (DataManager.SECONDS_BETWEEN_MICROGAMES - timeInMainScene).ToString("F2") + "s";
+                betweenMicrogameText.text = "Next Level In: " + (DataManager.SECONDS_BETWEEN_MICROGAMES - timeInMainScene).ToString("F2") + "s";
                 if (livesLeft > 0 && timeInMainScene >= DataManager.SECONDS_BETWEEN_MICROGAMES && !(curRaid is null) && !(curRaid.curBoss is null))
                 {
                     DataManager.Scenes nextScene = curRaid.curBoss.PickNextMicrogame(); 
@@ -164,6 +166,7 @@ namespace ShrugWare
         {
             FillBossInfoText();
             HandleFromMicrogameTransition();
+            GameManager.Instance.LoadScene((int)DataManager.Scenes.MainScene);
         }
 
         private void FillBossInfoText()
@@ -205,26 +208,24 @@ namespace ShrugWare
 
                 if (curRaid.IsComplete)
                 {
-                    timeToNextMicrogameText.enabled = false;
+                    betweenMicrogameText.enabled = false;
                     gameInfoText.text += "\n \n CONGLADURATION. YOU ARE WIN";
                 }
                 else
                 {
                     // pause the game and wait for the player to hit the continue button
-                    startGameButton.GetComponentInChildren<Text>().text = "Continue to " + curRaid.curBoss.bossName;
-                    startGameButton.gameObject.SetActive(true);
+                    continueGameButton.GetComponentInChildren<Text>().text = "Continue to " + curRaid.curBoss.bossName;
+                    continueGameButton.gameObject.SetActive(true);
                 }
 
-                // temp hack to stop the game when you win/lose
-                gameStarted = false;
+                gameRunning = false;
             }
             else if(livesLeft == 0)
             {
-                timeToNextMicrogameText.enabled = false;
+                betweenMicrogameText.enabled = false;
                 gameInfoText.text += "\n \n 50 DKP MINUS!";
 
-                // temp hack to stop the game when you win/lose
-                gameStarted = false;
+                gameRunning = false;
             }
         }
 
@@ -244,15 +245,54 @@ namespace ShrugWare
 
             curSceneIndex = sceneIndex;
             SceneManager.LoadScene(sceneIndex);
+
+            PauseAndDisplayPreviousEffectInfo();
         }
 
-        public void StartGame()
+        private void PauseAndDisplayPreviousEffectInfo()
         {
-            timeToNextMicrogameText.enabled = true;
-            startGameButton.gameObject.SetActive(false);
+            gameRunning = false;
+
+            float raidDamageTaken = 0.0f;
+            float bossDamageTaken = 0.0f;
+            float timeScaleModification = 0.0f;
+
+            foreach(DataManager.StatEffect effect in previouslyRanEffects)
+            {
+                if (effect.effectType == DataManager.StatEffectType.PlayerHealth)
+                {
+                    raidDamageTaken += effect.amount;
+                }
+                else if (effect.effectType == DataManager.StatEffectType.BossHealth)
+                {
+                    bossDamageTaken += effect.amount;
+                }
+                else if (effect.effectType == DataManager.StatEffectType.TimeScale)
+                {
+                    timeScaleModification += effect.amount;
+                }
+            }
+
+            betweenMicrogameText.enabled = true;
+            betweenMicrogameText.text = "Raid Damage: " + raidDamageTaken.ToString() + 
+                "\nBoss Damage: " + bossDamageTaken.ToString() + "\nTimescale Mod: " + timeScaleModification.ToString();
+
+            continueGameButton.GetComponentInChildren<Text>().text = "Continue";
+            continueGameButton.gameObject.SetActive(true);
+        }
+
+        public void ClearPreviousEffects()
+        {
+            previouslyRanEffects.Clear();
+        }
+
+        public void ContinueGame()
+        {
+            betweenMicrogameText.enabled = true;
+            continueGameButton.gameObject.SetActive(false);
             gameInfoText.enabled = true;
 
-            gameStarted = true;
+            gameRunning = true;
         }
 
         public void TakeDamage(float amount)
@@ -267,6 +307,8 @@ namespace ShrugWare
                     curRaidHealth = maxRaidHealth;
                 }
             }
+
+            Debug.Log("Raid health modified by " + amount.ToString());
         }
 
         public void DamageBoss(float amount)
@@ -274,6 +316,8 @@ namespace ShrugWare
             if (!(curRaid is null) && !(curRaid.curBoss is null))
             {
                 curRaid.curBoss.TakeDamage(amount);
+
+                Debug.Log("Current boss " + curRaid.curBoss.bossName + " health modified by " + amount.ToString());
             }
         }
 
@@ -282,6 +326,8 @@ namespace ShrugWare
             curTimeScale += amount;
             Time.timeScale = curTimeScale;
             timeScaleInputField.text = "Time Scale: " + curTimeScale.ToString("F3");
+
+            Debug.Log("Timescale modified by " + amount.ToString());
         }
 
         public Raid GetRaidAtIndex(int index)
@@ -292,6 +338,11 @@ namespace ShrugWare
             }
 
             return null;
+        }
+
+        public void AddPreviouslyRanEffect(DataManager.StatEffect effect)
+        {
+            previouslyRanEffects.Add(effect);
         }
     }
 }

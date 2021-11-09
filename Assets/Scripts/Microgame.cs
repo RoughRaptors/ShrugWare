@@ -56,11 +56,11 @@ namespace ShrugWare
             yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
             
             GameManager.Instance.MicrogameCompleted(wonMicrogame);
-            GameManager.Instance.LoadScene((int)DataManager.Scenes.MainScene);
         }
 
         private void RunEffects(List<DataManager.StatEffect> effects)
         {
+            GameManager.Instance.ClearPreviousEffects();
             foreach (DataManager.StatEffect effect in effects)
             {
                 RunEffect(effect);
@@ -69,7 +69,9 @@ namespace ShrugWare
 
         private void RunEffect(DataManager.StatEffect effect)
         {
-            if(effect.effectType == DataManager.StatEffectType.PlayerHealth)
+            GameManager.Instance.AddPreviouslyRanEffect(effect);
+
+            if (effect.effectType == DataManager.StatEffectType.PlayerHealth)
             {
                 GameManager.Instance.TakeDamage(effect.amount);
             }
