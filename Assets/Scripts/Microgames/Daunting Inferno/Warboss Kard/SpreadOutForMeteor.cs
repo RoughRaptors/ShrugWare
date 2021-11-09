@@ -33,7 +33,7 @@ namespace ShrugWare
 
         private const float PLAYER_MOVE_SPEED = 15.0f;
 
-        private bool stacked = false;
+        private bool stacked = true;
 
         private Vector3 member1TargetPos;
         private Vector3 member2TargetPos;
@@ -163,7 +163,7 @@ namespace ShrugWare
             float member2DistanceFromPlayer = Vector3.Distance(groupMember2.transform.position, playerObject.transform.position);
             if (member1DistanceFromPlayer > DISTANCE_FOR_VALID_STACK && member2DistanceFromPlayer > DISTANCE_FOR_VALID_STACK)
             {
-                stacked = true;
+                stacked = false;
                 instructionsText.text = "On point";
             }
             else

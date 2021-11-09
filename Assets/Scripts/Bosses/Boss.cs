@@ -8,6 +8,7 @@ namespace ShrugWare
     {
         public string bossName { get; set; }
 
+        public bool isDead { get; set; } = false;
         public float curHealth { get; set; }
         public float maxHealth { get; set; }
 
@@ -19,9 +20,9 @@ namespace ShrugWare
         public void TakeDamage(float amount)
         {
             curHealth -= amount;
-            if(curHealth <= 0)
+            if (curHealth <= 0)
             {
-
+                isDead = true;
             }
         }
 

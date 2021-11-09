@@ -22,6 +22,15 @@ namespace ShrugWare
         [SerializeField]
         Button healButton;
 
+        [SerializeField]
+        GameObject leftButtonObj;
+
+        [SerializeField]
+        GameObject middleButtonObj;
+
+        [SerializeField]
+        GameObject rightButtonObj;
+
         private bool castedFrostbolt = false;
 
         new private void Start()
@@ -50,6 +59,8 @@ namespace ShrugWare
             frostboltButton.gameObject.SetActive(false);
             healButton.gameObject.SetActive(false);
 
+            RandomizeButtons();
+
             StartCoroutine(DisableInstructionsText());
         }
 
@@ -63,8 +74,11 @@ namespace ShrugWare
                 if (microgameDurationRemaining <= 0.0f)
                 {
                     // out of time
-                    instructionsText.gameObject.SetActive(true);
-                    instructionsText.text = "Clicker";
+                    if (!castedFrostbolt)
+                    {
+                        instructionsText.gameObject.SetActive(true);
+                        instructionsText.text = "Clicker";
+                    }
 
                     HandleMicrogameEnd(castedFrostbolt);
                 }
@@ -74,6 +88,28 @@ namespace ShrugWare
                     timerText.text = microgameDurationRemaining.ToString("F2") + "s";
                 }
             }
+        }
+
+        public void RandomizeButtons()
+        {
+            List<Button> buttonList = new List<Button>();
+            buttonList.Add(fireballButton);
+            buttonList.Add(frostboltButton);
+            buttonList.Add(healButton);
+
+            int randIndex = Random.Range(0, 3);
+            Button button = buttonList[randIndex];
+            button.gameObject.transform.position = leftButtonObj.transform.position;
+            buttonList.RemoveAt(randIndex);
+
+            int randIndex2 = Random.Range(0, 2);
+            Button button2 = buttonList[randIndex2];
+            button2.gameObject.transform.position = middleButtonObj.transform.position;
+            buttonList.RemoveAt(randIndex2);
+
+            Button button3 = buttonList[0];
+            button3.gameObject.transform.position = rightButtonObj.transform.position;
+            buttonList.RemoveAt(0);
         }
 
         // easier to make this a coroutine since Update() will keep trying to disable it (for now at least)
