@@ -20,7 +20,9 @@ namespace ShrugWare
             DodgeTheFireballPattern,
             StackUpForMeteor,
             SpreadOutFromMeteor,
-            MICROGAME_END = 10 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            EqualizeGroupSize,
+            InterruptTheAbility,
+            MICROGAME_END = 12 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatEffectType

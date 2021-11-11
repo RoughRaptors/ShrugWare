@@ -89,6 +89,7 @@ namespace ShrugWare
 
                 // set all of our shit back - figure out a better solution later if there is one - TODO MAKE THIS BETTER
                 curTimeScale = GameManager.Instance.curTimeScale;
+                timeScaleInputField = GameManager.Instance.timeScaleInputField;
                 timeScaleInputField.text = "Time Scale: " + curTimeScale.ToString("F3");
 
                 gameRunning = GameManager.Instance.gameRunning;

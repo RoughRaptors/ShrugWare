@@ -38,4 +38,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Raids/Daunting Inferno/SpreadOutForMeteor.unity
     guid: 24cf4d3570f7282409dcb6d206285008
+  - enabled: 1
+    path: Assets/Scenes/Raids/Daunting Inferno/EqualizeTwoGroups.unity
+    guid: 1fc8e39649ba7684fb8ad4f397ad059d
+  - enabled: 1
+    path: Assets/Scenes/Raids/Daunting Inferno/InterruptTheAbility.unity
+    guid: acfa2c51ef16cd64f883a0f96018ad5f
   m_configObjects: {}
