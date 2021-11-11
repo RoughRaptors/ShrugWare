@@ -31,6 +31,9 @@ namespace ShrugWare
         private bool enemy1Taunted = false;
         private bool enemy2Taunted = false;
 
+        private Vector3 enemy1TargetPos;
+        private Vector3 enemy2TargetPos;
+
         new private void Start()
         {
             base.Start();
@@ -78,14 +81,10 @@ namespace ShrugWare
                 }
                 else
                 {
-                    // move towards the middle - arbitrary point
-                    enemy1.transform.position = 
-                        Vector3.MoveTowards(enemy1.transform.position,
-                        new Vector3(0, 0, 30), ENEMY_MOVE_SPEED * Time.deltaTime);
+                    // move towards the target point
+                    enemy1.transform.position = Vector3.MoveTowards(enemy1.transform.position, enemy1TargetPos, ENEMY_MOVE_SPEED * Time.deltaTime);
 
-                    enemy2.transform.position =
-                        Vector3.MoveTowards(enemy2.transform.position, 
-                        new Vector3(0, 0, 30), ENEMY_MOVE_SPEED * Time.deltaTime);
+                    enemy2.transform.position = Vector3.MoveTowards(enemy2.transform.position, enemy2TargetPos, ENEMY_MOVE_SPEED * Time.deltaTime);
 
                     microgameDurationRemaining -= Time.deltaTime;
                     timerText.text = microgameDurationRemaining.ToString("F2") + "s";
@@ -102,14 +101,24 @@ namespace ShrugWare
             Vector3 enemy1Pos = new Vector3(enemy1XPos, enemy1YPos, 30.0f);
             enemy1.transform.position = enemy1Pos;
 
+            float enemy1TargetXPos = Random.Range(X_MIN, X_MAX);
+            float enemy1TargetYPos = Random.Range(Y_MIN, Y_MAX);
+            enemy1TargetPos = new Vector3(enemy1TargetXPos, enemy1TargetYPos, 30);
+
             MeshFilter filter1 = enemy1.GetComponent<MeshFilter>();
             filter1.GetComponent<MeshRenderer>().material.color = Color.red;
+            enemy1.SetActive(false);
 
             // enemy 2
             float enemy2XPos = Random.Range(X_MIN, X_MAX);
             float enemy2YPos = Random.Range(Y_MIN, Y_MAX);
             Vector3 enemy2Pos = new Vector3(enemy2XPos, enemy2YPos, 30.0f);
             enemy2.transform.position = enemy2Pos;
+
+            float enemy2TargetXPos = Random.Range(X_MIN, X_MAX);
+            float enemy2TargetYPos = Random.Range(Y_MIN, Y_MAX);
+            enemy2TargetPos = new Vector3(enemy2TargetXPos, enemy2TargetYPos, 30);
+            enemy2.SetActive(false);
 
             MeshFilter filter2 = enemy2.GetComponent<MeshFilter>();
             filter2.GetComponent<MeshRenderer>().material.color = Color.red;
@@ -155,6 +164,8 @@ namespace ShrugWare
         {
             yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
             instructionsText.gameObject.SetActive(false);
+            enemy1.SetActive(true);
+            enemy2.SetActive(true);
         }
     }
 }
