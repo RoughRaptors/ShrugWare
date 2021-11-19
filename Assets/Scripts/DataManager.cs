@@ -22,7 +22,8 @@ namespace ShrugWare
             SpreadOutFromMeteor,
             EqualizeGroupSize,
             InterruptTheAbility,
-            MICROGAME_END = 12 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            KnockbackedSafelty,
+            MICROGAME_END = 13 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatEffectType
