@@ -19,15 +19,17 @@ namespace ShrugWare
         [SerializeField]
         GameObject powerstoneObj = null;
 
-        private const float PLAYER_MOVE_SPEED = 5.0f;
+        private const float PLAYER_MOVE_SPEED = 12.5f;
 
-        private const float X_MIN = -5.0f;
-        private const float X_MAX = 5.0f;
-        private const float Y_MIN = -2.5f;
-        private const float Y_MAX = 2.5f;
+        private const float X_MIN = -9.0f;
+        private const float X_MAX =9.0f;
+        private const float Y_MIN = -4.0f;
+        private const float Y_MAX = 4.0f;
 
-        private const float NUM_POWERSTONES_TOTAL = 3;
+        private const float NUM_POWERSTONES_TOTAL = 4;
         private float numPowerstonesCollected = 0;
+
+        private List<GameObject> powerstones = new List<GameObject>();
 
         new private void Start()
         {
@@ -71,7 +73,12 @@ namespace ShrugWare
                     if (numPowerstonesCollected != NUM_POWERSTONES_TOTAL)
                     {
                         instructionsText.gameObject.SetActive(true);
-                        instructionsText.text = "Casual";
+                        instructionsText.text = "Casual, no kill for you";
+
+                        foreach(GameObject go in powerstones)
+                        {
+                            go.SetActive(false);
+                        }
                     }
 
                     HandleMicrogameEnd(numPowerstonesCollected == NUM_POWERSTONES_TOTAL);
@@ -94,6 +101,8 @@ namespace ShrugWare
                 Vector3 powerstonePos = new Vector3(xPos, yPos, 15.0f);
                 GameObject powerstone = Instantiate(powerstoneObj);
                 powerstone.transform.position = powerstonePos;
+
+                powerstones.Add(powerstone);
             }
         }
 
@@ -137,7 +146,7 @@ namespace ShrugWare
             if (++numPowerstonesCollected == NUM_POWERSTONES_TOTAL)
             {
                 instructionsText.gameObject.SetActive(true);
-                instructionsText.text = "Oops banned";
+                instructionsText.text = "Oops banned \n#WORTHIT #GOTLOOT";
             }
         }
     }

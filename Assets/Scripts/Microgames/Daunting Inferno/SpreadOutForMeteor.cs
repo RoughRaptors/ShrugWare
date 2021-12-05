@@ -88,18 +88,22 @@ namespace ShrugWare
                 }
                 else
                 {
-                    timeRatio += Time.deltaTime / DataManager.MICROGAME_DURATION_SECONDS;
-                    meteorObject.transform.position = Vector3.Lerp(meteorStartPos, playerObject.transform.position, timeRatio);
+                    if (meteorObject.activeInHierarchy)
+                    {
+                        timeRatio += Time.deltaTime / DataManager.MICROGAME_DURATION_SECONDS;
+                        meteorObject.transform.position = Vector3.Lerp(meteorStartPos, playerObject.transform.position, timeRatio);
 
-                    groupMember1.transform.position =
-                        Vector3.MoveTowards(groupMember1.transform.position, member1TargetPos, PLAYER_MOVE_SPEED * Time.deltaTime);
+                        groupMember1.transform.position =
+                            Vector3.MoveTowards(groupMember1.transform.position, member1TargetPos, PLAYER_MOVE_SPEED * Time.deltaTime);
 
-                    groupMember2.transform.position =
-                        Vector3.MoveTowards(groupMember2.transform.position, member2TargetPos, PLAYER_MOVE_SPEED * Time.deltaTime);
+                        groupMember2.transform.position =
+                            Vector3.MoveTowards(groupMember2.transform.position, member2TargetPos, PLAYER_MOVE_SPEED * Time.deltaTime);
+
+                        HandleInput();
+                    }
 
                     microgameDurationRemaining -= Time.deltaTime;
                     timerText.text = microgameDurationRemaining.ToString("F2") + "s";
-                    HandleInput();
                 }
             }
         }
