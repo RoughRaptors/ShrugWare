@@ -71,15 +71,15 @@ namespace ShrugWare
         {
             GameManager.Instance.AddPreviouslyRanEffect(effect);
 
-            if (effect.effectType == DataManager.StatEffectType.PlayerHealth)
+            if (effect.effectType == DataManager.StatModifierType.PlayerHealth)
             {
                 GameManager.Instance.TakeDamage(effect.amount);
             }
-            else if (effect.effectType == DataManager.StatEffectType.BossHealth)
+            else if (effect.effectType == DataManager.StatModifierType.BossHealth)
             {
                 GameManager.Instance.DamageBoss(effect.amount);
             }
-            else if(effect.effectType == DataManager.StatEffectType.TimeScale)
+            else if(effect.effectType == DataManager.StatModifierType.Timescale)
             {
                 GameManager.Instance.ModifyTimeScale(effect.amount);
             }

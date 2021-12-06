@@ -20,7 +20,6 @@ namespace ShrugWare
         Button interruptButton;
 
         // take some time to spawn to make it challenging
-        private bool interruptVisible = false;
         private bool interrupted = false;
         private float castDelay = 0.0f;
 
@@ -29,15 +28,15 @@ namespace ShrugWare
             base.Start();
 
             DataManager.StatEffect damagePlayerEffect;
-            damagePlayerEffect.effectType = DataManager.StatEffectType.PlayerHealth;
+            damagePlayerEffect.effectType = DataManager.StatModifierType.PlayerHealth;
             damagePlayerEffect.amount = 34.0f;
 
             DataManager.StatEffect damageBossEffect;
-            damageBossEffect.effectType = DataManager.StatEffectType.BossHealth;
+            damageBossEffect.effectType = DataManager.StatModifierType.BossHealth;
             damageBossEffect.amount = 20.0f;
 
             DataManager.StatEffect timeScaleEffect;
-            timeScaleEffect.effectType = DataManager.StatEffectType.TimeScale;
+            timeScaleEffect.effectType = DataManager.StatModifierType.Timescale;
             timeScaleEffect.amount = 0.05f;
 
             winEffects.Add(damageBossEffect);
@@ -92,7 +91,7 @@ namespace ShrugWare
             interruptButton.gameObject.SetActive(true);
 
             castDelay = Random.Range(0.5f, 1.5f);
-            Invoke("CastAbility", castDelay);
+            Invoke(nameof(CastAbility), castDelay);
         }
 
         private void CastAbility()

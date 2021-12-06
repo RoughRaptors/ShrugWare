@@ -18,6 +18,11 @@ using UnityEngine.EventSystems;
             modify timescale
     progress through that bosses minigames and perform well enough to not wipe and defeat the boss
     progress through each raid by defeating all bosses
+
+    you are able to leave raids in between bosses to visit a merchant
+        to reach the merchant, you must successfully pass a number of meta microgames
+        merchant is currency based - each raid has their own currency type
+        sells armor and consumables
 */
 
 /* 
@@ -221,15 +226,15 @@ namespace ShrugWare
 
             foreach(DataManager.StatEffect effect in previouslyRanEffects)
             {
-                if (effect.effectType == DataManager.StatEffectType.PlayerHealth)
+                if (effect.effectType == DataManager.StatModifierType.PlayerHealth)
                 {
                     raidDamageTaken += effect.amount;
                 }
-                else if (effect.effectType == DataManager.StatEffectType.BossHealth)
+                else if (effect.effectType == DataManager.StatModifierType.BossHealth)
                 {
                     bossDamageTaken += effect.amount;
                 }
-                else if (effect.effectType == DataManager.StatEffectType.TimeScale)
+                else if (effect.effectType == DataManager.StatModifierType.Timescale)
                 {
                     timeScaleModification += effect.amount;
                 }

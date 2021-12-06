@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace ShrugWare
 {
     public class DataManager
@@ -26,17 +22,25 @@ namespace ShrugWare
             MICROGAME_END = 13 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
-        public enum StatEffectType
+        public enum StatModifierType
         {
             PlayerHealth = 0,
             BossHealth,
-            TimeScale
+            Timescale,
+            OutgoingDamage,
+            IncomingDamage
         }
 
         public struct StatEffect
         {
-            public StatEffectType effectType;
+            public StatModifierType effectType;
             public float amount;
+        }
+
+        public enum ItemType
+        {
+            Armor = 0,
+            Consumable
         }
 
         public static float MICROGAME_DURATION_SECONDS = 3.0f; // we can override this in the child Microgame's Start() - microgameDurationRemaining

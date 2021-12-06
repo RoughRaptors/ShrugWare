@@ -20,12 +20,6 @@ namespace ShrugWare
         GameObject arrowObj = null;
 
         [SerializeField]
-        GameObject badZone1Obj = null;
-
-        [SerializeField]
-        GameObject badZone2Obj = null;
-
-        [SerializeField]
         GameObject safeZoneObj = null;
 
         private bool inSafeZone = false;
@@ -41,15 +35,15 @@ namespace ShrugWare
             base.Start();
 
             DataManager.StatEffect damagePlayerEffect;
-            damagePlayerEffect.effectType = DataManager.StatEffectType.PlayerHealth;
+            damagePlayerEffect.effectType = DataManager.StatModifierType.PlayerHealth;
             damagePlayerEffect.amount = 34.0f;
 
             DataManager.StatEffect damageBossEffect;
-            damageBossEffect.effectType = DataManager.StatEffectType.BossHealth;
+            damageBossEffect.effectType = DataManager.StatModifierType.BossHealth;
             damageBossEffect.amount = 20.0f;
 
             DataManager.StatEffect timeScaleEffect;
-            timeScaleEffect.effectType = DataManager.StatEffectType.TimeScale;
+            timeScaleEffect.effectType = DataManager.StatModifierType.Timescale;
             timeScaleEffect.amount = 0.05f;
 
             winEffects.Add(damageBossEffect);
@@ -75,7 +69,7 @@ namespace ShrugWare
                     if (!knockbacked)
                     {
                         ApplyKnockback();
-                        Invoke("EndMicrogame", 1.5f);
+                        Invoke(nameof(EndMicrogame), 1.5f);
                     }
                 }
                 else
