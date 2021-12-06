@@ -284,6 +284,13 @@ namespace ShrugWare
             }
         }
 
+        public void SetTimescale(float newTimescale)
+        {
+            curTimeScale = newTimescale;
+            Time.timeScale = curTimeScale;
+            UIManager.Instance.SetTimescaleInputFieldText("Time Scale: " + curTimeScale.ToString("F3"));
+        }
+
         public void ModifyTimeScale(float amount)
         {
             curTimeScale += amount;

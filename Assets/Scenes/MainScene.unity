@@ -1148,8 +1148,8 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1761595078}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1525524872}
+        m_TargetAssemblyTypeName: ShrugWare.UIManager, Assembly-CSharp
         m_MethodName: ConfirmTimeScaleButtonClicked
         m_Mode: 1
         m_Arguments:
