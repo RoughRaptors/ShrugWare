@@ -8,10 +8,9 @@ namespace ShrugWare
     {
         private Dictionary<DataManager.Currencies, int> currencies = new Dictionary<DataManager.Currencies, int>();
         private Dictionary<int, Item> inventoryItems = new Dictionary<int, Item>();
-        private Dictionary<ArmorItem.ArmorSlot, Item> equippedArmor = new Dictionary<ArmorItem.ArmorSlot, Item>();
+        private Dictionary<DataManager.ArmorSlot, ArmorItem> equippedArmor = new Dictionary<DataManager.ArmorSlot, ArmorItem>();
 
         private float curMitigationPercent = 0.0f;
-        public float GetMitigation() { return curMitigationPercent; }
 
         public PlayerInventory()
         {
@@ -67,9 +66,9 @@ namespace ShrugWare
             }
         }
 
-        public void EquipArmorItem(Item itemToEquip)
+        public void EquipArmorItem(ArmorItem armorToEquip)
         {
-            foreach(DataManager.StatEffect effect in itemToEquip.GetEffects())
+            foreach(DataManager.StatEffect effect in armorToEquip.GetEffects())
             {
                 curMitigationPercent += effect.amount;
                 if(curMitigationPercent > 100.0f)
@@ -77,26 +76,16 @@ namespace ShrugWare
                     curMitigationPercent = 100.0f;
                 }
             }
+
+            equippedArmor[armorToEquip.GetArmorSlot()] = armorToEquip;
+            RecalculateStats();
         }
 
-        public void UnequipArmorSlot(ArmorItem.ArmorSlot slot)
+        public void UnequipArmorSlot(DataManager.ArmorSlot slot)
         {
-            Item itemToUnequip = null;
+            ArmorItem itemToUnequip = null;
             if(equippedArmor.TryGetValue(slot, out itemToUnequip))
             {
-                // remove the effects
-                foreach (DataManager.StatEffect effect in itemToUnequip.GetEffects())
-                {
-                    if(effect.effectType == DataManager.StatModifierType.IncomingDamage)
-                    {
-                        curMitigationPercent -= effect.amount;
-                        if(curMitigationPercent < 0.0f)
-                        {
-                            curMitigationPercent = 0.0f;
-                        }
-                    }
-                }
-
                 // if we already have the item in our inventory, increase the quantity, otherwise add it
                 if(inventoryItems.ContainsKey(itemToUnequip.templateId))
                 {
@@ -108,6 +97,41 @@ namespace ShrugWare
                 }
 
                 equippedArmor[slot] = null;
+                RecalculateStats();
+            }
+        }
+
+        private void RecalculateStats()
+        {
+            curMitigationPercent = 0;
+            GameManager.Instance.ResetMaxHP();
+
+            if (HasSetBonus())
+            {
+                // we have a full set, grab any piece's set bonus since they are all the same and we only need 1
+                List<DataManager.StatEffect> setBonuses = equippedArmor[DataManager.ArmorSlot.Head].GetSetBonuses();
+                foreach (DataManager.StatEffect effect in setBonuses)
+                {
+                    if (effect.effectType == DataManager.StatModifierType.IncomingDamage)
+                    {
+                        curMitigationPercent += effect.amount;
+                    }
+                    else if(effect.effectType == DataManager.StatModifierType.PlayerMaxHealth)
+                    {
+                        GameManager.Instance.AddToMaxHP((int)(GameManager.Instance.GetPlayerInfo().maxRaidHealth * effect.amount));
+                    }
+                }
+            }
+
+            foreach (KeyValuePair<DataManager.ArmorSlot, ArmorItem> armor in equippedArmor)
+            {
+                foreach (DataManager.StatEffect effect in armor.Value.GetEffects())
+                {
+                    if (effect.effectType == DataManager.StatModifierType.IncomingDamage)
+                    {
+                        curMitigationPercent += effect.amount;
+                    }
+                }
             }
         }
 
@@ -144,6 +168,40 @@ namespace ShrugWare
             }
 
             return usedConsumable;
+        }
+
+
+        public float GetMitigation() 
+        {
+            return curMitigationPercent;
+        }
+
+        public bool HasSetBonus()
+        {
+            // check for armor set - this can be dumb and just check for 5 of the same
+            int numSameArmorSetEquipped = 0;
+            DataManager.ArmorSet prevSet = DataManager.ArmorSet.DauntingInferno;
+            foreach (KeyValuePair<DataManager.ArmorSlot, ArmorItem> armor in equippedArmor)
+            {
+                // if we have none, this means we haven't started yet so set our set to the current piece of armor
+                if (numSameArmorSetEquipped == 0)
+                {
+                    prevSet = armor.Value.GetArmorSet();
+                }
+
+                // then if we detect a match of pieces, increment the number of matches
+                if (prevSet == armor.Value.GetArmorSet())
+                {
+                    ++numSameArmorSetEquipped;
+                }
+                else
+                {
+                    // not a match, therefore not a full set
+                    break;
+                }
+            }
+
+            return numSameArmorSetEquipped == (int)DataManager.ArmorSlot.MAX + 1;
         }
     }
 }

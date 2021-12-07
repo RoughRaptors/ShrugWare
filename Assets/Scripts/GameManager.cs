@@ -72,6 +72,7 @@ namespace ShrugWare
         }
 
         PlayerInfo playerInfo = new PlayerInfo(DataManager.PLAYER_RAID_START_HP, DataManager.PLAYER_RAID_MAX_HP, DataManager.PLAYER_RAID_STARTING_LIVES);
+        public PlayerInfo GetPlayerInfo() { return playerInfo; }
 
         private int curRaidListIndex = -1;
         public int GetCurRaidListIndex() { return curRaidListIndex; }
@@ -340,6 +341,16 @@ namespace ShrugWare
         public void AddPreviouslyRanEffect(DataManager.StatEffect effect)
         {
             previouslyRanEffects.Add(effect);
+        }
+
+        public void AddToMaxHP(int amount)
+        {
+            playerInfo.maxRaidHealth += amount;
+        }
+
+        public void ResetMaxHP()
+        {
+            playerInfo.maxRaidHealth = DataManager.PLAYER_RAID_MAX_HP;
         }
     }
 }

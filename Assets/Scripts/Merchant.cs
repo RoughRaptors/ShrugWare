@@ -67,7 +67,7 @@ namespace ShrugWare
             itemsForSale.Add(maxHealthPotionItem);
 
             // helmet
-            ArmorItem diHelm = new ArmorItem(ArmorItem.ArmorSlot.Head);
+            ArmorItem diHelm = new ArmorItem(DataManager.ArmorSlot.Head, DataManager.ArmorSet.DauntingInferno);
             diHelm.AddEffect(damageReductionEffect);
 
             ItemForSale diHelmItem;
@@ -78,7 +78,7 @@ namespace ShrugWare
             itemsForSale.Add(diHelmItem);
 
             // chest
-            ArmorItem diChest = new ArmorItem(ArmorItem.ArmorSlot.Chest);
+            ArmorItem diChest = new ArmorItem(DataManager.ArmorSlot.Chest, DataManager.ArmorSet.DauntingInferno);
             diChest.AddEffect(damageReductionEffect);
 
             ItemForSale diChestItem;
@@ -89,7 +89,7 @@ namespace ShrugWare
             itemsForSale.Add(diChestItem);
 
             // gloves
-            ArmorItem diGloves = new ArmorItem(ArmorItem.ArmorSlot.Gloves);
+            ArmorItem diGloves = new ArmorItem(DataManager.ArmorSlot.Gloves, DataManager.ArmorSet.DauntingInferno);
             diGloves.AddEffect(damageReductionEffect);
 
             ItemForSale diGlovesItem;
@@ -100,7 +100,7 @@ namespace ShrugWare
             itemsForSale.Add(diGlovesItem);
 
             // legs
-            ArmorItem diLegs = new ArmorItem(ArmorItem.ArmorSlot.Legs);
+            ArmorItem diLegs = new ArmorItem(DataManager.ArmorSlot.Legs, DataManager.ArmorSet.DauntingInferno);
             diLegs.AddEffect(damageReductionEffect);
 
             ItemForSale diLegsItem;
@@ -111,7 +111,7 @@ namespace ShrugWare
             itemsForSale.Add(diLegsItem);
 
             // boots
-            ArmorItem diBoots = new ArmorItem(ArmorItem.ArmorSlot.Boots);
+            ArmorItem diBoots = new ArmorItem(DataManager.ArmorSlot.Boots, DataManager.ArmorSet.DauntingInferno);
             diBoots.AddEffect(damageReductionEffect);
 
             ItemForSale diBootsItem;
