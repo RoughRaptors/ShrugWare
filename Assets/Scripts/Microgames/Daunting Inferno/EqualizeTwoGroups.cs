@@ -43,17 +43,20 @@ namespace ShrugWare
         {
             base.Start();
 
-            DataManager.StatEffect damagePlayerEffect;
-            damagePlayerEffect.effectType = DataManager.StatEffectType.PlayerHealth;
+            DataManager.StatEffect damagePlayerEffect = new DataManager.StatEffect();
+            damagePlayerEffect.effectType = DataManager.StatModifierType.PlayerCurHealth;
             damagePlayerEffect.amount = 34.0f;
+            damagePlayerEffect.asPercentage = false;
 
-            DataManager.StatEffect damageBossEffect;
-            damageBossEffect.effectType = DataManager.StatEffectType.BossHealth;
+            DataManager.StatEffect damageBossEffect = new DataManager.StatEffect();
+            damageBossEffect.effectType = DataManager.StatModifierType.BossCurHealth;
             damageBossEffect.amount = 20.0f;
+            damageBossEffect.asPercentage = false;
 
-            DataManager.StatEffect timeScaleEffect;
-            timeScaleEffect.effectType = DataManager.StatEffectType.TimeScale;
+            DataManager.StatEffect timeScaleEffect = new DataManager.StatEffect();
+            timeScaleEffect.effectType = DataManager.StatModifierType.Timescale;
             timeScaleEffect.amount = 0.05f;
+            timeScaleEffect.asPercentage = false;
 
             winEffects.Add(damageBossEffect);
             winEffects.Add(timeScaleEffect);

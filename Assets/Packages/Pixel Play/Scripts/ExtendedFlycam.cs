@@ -30,22 +30,22 @@ public class ExtendedFlycam : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
-            transform.position += transform.forward * (normalMoveSpeed * fastMoveFactor) * Input.GetAxis("Vertical") * Time.deltaTime;
-            transform.position += transform.right * (normalMoveSpeed * fastMoveFactor) * Input.GetAxis("Horizontal") * Time.deltaTime;
+            transform.position += (normalMoveSpeed * fastMoveFactor) * Input.GetAxis("Vertical") * Time.deltaTime * transform.forward;
+            transform.position += (normalMoveSpeed * fastMoveFactor) * Input.GetAxis("Horizontal") * Time.deltaTime * transform.right;
         }
         else if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
         {
-            transform.position += transform.forward * (normalMoveSpeed * slowMoveFactor) * Input.GetAxis("Vertical") * Time.deltaTime;
-            transform.position += transform.right * (normalMoveSpeed * slowMoveFactor) * Input.GetAxis("Horizontal") * Time.deltaTime;
+            transform.position += (normalMoveSpeed * slowMoveFactor) * Input.GetAxis("Vertical") * Time.deltaTime * Time.deltaTime * transform.forward;
+            transform.position += (normalMoveSpeed * slowMoveFactor) * Input.GetAxis("Horizontal") * Time.deltaTime * transform.right;
         }
         else
         {
-            transform.position += transform.forward * normalMoveSpeed * Input.GetAxis("Vertical") * Time.deltaTime;
-            transform.position += transform.right * normalMoveSpeed * Input.GetAxis("Horizontal") * Time.deltaTime;
+            transform.position += normalMoveSpeed * Input.GetAxis("Vertical") * Time.deltaTime * transform.forward;
+            transform.position += normalMoveSpeed * Input.GetAxis("Horizontal") * Time.deltaTime * transform.right;
         }
 
 
-        if (Input.GetKey(KeyCode.Q)) { transform.position += transform.up * climbSpeed * Time.deltaTime; }
-        if (Input.GetKey(KeyCode.E)) { transform.position -= transform.up * climbSpeed * Time.deltaTime; }
+        if (Input.GetKey(KeyCode.Q)) { transform.position += climbSpeed * Time.deltaTime * transform.up; }
+        if (Input.GetKey(KeyCode.E)) { transform.position -= climbSpeed * Time.deltaTime * transform.up; ; }
     }
 }

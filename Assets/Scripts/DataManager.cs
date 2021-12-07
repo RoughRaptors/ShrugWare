@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace ShrugWare
 {
     public class DataManager
@@ -26,25 +22,41 @@ namespace ShrugWare
             MICROGAME_END = 13 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
-        public enum StatEffectType
+        public enum StatModifierType
         {
-            PlayerHealth = 0,
-            BossHealth,
-            TimeScale
+            PlayerCurHealth = 0,
+            PlayerMaxHealth,
+            BossCurHealth,
+            Timescale,
+            OutgoingDamage,
+            IncomingDamage
         }
 
         public struct StatEffect
         {
-            public StatEffectType effectType;
+            public StatModifierType effectType;
             public float amount;
+            public bool asPercentage;
+        }
+
+        public enum ItemType
+        {
+            Armor = 0,
+            Consumable
+        }
+
+        public enum Currencies
+        {
+            Generic = 0,
+            DauntingInferno
         }
 
         public static float MICROGAME_DURATION_SECONDS = 3.0f; // we can override this in the child Microgame's Start() - microgameDurationRemaining
         public static float SECONDS_TO_START_MICROGAME = 1.0f; // how long we wait for the microgame to start when on the scene - to orient the player
         public static float SECONDS_BETWEEN_MICROGAMES = 3.0f; // how long we wait before starting another microgame inside of GameManager
 
-        public static float PLAYER_RAID_START_HP = 100.0f;
-        public static float PLAYER_RAID_MAX_HP = 100.0f;
+        public static int PLAYER_RAID_START_HP = 100;
+        public static int PLAYER_RAID_MAX_HP = 100;
         public static int PLAYER_RAID_STARTING_LIVES = 3;
     }
 }

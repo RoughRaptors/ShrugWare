@@ -18,6 +18,11 @@ using UnityEngine.EventSystems;
             modify timescale
     progress through that bosses minigames and perform well enough to not wipe and defeat the boss
     progress through each raid by defeating all bosses
+
+    you are able to leave raids in between bosses to visit a merchant
+        to reach the merchant, you must successfully pass a number of meta microgames
+        merchant is currency based - each raid has their own currency type
+        sells armor and consumables
 */
 
 /* 
@@ -53,7 +58,7 @@ namespace ShrugWare
 
         public struct PlayerInfo
         {
-            public PlayerInfo(float cur, float max, int lives)
+            public PlayerInfo(int cur, int max, int lives)
             {
                 curRaidHealth = cur;
                 maxRaidHealth = max;
@@ -61,8 +66,8 @@ namespace ShrugWare
             }
 
             // 0 is still alive, it's your last life
-            public float curRaidHealth;
-            public float maxRaidHealth;
+            public int curRaidHealth;
+            public int maxRaidHealth;
             public int livesLeft;
         }
 
@@ -77,6 +82,9 @@ namespace ShrugWare
 
         private List<DataManager.StatEffect> previouslyRanEffects = new List<DataManager.StatEffect>();
         public List<DataManager.StatEffect> GetPreviouslyRanEffects() { return previouslyRanEffects; }
+
+        private PlayerInventory inventory = new PlayerInventory();
+        public PlayerInventory GetPlayerInventory() { return inventory; }
 
         private void Awake()
         {
@@ -117,6 +125,11 @@ namespace ShrugWare
             if (raidList.Count == 0)
             {
                 PopulateData();
+            }
+
+            if(inventory == null)
+            {
+                inventory = new PlayerInventory();
             }
 
             // our raid and boss data needs to be populated by this point
@@ -221,15 +234,15 @@ namespace ShrugWare
 
             foreach(DataManager.StatEffect effect in previouslyRanEffects)
             {
-                if (effect.effectType == DataManager.StatEffectType.PlayerHealth)
+                if (effect.effectType == DataManager.StatModifierType.PlayerCurHealth)
                 {
                     raidDamageTaken += effect.amount;
                 }
-                else if (effect.effectType == DataManager.StatEffectType.BossHealth)
+                else if (effect.effectType == DataManager.StatModifierType.BossCurHealth)
                 {
                     bossDamageTaken += effect.amount;
                 }
-                else if (effect.effectType == DataManager.StatEffectType.TimeScale)
+                else if (effect.effectType == DataManager.StatModifierType.Timescale)
                 {
                     timeScaleModification += effect.amount;
                 }
@@ -258,9 +271,16 @@ namespace ShrugWare
             gameRunning = true;
         }
 
-        public void TakeDamage(float amount)
+        public void TakePlayerRaidDamage(float amount)
         {
-            playerInfo.curRaidHealth -= amount;
+            float totalAmount = amount;
+            float mitigationModifier = inventory.GetMitigation();
+            if(mitigationModifier > 0)
+            {
+                totalAmount = totalAmount * (mitigationModifier / 100);
+            }
+
+            playerInfo.curRaidHealth -= (int)totalAmount;
             if(playerInfo.curRaidHealth < 0)
             {
                 --playerInfo.livesLeft;
@@ -271,8 +291,17 @@ namespace ShrugWare
                 }
                 else
                 {
-                    playerInfo.curRaidHealth = 0.0f;
+                    playerInfo.curRaidHealth = 0;
                 }
+            }
+        }
+
+        public void HealPlayerRaid(int amount)
+        {
+            playerInfo.curRaidHealth += amount;
+            if (playerInfo.curRaidHealth > playerInfo.maxRaidHealth)
+            {
+                playerInfo.curRaidHealth = playerInfo.maxRaidHealth;
             }
         }
 
