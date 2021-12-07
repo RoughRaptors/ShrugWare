@@ -15,7 +15,7 @@ namespace ShrugWare
         {
             foreach(DataManager.StatEffect effect in effects)
             {
-                if(effect.effectType == DataManager.StatModifierType.PlayerHealth)
+                if(effect.effectType == DataManager.StatModifierType.PlayerCurHealth)
                 {
                     
                 }

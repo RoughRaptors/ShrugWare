@@ -90,6 +90,9 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\EqualizeTwoGroups.cs" />
     <Compile Include="Assets\Scripts\Items\ArmorItem.cs" />
     <Compile Include="Assets\Scripts\DataManager.cs" />
+    <Compile Include="Assets\Scripts\Merchant.cs" />
+    <Compile Include="Assets\Scripts\PlayerInventory.cs" />
+    <Compile Include="Assets\Scripts\InventoryManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

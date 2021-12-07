@@ -17,8 +17,9 @@ namespace ShrugWare
 
         protected ArmorSlot armorSlot;
 
-        public ArmorItem()
+        public ArmorItem(ArmorSlot slot)
         {
+            armorSlot = slot;
             itemType = DataManager.ItemType.Armor;
         }
     }

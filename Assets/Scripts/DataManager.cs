@@ -24,8 +24,9 @@ namespace ShrugWare
 
         public enum StatModifierType
         {
-            PlayerHealth = 0,
-            BossHealth,
+            PlayerCurHealth = 0,
+            PlayerMaxHealth,
+            BossCurHealth,
             Timescale,
             OutgoingDamage,
             IncomingDamage
@@ -35,12 +36,19 @@ namespace ShrugWare
         {
             public StatModifierType effectType;
             public float amount;
+            public bool asPercentage;
         }
 
         public enum ItemType
         {
             Armor = 0,
             Consumable
+        }
+
+        public enum Currencies
+        {
+            Generic = 0,
+            DauntingInferno
         }
 
         public static float MICROGAME_DURATION_SECONDS = 3.0f; // we can override this in the child Microgame's Start() - microgameDurationRemaining

@@ -10,6 +10,9 @@ namespace ShrugWare
         public DataManager.ItemType itemType { get; protected set; }
         public int itemQuantity { get; set; } = 1;
 
+        public static int curTemplateId = 0;
+        public int templateId { get; set; } = 0;
+
         protected List<DataManager.StatEffect> effects = new List<DataManager.StatEffect>();
         public void AddEffect(DataManager.StatEffect effect)
         {

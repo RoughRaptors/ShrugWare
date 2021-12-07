@@ -83,6 +83,9 @@ namespace ShrugWare
         private List<DataManager.StatEffect> previouslyRanEffects = new List<DataManager.StatEffect>();
         public List<DataManager.StatEffect> GetPreviouslyRanEffects() { return previouslyRanEffects; }
 
+        private PlayerInventory inventory = new PlayerInventory();
+        public PlayerInventory GetPlayerInventory() { return inventory; }
+
         private void Awake()
         {
             // this will be called every time we swap back to our main scene
@@ -122,6 +125,11 @@ namespace ShrugWare
             if (raidList.Count == 0)
             {
                 PopulateData();
+            }
+
+            if(inventory == null)
+            {
+                inventory = new PlayerInventory();
             }
 
             // our raid and boss data needs to be populated by this point
@@ -226,11 +234,11 @@ namespace ShrugWare
 
             foreach(DataManager.StatEffect effect in previouslyRanEffects)
             {
-                if (effect.effectType == DataManager.StatModifierType.PlayerHealth)
+                if (effect.effectType == DataManager.StatModifierType.PlayerCurHealth)
                 {
                     raidDamageTaken += effect.amount;
                 }
-                else if (effect.effectType == DataManager.StatModifierType.BossHealth)
+                else if (effect.effectType == DataManager.StatModifierType.BossCurHealth)
                 {
                     bossDamageTaken += effect.amount;
                 }
