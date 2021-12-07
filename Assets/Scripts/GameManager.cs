@@ -58,7 +58,7 @@ namespace ShrugWare
 
         public struct PlayerInfo
         {
-            public PlayerInfo(float cur, float max, int lives)
+            public PlayerInfo(int cur, int max, int lives)
             {
                 curRaidHealth = cur;
                 maxRaidHealth = max;
@@ -66,8 +66,8 @@ namespace ShrugWare
             }
 
             // 0 is still alive, it's your last life
-            public float curRaidHealth;
-            public float maxRaidHealth;
+            public int curRaidHealth;
+            public int maxRaidHealth;
             public int livesLeft;
         }
 
@@ -271,12 +271,16 @@ namespace ShrugWare
             gameRunning = true;
         }
 
-        public void TakeDamage(float amount)
+        public void TakePlayerRaidDamage(float amount)
         {
-            float mitigatedAmount = amount;
-            float mitigationModifier = 0.0f;
+            float totalAmount = amount;
+            float mitigationModifier = inventory.GetMitigation();
+            if(mitigationModifier > 0)
+            {
+                totalAmount = totalAmount * (mitigationModifier / 100);
+            }
 
-            playerInfo.curRaidHealth -= mitigatedAmount;
+            playerInfo.curRaidHealth -= (int)totalAmount;
             if(playerInfo.curRaidHealth < 0)
             {
                 --playerInfo.livesLeft;
@@ -287,8 +291,17 @@ namespace ShrugWare
                 }
                 else
                 {
-                    playerInfo.curRaidHealth = 0.0f;
+                    playerInfo.curRaidHealth = 0;
                 }
+            }
+        }
+
+        public void HealPlayerRaid(int amount)
+        {
+            playerInfo.curRaidHealth += amount;
+            if (playerInfo.curRaidHealth > playerInfo.maxRaidHealth)
+            {
+                playerInfo.curRaidHealth = playerInfo.maxRaidHealth;
             }
         }
 

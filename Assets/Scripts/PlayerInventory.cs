@@ -72,6 +72,10 @@ namespace ShrugWare
             foreach(DataManager.StatEffect effect in itemToEquip.GetEffects())
             {
                 curMitigationPercent += effect.amount;
+                if(curMitigationPercent > 100.0f)
+                {
+                    curMitigationPercent = 100.0f;
+                }
             }
         }
 
@@ -85,14 +89,18 @@ namespace ShrugWare
                 {
                     if(effect.effectType == DataManager.StatModifierType.IncomingDamage)
                     {
-                        curMitigationPercent += effect.amount;
+                        curMitigationPercent -= effect.amount;
+                        if(curMitigationPercent < 0.0f)
+                        {
+                            curMitigationPercent = 0.0f;
+                        }
                     }
                 }
 
                 // if we already have the item in our inventory, increase the quantity, otherwise add it
-                if(inventoryItems.TryGetValue(itemToUnequip.templateId, out itemToUnequip))
+                if(inventoryItems.ContainsKey(itemToUnequip.templateId))
                 {
-                    ++itemToUnequip.itemQuantity;
+                    ++inventoryItems[itemToUnequip.templateId].itemQuantity;
                 }
                 else
                 {
@@ -101,6 +109,41 @@ namespace ShrugWare
 
                 equippedArmor[slot] = null;
             }
+        }
+
+        public void RemoveCurrency(DataManager.Currencies currency, int amount)
+        {
+            if(currencies.ContainsKey(currency))
+            {
+                currencies[currency] -= amount;
+
+                if(currencies[currency] < 0)
+                {
+                    currencies[currency] = 0;
+                    Debug.Log("Currency " + currency.ToString() + " is below 0");
+                }
+            }
+        }
+
+        public bool UseConsumable(ConsumableItem consumable)
+        {
+            bool usedConsumable = false;
+            if (consumable != null)
+            {
+                if (usedConsumable)
+                {
+                    --consumable.itemQuantity;
+                    if (consumable.itemQuantity == 0)
+                    {
+                        inventoryItems.Remove(consumable.templateId);
+                    }
+
+                    consumable.UseItem();
+                    usedConsumable = true;
+                }
+            }
+
+            return usedConsumable;
         }
     }
 }

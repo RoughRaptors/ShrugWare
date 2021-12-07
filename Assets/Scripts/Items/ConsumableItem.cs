@@ -17,7 +17,7 @@ namespace ShrugWare
             {
                 if(effect.effectType == DataManager.StatModifierType.PlayerCurHealth)
                 {
-                    
+                    GameManager.Instance.HealPlayerRaid((int)effect.amount);
                 }
             }
         }

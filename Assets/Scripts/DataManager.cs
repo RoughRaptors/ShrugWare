@@ -55,8 +55,8 @@ namespace ShrugWare
         public static float SECONDS_TO_START_MICROGAME = 1.0f; // how long we wait for the microgame to start when on the scene - to orient the player
         public static float SECONDS_BETWEEN_MICROGAMES = 3.0f; // how long we wait before starting another microgame inside of GameManager
 
-        public static float PLAYER_RAID_START_HP = 100.0f;
-        public static float PLAYER_RAID_MAX_HP = 100.0f;
+        public static int PLAYER_RAID_START_HP = 100;
+        public static int PLAYER_RAID_MAX_HP = 100;
         public static int PLAYER_RAID_STARTING_LIVES = 3;
     }
 }

@@ -128,6 +128,8 @@ namespace ShrugWare
             if (inventory != null && inventory.GetCurrencyAmount(itemToPurchase.currency) >= itemToPurchase.price)
             {
                 inventory.AddItemToInventory(itemToPurchase.item);
+                inventory.RemoveCurrency(itemToPurchase.currency, itemToPurchase.price);
+
                 return true;
             }
 

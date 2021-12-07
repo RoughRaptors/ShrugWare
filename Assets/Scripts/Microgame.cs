@@ -73,7 +73,7 @@ namespace ShrugWare
 
             if (effect.effectType == DataManager.StatModifierType.PlayerCurHealth)
             {
-                GameManager.Instance.TakeDamage(effect.amount);
+                GameManager.Instance.TakePlayerRaidDamage(effect.amount);
             }
             else if (effect.effectType == DataManager.StatModifierType.BossCurHealth)
             {
