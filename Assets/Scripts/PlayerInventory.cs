@@ -10,6 +10,9 @@ namespace ShrugWare
         private Dictionary<int, Item> inventoryItems = new Dictionary<int, Item>();
         private Dictionary<ArmorItem.ArmorSlot, Item> equippedArmor = new Dictionary<ArmorItem.ArmorSlot, Item>();
 
+        private float curMitigationPercent = 0.0f;
+        public float GetMitigation() { return curMitigationPercent; }
+
         public PlayerInventory()
         {
             currencies.Add(DataManager.Currencies.Generic, 250);
@@ -61,6 +64,42 @@ namespace ShrugWare
             else
             {
                 inventoryItems.Add(foundItem.templateId, foundItem);
+            }
+        }
+
+        public void EquipArmorItem(Item itemToEquip)
+        {
+            foreach(DataManager.StatEffect effect in itemToEquip.GetEffects())
+            {
+                curMitigationPercent += effect.amount;
+            }
+        }
+
+        public void UnequipArmorSlot(ArmorItem.ArmorSlot slot)
+        {
+            Item itemToUnequip = null;
+            if(equippedArmor.TryGetValue(slot, out itemToUnequip))
+            {
+                // remove the effects
+                foreach (DataManager.StatEffect effect in itemToUnequip.GetEffects())
+                {
+                    if(effect.effectType == DataManager.StatModifierType.IncomingDamage)
+                    {
+                        curMitigationPercent += effect.amount;
+                    }
+                }
+
+                // if we already have the item in our inventory, increase the quantity, otherwise add it
+                if(inventoryItems.TryGetValue(itemToUnequip.templateId, out itemToUnequip))
+                {
+                    ++itemToUnequip.itemQuantity;
+                }
+                else
+                {
+                    inventoryItems.Add(itemToUnequip.templateId, itemToUnequip);
+                }
+
+                equippedArmor[slot] = null;
             }
         }
     }

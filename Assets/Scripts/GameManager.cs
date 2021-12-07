@@ -273,7 +273,10 @@ namespace ShrugWare
 
         public void TakeDamage(float amount)
         {
-            playerInfo.curRaidHealth -= amount;
+            float mitigatedAmount = amount;
+            float mitigationModifier = 0.0f;
+
+            playerInfo.curRaidHealth -= mitigatedAmount;
             if(playerInfo.curRaidHealth < 0)
             {
                 --playerInfo.livesLeft;

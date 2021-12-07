@@ -14,6 +14,8 @@ namespace ShrugWare
         public int templateId { get; set; } = 0;
 
         protected List<DataManager.StatEffect> effects = new List<DataManager.StatEffect>();
+        public List<DataManager.StatEffect> GetEffects() { return effects; }
+
         public void AddEffect(DataManager.StatEffect effect)
         {
             effects.Add(effect);
