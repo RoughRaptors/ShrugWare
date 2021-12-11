@@ -24,6 +24,8 @@ namespace ShrugWare
         [SerializeField]
         GameObject iceBlastButtonObj = null;
 
+        private bool failed = false;
+
         private enum RotationMapping
         {
             Frostbolt = 0,
@@ -77,7 +79,7 @@ namespace ShrugWare
                 if (microgameDurationRemaining <= 0.0f)
                 {
                     // out of time
-                    if (rotation.Count > 0)
+                    if (rotation.Count > 0 && !failed)
                     {
                         instructionsText.gameObject.SetActive(true);
                         instructionsText.text = "Bad DPS";
@@ -101,6 +103,10 @@ namespace ShrugWare
                 rotation.RemoveAt(0);
                 frostboltButtonObj.SetActive(false);
             }
+            else
+            {
+                HandleLoseGame();
+            }
 
             CheckEndCondition();
         }
@@ -112,6 +118,10 @@ namespace ShrugWare
             {
                 rotation.RemoveAt(0);
                 glacialSpileButtonObj.SetActive(false);
+            }
+            else
+            {
+                HandleLoseGame();
             }
 
             CheckEndCondition();
@@ -125,6 +135,10 @@ namespace ShrugWare
                 rotation.RemoveAt(0);
                 iceBlastButtonObj.SetActive(false);
             }
+            else
+            {
+                HandleLoseGame();
+            }
 
             CheckEndCondition();
         }
@@ -136,6 +150,18 @@ namespace ShrugWare
                 instructionsText.gameObject.SetActive(true);
                 instructionsText.text = "PEW PEW PEW";
             }
+        }
+
+        private void HandleLoseGame()
+        {
+            frostboltButtonObj.SetActive(false);
+            glacialSpileButtonObj.SetActive(false);
+            iceBlastButtonObj.SetActive(false);
+
+            instructionsText.gameObject.SetActive(true);
+            instructionsText.text = "Wrong rotation";
+
+            failed = true;
         }
     }
 }

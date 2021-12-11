@@ -24,6 +24,12 @@ namespace ShrugWare
         [SerializeField]
         Text gameInfoText = null;
 
+        [SerializeField]
+        Button merchantButton = null;
+
+        [SerializeField]
+        GameObject merchantUI = null;
+
         private void Awake()
         {
             if (Instance == null)
@@ -96,14 +102,32 @@ namespace ShrugWare
             timeScaleInputField.text = newText;
         }
 
-        public void HandleContinueGame()
+        public void OnContinueGameButtonClicked()
         {
-            betweenMicrogameText.enabled = true;
-            continueGameButton.gameObject.SetActive(false);
-            gameInfoText.enabled = true;
+            // if the merchant screen is open, close that
+            if (GameManager.Instance.GetGameState() == GameManager.GameState.Merchant)
+            {
+                GameManager.Instance.SetGameState(GameManager.GameState.Paused);
+                merchantButton.gameObject.SetActive(true);
+                timeScaleInputField.gameObject.SetActive(true);
+                continueGameButton.GetComponentInChildren<Text>().text = "Continue";
+                gameInfoText.enabled = true;
+
+                merchantUI.SetActive(true);
+            }
+            else if (GameManager.Instance.GetGameState() == GameManager.GameState.Paused)
+            {
+                // otherwise we are continuing the game
+                betweenMicrogameText.enabled = true;
+                merchantButton.gameObject.SetActive(false);
+                continueGameButton.gameObject.SetActive(false);
+                gameInfoText.enabled = true;
+
+                GameManager.Instance.ContinueGame();
+            }
         }
 
-        public void HandleMicrogameComplete()
+        public void HandleWinGame()
         {
             betweenMicrogameText.enabled = false;
             gameInfoText.text += "\n \n CONGLADURATION. YOU ARE WIN";
@@ -113,12 +137,34 @@ namespace ShrugWare
         {
             continueGameButton.GetComponentInChildren<Text>().text = "Continue to " + GameManager.Instance.GetCurRaid().curBoss.bossName;
             continueGameButton.gameObject.SetActive(true);
+            merchantButton.gameObject.SetActive(false);
         }
 
         public void HandleGameOver()
         {
             betweenMicrogameText.enabled = false;
             gameInfoText.text += "\n \n 50 DKP MINUS!";
+        }
+        
+        public void OnMerchantButtonClicked()
+        {
+            // don't open the merchant if we're not ready/able to - todo change this to a proper game state when we add it
+            if (GameManager.Instance.GetGameState() == GameManager.GameState.Paused)
+            {
+                merchantButton.gameObject.SetActive(false);
+                timeScaleInputField.gameObject.SetActive(false);
+                betweenMicrogameText.enabled = false;
+                continueGameButton.GetComponentInChildren<Text>().text = "Exit Merchant";
+                gameInfoText.enabled = false;
+
+                merchantUI.SetActive(true);
+                GameManager.Instance.EnterMerchant();
+            }
+        }
+
+        public void SetMerchantButtonActive(bool enabled)
+        {
+            merchantButton.gameObject.SetActive(enabled);
         }
     }
 }

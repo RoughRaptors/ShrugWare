@@ -87,6 +87,18 @@ namespace ShrugWare
         private PlayerInventory inventory = new PlayerInventory();
         public PlayerInventory GetPlayerInventory() { return inventory; }
 
+        public enum GameState
+        {
+            MainLoop = 0,
+            Paused,
+            Microgame,
+            Merchant
+        }
+
+        private GameState gameState = GameState.Paused;
+        public GameState GetGameState() { return gameState; }
+        public void SetGameState(GameState gState) { gameState = gState; }
+
         private void Awake()
         {
             // this will be called every time we swap back to our main scene
@@ -138,7 +150,7 @@ namespace ShrugWare
         }
 
         private void Update()
-        {            
+        {
             // we will come back here whenever we load back from a microgame to the main scene
             // we need to keep playing, which means to pick and start a new microgame from our raid and boss if we're not dead
             if (gameRunning && curSceneIndex == (int)DataManager.Scenes.MainScene)
@@ -171,6 +183,7 @@ namespace ShrugWare
 
         private void HandleFromMicrogameTransition()
         {
+            gameState = GameState.MainLoop;
             UIManager.Instance.SetCanvasEnabled(true);            
             if (!(curRaid is null) && !(curRaid.curBoss is null))
             {
@@ -192,20 +205,21 @@ namespace ShrugWare
 
                 if (curRaid.IsComplete)
                 {
-                    gameRunning = false;
-
-                    UIManager.Instance.HandleMicrogameComplete();
+                    // pause the game and wait for the player to hit the continue button
+                    PauseGame();
+                    UIManager.Instance.HandleWinGame();
                 }
                 else
                 {
-                    // pause the game and wait for the player to hit the continue button
-                    gameRunning = false;
+                    // boss is dead but raid is not complete, wait for the player to move on
+                    PauseGame();
                     UIManager.Instance.HandlePauseGame();
+                    UIManager.Instance.SetMerchantButtonActive(true);
                 }
             }
             else if(playerInfo.livesLeft == 0)
             {
-                gameRunning = false;
+                PauseGame();
                 UIManager.Instance.HandleGameOver();
             }
         }
@@ -268,8 +282,20 @@ namespace ShrugWare
 
         public void ContinueGame()
         {
-            UIManager.Instance.HandleContinueGame();
+            gameState = GameState.MainLoop;
             gameRunning = true;
+        }
+
+        public void PauseGame()
+        {
+            gameState = GameState.Paused;
+            gameRunning = false;
+        }
+
+        public void EnterMerchant()
+        {
+            gameState = GameState.Merchant;
+            gameRunning = false;   
         }
 
         public void TakePlayerRaidDamage(float amount)
