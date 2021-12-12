@@ -5,9 +5,11 @@ using UnityEngine;
 namespace ShrugWare
 {
     // todo - make it template id based like the inventory
-    public class Merchant : MonoBehaviour
+    public class MerchantManager : MonoBehaviour
     {
-        private struct ItemForSale
+        public static MerchantManager Instance = null;
+        
+        public struct ItemForSale
         {
             public Item item;
             public DataManager.Currencies currency;
@@ -15,6 +17,21 @@ namespace ShrugWare
         }
 
         private List<ItemForSale> itemsForSale = new List<ItemForSale>();
+        public List<ItemForSale> GetItemsForSale() { return itemsForSale; }
+
+        ItemForSale selectedItem;
+
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else if (Instance != this)
+            {
+                Destroy(gameObject);
+            }
+        }
 
         // for now just hard code the items
         void Start()
@@ -50,7 +67,7 @@ namespace ShrugWare
             ItemForSale healthPotionItem;
             healthPotionItem.item = healthPotion;
             healthPotionItem.currency = DataManager.Currencies.Generic;
-            healthPotionItem.price = 100;
+            healthPotionItem.price = 500;
 
             itemsForSale.Add(healthPotionItem);
 
@@ -62,12 +79,13 @@ namespace ShrugWare
             ItemForSale maxHealthPotionItem;
             maxHealthPotionItem.item = maxHealthPotion;
             maxHealthPotionItem.currency = DataManager.Currencies.Generic;
-            maxHealthPotionItem.price = 100;
+            maxHealthPotionItem.price = 500;
 
             itemsForSale.Add(maxHealthPotionItem);
 
             // helmet
             ArmorItem diHelm = new ArmorItem(DataManager.ArmorSlot.Head, DataManager.ArmorSet.DauntingInferno);
+            diHelm.itemName = "Helm";
             diHelm.AddEffect(damageReductionEffect);
 
             ItemForSale diHelmItem;
@@ -79,6 +97,7 @@ namespace ShrugWare
 
             // chest
             ArmorItem diChest = new ArmorItem(DataManager.ArmorSlot.Chest, DataManager.ArmorSet.DauntingInferno);
+            diChest.itemName = "Chest";
             diChest.AddEffect(damageReductionEffect);
 
             ItemForSale diChestItem;
@@ -90,6 +109,7 @@ namespace ShrugWare
 
             // gloves
             ArmorItem diGloves = new ArmorItem(DataManager.ArmorSlot.Gloves, DataManager.ArmorSet.DauntingInferno);
+            diGloves.itemName = "Gloves";
             diGloves.AddEffect(damageReductionEffect);
 
             ItemForSale diGlovesItem;
@@ -101,6 +121,7 @@ namespace ShrugWare
 
             // legs
             ArmorItem diLegs = new ArmorItem(DataManager.ArmorSlot.Legs, DataManager.ArmorSet.DauntingInferno);
+            diLegs.itemName = "Legs";
             diLegs.AddEffect(damageReductionEffect);
 
             ItemForSale diLegsItem;
@@ -112,6 +133,7 @@ namespace ShrugWare
 
             // boots
             ArmorItem diBoots = new ArmorItem(DataManager.ArmorSlot.Boots, DataManager.ArmorSet.DauntingInferno);
+            diBoots.itemName = "Boots";
             diBoots.AddEffect(damageReductionEffect);
 
             ItemForSale diBootsItem;
@@ -122,18 +144,17 @@ namespace ShrugWare
             itemsForSale.Add(diBootsItem);
         }
 
-        bool PurchaseItem(ItemForSale itemToPurchase)
+        public void OnBuyButtonClicked()
         {
-            PlayerInventory inventory = GameManager.Instance.GetPlayerInventory();
-            if (inventory != null && inventory.GetCurrencyAmount(itemToPurchase.currency) >= itemToPurchase.price)
+            if (selectedItem.item != null)
             {
-                inventory.AddItemToInventory(itemToPurchase.item);
-                inventory.RemoveCurrency(itemToPurchase.currency, itemToPurchase.price);
-
-                return true;
+                PlayerInventory inventory = GameManager.Instance.GetPlayerInventory();
+                if (inventory != null && inventory.GetCurrencyAmount(selectedItem.currency) >= selectedItem.price)
+                {
+                    inventory.AddItemToInventory(selectedItem.item);
+                    inventory.RemoveCurrency(selectedItem.currency, selectedItem.price);
+                }
             }
-
-            return false;
         }
     }
 }

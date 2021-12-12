@@ -66,8 +66,10 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterruptTheAbility.cs" />
     <Compile Include="Assets\Scripts\Bosses\Warboss Kard.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\TauntTheAdds.cs" />
+    <Compile Include="Assets\Scripts\Merchants\MerchantManager.cs" />
     <Compile Include="Assets\Packages\Pixel Play\Scripts\OffScreenIndicator\OffScreenIndicatorCore.cs" />
     <Compile Include="Assets\Scripts\Bosses\Boss.cs" />
+    <Compile Include="Assets\Scripts\InventoryManager.cs" />
     <Compile Include="Assets\Scripts\UI\UIManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\DodgeTheFireballPattern.cs" />
@@ -90,9 +92,7 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\EqualizeTwoGroups.cs" />
     <Compile Include="Assets\Scripts\Items\ArmorItem.cs" />
     <Compile Include="Assets\Scripts\DataManager.cs" />
-    <Compile Include="Assets\Scripts\Merchant.cs" />
     <Compile Include="Assets\Scripts\PlayerInventory.cs" />
-    <Compile Include="Assets\Scripts\InventoryManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

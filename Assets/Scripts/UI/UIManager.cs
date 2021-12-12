@@ -10,6 +10,9 @@ namespace ShrugWare
         public static UIManager Instance = null;
 
         [SerializeField]
+        Text titleText = null;
+
+        [SerializeField]
         InputField timeScaleInputField = null;
 
         [SerializeField]
@@ -34,7 +37,6 @@ namespace ShrugWare
         {
             if (Instance == null)
             {
-                // DontDestroyOnLoad(gameObject);
                 Instance = this;
             }
             else if (Instance != this)
@@ -112,8 +114,8 @@ namespace ShrugWare
                 timeScaleInputField.gameObject.SetActive(true);
                 continueGameButton.GetComponentInChildren<Text>().text = "Continue";
                 gameInfoText.enabled = true;
-
-                merchantUI.SetActive(true);
+                merchantUI.SetActive(false);
+                titleText.enabled = true;
             }
             else if (GameManager.Instance.GetGameState() == GameManager.GameState.Paused)
             {
@@ -156,6 +158,7 @@ namespace ShrugWare
                 betweenMicrogameText.enabled = false;
                 continueGameButton.GetComponentInChildren<Text>().text = "Exit Merchant";
                 gameInfoText.enabled = false;
+                titleText.enabled = false;
 
                 merchantUI.SetActive(true);
                 GameManager.Instance.EnterMerchant();
@@ -165,6 +168,11 @@ namespace ShrugWare
         public void SetMerchantButtonActive(bool enabled)
         {
             merchantButton.gameObject.SetActive(enabled);
+        }
+
+        public void OnMerchantBuyButtonClicked()
+        {
+
         }
     }
 }
