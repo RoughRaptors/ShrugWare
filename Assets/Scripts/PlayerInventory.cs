@@ -33,14 +33,14 @@ namespace ShrugWare
             ConsumableItem healthPotionItem = new ConsumableItem();
             healthPotionItem.itemName = "Health Potion";
             healthPotionItem.itemQuantity = 1;
-            healthPotionItem.templateId = 1;
+            healthPotionItem.templateId = 0;
             healthPotionItem.AddEffect(healPlayerEffect);
             inventoryItems.Add(healthPotionItem.templateId, healthPotionItem);
 
             ConsumableItem maxHealthPotionItem = new ConsumableItem();
             maxHealthPotionItem.itemName = "Increase Max Health Potion";
             maxHealthPotionItem.itemQuantity = 1;
-            maxHealthPotionItem.templateId = 2;
+            maxHealthPotionItem.templateId = 1;
             maxHealthPotionItem.AddEffect(maxHPEffect);
             inventoryItems.Add(maxHealthPotionItem.templateId, maxHealthPotionItem);
         }

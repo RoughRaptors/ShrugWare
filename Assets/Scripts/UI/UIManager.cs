@@ -116,6 +116,8 @@ namespace ShrugWare
                 gameInfoText.enabled = true;
                 merchantUI.SetActive(false);
                 titleText.enabled = true;
+
+                MerchantManager.Instance.ExitMerchant();
             }
             else if (GameManager.Instance.GetGameState() == GameManager.GameState.Paused)
             {

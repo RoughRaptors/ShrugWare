@@ -1,12 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ShrugWare
 {
     // todo - make it template id based like the inventory
     public class MerchantManager : MonoBehaviour
     {
+        [SerializeField]
+        GameObject helmObj = null;
+
+        [SerializeField]
+        GameObject chestObj = null;
+
+        [SerializeField]
+        GameObject glovesObj = null;
+
+        [SerializeField]
+        GameObject legsObj = null;
+
+        [SerializeField]
+        GameObject bootsObj = null;
+
+        [SerializeField]
+        GameObject healthPotionObj = null;
+
+        [SerializeField]
+        GameObject maxHalthPotionObj = null;
+
         public static MerchantManager Instance = null;
         
         public struct ItemForSale
@@ -19,7 +41,8 @@ namespace ShrugWare
         private Dictionary<int, ItemForSale> itemsForSale = new Dictionary<int, ItemForSale>();
         public Dictionary<int, ItemForSale> GetItemsForSale() { return itemsForSale; }
 
-        ItemForSale selectedItem;
+        private ItemForSale selectedItem;
+        private GameObject prevSelectedObj;
 
         private void Awake()
         {
@@ -62,7 +85,7 @@ namespace ShrugWare
             // hp potion
             ConsumableItem healthPotion = new ConsumableItem();
             healthPotion.itemName = "Health Potion";
-            healthPotion.templateId = 1;
+            healthPotion.templateId = 0;
             healthPotion.AddEffect(healPlayerEffect);
 
             ItemForSale healthPotionItem;
@@ -75,7 +98,7 @@ namespace ShrugWare
             // max hp potion
             ConsumableItem maxHealthPotion = new ConsumableItem();
             maxHealthPotion.itemName = "Increase Max Health Potion";
-            maxHealthPotion.templateId = 2;
+            maxHealthPotion.templateId = 1;
             maxHealthPotion.AddEffect(maxHPEffect);
 
             ItemForSale maxHealthPotionItem;
@@ -88,11 +111,11 @@ namespace ShrugWare
             // helmet
             ArmorItem diHelm = new ArmorItem(DataManager.ArmorSlot.Head, DataManager.ArmorSet.DauntingInferno);
             diHelm.itemName = "Helm";
-            diHelm.templateId = 3;
+            diHelm.templateId = 2;
             diHelm.AddEffect(damageReductionEffect);
 
             ItemForSale diHelmItem;
-            diHelmItem.item = maxHealthPotion;
+            diHelmItem.item = diHelm;
             diHelmItem.currency = DataManager.Currencies.DauntingInferno;
             diHelmItem.price = 1000;
 
@@ -101,11 +124,11 @@ namespace ShrugWare
             // chest
             ArmorItem diChest = new ArmorItem(DataManager.ArmorSlot.Chest, DataManager.ArmorSet.DauntingInferno);
             diChest.itemName = "Chest";
-            diChest.templateId = 4;
+            diChest.templateId = 3;
             diChest.AddEffect(damageReductionEffect);
 
             ItemForSale diChestItem;
-            diChestItem.item = maxHealthPotion;
+            diChestItem.item = diChest;
             diChestItem.currency = DataManager.Currencies.DauntingInferno;
             diChestItem.price = 1000;
 
@@ -114,11 +137,11 @@ namespace ShrugWare
             // gloves
             ArmorItem diGloves = new ArmorItem(DataManager.ArmorSlot.Gloves, DataManager.ArmorSet.DauntingInferno);
             diGloves.itemName = "Gloves";
-            diGloves.templateId = 5;
+            diGloves.templateId = 4;
             diGloves.AddEffect(damageReductionEffect);
 
             ItemForSale diGlovesItem;
-            diGlovesItem.item = maxHealthPotion;
+            diGlovesItem.item = diGloves;
             diGlovesItem.currency = DataManager.Currencies.DauntingInferno;
             diGlovesItem.price = 1000;
 
@@ -127,11 +150,11 @@ namespace ShrugWare
             // legs
             ArmorItem diLegs = new ArmorItem(DataManager.ArmorSlot.Legs, DataManager.ArmorSet.DauntingInferno);
             diLegs.itemName = "Legs";
-            diLegs.templateId = 6;
+            diLegs.templateId = 5;
             diLegs.AddEffect(damageReductionEffect);
 
             ItemForSale diLegsItem;
-            diLegsItem.item = maxHealthPotion;
+            diLegsItem.item = diLegs;
             diLegsItem.currency = DataManager.Currencies.DauntingInferno;
             diLegsItem.price = 1000;
 
@@ -140,11 +163,11 @@ namespace ShrugWare
             // boots
             ArmorItem diBoots = new ArmorItem(DataManager.ArmorSlot.Boots, DataManager.ArmorSet.DauntingInferno);
             diBoots.itemName = "Boots";
-            diBoots.templateId = 7;
+            diBoots.templateId = 6;
             diBoots.AddEffect(damageReductionEffect);
 
             ItemForSale diBootsItem;
-            diBootsItem.item = maxHealthPotion;
+            diBootsItem.item = diBoots;
             diBootsItem.currency = DataManager.Currencies.DauntingInferno;
             diBootsItem.price = 1000;
 
@@ -164,13 +187,60 @@ namespace ShrugWare
             }
         }
 
+        // todo - fix this when we refactor
         public void OnItemSelected(int itemTemplateId)
         {
             if(itemsForSale.ContainsKey(itemTemplateId))
             {
-                selectedItem = itemsForSale[itemTemplateId];
+                if (prevSelectedObj != null)
+                {
+                    prevSelectedObj.GetComponentInChildren<RawImage>().color = UnityEngine.Color.white;
+                }
 
+                GameObject objToChange = null;
+                selectedItem = itemsForSale[itemTemplateId];
+                if(selectedItem.item.templateId == 0)
+                {
+                    objToChange = healthPotionObj;
+                }
+                else if (selectedItem.item.templateId == 1)
+                {
+                    objToChange = maxHalthPotionObj;
+                }
+                else if (selectedItem.item.templateId == 2)
+                {
+                    objToChange = helmObj;
+                }
+                else if (selectedItem.item.templateId == 3)
+                {
+                    objToChange = chestObj;
+                }
+                else if (selectedItem.item.templateId == 4)
+                {
+                    objToChange = glovesObj;
+                }
+                else if (selectedItem.item.templateId == 5)
+                {
+                    objToChange = legsObj;
+                }
+                else if (selectedItem.item.templateId == 6)
+                {
+                    objToChange = bootsObj;
+                }
+
+                if (objToChange != null)
+                {
+                    prevSelectedObj = objToChange;
+                    objToChange.GetComponentInChildren<RawImage>().color = UnityEngine.Color.green;
+                }
             }
+        }
+
+        public void ExitMerchant()
+        {
+            prevSelectedObj.GetComponentInChildren<RawImage>().color = UnityEngine.Color.white;
+            prevSelectedObj = null;
+            selectedItem.item = null;
         }
     }
 }
