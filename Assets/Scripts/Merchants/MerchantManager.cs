@@ -16,8 +16,8 @@ namespace ShrugWare
             public int price;
         }
 
-        private List<ItemForSale> itemsForSale = new List<ItemForSale>();
-        public List<ItemForSale> GetItemsForSale() { return itemsForSale; }
+        private Dictionary<int, ItemForSale> itemsForSale = new Dictionary<int, ItemForSale>();
+        public Dictionary<int, ItemForSale> GetItemsForSale() { return itemsForSale; }
 
         ItemForSale selectedItem;
 
@@ -62,6 +62,7 @@ namespace ShrugWare
             // hp potion
             ConsumableItem healthPotion = new ConsumableItem();
             healthPotion.itemName = "Health Potion";
+            healthPotion.templateId = 1;
             healthPotion.AddEffect(healPlayerEffect);
 
             ItemForSale healthPotionItem;
@@ -69,11 +70,12 @@ namespace ShrugWare
             healthPotionItem.currency = DataManager.Currencies.Generic;
             healthPotionItem.price = 500;
 
-            itemsForSale.Add(healthPotionItem);
+            itemsForSale.Add(healthPotion.templateId, healthPotionItem);
 
             // max hp potion
             ConsumableItem maxHealthPotion = new ConsumableItem();
             maxHealthPotion.itemName = "Increase Max Health Potion";
+            maxHealthPotion.templateId = 2;
             maxHealthPotion.AddEffect(maxHPEffect);
 
             ItemForSale maxHealthPotionItem;
@@ -81,11 +83,12 @@ namespace ShrugWare
             maxHealthPotionItem.currency = DataManager.Currencies.Generic;
             maxHealthPotionItem.price = 500;
 
-            itemsForSale.Add(maxHealthPotionItem);
+            itemsForSale.Add(maxHealthPotion.templateId, maxHealthPotionItem);
 
             // helmet
             ArmorItem diHelm = new ArmorItem(DataManager.ArmorSlot.Head, DataManager.ArmorSet.DauntingInferno);
             diHelm.itemName = "Helm";
+            diHelm.templateId = 3;
             diHelm.AddEffect(damageReductionEffect);
 
             ItemForSale diHelmItem;
@@ -93,11 +96,12 @@ namespace ShrugWare
             diHelmItem.currency = DataManager.Currencies.DauntingInferno;
             diHelmItem.price = 1000;
 
-            itemsForSale.Add(diHelmItem);
+            itemsForSale.Add(diHelm.templateId, diHelmItem);
 
             // chest
             ArmorItem diChest = new ArmorItem(DataManager.ArmorSlot.Chest, DataManager.ArmorSet.DauntingInferno);
             diChest.itemName = "Chest";
+            diChest.templateId = 4;
             diChest.AddEffect(damageReductionEffect);
 
             ItemForSale diChestItem;
@@ -105,11 +109,12 @@ namespace ShrugWare
             diChestItem.currency = DataManager.Currencies.DauntingInferno;
             diChestItem.price = 1000;
 
-            itemsForSale.Add(diChestItem);
+            itemsForSale.Add(diChest.templateId, diChestItem);
 
             // gloves
             ArmorItem diGloves = new ArmorItem(DataManager.ArmorSlot.Gloves, DataManager.ArmorSet.DauntingInferno);
             diGloves.itemName = "Gloves";
+            diGloves.templateId = 5;
             diGloves.AddEffect(damageReductionEffect);
 
             ItemForSale diGlovesItem;
@@ -117,11 +122,12 @@ namespace ShrugWare
             diGlovesItem.currency = DataManager.Currencies.DauntingInferno;
             diGlovesItem.price = 1000;
 
-            itemsForSale.Add(diGlovesItem);
+            itemsForSale.Add(diGloves.templateId, diGlovesItem);
 
             // legs
             ArmorItem diLegs = new ArmorItem(DataManager.ArmorSlot.Legs, DataManager.ArmorSet.DauntingInferno);
             diLegs.itemName = "Legs";
+            diLegs.templateId = 6;
             diLegs.AddEffect(damageReductionEffect);
 
             ItemForSale diLegsItem;
@@ -129,11 +135,12 @@ namespace ShrugWare
             diLegsItem.currency = DataManager.Currencies.DauntingInferno;
             diLegsItem.price = 1000;
 
-            itemsForSale.Add(diLegsItem);
+            itemsForSale.Add(diLegs.templateId, diLegsItem);
 
             // boots
             ArmorItem diBoots = new ArmorItem(DataManager.ArmorSlot.Boots, DataManager.ArmorSet.DauntingInferno);
             diBoots.itemName = "Boots";
+            diBoots.templateId = 7;
             diBoots.AddEffect(damageReductionEffect);
 
             ItemForSale diBootsItem;
@@ -141,7 +148,7 @@ namespace ShrugWare
             diBootsItem.currency = DataManager.Currencies.DauntingInferno;
             diBootsItem.price = 1000;
 
-            itemsForSale.Add(diBootsItem);
+            itemsForSale.Add(diBoots.templateId, diBootsItem);
         }
 
         public void OnBuyButtonClicked()
@@ -154,6 +161,15 @@ namespace ShrugWare
                     inventory.AddItemToInventory(selectedItem.item);
                     inventory.RemoveCurrency(selectedItem.currency, selectedItem.price);
                 }
+            }
+        }
+
+        public void OnItemSelected(int itemTemplateId)
+        {
+            if(itemsForSale.ContainsKey(itemTemplateId))
+            {
+                selectedItem = itemsForSale[itemTemplateId];
+
             }
         }
     }

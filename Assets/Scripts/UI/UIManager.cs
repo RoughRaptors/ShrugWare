@@ -170,9 +170,14 @@ namespace ShrugWare
             merchantButton.gameObject.SetActive(enabled);
         }
 
+        public void OnItemForSaleSelected(int itemTemplateId)
+        {
+            MerchantManager.Instance.OnItemSelected(itemTemplateId);
+        }
+
         public void OnMerchantBuyButtonClicked()
         {
-
+            MerchantManager.Instance.OnBuyButtonClicked();
         }
     }
 }
