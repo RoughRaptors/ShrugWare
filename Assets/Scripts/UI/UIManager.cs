@@ -214,6 +214,12 @@ namespace ShrugWare
             }
         }
 
+        public void ToggleConsumableVisibility(bool enabled)
+        {
+            healthPotionItem.SetActive(enabled);
+            maxHealthPotionItem.SetActive(enabled);
+        }
+
         public void OnUseConsumableItemClicked(int templateId)
         {
             GameManager.Instance.UseConsumableItem(templateId);

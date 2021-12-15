@@ -284,12 +284,14 @@ namespace ShrugWare
         {
             gameState = GameState.MainLoop;
             gameRunning = true;
+            UIManager.Instance.ToggleConsumableVisibility(false);
         }
 
         public void PauseGame()
         {
             gameState = GameState.Paused;
             gameRunning = false;
+            UIManager.Instance.ToggleConsumableVisibility(true);
         }
 
         public void EnterMerchant()
