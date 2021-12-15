@@ -87,6 +87,18 @@ namespace ShrugWare
         private PlayerInventory inventory = new PlayerInventory();
         public PlayerInventory GetPlayerInventory() { return inventory; }
 
+        public enum GameState
+        {
+            MainLoop = 0,
+            Paused,
+            Microgame,
+            Merchant
+        }
+
+        private GameState gameState = GameState.Paused;
+        public GameState GetGameState() { return gameState; }
+        public void SetGameState(GameState gState) { gameState = gState; }
+
         private void Awake()
         {
             // this will be called every time we swap back to our main scene
@@ -134,11 +146,11 @@ namespace ShrugWare
             }
 
             // our raid and boss data needs to be populated by this point
-            UIManager.Instance.FillBossInfoText(curRaid, playerInfo);
+            UpdateGameInfoText();
         }
 
         private void Update()
-        {            
+        {
             // we will come back here whenever we load back from a microgame to the main scene
             // we need to keep playing, which means to pick and start a new microgame from our raid and boss if we're not dead
             if (gameRunning && curSceneIndex == (int)DataManager.Scenes.MainScene)
@@ -164,13 +176,14 @@ namespace ShrugWare
 
         public void MicrogameCompleted(bool wonMicrogame)
         {
-            UIManager.Instance.FillBossInfoText(curRaid, playerInfo);
+            UpdateGameInfoText();
             HandleFromMicrogameTransition();
             GameManager.Instance.LoadScene((int)DataManager.Scenes.MainScene);
         }
 
         private void HandleFromMicrogameTransition()
         {
+            gameState = GameState.MainLoop;
             UIManager.Instance.SetCanvasEnabled(true);            
             if (!(curRaid is null) && !(curRaid.curBoss is null))
             {
@@ -192,20 +205,21 @@ namespace ShrugWare
 
                 if (curRaid.IsComplete)
                 {
-                    gameRunning = false;
-
-                    UIManager.Instance.HandleMicrogameComplete();
+                    // pause the game and wait for the player to hit the continue button
+                    PauseGame();
+                    UIManager.Instance.HandleWinGame();
                 }
                 else
                 {
-                    // pause the game and wait for the player to hit the continue button
-                    gameRunning = false;
+                    // boss is dead but raid is not complete, wait for the player to move on
+                    PauseGame();
                     UIManager.Instance.HandlePauseGame();
+                    UIManager.Instance.SetMerchantButtonActive(true);
                 }
             }
             else if(playerInfo.livesLeft == 0)
             {
-                gameRunning = false;
+                PauseGame();
                 UIManager.Instance.HandleGameOver();
             }
         }
@@ -268,8 +282,22 @@ namespace ShrugWare
 
         public void ContinueGame()
         {
-            UIManager.Instance.HandleContinueGame();
+            gameState = GameState.MainLoop;
             gameRunning = true;
+            UIManager.Instance.ToggleConsumableVisibility(false);
+        }
+
+        public void PauseGame()
+        {
+            gameState = GameState.Paused;
+            gameRunning = false;
+            UIManager.Instance.ToggleConsumableVisibility(true);
+        }
+
+        public void EnterMerchant()
+        {
+            gameState = GameState.Merchant;
+            gameRunning = false;   
         }
 
         public void TakePlayerRaidDamage(float amount)
@@ -295,15 +323,24 @@ namespace ShrugWare
                     playerInfo.curRaidHealth = 0;
                 }
             }
+
+            UIManager.Instance.FillBossInfoText(curRaid, playerInfo);
         }
 
-        public void HealPlayerRaid(int amount)
+        public bool HealPlayerRaid(int amount)
         {
-            playerInfo.curRaidHealth += amount;
-            if (playerInfo.curRaidHealth > playerInfo.maxRaidHealth)
+            if (playerInfo.curRaidHealth < playerInfo.maxRaidHealth)
             {
-                playerInfo.curRaidHealth = playerInfo.maxRaidHealth;
+                playerInfo.curRaidHealth += amount;
+                if (playerInfo.curRaidHealth > playerInfo.maxRaidHealth)
+                {
+                    playerInfo.curRaidHealth = playerInfo.maxRaidHealth;
+                }
+
+                return true;
             }
+
+            return false;
         }
 
         public void DamageBoss(float amount)
@@ -351,6 +388,16 @@ namespace ShrugWare
         public void ResetMaxHP()
         {
             playerInfo.maxRaidHealth = DataManager.PLAYER_RAID_MAX_HP;
+        }
+
+        public void UpdateGameInfoText()
+        {
+            UIManager.Instance.FillBossInfoText(curRaid, playerInfo);
+        }
+
+        public void UseConsumableItem(int templateId)
+        {
+            inventory.UseConsumableItem(templateId);
         }
     }
 }

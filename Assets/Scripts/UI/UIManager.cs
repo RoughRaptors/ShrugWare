@@ -10,6 +10,9 @@ namespace ShrugWare
         public static UIManager Instance = null;
 
         [SerializeField]
+        Text titleText = null;
+
+        [SerializeField]
         InputField timeScaleInputField = null;
 
         [SerializeField]
@@ -24,11 +27,22 @@ namespace ShrugWare
         [SerializeField]
         Text gameInfoText = null;
 
+        [SerializeField]
+        Button merchantButton = null;
+
+        [SerializeField]
+        GameObject merchantUI = null;
+
+        [SerializeField]
+        GameObject healthPotionItem = null;
+
+        [SerializeField]
+        GameObject maxHealthPotionItem = null;
+
         private void Awake()
         {
             if (Instance == null)
             {
-                // DontDestroyOnLoad(gameObject);
                 Instance = this;
             }
             else if (Instance != this)
@@ -44,9 +58,9 @@ namespace ShrugWare
         // Start is called before the first frame update
         void Start()
         {
-            gameInfoText.enabled = false;
             betweenMicrogameText.enabled = false;
             timeScaleInputField.text = "Time Scale: " + GameManager.Instance.GetCurTimeScale().ToString("F3");
+            UpdateConsumableInfo();
         }
 
         public void UpdateBetweenMicrogameText()
@@ -96,14 +110,38 @@ namespace ShrugWare
             timeScaleInputField.text = newText;
         }
 
-        public void HandleContinueGame()
+        public void OnContinueGameButtonClicked()
         {
-            betweenMicrogameText.enabled = true;
-            continueGameButton.gameObject.SetActive(false);
-            gameInfoText.enabled = true;
+            // if the merchant screen is open, close that
+            if (GameManager.Instance.GetGameState() == GameManager.GameState.Merchant)
+            {
+                GameManager.Instance.SetGameState(GameManager.GameState.Paused);
+                merchantButton.gameObject.SetActive(true);
+                timeScaleInputField.gameObject.SetActive(true);
+                continueGameButton.GetComponentInChildren<Text>().text = "Continue";
+                gameInfoText.enabled = true;
+                merchantUI.SetActive(false);
+                titleText.enabled = true; 
+                healthPotionItem.SetActive(true);
+                maxHealthPotionItem.SetActive(true);
+
+                UpdateConsumableInfo();
+                GameManager.Instance.UpdateGameInfoText();
+                MerchantManager.Instance.ExitMerchant();
+            }
+            else if (GameManager.Instance.GetGameState() == GameManager.GameState.Paused)
+            {
+                // otherwise we are continuing the game
+                betweenMicrogameText.enabled = true;
+                merchantButton.gameObject.SetActive(false);
+                continueGameButton.gameObject.SetActive(false);
+                gameInfoText.enabled = true;
+
+                GameManager.Instance.ContinueGame();
+            }
         }
 
-        public void HandleMicrogameComplete()
+        public void HandleWinGame()
         {
             betweenMicrogameText.enabled = false;
             gameInfoText.text += "\n \n CONGLADURATION. YOU ARE WIN";
@@ -113,12 +151,78 @@ namespace ShrugWare
         {
             continueGameButton.GetComponentInChildren<Text>().text = "Continue to " + GameManager.Instance.GetCurRaid().curBoss.bossName;
             continueGameButton.gameObject.SetActive(true);
+            merchantButton.gameObject.SetActive(false);
         }
 
         public void HandleGameOver()
         {
             betweenMicrogameText.enabled = false;
             gameInfoText.text += "\n \n 50 DKP MINUS!";
+        }
+        
+        public void OnMerchantButtonClicked()
+        {
+            // don't open the merchant if we're not ready/able to - todo change this to a proper game state when we add it
+            if (GameManager.Instance.GetGameState() == GameManager.GameState.Paused)
+            {
+                merchantButton.gameObject.SetActive(false);
+                timeScaleInputField.gameObject.SetActive(false);
+                betweenMicrogameText.enabled = false;
+                continueGameButton.GetComponentInChildren<Text>().text = "Exit Merchant";
+                gameInfoText.enabled = false;
+                titleText.enabled = false;
+                healthPotionItem.SetActive(false);
+                maxHealthPotionItem.SetActive(false);
+
+
+                merchantUI.SetActive(true);
+                GameManager.Instance.EnterMerchant();
+                MerchantManager.Instance.UpdateCurrencies();
+            }
+        }
+
+        public void SetMerchantButtonActive(bool enabled)
+        {
+            merchantButton.gameObject.SetActive(enabled);
+        }
+
+        public void OnItemForSaleSelected(int itemTemplateId)
+        {
+            MerchantManager.Instance.OnItemSelected(itemTemplateId);
+        }
+
+        public void OnMerchantBuyButtonClicked()
+        {
+            MerchantManager.Instance.OnBuyButtonClicked();
+        }
+
+        public void UpdateConsumableInfo()
+        {
+            healthPotionItem.GetComponentInChildren<Text>().text = "";
+            maxHealthPotionItem.GetComponentInChildren<Text>().text = "";
+
+            Item healthPotion = GameManager.Instance.GetPlayerInventory().GetInventoryItem(0);
+            Item maxHealthPotion = GameManager.Instance.GetPlayerInventory().GetInventoryItem(1);
+            if(healthPotion != null)
+            {
+                healthPotionItem.GetComponentInChildren<Text>().text += "Health Potion\n+25% Heal\nQuantity: " + healthPotion.itemQuantity;
+            }
+
+            if(maxHealthPotion != null)
+            {
+                maxHealthPotionItem.GetComponentInChildren<Text>().text += "\nMax Health Potion\n+10% Max HP\nQuantity: " + maxHealthPotion.itemQuantity;
+            }
+        }
+
+        public void ToggleConsumableVisibility(bool enabled)
+        {
+            healthPotionItem.SetActive(enabled);
+            maxHealthPotionItem.SetActive(enabled);
+        }
+
+        public void OnUseConsumableItemClicked(int templateId)
+        {
+            GameManager.Instance.UseConsumableItem(templateId);
         }
     }
 }

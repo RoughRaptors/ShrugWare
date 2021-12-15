@@ -21,7 +21,7 @@ namespace ShrugWare
             armorSet = newArmorSet;
             itemType = DataManager.ItemType.Armor;
 
-            // hard code our set bonus for daunting infero right now
+            // hard code our set bonus for daunting inferno right now
             if(armorSet == DataManager.ArmorSet.DauntingInferno)
             {
                 // +10% max hp

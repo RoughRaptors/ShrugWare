@@ -83,6 +83,10 @@ namespace ShrugWare
                         instructionsText.text = "Clicker";
                     }
 
+                    fireballButton.gameObject.SetActive(false);
+                    frostboltButton.gameObject.SetActive(false);
+                    healButton.gameObject.SetActive(false);
+
                     HandleMicrogameEnd(castedFrostbolt);
                 }
                 else
