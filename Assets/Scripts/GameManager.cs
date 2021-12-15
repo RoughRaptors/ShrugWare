@@ -146,7 +146,7 @@ namespace ShrugWare
             }
 
             // our raid and boss data needs to be populated by this point
-            UIManager.Instance.FillBossInfoText(curRaid, playerInfo);
+            UpdateGameInfoText();
         }
 
         private void Update()
@@ -176,7 +176,7 @@ namespace ShrugWare
 
         public void MicrogameCompleted(bool wonMicrogame)
         {
-            UIManager.Instance.FillBossInfoText(curRaid, playerInfo);
+            UpdateGameInfoText();
             HandleFromMicrogameTransition();
             GameManager.Instance.LoadScene((int)DataManager.Scenes.MainScene);
         }
@@ -321,6 +321,8 @@ namespace ShrugWare
                     playerInfo.curRaidHealth = 0;
                 }
             }
+
+            UIManager.Instance.FillBossInfoText(curRaid, playerInfo);
         }
 
         public void HealPlayerRaid(int amount)
@@ -377,6 +379,11 @@ namespace ShrugWare
         public void ResetMaxHP()
         {
             playerInfo.maxRaidHealth = DataManager.PLAYER_RAID_MAX_HP;
+        }
+
+        public void UpdateGameInfoText()
+        {
+            UIManager.Instance.FillBossInfoText(curRaid, playerInfo);
         }
     }
 }

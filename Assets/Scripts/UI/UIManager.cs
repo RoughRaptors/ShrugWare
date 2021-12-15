@@ -52,7 +52,6 @@ namespace ShrugWare
         // Start is called before the first frame update
         void Start()
         {
-            gameInfoText.enabled = false;
             betweenMicrogameText.enabled = false;
             timeScaleInputField.text = "Time Scale: " + GameManager.Instance.GetCurTimeScale().ToString("F3");
         }
@@ -117,6 +116,7 @@ namespace ShrugWare
                 merchantUI.SetActive(false);
                 titleText.enabled = true;
 
+                GameManager.Instance.UpdateGameInfoText();
                 MerchantManager.Instance.ExitMerchant();
             }
             else if (GameManager.Instance.GetGameState() == GameManager.GameState.Paused)
@@ -164,6 +164,7 @@ namespace ShrugWare
 
                 merchantUI.SetActive(true);
                 GameManager.Instance.EnterMerchant();
+                MerchantManager.Instance.UpdateCurrencies();
             }
         }
 

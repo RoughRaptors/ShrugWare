@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace ShrugWare
@@ -8,7 +9,7 @@ namespace ShrugWare
     {
         private Dictionary<DataManager.Currencies, int> currencies = new Dictionary<DataManager.Currencies, int>();
         private Dictionary<int, Item> inventoryItems = new Dictionary<int, Item>();
-        private Dictionary<DataManager.ArmorSlot, ArmorItem> equippedArmor = new Dictionary<DataManager.ArmorSlot, ArmorItem>();
+        private Dictionary<DataManager.ArmorSlot, ArmorItem> equippedArmor = new Dictionary<DataManager.ArmorSlot, ArmorItem>(5);
 
         private float curMitigationPercent = 0.0f;
 
@@ -43,6 +44,15 @@ namespace ShrugWare
             maxHealthPotionItem.templateId = 1;
             maxHealthPotionItem.AddEffect(maxHPEffect);
             inventoryItems.Add(maxHealthPotionItem.templateId, maxHealthPotionItem);
+
+            foreach (DataManager.ArmorSlot slot in Enum.GetValues(typeof(DataManager.ArmorSlot)))
+            {
+                equippedArmor[DataManager.ArmorSlot.Head] = null;
+                equippedArmor[DataManager.ArmorSlot.Chest] = null;
+                equippedArmor[DataManager.ArmorSlot.Gloves] = null;
+                equippedArmor[DataManager.ArmorSlot.Legs] = null;
+                equippedArmor[DataManager.ArmorSlot.Boots] = null;
+            }
         }
         
         public int GetCurrencyAmount(DataManager.Currencies currencyType)
@@ -62,7 +72,13 @@ namespace ShrugWare
             }
             else
             {
-                inventoryItems.Add(foundItem.templateId, foundItem);
+                inventoryItems.Add(itemToAdd.templateId, itemToAdd);
+            }
+
+            // if this is armor, auto equip it
+            if(itemToAdd is ArmorItem)
+            {
+                EquipArmorItem(itemToAdd as ArmorItem);
             }
         }
 
@@ -77,8 +93,11 @@ namespace ShrugWare
                 }
             }
 
-            equippedArmor[armorToEquip.GetArmorSlot()] = armorToEquip;
-            RecalculateStats();
+            if (equippedArmor.ContainsKey(armorToEquip.GetArmorSlot()))
+            {
+                equippedArmor[armorToEquip.GetArmorSlot()] = armorToEquip;
+                RecalculateStats();
+            }
         }
 
         public void UnequipArmorSlot(DataManager.ArmorSlot slot)
@@ -109,27 +128,35 @@ namespace ShrugWare
             if (HasSetBonus())
             {
                 // we have a full set, grab any piece's set bonus since they are all the same and we only need 1
-                List<DataManager.StatEffect> setBonuses = equippedArmor[DataManager.ArmorSlot.Head].GetSetBonuses();
-                foreach (DataManager.StatEffect effect in setBonuses)
+                if (equippedArmor[DataManager.ArmorSlot.Head] != null)
                 {
-                    if (effect.effectType == DataManager.StatModifierType.IncomingDamage)
+                    List<DataManager.StatEffect> setBonuses = equippedArmor[DataManager.ArmorSlot.Head].GetSetBonuses();
+                    foreach (DataManager.StatEffect effect in setBonuses)
                     {
-                        curMitigationPercent += effect.amount;
-                    }
-                    else if(effect.effectType == DataManager.StatModifierType.PlayerMaxHealth)
-                    {
-                        GameManager.Instance.AddToMaxHP((int)(GameManager.Instance.GetPlayerInfo().maxRaidHealth * effect.amount));
+                        if (effect.effectType == DataManager.StatModifierType.IncomingDamage)
+                        {
+                            curMitigationPercent += effect.amount;
+                        }
+                        else if (effect.effectType == DataManager.StatModifierType.PlayerMaxHealth)
+                        {
+                            int effectAmount = (int)(GameManager.Instance.GetPlayerInfo().maxRaidHealth * (effect.amount / 100.0f));
+                            GameManager.Instance.AddToMaxHP(effectAmount);
+                            GameManager.Instance.HealPlayerRaid(effectAmount);
+                        }
                     }
                 }
             }
 
             foreach (KeyValuePair<DataManager.ArmorSlot, ArmorItem> armor in equippedArmor)
             {
-                foreach (DataManager.StatEffect effect in armor.Value.GetEffects())
+                if (armor.Value != null)
                 {
-                    if (effect.effectType == DataManager.StatModifierType.IncomingDamage)
+                    foreach (DataManager.StatEffect effect in armor.Value.GetEffects())
                     {
-                        curMitigationPercent += effect.amount;
+                        if (effect.effectType == DataManager.StatModifierType.IncomingDamage)
+                        {
+                            curMitigationPercent += effect.amount;
+                        }
                     }
                 }
             }
@@ -183,21 +210,24 @@ namespace ShrugWare
             DataManager.ArmorSet prevSet = DataManager.ArmorSet.DauntingInferno;
             foreach (KeyValuePair<DataManager.ArmorSlot, ArmorItem> armor in equippedArmor)
             {
-                // if we have none, this means we haven't started yet so set our set to the current piece of armor
-                if (numSameArmorSetEquipped == 0)
+                if (armor.Value != null)
                 {
-                    prevSet = armor.Value.GetArmorSet();
-                }
+                    // if we have none, this means we haven't started yet so set our set to the current piece of armor
+                    if (numSameArmorSetEquipped == 0)
+                    {
+                        prevSet = armor.Value.GetArmorSet();
+                    }
 
-                // then if we detect a match of pieces, increment the number of matches
-                if (prevSet == armor.Value.GetArmorSet())
-                {
-                    ++numSameArmorSetEquipped;
-                }
-                else
-                {
-                    // not a match, therefore not a full set
-                    break;
+                    // then if we detect a match of pieces, increment the number of matches
+                    if (prevSet == armor.Value.GetArmorSet())
+                    {
+                        ++numSameArmorSetEquipped;
+                    }
+                    else
+                    {
+                        // not a match, therefore not a full set
+                        break;
+                    }
                 }
             }
 

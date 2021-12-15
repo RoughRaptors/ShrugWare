@@ -29,6 +29,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject maxHalthPotionObj = null;
 
+        [SerializeField]
+        Text currenciesText = null;
+
         public static MerchantManager Instance = null;
         
         public struct ItemForSale
@@ -183,6 +186,33 @@ namespace ShrugWare
                 {
                     inventory.AddItemToInventory(selectedItem.item);
                     inventory.RemoveCurrency(selectedItem.currency, selectedItem.price);
+                    UpdateCurrencies();
+
+                    // todo - fix this when we refactor, for now just disable the item
+                    if (selectedItem.item.templateId == 2)
+                    {
+                        helmObj.SetActive(false);
+                    }
+                    else if (selectedItem.item.templateId == 3)
+                    {
+                        chestObj.SetActive(false);
+                    }
+                    else if (selectedItem.item.templateId == 4)
+                    {
+                        glovesObj.SetActive(false);
+                    }
+                    else if (selectedItem.item.templateId == 5)
+                    {
+                        legsObj.SetActive(false);
+                    }
+                    else if (selectedItem.item.templateId == 6)
+                    {
+                        bootsObj.SetActive(false);
+                    }
+
+                    prevSelectedObj.GetComponentInChildren<RawImage>().color = UnityEngine.Color.white;
+                    prevSelectedObj = null;
+                    selectedItem.item = null;
                 }
             }
         }
@@ -236,9 +266,23 @@ namespace ShrugWare
             }
         }
 
+        public void UpdateCurrencies()
+        {
+            PlayerInventory inventory = GameManager.Instance.GetPlayerInventory();
+            if (inventory != null)
+            {
+                currenciesText.text = "Gold: " + inventory.GetCurrencyAmount(DataManager.Currencies.Generic).ToString();
+                currenciesText.text += "\nDaunting Inferno Marks: " + inventory.GetCurrencyAmount(DataManager.Currencies.DauntingInferno).ToString();
+            }
+        }
+
         public void ExitMerchant()
         {
-            prevSelectedObj.GetComponentInChildren<RawImage>().color = UnityEngine.Color.white;
+            if (prevSelectedObj != null)
+            {
+                prevSelectedObj.GetComponentInChildren<RawImage>().color = UnityEngine.Color.white;
+            }
+
             prevSelectedObj = null;
             selectedItem.item = null;
         }
