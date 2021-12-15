@@ -33,6 +33,12 @@ namespace ShrugWare
         [SerializeField]
         GameObject merchantUI = null;
 
+        [SerializeField]
+        GameObject healthPotionItem = null;
+
+        [SerializeField]
+        GameObject maxHealthPotionItem = null;
+
         private void Awake()
         {
             if (Instance == null)
@@ -54,6 +60,7 @@ namespace ShrugWare
         {
             betweenMicrogameText.enabled = false;
             timeScaleInputField.text = "Time Scale: " + GameManager.Instance.GetCurTimeScale().ToString("F3");
+            UpdateConsumableInfo();
         }
 
         public void UpdateBetweenMicrogameText()
@@ -114,8 +121,11 @@ namespace ShrugWare
                 continueGameButton.GetComponentInChildren<Text>().text = "Continue";
                 gameInfoText.enabled = true;
                 merchantUI.SetActive(false);
-                titleText.enabled = true;
+                titleText.enabled = true; 
+                healthPotionItem.SetActive(true);
+                maxHealthPotionItem.SetActive(true);
 
+                UpdateConsumableInfo();
                 GameManager.Instance.UpdateGameInfoText();
                 MerchantManager.Instance.ExitMerchant();
             }
@@ -161,6 +171,9 @@ namespace ShrugWare
                 continueGameButton.GetComponentInChildren<Text>().text = "Exit Merchant";
                 gameInfoText.enabled = false;
                 titleText.enabled = false;
+                healthPotionItem.SetActive(false);
+                maxHealthPotionItem.SetActive(false);
+
 
                 merchantUI.SetActive(true);
                 GameManager.Instance.EnterMerchant();
@@ -181,6 +194,29 @@ namespace ShrugWare
         public void OnMerchantBuyButtonClicked()
         {
             MerchantManager.Instance.OnBuyButtonClicked();
+        }
+
+        public void UpdateConsumableInfo()
+        {
+            healthPotionItem.GetComponentInChildren<Text>().text = "";
+            maxHealthPotionItem.GetComponentInChildren<Text>().text = "";
+
+            Item healthPotion = GameManager.Instance.GetPlayerInventory().GetInventoryItem(0);
+            Item maxHealthPotion = GameManager.Instance.GetPlayerInventory().GetInventoryItem(1);
+            if(healthPotion != null)
+            {
+                healthPotionItem.GetComponentInChildren<Text>().text += "Health Potion\n+25% Heal\nQuantity: " + healthPotion.itemQuantity;
+            }
+
+            if(maxHealthPotion != null)
+            {
+                maxHealthPotionItem.GetComponentInChildren<Text>().text += "\nMax Health Potion\n+10% Max HP\nQuantity: " + maxHealthPotion.itemQuantity;
+            }
+        }
+
+        public void OnUseConsumableItemClicked(int templateId)
+        {
+            GameManager.Instance.UseConsumableItem(templateId);
         }
     }
 }

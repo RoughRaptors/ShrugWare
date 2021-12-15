@@ -325,13 +325,20 @@ namespace ShrugWare
             UIManager.Instance.FillBossInfoText(curRaid, playerInfo);
         }
 
-        public void HealPlayerRaid(int amount)
+        public bool HealPlayerRaid(int amount)
         {
-            playerInfo.curRaidHealth += amount;
-            if (playerInfo.curRaidHealth > playerInfo.maxRaidHealth)
+            if (playerInfo.curRaidHealth < playerInfo.maxRaidHealth)
             {
-                playerInfo.curRaidHealth = playerInfo.maxRaidHealth;
+                playerInfo.curRaidHealth += amount;
+                if (playerInfo.curRaidHealth > playerInfo.maxRaidHealth)
+                {
+                    playerInfo.curRaidHealth = playerInfo.maxRaidHealth;
+                }
+
+                return true;
             }
+
+            return false;
         }
 
         public void DamageBoss(float amount)
@@ -384,6 +391,11 @@ namespace ShrugWare
         public void UpdateGameInfoText()
         {
             UIManager.Instance.FillBossInfoText(curRaid, playerInfo);
+        }
+
+        public void UseConsumableItem(int templateId)
+        {
+            inventory.UseConsumableItem(templateId);
         }
     }
 }

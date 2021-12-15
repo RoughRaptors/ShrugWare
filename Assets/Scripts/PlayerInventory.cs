@@ -176,21 +176,29 @@ namespace ShrugWare
             }
         }
 
-        public bool UseConsumable(ConsumableItem consumable)
+        public bool UseConsumableItem(int templateId)
         {
             bool usedConsumable = false;
-            if (consumable != null)
-            {
-                if (usedConsumable)
-                {
-                    --consumable.itemQuantity;
-                    if (consumable.itemQuantity == 0)
-                    {
-                        inventoryItems.Remove(consumable.templateId);
-                    }
+            Item item = null;
+            inventoryItems.TryGetValue(templateId, out item);
 
-                    consumable.UseItem();
-                    usedConsumable = true;
+            if (item != null)
+            {
+                ConsumableItem consumableItem = item as ConsumableItem;
+                if (consumableItem != null && consumableItem.itemQuantity > 0)
+                {
+                    usedConsumable = consumableItem.UseItem();
+                    if(usedConsumable)
+                    {
+                        --consumableItem.itemQuantity;
+                        if (consumableItem.itemQuantity == 0)
+                        {
+                            // inventoryItems.Remove(consumableItem.templateId);
+                        }
+
+                        UIManager.Instance.UpdateConsumableInfo();
+                        GameManager.Instance.UpdateGameInfoText();
+                    }
                 }
             }
 
@@ -232,6 +240,14 @@ namespace ShrugWare
             }
 
             return numSameArmorSetEquipped == (int)DataManager.ArmorSlot.MAX + 1;
+        }
+
+        public Item GetInventoryItem(int templateId)
+        {
+            Item item = null;
+            inventoryItems.TryGetValue(templateId, out item);
+
+            return item;
         }
     }
 }
