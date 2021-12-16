@@ -19,9 +19,6 @@ namespace ShrugWare
         Text betweenMicrogameText = null;
 
         [SerializeField]
-        Canvas mainCanvas = null;
-
-        [SerializeField]
         Button continueGameButton = null;
 
         [SerializeField]
@@ -29,9 +26,12 @@ namespace ShrugWare
 
         [SerializeField]
         Button merchantButton = null;
+        
+        [SerializeField]
+        GameObject mainUICanvas = null;
 
         [SerializeField]
-        GameObject merchantUI = null;
+        GameObject merchantUICanvas = null;
 
         [SerializeField]
         GameObject healthPotionItem = null;
@@ -100,9 +100,9 @@ namespace ShrugWare
             }
         }
 
-        public void SetCanvasEnabled(bool enabled)
+        public void SetMainCanvasEnabled(bool enabled)
         {
-            mainCanvas.enabled = enabled;
+            mainUICanvas.SetActive(enabled);
         }
 
         public void SetTimescaleInputFieldText(string newText)
@@ -112,33 +112,12 @@ namespace ShrugWare
 
         public void OnContinueGameButtonClicked()
         {
-            // if the merchant screen is open, close that
-            if (GameManager.Instance.GetGameState() == GameManager.GameState.Merchant)
-            {
-                GameManager.Instance.SetGameState(GameManager.GameState.Paused);
-                merchantButton.gameObject.SetActive(true);
-                timeScaleInputField.gameObject.SetActive(true);
-                continueGameButton.GetComponentInChildren<Text>().text = "Continue";
-                gameInfoText.enabled = true;
-                merchantUI.SetActive(false);
-                titleText.enabled = true; 
-                healthPotionItem.SetActive(true);
-                maxHealthPotionItem.SetActive(true);
+            betweenMicrogameText.enabled = true;
+            merchantButton.gameObject.SetActive(false);
+            continueGameButton.gameObject.SetActive(false);
+            gameInfoText.enabled = true;
 
-                UpdateConsumableInfo();
-                GameManager.Instance.UpdateGameInfoText();
-                MerchantManager.Instance.ExitMerchant();
-            }
-            else if (GameManager.Instance.GetGameState() == GameManager.GameState.Paused)
-            {
-                // otherwise we are continuing the game
-                betweenMicrogameText.enabled = true;
-                merchantButton.gameObject.SetActive(false);
-                continueGameButton.gameObject.SetActive(false);
-                gameInfoText.enabled = true;
-
-                GameManager.Instance.ContinueGame();
-            }
+            GameManager.Instance.ContinueGame();
         }
 
         public void HandleWinGame()
@@ -165,20 +144,22 @@ namespace ShrugWare
             // don't open the merchant if we're not ready/able to - todo change this to a proper game state when we add it
             if (GameManager.Instance.GetGameState() == GameManager.GameState.Paused)
             {
-                merchantButton.gameObject.SetActive(false);
-                timeScaleInputField.gameObject.SetActive(false);
-                betweenMicrogameText.enabled = false;
-                continueGameButton.GetComponentInChildren<Text>().text = "Exit Merchant";
-                gameInfoText.enabled = false;
-                titleText.enabled = false;
-                healthPotionItem.SetActive(false);
-                maxHealthPotionItem.SetActive(false);
-
-
-                merchantUI.SetActive(true);
+                mainUICanvas.SetActive(false);
+                merchantUICanvas.SetActive(true);
                 GameManager.Instance.EnterMerchant();
                 MerchantManager.Instance.UpdateCurrencies();
             }
+        }
+
+        public void OnExitMerchantClicked()
+        {
+            GameManager.Instance.SetGameState(GameManager.GameState.Paused);
+            mainUICanvas.SetActive(true);
+            merchantUICanvas.SetActive(false);
+
+            UpdateConsumableInfo();
+            GameManager.Instance.UpdateGameInfoText();
+            MerchantManager.Instance.ExitMerchant();
         }
 
         public void SetMerchantButtonActive(bool enabled)
