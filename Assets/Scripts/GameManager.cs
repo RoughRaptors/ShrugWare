@@ -184,7 +184,7 @@ namespace ShrugWare
         private void HandleFromMicrogameTransition()
         {
             gameState = GameState.MainLoop;
-            UIManager.Instance.SetCanvasEnabled(true);            
+            UIManager.Instance.SetMainCanvasEnabled(true);            
             if (!(curRaid is null) && !(curRaid.curBoss is null))
             {
                 CheckAndHandleEndCondition();
@@ -233,7 +233,7 @@ namespace ShrugWare
                 mainCanvasEnabled = true;
             }
 
-            UIManager.Instance.SetCanvasEnabled(mainCanvasEnabled);
+            UIManager.Instance.SetMainCanvasEnabled(mainCanvasEnabled);
             
             timeInMainScene = 0.0f;
 

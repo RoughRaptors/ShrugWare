@@ -257,8 +257,6 @@ MonoBehaviour:
   timerText: {fileID: 1812167574}
   playerObject: {fileID: 201544206}
   arrowObj: {fileID: 78332049}
-  badZone1Obj: {fileID: 0}
-  badZone2Obj: {fileID: 0}
   safeZoneObj: {fileID: 386133750}
 --- !u!1 &386133750
 GameObject:
@@ -502,7 +500,7 @@ Canvas:
   m_GameObject: {fileID: 435793023}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 2
   m_Camera: {fileID: 963194227}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -522,8 +520,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 435793023}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
+  m_LocalScale: {x: 0.15584415, y: 0.15584415, z: 0.15584415}
   m_Children:
   - {fileID: 1947304314}
   - {fileID: 424274558}
@@ -535,8 +533,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_SizeDelta: {x: 547, y: 308}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &514304427
 PrefabInstance:
   m_ObjectHideFlags: 0
