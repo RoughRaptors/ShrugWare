@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace ShrugWare
 {
-    public class EqualizeTwoGroups : Microgame
+    public class MatchPolarity : Microgame
     {
         [SerializeField]
         Text instructionsText = null;
@@ -17,20 +17,28 @@ namespace ShrugWare
         GameObject playerObject = null;
 
         [SerializeField]
-        GameObject meteorObject = null;
+        GameObject eletricityObj = null;
 
         [SerializeField]
-        GameObject groupOfTwoObj;
+        GameObject negativeGroupObj;
 
         [SerializeField]
-        GameObject groupOfThreeObj;
+        GameObject positiveGroupObj;
 
-        private const float PLAYER_MOVE_SPEED = 30.0f;
+        [SerializeField]
+        GameObject playerNegativeObj;
 
-        private bool stackedEqually = false;
+        [SerializeField]
+        GameObject playerPositiveObj;
+
+        private const float PLAYER_MOVE_SPEED = 40.0f;
+
+        private bool polarityMatched = false;
 
         private float timeRatio = 0;
-        private Vector3 meteorStartPos;
+        private Vector3 electricityStartPos;
+
+        bool playerPositive = false;
 
         new private void Start()
         {
@@ -57,8 +65,10 @@ namespace ShrugWare
             lossEffects.Add(damagePlayerEffect);
             lossEffects.Add(timeScaleEffect);
 
-            meteorStartPos = meteorObject.transform.position;
+            electricityStartPos = eletricityObj.transform.position;
 
+            playerNegativeObj.SetActive(false);
+            playerPositiveObj.SetActive(false);
             SetupGroupMembers();
 
             StartCoroutine(DisableInstructionsText());
@@ -74,17 +84,17 @@ namespace ShrugWare
                 if (microgameDurationRemaining <= 0.0f)
                 {
                     // out of time - we should have collided already, but maybe not
-                    if (meteorObject.activeInHierarchy)
+                    if (eletricityObj.activeInHierarchy)
                     {
                         HandleCollision();
                     }
 
-                    HandleMicrogameEnd(stackedEqually);
+                    HandleMicrogameEnd(polarityMatched);
                 }
                 else
                 {
                     timeRatio += Time.deltaTime / DataManager.MICROGAME_DURATION_SECONDS;
-                    meteorObject.transform.position = Vector3.Lerp(meteorStartPos, playerObject.transform.position, timeRatio);
+                    eletricityObj.transform.position = Vector3.Lerp(electricityStartPos, playerObject.transform.position, timeRatio);
 
                     microgameDurationRemaining -= Time.deltaTime;
                     timerText.text = microgameDurationRemaining.ToString("F2") + "s";
@@ -125,59 +135,69 @@ namespace ShrugWare
             yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
             instructionsText.gameObject.SetActive(false);
 
-            groupOfTwoObj.SetActive(true);
-            groupOfThreeObj.SetActive(true);
+            // do this here so they don't see their own polarity until it starts
+            SetupPlayer();
         }
 
-        // 50/50 chance to spawn on left or right
+        private void SetupPlayer()
+        {
+            playerPositive = Random.Range(0, 2) == 0;
+            if(playerPositive)
+            {
+                playerPositiveObj.SetActive(true);
+            }
+            else
+            {
+                playerNegativeObj.SetActive(true);
+            }
+        }
+
+        // 50/50 chance for polarity to be on one side
         private void SetupGroupMembers()
         {
-            groupOfTwoObj.SetActive(false);
-            groupOfThreeObj.SetActive(false);
-
             if (Random.Range(0, 2) == 0)
             {
-                Vector3 tempObjPos = groupOfTwoObj.transform.position;
-                groupOfTwoObj.transform.position = groupOfThreeObj.transform.position;
-                groupOfThreeObj.transform.position = tempObjPos;
+                Vector3 tempObjPos = negativeGroupObj.transform.position;
+                negativeGroupObj.transform.position = positiveGroupObj.transform.position;
+                positiveGroupObj.transform.position = tempObjPos;
             }
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject == meteorObject)
+            if (other.gameObject == eletricityObj)
             {
                 HandleCollision();
             }
-            else if(other.gameObject == groupOfTwoObj)
+            else if(playerPositive && other.gameObject == positiveGroupObj
+                || (!playerPositive && other.gameObject == negativeGroupObj))
             {
-                stackedEqually = true;
+                polarityMatched = true;
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if(other.gameObject == groupOfTwoObj)
+            if(other.gameObject == negativeGroupObj)
             {
-                stackedEqually = false;
+                polarityMatched = false;
             }
         }
 
         private void HandleCollision()
         {
-            if (stackedEqually)
+            if (polarityMatched)
             {
-                stackedEqually = true;
-                instructionsText.text = "Equality!";
+                polarityMatched = true;
+                instructionsText.text = "Shocking Performance";
             }
             else
             {
-                instructionsText.text = "Count better";
+                instructionsText.text = "BZZZT DED";
             }
 
             instructionsText.gameObject.SetActive(true);
-
-            meteorObject.SetActive(false);
+            eletricityObj.SetActive(false);
         }
     }
 }
