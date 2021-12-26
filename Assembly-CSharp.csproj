@@ -94,6 +94,7 @@
     <Compile Include="Assets\Scripts\DataManager.cs" />
     <Compile Include="Assets\Scripts\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\MatchPolarity.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StealTheChest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

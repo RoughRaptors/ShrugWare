@@ -50,4 +50,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Raids/Daunting Inferno/MatchPolarity.unity
     guid: fcdc7055661e3bb4d84f92be35df7ad8
+  - enabled: 1
+    path: Assets/Scenes/Raids/Daunting Inferno/StealTheChest.unity
+    guid: 65ecb1f9d1f35384f8bf8d4d59311d0a
   m_configObjects: {}
