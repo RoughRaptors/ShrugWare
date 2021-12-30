@@ -34,11 +34,11 @@ namespace ShrugWare
 
         private const float X_MIN = -75.0f;
         private const float X_MAX = 75.0f;
-        private const float Y_MIN = -50.0f;
-        private const float Y_MAX = 45.0f;
+        private const float Y_MIN = -30.0f;
+        private const float Y_MAX = 10.0f;
 
-        private const float PLAYER_MOVE_SPEED = 25.0f;
-        private const float REQUIRED_DISTANCE_FROM_PLAYER = 50.0f;
+        private const float PLAYER_MOVE_SPEED = 20.0f;
+        private const float REQUIRED_DISTANCE_FROM_PLAYER = 45.0f;
 
         private bool lootStolen = false;
 
@@ -142,7 +142,7 @@ namespace ShrugWare
 
         private void SetupChest()
         {
-            Vector2 spawnPos = new Vector2(0, 0);
+            Vector2 spawnPos = new Vector3(0, 0);
             float xPos = 0.0f;
             float yPos = 0.0f;
 
@@ -153,7 +153,7 @@ namespace ShrugWare
                 yPos = Random.Range(Y_MIN, Y_MAX);
                 ++numLootSpawnRetries;
 
-                spawnPos = new Vector2(xPos, yPos);
+                spawnPos = new Vector3(xPos, yPos);
                 if(Vector2.Distance(playerObject.transform.position, spawnPos) > REQUIRED_DISTANCE_FROM_PLAYER)
                 {
                     break;
