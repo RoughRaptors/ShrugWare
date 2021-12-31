@@ -37,7 +37,7 @@ namespace ShrugWare
         private const float Y_MIN = -30.0f;
         private const float Y_MAX = 10.0f;
 
-        private const float PLAYER_MOVE_SPEED = 20.0f;
+        private const float PLAYER_MOVE_SPEED = 25.0f;
         private const float REQUIRED_DISTANCE_FROM_PLAYER = 45.0f;
 
         private bool lootStolen = false;

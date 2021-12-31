@@ -25,13 +25,13 @@ namespace ShrugWare
         [SerializeField]
         GameObject groupMember2 = null;
 
-        private const float X_MIN = -50.0f;
-        private const float X_MAX = 50.0f;
+        private const float X_MIN = -65.0f;
+        private const float X_MAX = 65.0f;
         private const float Y_MIN = -30.0f;
         private const float Y_MAX = 0.0f;
-        private const float DISTANCE_FOR_VALID_STACK = 6.0f;
+        private const float DISTANCE_FOR_VALID_STACK = 10.0f;
 
-        private const float PLAYER_MOVE_SPEED = 15.0f;
+        private const float PLAYER_MOVE_SPEED = 22.5f;
 
         private bool stacked = false;
 
