@@ -29,9 +29,9 @@ namespace ShrugWare
         private const float X_MAX = 50.0f;
         private const float Y_MIN = -30.0f;
         private const float Y_MAX = 0.0f;
-        private const float DISTANCE_FOR_VALID_STACK = 5.0f;
+        private const float DISTANCE_FOR_VALID_STACK = 20.0f;
 
-        private const float PLAYER_MOVE_SPEED = 15.0f;
+        private const float PLAYER_MOVE_SPEED = 20.0f;
 
         private bool stacked = true;
 
