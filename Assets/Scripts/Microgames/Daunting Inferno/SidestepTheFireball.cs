@@ -27,7 +27,7 @@ namespace ShrugWare
         private const float Y_MAX = 0.0f;
 
         private const float FIREBALL_MOVE_SPEED = 30.0f;
-        private const float PLAYER_MOVE_SPEED = 10.0f;
+        private const float PLAYER_MOVE_SPEED = 11.0f;
 
         new private void Start()
         {
@@ -67,13 +67,13 @@ namespace ShrugWare
                 if (microgameDurationRemaining <= 0.0f)
                 {
                     // out of time
-                    if (playerObject.GetComponent<MeshRenderer>().enabled)
+                    if (playerObject.activeInHierarchy)
                     {
                         instructionsText.gameObject.SetActive(true);
                         instructionsText.text = "Slightly singed";
                     }
 
-                    HandleMicrogameEnd(playerObject.GetComponent<MeshRenderer>().enabled);
+                    HandleMicrogameEnd(playerObject.activeInHierarchy);
                 }
                 else
                 {
@@ -117,7 +117,7 @@ namespace ShrugWare
         {
             if (other.gameObject == fireballObject)
             {
-                playerObject.GetComponent<MeshRenderer>().enabled = false;
+                playerObject.SetActive(false);
 
                 instructionsText.gameObject.SetActive(true);
                 instructionsText.text = "Be faster";

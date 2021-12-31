@@ -16,7 +16,7 @@ namespace ShrugWare
         [SerializeField]
         GameObject playerObject = null;
 
-        private const float PLAYER_MOVE_SPEED = 2.5f;
+        private const float PLAYER_MOVE_SPEED = 5.0f;
 
         private bool inFire = true;
 

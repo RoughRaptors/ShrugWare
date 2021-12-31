@@ -19,12 +19,12 @@ namespace ShrugWare
         [SerializeField]
         GameObject powerstoneObj = null;
 
-        private const float PLAYER_MOVE_SPEED = 12.5f;
+        private const float PLAYER_MOVE_SPEED = 75.0f;
 
-        private const float X_MIN = -9.0f;
-        private const float X_MAX =9.0f;
-        private const float Y_MIN = -4.0f;
-        private const float Y_MAX = 4.0f;
+        private const float X_MIN = -65.0f;
+        private const float X_MAX = 65.0f;
+        private const float Y_MIN = -30.0f;
+        private const float Y_MAX = 14.0f;
 
         private const float NUM_POWERSTONES_TOTAL = 4;
         private float numPowerstonesCollected = 0;
@@ -71,7 +71,7 @@ namespace ShrugWare
                 if (microgameDurationRemaining <= 0.0f)
                 {
                     // out of time
-                    playerObject.GetComponent<MeshRenderer>().enabled = false;
+                    playerObject.SetActive(false);
 
                     if (numPowerstonesCollected != NUM_POWERSTONES_TOTAL)
                     {
@@ -99,13 +99,25 @@ namespace ShrugWare
         {
             for (int i = 0; i < NUM_POWERSTONES_TOTAL; ++i)
             {
-                float xPos = Random.Range(X_MIN, X_MAX);
-                float yPos = Random.Range(Y_MIN, Y_MAX);
-                Vector3 powerstonePos = new Vector3(xPos, yPos, 15.0f);
-                GameObject powerstone = Instantiate(powerstoneObj);
-                powerstone.transform.position = powerstonePos;
+                int numTries = 0;
 
-                powerstones.Add(powerstone);
+                while (numTries < 100)
+                {
+                    ++numTries;
+
+                    float xPos = Random.Range(X_MIN, X_MAX);
+                    float yPos = Random.Range(Y_MIN, Y_MAX);
+                    Vector3 powerstonePos = new Vector3(xPos, yPos, 75.0f);
+                    if (Vector3.Distance(playerObject.transform.position, powerstonePos) > 15.0f)
+                    {
+                        GameObject powerstone = Instantiate(powerstoneObj);
+                        powerstone.transform.position = powerstonePos;
+                        powerstone.transform.localScale = new Vector3(10.0f, 10.0f, 10.0f);
+
+                        powerstones.Add(powerstone);
+                        break;
+                    }
+                }
             }
         }
 

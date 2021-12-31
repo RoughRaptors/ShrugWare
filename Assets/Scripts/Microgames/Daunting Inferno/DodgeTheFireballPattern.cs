@@ -73,13 +73,13 @@ namespace ShrugWare
                 if (microgameDurationRemaining <= 0.0f)
                 {
                     // out of time
-                    if (playerObject.GetComponent<MeshRenderer>().enabled)
+                    if (playerObject.activeInHierarchy)
                     {
                         instructionsText.gameObject.SetActive(true);
                         instructionsText.text = "Threaded";
                     }
 
-                    HandleMicrogameEnd(playerObject.GetComponent<MeshRenderer>().enabled);
+                    HandleMicrogameEnd(playerObject.activeInHierarchy);
                 }
                 else
                 {
@@ -130,7 +130,7 @@ namespace ShrugWare
 
         private void OnTriggerEnter(Collider other)
         {
-            playerObject.GetComponent<MeshRenderer>().enabled = false;
+            playerObject.SetActive(false);
 
             instructionsText.gameObject.SetActive(true);
             instructionsText.text = "Like a leaf on the wind";

@@ -21,12 +21,12 @@ namespace ShrugWare
 
         bool won = false;
 
-        private const float ENEMY_MOVE_SPEED = 10f;
+        private const float ENEMY_MOVE_SPEED = 1.5f;
         
-        private const float X_MIN = -25.0f;
-        private const float X_MAX = 25.0f;
-        private const float Y_MIN = -10.0f;
-        private const float Y_MAX = 10.0f;
+        private const float X_MIN = -3.20f;
+        private const float X_MAX = 3.20f;
+        private const float Y_MIN = 0.70f;
+        private const float Y_MAX = 1.70f;
 
         private bool enemy1Taunted = false;
         private bool enemy2Taunted = false;
@@ -98,33 +98,53 @@ namespace ShrugWare
 
         private void SetupEnemies()
         {
+            // try 100 times to get a far enough position away from its spawn
+            int numTries = 0;
+
             // enemy 1
-            float enemy1XPos = Random.Range(X_MIN, X_MAX);
-            float enemy1YPos = Random.Range(Y_MIN, Y_MAX);
-            Vector3 enemy1Pos = new Vector3(enemy1XPos, enemy1YPos, 30.0f);
-            enemy1.transform.position = enemy1Pos;
+            while (numTries < 100)
+            {
+                ++numTries;
 
-            float enemy1TargetXPos = Random.Range(X_MIN, X_MAX);
-            float enemy1TargetYPos = Random.Range(Y_MIN, Y_MAX);
-            enemy1TargetPos = new Vector3(enemy1TargetXPos, enemy1TargetYPos, 30);
+                float enemy1XPos = Random.Range(X_MIN, X_MAX);
+                float enemy1YPos = Random.Range(Y_MIN, Y_MAX);
+                Vector3 enemy1Pos = new Vector3(enemy1XPos, enemy1YPos, 4.0f);
 
-            MeshFilter filter1 = enemy1.GetComponent<MeshFilter>();
-            filter1.GetComponent<MeshRenderer>().material.color = Color.red;
-            enemy1.SetActive(false);
+                float enemy1TargetXPos = Random.Range(X_MIN, X_MAX);
+                float enemy1TargetYPos = Random.Range(Y_MIN, Y_MAX);
+                enemy1TargetPos = new Vector3(enemy1TargetXPos, enemy1TargetYPos, 4.0f);
+
+                if (Vector3.Distance(enemy1Pos, enemy1TargetPos) < 3.0f)
+                {
+                    enemy1.transform.position = enemy1Pos;
+                    break;
+                }
+            }
 
             // enemy 2
-            float enemy2XPos = Random.Range(X_MIN, X_MAX);
-            float enemy2YPos = Random.Range(Y_MIN, Y_MAX);
-            Vector3 enemy2Pos = new Vector3(enemy2XPos, enemy2YPos, 30.0f);
-            enemy2.transform.position = enemy2Pos;
+            numTries = 0;
+            while (numTries < 100)
+            {
+                ++numTries;
 
-            float enemy2TargetXPos = Random.Range(X_MIN, X_MAX);
-            float enemy2TargetYPos = Random.Range(Y_MIN, Y_MAX);
-            enemy2TargetPos = new Vector3(enemy2TargetXPos, enemy2TargetYPos, 30);
+                float enemy2XPos = Random.Range(X_MIN, X_MAX);
+                float enemy2YPos = Random.Range(Y_MIN, Y_MAX);
+                Vector3 enemy2Pos = new Vector3(enemy2XPos, enemy2YPos, 4.0f);
+                enemy2.transform.position = enemy2Pos;
+
+                float enemy2TargetXPos = Random.Range(X_MIN, X_MAX);
+                float enemy2TargetYPos = Random.Range(Y_MIN, Y_MAX);
+                enemy2TargetPos = new Vector3(enemy2TargetXPos, enemy2TargetYPos, 4.0f);
+
+                if (Vector3.Distance(enemy2Pos, enemy2TargetPos) > 3.0f)
+                {
+                    enemy2.transform.position = enemy2Pos;
+                    break;
+                }
+            }
+
+            enemy1.SetActive(false);
             enemy2.SetActive(false);
-
-            MeshFilter filter2 = enemy2.GetComponent<MeshFilter>();
-            filter2.GetComponent<MeshRenderer>().material.color = Color.red;
         }
 
         private void HandleInput()
@@ -139,16 +159,14 @@ namespace ShrugWare
                     if (hit.transform.gameObject == enemy1)
                     {
                         enemy1Taunted = true;
-
-                        MeshFilter filter = enemy1.GetComponent<MeshFilter>();
-                        filter.GetComponent<MeshRenderer>().material.color = Color.green;
+                        //enemy1.GetComponent<MeshRenderer>().material.color = Color.green;
+                        enemy1.GetComponentInChildren<SkinnedMeshRenderer>().material.color = Color.green;
                     }
                     else if(hit.transform.gameObject == enemy2)
                     {
                         enemy2Taunted = true;
-
-                        MeshFilter filter = enemy2.GetComponent<MeshFilter>();
-                        filter.GetComponent<MeshRenderer>().material.color = Color.green;
+                        //enemy2.GetComponent<MeshRenderer>().material.color = Color.green;
+                        enemy2.GetComponentInChildren<SkinnedMeshRenderer>().material.color = Color.green;
                     }
                 }
                

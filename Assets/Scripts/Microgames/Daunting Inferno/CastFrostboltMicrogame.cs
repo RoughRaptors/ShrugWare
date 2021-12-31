@@ -31,6 +31,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject rightButtonObj;
 
+        [SerializeField]
+        GameObject bossObj;
+
         private bool castedFrostbolt = false;
 
         new private void Start()
@@ -140,6 +143,8 @@ namespace ShrugWare
 
             instructionsText.gameObject.SetActive(true);
             instructionsText.text = "Chilled Out";
+
+            bossObj.GetComponentInChildren<SkinnedMeshRenderer>().material.color = Color.cyan;
         }
     }
 }

@@ -57,34 +57,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\SidestepTheFireball.cs" />
-    <Compile Include="Assets\Packages\Pixel Play\Scripts\OffScreenIndicator\OffScreenIndicator.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\CastFrostboltMicrogame.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\SpreadOutForMeteor.cs" />
-    <Compile Include="Assets\Packages\OccaSoftware Fire Shader\Scripts\OscillateLightBrightness.cs" />
-    <Compile Include="Assets\Packages\Pixel Play\Scripts\ExtendedFlycam.cs" />
+    <Compile Include="Assets\Art\Fire\Scripts\OscillateLightBrightness.cs" />
     <Compile Include="Assets\Scripts\Items\ConsumableItem.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterruptTheAbility.cs" />
     <Compile Include="Assets\Scripts\Bosses\Warboss Kard.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\TauntTheAdds.cs" />
     <Compile Include="Assets\Scripts\Merchants\MerchantManager.cs" />
-    <Compile Include="Assets\Packages\Pixel Play\Scripts\OffScreenIndicator\OffScreenIndicatorCore.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\MatchPolarity.cs" />
     <Compile Include="Assets\Scripts\Bosses\Boss.cs" />
     <Compile Include="Assets\Scripts\InventoryManager.cs" />
     <Compile Include="Assets\Scripts\UI\UIManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\DodgeTheFireballPattern.cs" />
-    <Compile Include="Assets\Packages\Pixel Play\Scripts\OffScreenIndicator\ArrowObjectPool.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\GetOutOfFireMicrogame.cs" />
-    <Compile Include="Assets\Packages\Pixel Play\Scripts\OffScreenIndicator\BoxObjectPool.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
-    <Compile Include="Assets\Packages\OccaSoftware Fire Shader\Scripts\VolumetricFire.cs" />
-    <Compile Include="Assets\Packages\Pixel Play\Scripts\OffScreenIndicator\Indicator.cs" />
-    <Compile Include="Assets\Packages\Pixel Play\Scripts\OffScreenIndicator\Target.cs" />
+    <Compile Include="Assets\Art\Fire\Scripts\VolumetricFire.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StackPowerstones.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\KnockbackedSafetly.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterceptTheFireball.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\DauntingInfernoRaid.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StackUpForMeteor.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StealTheChest.cs" />
     <Compile Include="Assets\Scripts\Microgame.cs" />
     <Compile Include="Assets\Scripts\Raid.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\PerformTheRotation.cs" />
@@ -93,8 +88,10 @@
     <Compile Include="Assets\Scripts\Items\ArmorItem.cs" />
     <Compile Include="Assets\Scripts\DataManager.cs" />
     <Compile Include="Assets\Scripts\PlayerInventory.cs" />
-    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\MatchPolarity.cs" />
-    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StealTheChest.cs" />
+    <Compile Include="Assets\Art\Lightning Bolt\LightningBoltScript.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Art\Lightning Bolt\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
