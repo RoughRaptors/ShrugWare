@@ -35,6 +35,8 @@ namespace ShrugWare
         {
             base.Start();
 
+            playerObject.transform.GetChild(0).gameObject.SetActive(true);
+
             DataManager.StatEffect damagePlayerEffect = new DataManager.StatEffect();
             damagePlayerEffect.effectType = DataManager.StatModifierType.PlayerCurHealth;
             damagePlayerEffect.amount = 34.0f;
@@ -71,7 +73,7 @@ namespace ShrugWare
                 if (microgameDurationRemaining <= 0.0f)
                 {
                     // out of time
-                    playerObject.SetActive(false);
+                    playerObject.transform.GetChild(0).gameObject.SetActive(false);
 
                     if (numPowerstonesCollected != NUM_POWERSTONES_TOTAL)
                     {

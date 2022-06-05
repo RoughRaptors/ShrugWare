@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace ShrugWare
 {
-    public class KnockbackedSafetly : Microgame
+    public class KnockbackedSafely : Microgame
     {
         [SerializeField]
         Text instructionsText = null;

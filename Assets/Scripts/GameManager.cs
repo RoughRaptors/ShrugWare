@@ -33,6 +33,28 @@ using UnityEngine.EventSystems;
     4: in DataManager.cs -> add the new scene name to the enum Scenes and update the MICROGAME_END value
 */
 
+/*
+-- Clicking Mechanics --
+Cast Frostbolt - Click the frostbolt button out of three options
+Taunt The Adds - Click x amount of adds running around the screen.
+Perform The Rotation - Click the shown abilities in the correct order
+
+-- 2.5D Character Movement --
+Dodge The Fireball - Dodge a fireball coming at you
+Equalize The Two Groups -  Move to the group that will make the party member numbers even
+Get Out Of Fire - Get out of the fire
+Intercept The Fireball -  Run into the fireball before it hits the party
+Interrupt The Ability - Hit the interrupt ability at the proper timing as the boss is casting
+Knockbacked Safely - Get knocked backwards into a safe zone
+Match Polarity - Move to the party members of the same electric positive or negative sign as you
+Spread Out For Meteor - Spread out from everyone else for a meteor attack
+Sidestep The Fireball - Sidestep a fireball coming at you
+Stack Up For Meteor - Stack up on everyone for a meteor attack
+Stack Powerstones - Collect powerups around the area
+Steal The Chest - Collect the chest before your team members get it
+
+*/
+
 namespace ShrugWare
 {
     public class GameManager : MonoBehaviour

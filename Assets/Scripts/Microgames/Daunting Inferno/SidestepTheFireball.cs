@@ -33,6 +33,8 @@ namespace ShrugWare
         {
             base.Start();
 
+            playerObject.transform.GetChild(0).gameObject.SetActive(true);
+
             DataManager.StatEffect damagePlayerEffect = new DataManager.StatEffect();
             damagePlayerEffect.effectType = DataManager.StatModifierType.PlayerCurHealth;
             damagePlayerEffect.amount = 34.0f; 
@@ -117,7 +119,7 @@ namespace ShrugWare
         {
             if (other.gameObject == fireballObject)
             {
-                playerObject.SetActive(false);
+                playerObject.transform.GetChild(0).gameObject.SetActive(false);
 
                 instructionsText.gameObject.SetActive(true);
                 instructionsText.text = "Be faster";

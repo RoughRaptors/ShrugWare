@@ -39,6 +39,8 @@ namespace ShrugWare
         {
             base.Start();
 
+            playerObject.transform.GetChild(0).gameObject.SetActive(true);
+
             DataManager.StatEffect damagePlayerEffect = new DataManager.StatEffect();
             damagePlayerEffect.effectType = DataManager.StatModifierType.PlayerCurHealth;
             damagePlayerEffect.amount = 34.0f;
@@ -130,7 +132,7 @@ namespace ShrugWare
 
         private void OnTriggerEnter(Collider other)
         {
-            playerObject.SetActive(false);
+            playerObject.transform.GetChild(0).gameObject.SetActive(false);
 
             instructionsText.gameObject.SetActive(true);
             instructionsText.text = "Like a leaf on the wind";
