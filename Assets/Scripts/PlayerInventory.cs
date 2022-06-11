@@ -139,7 +139,7 @@ namespace ShrugWare
                         }
                         else if (effect.effectType == DataManager.StatModifierType.PlayerMaxHealth)
                         {
-                            int effectAmount = (int)(GameManager.Instance.GetPlayerInfo().maxRaidHealth * (effect.amount / 100.0f));
+                            int effectAmount = (int)(GameManager.Instance.GetPlayerInfo().maxPlayerHealth * (effect.amount / 100.0f));
                             GameManager.Instance.AddToMaxHP(effectAmount);
                             GameManager.Instance.HealPlayerRaid(effectAmount);
                         }
@@ -197,7 +197,7 @@ namespace ShrugWare
                         }
 
                         UIManager.Instance.UpdateConsumableInfo();
-                        GameManager.Instance.UpdateGameInfoText();
+                        GameManager.Instance.UpdateGameUI();
                     }
                 }
             }

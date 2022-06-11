@@ -39,6 +39,12 @@ namespace ShrugWare
         [SerializeField]
         GameObject maxHealthPotionItem = null;
 
+        [SerializeField]
+        HealthBar playerHealthBar = null;
+
+        [SerializeField]
+        HealthBar bossHealthBar = null;
+
         private void Awake()
         {
             if (Instance == null)
@@ -85,19 +91,32 @@ namespace ShrugWare
             timeScaleInputField.text = "Time Scale: " + GameManager.Instance.GetCurTimeScale().ToString("F3");
         }
 
-        public void FillBossInfoText(Raid curRaid, GameManager.PlayerInfo playerInfo)
+        public void FillGameInfoText(Raid curRaid, GameManager.PlayerInfo playerInfo)
         {
             if (!(curRaid is null) && !(curRaid.curBoss is null))
             {
+                /*
                 gameInfoText.text = curRaid.raidName + "\n" + curRaid.curBoss.bossName + "\n"
                     + "Health: " + curRaid.curBoss.curHealth.ToString() + " / " + curRaid.curBoss.maxHealth + "\n \n"
-                    + "Raid Health: " + playerInfo.curRaidHealth.ToString() + " / " + playerInfo.maxRaidHealth.ToString() + "\n"
+                    + "Player Health: " + playerInfo.curPlayerHealth.ToString() + " / " + playerInfo.maxPlayerHealth.ToString() + "\n"
                     + "Rezzes Left: " + playerInfo.livesLeft.ToString();
+                */
+
+                gameInfoText.text = "Rezzes Left: " + playerInfo.livesLeft.ToString();
             }
             else
             {
-                Debug.Log("Raid or Boss null in FillBossInfoText");
+                Debug.Log("Raid or Boss null in FillGameInfoText");
             }
+        }
+
+        public void UpdateHealthBars()
+        {
+            playerHealthBar.gameObject.SetActive(true);
+            bossHealthBar.gameObject.SetActive(true);
+
+            bossHealthBar.UpdateHealthBar();
+            playerHealthBar.UpdateHealthBar();
         }
 
         public void SetMainCanvasEnabled(bool enabled)
@@ -115,6 +134,8 @@ namespace ShrugWare
             betweenMicrogameText.enabled = true;
             merchantButton.gameObject.SetActive(false);
             continueGameButton.gameObject.SetActive(false);
+            playerHealthBar.gameObject.SetActive(false);
+            bossHealthBar.gameObject.SetActive(false);
             gameInfoText.enabled = true;
 
             GameManager.Instance.ContinueGame();
@@ -158,7 +179,7 @@ namespace ShrugWare
             merchantUICanvas.SetActive(false);
 
             UpdateConsumableInfo();
-            GameManager.Instance.UpdateGameInfoText();
+            GameManager.Instance.UpdateGameUI();
             MerchantManager.Instance.ExitMerchant();
         }
 

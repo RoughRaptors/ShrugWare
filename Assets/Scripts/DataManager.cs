@@ -68,12 +68,12 @@ namespace ShrugWare
             DauntingInferno = 0
         }
 
-        public static float MICROGAME_DURATION_SECONDS = 3.0f; // we can override this in the child Microgame's Start() - microgameDurationRemaining
-        public static float SECONDS_TO_START_MICROGAME = 1.0f; // how long we wait for the microgame to start when on the scene - to orient the player
-        public static float SECONDS_BETWEEN_MICROGAMES = 3.0f; // how long we wait before starting another microgame inside of GameManager
+        public static float MICROGAME_DURATION_SECONDS = 3.5f; // we can override this in the child Microgame's Start() - microgameDurationRemaining
+        public static float SECONDS_TO_START_MICROGAME = 1.25f; // how long we wait for the microgame to start when on the scene - to orient the player
+        public static float SECONDS_BETWEEN_MICROGAMES = 3.5f; // how long we wait before starting another microgame inside of GameManager
 
-        public static int PLAYER_RAID_START_HP = 100;
-        public static int PLAYER_RAID_MAX_HP = 100;
-        public static int PLAYER_RAID_STARTING_LIVES = 3;
+        public static int PLAYER_START_HP = 100;
+        public static int PLAYER_MAX_HP = 100;
+        public static int PLAYER_STARTING_LIVES = 3;
     }
 }

@@ -21,7 +21,7 @@ namespace ShrugWare
                 }
                 else if (effect.effectType == DataManager.StatModifierType.PlayerMaxHealth)
                 {
-                    float amount = (effect.amount * DataManager.PLAYER_RAID_MAX_HP) / 100.0f;
+                    float amount = (effect.amount * DataManager.PLAYER_MAX_HP) / 100.0f;
                     GameManager.Instance.AddToMaxHP((int)amount);
                     GameManager.Instance.HealPlayerRaid((int)amount);
                     return true;
