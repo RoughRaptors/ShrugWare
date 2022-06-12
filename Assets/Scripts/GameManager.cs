@@ -52,7 +52,6 @@ Sidestep The Fireball - Sidestep a fireball coming at you
 Stack Up For Meteor - Stack up on everyone for a meteor attack
 Stack Powerstones - Collect powerups around the area
 Steal The Chest - Collect the chest before your team members get it
-
 */
 
 namespace ShrugWare
@@ -63,6 +62,8 @@ namespace ShrugWare
         
         [SerializeField]
         private UIManager uiManager;
+
+        private AudioManager audioManager;
 
         private float curTimeScale = 1.0f;
         public float GetCurTimeScale() { return curTimeScale; }
@@ -139,7 +140,8 @@ namespace ShrugWare
                 playerInfo.livesLeft = GameManager.Instance.playerInfo.livesLeft;
                 timeInMainScene = 0.0f;
             }
-
+            
+            audioManager = GetComponent<AudioManager>();
             curSceneIndex = (int)DataManager.Scenes.MainScene;
 
             EventSystem sceneEventSystem = FindObjectOfType<EventSystem>();
@@ -155,6 +157,8 @@ namespace ShrugWare
         {
             Screen.SetResolution(1920, 1080, false);
             Time.timeScale = curTimeScale;
+
+            audioManager.PlayAudioClip(DataManager.AudioEffectTypes.MainMenu);
 
             // initialize our data if this is our first time starting
             if (raidList.Count == 0)
@@ -206,7 +210,8 @@ namespace ShrugWare
         private void HandleFromMicrogameTransition()
         {
             gameState = GameState.MainLoop;
-            uiManager.SetMainCanvasEnabled(true);            
+            uiManager.SetMainCanvasEnabled(true);
+            audioManager.PlayAudioClip(DataManager.AudioEffectTypes.BetweenMicrogame);
             if (!(curRaid is null) && !(curRaid.curBoss is null))
             {
                 CheckAndHandleEndCondition();
@@ -307,6 +312,7 @@ namespace ShrugWare
             gameState = GameState.MainLoop;
             gameRunning = true;
             uiManager.ToggleConsumableVisibility(false);
+            audioManager.StopAudio();
         }
 
         public void PauseGame()
