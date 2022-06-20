@@ -22,9 +22,7 @@ namespace ShrugWare
             {
                 Destroy(gameObject);
             }
-        }
-        private void Start()
-        {
+
             if (audioSource == null)
             {
                 audioSource = gameObject.AddComponent<AudioSource>();
@@ -43,8 +41,13 @@ namespace ShrugWare
             return null;
         }
 
-        public void PlayAudioClip(DataManager.AudioEffectTypes audioEffectType)
+        public void PlayAudioClip(DataManager.AudioEffectTypes audioEffectType, float volumeScale = 1)
         {
+            if(audioSource == null)
+            {
+                return;
+            }
+
             audioSource.Stop();
 
             AudioClip audioClip = GetAudioClip(audioEffectType);
@@ -53,7 +56,7 @@ namespace ShrugWare
                 // we want to play the audio clip scaled based on the current timescale
                 // ie if timescale is 1.25, that's 25% faster
                 audioSource.pitch = GameManager.Instance.GetCurTimeScale();
-                audioSource.PlayOneShot(audioClip);
+                audioSource.PlayOneShot(audioClip, volumeScale);
             }
         }
 
