@@ -10,9 +10,6 @@ namespace ShrugWare
         public static UIManager Instance = null;
 
         [SerializeField]
-        Text titleText = null;
-
-        [SerializeField]
         InputField timeScaleInputField = null;
 
         [SerializeField]
@@ -33,6 +30,12 @@ namespace ShrugWare
         [SerializeField]
         GameObject merchantUICanvas = null;
 
+        [SerializeField]
+        GameObject instructionsUICanvas = null;
+
+        [SerializeField]
+        GameObject instructionsUIButton = null;
+ 
         [SerializeField]
         GameObject healthPotionItem = null;
 
@@ -95,13 +98,6 @@ namespace ShrugWare
         {
             if (!(curRaid is null) && !(curRaid.curBoss is null))
             {
-                /*
-                gameInfoText.text = curRaid.raidName + "\n" + curRaid.curBoss.bossName + "\n"
-                    + "Health: " + curRaid.curBoss.curHealth.ToString() + " / " + curRaid.curBoss.maxHealth + "\n \n"
-                    + "Player Health: " + playerInfo.curPlayerHealth.ToString() + " / " + playerInfo.maxPlayerHealth.ToString() + "\n"
-                    + "Rezzes Left: " + playerInfo.livesLeft.ToString();
-                */
-
                 gameInfoText.text = "Rezzes Left: " + playerInfo.livesLeft.ToString();
             }
             else
@@ -137,6 +133,7 @@ namespace ShrugWare
             playerHealthBar.gameObject.SetActive(false);
             bossHealthBar.gameObject.SetActive(false);
             gameInfoText.enabled = true;
+            instructionsUIButton.SetActive(false);
 
             GameManager.Instance.ContinueGame();
         }
@@ -225,6 +222,18 @@ namespace ShrugWare
         public void OnUseConsumableItemClicked(int templateId)
         {
             GameManager.Instance.UseConsumableItem(templateId);
+        }
+
+        public void OnInstructionsButtonClicked()
+        {
+            mainUICanvas.SetActive(false);
+            instructionsUICanvas.SetActive(true);
+        }
+
+        public void OnInstructionsBackButtonClicked()
+        {
+            mainUICanvas.SetActive(true);
+            instructionsUICanvas.SetActive(false);
         }
     }
 }

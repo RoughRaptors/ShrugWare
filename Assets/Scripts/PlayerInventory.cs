@@ -15,6 +15,7 @@ namespace ShrugWare
 
         public PlayerInventory()
         {
+            // starting inventory
             currencies.Add(DataManager.Currencies.Generic, 1000);
             currencies.Add(DataManager.Currencies.DauntingInferno, 5000);
 

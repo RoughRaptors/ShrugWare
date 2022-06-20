@@ -63,6 +63,9 @@ namespace ShrugWare
         [SerializeField]
         private UIManager uiManager;
 
+        [SerializeField]
+        private MerchantManager merchantManager;
+
         private AudioManager audioManager;
 
         private float curTimeScale = 1.0f;
@@ -158,7 +161,7 @@ namespace ShrugWare
             Screen.SetResolution(1920, 1080, false);
             Time.timeScale = curTimeScale;
 
-            audioManager.PlayAudioClip(DataManager.AudioEffectTypes.MainMenu);
+            audioManager.PlayAudioClip(DataManager.AudioEffectTypes.MainMenu, 0.2f);
 
             // initialize our data if this is our first time starting
             if (raidList.Count == 0)
@@ -211,7 +214,7 @@ namespace ShrugWare
         {
             gameState = GameState.MainLoop;
             uiManager.SetMainCanvasEnabled(true);
-            audioManager.PlayAudioClip(DataManager.AudioEffectTypes.BetweenMicrogame);
+            audioManager.PlayAudioClip(DataManager.AudioEffectTypes.BetweenMicrogame, .75f);
             if (!(curRaid is null) && !(curRaid.curBoss is null))
             {
                 CheckAndHandleEndCondition();
