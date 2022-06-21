@@ -9,7 +9,8 @@ namespace ShrugWare
     {
         public List<AudioEffectClip> audioEffects = new List<AudioEffectClip>();
 
-        private AudioSource audioSource;
+        private AudioSource audioSourceMusic;
+        private AudioSource audioSourceEffects;
 
         public static AudioManager Instance;
         private void Awake()
@@ -23,9 +24,14 @@ namespace ShrugWare
                 Destroy(gameObject);
             }
 
-            if (audioSource == null)
+            if (audioSourceMusic == null)
             {
-                audioSource = gameObject.AddComponent<AudioSource>();
+                audioSourceMusic = gameObject.AddComponent<AudioSource>();
+            }
+
+            if (audioSourceEffects == null)
+            {
+                audioSourceEffects = gameObject.AddComponent<AudioSource>();
             }
         }
         private AudioClip GetAudioClip(DataManager.AudioEffectTypes audioEffectType)
@@ -43,26 +49,36 @@ namespace ShrugWare
 
         public void PlayAudioClip(DataManager.AudioEffectTypes audioEffectType, float volumeScale = 1)
         {
-            if(audioSource == null)
+            if(audioSourceMusic == null || audioSourceEffects == null)
             {
                 return;
             }
 
-            audioSource.Stop();
+            audioSourceEffects.Stop();
 
             AudioClip audioClip = GetAudioClip(audioEffectType);
             if(audioClip != null)
             {
                 // we want to play the audio clip scaled based on the current timescale
                 // ie if timescale is 1.25, that's 25% faster
-                audioSource.pitch = GameManager.Instance.GetCurTimeScale();
-                audioSource.PlayOneShot(audioClip, volumeScale);
+                audioSourceMusic.pitch = GameManager.Instance.GetCurTimeScale();
+                audioSourceEffects.pitch = GameManager.Instance.GetCurTimeScale();
+
+                // if it's main menu music, use the audio source for music
+                if (audioEffectType == DataManager.AudioEffectTypes.MainMenu)
+                {
+                    audioSourceMusic.PlayOneShot(audioClip, volumeScale);
+                }
+                else
+                {
+                    audioSourceEffects.PlayOneShot(audioClip, volumeScale);
+                }
             }
         }
 
         public void StopAudio()
         {
-            audioSource.Stop();
+            audioSourceMusic.Stop();
         }
     }
 }

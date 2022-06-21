@@ -71,7 +71,10 @@ namespace ShrugWare
         public enum AudioEffectTypes
         {
             MainMenu = 0,
-            BetweenMicrogame
+            BetweenMicrogame,
+            UsePotion,
+            MerchantPurchase,
+            ButtonClick
         }
 
         public static float MICROGAME_DURATION_SECONDS = 3.5f; // we can override this in the child Microgame's Start() - microgameDurationRemaining

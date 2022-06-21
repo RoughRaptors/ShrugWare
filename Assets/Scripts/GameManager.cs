@@ -214,7 +214,7 @@ namespace ShrugWare
         {
             gameState = GameState.MainLoop;
             uiManager.SetMainCanvasEnabled(true);
-            audioManager.PlayAudioClip(DataManager.AudioEffectTypes.BetweenMicrogame, .75f);
+            audioManager.PlayAudioClip(DataManager.AudioEffectTypes.BetweenMicrogame, .4f);
             if (!(curRaid is null) && !(curRaid.curBoss is null))
             {
                 CheckAndHandleEndCondition();
@@ -327,6 +327,7 @@ namespace ShrugWare
 
         public void EnterMerchant()
         {
+            AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.ButtonClick);
             gameState = GameState.Merchant;
             gameRunning = false;   
         }
