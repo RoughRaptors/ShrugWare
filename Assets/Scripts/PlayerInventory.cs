@@ -197,6 +197,7 @@ namespace ShrugWare
                             // inventoryItems.Remove(consumableItem.templateId);
                         }
 
+                        AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.UsePotion, 0.4f);
                         UIManager.Instance.UpdateConsumableInfo();
                         GameManager.Instance.UpdateGameUI();
                     }

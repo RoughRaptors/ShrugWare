@@ -135,6 +135,7 @@ namespace ShrugWare
             gameInfoText.enabled = true;
             instructionsUIButton.SetActive(false);
 
+            AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.ButtonClick);
             GameManager.Instance.ContinueGame();
         }
 
@@ -164,6 +165,7 @@ namespace ShrugWare
             {
                 mainUICanvas.SetActive(false);
                 merchantUICanvas.SetActive(true);
+
                 GameManager.Instance.EnterMerchant();
                 MerchantManager.Instance.UpdateCurrencies();
             }
@@ -176,6 +178,7 @@ namespace ShrugWare
             merchantUICanvas.SetActive(false);
 
             UpdateConsumableInfo();
+            AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.ButtonClick);
             GameManager.Instance.UpdateGameUI();
             MerchantManager.Instance.ExitMerchant();
         }
@@ -226,12 +229,14 @@ namespace ShrugWare
 
         public void OnInstructionsButtonClicked()
         {
+            AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.ButtonClick);
             mainUICanvas.SetActive(false);
             instructionsUICanvas.SetActive(true);
         }
 
         public void OnInstructionsBackButtonClicked()
         {
+            AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.ButtonClick);
             mainUICanvas.SetActive(true);
             instructionsUICanvas.SetActive(false);
         }

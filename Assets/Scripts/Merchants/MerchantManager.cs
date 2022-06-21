@@ -210,6 +210,7 @@ namespace ShrugWare
                         bootsObj.SetActive(false);
                     }
 
+                    AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.MerchantPurchase, .4f);
                     prevSelectedObj.GetComponentInChildren<RawImage>().color = UnityEngine.Color.white;
                     prevSelectedObj = null;
                     selectedItem.item = null;
@@ -262,6 +263,7 @@ namespace ShrugWare
                 {
                     prevSelectedObj = objToChange;
                     objToChange.GetComponentInChildren<RawImage>().color = UnityEngine.Color.green;
+                    AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.ButtonClick);
                 }
             }
         }
