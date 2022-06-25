@@ -287,7 +287,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerObj: {fileID: 1926724886}
   instructionsText: {fileID: 424274559}
-  timerText: {fileID: 0}
   frostboltButtonObj: {fileID: 27083949}
   glacialSpileButtonObj: {fileID: 1325052453}
   iceBlastButtonObj: {fileID: 1213044721}
@@ -1271,7 +1270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101785762507012292, guid: dbabc0eaad358044d83c94120c3582d9, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8101785762507012292, guid: dbabc0eaad358044d83c94120c3582d9, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1299,15 +1298,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101785762507012292, guid: dbabc0eaad358044d83c94120c3582d9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.29144645
+      value: 0.0175
       objectReference: {fileID: 0}
     - target: {fileID: 8101785762507012292, guid: dbabc0eaad358044d83c94120c3582d9, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.29144645
+      value: 0.0175
       objectReference: {fileID: 0}
     - target: {fileID: 8101785762507012292, guid: dbabc0eaad358044d83c94120c3582d9, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.29144645
+      value: 0.0175
       objectReference: {fileID: 0}
     - target: {fileID: 8101785762507012292, guid: dbabc0eaad358044d83c94120c3582d9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1339,11 +1338,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8101785762507012292, guid: dbabc0eaad358044d83c94120c3582d9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 262.3133
+      value: 273.31
       objectReference: {fileID: 0}
     - target: {fileID: 8101785762507012292, guid: dbabc0eaad358044d83c94120c3582d9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 11.914074
+      value: 147.1
       objectReference: {fileID: 0}
     - target: {fileID: 8101785762507012292, guid: dbabc0eaad358044d83c94120c3582d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
