@@ -160,7 +160,6 @@ namespace ShrugWare
         {
             Screen.SetResolution(1920, 1080, false);
             Time.timeScale = curTimeScale;
-
             audioManager.PlayAudioClip(DataManager.AudioEffectTypes.MainMenu, .175f);
 
             // initialize our data if this is our first time starting
