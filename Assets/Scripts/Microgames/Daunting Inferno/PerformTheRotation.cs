@@ -11,9 +11,6 @@ namespace ShrugWare
     {
         [SerializeField]
         Text instructionsText = null;
-        
-        [SerializeField]
-        Text timerText = null;
 
         [SerializeField]
         GameObject frostboltButtonObj = null;
@@ -90,7 +87,7 @@ namespace ShrugWare
                 else
                 {
                     microgameDurationRemaining -= Time.deltaTime;
-                    timerText.text = microgameDurationRemaining.ToString("F2") + "s";
+                    base.Update();
                 }
             }
         }

@@ -9,9 +9,6 @@ namespace ShrugWare
     {
         [SerializeField]
         Text instructionsText = null;
-        
-        [SerializeField]
-        Text timerText = null;
 
         [SerializeField]
         Slider abilityBar;
@@ -75,7 +72,7 @@ namespace ShrugWare
                 else
                 {
                     microgameDurationRemaining -= Time.deltaTime;
-                    timerText.text = microgameDurationRemaining.ToString("F2") + "s";
+                    base.Update();
 
                     if (abilityBar.isActiveAndEnabled && !interrupted)
                     {

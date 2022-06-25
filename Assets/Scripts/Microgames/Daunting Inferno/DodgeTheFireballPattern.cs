@@ -9,9 +9,6 @@ namespace ShrugWare
     {
         [SerializeField]
         Text instructionsText = null;
-        
-        [SerializeField]
-        Text timerText = null;
 
         [SerializeField]
         GameObject playerObject = null;
@@ -98,7 +95,7 @@ namespace ShrugWare
                         FIREBALL_MOVE_SPEED * (Random.Range(1, 1.5f) * Time.deltaTime));
 
                     microgameDurationRemaining -= Time.deltaTime;
-                    timerText.text = microgameDurationRemaining.ToString("F2") + "s";
+                    base.Update();
                     HandleInput();
                 }
             }

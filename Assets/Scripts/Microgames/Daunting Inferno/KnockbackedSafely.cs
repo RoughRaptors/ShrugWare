@@ -9,9 +9,6 @@ namespace ShrugWare
     {
         [SerializeField]
         Text instructionsText = null;
-        
-        [SerializeField]
-        Text timerText = null;
 
         [SerializeField]
         GameObject playerObject = null;
@@ -78,7 +75,7 @@ namespace ShrugWare
                 else
                 {
                     microgameDurationRemaining -= Time.deltaTime;
-                    timerText.text = microgameDurationRemaining.ToString("F2") + "s";
+                    base.Update();
                     HandleInput();
 
                     float angleRad = Mathf.Atan2(playerObject.transform.position.y - arrowObj.transform.position.y,
