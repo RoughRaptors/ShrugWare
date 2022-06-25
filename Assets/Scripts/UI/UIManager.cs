@@ -61,6 +61,11 @@ namespace ShrugWare
                 // set all of our shit back - figure out a better solution later if there is one - TODO MAKE THIS BETTER
                 timeScaleInputField = UIManager.Instance.timeScaleInputField;
                 timeScaleInputField.text = "Time Scale: " + GameManager.Instance.GetCurTimeScale().ToString("F3");
+
+#if !UNITY_EDITOR
+                // don't show this outside of the editor, it's debug
+                timeScaleInputField.gameObject.SetActive(false);
+#endif
             }
         }
 

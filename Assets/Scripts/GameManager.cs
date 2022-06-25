@@ -161,7 +161,7 @@ namespace ShrugWare
             Screen.SetResolution(1920, 1080, false);
             Time.timeScale = curTimeScale;
 
-            audioManager.PlayAudioClip(DataManager.AudioEffectTypes.MainMenu, 0.2f);
+            audioManager.PlayAudioClip(DataManager.AudioEffectTypes.MainMenu, .2f);
 
             // initialize our data if this is our first time starting
             if (raidList.Count == 0)
