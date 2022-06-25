@@ -9,9 +9,6 @@ namespace ShrugWare
     {
         [SerializeField]
         Text instructionsText = null;
-        
-        [SerializeField]
-        Text timerText = null;
 
         [SerializeField]
         GameObject playerObject = null;
@@ -87,7 +84,7 @@ namespace ShrugWare
                     meteorObject.transform.position = Vector3.Lerp(meteorStartPos, playerObject.transform.position, timeRatio);
 
                     microgameDurationRemaining -= Time.deltaTime;
-                    timerText.text = microgameDurationRemaining.ToString("F2") + "s";
+                    base.Update();
                     HandleInput();
                 }
             }

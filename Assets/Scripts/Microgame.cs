@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ShrugWare
 {
     public abstract class Microgame : MonoBehaviour
     {
         // todo - add string instructionsTextString field to allow for cleaner, more data driven code
+
+        [SerializeField]
+        GameObject timerObj;
 
         protected float microgameDurationRemaining;
 
@@ -19,6 +23,18 @@ namespace ShrugWare
 
         // temp hack to allow for a brief pause in between microgame timers running out
         private bool hasRunEndCondition = false;
+
+        protected void Update()
+        {
+            // if we're debugging a single scene, we don't have a GameManager
+            float totalMicrogameTime = DataManager.MICROGAME_DURATION_SECONDS;
+            if (GameManager.Instance != null)
+            {
+                totalMicrogameTime *= GameManager.Instance.GetCurTimeScale();
+            }
+
+            timerObj.GetComponent<Slider>().value = microgameDurationRemaining / totalMicrogameTime;
+        }
 
         protected void Start()
         {

@@ -147,7 +147,7 @@ namespace ShrugWare
         public void HandleWinGame()
         {
             betweenMicrogameText.enabled = false;
-            gameInfoText.text += "\n \n CONGLADURATION. YOU ARE WIN";
+            gameInfoText.text += "\n CONGLADURATION. YOU ARE WIN";
         }
 
         public void HandlePauseGame()
