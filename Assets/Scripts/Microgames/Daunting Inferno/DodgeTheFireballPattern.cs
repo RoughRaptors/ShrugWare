@@ -72,13 +72,13 @@ namespace ShrugWare
                 if (microgameDurationRemaining <= 0.0f)
                 {
                     // out of time
-                    if (playerObject.activeInHierarchy)
+                    if (playerObject.transform.GetChild(0).gameObject.activeInHierarchy)
                     {
                         instructionsText.gameObject.SetActive(true);
                         instructionsText.text = "Threaded";
                     }
 
-                    HandleMicrogameEnd(playerObject.activeInHierarchy);
+                    HandleMicrogameEnd(playerObject.transform.GetChild(0).gameObject.activeInHierarchy);
                 }
                 else
                 {
