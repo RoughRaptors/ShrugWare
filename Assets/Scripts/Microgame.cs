@@ -28,9 +28,9 @@ namespace ShrugWare
         {
             // if we're debugging a single scene, we don't have a GameManager
             float totalMicrogameTime = DataManager.MICROGAME_DURATION_SECONDS;
-            if (GameManager.Instance != null)
+            if (BossGameManager.Instance != null)
             {
-                totalMicrogameTime *= GameManager.Instance.GetCurTimeScale();
+                totalMicrogameTime *= BossGameManager.Instance.GetCurTimeScale();
             }
 
             timerObj.GetComponent<Slider>().value = microgameDurationRemaining / totalMicrogameTime;
@@ -38,19 +38,20 @@ namespace ShrugWare
 
         protected void Start()
         {
+            BossGameManager.Instance.SetGameState(BossGameManager.GameState.InMicrogame);
             microgameDurationRemaining = DataManager.MICROGAME_DURATION_SECONDS;
 
             // will be null if individually loading scenes
-            if (GameManager.Instance)
+            if (BossGameManager.Instance)
             {
-                Time.timeScale = GameManager.Instance.GetCurTimeScale();
+                Time.timeScale = BossGameManager.Instance.GetCurTimeScale();
             }
         }
 
         protected void HandleMicrogameEnd(bool wonMicrogame)
         {
             // should only be null if running the microgame scene on its own
-            if (GameManager.Instance && !hasRunEndCondition)
+            if (BossGameManager.Instance && !hasRunEndCondition)
             {
                 hasRunEndCondition = true;
                 if (wonMicrogame)
@@ -71,12 +72,12 @@ namespace ShrugWare
         {
             yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
             
-            GameManager.Instance.MicrogameCompleted(wonMicrogame);
+            BossGameManager.Instance.MicrogameCompleted(wonMicrogame);
         }
 
         private void RunEffects(List<DataManager.StatEffect> effects)
         {
-            GameManager.Instance.ClearPreviousEffects();
+            BossGameManager.Instance.ClearPreviousEffects();
             foreach (DataManager.StatEffect effect in effects)
             {
                 RunEffect(effect);
@@ -85,19 +86,19 @@ namespace ShrugWare
 
         private void RunEffect(DataManager.StatEffect effect)
         {
-            GameManager.Instance.AddPreviouslyRanEffect(effect);
+            BossGameManager.Instance.AddPreviouslyRanEffect(effect);
 
             if (effect.effectType == DataManager.StatModifierType.PlayerCurHealth)
             {
-                GameManager.Instance.TakePlayerRaidDamage(effect.amount);
+                BossGameManager.Instance.TakePlayerRaidDamage(effect.amount);
             }
             else if (effect.effectType == DataManager.StatModifierType.BossCurHealth)
             {
-                GameManager.Instance.DamageBoss(effect.amount);
+                BossGameManager.Instance.DamageBoss(effect.amount);
             }
             else if(effect.effectType == DataManager.StatModifierType.Timescale)
             {
-                GameManager.Instance.ModifyTimeScale(effect.amount);
+                BossGameManager.Instance.ModifyTimeScale(effect.amount);
             }
         }
     }

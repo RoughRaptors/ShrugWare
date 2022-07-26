@@ -181,7 +181,7 @@ namespace ShrugWare
         {
             if (selectedItem.item != null)
             {
-                PlayerInventory inventory = GameManager.Instance.GetPlayerInventory();
+                PlayerInventory inventory = BossGameManager.Instance.GetPlayerInventory();
                 if (inventory != null && inventory.GetCurrencyAmount(selectedItem.currency) >= selectedItem.price)
                 {
                     inventory.AddItemToInventory(selectedItem.item);
@@ -270,7 +270,7 @@ namespace ShrugWare
 
         public void UpdateCurrencies()
         {
-            PlayerInventory inventory = GameManager.Instance.GetPlayerInventory();
+            PlayerInventory inventory = BossGameManager.Instance.GetPlayerInventory();
             if (inventory != null)
             {
                 currenciesText.text = "Gold: " + inventory.GetCurrencyAmount(DataManager.Currencies.Generic).ToString();

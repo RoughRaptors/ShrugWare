@@ -124,7 +124,7 @@ namespace ShrugWare
         private void RecalculateStats()
         {
             curMitigationPercent = 0;
-            GameManager.Instance.ResetMaxHP();
+            BossGameManager.Instance.ResetMaxHP();
 
             if (HasSetBonus())
             {
@@ -140,9 +140,9 @@ namespace ShrugWare
                         }
                         else if (effect.effectType == DataManager.StatModifierType.PlayerMaxHealth)
                         {
-                            int effectAmount = (int)(GameManager.Instance.GetPlayerInfo().maxPlayerHealth * (effect.amount / 100.0f));
-                            GameManager.Instance.AddToMaxHP(effectAmount);
-                            GameManager.Instance.HealPlayerRaid(effectAmount);
+                            int effectAmount = (int)(BossGameManager.Instance.GetPlayerInfo().maxPlayerHealth * (effect.amount / 100.0f));
+                            BossGameManager.Instance.AddToMaxHP(effectAmount);
+                            BossGameManager.Instance.HealPlayerRaid(effectAmount);
                         }
                     }
                 }
@@ -198,8 +198,8 @@ namespace ShrugWare
                         }
 
                         AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.UsePotion, 0.4f);
-                        UIManager.Instance.UpdateConsumableInfo();
-                        GameManager.Instance.UpdateGameUI();
+                        BossUIManager.Instance.UpdateConsumableInfo();
+                        BossGameManager.Instance.UpdateGameUI();
                     }
                 }
             }

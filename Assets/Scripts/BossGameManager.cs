@@ -56,12 +56,12 @@ Steal The Chest - Collect the chest before your team members get it
 
 namespace ShrugWare
 {
-    public class GameManager : MonoBehaviour
+    public class BossGameManager : MonoBehaviour
     {
-        public static GameManager Instance;
+        public static BossGameManager Instance;
         
         [SerializeField]
-        private UIManager uiManager;
+        private BossUIManager bossUIManager;
 
         [SerializeField]
         private MerchantManager merchantManager;
@@ -115,10 +115,10 @@ namespace ShrugWare
 
         public enum GameState
         {
-            MainLoop = 0,
+            MainMicrogameLoop, // the top level of the boss loop hierarchy - in between games
             Paused,
-            Microgame,
-            Merchant
+            InMicrogame,
+            Merchant,
         }
 
         private GameState gameState = GameState.Paused;
@@ -138,14 +138,14 @@ namespace ShrugWare
                 Destroy(gameObject);
 
                 // set all of our shit back - figure out a better solution later if there is one - TODO MAKE THIS BETTER
-                curTimeScale = GameManager.Instance.curTimeScale;
-                gameRunning = GameManager.Instance.gameRunning;
-                playerInfo.livesLeft = GameManager.Instance.playerInfo.livesLeft;
+                curTimeScale = BossGameManager.Instance.curTimeScale;
+                gameRunning = BossGameManager.Instance.gameRunning;
+                playerInfo.livesLeft = BossGameManager.Instance.playerInfo.livesLeft;
                 timeInMainScene = 0.0f;
             }
             
             audioManager = GetComponent<AudioManager>();
-            curSceneIndex = (int)DataManager.Scenes.MainScene;
+            curSceneIndex = (int)DataManager.MicrogameScenes.BossScene;
 
             EventSystem sceneEventSystem = FindObjectOfType<EventSystem>();
             if (sceneEventSystem == null)
@@ -181,14 +181,14 @@ namespace ShrugWare
         {
             // we will come back here whenever we load back from a microgame to the main scene
             // we need to keep playing, which means to pick and start a new microgame from our raid and boss if we're not dead
-            if (gameRunning && curSceneIndex == (int)DataManager.Scenes.MainScene)
+            if (gameRunning && curSceneIndex == (int)DataManager.MicrogameScenes.BossScene)
             {
                 timeInMainScene += Time.deltaTime;
 
-                uiManager.UpdateBetweenMicrogameText();
+                bossUIManager.UpdateBetweenMicrogameText();
                 if (playerInfo.livesLeft > 0 && timeInMainScene >= DataManager.SECONDS_BETWEEN_MICROGAMES && !(curRaid is null) && !(curRaid.curBoss is null))
                 {
-                    DataManager.Scenes nextScene = curRaid.curBoss.PickNextMicrogame(); 
+                    DataManager.MicrogameScenes nextScene = curRaid.curBoss.PickNextMicrogame(); 
                     LoadScene((int)nextScene);
                 }
             }
@@ -206,13 +206,13 @@ namespace ShrugWare
         {
             UpdateGameUI();
             HandleFromMicrogameTransition();
-            GameManager.Instance.LoadScene((int)DataManager.Scenes.MainScene);
+            BossGameManager.Instance.LoadScene((int)DataManager.MicrogameScenes.BossScene);
         }
 
         private void HandleFromMicrogameTransition()
         {
-            gameState = GameState.MainLoop;
-            uiManager.SetMainCanvasEnabled(true);
+            gameState = GameState.MainMicrogameLoop;
+            bossUIManager.SetMainCanvasEnabled(true);
             audioManager.PlayAudioClip(DataManager.AudioEffectTypes.BetweenMicrogame, .3f);
             if (!(curRaid is null) && !(curRaid.curBoss is null))
             {
@@ -236,20 +236,20 @@ namespace ShrugWare
                 {
                     // pause the game and wait for the player to hit the continue button
                     PauseGame();
-                    uiManager.HandleWinGame();
+                    bossUIManager.HandleWinGame();
                 }
                 else
                 {
                     // boss is dead but raid is not complete, wait for the player to move on
                     PauseGame();
-                    uiManager.HandlePauseGame();
-                    uiManager.SetMerchantButtonActive(true);
+                    bossUIManager.HandlePauseGame();
+                    bossUIManager.SetMerchantButtonActive(true);
                 }
             }
             else if(playerInfo.livesLeft == 0)
             {
                 PauseGame();
-                uiManager.HandleGameOver();
+                bossUIManager.HandleGameOver();
             }
         }
 
@@ -257,12 +257,12 @@ namespace ShrugWare
         public void LoadScene(int sceneIndex)
         {
             bool mainCanvasEnabled = false;
-            if (sceneIndex == (int)DataManager.Scenes.MainScene)
+            if (sceneIndex == (int)DataManager.MicrogameScenes.BossScene)
             {
                 mainCanvasEnabled = true;
             }
 
-            uiManager.SetMainCanvasEnabled(mainCanvasEnabled);
+            bossUIManager.SetMainCanvasEnabled(mainCanvasEnabled);
             
             timeInMainScene = 0.0f;
 
@@ -311,9 +311,9 @@ namespace ShrugWare
 
         public void ContinueGame()
         {
-            gameState = GameState.MainLoop;
+            gameState = GameState.MainMicrogameLoop;
             gameRunning = true;
-            uiManager.ToggleConsumableVisibility(false);
+            bossUIManager.ToggleConsumableVisibility(false);
             audioManager.StopAudio();
         }
 
@@ -321,7 +321,7 @@ namespace ShrugWare
         {
             gameState = GameState.Paused;
             gameRunning = false;
-            uiManager.ToggleConsumableVisibility(true);
+            bossUIManager.ToggleConsumableVisibility(true);
         }
 
         public void EnterMerchant()
@@ -386,14 +386,14 @@ namespace ShrugWare
         {
             curTimeScale = newTimescale;
             Time.timeScale = curTimeScale;
-            uiManager.SetTimescaleInputFieldText("Time Scale: " + curTimeScale.ToString("F3"));
+            bossUIManager.SetTimescaleInputFieldText("Time Scale: " + curTimeScale.ToString("F3"));
         }
 
         public void ModifyTimeScale(float amount)
         {
             curTimeScale += amount;
             Time.timeScale = curTimeScale;
-            uiManager.SetTimescaleInputFieldText("Time Scale: " + curTimeScale.ToString("F3"));
+            bossUIManager.SetTimescaleInputFieldText("Time Scale: " + curTimeScale.ToString("F3"));
         }
 
         public Raid GetRaidAtIndex(int index)
@@ -423,8 +423,8 @@ namespace ShrugWare
 
         public void UpdateGameUI()
         {
-            uiManager.UpdateHealthBars();
-            uiManager.FillGameInfoText(curRaid, playerInfo);
+            bossUIManager.UpdateHealthBars();
+            bossUIManager.FillGameInfoText(curRaid, playerInfo);
         }
 
         public void UseConsumableItem(int templateId)

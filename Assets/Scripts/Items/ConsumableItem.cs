@@ -17,13 +17,13 @@ namespace ShrugWare
             {
                 if(effect.effectType == DataManager.StatModifierType.PlayerCurHealth)
                 {
-                    return GameManager.Instance.HealPlayerRaid((int)effect.amount);
+                    return BossGameManager.Instance.HealPlayerRaid((int)effect.amount);
                 }
                 else if (effect.effectType == DataManager.StatModifierType.PlayerMaxHealth)
                 {
                     float amount = (effect.amount * DataManager.PLAYER_MAX_HP) / 100.0f;
-                    GameManager.Instance.AddToMaxHP((int)amount);
-                    GameManager.Instance.HealPlayerRaid((int)amount);
+                    BossGameManager.Instance.AddToMaxHP((int)amount);
+                    BossGameManager.Instance.HealPlayerRaid((int)amount);
                     return true;
                 }
             }

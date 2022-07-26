@@ -61,8 +61,8 @@ namespace ShrugWare
             {
                 // we want to play the audio clip scaled based on the current timescale
                 // ie if timescale is 1.25, that's 25% faster
-                audioSourceMusic.pitch = GameManager.Instance.GetCurTimeScale();
-                audioSourceEffects.pitch = GameManager.Instance.GetCurTimeScale();
+                audioSourceMusic.pitch = BossGameManager.Instance.GetCurTimeScale();
+                audioSourceEffects.pitch = BossGameManager.Instance.GetCurTimeScale();
 
                 // if it's main menu music, use the audio source for music
                 if (audioEffectType == DataManager.AudioEffectTypes.MainMenu)
