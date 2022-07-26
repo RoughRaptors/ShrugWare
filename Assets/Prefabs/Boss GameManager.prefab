@@ -2282,7 +2282,6 @@ GameObject:
   - component: {fileID: 2301266168276219430}
   - component: {fileID: 2301266168276219429}
   - component: {fileID: 2301266168276219428}
-  - component: {fileID: 2301266168276219435}
   m_Layer: 0
   m_Name: Boss GameManager
   m_TagString: Untagged
@@ -2342,19 +2341,6 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 163ebe8ba7a04c34c8e861557f6d80ea, type: 3}
   - audioEffect: 4
     audioClip: {fileID: 8300000, guid: 683304f955c0ee341818181c327a561f, type: 3}
---- !u!114 &2301266168276219435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2301266168276219434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2d499ce0277aad47995365a64104dae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  curLevelText: {fileID: 0}
 --- !u!1 &2301266168306257812
 GameObject:
   m_ObjectHideFlags: 0
