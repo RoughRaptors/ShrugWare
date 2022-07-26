@@ -13,7 +13,7 @@ namespace ShrugWare
         public float maxHealth { get; set; }
 
         // the microgames associated with this boss
-        protected List<DataManager.Scenes> mechanics = new List<DataManager.Scenes>();
+        protected List<DataManager.MicrogameScenes> mechanics = new List<DataManager.MicrogameScenes>();
 
         protected abstract void PopulateMechanicsList();
 
@@ -26,7 +26,7 @@ namespace ShrugWare
             }
         }
 
-        public DataManager.Scenes PickNextMicrogame()
+        public DataManager.MicrogameScenes PickNextMicrogame()
         {
             if(mechanics.Count == 0)
             {
@@ -35,7 +35,7 @@ namespace ShrugWare
 
             // randomly grab one and remove it from our list
             int microgameSceneIndex = Random.Range(0, mechanics.Count); // exclusive max
-            DataManager.Scenes scene = mechanics[microgameSceneIndex];
+            DataManager.MicrogameScenes scene = mechanics[microgameSceneIndex];
             mechanics.RemoveAt(microgameSceneIndex);
 
             return scene;

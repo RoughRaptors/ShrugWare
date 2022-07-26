@@ -3,10 +3,10 @@ namespace ShrugWare
     public class DataManager
     {
         // KEEP IN SYNC WITH BUILD SETTINGS
-        public enum Scenes
+        public enum MicrogameScenes
         {
-            MainScene = 0, // DO NOT CHANGE THIS
-            GetOutOfFire = 1,
+            BossScene = 1, // DO NOT CHANGE THIS
+            GetOutOfFire,
             CastFrostbolt,
             TauntTheAdds,
             InterceptTheFireball,
@@ -21,7 +21,7 @@ namespace ShrugWare
             KnockbackedSafelty,
             MatchPolarity,
             StealTheChest,
-            MICROGAME_END = 15 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            MICROGAME_END = 16 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatModifierType
@@ -75,6 +75,16 @@ namespace ShrugWare
             UsePotion,
             MerchantPurchase,
             ButtonClick
+        }
+
+        public enum OverworldLevelType
+        {
+            Start = 0,
+            Tutorial,
+            End,
+            Merchant,
+            Trash,
+            Boss
         }
 
         public static float MICROGAME_DURATION_SECONDS = 3.5f; // we can override this in the child Microgame's Start() - microgameDurationRemaining

@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 namespace ShrugWare
 {
-    public class UIManager : MonoBehaviour
+    public class BossUIManager : MonoBehaviour
     {
-        public static UIManager Instance = null;
+        public static BossUIManager Instance = null;
 
         [SerializeField]
         InputField timeScaleInputField = null;
@@ -59,8 +59,8 @@ namespace ShrugWare
                 Destroy(gameObject);
 
                 // set all of our shit back - figure out a better solution later if there is one - TODO MAKE THIS BETTER
-                timeScaleInputField = UIManager.Instance.timeScaleInputField;
-                timeScaleInputField.text = "Time Scale: " + GameManager.Instance.GetCurTimeScale().ToString("F3");
+                timeScaleInputField = BossUIManager.Instance.timeScaleInputField;
+                timeScaleInputField.text = "Time Scale: " + BossGameManager.Instance.GetCurTimeScale().ToString("F3");
 
 #if !UNITY_EDITOR
                 // don't show this outside of the editor, it's debug
@@ -73,17 +73,17 @@ namespace ShrugWare
         void Start()
         {
             betweenMicrogameText.enabled = false;
-            timeScaleInputField.text = "Time Scale: " + GameManager.Instance.GetCurTimeScale().ToString("F3");
+            timeScaleInputField.text = "Time Scale: " + BossGameManager.Instance.GetCurTimeScale().ToString("F3");
             UpdateConsumableInfo();
         }
 
         public void UpdateBetweenMicrogameText()
         {
             betweenMicrogameText.enabled = true;
-            betweenMicrogameText.text = "Next Level In: " + (DataManager.SECONDS_BETWEEN_MICROGAMES - GameManager.Instance.GetTimeInMainScene()).ToString("F2") + "s";
-            if (GameManager.Instance.GetPreviouslyRanEffects().Count > 0)
+            betweenMicrogameText.text = "Next Level In: " + (DataManager.SECONDS_BETWEEN_MICROGAMES - BossGameManager.Instance.GetTimeInMainScene()).ToString("F2") + "s";
+            if (BossGameManager.Instance.GetPreviouslyRanEffects().Count > 0)
             {
-                betweenMicrogameText.text += "\n" + GameManager.Instance.GetPreviousEffectInfoString();
+                betweenMicrogameText.text += "\n" + BossGameManager.Instance.GetPreviousEffectInfoString();
             }
         }
 
@@ -91,15 +91,15 @@ namespace ShrugWare
         {
             float newTimeScale = 1.0f;
             float.TryParse(timeScaleInputField.text, out newTimeScale);
-            if (GameManager.Instance.GetCurTimeScale() != newTimeScale && newTimeScale != 0)
+            if (BossGameManager.Instance.GetCurTimeScale() != newTimeScale && newTimeScale != 0)
             {
-                GameManager.Instance.SetCurTimeScale(newTimeScale);
+                BossGameManager.Instance.SetCurTimeScale(newTimeScale);
             }
 
-            timeScaleInputField.text = "Time Scale: " + GameManager.Instance.GetCurTimeScale().ToString("F3");
+            timeScaleInputField.text = "Time Scale: " + BossGameManager.Instance.GetCurTimeScale().ToString("F3");
         }
 
-        public void FillGameInfoText(Raid curRaid, GameManager.PlayerInfo playerInfo)
+        public void FillGameInfoText(Raid curRaid, BossGameManager.PlayerInfo playerInfo)
         {
             if (!(curRaid is null) && !(curRaid.curBoss is null))
             {
@@ -141,7 +141,7 @@ namespace ShrugWare
             instructionsUIButton.SetActive(false);
 
             AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.ButtonClick);
-            GameManager.Instance.ContinueGame();
+            BossGameManager.Instance.ContinueGame();
         }
 
         public void HandleWinGame()
@@ -152,7 +152,7 @@ namespace ShrugWare
 
         public void HandlePauseGame()
         {
-            continueGameButton.GetComponentInChildren<Text>().text = "Continue to " + GameManager.Instance.GetCurRaid().curBoss.bossName;
+            continueGameButton.GetComponentInChildren<Text>().text = "Continue to " + BossGameManager.Instance.GetCurRaid().curBoss.bossName;
             continueGameButton.gameObject.SetActive(true);
             merchantButton.gameObject.SetActive(false);
         }
@@ -166,25 +166,25 @@ namespace ShrugWare
         public void OnMerchantButtonClicked()
         {
             // don't open the merchant if we're not ready/able to - todo change this to a proper game state when we add it
-            if (GameManager.Instance.GetGameState() == GameManager.GameState.Paused)
+            if (BossGameManager.Instance.GetGameState() == BossGameManager.GameState.Paused)
             {
                 mainUICanvas.SetActive(false);
                 merchantUICanvas.SetActive(true);
 
-                GameManager.Instance.EnterMerchant();
+                BossGameManager.Instance.EnterMerchant();
                 MerchantManager.Instance.UpdateCurrencies();
             }
         }
 
         public void OnExitMerchantClicked()
         {
-            GameManager.Instance.SetGameState(GameManager.GameState.Paused);
+            BossGameManager.Instance.SetGameState(BossGameManager.GameState.Paused);
             mainUICanvas.SetActive(true);
             merchantUICanvas.SetActive(false);
 
             UpdateConsumableInfo();
             AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.ButtonClick);
-            GameManager.Instance.UpdateGameUI();
+            BossGameManager.Instance.UpdateGameUI();
             MerchantManager.Instance.ExitMerchant();
         }
 
@@ -208,8 +208,8 @@ namespace ShrugWare
             healthPotionItem.GetComponentInChildren<Text>().text = "";
             maxHealthPotionItem.GetComponentInChildren<Text>().text = "";
 
-            Item healthPotion = GameManager.Instance.GetPlayerInventory().GetInventoryItem(0);
-            Item maxHealthPotion = GameManager.Instance.GetPlayerInventory().GetInventoryItem(1);
+            Item healthPotion = BossGameManager.Instance.GetPlayerInventory().GetInventoryItem(0);
+            Item maxHealthPotion = BossGameManager.Instance.GetPlayerInventory().GetInventoryItem(1);
             if(healthPotion != null)
             {
                 healthPotionItem.GetComponentInChildren<Text>().text += "Health Potion\n+25% Heal\nQuantity: " + healthPotion.itemQuantity;
@@ -229,7 +229,7 @@ namespace ShrugWare
 
         public void OnUseConsumableItemClicked(int templateId)
         {
-            GameManager.Instance.UseConsumableItem(templateId);
+            BossGameManager.Instance.UseConsumableItem(templateId);
         }
 
         public void OnInstructionsButtonClicked()
