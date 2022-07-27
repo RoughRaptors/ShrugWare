@@ -45,7 +45,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Raids/Daunting Inferno/InterruptTheAbility.unity
     guid: acfa2c51ef16cd64f883a0f96018ad5f
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/KnockbackedSafetly.unity
+    path: Assets/Scenes/Raids/Daunting Inferno/KnockbackedSafely.unity
     guid: c9be61a879ab05843b4aa0e73cac8bcf
   - enabled: 1
     path: Assets/Scenes/Raids/Daunting Inferno/MatchPolarity.unity
