@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +16,7 @@ namespace ShrugWare
 
         private bool inFire = true;
 
-        new private void Start()
+        protected override void Start()
         {
             base.Start();
 
@@ -67,10 +66,21 @@ namespace ShrugWare
                 {
                     microgameDurationRemaining -= Time.deltaTime;
                     base.Update();
-
                     HandleInput();
                 }
             }
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            PlayerCollider.OnBadExit += FireEscape;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            PlayerCollider.OnBadExit -= FireEscape;
         }
 
         // easier to make this a coroutine since Update() will keep trying to disable it (for now at least)
@@ -107,10 +117,9 @@ namespace ShrugWare
         }
 
         // once they're out, we don't care if they go back in
-        private void OnTriggerExit(Collider other)
+        private void FireEscape(GameObject fireObject)
         {
             inFire = false;
-
             instructionsText.gameObject.SetActive(true);
             instructionsText.text = "No noms for dargon";
         }

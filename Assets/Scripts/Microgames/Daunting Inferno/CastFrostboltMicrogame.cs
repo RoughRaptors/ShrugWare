@@ -33,7 +33,7 @@ namespace ShrugWare
 
         private bool castedFrostbolt = false;
 
-        new private void Start()
+        protected override void Start()
         {
             base.Start();
 

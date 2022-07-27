@@ -17,10 +17,7 @@ namespace ShrugWare
         GameObject meteorObject = null;
 
         [SerializeField]
-        GameObject groupMember1 = null;
-
-        [SerializeField]
-        GameObject groupMember2 = null;
+        GameObject[] groupMembers = new GameObject[0];
 
         private const float X_MIN = -65.0f;
         private const float X_MAX = 65.0f;
@@ -35,7 +32,7 @@ namespace ShrugWare
         private float timeRatio = 0;
         private Vector3 meteorStartPos;
 
-        new private void Start()
+        protected override void Start()
         {
             base.Start();
 
@@ -78,7 +75,7 @@ namespace ShrugWare
                     // out of time - we should have collided already, but maybe not
                     if (meteorObject.activeInHierarchy)
                     {
-                        HandleCollision();
+                        MeteorCheck(meteorObject);
                     }
 
                     HandleMicrogameEnd(stacked);
@@ -90,11 +87,11 @@ namespace ShrugWare
                         timeRatio += Time.deltaTime / DataManager.MICROGAME_DURATION_SECONDS;
                         meteorObject.transform.position = Vector3.Lerp(meteorStartPos, playerObject.transform.position, timeRatio);
 
-                        groupMember1.transform.position =
-                            Vector3.MoveTowards(groupMember1.transform.position, playerObject.transform.position, PLAYER_MOVE_SPEED * Time.deltaTime);
-
-                        groupMember2.transform.position =
-                            Vector3.MoveTowards(groupMember2.transform.position, playerObject.transform.position, PLAYER_MOVE_SPEED * Time.deltaTime);
+                        foreach(GameObject groupMember in groupMembers)
+                        {
+                            groupMember.transform.position =
+                                Vector3.MoveTowards(groupMember.transform.position, playerObject.transform.position, PLAYER_MOVE_SPEED * Time.deltaTime);
+                        }
 
                         HandleInput();
                     }
@@ -103,6 +100,18 @@ namespace ShrugWare
                     base.Update();
                 }
             }
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            PlayerCollider.OnBadCollision += MeteorCheck;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            PlayerCollider.OnBadCollision -= MeteorCheck;
         }
 
         private void HandleInput()
@@ -145,31 +154,29 @@ namespace ShrugWare
             instructionsText.gameObject.SetActive(false);
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void MeteorCheck(GameObject meteor)
         {
-            if (other.gameObject == meteorObject)
-            {
-                HandleCollision();
-            }
-        }
-
-        private void HandleCollision()
-        {
+            bool fail = false;
             // be lazy, check member distance from player instead of if the meteor is colliding with all 3 objects
-            float member1DistanceFromPlayer = Vector3.Distance(groupMember1.transform.position, playerObject.transform.position);
-            float member2DistanceFromPlayer = Vector3.Distance(groupMember2.transform.position, playerObject.transform.position);
-            if (member1DistanceFromPlayer < DISTANCE_FOR_VALID_STACK && member2DistanceFromPlayer < DISTANCE_FOR_VALID_STACK)
+            foreach(GameObject member in groupMembers)
+            {
+                float memberDistance = Vector3.Distance(member.transform.position, playerObject.transform.position);
+                if (memberDistance < DISTANCE_FOR_VALID_STACK) continue;
+                fail = true;
+                break;
+            }
+
+            if(fail)
+            {
+                instructionsText.text = "Boom";
+            }
+            else
             {
                 stacked = true;
                 instructionsText.text = "On point";
             }
-            else
-            {
-                instructionsText.text = "Boom";
-            }
 
             instructionsText.gameObject.SetActive(true);
-
             meteorObject.SetActive(false);
         }
     }

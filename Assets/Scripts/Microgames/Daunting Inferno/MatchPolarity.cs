@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -83,7 +82,7 @@ namespace ShrugWare
                     // out of time - we should have collided already, but maybe not
                     if (eletricityObj.activeInHierarchy)
                     {
-                        HandleCollision();
+                        ElectricHit(eletricityObj);
                     }
 
                     HandleMicrogameEnd(polarityMatched);
@@ -98,6 +97,22 @@ namespace ShrugWare
                     HandleInput();
                 }
             }
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            PlayerCollider.OnGoodCollision += EnterField;
+            PlayerCollider.OnBadCollision += ElectricHit;
+            PlayerCollider.OnGoodExit += ExitField;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            PlayerCollider.OnGoodCollision -= EnterField;
+            PlayerCollider.OnBadCollision -= ElectricHit;
+            PlayerCollider.OnGoodExit -= ExitField;
         }
 
         private void HandleInput()
@@ -160,28 +175,22 @@ namespace ShrugWare
             }
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void EnterField(GameObject electricField)
         {
-            if (other.gameObject == eletricityObj)
-            {
-                HandleCollision();
-            }
-            else if(playerPositive && other.gameObject == positiveGroupObj
-                || (!playerPositive && other.gameObject == negativeGroupObj))
+            bool isNegative = electricField != positiveGroupObj;
+
+            if(isNegative ^ playerPositive)
             {
                 polarityMatched = true;
             }
         }
 
-        private void OnTriggerExit(Collider other)
+        private void ExitField(GameObject electricField)
         {
-            if(other.gameObject == negativeGroupObj)
-            {
-                polarityMatched = false;
-            }
+            polarityMatched = false;
         }
 
-        private void HandleCollision()
+        private void ElectricHit(GameObject electric)
         {
             if (polarityMatched)
             {

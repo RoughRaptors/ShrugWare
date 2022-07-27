@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3598132001379640907}
   - component: {fileID: 3598132001379640906}
   - component: {fileID: 3598132001379640905}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Powerstone
   m_TagString: Untagged
   m_Icon: {fileID: 0}

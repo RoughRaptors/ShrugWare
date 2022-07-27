@@ -24,6 +24,9 @@ namespace ShrugWare
         // temp hack to allow for a brief pause in between microgame timers running out
         private bool hasRunEndCondition = false;
 
+
+        protected virtual void Awake() { }
+
         protected void Update()
         {
             // if we're debugging a single scene, we don't have a GameManager
@@ -36,7 +39,7 @@ namespace ShrugWare
             timerObj.GetComponent<Slider>().value = microgameDurationRemaining / totalMicrogameTime;
         }
 
-        protected void Start()
+        protected virtual void Start()
         {
             BossGameManager.Instance.SetGameState(BossGameManager.GameState.InMicrogame);
             microgameDurationRemaining = DataManager.MICROGAME_DURATION_SECONDS;
@@ -47,6 +50,9 @@ namespace ShrugWare
                 Time.timeScale = BossGameManager.Instance.GetCurTimeScale();
             }
         }
+
+        protected virtual void OnEnable() { }
+        protected virtual void OnDisable() { }
 
         protected void HandleMicrogameEnd(bool wonMicrogame)
         {

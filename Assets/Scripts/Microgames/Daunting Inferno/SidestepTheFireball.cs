@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,11 +25,11 @@ namespace ShrugWare
         private const float FIREBALL_MOVE_SPEED = 30.0f;
         private const float PLAYER_MOVE_SPEED = 11.0f;
 
-        new private void Start()
+        protected override void Start()
         {
             base.Start();
 
-            playerObject.transform.GetChild(0).gameObject.SetActive(true);
+            playerObject.SetActive(true);
 
             DataManager.StatEffect damagePlayerEffect = new DataManager.StatEffect();
             damagePlayerEffect.effectType = DataManager.StatModifierType.PlayerCurHealth;
@@ -86,6 +85,18 @@ namespace ShrugWare
             }
         }
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            PlayerCollider.OnBadCollision += FireballHit;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            PlayerCollider.OnBadCollision -= FireballHit;
+        }
+
         private void HandleInput()
         {
             if (!intercepted)
@@ -112,15 +123,11 @@ namespace ShrugWare
             instructionsText.gameObject.SetActive(false);
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void FireballHit(GameObject fireball)
         {
-            if (other.gameObject == fireballObject)
-            {
-                playerObject.transform.GetChild(0).gameObject.SetActive(false);
-
-                instructionsText.gameObject.SetActive(true);
-                instructionsText.text = "Be faster";
-            }
+            playerObject.SetActive(false);
+            instructionsText.gameObject.SetActive(true);
+            instructionsText.text = "Be faster";
         }
     }
 }

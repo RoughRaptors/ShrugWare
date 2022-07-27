@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +17,7 @@ namespace ShrugWare
 
         // take some time to spawn to make it challenging
         private bool interrupted = false;
+        private bool tooSoon = false;
         private float castDelay = 0.0f;
 
         new private void Start()
@@ -61,7 +61,7 @@ namespace ShrugWare
                 if (microgameDurationRemaining <= 0.0f)
                 {
                     // out of time
-                    if (!interrupted)
+                    if (!interrupted && !tooSoon)
                     {
                         instructionsText.gameObject.SetActive(true);
                         instructionsText.text = "Clicker";
@@ -105,6 +105,7 @@ namespace ShrugWare
             {
                 instructionsText.gameObject.SetActive(true);
                 instructionsText.text = "Too soon";
+                tooSoon = true;
             }
             else
             {

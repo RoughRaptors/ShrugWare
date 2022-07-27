@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,13 +13,7 @@ namespace ShrugWare
         GameObject playerObject = null;
 
         [SerializeField]
-        GameObject fireballObject1 = null;
-
-        [SerializeField]
-        GameObject fireballObject2 = null;
-
-        [SerializeField]
-        GameObject fireballObject3 = null;
+        GameObject[] fireballs = new GameObject[0];
 
         private bool intercepted = false;
 
@@ -29,14 +22,23 @@ namespace ShrugWare
         private const float Y_MIN = -30.0f;
         private const float Y_MAX = 0.0f;
 
-        private const float FIREBALL_MOVE_SPEED = 60.0f;
-        private const float PLAYER_MOVE_SPEED = 10.0f;
+        [SerializeField] private float FIREBALL_MOVE_SPEED = 60.0f;
+        [SerializeField] private float PLAYER_MOVE_SPEED = 10.0f;
+        [SerializeField] private float minPlayerStartPos = -40f;
+        [SerializeField] private float maxPlayerStartPos = 15f;
 
-        new private void Start()
+
+        protected override void Awake()
+        {
+            base.Awake();
+            playerObject.transform.position = new Vector2(playerObject.transform.position.x, Random.Range(minPlayerStartPos, maxPlayerStartPos));
+        }
+
+        protected override void Start()
         {
             base.Start();
 
-            playerObject.transform.GetChild(0).gameObject.SetActive(true);
+            playerObject.SetActive(true);
 
             DataManager.StatEffect damagePlayerEffect = new DataManager.StatEffect();
             damagePlayerEffect.effectType = DataManager.StatModifierType.PlayerCurHealth;
@@ -82,23 +84,30 @@ namespace ShrugWare
                 }
                 else
                 {
-                    fireballObject1.transform.position = 
-                        Vector3.MoveTowards(fireballObject1.transform.position, new Vector3(-100, fireballObject1.transform.position.y, 0),
+                    foreach(GameObject fireball in fireballs)
+                    {
+                        fireball.transform.position = 
+                        Vector3.MoveTowards(fireball.transform.position, new Vector3(-100, fireball.transform.position.y, 0),
                         FIREBALL_MOVE_SPEED * (Random.Range(1, 1.5f) * Time.deltaTime));
-
-                    fireballObject2.transform.position =
-                        Vector3.MoveTowards(fireballObject2.transform.position, new Vector3(-100, fireballObject2.transform.position.y, 0),
-                        FIREBALL_MOVE_SPEED * (Random.Range(1, 1.5f) * Time.deltaTime));
-
-                    fireballObject3.transform.position =
-                        Vector3.MoveTowards(fireballObject3.transform.position, new Vector3(-100, fireballObject3.transform.position.y, 0),
-                        FIREBALL_MOVE_SPEED * (Random.Range(1, 1.5f) * Time.deltaTime));
+                    }
 
                     microgameDurationRemaining -= Time.deltaTime;
                     base.Update();
                     HandleInput();
                 }
             }
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            PlayerCollider.OnAnyCollision += PlayerCollision;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            PlayerCollider.OnAnyCollision -= PlayerCollision;
         }
 
         private void HandleInput()
@@ -115,7 +124,8 @@ namespace ShrugWare
                 {
                     newPos.y -= PLAYER_MOVE_SPEED * Time.deltaTime;
                 }
-
+                
+                newPos.y = Mathf.Clamp(newPos.y, minPlayerStartPos, maxPlayerStartPos);
                 playerObject.transform.position = newPos;
             }
         }
@@ -127,10 +137,9 @@ namespace ShrugWare
             instructionsText.gameObject.SetActive(false);
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void PlayerCollision(GameObject fireball)
         {
-            playerObject.transform.GetChild(0).gameObject.SetActive(false);
-
+            playerObject.SetActive(false);
             instructionsText.gameObject.SetActive(true);
             instructionsText.text = "Like a leaf on the wind";
         }
