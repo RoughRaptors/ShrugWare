@@ -12,6 +12,10 @@ public class PlayerCollider : MonoBehaviour
     public static event Action<GameObject> OnBadCollision;
     public static event Action<GameObject> OnAnyCollision;
 
+    public static event Action<GameObject> OnGoodExit;
+    public static event Action<GameObject> OnBadExit;
+    public static event Action<GameObject> OnAnyExit;
+
     private void OnTriggerEnter(Collider other)
     {
         OnAnyCollision?.Invoke(other.gameObject);
@@ -23,6 +27,20 @@ public class PlayerCollider : MonoBehaviour
         else if(badMasks.HasLayer(other.gameObject.layer))
         {
             OnBadCollision?.Invoke(other.gameObject);
+        }
+    }
+
+    private void OnTriggerExit(Collider other) 
+    {
+        OnAnyExit?.Invoke(other.gameObject);
+
+        if(goodMasks.HasLayer(other.gameObject.layer))
+        {
+            OnGoodExit?.Invoke(other.gameObject);
+        }
+        else if(badMasks.HasLayer(other.gameObject.layer))
+        {
+            OnBadExit?.Invoke(other.gameObject);
         }
     }
 }

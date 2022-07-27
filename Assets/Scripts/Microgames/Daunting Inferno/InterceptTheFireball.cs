@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +28,7 @@ namespace ShrugWare
         private const float FIREBALL_MOVE_SPEED = 15.0f;
         private const float PLAYER_MOVE_SPEED = 15.0f;
 
-        new private void Start()
+        protected override void Start()
         {
             base.Start();
 
@@ -89,6 +88,18 @@ namespace ShrugWare
             }
         }
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            PlayerCollider.OnBadCollision += FireballHit;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            PlayerCollider.OnBadCollision -= FireballHit;
+        }
+
         private void HandleInput()
         {
             if (!intercepted)
@@ -132,17 +143,12 @@ namespace ShrugWare
             instructionsText.gameObject.SetActive(false);
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void FireballHit(GameObject fireball)
         {
-            if (other.gameObject == fireballObject)
-            {
-                intercepted = true;
-
-                instructionsText.gameObject.SetActive(true);
-                instructionsText.text = "Good tank";
-
-                fireballObject.SetActive(false);
-            }
+            intercepted = true;
+            instructionsText.gameObject.SetActive(true);
+            instructionsText.text = "Good tank";
+            fireballObject.SetActive(false);
         }
     }
 }

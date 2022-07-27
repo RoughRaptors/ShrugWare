@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +26,7 @@ namespace ShrugWare
 
         private const float PLAYER_MOVE_SPEED = 15.0f;
 
-        new private void Start()
+        protected override void Start()
         {
             base.Start();
 
@@ -82,9 +81,22 @@ namespace ShrugWare
                         playerObject.transform.position.x - arrowObj.transform.position.x);
 
                     float angleDeg = (180 / Mathf.PI) * angleRad;
+                    // arrowObj.transform.LookAt(playerObject.transform, Vector3.up);
                     arrowObj.transform.rotation = Quaternion.Euler(0, 0, angleDeg);
                 }
             }
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            PlayerCollider.OnGoodCollision += EnterSafeZone;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            PlayerCollider.OnGoodCollision -= EnterSafeZone;
         }
 
         private void SetupSafeZone()
@@ -155,18 +167,13 @@ namespace ShrugWare
             arrowObj.SetActive(false);
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void EnterSafeZone(GameObject safeZone)
         {
-            if (other.gameObject == safeZoneObj)
-            {
-                instructionsText.gameObject.SetActive(true);
-                instructionsText.text = "Wheeeee!";
-
-                inSafeZone = true;
-
-                playerObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                playerObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-            }
+            instructionsText.gameObject.SetActive(true);
+            instructionsText.text = "Wheeeee!";
+            inSafeZone = true;
+            playerObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            playerObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         }
     }
 }

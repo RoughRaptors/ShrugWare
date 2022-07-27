@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,7 +31,7 @@ namespace ShrugWare
 
         private List<RotationMapping> rotation = new List<RotationMapping>();
 
-        new private void Start()
+        protected override void Start()
         {
             base.Start();
 

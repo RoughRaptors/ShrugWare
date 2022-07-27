@@ -29,7 +29,8 @@ namespace ShrugWare
         private float timeRatio = 0;
         private Vector3 meteorStartPos;
 
-        new private void Start()
+
+        protected override void Start()
         {
             base.Start();
 
@@ -73,7 +74,7 @@ namespace ShrugWare
                     // out of time - we should have collided already, but maybe not
                     if (meteorObject.activeInHierarchy)
                     {
-                        HandleCollision();
+                        EqualCheck(meteorObject);
                     }
 
                     HandleMicrogameEnd(stackedEqually);
@@ -116,6 +117,22 @@ namespace ShrugWare
             playerObject.transform.position = newPos;
         }
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            PlayerCollider.OnGoodCollision += MakeEqual;
+            PlayerCollider.OnBadCollision += EqualCheck;
+            PlayerCollider.OnGoodExit += BreakEqual;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            PlayerCollider.OnGoodCollision -= MakeEqual;
+            PlayerCollider.OnBadCollision -= EqualCheck;
+            PlayerCollider.OnGoodExit -= BreakEqual;
+        }
+
         // easier to make this a coroutine since Update() will keep trying to disable it (for now at least)
         IEnumerator DisableInstructionsText()
         {
@@ -144,7 +161,7 @@ namespace ShrugWare
         {
             if (other.gameObject == meteorObject)
             {
-                HandleCollision();
+                EqualCheck(meteorObject);
             }
             else if(other.gameObject == groupOfTwoObj)
             {
@@ -152,15 +169,17 @@ namespace ShrugWare
             }
         }
 
-        private void OnTriggerExit(Collider other)
+        private void MakeEqual(GameObject members)
         {
-            if(other.gameObject == groupOfTwoObj)
-            {
-                stackedEqually = false;
-            }
+            stackedEqually = true;
         }
 
-        private void HandleCollision()
+        private void BreakEqual(GameObject members)
+        {
+            stackedEqually = false;
+        }
+
+        private void EqualCheck(GameObject meteor)
         {
             if (stackedEqually)
             {
@@ -173,7 +192,6 @@ namespace ShrugWare
             }
 
             instructionsText.gameObject.SetActive(true);
-
             meteorObject.SetActive(false);
         }
     }
