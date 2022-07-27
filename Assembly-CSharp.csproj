@@ -72,6 +72,9 @@
      <Compile Include="Assets\Scripts\DataManager.cs" />
      <Compile Include="Assets\Scripts\PlayerInventory.cs" />
      <Compile Include="Assets\Scripts\AudioEffectClip.cs" />
+     <Compile Include="Assets\Scripts\PlayerCollider.cs" />
+     <Compile Include="Assets\Scripts\Extensions\JZLayerExtensions.cs" />
+     <Compile Include="Assets\Scripts\Extensions\JZVectorExtensions.cs" />
      <None Include="Assets\Art\Lightning Bolt\Readme.txt" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.13f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>

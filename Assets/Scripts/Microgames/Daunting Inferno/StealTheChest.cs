@@ -17,17 +17,8 @@ namespace ShrugWare
         GameObject chestObj = null;
 
         [SerializeField]
-        GameObject groupMember1Obj = null;
-
-        [SerializeField]
-        GameObject groupMember2Obj = null;
-
-        [SerializeField]
-        GameObject groupMember3Obj = null;
-
-        private Vector2 groupMember1StartPos = new Vector2(-80, -40);
-        private Vector2 groupMember2StartPos = new Vector2(0, -25);
-        private Vector2 groupMember3StartPos = new Vector2(80, -40);
+        GameObject[] groupMembers = new GameObject[0];
+        Dictionary<GameObject, Vector3> startPositions = new Dictionary<GameObject, Vector3>();
 
         private const float X_MIN = -75.0f;
         private const float X_MAX = 75.0f;
@@ -43,7 +34,16 @@ namespace ShrugWare
 
         private float timeRatio = 0;
 
-        new private void Start()
+        protected override void Awake()
+        {
+            base.Awake();
+            foreach(GameObject member in groupMembers)
+            {
+                startPositions.Add(member, member.transform.position);
+            }
+        }
+
+        protected override void Start()
         {
             base.Start();
 
@@ -102,6 +102,18 @@ namespace ShrugWare
                     }
                 }
             }
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            PlayerCollider.OnGoodCollision += ChestHit;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            PlayerCollider.OnGoodCollision -= ChestHit;
         }
 
         private void HandleInput()
@@ -163,24 +175,20 @@ namespace ShrugWare
         private void MoveGroupMembers()
         {
             timeRatio += Time.deltaTime / DataManager.MICROGAME_DURATION_SECONDS;
-
-            groupMember1Obj.transform.position = Vector3.Lerp(groupMember1StartPos, chestObj.transform.position, timeRatio);
-            groupMember2Obj.transform.position = Vector3.Lerp(groupMember2StartPos, chestObj.transform.position, timeRatio);
-            groupMember3Obj.transform.position = Vector3.Lerp(groupMember3StartPos, chestObj.transform.position, timeRatio);
+            foreach(GameObject member in groupMembers)
+            {
+                member.transform.position = Vector3.Lerp(startPositions[member], chestObj.transform.position, timeRatio);
+            }
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void ChestHit(GameObject chest)
         {
-            if(other.gameObject == chestObj)
+            lootStolen = true;
+            instructionsText.text = "NINJAED!";
+            instructionsText.gameObject.SetActive(true);
+            foreach(GameObject member in groupMembers)
             {
-                lootStolen = true;
-
-                instructionsText.text = "NINJAED!";
-                instructionsText.gameObject.SetActive(true);
-
-                groupMember1Obj.SetActive(false);
-                groupMember2Obj.SetActive(false);
-                groupMember3Obj.SetActive(false);
+                member.SetActive(false);
             }
         }
     }

@@ -11,10 +11,9 @@ namespace ShrugWare
         Text instructionsText = null;
 
         [SerializeField]
-        GameObject enemy1 = null;
-
-        [SerializeField]
-        GameObject enemy2 = null;
+        GameObject[] enemies = new GameObject[0];
+        Dictionary<GameObject, Vector3> enemyTargetPositions = new Dictionary<GameObject, Vector3>();
+        Dictionary<GameObject, bool> enemiesTaunted = new Dictionary<GameObject, bool>();
 
         bool won = false;
 
@@ -25,13 +24,17 @@ namespace ShrugWare
         private const float Y_MIN = 0.70f;
         private const float Y_MAX = 1.70f;
 
-        private bool enemy1Taunted = false;
-        private bool enemy2Taunted = false;
+        protected override void Awake()
+        {
+            base.Awake();
 
-        private Vector3 enemy1TargetPos;
-        private Vector3 enemy2TargetPos;
+            for(int ii = 0; ii < enemies.Length; ii++)
+            {
+                SetupEnemy(ii);
+            }
+        }
 
-        new private void Start()
+        protected override void Start()
         {
             base.Start();
 
@@ -56,8 +59,6 @@ namespace ShrugWare
             lossEffects.Add(damagePlayerEffect);
             lossEffects.Add(timeScaleEffect);
 
-            SetupEnemies();
-
             StartCoroutine(DisableInstructionsText());
         }
 
@@ -81,10 +82,10 @@ namespace ShrugWare
                 }
                 else
                 {
-                    // move towards the target point
-                    enemy1.transform.position = Vector3.MoveTowards(enemy1.transform.position, enemy1TargetPos, ENEMY_MOVE_SPEED * Time.deltaTime);
-
-                    enemy2.transform.position = Vector3.MoveTowards(enemy2.transform.position, enemy2TargetPos, ENEMY_MOVE_SPEED * Time.deltaTime);
+                    foreach(GameObject enemy in enemies)
+                    {
+                        enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, enemyTargetPositions[enemy], ENEMY_MOVE_SPEED * Time.deltaTime);
+                    }
 
                     microgameDurationRemaining -= Time.deltaTime;
                     base.Update();
@@ -93,55 +94,35 @@ namespace ShrugWare
             }
         }
 
-        private void SetupEnemies()
+        private void SetupEnemy(int index)
         {
             // try 100 times to get a far enough position away from its spawn
             int numTries = 0;
+            GameObject enemy = enemies[index];
+            enemiesTaunted.Add(enemy, false);
 
             // enemy 1
             while (numTries < 100)
             {
                 ++numTries;
 
-                float enemy1XPos = Random.Range(X_MIN, X_MAX);
-                float enemy1YPos = Random.Range(Y_MIN, Y_MAX);
-                Vector3 enemy1Pos = new Vector3(enemy1XPos, enemy1YPos, 4.0f);
+                float enemyXPos = Random.Range(X_MIN, X_MAX);
+                float enemyYPos = Random.Range(Y_MIN, Y_MAX);
+                Vector3 enemyPos = new Vector3(enemyXPos, enemyYPos, 4.0f);
 
-                float enemy1TargetXPos = Random.Range(X_MIN, X_MAX);
-                float enemy1TargetYPos = Random.Range(Y_MIN, Y_MAX);
-                enemy1TargetPos = new Vector3(enemy1TargetXPos, enemy1TargetYPos, 4.0f);
+                float enemyTargetXPos = Random.Range(X_MIN, X_MAX);
+                float enemyTargetYPos = Random.Range(Y_MIN, Y_MAX);
+                Vector3 targetPos = new Vector3(enemyTargetXPos, enemyTargetYPos, 4.0f);
 
-                if (Vector3.Distance(enemy1Pos, enemy1TargetPos) < 3.0f)
+                if (Vector3.Distance(enemyPos, targetPos) < 3.0f)
                 {
-                    enemy1.transform.position = enemy1Pos;
+                    enemy.transform.position = enemyPos;
+                    enemyTargetPositions.Add(enemy, targetPos);
                     break;
                 }
+
+                enemy.SetActive(false);
             }
-
-            // enemy 2
-            numTries = 0;
-            while (numTries < 100)
-            {
-                ++numTries;
-
-                float enemy2XPos = Random.Range(X_MIN, X_MAX);
-                float enemy2YPos = Random.Range(Y_MIN, Y_MAX);
-                Vector3 enemy2Pos = new Vector3(enemy2XPos, enemy2YPos, 4.0f);
-                enemy2.transform.position = enemy2Pos;
-
-                float enemy2TargetXPos = Random.Range(X_MIN, X_MAX);
-                float enemy2TargetYPos = Random.Range(Y_MIN, Y_MAX);
-                enemy2TargetPos = new Vector3(enemy2TargetXPos, enemy2TargetYPos, 4.0f);
-
-                if (Vector3.Distance(enemy2Pos, enemy2TargetPos) > 3.0f)
-                {
-                    enemy2.transform.position = enemy2Pos;
-                    break;
-                }
-            }
-
-            enemy1.SetActive(false);
-            enemy2.SetActive(false);
         }
 
         private void HandleInput()
@@ -152,22 +133,17 @@ namespace ShrugWare
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit))
                 {
-                    //Select stage    
-                    if (hit.transform.gameObject == enemy1)
+                    foreach(GameObject enemy in enemies)
                     {
-                        enemy1Taunted = true;
-                        //enemy1.GetComponent<MeshRenderer>().material.color = Color.green;
-                        enemy1.GetComponentInChildren<SkinnedMeshRenderer>().material.color = Color.green;
-                    }
-                    else if(hit.transform.gameObject == enemy2)
-                    {
-                        enemy2Taunted = true;
-                        //enemy2.GetComponent<MeshRenderer>().material.color = Color.green;
-                        enemy2.GetComponentInChildren<SkinnedMeshRenderer>().material.color = Color.green;
+                        if(hit.transform.gameObject == enemy)
+                        {
+                            enemiesTaunted[enemy] = true;
+                            enemy.GetComponentInChildren<SkinnedMeshRenderer>().material.color = Color.green;
+                        }
                     }
                 }
                
-                if(enemy1Taunted && enemy2Taunted)
+                if(!enemiesTaunted.ContainsValue(false))
                 {
                     won = true;
 
@@ -182,8 +158,8 @@ namespace ShrugWare
         {
             yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
             instructionsText.gameObject.SetActive(false);
-            enemy1.SetActive(true);
-            enemy2.SetActive(true);
+            foreach(GameObject enemy in enemies)
+                enemy.SetActive(true);
         }
     }
 }

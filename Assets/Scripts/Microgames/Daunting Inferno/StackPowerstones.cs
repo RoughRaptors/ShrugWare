@@ -28,7 +28,7 @@ namespace ShrugWare
 
         private List<GameObject> powerstones = new List<GameObject>();
 
-        new private void Start()
+        protected override void Start()
         {
             base.Start();
 
@@ -94,6 +94,18 @@ namespace ShrugWare
             }
         }
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            PlayerCollider.OnGoodCollision += CollectStone;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            PlayerCollider.OnGoodCollision -= CollectStone;
+        }
+
         private void SpawnPowerstones()
         {
             for (int i = 0; i < NUM_POWERSTONES_TOTAL; ++i)
@@ -153,9 +165,9 @@ namespace ShrugWare
             playerObject.transform.position = newPos;
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void CollectStone(GameObject stone)
         {
-            other.gameObject.SetActive(false);
+            stone.SetActive(false);
 
             if (++numPowerstonesCollected == NUM_POWERSTONES_TOTAL)
             {
