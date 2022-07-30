@@ -43,7 +43,7 @@
      <Compile Include="Assets\Scripts\Bosses\Warboss Kard.cs" />
      <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\TauntTheAdds.cs" />
      <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\MatchPolarity.cs" />
-     <Compile Include="Assets\Scripts\Extensions\JZVectorExtensions.cs" />
+     <Compile Include="Assets\Stuff from jzucc\JZVectorExtensions.cs" />
      <Compile Include="Assets\Scripts\Bosses\Boss.cs" />
      <Compile Include="Assets\Scripts\UI\BossUIManager.cs" />
      <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\DodgeTheFireballPattern.cs" />
@@ -69,7 +69,7 @@
      <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterruptTheAbility.cs" />
      <Compile Include="Assets\Scripts\Merchants\MerchantManager.cs" />
      <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
-     <Compile Include="Assets\Scripts\Extensions\JZLayerExtensions.cs" />
+     <Compile Include="Assets\Stuff from jzucc\JZLayerExtensions.cs" />
      <Compile Include="Assets\Art\Fire\Scripts\VolumetricFire.cs" />
      <Compile Include="Assets\Art\Progress Bars\Scripts\SliderScripts.cs" />
      <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StealTheChest.cs" />
@@ -77,7 +77,18 @@
      <Compile Include="Assets\Scripts\Items\ArmorItem.cs" />
      <Compile Include="Assets\Scripts\DataManager.cs" />
      <Compile Include="Assets\Scripts\PlayerInventory.cs" />
+     <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\SceneTransitioner.cs" />
+     <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\AdditiveHelpers.cs" />
+     <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\SceneTransitionData.cs" />
+     <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\AnimType.cs" />
+     <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\TransitionAnimation.cs" />
+     <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\Buttons\ReloadSceneButton.cs" />
+     <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\Buttons\LoadNextLevelButton.cs" />
+     <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\Buttons\SceneButtonFunction.cs" />
+     <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\Buttons\SceneChangeButton.cs" />
+     <Compile Include="Assets\Stuff from jzucc\JZSceneHelpers.cs" />
      <None Include="Assets\Art\Lightning Bolt\Readme.txt" />
+     <None Include="Assets\Stuff from jzucc\Scene Package\ReadMe.txt" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.6f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
