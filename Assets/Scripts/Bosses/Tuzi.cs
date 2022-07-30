@@ -18,9 +18,9 @@ namespace ShrugWare
 
         protected override void PopulateMechanicsList()
         {
-            for (int sceneIndex = (int)DataManager.MicrogameScenes.BossScene + 1; sceneIndex <= (int)DataManager.MicrogameScenes.MICROGAME_END; ++sceneIndex)
+            for (int sceneIndex = (int)DataManager.Scenes.BossScene + 1; sceneIndex <= (int)DataManager.Scenes.MICROGAME_END; ++sceneIndex)
             {
-                mechanics.Add((DataManager.MicrogameScenes)sceneIndex);
+                mechanics.Add((DataManager.Scenes)sceneIndex);
             }
         }
     }

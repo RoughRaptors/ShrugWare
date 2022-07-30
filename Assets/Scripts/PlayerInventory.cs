@@ -121,8 +121,13 @@ namespace ShrugWare
             }
         }
 
-        private void RecalculateStats()
+        public void RecalculateStats()
         {
+            if(BossGameManager.Instance == null)
+            {
+                return;
+            }
+
             curMitigationPercent = 0;
             BossGameManager.Instance.ResetMaxHP();
 
