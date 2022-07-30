@@ -3,10 +3,15 @@ namespace ShrugWare
     public class DataManager
     {
         // KEEP IN SYNC WITH BUILD SETTINGS
-        public enum MicrogameScenes
+        [System.Serializable]
+        public enum Scenes
         {
-            BossScene = 1, // DO NOT CHANGE THIS
-            GetOutOfFire,
+            Overworld = 0,
+            TutorialScene,
+            MerchantScene,
+            BossScene, 
+            MICROGAME_START = 4, // KEEP IN SYNC
+            GetOutOfFire = 4,    // KEEP IN SYNC
             CastFrostbolt,
             TauntTheAdds,
             InterceptTheFireball,
@@ -21,7 +26,7 @@ namespace ShrugWare
             KnockbackedSafelty,
             MatchPolarity,
             StealTheChest,
-            MICROGAME_END = 16 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            MICROGAME_END = 18,// PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatModifierType

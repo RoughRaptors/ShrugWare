@@ -63,9 +63,6 @@ namespace ShrugWare
         [SerializeField]
         private BossUIManager bossUIManager;
 
-        [SerializeField]
-        private MerchantManager merchantManager;
-
         private AudioManager audioManager;
 
         private float curTimeScale = 1.0f;
@@ -81,6 +78,8 @@ namespace ShrugWare
         // for now until we find something better, hold this so we know when to transition to our next microgame - TODO MAKE THIS BETTER
         private float timeInMainScene = 0.0f;
         public float GetTimeInMainScene() { return timeInMainScene; }
+
+        PlayerInventory playerInventory;
 
         public struct PlayerInfo
         {
@@ -109,9 +108,6 @@ namespace ShrugWare
 
         private List<DataManager.StatEffect> previouslyRanEffects = new List<DataManager.StatEffect>();
         public List<DataManager.StatEffect> GetPreviouslyRanEffects() { return previouslyRanEffects; }
-
-        private PlayerInventory inventory = new PlayerInventory();
-        public PlayerInventory GetPlayerInventory() { return inventory; }
 
         public enum GameState
         {
@@ -143,17 +139,20 @@ namespace ShrugWare
                 playerInfo.livesLeft = BossGameManager.Instance.playerInfo.livesLeft;
                 timeInMainScene = 0.0f;
             }
-            
-            audioManager = GetComponent<AudioManager>();
-            curSceneIndex = (int)DataManager.MicrogameScenes.BossScene;
 
-            EventSystem sceneEventSystem = FindObjectOfType<EventSystem>();
-            if (sceneEventSystem == null)
+            playerInventory = OverworldManager.Instance.GetPlayerInventory();
+            if(playerInventory != null)
             {
-                GameObject eventSystem = new GameObject("EventSystem");
-                eventSystem.AddComponent<EventSystem>();
-                eventSystem.AddComponent<StandaloneInputModule>();
+                playerInventory.RecalculateStats();
+            
             }
+            else
+            {
+                playerInventory = new PlayerInventory();
+            }
+
+            audioManager = GetComponent<AudioManager>();
+            curSceneIndex = (int)DataManager.Scenes.BossScene;
         }
 
         private void Start()
@@ -168,11 +167,6 @@ namespace ShrugWare
                 PopulateData();
             }
 
-            if(inventory == null)
-            {
-                inventory = new PlayerInventory();
-            }
-
             // our raid and boss data needs to be populated by this point
             UpdateGameUI();
         }
@@ -181,14 +175,14 @@ namespace ShrugWare
         {
             // we will come back here whenever we load back from a microgame to the main scene
             // we need to keep playing, which means to pick and start a new microgame from our raid and boss if we're not dead
-            if (gameRunning && curSceneIndex == (int)DataManager.MicrogameScenes.BossScene)
+            if (gameRunning && curSceneIndex == (int)DataManager.Scenes.BossScene)
             {
                 timeInMainScene += Time.deltaTime;
 
                 bossUIManager.UpdateBetweenMicrogameText();
                 if (playerInfo.livesLeft > 0 && timeInMainScene >= DataManager.SECONDS_BETWEEN_MICROGAMES && !(curRaid is null) && !(curRaid.curBoss is null))
                 {
-                    DataManager.MicrogameScenes nextScene = curRaid.curBoss.PickNextMicrogame(); 
+                    DataManager.Scenes nextScene = curRaid.curBoss.PickNextMicrogame(); 
                     LoadScene((int)nextScene);
                 }
             }
@@ -206,7 +200,7 @@ namespace ShrugWare
         {
             UpdateGameUI();
             HandleFromMicrogameTransition();
-            BossGameManager.Instance.LoadScene((int)DataManager.MicrogameScenes.BossScene);
+            BossGameManager.Instance.LoadScene((int)DataManager.Scenes.BossScene);
         }
 
         private void HandleFromMicrogameTransition()
@@ -243,7 +237,6 @@ namespace ShrugWare
                     // boss is dead but raid is not complete, wait for the player to move on
                     PauseGame();
                     bossUIManager.HandlePauseGame();
-                    bossUIManager.SetMerchantButtonActive(true);
                 }
             }
             else if(playerInfo.livesLeft == 0)
@@ -257,7 +250,7 @@ namespace ShrugWare
         public void LoadScene(int sceneIndex)
         {
             bool mainCanvasEnabled = false;
-            if (sceneIndex == (int)DataManager.MicrogameScenes.BossScene)
+            if (sceneIndex == (int)DataManager.Scenes.BossScene)
             {
                 mainCanvasEnabled = true;
             }
@@ -334,7 +327,7 @@ namespace ShrugWare
         public void TakePlayerRaidDamage(float amount)
         {
             float totalAmount = amount;
-            float mitigationModifier = inventory.GetMitigation();
+            float mitigationModifier = playerInventory.GetMitigation();
             if(mitigationModifier > 0)
             {
                 totalAmount = totalAmount * (mitigationModifier / 100);
@@ -429,7 +422,7 @@ namespace ShrugWare
 
         public void UseConsumableItem(int templateId)
         {
-            inventory.UseConsumableItem(templateId);
+            playerInventory.UseConsumableItem(templateId);
         }
     }
 }
