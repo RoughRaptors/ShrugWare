@@ -4,3 +4,7 @@ UserSettings/
 obj/
 Temp/
 Library/
+
+*.csproj
+*.unityproj
+*.sln
