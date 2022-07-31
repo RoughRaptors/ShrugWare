@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace ShrugWare
 {
@@ -181,7 +182,7 @@ namespace ShrugWare
         {
             if (selectedItem.item != null)
             {
-                PlayerInventory inventory = BossGameManager.Instance.GetPlayerInventory();
+                PlayerInventory inventory = OverworldManager.Instance.GetPlayerInventory();
                 if (inventory != null && inventory.GetCurrencyAmount(selectedItem.currency) >= selectedItem.price)
                 {
                     inventory.AddItemToInventory(selectedItem.item);
@@ -210,7 +211,6 @@ namespace ShrugWare
                         bootsObj.SetActive(false);
                     }
 
-                    AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.MerchantPurchase, .4f);
                     prevSelectedObj.GetComponentInChildren<RawImage>().color = UnityEngine.Color.white;
                     prevSelectedObj = null;
                     selectedItem.item = null;
@@ -263,14 +263,13 @@ namespace ShrugWare
                 {
                     prevSelectedObj = objToChange;
                     objToChange.GetComponentInChildren<RawImage>().color = UnityEngine.Color.green;
-                    AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.ButtonClick);
                 }
             }
         }
 
         public void UpdateCurrencies()
         {
-            PlayerInventory inventory = BossGameManager.Instance.GetPlayerInventory();
+            PlayerInventory inventory = OverworldManager.Instance.GetPlayerInventory();
             if (inventory != null)
             {
                 currenciesText.text = "Gold: " + inventory.GetCurrencyAmount(DataManager.Currencies.Generic).ToString();
@@ -278,7 +277,7 @@ namespace ShrugWare
             }
         }
 
-        public void ExitMerchant()
+        public void ExitMerchantClicked()
         {
             if (prevSelectedObj != null)
             {
@@ -287,6 +286,8 @@ namespace ShrugWare
 
             prevSelectedObj = null;
             selectedItem.item = null;
+
+            SceneManager.LoadScene((int)DataManager.Scenes.Overworld);
         }
     }
 }

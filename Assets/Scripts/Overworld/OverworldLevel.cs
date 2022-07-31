@@ -17,8 +17,8 @@ namespace ShrugWare
         
         // the scene to load that we play
         [SerializeField]
-        int sceneIDToLoad = -1;
-        public int SceneIDToLoad { get { return sceneIDToLoad; } }
+        DataManager.Scenes sceneIDToLoad;
+        public DataManager.Scenes SceneIDToLoad { get { return sceneIDToLoad; } }
 
         // the list of levels that are unlocked upon level completion
         [SerializeField]
@@ -41,24 +41,19 @@ namespace ShrugWare
 
         public void EnterLevel()
         {
-            if(sceneIDToLoad == -1)
-            {
-                return;
-            }
-
             if (levelType == DataManager.OverworldLevelType.Start)
             {
                 // we don't enter these
                 return;
             }
 
-            SceneManager.LoadScene((int)DataManager.MicrogameScenes.BossScene);
-            //BossGameManager.Instance.LoadScene(sceneIDToLoad);
+            OverworldUIManager.Instance.SetCanvasEnabled(false);
+            SceneManager.LoadScene((int)sceneIDToLoad);
         }
 
         private void OnMouseDown()
         {
-            OverworldManager.Instance.DEBUGSetCurLevelID(levelID);
+            OverworldManager.Instance.SetCurLevelID(levelID);
         }
     }
 }

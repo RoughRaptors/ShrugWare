@@ -20,21 +20,9 @@ namespace ShrugWare
 
         [SerializeField]
         Text gameInfoText = null;
-
-        [SerializeField]
-        Button merchantButton = null;
         
         [SerializeField]
         GameObject mainUICanvas = null;
-
-        [SerializeField]
-        GameObject merchantUICanvas = null;
-
-        [SerializeField]
-        GameObject instructionsUICanvas = null;
-
-        [SerializeField]
-        GameObject instructionsUIButton = null;
  
         [SerializeField]
         GameObject healthPotionItem = null;
@@ -133,12 +121,10 @@ namespace ShrugWare
         public void OnContinueGameButtonClicked()
         {
             betweenMicrogameText.enabled = true;
-            merchantButton.gameObject.SetActive(false);
             continueGameButton.gameObject.SetActive(false);
             playerHealthBar.gameObject.SetActive(false);
             bossHealthBar.gameObject.SetActive(false);
             gameInfoText.enabled = true;
-            instructionsUIButton.SetActive(false);
 
             AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.ButtonClick);
             BossGameManager.Instance.ContinueGame();
@@ -154,7 +140,6 @@ namespace ShrugWare
         {
             continueGameButton.GetComponentInChildren<Text>().text = "Continue to " + BossGameManager.Instance.GetCurRaid().curBoss.bossName;
             continueGameButton.gameObject.SetActive(true);
-            merchantButton.gameObject.SetActive(false);
         }
 
         public void HandleGameOver()
@@ -162,54 +147,14 @@ namespace ShrugWare
             betweenMicrogameText.enabled = false;
             gameInfoText.text += "\n \n 50 DKP MINUS!";
         }
-        
-        public void OnMerchantButtonClicked()
-        {
-            // don't open the merchant if we're not ready/able to - todo change this to a proper game state when we add it
-            if (BossGameManager.Instance.GetGameState() == BossGameManager.GameState.Paused)
-            {
-                mainUICanvas.SetActive(false);
-                merchantUICanvas.SetActive(true);
-
-                BossGameManager.Instance.EnterMerchant();
-                MerchantManager.Instance.UpdateCurrencies();
-            }
-        }
-
-        public void OnExitMerchantClicked()
-        {
-            BossGameManager.Instance.SetGameState(BossGameManager.GameState.Paused);
-            mainUICanvas.SetActive(true);
-            merchantUICanvas.SetActive(false);
-
-            UpdateConsumableInfo();
-            AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.ButtonClick);
-            BossGameManager.Instance.UpdateGameUI();
-            MerchantManager.Instance.ExitMerchant();
-        }
-
-        public void SetMerchantButtonActive(bool enabled)
-        {
-            merchantButton.gameObject.SetActive(enabled);
-        }
-
-        public void OnItemForSaleSelected(int itemTemplateId)
-        {
-            MerchantManager.Instance.OnItemSelected(itemTemplateId);
-        }
-
-        public void OnMerchantBuyButtonClicked()
-        {
-            MerchantManager.Instance.OnBuyButtonClicked();
-        }
 
         public void UpdateConsumableInfo()
         {
             healthPotionItem.GetComponentInChildren<Text>().text = "";
             maxHealthPotionItem.GetComponentInChildren<Text>().text = "";
 
-            Item healthPotion = BossGameManager.Instance.GetPlayerInventory().GetInventoryItem(0);
-            Item maxHealthPotion = BossGameManager.Instance.GetPlayerInventory().GetInventoryItem(1);
+            Item healthPotion = OverworldManager.Instance.GetPlayerInventory().GetInventoryItem(0);
+            Item maxHealthPotion = OverworldManager.Instance.GetPlayerInventory().GetInventoryItem(1);
             if(healthPotion != null)
             {
                 healthPotionItem.GetComponentInChildren<Text>().text += "Health Potion\n+25% Heal\nQuantity: " + healthPotion.itemQuantity;
@@ -230,20 +175,6 @@ namespace ShrugWare
         public void OnUseConsumableItemClicked(int templateId)
         {
             BossGameManager.Instance.UseConsumableItem(templateId);
-        }
-
-        public void OnInstructionsButtonClicked()
-        {
-            AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.ButtonClick);
-            mainUICanvas.SetActive(false);
-            instructionsUICanvas.SetActive(true);
-        }
-
-        public void OnInstructionsBackButtonClicked()
-        {
-            AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.ButtonClick);
-            mainUICanvas.SetActive(true);
-            instructionsUICanvas.SetActive(false);
         }
     }
 }

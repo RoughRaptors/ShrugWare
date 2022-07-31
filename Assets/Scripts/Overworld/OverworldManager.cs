@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace ShrugWare
-{
+namespace ShrugWare{
 
 /* 
     this connects the game world together by OverworldLevels
@@ -19,14 +17,20 @@ namespace ShrugWare
     {
         public static OverworldManager Instance = null;
 
+        [SerializeField]
+        OverworldUIManager overworldUIManager;
+
         Dictionary<int, OverworldLevel> overworldMap = new Dictionary<int, OverworldLevel>();
 
-        int curLevelID = 0;
-        public int CurLevelID { get; set; }
+        private int curLevelID = 0;
+        public int CurLevelID
+        {
+            get { return curLevelID; }
+            set { curLevelID = value; }
+        }
 
-        // TODO UI
-        [SerializeField]
-        Text curLevelText;
+        private PlayerInventory inventory = new PlayerInventory();
+        public PlayerInventory GetPlayerInventory() { return inventory; }
 
         private void Awake()
         {
@@ -42,7 +46,14 @@ namespace ShrugWare
                 // set all of our shit back - figure out a better solution later if there is one - TODO MAKE THIS BETTER
                 overworldMap = OverworldManager.Instance.overworldMap;
                 curLevelID = OverworldManager.Instance.curLevelID;
-                curLevelText = OverworldManager.Instance.curLevelText;
+            }
+        }
+
+        private void Start()
+        {
+            if (inventory == null)
+            {
+                inventory = new PlayerInventory();
             }
         }
 
@@ -56,8 +67,7 @@ namespace ShrugWare
 
         public bool IsLevelUnlocked(int levelID)
         {
-            OverworldLevel overworldLevel = null;
-            overworldMap.TryGetValue(levelID, out overworldLevel);
+            OverworldLevel overworldLevel = GetOverworldLevel(levelID);
             if(overworldLevel != null)
             {
                 return overworldLevel.Unlocked;
@@ -66,26 +76,14 @@ namespace ShrugWare
             return false;
         }
 
-        public void EnterCurLevelClicked()
-        {
-            OverworldLevel overworldLevel = null;
-            overworldMap.TryGetValue(curLevelID, out overworldLevel);
-            if (overworldLevel != null)
-            {
-                overworldLevel.EnterLevel();
-            }
-        }
-
         public void CompleteLevel(int completedLevelID)
         {
-            OverworldLevel overworldLevel = null;
-            overworldMap.TryGetValue(completedLevelID, out overworldLevel);
-            if (overworldMap != null)
+            OverworldLevel overworldLevel = GetOverworldLevel(completedLevelID);
+            if (overworldLevel != null)
             {
                 foreach (int idToUnlock in overworldLevel.LevelIDsToUnlock)
                 {
-                    OverworldLevel overworldLevelToUnlock = null;
-                    overworldMap.TryGetValue(idToUnlock, out overworldLevelToUnlock);
+                    OverworldLevel overworldLevelToUnlock = GetOverworldLevel(idToUnlock);
                     if(overworldLevelToUnlock != null)
                     {
                         overworldLevelToUnlock.Unlocked = true;
@@ -94,21 +92,27 @@ namespace ShrugWare
             }
         }
 
-        public void DEBUGSetCurLevelID(int levelID)
+        public void SetCurLevelID(int levelID)
+        {
+            // only change if it's valid
+            OverworldLevel overworldLevel = GetOverworldLevel(levelID);
+            if (overworldLevel != null)
+            {
+                curLevelID = levelID;
+                overworldUIManager.UpdateUI();
+            }
+        }
+
+        public OverworldLevel GetOverworldLevel(int levelID)
         {
             OverworldLevel overworldLevel = null;
             overworldMap.TryGetValue(levelID, out overworldLevel);
-            if (overworldMap != null)
+            if (overworldLevel != null)
             {
-                curLevelID = levelID;
-                curLevelText.text = "Cur Level ID: " + curLevelID.ToString() +
-                    "\n" + "Scene ID: " + overworldLevel.SceneIDToLoad +
-                    "\n" + "Type : " + overworldLevel.LevelType.ToString();
+                return overworldLevel;
             }
-            else
-            {
-                curLevelText.text = "Invalid Level ID";
-            }
+
+            return null;
         }
     }
 }
