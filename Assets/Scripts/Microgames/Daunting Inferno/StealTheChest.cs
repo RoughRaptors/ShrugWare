@@ -1,15 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ShrugWare
 {
     public class StealTheChest : Microgame
     {
-        [SerializeField]
-        Text instructionsText = null;
-
         [SerializeField]
         GameObject playerObject = null;
 
@@ -69,39 +64,6 @@ namespace ShrugWare
             lossEffects.Add(timeScaleEffect);
 
             SetupChest();
-
-            StartCoroutine(DisableInstructionsText());
-        }
-
-        private void Update()
-        {
-            timeElapsed += Time.deltaTime;
-
-            // don't "start" the microgame until we can orient the player to the microgame
-            if (timeElapsed >= DataManager.SECONDS_TO_START_MICROGAME)
-            {
-                if (microgameDurationRemaining <= 0.0f)
-                {
-                    if(!lootStolen)
-                    {
-                        instructionsText.text = "No loot for you";
-                        instructionsText.gameObject.SetActive(true);
-                    }
-
-                    HandleMicrogameEnd(lootStolen);
-                }
-                else
-                {
-                    microgameDurationRemaining -= Time.deltaTime;
-                    base.Update();
-
-                    if (!lootStolen)
-                    {
-                        MoveGroupMembers();
-                        HandleInput();
-                    }
-                }
-            }
         }
 
         protected override void OnEnable()
@@ -115,6 +77,18 @@ namespace ShrugWare
             base.OnDisable();
             PlayerCollider.OnGoodCollision -= ChestHit;
         }
+
+        protected override void OnMyGameTick(float timePercentLeft)
+        {
+            base.OnMyGameTick(timePercentLeft);
+            if (!lootStolen)
+            {
+                MoveGroupMembers();
+                HandleInput();
+            }
+        }
+
+        protected override bool VictoryCheck() => lootStolen;
 
         private void HandleInput()
         {
@@ -140,13 +114,6 @@ namespace ShrugWare
             }
 
             playerObject.transform.position = newPos;
-        }
-
-        // easier to make this a coroutine since Update() will keep trying to disable it (for now at least)
-        IEnumerator DisableInstructionsText()
-        {
-            yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
-            instructionsText.gameObject.SetActive(false);
         }
 
         private void SetupChest()
@@ -184,8 +151,7 @@ namespace ShrugWare
         private void ChestHit(GameObject chest)
         {
             lootStolen = true;
-            instructionsText.text = "NINJAED!";
-            instructionsText.gameObject.SetActive(true);
+            SetMicrogameEndText(true);
             foreach(GameObject member in groupMembers)
             {
                 member.SetActive(false);

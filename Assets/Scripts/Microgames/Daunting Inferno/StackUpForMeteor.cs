@@ -1,15 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ShrugWare
 {
     public class StackUpForMeteor : Microgame
     {
-        [SerializeField]
-        Text instructionsText = null;
-
         [SerializeField]
         GameObject playerObject = null;
 
@@ -27,7 +21,7 @@ namespace ShrugWare
 
         private const float PLAYER_MOVE_SPEED = 22.5f;
 
-        private bool stacked = false;
+        private bool stacked = true;
 
         private float timeRatio = 0;
         private Vector3 meteorStartPos;
@@ -59,47 +53,6 @@ namespace ShrugWare
 
             SetupPlayerObject();
             meteorStartPos = meteorObject.transform.position;
-
-            StartCoroutine(DisableInstructionsText());
-        }
-
-        private void Update()
-        {
-            timeElapsed += Time.deltaTime;
-
-            // don't "start" the microgame until we can orient the player to the microgame
-            if (timeElapsed >= DataManager.SECONDS_TO_START_MICROGAME)
-            {
-                if (microgameDurationRemaining <= 0.0f)
-                {
-                    // out of time - we should have collided already, but maybe not
-                    if (meteorObject.activeInHierarchy)
-                    {
-                        MeteorCheck(meteorObject);
-                    }
-
-                    HandleMicrogameEnd(stacked);
-                }
-                else
-                {
-                    if (meteorObject.activeInHierarchy)
-                    {
-                        timeRatio += Time.deltaTime / DataManager.MICROGAME_DURATION_SECONDS;
-                        meteorObject.transform.position = Vector3.Lerp(meteorStartPos, playerObject.transform.position, timeRatio);
-
-                        foreach(GameObject groupMember in groupMembers)
-                        {
-                            groupMember.transform.position =
-                                Vector3.MoveTowards(groupMember.transform.position, playerObject.transform.position, PLAYER_MOVE_SPEED * Time.deltaTime);
-                        }
-
-                        HandleInput();
-                    }
-
-                    microgameDurationRemaining -= Time.deltaTime;
-                    base.Update();
-                }
-            }
         }
 
         protected override void OnEnable()
@@ -112,6 +65,32 @@ namespace ShrugWare
         {
             base.OnDisable();
             PlayerCollider.OnBadCollision -= MeteorCheck;
+        }
+
+        protected override void OnMyGameTick(float timePercentLeft)
+        {
+            base.OnMyGameTick(timePercentLeft);
+            if (!meteorObject.activeInHierarchy) return;
+
+            timeRatio += Time.deltaTime / DataManager.MICROGAME_DURATION_SECONDS;
+            meteorObject.transform.position = Vector3.Lerp(meteorStartPos, playerObject.transform.position, timeRatio);
+
+            foreach(GameObject groupMember in groupMembers)
+            {
+                groupMember.transform.position =
+                    Vector3.MoveTowards(groupMember.transform.position, playerObject.transform.position, PLAYER_MOVE_SPEED * Time.deltaTime);
+            }
+            HandleInput();
+        }
+
+        protected override bool VictoryCheck()
+        {
+            if (meteorObject.activeInHierarchy)
+            {
+                MeteorCheck(meteorObject);
+            }
+
+            return stacked;
         }
 
         private void HandleInput()
@@ -147,36 +126,17 @@ namespace ShrugWare
             playerObject.transform.position = new Vector3(xPos, yPos, 0.0f);
         }
 
-        // easier to make this a coroutine since Update() will keep trying to disable it (for now at least)
-        IEnumerator DisableInstructionsText()
-        {
-            yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
-            instructionsText.gameObject.SetActive(false);
-        }
-
         private void MeteorCheck(GameObject meteor)
         {
-            bool fail = false;
             // be lazy, check member distance from player instead of if the meteor is colliding with all 3 objects
             foreach(GameObject member in groupMembers)
             {
                 float memberDistance = Vector3.Distance(member.transform.position, playerObject.transform.position);
                 if (memberDistance < DISTANCE_FOR_VALID_STACK) continue;
-                fail = true;
+                stacked = false;
                 break;
             }
-
-            if(fail)
-            {
-                instructionsText.text = "Boom";
-            }
-            else
-            {
-                stacked = true;
-                instructionsText.text = "On point";
-            }
-
-            instructionsText.gameObject.SetActive(true);
+            SetMicrogameEndText(stacked);
             meteorObject.SetActive(false);
         }
     }

@@ -1,14 +1,9 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ShrugWare
 {
     public class MatchPolarity : Microgame
     {
-        [SerializeField]
-        Text instructionsText = null;
-
         [SerializeField]
         GameObject playerObject = null;
 
@@ -31,7 +26,6 @@ namespace ShrugWare
 
         private bool polarityMatched = false;
 
-        private float timeRatio = 0;
         private Vector3 electricityStartPos;
 
         bool playerPositive = false;
@@ -66,37 +60,6 @@ namespace ShrugWare
             playerNegativeObj.SetActive(false);
             playerPositiveObj.SetActive(false);
             SetupGroupMembers();
-
-            StartCoroutine(DisableInstructionsText());
-        }
-
-        private void Update()
-        {
-            timeElapsed += Time.deltaTime;
-
-            // don't "start" the microgame until we can orient the player to the microgame
-            if (timeElapsed >= DataManager.SECONDS_TO_START_MICROGAME)
-            {
-                if (microgameDurationRemaining <= 0.0f)
-                {
-                    // out of time - we should have collided already, but maybe not
-                    if (eletricityObj.activeInHierarchy)
-                    {
-                        ElectricHit(eletricityObj);
-                    }
-
-                    HandleMicrogameEnd(polarityMatched);
-                }
-                else
-                {
-                    timeRatio += Time.deltaTime / DataManager.MICROGAME_DURATION_SECONDS;
-                    eletricityObj.transform.position = Vector3.Lerp(electricityStartPos, playerObject.transform.position, timeRatio);
-
-                    microgameDurationRemaining -= Time.deltaTime;
-                    base.Update();
-                    HandleInput();
-                }
-            }
         }
 
         protected override void OnEnable()
@@ -113,6 +76,29 @@ namespace ShrugWare
             PlayerCollider.OnGoodCollision -= EnterField;
             PlayerCollider.OnBadCollision -= ElectricHit;
             PlayerCollider.OnGoodExit -= ExitField;
+        }
+
+        protected override void OnMyGameStart()
+        {
+            base.OnMyGameStart();
+            SetupPlayer();
+        }
+
+        protected override void OnMyGameTick(float timePercentLeft)
+        {
+            base.OnMyGameTick(timePercentLeft);
+            eletricityObj.transform.position = Vector3.Lerp(electricityStartPos, playerObject.transform.position, 1 - timePercentLeft);
+            HandleInput();
+        }
+
+        protected override bool VictoryCheck()
+        {
+            if (eletricityObj.activeInHierarchy)
+            {
+                ElectricHit(eletricityObj);
+            }
+
+            return polarityMatched;
         }
 
         private void HandleInput()
@@ -139,16 +125,6 @@ namespace ShrugWare
             }
 
             playerObject.transform.position = newPos;
-        }
-
-        // easier to make this a coroutine since Update() will keep trying to disable it (for now at least)
-        IEnumerator DisableInstructionsText()
-        {
-            yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
-            instructionsText.gameObject.SetActive(false);
-
-            // do this here so they don't see their own polarity until it starts
-            SetupPlayer();
         }
 
         private void SetupPlayer()
@@ -192,17 +168,7 @@ namespace ShrugWare
 
         private void ElectricHit(GameObject electric)
         {
-            if (polarityMatched)
-            {
-                polarityMatched = true;
-                instructionsText.text = "Shocking Performance";
-            }
-            else
-            {
-                instructionsText.text = "BZZZT DED";
-            }
-
-            instructionsText.gameObject.SetActive(true);
+            SetMicrogameEndText(polarityMatched);
             eletricityObj.SetActive(false);
         }
     }

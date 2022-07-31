@@ -1,14 +1,9 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ShrugWare
 {
     public class SidestepTheFireball : Microgame
     {
-        [SerializeField]
-        Text instructionsText = null;
-
         [SerializeField]
         GameObject playerObject = null;
 
@@ -51,38 +46,6 @@ namespace ShrugWare
 
             lossEffects.Add(damagePlayerEffect);
             lossEffects.Add(timeScaleEffect);
-
-            StartCoroutine(DisableInstructionsText());
-        }
-
-        private void Update()
-        {
-            timeElapsed += Time.deltaTime;
-
-            // don't "start" the microgame until we can orient the player to the microgame
-            if (timeElapsed >= DataManager.SECONDS_TO_START_MICROGAME)
-            {
-                if (microgameDurationRemaining <= 0.0f)
-                {
-                    // out of time
-                    if (playerObject.activeInHierarchy)
-                    {
-                        instructionsText.gameObject.SetActive(true);
-                        instructionsText.text = "Slightly singed";
-                    }
-
-                    HandleMicrogameEnd(playerObject.activeInHierarchy);
-                }
-                else
-                {
-                    fireballObject.transform.position = 
-                        Vector3.MoveTowards(fireballObject.transform.position, new Vector3(0, -60, 0), FIREBALL_MOVE_SPEED * Time.deltaTime);
-
-                    microgameDurationRemaining -= Time.deltaTime;
-                    base.Update();
-                    HandleInput();
-                }
-            }
         }
 
         protected override void OnEnable()
@@ -96,6 +59,17 @@ namespace ShrugWare
             base.OnDisable();
             PlayerCollider.OnBadCollision -= FireballHit;
         }
+
+        protected override void OnMyGameTick(float timePercentLeft)
+        {
+            base.OnMyGameTick(timePercentLeft);
+            fireballObject.transform.position = 
+                Vector3.MoveTowards(fireballObject.transform.position, new Vector3(0, -60, 0), FIREBALL_MOVE_SPEED * Time.deltaTime);
+
+            HandleInput();
+        }
+
+        protected override bool VictoryCheck() => playerObject.activeInHierarchy;
 
         private void HandleInput()
         {
@@ -116,18 +90,10 @@ namespace ShrugWare
             }
         }
 
-        // easier to make this a coroutine since Update() will keep trying to disable it (for now at least)
-        IEnumerator DisableInstructionsText()
-        {
-            yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
-            instructionsText.gameObject.SetActive(false);
-        }
-
         private void FireballHit(GameObject fireball)
         {
             playerObject.SetActive(false);
-            instructionsText.gameObject.SetActive(true);
-            instructionsText.text = "Be faster";
+            SetMicrogameEndText(false);
         }
     }
 }

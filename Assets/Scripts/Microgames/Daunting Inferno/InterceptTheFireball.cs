@@ -1,14 +1,9 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ShrugWare
 {
     public class InterceptTheFireball : Microgame
     {
-        [SerializeField]
-        Text instructionsText = null;
-
         [SerializeField]
         GameObject playerObject = null;
 
@@ -19,7 +14,6 @@ namespace ShrugWare
         GameObject healerObject = null;
 
         private bool intercepted = false;
-
         private const float X_MIN = -50.0f;
         private const float X_MAX = 50.0f;
         private const float Y_MIN = -30.0f;
@@ -39,12 +33,12 @@ namespace ShrugWare
 
             DataManager.StatEffect damageBossEffect = new DataManager.StatEffect();
             damageBossEffect.effectType = DataManager.StatModifierType.BossCurHealth;
-            damageBossEffect.amount = 20.0f; 
+            damageBossEffect.amount = 20.0f;
             damageBossEffect.asPercentage = false;
 
             DataManager.StatEffect timeScaleEffect = new DataManager.StatEffect();
             timeScaleEffect.effectType = DataManager.StatModifierType.Timescale;
-            timeScaleEffect.amount = 0.05f; 
+            timeScaleEffect.amount = 0.05f;
             timeScaleEffect.asPercentage = false;
 
             winEffects.Add(damageBossEffect);
@@ -54,38 +48,6 @@ namespace ShrugWare
             lossEffects.Add(timeScaleEffect);
 
             SetupPlayerObject();
-
-            StartCoroutine(DisableInstructionsText());
-        }
-
-        private void Update()
-        {
-            timeElapsed += Time.deltaTime;
-
-            // don't "start" the microgame until we can orient the player to the microgame
-            if (timeElapsed >= DataManager.SECONDS_TO_START_MICROGAME)
-            {
-                if (microgameDurationRemaining <= 0.0f)
-                {
-                    // out of time
-                    if(!intercepted)
-                    {
-                        instructionsText.gameObject.SetActive(true);
-                        instructionsText.text = "I smell healer";
-                    }
-
-                    HandleMicrogameEnd(intercepted);
-                }
-                else
-                {
-                    fireballObject.transform.position = 
-                        Vector3.MoveTowards(fireballObject.transform.position, healerObject.transform.position, FIREBALL_MOVE_SPEED * Time.deltaTime);
-
-                    microgameDurationRemaining -= Time.deltaTime;
-                    base.Update();
-                    HandleInput();
-                }
-            }
         }
 
         protected override void OnEnable()
@@ -99,6 +61,16 @@ namespace ShrugWare
             base.OnDisable();
             PlayerCollider.OnBadCollision -= FireballHit;
         }
+
+        protected override void OnMyGameTick(float timePercentLeft)
+        {
+            base.OnMyGameTick(timePercentLeft);
+            fireballObject.transform.position =
+                Vector3.MoveTowards(fireballObject.transform.position, healerObject.transform.position, FIREBALL_MOVE_SPEED * Time.deltaTime);
+            HandleInput();
+        }
+
+        protected override bool VictoryCheck() => intercepted;
 
         private void HandleInput()
         {
@@ -136,18 +108,10 @@ namespace ShrugWare
             playerObject.transform.position = new Vector3(xPos, yPos, 0.0f);
         }
 
-        // easier to make this a coroutine since Update() will keep trying to disable it (for now at least)
-        IEnumerator DisableInstructionsText()
-        {
-            yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
-            instructionsText.gameObject.SetActive(false);
-        }
-
         private void FireballHit(GameObject fireball)
         {
+            SetMicrogameEndText(true);
             intercepted = true;
-            instructionsText.gameObject.SetActive(true);
-            instructionsText.text = "Good tank";
             fireballObject.SetActive(false);
         }
     }

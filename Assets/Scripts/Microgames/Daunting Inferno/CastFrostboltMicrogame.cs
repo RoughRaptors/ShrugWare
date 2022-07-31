@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,9 +6,6 @@ namespace ShrugWare
 {
     public class CastFrostboltMicrogame : Microgame
     {
-        [SerializeField]
-        Text instructionsText = null;
-
         [SerializeField]
         Button fireballButton;
 
@@ -60,41 +56,25 @@ namespace ShrugWare
 
             fireballButton.gameObject.SetActive(false);
             frostboltButton.gameObject.SetActive(false);
+            frostboltButton.onClick.AddListener(CastFrostboltButtonPressed);
             healButton.gameObject.SetActive(false);
-
             RandomizeButtons();
-
-            StartCoroutine(DisableInstructionsText());
         }
 
-        private void Update()
+        protected override void OnMyGameStart()
         {
-            timeElapsed += Time.deltaTime;
+            base.OnMyGameStart();
+            fireballButton.gameObject.SetActive(true);
+            frostboltButton.gameObject.SetActive(true);
+            healButton.gameObject.SetActive(true);
+        }
 
-            // don't "start" the microgame until we can orient the player to the microgame
-            if (timeElapsed >= DataManager.SECONDS_TO_START_MICROGAME)
-            {
-                if (microgameDurationRemaining <= 0.0f)
-                {
-                    // out of time
-                    if (!castedFrostbolt)
-                    {
-                        instructionsText.gameObject.SetActive(true);
-                        instructionsText.text = "Clicker";
-                    }
-
-                    fireballButton.gameObject.SetActive(false);
-                    frostboltButton.gameObject.SetActive(false);
-                    healButton.gameObject.SetActive(false);
-
-                    HandleMicrogameEnd(castedFrostbolt);
-                }
-                else
-                {
-                    microgameDurationRemaining -= Time.deltaTime;
-                    base.Update();
-                }
-            }
+        protected override bool VictoryCheck()
+        {
+            fireballButton.gameObject.SetActive(false);
+            frostboltButton.gameObject.SetActive(false);
+            healButton.gameObject.SetActive(false);
+            return castedFrostbolt;
         }
 
         public void RandomizeButtons()
@@ -119,28 +99,14 @@ namespace ShrugWare
             buttonList.RemoveAt(0);
         }
 
-        // easier to make this a coroutine since Update() will keep trying to disable it (for now at least)
-        IEnumerator DisableInstructionsText()
-        {
-            yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
-            instructionsText.gameObject.SetActive(false);
-
-            fireballButton.gameObject.SetActive(true);
-            frostboltButton.gameObject.SetActive(true);
-            healButton.gameObject.SetActive(true);
-        }
-
-        public void CastFrostboltButtonPressed()
+        private void CastFrostboltButtonPressed()
         {
             castedFrostbolt = true;
 
             fireballButton.gameObject.SetActive(false);
             frostboltButton.gameObject.SetActive(false);
             healButton.gameObject.SetActive(false);
-
-            instructionsText.gameObject.SetActive(true);
-            instructionsText.text = "Chilled Out";
-
+            SetMicrogameEndText(true);
             bossObj.GetComponentInChildren<SkinnedMeshRenderer>().material.color = Color.cyan;
         }
     }
