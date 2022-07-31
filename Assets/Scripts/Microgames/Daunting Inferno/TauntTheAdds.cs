@@ -1,15 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ShrugWare
 {
     public class TauntTheAdds : Microgame
     {
-        [SerializeField]
-        Text instructionsText = null;
-
         [SerializeField]
         GameObject[] enemies = new GameObject[0];
         Dictionary<GameObject, Vector3> enemyTargetPositions = new Dictionary<GameObject, Vector3>();
@@ -58,41 +53,32 @@ namespace ShrugWare
 
             lossEffects.Add(damagePlayerEffect);
             lossEffects.Add(timeScaleEffect);
-
-            StartCoroutine(DisableInstructionsText());
         }
 
-        private void Update()
+        protected override void OnMyGameStart()
         {
-            timeElapsed += Time.deltaTime;
+            base.OnMyGameStart();
+            foreach(GameObject enemy in enemies)
+                enemy.SetActive(true);
+        }
 
-            // don't "start" the microgame until we can orient the player to the microgame
-            if (timeElapsed >= DataManager.SECONDS_TO_START_MICROGAME)
+        protected override void OnMyGameTick(float timePercentLeft)
+        {
+            base.OnMyGameTick(timePercentLeft);
+            foreach(GameObject enemy in enemies)
             {
-                if (microgameDurationRemaining <= 0.0f)
-                {
-                    // out of time
-                    if (!won)
-                    {
-                        instructionsText.gameObject.SetActive(true);
-                        instructionsText.text = "RIP healers";
-                    }
+                enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, enemyTargetPositions[enemy], ENEMY_MOVE_SPEED * Time.deltaTime);
+            }
+            HandleInput();
 
-                    HandleMicrogameEnd(won);
-                }
-                else
-                {
-                    foreach(GameObject enemy in enemies)
-                    {
-                        enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, enemyTargetPositions[enemy], ENEMY_MOVE_SPEED * Time.deltaTime);
-                    }
-
-                    microgameDurationRemaining -= Time.deltaTime;
-                    base.Update();
-                    HandleInput();
-                }
+            if(!won && !enemiesTaunted.ContainsValue(false))
+            {
+                won = true;
+                SetMicrogameEndText(true);
             }
         }
+
+        protected override bool VictoryCheck() => won;
 
         private void SetupEnemy(int index)
         {
@@ -142,24 +128,7 @@ namespace ShrugWare
                         }
                     }
                 }
-               
-                if(!enemiesTaunted.ContainsValue(false))
-                {
-                    won = true;
-
-                    instructionsText.gameObject.SetActive(true);
-                    instructionsText.text = "Healer Says Thanks";
-                }
             }
-        }
-
-        // easier to make this a coroutine since Update() will keep trying to disable it (for now at least)
-        IEnumerator DisableInstructionsText()
-        {
-            yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
-            instructionsText.gameObject.SetActive(false);
-            foreach(GameObject enemy in enemies)
-                enemy.SetActive(true);
         }
     }
 }

@@ -197,8 +197,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef4d2bb496e5eb4c94191ee9ff683d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerObj: {fileID: 0}
-  instructionsText: {fileID: 0}
+  victoryText: NINJAED!
+  defaultDefeatText: No loot for you
+  postTimerWait: 0
   playerObject: {fileID: 538549391}
   chestObj: {fileID: 659116896}
   groupMembers:

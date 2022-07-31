@@ -1,14 +1,9 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ShrugWare
 {
     public class DodgeTheFireballPattern : Microgame
     {
-        [SerializeField]
-        Text instructionsText = null;
-
         [SerializeField]
         GameObject playerObject = null;
 
@@ -60,42 +55,6 @@ namespace ShrugWare
 
             lossEffects.Add(damagePlayerEffect);
             lossEffects.Add(timeScaleEffect);
-
-            StartCoroutine(DisableInstructionsText());
-        }
-
-        private void Update()
-        {
-            timeElapsed += Time.deltaTime;
-
-            // don't "start" the microgame until we can orient the player to the microgame
-            if (timeElapsed >= DataManager.SECONDS_TO_START_MICROGAME)
-            {
-                if (microgameDurationRemaining <= 0.0f)
-                {
-                    // out of time
-                    if (playerObject.activeInHierarchy)
-                    {
-                        instructionsText.gameObject.SetActive(true);
-                        instructionsText.text = "Threaded";
-                    }
-
-                    HandleMicrogameEnd(playerObject.activeInHierarchy);
-                }
-                else
-                {
-                    foreach(GameObject fireball in fireballs)
-                    {
-                        fireball.transform.position = 
-                        Vector3.MoveTowards(fireball.transform.position, new Vector3(-100, fireball.transform.position.y, 0),
-                        FIREBALL_MOVE_SPEED * (Random.Range(1, 1.5f) * Time.deltaTime));
-                    }
-
-                    microgameDurationRemaining -= Time.deltaTime;
-                    base.Update();
-                    HandleInput();
-                }
-            }
         }
 
         protected override void OnEnable()
@@ -110,6 +69,19 @@ namespace ShrugWare
             PlayerCollider.OnAnyCollision -= PlayerCollision;
         }
 
+        protected override void OnMyGameTick(float timePercentLeft)
+        {
+            base.OnMyGameTick(timePercentLeft);
+            foreach(GameObject fireball in fireballs)
+            {
+                fireball.transform.position = 
+                Vector3.MoveTowards(fireball.transform.position, new Vector3(-100, fireball.transform.position.y, 0),
+                FIREBALL_MOVE_SPEED * (Random.Range(1, 1.5f) * Time.deltaTime));
+            }
+            HandleInput();
+        }
+
+        protected override bool VictoryCheck() => playerObject.activeInHierarchy;
         private void HandleInput()
         {
             if (!intercepted)
@@ -130,18 +102,10 @@ namespace ShrugWare
             }
         }
 
-        // easier to make this a coroutine since Update() will keep trying to disable it (for now at least)
-        IEnumerator DisableInstructionsText()
-        {
-            yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
-            instructionsText.gameObject.SetActive(false);
-        }
-
         private void PlayerCollision(GameObject fireball)
         {
             playerObject.SetActive(false);
-            instructionsText.gameObject.SetActive(true);
-            instructionsText.text = "Like a leaf on the wind";
+            SetMicrogameEndText(false);
         }
     }
 }

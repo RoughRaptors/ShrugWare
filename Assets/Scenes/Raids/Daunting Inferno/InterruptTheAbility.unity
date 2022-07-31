@@ -363,8 +363,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22aea81ced6ca594abcbac62a0b5d15e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerObj: {fileID: 0}
-  instructionsText: {fileID: 0}
+  victoryText: Good timing
+  defaultDefeatText: Clicker
+  postTimerWait: 0
   abilityBar: {fileID: 274319489}
   interruptButton: {fileID: 1325052455}
 --- !u!1 &392852466

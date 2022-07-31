@@ -676,8 +676,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dd84f8240756b245aef42665e2a2a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerObj: {fileID: 0}
-  instructionsText: {fileID: 0}
+  victoryText: Wheeeee!
+  defaultDefeatText: Fell off
+  postTimerWait: 1.5
   playerObject: {fileID: 1387725039}
   arrowObj: {fileID: 78332049}
   safeZoneObj: {fileID: 386133750}

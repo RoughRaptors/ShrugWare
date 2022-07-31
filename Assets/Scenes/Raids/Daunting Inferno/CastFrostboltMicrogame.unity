@@ -1191,8 +1191,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3288ad5397bb9244b82edfbbbadb17c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerObj: {fileID: 0}
-  instructionsText: {fileID: 0}
+  startText: 
+  victoryText: Chilled out
+  defaultDefeatText: Clicker
+  postTimerWait: 0
   fireballButton: {fileID: 1325052455}
   frostboltButton: {fileID: 27083951}
   healButton: {fileID: 1213044723}

@@ -123,22 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &642704392 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1100847505808109908, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
-  m_PrefabInstance: {fileID: 736425612}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &675111194 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9163045961094295230, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
-  m_PrefabInstance: {fileID: 736425612}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &736425612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -501,7 +485,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28613739640e2546aa1f7a42f52c551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerObj: {fileID: 642704392}
-  instructionsText: {fileID: 675111194}
+  victoryText: Oops banned #WORTHIT #GOTLOOT
+  defaultDefeatText: Casual, no kill for you
+  postTimerWait: 0
   playerObject: {fileID: 1149168136}
   powerstoneObj: {fileID: 3598132001379640902, guid: c720dce668a164544baa854db362e021, type: 3}

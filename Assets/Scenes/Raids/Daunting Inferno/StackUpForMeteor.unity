@@ -641,8 +641,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e81c81ca764dbdc43a74ff1503119423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerObj: {fileID: 0}
-  instructionsText: {fileID: 0}
+  victoryText: On point
+  defaultDefeatText: Boom
+  postTimerWait: 0
   playerObject: {fileID: 760236644}
   meteorObject: {fileID: 708319694}
   groupMembers:
@@ -767,3 +768,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe42cd452c7c04c4a9025b927e86fc79, type: 3}
+--- !u!1 &2000318539 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8265206808523038930, guid: 32e4090eebf4da94d80184fff513bad3, type: 3}
+  m_PrefabInstance: {fileID: 708319692}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2000318543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000318539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}

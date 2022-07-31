@@ -666,8 +666,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e4057767d1b53c489ae320a349f6d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerObj: {fileID: 0}
-  instructionsText: {fileID: 0}
+  victoryText: Good tank
+  defaultDefeatText: I smell healer
+  postTimerWait: 0
   playerObject: {fileID: 114926076}
   fireballObject: {fileID: 708319694}
   healerObject: {fileID: 1807666803}

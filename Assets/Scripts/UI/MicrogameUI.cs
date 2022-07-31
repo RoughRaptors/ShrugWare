@@ -11,13 +11,21 @@ namespace ShrugWare
     {
         private Microgame myMicrogame = null;
         [SerializeField] private string instructionText = "";
+
+        [Header("UI Components")]
         [SerializeField] private TextMeshProUGUI instructionTextUI = null;
         [SerializeField] private Slider timerBar = null;
+
+        [Header("Text Colors")]
+        [SerializeField] private Color introTextColor = Color.green;
+        [SerializeField] private Color winTextColor = Color.green;
+        [SerializeField] private Color loseTextColor = Color.red;
+
 
 
         private void OnValidate()
         {
-            SetInstructionText(instructionText);
+            SetInstructionText(instructionText, introTextColor);
         }
 
         private void Awake()
@@ -28,30 +36,41 @@ namespace ShrugWare
         private void OnEnable()
         {
             myMicrogame.MicrogameStart += OnMicrogameStart;
+            myMicrogame.MicrogameTick += ReduceSlider;
             myMicrogame.MicrogameEnd += OnMicrogameEnd;
         }
 
         private void OnDisable()
         {
             myMicrogame.MicrogameStart -= OnMicrogameStart;
+            myMicrogame.MicrogameTick -= ReduceSlider;
             myMicrogame.MicrogameEnd -= OnMicrogameEnd;
         }
 
-        private void OnMicrogameStart()
+        private void ReduceSlider(float percentTimeLeft)
         {
-            instructionTextUI.enabled = false;
+            timerBar.value = percentTimeLeft;
         }
 
-        private void OnMicrogameEnd()
+        private void OnMicrogameStart(string startText)
+        {
+            if(string.IsNullOrEmpty(startText))
+                instructionTextUI.enabled = false;
+            else
+                SetInstructionText(startText, introTextColor);
+        }
+
+        private void OnMicrogameEnd(bool victory, string displayText)
         {
             instructionTextUI.enabled = true;
+            Color textColor = victory ? winTextColor : loseTextColor;
+            SetInstructionText(displayText, textColor);
         }
 
-        private void SetInstructionText(string text)
+        private void SetInstructionText(string text, Color color)
         {
+            instructionTextUI.color = color;
             instructionTextUI.text = text.ToUpper();
         }
-
-
     }
 }

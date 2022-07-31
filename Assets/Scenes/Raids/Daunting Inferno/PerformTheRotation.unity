@@ -206,19 +206,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 27083952}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ShrugWare.PerformTheRotation, Assembly-CSharp
-        m_MethodName: FrostboltButtonPressed
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &27083952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,11 +319,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ecfee5fafc93e448b405ef64c2dde5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerObj: {fileID: 0}
-  instructionsText: {fileID: 0}
-  frostboltButtonObj: {fileID: 27083949}
-  glacialSpileButtonObj: {fileID: 1325052453}
-  iceBlastButtonObj: {fileID: 1213044721}
+  victoryText: PEW PEW PEW
+  defaultDefeatText: Bad DPS
+  postTimerWait: 0
+  frostboltButtonObj: {fileID: 27083951}
+  glacialSpikeButtonObj: {fileID: 1325052455}
+  iceBlastButtonObj: {fileID: 1213044723}
 --- !u!1 &723481294
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,19 +625,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1213044724}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ShrugWare.PerformTheRotation, Assembly-CSharp
-        m_MethodName: IceBlastButtonPressed
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1213044724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,19 +747,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1325052456}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ShrugWare.PerformTheRotation, Assembly-CSharp
-        m_MethodName: GlacialSpikeButtonPressed
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1325052456
 MonoBehaviour:
   m_ObjectHideFlags: 0

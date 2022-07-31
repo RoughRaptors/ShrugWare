@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,9 +6,6 @@ namespace ShrugWare
     public class InterruptTheAbility : Microgame
     {
         [SerializeField]
-        Text instructionsText = null;
-
-        [SerializeField]
         Slider abilityBar;
 
         [SerializeField]
@@ -17,8 +13,8 @@ namespace ShrugWare
 
         // take some time to spawn to make it challenging
         private bool interrupted = false;
-        private bool tooSoon = false;
         private float castDelay = 0.0f;
+        private float castTimePercent = 1;
 
         new private void Start()
         {
@@ -46,73 +42,46 @@ namespace ShrugWare
             lossEffects.Add(timeScaleEffect);
 
             interruptButton.gameObject.SetActive(false);
+            interruptButton.onClick.AddListener(InterruptButtonPressed);
             abilityBar.gameObject.SetActive(false);
 
-            StartCoroutine(DisableInstructionsText());
         }
 
-        private void Update()
+        protected override void OnMyGameStart()
         {
-            timeElapsed += Time.deltaTime;
+            base.OnMyGameStart();
+            interruptButton.gameObject.SetActive(true);
+            castDelay = Random.Range(0.5f, 1.5f);
+            castTimePercent -= castDelay / microGameTime;
+            Invoke(nameof(CastAbility), castDelay);
+        }
 
-            // don't "start" the microgame until we can orient the player to the microgame
-            if (timeElapsed >= DataManager.SECONDS_TO_START_MICROGAME)
+        protected override void OnMyGameTick(float timePercentLeft)
+        {
+            base.OnMyGameTick(timePercentLeft);
+            if (abilityBar.isActiveAndEnabled && !interrupted)
             {
-                if (microgameDurationRemaining <= 0.0f)
-                {
-                    // out of time
-                    if (!interrupted && !tooSoon)
-                    {
-                        instructionsText.gameObject.SetActive(true);
-                        instructionsText.text = "Clicker";
-                    }
-
-                    HandleMicrogameEnd(interrupted);
-                }
-                else
-                {
-                    microgameDurationRemaining -= Time.deltaTime;
-                    base.Update();
-
-                    if (abilityBar.isActiveAndEnabled && !interrupted)
-                    {
-                        abilityBar.value += Mathf.Lerp(abilityBar.minValue, abilityBar.maxValue, 
-                            Time.deltaTime / (DataManager.MICROGAME_DURATION_SECONDS - castDelay));
-                    }
-                }
+                abilityBar.value = Mathf.Lerp(abilityBar.minValue, abilityBar.maxValue, castTimePercent - timePercentLeft);
             }
         }
 
-        // easier to make this a coroutine since Update() will keep trying to disable it (for now at least)
-        IEnumerator DisableInstructionsText()
-        {
-            yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
-            instructionsText.gameObject.SetActive(false);
-            interruptButton.gameObject.SetActive(true);
-
-            castDelay = Random.Range(0.5f, 1.5f);
-            Invoke(nameof(CastAbility), castDelay);
-        }
+        protected override bool VictoryCheck() => interrupted;
 
         private void CastAbility()
         {
             abilityBar.gameObject.SetActive(true);
         }
 
-        public void InterruptButtonPressed()
+        private void InterruptButtonPressed()
         {
             if (!abilityBar.isActiveAndEnabled)
             {
-                instructionsText.gameObject.SetActive(true);
-                instructionsText.text = "Too soon";
-                tooSoon = true;
+                SetMicrogameEndText(false, "Too soon");
             }
             else
             {
                 interrupted = true;
-
-                instructionsText.gameObject.SetActive(true);
-                instructionsText.text = "Good timing";
+                SetMicrogameEndText(true);
             }
 
             interruptButton.gameObject.SetActive(false);

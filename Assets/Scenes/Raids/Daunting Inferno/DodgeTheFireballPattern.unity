@@ -441,8 +441,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17b7eba41bf6f746a06e6e2cfc71d41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerObj: {fileID: 2055586002}
-  instructionsText: {fileID: 2055586003}
+  victoryText: Threaded
+  defaultDefeatText: Like a leaf on the wind
+  postTimerWait: 0
   playerObject: {fileID: 1518460224}
   fireballs:
   - {fileID: 551321346}
@@ -573,22 +574,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &2055586002 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1100847505808109908, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
-  m_PrefabInstance: {fileID: 7751155465286772616}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2055586003 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9163045961094295230, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
-  m_PrefabInstance: {fileID: 7751155465286772616}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2849529205478200106
 PrefabInstance:
   m_ObjectHideFlags: 0

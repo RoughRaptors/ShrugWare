@@ -497,8 +497,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e54ae71307fc841a921afa4697e403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerObj: {fileID: 0}
-  instructionsText: {fileID: 0}
+  victoryText: On point
+  defaultDefeatText: Boom
+  postTimerWait: 0
   playerObject: {fileID: 1278265222}
   meteorObject: {fileID: 708319694}
   groupMembers:

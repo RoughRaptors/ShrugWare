@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.UI;
 
 namespace ShrugWare
 {
@@ -9,18 +9,13 @@ namespace ShrugWare
     public class PerformTheRotation : Microgame
     {
         [SerializeField]
-        Text instructionsText = null;
+        Button frostboltButtonObj = null;
 
         [SerializeField]
-        GameObject frostboltButtonObj = null;
+        Button glacialSpikeButtonObj = null;
 
         [SerializeField]
-        GameObject glacialSpileButtonObj = null;
-
-        [SerializeField]
-        GameObject iceBlastButtonObj = null;
-
-        private bool failed = false;
+        Button iceBlastButtonObj = null;
 
         private enum RotationMapping
         {
@@ -61,103 +56,34 @@ namespace ShrugWare
             rotation.Add((RotationMapping)1);
             rotation.Add((RotationMapping)2);
             rotation = rotation.OrderBy(i => Random.value).ToList();
+            startText = rotation[0].ToString() + " -> " + rotation[1].ToString() + " -> " + rotation[2];
 
-            instructionsText.text = rotation[0].ToString() + " -> " + rotation[1].ToString() + " -> " + rotation[2];
+            frostboltButtonObj.onClick.AddListener(() => ButtonPressed(frostboltButtonObj, RotationMapping.Frostbolt));
+            glacialSpikeButtonObj.onClick.AddListener(() => ButtonPressed(glacialSpikeButtonObj, RotationMapping.GlacialSpike));
+            iceBlastButtonObj.onClick.AddListener(() => ButtonPressed(iceBlastButtonObj, RotationMapping.IceBlast));
         }
 
-        private void Update()
+        protected override bool VictoryCheck() => rotation.Count == 0;
+
+        private void ButtonPressed(Button button, RotationMapping rotationElement)
         {
-            timeElapsed += Time.deltaTime;
-
-            // don't "start" the microgame until we can orient the player to the microgame
-            if (timeElapsed >= DataManager.SECONDS_TO_START_MICROGAME)
-            {
-                if (microgameDurationRemaining <= 0.0f)
-                {
-                    // out of time
-                    if (rotation.Count > 0 && !failed)
-                    {
-                        instructionsText.gameObject.SetActive(true);
-                        instructionsText.text = "Bad DPS";
-                    }
-
-                    HandleMicrogameEnd(rotation.Count == 0);
-                }
-                else
-                {
-                    microgameDurationRemaining -= Time.deltaTime;
-                    base.Update();
-                }
-            }
-        }
-
-        // 0
-        public void FrostboltButtonPressed()
-        {
-            if(rotation[0] == RotationMapping.Frostbolt)
+            if(rotation[0] == rotationElement)
             {
                 rotation.RemoveAt(0);
-                frostboltButtonObj.SetActive(false);
+                button.gameObject.SetActive(false);
             }
             else
             {
-                HandleLoseGame();
+                frostboltButtonObj.gameObject.SetActive(false);
+                glacialSpikeButtonObj.gameObject.SetActive(false);
+                iceBlastButtonObj.gameObject.SetActive(false);
+                SetMicrogameEndText(false, "Wrong rotation");
             }
-
-            CheckEndCondition();
-        }
-
-        // 1
-        public void GlacialSpikeButtonPressed()
-        {
-            if (rotation[0] == RotationMapping.GlacialSpike)
-            {
-                rotation.RemoveAt(0);
-                glacialSpileButtonObj.SetActive(false);
-            }
-            else
-            {
-                HandleLoseGame();
-            }
-
-            CheckEndCondition();
-        }
-
-        // 2
-        public void IceBlastButtonPressed()
-        {
-            if (rotation[0] == RotationMapping.IceBlast)
-            {
-                rotation.RemoveAt(0);
-                iceBlastButtonObj.SetActive(false);
-            }
-            else
-            {
-                HandleLoseGame();
-            }
-
-            CheckEndCondition();
-        }
-
-        private void CheckEndCondition()
-        {
+            
             if(rotation.Count == 0)
             {
-                instructionsText.gameObject.SetActive(true);
-                instructionsText.text = "PEW PEW PEW";
+                SetMicrogameEndText(true);
             }
-        }
-
-        private void HandleLoseGame()
-        {
-            frostboltButtonObj.SetActive(false);
-            glacialSpileButtonObj.SetActive(false);
-            iceBlastButtonObj.SetActive(false);
-
-            instructionsText.gameObject.SetActive(true);
-            instructionsText.text = "Wrong rotation";
-
-            failed = true;
         }
     }
 }

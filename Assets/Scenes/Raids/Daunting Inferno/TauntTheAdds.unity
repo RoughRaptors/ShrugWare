@@ -318,8 +318,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb192e8095d25174eae65d668eb8c064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerObj: {fileID: 0}
-  instructionsText: {fileID: 0}
+  victoryText: Healer Says Thanks
+  defaultDefeatText: RIP healers
+  postTimerWait: 0
   enemies:
   - {fileID: 1642837734}
   - {fileID: 105905182}

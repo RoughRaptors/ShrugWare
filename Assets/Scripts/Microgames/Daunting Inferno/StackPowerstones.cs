@@ -1,15 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ShrugWare
 {
     public class StackPowerstones : Microgame
     {
-        [SerializeField]
-        Text instructionsText = null;
-
         [SerializeField]
         GameObject playerObject = null;
 
@@ -56,42 +51,6 @@ namespace ShrugWare
             lossEffects.Add(timeScaleEffect);
 
             SpawnPowerstones();
-
-            StartCoroutine(DisableInstructionsText());
-        }
-
-        private void Update()
-        {
-            timeElapsed += Time.deltaTime;
-
-            // don't "start" the microgame until we can orient the player to the microgame
-            if (timeElapsed >= DataManager.SECONDS_TO_START_MICROGAME)
-            {
-                if (microgameDurationRemaining <= 0.0f)
-                {
-                    // out of time
-                    playerObject.transform.GetChild(0).gameObject.SetActive(false);
-
-                    if (numPowerstonesCollected != NUM_POWERSTONES_TOTAL)
-                    {
-                        instructionsText.gameObject.SetActive(true);
-                        instructionsText.text = "Casual, no kill for you";
-
-                        foreach(GameObject go in powerstones)
-                        {
-                            go.SetActive(false);
-                        }
-                    }
-
-                    HandleMicrogameEnd(numPowerstonesCollected == NUM_POWERSTONES_TOTAL);
-                }
-                else
-                {
-                    microgameDurationRemaining -= Time.deltaTime;
-                    base.Update();
-                    HandleInput();
-                }
-            }
         }
 
         protected override void OnEnable()
@@ -104,6 +63,26 @@ namespace ShrugWare
         {
             base.OnDisable();
             PlayerCollider.OnGoodCollision -= CollectStone;
+        }
+
+        protected override void OnMyGameTick(float timePercentLeft)
+        {
+            base.OnMyGameTick(timePercentLeft);
+            HandleInput();
+        }
+
+        protected override bool VictoryCheck()
+        {
+            playerObject.transform.GetChild(0).gameObject.SetActive(false);
+            bool victory = numPowerstonesCollected == NUM_POWERSTONES_TOTAL;
+            if (!victory)
+            {
+                foreach(GameObject go in powerstones)
+                {
+                    go.SetActive(false);
+                }
+            }
+            return victory;
         }
 
         private void SpawnPowerstones()
@@ -130,13 +109,6 @@ namespace ShrugWare
                     }
                 }
             }
-        }
-
-        // easier to make this a coroutine since Update() will keep trying to disable it (for now at least)
-        IEnumerator DisableInstructionsText()
-        {
-            yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
-            instructionsText.gameObject.SetActive(false);
         }
 
         private void HandleInput()
@@ -168,11 +140,9 @@ namespace ShrugWare
         private void CollectStone(GameObject stone)
         {
             stone.SetActive(false);
-
             if (++numPowerstonesCollected == NUM_POWERSTONES_TOTAL)
             {
-                instructionsText.gameObject.SetActive(true);
-                instructionsText.text = "Oops banned \n#WORTHIT #GOTLOOT";
+                SetMicrogameEndText(true);
             }
         }
     }

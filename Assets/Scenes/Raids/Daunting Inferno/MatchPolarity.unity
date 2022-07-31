@@ -1685,8 +1685,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab97a232d4441e4cafaf1cbd022f82b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerObj: {fileID: 0}
-  instructionsText: {fileID: 0}
+  victoryText: Shocking performance
+  defaultDefeatText: BZZZZT DED
+  postTimerWait: 0
   playerObject: {fileID: 861914153}
   eletricityObj: {fileID: 859681726}
   negativeGroupObj: {fileID: 13680056}
@@ -1831,7 +1832,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011826580284, guid: 5b210609803658e488f512fc13a6163e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -13
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 4000011826580284, guid: 5b210609803658e488f512fc13a6163e, type: 3}
       propertyPath: m_LocalPosition.z

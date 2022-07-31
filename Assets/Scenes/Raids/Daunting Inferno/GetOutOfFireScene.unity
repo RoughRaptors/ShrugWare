@@ -3714,8 +3714,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 140becdb6e0bbc441a61cbbefc9f276d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerObj: {fileID: 0}
-  instructionsText: {fileID: 0}
+  victoryText: No noms for dargon
+  defaultDefeatText: Be faster
+  postTimerWait: 0
   playerObject: {fileID: 477383225}
 --- !u!1001 &2127744954
 PrefabInstance:
