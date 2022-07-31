@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,8 @@ namespace ShrugWare
 
         // temp hack to allow for a brief pause in between microgame timers running out
         private bool hasRunEndCondition = false;
+        public event Action MicrogameStart;
+        public event Action MicrogameEnd;
 
 
         protected virtual void Awake() { }
