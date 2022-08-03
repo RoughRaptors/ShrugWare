@@ -29,40 +29,13 @@ namespace ShrugWare
 
         private float timeRatio = 0;
 
-        protected override void Awake()
+        protected override void Start()
         {
-            base.Awake();
+            base.Start();
             foreach(GameObject member in groupMembers)
             {
                 startPositions.Add(member, member.transform.position);
             }
-        }
-
-        protected override void Start()
-        {
-            base.Start();
-
-            DataManager.StatEffect damagePlayerEffect = new DataManager.StatEffect();
-            damagePlayerEffect.effectType = DataManager.StatModifierType.PlayerCurHealth;
-            damagePlayerEffect.amount = 34.0f;
-            damagePlayerEffect.asPercentage = false;
-
-            DataManager.StatEffect damageBossEffect = new DataManager.StatEffect();
-            damageBossEffect.effectType = DataManager.StatModifierType.BossCurHealth;
-            damageBossEffect.amount = 20.0f;
-            damageBossEffect.asPercentage = false;
-
-            DataManager.StatEffect timeScaleEffect = new DataManager.StatEffect();
-            timeScaleEffect.effectType = DataManager.StatModifierType.Timescale;
-            timeScaleEffect.amount = 0.05f;
-            timeScaleEffect.asPercentage = false;
-
-            winEffects.Add(damageBossEffect);
-            winEffects.Add(timeScaleEffect);
-
-            lossEffects.Add(damagePlayerEffect);
-            lossEffects.Add(timeScaleEffect);
-
             SetupChest();
         }
 

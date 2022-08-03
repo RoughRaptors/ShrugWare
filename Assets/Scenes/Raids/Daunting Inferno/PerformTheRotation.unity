@@ -322,6 +322,25 @@ MonoBehaviour:
   victoryText: PEW PEW PEW
   defaultDefeatText: Bad DPS
   postTimerWait: 0
+  effects:
+  - effect:
+      effectType: 0
+      amount: 34
+      asPercentage: 0
+    addOnWin: 0
+    addOnLoss: 1
+  - effect:
+      effectType: 2
+      amount: 20
+      asPercentage: 0
+    addOnWin: 1
+    addOnLoss: 0
+  - effect:
+      effectType: 3
+      amount: 0.05
+      asPercentage: 0
+    addOnWin: 1
+    addOnLoss: 1
   frostboltButtonObj: {fileID: 27083951}
   glacialSpikeButtonObj: {fileID: 1325052455}
   iceBlastButtonObj: {fileID: 1213044723}

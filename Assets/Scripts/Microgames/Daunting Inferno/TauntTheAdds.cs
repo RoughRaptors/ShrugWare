@@ -19,40 +19,14 @@ namespace ShrugWare
         private const float Y_MIN = 0.70f;
         private const float Y_MAX = 1.70f;
 
-        protected override void Awake()
+        protected override void Start()
         {
-            base.Awake();
+            base.Start();
 
             for(int ii = 0; ii < enemies.Length; ii++)
             {
                 SetupEnemy(ii);
             }
-        }
-
-        protected override void Start()
-        {
-            base.Start();
-
-            DataManager.StatEffect damagePlayerEffect = new DataManager.StatEffect();
-            damagePlayerEffect.effectType = DataManager.StatModifierType.PlayerCurHealth;
-            damagePlayerEffect.amount = 34.0f;
-            damagePlayerEffect.asPercentage = false;
-
-            DataManager.StatEffect damageBossEffect = new DataManager.StatEffect();
-            damageBossEffect.effectType = DataManager.StatModifierType.BossCurHealth;
-            damageBossEffect.amount = 20.0f;
-            damageBossEffect.asPercentage = false;
-
-            DataManager.StatEffect timeScaleEffect = new DataManager.StatEffect();
-            timeScaleEffect.effectType = DataManager.StatModifierType.Timescale;
-            timeScaleEffect.amount = 0.05f;
-            timeScaleEffect.asPercentage = false;
-
-            winEffects.Add(damageBossEffect);
-            winEffects.Add(timeScaleEffect);
-
-            lossEffects.Add(damagePlayerEffect);
-            lossEffects.Add(timeScaleEffect);
         }
 
         protected override void OnMyGameStart()

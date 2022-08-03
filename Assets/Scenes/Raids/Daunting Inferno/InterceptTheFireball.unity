@@ -669,6 +669,25 @@ MonoBehaviour:
   victoryText: Good tank
   defaultDefeatText: I smell healer
   postTimerWait: 0
+  effects:
+  - effect:
+      effectType: 0
+      amount: 34
+      asPercentage: 0
+    addOnWin: 0
+    addOnLoss: 1
+  - effect:
+      effectType: 2
+      amount: 20
+      asPercentage: 0
+    addOnWin: 1
+    addOnLoss: 0
+  - effect:
+      effectType: 3
+      amount: 0.05
+      asPercentage: 0
+    addOnWin: 1
+    addOnLoss: 1
   playerObject: {fileID: 114926076}
   fireballObject: {fileID: 708319694}
   healerObject: {fileID: 1807666803}

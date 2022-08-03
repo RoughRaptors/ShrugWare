@@ -30,27 +30,6 @@ namespace ShrugWare
         {
             base.Start();
 
-            DataManager.StatEffect damagePlayerEffect = new DataManager.StatEffect();
-            damagePlayerEffect.effectType = DataManager.StatModifierType.PlayerCurHealth;
-            damagePlayerEffect.amount = 34.0f;
-            damagePlayerEffect.asPercentage = false;
-
-            DataManager.StatEffect damageBossEffect = new DataManager.StatEffect();
-            damageBossEffect.effectType = DataManager.StatModifierType.BossCurHealth;
-            damageBossEffect.amount = 20.0f; 
-            damageBossEffect.asPercentage = false;
-
-            DataManager.StatEffect timeScaleEffect = new DataManager.StatEffect();
-            timeScaleEffect.effectType = DataManager.StatModifierType.Timescale;
-            timeScaleEffect.amount = 0.05f; 
-            timeScaleEffect.asPercentage = false;
-
-            winEffects.Add(damageBossEffect);
-            winEffects.Add(timeScaleEffect);
-
-            lossEffects.Add(damagePlayerEffect);
-            lossEffects.Add(timeScaleEffect);
-
             // get a random, 3 button rotation
             rotation.Add((RotationMapping)0);
             rotation.Add((RotationMapping)1);

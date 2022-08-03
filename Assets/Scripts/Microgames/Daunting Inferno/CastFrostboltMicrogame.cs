@@ -32,28 +32,6 @@ namespace ShrugWare
         protected override void Start()
         {
             base.Start();
-
-            DataManager.StatEffect damagePlayerEffect = new DataManager.StatEffect();
-            damagePlayerEffect.effectType = DataManager.StatModifierType.PlayerCurHealth;
-            damagePlayerEffect.amount = 34.0f;
-            damagePlayerEffect.asPercentage = false;
-
-            DataManager.StatEffect damageBossEffect = new DataManager.StatEffect();
-            damageBossEffect.effectType = DataManager.StatModifierType.BossCurHealth;
-            damageBossEffect.amount = 20.0f;
-            damageBossEffect.asPercentage = false;
-
-            DataManager.StatEffect timeScaleEffect = new DataManager.StatEffect();
-            timeScaleEffect.effectType = DataManager.StatModifierType.Timescale;
-            timeScaleEffect.amount = 0.05f;
-            timeScaleEffect.asPercentage = false;
-
-            winEffects.Add(damageBossEffect);
-            winEffects.Add(timeScaleEffect);
-
-            lossEffects.Add(damagePlayerEffect);
-            lossEffects.Add(timeScaleEffect);
-
             fireballButton.gameObject.SetActive(false);
             frostboltButton.gameObject.SetActive(false);
             frostboltButton.onClick.AddListener(CastFrostboltButtonPressed);
@@ -98,7 +76,6 @@ namespace ShrugWare
             button3.gameObject.transform.position = rightButtonObj.transform.position;
             buttonList.RemoveAt(0);
         }
-
         private void CastFrostboltButtonPressed()
         {
             castedFrostbolt = true;

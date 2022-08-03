@@ -61,7 +61,7 @@
      <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\DauntingInfernoRaid.cs" />
      <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\SceneTransitionData.cs" />
      <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StackUpForMeteor.cs" />
-     <Compile Include="Assets\Scripts\Microgame.cs" />
+     <Compile Include="Assets\Scripts\Microgames\Microgame.cs" />
      <Compile Include="Assets\Scripts\Raid.cs" />
      <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\PerformTheRotation.cs" />
      <Compile Include="Assets\Scripts\Bosses\Tuzi.cs" />
@@ -90,6 +90,7 @@
      <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\Buttons\ReloadSceneButton.cs" />
      <Compile Include="Assets\Scripts\DataManager.cs" />
      <Compile Include="Assets\Scripts\PlayerInventory.cs" />
+     <Compile Include="Assets\Scripts\Microgames\MicrogameEffect.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Art\Lightning Bolt\Readme.txt" />

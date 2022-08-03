@@ -679,6 +679,25 @@ MonoBehaviour:
   victoryText: Wheeeee!
   defaultDefeatText: Fell off
   postTimerWait: 1.5
+  effects:
+  - effect:
+      effectType: 0
+      amount: 34
+      asPercentage: 0
+    addOnWin: 0
+    addOnLoss: 1
+  - effect:
+      effectType: 2
+      amount: 20
+      asPercentage: 0
+    addOnWin: 1
+    addOnLoss: 0
+  - effect:
+      effectType: 3
+      amount: 0.05
+      asPercentage: 0
+    addOnWin: 1
+    addOnLoss: 1
   playerObject: {fileID: 1387725039}
   arrowObj: {fileID: 78332049}
   safeZoneObj: {fileID: 386133750}

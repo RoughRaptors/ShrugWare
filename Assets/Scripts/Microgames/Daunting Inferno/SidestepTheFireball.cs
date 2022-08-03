@@ -20,33 +20,6 @@ namespace ShrugWare
         private const float FIREBALL_MOVE_SPEED = 30.0f;
         private const float PLAYER_MOVE_SPEED = 11.0f;
 
-        protected override void Start()
-        {
-            base.Start();
-
-            playerObject.SetActive(true);
-
-            DataManager.StatEffect damagePlayerEffect = new DataManager.StatEffect();
-            damagePlayerEffect.effectType = DataManager.StatModifierType.PlayerCurHealth;
-            damagePlayerEffect.amount = 34.0f; 
-            damagePlayerEffect.asPercentage = false;
-
-            DataManager.StatEffect damageBossEffect = new DataManager.StatEffect();
-            damageBossEffect.effectType = DataManager.StatModifierType.BossCurHealth;
-            damageBossEffect.amount = 20.0f;
-            damageBossEffect.asPercentage = false;
-
-            DataManager.StatEffect timeScaleEffect = new DataManager.StatEffect();
-            timeScaleEffect.effectType = DataManager.StatModifierType.Timescale;
-            timeScaleEffect.amount = 0.05f; 
-            timeScaleEffect.asPercentage = false;
-
-            winEffects.Add(damageBossEffect);
-            winEffects.Add(timeScaleEffect);
-
-            lossEffects.Add(damagePlayerEffect);
-            lossEffects.Add(timeScaleEffect);
-        }
 
         protected override void OnEnable()
         {
