@@ -153,6 +153,8 @@ namespace ShrugWare
             healthPotionItem.GetComponentInChildren<Text>().text = "";
             maxHealthPotionItem.GetComponentInChildren<Text>().text = "";
 
+            if(!OverworldManager.Instance) return;
+
             Item healthPotion = OverworldManager.Instance.GetPlayerInventory().GetInventoryItem(0);
             Item maxHealthPotion = OverworldManager.Instance.GetPlayerInventory().GetInventoryItem(1);
             if(healthPotion != null)
