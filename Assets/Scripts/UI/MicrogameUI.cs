@@ -35,16 +35,16 @@ namespace ShrugWare
 
         private void OnEnable()
         {
-            myMicrogame.MicrogameStart += OnMicrogameStart;
+            myMicrogame.MicrogameStartText += OnMicrogameStart;
             myMicrogame.MicrogameTick += ReduceSlider;
-            myMicrogame.MicrogameEnd += OnMicrogameEnd;
+            myMicrogame.MicrogameEndText += OnMicrogameEnd;
         }
 
         private void OnDisable()
         {
-            myMicrogame.MicrogameStart -= OnMicrogameStart;
+            myMicrogame.MicrogameStartText -= OnMicrogameStart;
             myMicrogame.MicrogameTick -= ReduceSlider;
-            myMicrogame.MicrogameEnd -= OnMicrogameEnd;
+            myMicrogame.MicrogameEndText -= OnMicrogameEnd;
         }
 
         private void ReduceSlider(float percentTimeLeft)

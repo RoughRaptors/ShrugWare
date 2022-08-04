@@ -140,16 +140,20 @@ namespace ShrugWare
                 timeInMainScene = 0.0f;
             }
 
-            playerInventory = OverworldManager.Instance.GetPlayerInventory();
-            if(playerInventory != null)
+            if(OverworldManager.Instance)
             {
-                playerInventory.RecalculateStats();
+                playerInventory = OverworldManager.Instance.GetPlayerInventory();
+                if(playerInventory != null)
+                {
+                    playerInventory.RecalculateStats();
             
+                }
+                else
+                {
+                    playerInventory = new PlayerInventory();
+                }
             }
-            else
-            {
-                playerInventory = new PlayerInventory();
-            }
+
 
             audioManager = GetComponent<AudioManager>();
             curSceneIndex = (int)DataManager.Scenes.BossScene;
@@ -327,7 +331,8 @@ namespace ShrugWare
         public void TakePlayerRaidDamage(float amount)
         {
             float totalAmount = amount;
-            float mitigationModifier = playerInventory.GetMitigation();
+            float mitigationModifier = 0;
+            if(OverworldManager.Instance) playerInventory.GetMitigation();
             if(mitigationModifier > 0)
             {
                 totalAmount = totalAmount * (mitigationModifier / 100);

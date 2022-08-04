@@ -6,86 +6,51 @@ namespace ShrugWare
     public class TauntTheAdds : Microgame
     {
         [SerializeField]
-        GameObject[] enemies = new GameObject[0];
-        Dictionary<GameObject, Vector3> enemyTargetPositions = new Dictionary<GameObject, Vector3>();
-        Dictionary<GameObject, bool> enemiesTaunted = new Dictionary<GameObject, bool>();
-
-        bool won = false;
+        List<Clickable> enemies = new List<Clickable>();
+        Dictionary<Clickable, Vector3> enemyTargetPositions = new Dictionary<Clickable, Vector3>();
 
         private const float ENEMY_MOVE_SPEED = 1.5f;
-        
         private const float X_MIN = -3.20f;
         private const float X_MAX = 3.20f;
         private const float Y_MIN = 0.70f;
         private const float Y_MAX = 1.70f;
 
-        protected override void Awake()
+        protected override void Start()
         {
-            base.Awake();
+            base.Start();
 
-            for(int ii = 0; ii < enemies.Length; ii++)
+            for(int ii = 0; ii < enemies.Count; ii++)
             {
                 SetupEnemy(ii);
             }
         }
 
-        protected override void Start()
-        {
-            base.Start();
-
-            DataManager.StatEffect damagePlayerEffect = new DataManager.StatEffect();
-            damagePlayerEffect.effectType = DataManager.StatModifierType.PlayerCurHealth;
-            damagePlayerEffect.amount = 34.0f;
-            damagePlayerEffect.asPercentage = false;
-
-            DataManager.StatEffect damageBossEffect = new DataManager.StatEffect();
-            damageBossEffect.effectType = DataManager.StatModifierType.BossCurHealth;
-            damageBossEffect.amount = 20.0f;
-            damageBossEffect.asPercentage = false;
-
-            DataManager.StatEffect timeScaleEffect = new DataManager.StatEffect();
-            timeScaleEffect.effectType = DataManager.StatModifierType.Timescale;
-            timeScaleEffect.amount = 0.05f;
-            timeScaleEffect.asPercentage = false;
-
-            winEffects.Add(damageBossEffect);
-            winEffects.Add(timeScaleEffect);
-
-            lossEffects.Add(damagePlayerEffect);
-            lossEffects.Add(timeScaleEffect);
-        }
-
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
-            foreach(GameObject enemy in enemies)
-                enemy.SetActive(true);
+            foreach(Clickable enemy in enemies)
+            {
+                enemy.Clicked += Taunted;
+                enemy.gameObject.SetActive(true);
+            }
         }
 
         protected override void OnMyGameTick(float timePercentLeft)
         {
             base.OnMyGameTick(timePercentLeft);
-            foreach(GameObject enemy in enemies)
+            foreach(Clickable enemy in enemies)
             {
                 enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, enemyTargetPositions[enemy], ENEMY_MOVE_SPEED * Time.deltaTime);
             }
-            HandleInput();
-
-            if(!won && !enemiesTaunted.ContainsValue(false))
-            {
-                won = true;
-                SetMicrogameEndText(true);
-            }
         }
 
-        protected override bool VictoryCheck() => won;
+        protected override bool VictoryCheck() => enemies.Count == 0;
 
         private void SetupEnemy(int index)
         {
             // try 100 times to get a far enough position away from its spawn
             int numTries = 0;
-            GameObject enemy = enemies[index];
-            enemiesTaunted.Add(enemy, false);
+            Clickable enemy = enemies[index];
 
             // enemy 1
             while (numTries < 100)
@@ -107,28 +72,18 @@ namespace ShrugWare
                     break;
                 }
 
-                enemy.SetActive(false);
+                enemy.gameObject.SetActive(false);
             }
         }
 
-        private void HandleInput()
+        private void Taunted(Clickable enemy)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit))
-                {
-                    foreach(GameObject enemy in enemies)
-                    {
-                        if(hit.transform.gameObject == enemy)
-                        {
-                            enemiesTaunted[enemy] = true;
-                            enemy.GetComponentInChildren<SkinnedMeshRenderer>().material.color = Color.green;
-                        }
-                    }
-                }
-            }
+            enemies.Remove(enemy);
+            enemy.GetComponentInChildren<SkinnedMeshRenderer>().material.color = Color.green;
+            enemy.Clicked -= Taunted;
+            
+            if(!VictoryCheck()) return;
+            SetMicrogameEndText(true);
         }
     }
 }

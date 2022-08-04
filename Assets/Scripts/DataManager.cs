@@ -39,6 +39,7 @@ namespace ShrugWare
             IncomingDamage
         }
 
+        [System.Serializable]
         public struct StatEffect
         {
             public StatModifierType effectType;

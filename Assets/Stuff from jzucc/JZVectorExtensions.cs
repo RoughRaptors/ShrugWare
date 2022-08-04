@@ -141,6 +141,7 @@ public static class JZVectorExtensions
         result.z = Mathf.Clamp(current.z, min.z, max.z);
         return result;
     }
+    
     public static Vector2 Clamp(this Vector2 current, Vector2 min, Vector2 max)
     {
         Vector2 result;
