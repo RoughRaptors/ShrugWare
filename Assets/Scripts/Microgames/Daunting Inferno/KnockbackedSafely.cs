@@ -45,18 +45,16 @@ namespace ShrugWare
         protected override void OnMyGameTick(float timePercentLeft)
         {
             base.OnMyGameTick(timePercentLeft);
-
-            float angleRad = Mathf.Atan2(playerObject.transform.position.y - arrowObj.transform.position.y,
+            float angle = Mathf.Atan2(playerObject.transform.position.y - arrowObj.transform.position.y,
                 playerObject.transform.position.x - arrowObj.transform.position.x);
 
-            float angleDeg = (180 / Mathf.PI) * angleRad;
-            arrowObj.transform.rotation = Quaternion.Euler(0, 0, angleDeg);
+            arrowObj.transform.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg);
         }
 
         protected override void TimeOut()
         {
             playerObject.DisableMovement();
-            playerObject.GetComponent<Collider>().enabled = false;
+            playerObject.GetComponent<Collider>().enabled = false; //Turns off the collider that keeps the player in bounds
             ApplyKnockback();
         }
 
