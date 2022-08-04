@@ -55,7 +55,7 @@
      <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StackPowerstones.cs" />
      <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\Buttons\LoadNextLevelButton.cs" />
      <Compile Include="Assets\Scripts\TutorialManager.cs" />
-     <Compile Include="Assets\Scripts\PlayerCollider.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerCollider.cs" />
      <Compile Include="Assets\Scripts\AudioManager.cs" />
      <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\KnockbackedSafely.cs" />
      <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterceptTheFireball.cs" />
@@ -91,6 +91,10 @@
      <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\Buttons\ReloadSceneButton.cs" />
      <Compile Include="Assets\Scripts\DataManager.cs" />
      <Compile Include="Assets\Scripts\PlayerInventory.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerMover.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerInput.cs" />
+     <Compile Include="Assets\Stuff from jzucc\AlignCollidersToCamera.cs" />
+     <Compile Include="Assets\Scripts\Clickable.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Art\Lightning Bolt\Readme.txt" />

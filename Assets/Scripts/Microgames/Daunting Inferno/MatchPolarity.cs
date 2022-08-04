@@ -22,8 +22,6 @@ namespace ShrugWare
         [SerializeField]
         GameObject playerPositiveObj;
 
-        private const float PLAYER_MOVE_SPEED = 40.0f;
-
         private bool polarityMatched = false;
 
         private Vector3 electricityStartPos;
@@ -65,7 +63,6 @@ namespace ShrugWare
         {
             base.OnMyGameTick(timePercentLeft);
             eletricityObj.transform.position = Vector3.Lerp(electricityStartPos, playerObject.transform.position, 1 - timePercentLeft);
-            HandleInput();
         }
 
         protected override bool VictoryCheck()
@@ -76,32 +73,6 @@ namespace ShrugWare
             }
 
             return polarityMatched;
-        }
-
-        private void HandleInput()
-        {
-            Vector3 newPos = playerObject.transform.position;
-            if (Input.GetKey(KeyCode.W))
-            {
-                newPos.y += PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.S))
-            {
-                newPos.y -= PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                newPos.x -= PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.D))
-            {
-                newPos.x += PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            playerObject.transform.position = newPos;
         }
 
         private void SetupPlayer()

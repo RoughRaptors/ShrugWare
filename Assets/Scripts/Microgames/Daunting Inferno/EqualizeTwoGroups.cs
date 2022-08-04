@@ -16,8 +16,6 @@ namespace ShrugWare
         [SerializeField]
         GameObject groupOfThreeObj;
 
-        private const float PLAYER_MOVE_SPEED = 30.0f;
-
         private bool stackedEqually = false;
 
         private Vector3 meteorStartPos;
@@ -57,7 +55,6 @@ namespace ShrugWare
         {
             base.OnMyGameTick(timePercentLeft);
             meteorObject.transform.position = Vector3.Lerp(meteorStartPos, playerObject.transform.position, 1 - timePercentLeft);
-            HandleInput();
         }
 
         protected override bool VictoryCheck()
@@ -68,32 +65,6 @@ namespace ShrugWare
             }
 
             return stackedEqually;
-        }
-
-        private void HandleInput()
-        {
-            Vector3 newPos = playerObject.transform.position;
-            if (Input.GetKey(KeyCode.W))
-            {
-                newPos.y += PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.S))
-            {
-                newPos.y -= PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                newPos.x -= PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.D))
-            {
-                newPos.x += PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            playerObject.transform.position = newPos;
         }
 
         // 50/50 chance to spawn on left or right

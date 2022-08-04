@@ -20,7 +20,6 @@ namespace ShrugWare
         private const float Y_MAX = 0.0f;
 
         private const float FIREBALL_MOVE_SPEED = 15.0f;
-        private const float PLAYER_MOVE_SPEED = 15.0f;
 
         protected override void Start()
         {
@@ -45,39 +44,9 @@ namespace ShrugWare
             base.OnMyGameTick(timePercentLeft);
             fireballObject.transform.position =
                 Vector3.MoveTowards(fireballObject.transform.position, healerObject.transform.position, FIREBALL_MOVE_SPEED * Time.deltaTime);
-            HandleInput();
         }
 
         protected override bool VictoryCheck() => intercepted;
-
-        private void HandleInput()
-        {
-            if (!intercepted)
-            {
-                Vector3 newPos = playerObject.transform.position;
-                if (Input.GetKey(KeyCode.W))
-                {
-                    newPos.y += PLAYER_MOVE_SPEED * Time.deltaTime;
-                }
-
-                if (Input.GetKey(KeyCode.S))
-                {
-                    newPos.y -= PLAYER_MOVE_SPEED * Time.deltaTime;
-                }
-
-                if (Input.GetKey(KeyCode.A))
-                {
-                    newPos.x -= PLAYER_MOVE_SPEED * Time.deltaTime;
-                }
-
-                if (Input.GetKey(KeyCode.D))
-                {
-                    newPos.x += PLAYER_MOVE_SPEED * Time.deltaTime;
-                }
-
-                playerObject.transform.position = newPos;
-            }
-        }
 
         private void SetupPlayerObject()
         {

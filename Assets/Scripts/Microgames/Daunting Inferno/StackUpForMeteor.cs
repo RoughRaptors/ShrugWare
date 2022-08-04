@@ -18,9 +18,7 @@ namespace ShrugWare
         private const float Y_MIN = -30.0f;
         private const float Y_MAX = 0.0f;
         private const float DISTANCE_FOR_VALID_STACK = 10.0f;
-
-        private const float PLAYER_MOVE_SPEED = 22.5f;
-
+        private const float MEMBER_MOVE_SPEED = 22.5f;
         private bool stacked = true;
 
         private float timeRatio = 0;
@@ -56,9 +54,8 @@ namespace ShrugWare
             foreach(GameObject groupMember in groupMembers)
             {
                 groupMember.transform.position =
-                    Vector3.MoveTowards(groupMember.transform.position, playerObject.transform.position, PLAYER_MOVE_SPEED * Time.deltaTime);
+                    Vector3.MoveTowards(groupMember.transform.position, playerObject.transform.position, MEMBER_MOVE_SPEED * Time.deltaTime);
             }
-            HandleInput();
         }
 
         protected override bool VictoryCheck()
@@ -69,32 +66,6 @@ namespace ShrugWare
             }
 
             return stacked;
-        }
-
-        private void HandleInput()
-        {
-            Vector3 newPos = playerObject.transform.position;
-            if (Input.GetKey(KeyCode.W))
-            {
-                newPos.y += PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.S))
-            {
-                newPos.y -= PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                newPos.x -= PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.D))
-            {
-                newPos.x += PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            playerObject.transform.position = newPos;
         }
 
         private void SetupPlayerObject()

@@ -20,7 +20,6 @@ namespace ShrugWare
         private const float Y_MIN = -30.0f;
         private const float Y_MAX = 10.0f;
 
-        private const float PLAYER_MOVE_SPEED = 25.0f;
         private const float REQUIRED_DISTANCE_FROM_PLAYER = 45.0f;
 
         private bool lootStolen = false;
@@ -54,40 +53,10 @@ namespace ShrugWare
         protected override void OnMyGameTick(float timePercentLeft)
         {
             base.OnMyGameTick(timePercentLeft);
-            if (!lootStolen)
-            {
-                MoveGroupMembers();
-                HandleInput();
-            }
+            MoveGroupMembers();
         }
 
         protected override bool VictoryCheck() => lootStolen;
-
-        private void HandleInput()
-        {
-            Vector3 newPos = playerObject.transform.position;
-            if (Input.GetKey(KeyCode.W))
-            {
-                newPos.y += PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.S))
-            {
-                newPos.y -= PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                newPos.x -= PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.D))
-            {
-                newPos.x += PLAYER_MOVE_SPEED * Time.deltaTime;
-            }
-
-            playerObject.transform.position = newPos;
-        }
 
         private void SetupChest()
         {

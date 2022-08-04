@@ -25,9 +25,11 @@ namespace ShrugWare
 
         // temp hack to allow for a brief pause in between microgame timers running out
         private bool hasRunEndCondition = false;
-        public event Action<string> MicrogameStart;
+        public event Action<string> MicrogameStartText;
+        public event Action MicrogameStarted;
         public event Action<float> MicrogameTick;
-        public event Action<bool, string> MicrogameEnd;
+        public event Action MicrogameEnded;
+        public event Action<bool, string> MicrogameEndText;
         private bool endTextSet = false;
 
 
@@ -57,7 +59,8 @@ namespace ShrugWare
         {
             //Wait initial delay time
             yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
-            MicrogameStart?.Invoke(startText);
+            MicrogameStartText?.Invoke(startText);
+            MicrogameStarted?.Invoke();
             OnMyGameStart();
 
             //Wait game duration
@@ -113,7 +116,8 @@ namespace ShrugWare
         protected void SetMicrogameEndText(bool victory, string text)
         {
             if(endTextSet) return;
-            MicrogameEnd?.Invoke(victory, text);
+            MicrogameEndText?.Invoke(victory, text);
+            MicrogameEnded?.Invoke();
             endTextSet = true;
         }
 
