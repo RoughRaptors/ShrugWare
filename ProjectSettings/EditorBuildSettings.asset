@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MerchantScene.unity
     guid: d14131625f363864c9811f8fa3b0c1e3
   - enabled: 1
-    path: Assets/Scenes/BossScene.unity
+    path: Assets/Scenes/Bosses/Warboss Kard.unity
     guid: 2724fc1884c1ac04b939f5b7df9ffed6
   - enabled: 1
     path: Assets/Scenes/Raids/Daunting Inferno/GetOutOfFireScene.unity
@@ -62,4 +62,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Raids/Daunting Inferno/StealTheChest.unity
     guid: 65ecb1f9d1f35384f8bf8d4d59311d0a
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: dd69bd027abc73c48b5382fd6cab7dda, type: 2}

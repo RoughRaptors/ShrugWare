@@ -69,15 +69,16 @@ namespace ShrugWare
         public float GetCurTimeScale() { return curTimeScale; }
         public void SetCurTimeScale(float newTimeScale) { curTimeScale = newTimeScale; }
 
-        // keep track of this so we can always know our scene index from anywhere - maybe useful later
-        private int curSceneIndex = 0;
-        public int GetCurSceneIndex() { return curSceneIndex; }
-
-        private bool gameRunning = false;
-
         // for now until we find something better, hold this so we know when to transition to our next microgame - TODO MAKE THIS BETTER
         private float timeInMainScene = 0.0f;
         public float GetTimeInMainScene() { return timeInMainScene; }
+
+        // this is bad
+        [SerializeField]
+        string bossName;
+
+        private Boss curBoss;
+        public Boss CurBoss { get; set; }
 
         PlayerInventory playerInventory;
 
@@ -99,22 +100,14 @@ namespace ShrugWare
         PlayerInfo playerInfo = new PlayerInfo(DataManager.PLAYER_START_HP, DataManager.PLAYER_MAX_HP, DataManager.PLAYER_STARTING_LIVES);
         public PlayerInfo GetPlayerInfo() { return playerInfo; }
 
-        private int curRaidListIndex = -1;
-        public int GetCurRaidListIndex() { return curRaidListIndex; }
-        private List<Raid> raidList = new List<Raid>();
-
-        private Raid curRaid = null;
-        public Raid GetCurRaid() { return curRaid; }
-
         private List<DataManager.StatEffect> previouslyRanEffects = new List<DataManager.StatEffect>();
         public List<DataManager.StatEffect> GetPreviouslyRanEffects() { return previouslyRanEffects; }
 
         public enum GameState
         {
-            MainMicrogameLoop, // the top level of the boss loop hierarchy - in between games
+            BossScreen, // the top level of the boss loop hierarchy - in between games
             Paused,
             InMicrogame,
-            Merchant,
         }
 
         private GameState gameState = GameState.Paused;
@@ -134,13 +127,13 @@ namespace ShrugWare
                 Destroy(gameObject);
 
                 // set all of our shit back - figure out a better solution later if there is one - TODO MAKE THIS BETTER
+                curBoss = BossGameManager.Instance.curBoss;
                 curTimeScale = BossGameManager.Instance.curTimeScale;
-                gameRunning = BossGameManager.Instance.gameRunning;
                 playerInfo.livesLeft = BossGameManager.Instance.playerInfo.livesLeft;
                 timeInMainScene = 0.0f;
             }
 
-            if(OverworldManager.Instance)
+            if(OverworldManager.Instance != null)
             {
                 playerInventory = OverworldManager.Instance.GetPlayerInventory();
                 if(playerInventory != null)
@@ -154,9 +147,18 @@ namespace ShrugWare
                 }
             }
 
+            // bad
+            // set our boss
+            if(curBoss == null && bossName == "Warboss Kard")
+            {
+                curBoss = new WarbossKard();
+            }
+            else if (curBoss == null && bossName == "Tuzi")
+            {
+                curBoss = new Tuzi();
+            }
 
             audioManager = GetComponent<AudioManager>();
-            curSceneIndex = (int)DataManager.Scenes.BossScene;
         }
 
         private void Start()
@@ -164,12 +166,6 @@ namespace ShrugWare
             Screen.SetResolution(1920, 1080, false);
             Time.timeScale = curTimeScale;
             audioManager.PlayAudioClip(DataManager.AudioEffectTypes.MainMenu, .175f);
-
-            // initialize our data if this is our first time starting
-            if (raidList.Count == 0)
-            {
-                PopulateData();
-            }
 
             // our raid and boss data needs to be populated by this point
             UpdateGameUI();
@@ -179,40 +175,32 @@ namespace ShrugWare
         {
             // we will come back here whenever we load back from a microgame to the main scene
             // we need to keep playing, which means to pick and start a new microgame from our raid and boss if we're not dead
-            if (gameRunning && curSceneIndex == (int)DataManager.Scenes.BossScene)
+            if (gameState == GameState.BossScreen)
             {
                 timeInMainScene += Time.deltaTime;
 
                 bossUIManager.UpdateBetweenMicrogameText();
-                if (playerInfo.livesLeft > 0 && timeInMainScene >= DataManager.SECONDS_BETWEEN_MICROGAMES && !(curRaid is null) && !(curRaid.curBoss is null))
+                if (playerInfo.livesLeft > 0 && timeInMainScene >= DataManager.SECONDS_BETWEEN_MICROGAMES && !(curBoss is null))
                 {
-                    DataManager.Scenes nextScene = curRaid.curBoss.PickNextMicrogame(); 
+                    DataManager.Scenes nextScene = curBoss.PickNextMicrogame();
                     LoadScene((int)nextScene);
                 }
             }
-        }
-
-        private void PopulateData()
-        {
-            curRaidListIndex = 0;
-            DauntingInferno dauntingInferno = new DauntingInferno();
-            raidList.Add(dauntingInferno);
-            curRaid = dauntingInferno;
         }
 
         public void MicrogameCompleted(bool wonMicrogame)
         {
             UpdateGameUI();
             HandleFromMicrogameTransition();
-            BossGameManager.Instance.LoadScene((int)DataManager.Scenes.BossScene);
+            BossGameManager.Instance.LoadScene((int)DataManager.Scenes.WarbossKard);
         }
 
         private void HandleFromMicrogameTransition()
         {
-            gameState = GameState.MainMicrogameLoop;
+            gameState = GameState.BossScreen;
             bossUIManager.SetMainCanvasEnabled(true);
             audioManager.PlayAudioClip(DataManager.AudioEffectTypes.BetweenMicrogame, .3f);
-            if (!(curRaid is null) && !(curRaid.curBoss is null))
+            if (!(curBoss is null))
             {
                 CheckAndHandleEndCondition();
             }
@@ -224,24 +212,13 @@ namespace ShrugWare
 
         private void CheckAndHandleEndCondition()
         {
-            if (curRaid.curBoss.curHealth <= 0)
+            if (curBoss.curHealth <= 0)
             {
-                // go to next boss
-                curRaid.curBoss.isDead = true;
-                curRaid.curBoss = curRaid.GetNextBoss();
+                curBoss.isDead = true;
 
-                if (curRaid.IsComplete)
-                {
-                    // pause the game and wait for the player to hit the continue button
-                    PauseGame();
-                    bossUIManager.HandleWinGame();
-                }
-                else
-                {
-                    // boss is dead but raid is not complete, wait for the player to move on
-                    PauseGame();
-                    bossUIManager.HandlePauseGame();
-                }
+                // pause the game and wait for the player to hit the continue button
+                PauseGame();
+                bossUIManager.HandleWinGame();
             }
             else if(playerInfo.livesLeft == 0)
             {
@@ -254,7 +231,7 @@ namespace ShrugWare
         public void LoadScene(int sceneIndex)
         {
             bool mainCanvasEnabled = false;
-            if (sceneIndex == (int)DataManager.Scenes.BossScene)
+            if (sceneIndex == (int)DataManager.Scenes.WarbossKard)
             {
                 mainCanvasEnabled = true;
             }
@@ -262,8 +239,6 @@ namespace ShrugWare
             bossUIManager.SetMainCanvasEnabled(mainCanvasEnabled);
             
             timeInMainScene = 0.0f;
-
-            curSceneIndex = sceneIndex;
             SceneManager.LoadScene(sceneIndex);
         }
 
@@ -308,8 +283,7 @@ namespace ShrugWare
 
         public void ContinueGame()
         {
-            gameState = GameState.MainMicrogameLoop;
-            gameRunning = true;
+            gameState = GameState.BossScreen;
             bossUIManager.ToggleConsumableVisibility(false);
             audioManager.StopAudio();
         }
@@ -317,15 +291,7 @@ namespace ShrugWare
         public void PauseGame()
         {
             gameState = GameState.Paused;
-            gameRunning = false;
             bossUIManager.ToggleConsumableVisibility(true);
-        }
-
-        public void EnterMerchant()
-        {
-            AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.ButtonClick);
-            gameState = GameState.Merchant;
-            gameRunning = false;   
         }
 
         public void TakePlayerRaidDamage(float amount)
@@ -374,9 +340,9 @@ namespace ShrugWare
 
         public void DamageBoss(float amount)
         {
-            if (!(curRaid is null) && !(curRaid.curBoss is null))
+            if (!(curBoss is null))
             {
-                curRaid.curBoss.TakeDamage(amount);
+                curBoss.TakeDamage(amount);
             }
         }
 
@@ -392,16 +358,6 @@ namespace ShrugWare
             curTimeScale += amount;
             Time.timeScale = curTimeScale;
             bossUIManager.SetTimescaleInputFieldText("Time Scale: " + curTimeScale.ToString("F3"));
-        }
-
-        public Raid GetRaidAtIndex(int index)
-        {
-            if(index < raidList.Count)
-            {
-                return raidList[index];
-            }
-
-            return null;
         }
 
         public void AddPreviouslyRanEffect(DataManager.StatEffect effect)
@@ -422,7 +378,7 @@ namespace ShrugWare
         public void UpdateGameUI()
         {
             bossUIManager.UpdateHealthBars();
-            bossUIManager.FillGameInfoText(curRaid, playerInfo);
+            bossUIManager.FillGameInfoText(curBoss, playerInfo);
         }
 
         public void UseConsumableItem(int templateId)

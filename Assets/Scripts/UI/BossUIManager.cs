@@ -87,9 +87,9 @@ namespace ShrugWare
             timeScaleInputField.text = "Time Scale: " + BossGameManager.Instance.GetCurTimeScale().ToString("F3");
         }
 
-        public void FillGameInfoText(Raid curRaid, BossGameManager.PlayerInfo playerInfo)
+        public void FillGameInfoText(Boss curBoss, BossGameManager.PlayerInfo playerInfo)
         {
-            if (!(curRaid is null) && !(curRaid.curBoss is null))
+            if (!(curBoss is null))
             {
                 gameInfoText.text = "Rezzes Left: " + playerInfo.livesLeft.ToString();
             }
@@ -138,7 +138,7 @@ namespace ShrugWare
 
         public void HandlePauseGame()
         {
-            continueGameButton.GetComponentInChildren<Text>().text = "Continue to " + BossGameManager.Instance.GetCurRaid().curBoss.bossName;
+            continueGameButton.GetComponentInChildren<Text>().text = "Continue to " + BossGameManager.Instance.CurBoss.bossName;
             continueGameButton.gameObject.SetActive(true);
         }
 
