@@ -9,7 +9,7 @@ namespace ShrugWare
             Overworld = 0,
             TutorialScene,
             MerchantScene,
-            BossScene, 
+            WarbossKard, 
             MICROGAME_START = 4, // KEEP IN SYNC
             GetOutOfFire = 4,    // KEEP IN SYNC
             CastFrostbolt,
@@ -27,6 +27,7 @@ namespace ShrugWare
             MatchPolarity,
             StealTheChest,
             MICROGAME_END = 18,// PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            Tuzi,
         }
 
         public enum StatModifierType

@@ -1,5 +1,6 @@
 namespace ShrugWare
 {
+    /*
     public class DauntingInferno : Raid
     {
         public DauntingInferno()
@@ -21,4 +22,5 @@ namespace ShrugWare
             curBossIndex = 0;
         }
     }
+    */
 }

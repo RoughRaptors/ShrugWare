@@ -64,11 +64,21 @@ namespace ShrugWare
         {
             instructionTextUI.enabled = true;
             Color textColor = victory ? winTextColor : loseTextColor;
-            SetInstructionText(displayText, textColor);
+            SetInstructionText(displayText, textColor, victory, true);
         }
 
-        private void SetInstructionText(string text, Color color)
+        private void SetInstructionText(string text, Color color, bool victory = false, bool displayPlusMinus = false)
         {
+            // make it a little clear for now if they won or lost since it's not always clear, add a + or - respectively of winning or losing
+            if(displayPlusMinus && victory)
+            {
+               text = text.Insert(0, "+");
+            }
+            else if(displayPlusMinus)
+            {
+                text = text.Insert(0, "-");
+            }
+
             instructionTextUI.color = color;
             instructionTextUI.text = text.ToUpper();
         }

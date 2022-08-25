@@ -18,10 +18,12 @@ namespace ShrugWare
 
         protected override void PopulateMechanicsList()
         {
-            for (int sceneIndex = (int)DataManager.Scenes.BossScene + 1; sceneIndex <= (int)DataManager.Scenes.MICROGAME_END; ++sceneIndex)
+            for (int sceneIndex = (int)DataManager.Scenes.MICROGAME_START; sceneIndex <= (int)DataManager.Scenes.MICROGAME_END; ++sceneIndex)
             {
                 mechanics.Add((DataManager.Scenes)sceneIndex);
             }
+
+            BossGameManager.Instance.CurBoss = this;
         }
     }
 }

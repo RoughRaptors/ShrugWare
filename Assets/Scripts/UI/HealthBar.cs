@@ -23,11 +23,11 @@ namespace ShrugWare
                 maxHP = BossGameManager.Instance.GetPlayerInfo().maxPlayerHealth;
                 infoText.text = "Player: ";
             }
-            else
+            else if(BossGameManager.Instance.CurBoss != null)
             {
-                curHP = BossGameManager.Instance.GetCurRaid().curBoss.curHealth;
-                maxHP = BossGameManager.Instance.GetCurRaid().curBoss.maxHealth;
-                infoText.text = BossGameManager.Instance.GetCurRaid().curBoss.bossName + ": ";
+                curHP = BossGameManager.Instance.CurBoss.curHealth;
+                maxHP = BossGameManager.Instance.CurBoss.maxHealth;
+                infoText.text = BossGameManager.Instance.CurBoss.bossName + ": ";
             }
 
             infoText.text += curHP.ToString() + " / " + maxHP.ToString();

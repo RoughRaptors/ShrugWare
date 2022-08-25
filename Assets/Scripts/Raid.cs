@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ShrugWare
 {
+    /*
     public abstract class Raid
     {
         public string raidName { get; set; }
@@ -34,4 +35,5 @@ namespace ShrugWare
             return null;
         }
     }
+    */
 }

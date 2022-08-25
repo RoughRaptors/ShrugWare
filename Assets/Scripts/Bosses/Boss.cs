@@ -18,7 +18,7 @@ namespace ShrugWare
 
         public void TakeDamage(float amount)
         {
-            curHealth -= amount;
+            curHealth -= amount * 5;
             if (curHealth <= 0)
             {
                 isDead = true;
