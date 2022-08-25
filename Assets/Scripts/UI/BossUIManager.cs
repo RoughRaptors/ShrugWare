@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -44,8 +42,6 @@ namespace ShrugWare
             }
             else if (Instance != this)
             {
-                Destroy(gameObject);
-
                 // set all of our shit back - figure out a better solution later if there is one - TODO MAKE THIS BETTER
                 timeScaleInputField = BossUIManager.Instance.timeScaleInputField;
                 timeScaleInputField.text = "Time Scale: " + BossGameManager.Instance.GetCurTimeScale().ToString("F3");
@@ -68,7 +64,7 @@ namespace ShrugWare
         public void UpdateBetweenMicrogameText()
         {
             betweenMicrogameText.enabled = true;
-            betweenMicrogameText.text = "Next Level In: " + (DataManager.SECONDS_BETWEEN_MICROGAMES - BossGameManager.Instance.GetTimeInMainScene()).ToString("F2") + "s";
+            betweenMicrogameText.text = "Next Level In: " + (DataManager.SECONDS_BETWEEN_MICROGAMES - BossGameManager.Instance.GetTimeInBossScene()).ToString("F2") + "s";
             if (BossGameManager.Instance.GetPreviouslyRanEffects().Count > 0)
             {
                 betweenMicrogameText.text += "\n" + BossGameManager.Instance.GetPreviousEffectInfoString();
@@ -108,7 +104,7 @@ namespace ShrugWare
             playerHealthBar.UpdateHealthBar();
         }
 
-        public void SetMainCanvasEnabled(bool enabled)
+        public void SetBossUICanvasEnabled(bool enabled)
         {
             mainUICanvas.SetActive(enabled);
         }
@@ -126,6 +122,15 @@ namespace ShrugWare
             bossHealthBar.gameObject.SetActive(false);
             gameInfoText.enabled = true;
 
+            // we killed the boss, change the functionality here
+            if(BossGameManager.Instance.CurBoss.isDead)
+            {
+                mainUICanvas.SetActive(false);
+                BossGameManager.Instance.EnableBossCamera(false);
+                BossGameManager.Instance.LoadScene((int)DataManager.Scenes.Overworld);
+                return;
+            }
+
             AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.ButtonClick);
             BossGameManager.Instance.ContinueGame();
         }
@@ -133,7 +138,9 @@ namespace ShrugWare
         public void HandleWinGame()
         {
             betweenMicrogameText.enabled = false;
-            gameInfoText.text += "\n CONGLADURATION. YOU ARE WIN";
+            gameInfoText.text += "\n You beat the boss!";
+            continueGameButton.GetComponentInChildren<Text>().text = "Back to Overworld";
+            continueGameButton.gameObject.SetActive(true);
         }
 
         public void HandlePauseGame()

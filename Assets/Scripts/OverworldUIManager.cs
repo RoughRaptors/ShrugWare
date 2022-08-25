@@ -30,14 +30,9 @@ namespace ShrugWare
             Instance.SetCanvasEnabled(true);
         }
 
-        private void Start()
-        {
-            UpdateUI();
-        }
-
         public void UpdateUI()
         {
-            OverworldLevel curLevel = OverworldManager.Instance.GetOverworldLevel(OverworldManager.Instance.CurLevelID);
+            OverworldLevel curLevel = OverworldManager.Instance.GetOverworldLevel(OverworldManager.Instance.CurLevel.LevelID);
             if (curLevel != null)
             {
                 curLevelText.text = "Cur Level ID: " + curLevel.LevelID.ToString() +
@@ -53,7 +48,7 @@ namespace ShrugWare
 
         public void EnterCurLevelClicked()
         {
-            OverworldLevel overworldLevel = OverworldManager.Instance.GetOverworldLevel(OverworldManager.Instance.CurLevelID);
+            OverworldLevel overworldLevel = OverworldManager.Instance.GetOverworldLevel(OverworldManager.Instance.CurLevel.LevelID);
             if (overworldLevel != null)
             {
                 overworldLevel.EnterLevel();

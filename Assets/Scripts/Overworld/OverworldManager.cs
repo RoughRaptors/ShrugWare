@@ -1,6 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 namespace ShrugWare{
 
@@ -20,13 +21,16 @@ namespace ShrugWare{
         [SerializeField]
         OverworldUIManager overworldUIManager;
 
+        [SerializeField]
+        Camera sceneCamera = null;
+
         Dictionary<int, OverworldLevel> overworldMap = new Dictionary<int, OverworldLevel>();
 
-        private int curLevelID = 0;
-        public int CurLevelID
+        private OverworldLevel curLevel = null;
+        public OverworldLevel CurLevel
         {
-            get { return curLevelID; }
-            set { curLevelID = value; }
+            get { return curLevel; }
+            set { curLevel = value; }
         }
 
         private PlayerInventory inventory = new PlayerInventory();
@@ -45,7 +49,9 @@ namespace ShrugWare{
 
                 // set all of our shit back - figure out a better solution later if there is one - TODO MAKE THIS BETTER
                 overworldMap = OverworldManager.Instance.overworldMap;
-                curLevelID = OverworldManager.Instance.curLevelID;
+                curLevel = OverworldManager.Instance.curLevel;
+
+                OverworldUIManager.Instance.SetCanvasEnabled(true);
             }
         }
 
@@ -55,6 +61,8 @@ namespace ShrugWare{
             {
                 inventory = new PlayerInventory();
             }
+
+            overworldUIManager.UpdateUI();
         }
 
         public void AddLevel(OverworldLevel newLevel)
@@ -92,13 +100,13 @@ namespace ShrugWare{
             }
         }
 
-        public void SetCurLevelID(int levelID)
+        public void SetCurLevelById(int levelID)
         {
             // only change if it's valid
             OverworldLevel overworldLevel = GetOverworldLevel(levelID);
             if (overworldLevel != null)
             {
-                curLevelID = levelID;
+                curLevel = overworldLevel;
                 overworldUIManager.UpdateUI();
             }
         }
@@ -113,6 +121,24 @@ namespace ShrugWare{
             }
 
             return null;
+        }
+
+        public void EnterLevel(OverworldLevel level)
+        {
+            if (level.LevelType == DataManager.OverworldLevelType.Start)
+            {
+                // we don't enter these
+                return;
+            }
+
+            EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+            if (eventSystem != null)
+            {
+                eventSystem.enabled = false;
+            }
+
+            OverworldUIManager.Instance.SetCanvasEnabled(false);
+            SceneManager.LoadScene((int)level.SceneIDToLoad);
         }
     }
 }

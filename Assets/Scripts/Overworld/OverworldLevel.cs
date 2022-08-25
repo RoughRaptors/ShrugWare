@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace ShrugWare
 {
@@ -31,29 +29,22 @@ namespace ShrugWare
         private void Start()
         {
             OverworldManager.Instance.AddLevel(this);
-        }
 
-        void CompleteLevel()
-        {
-            // do we do this here or from the manager?
-            // OverworldManager.Instance.CompleteLevel(levelID);
+            // we need an initial starting level
+            if (OverworldManager.Instance.CurLevel == null && levelType == DataManager.OverworldLevelType.Start)
+            {
+                OverworldManager.Instance.SetCurLevelById(levelID);
+            }
         }
 
         public void EnterLevel()
         {
-            if (levelType == DataManager.OverworldLevelType.Start)
-            {
-                // we don't enter these
-                return;
-            }
-
-            OverworldUIManager.Instance.SetCanvasEnabled(false);
-            SceneManager.LoadScene((int)sceneIDToLoad);
+            OverworldManager.Instance.EnterLevel(this);
         }
 
         private void OnMouseDown()
         {
-            OverworldManager.Instance.SetCurLevelID(levelID);
+            OverworldManager.Instance.SetCurLevelById(levelID);
         }
     }
 }

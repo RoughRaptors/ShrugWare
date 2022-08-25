@@ -62,59 +62,59 @@
     <Compile Include="Assets\Scripts\Items\ConsumableItem.cs" />
     <Compile Include="Assets\Scripts\Bosses\Warboss Kard.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\TauntTheAdds.cs" />
+    <Compile Include="Assets\Scripts\Microgames\MicrogameEffect.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\MatchPolarity.cs" />
     <Compile Include="Assets\Stuff from jzucc\JZVectorExtensions.cs" />
     <Compile Include="Assets\Scripts\Bosses\Boss.cs" />
     <Compile Include="Assets\Scripts\UI\BossUIManager.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\DodgeTheFireballPattern.cs" />
+    <Compile Include="Assets\Scripts\UI\MicrogameUI.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\GetOutOfFireMicrogame.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\Art\Lightning Bolt\LightningBoltScript.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StackPowerstones.cs" />
+    <Compile Include="Assets\Stuff from jzucc\AlignCollidersToCamera.cs" />
+    <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\Buttons\LoadNextLevelButton.cs" />
     <Compile Include="Assets\Scripts\TutorialManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCollider.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\KnockbackedSafely.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterceptTheFireball.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\DauntingInfernoRaid.cs" />
+    <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\SceneTransitionData.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StackUpForMeteor.cs" />
     <Compile Include="Assets\Scripts\Microgames\Microgame.cs" />
     <Compile Include="Assets\Scripts\Raid.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\PerformTheRotation.cs" />
     <Compile Include="Assets\Scripts\Bosses\Tuzi.cs" />
     <Compile Include="Assets\Scripts\Overworld\OverworldManager.cs" />
+    <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\Buttons\SceneButtonFunction.cs" />
     <Compile Include="Assets\Scripts\AudioEffectClip.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\SidestepTheFireball.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\OverworldUIManager.cs" />
+    <Compile Include="Assets\Scripts\Clickable.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\CastFrostboltMicrogame.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\SpreadOutForMeteor.cs" />
-    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterruptTheAbility.cs" />
-    <Compile Include="Assets\Scripts\Merchants\MerchantManager.cs" />
-    <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
-    <Compile Include="Assets\Stuff from jzucc\JZLayerExtensions.cs" />
-    <Compile Include="Assets\Art\Fire\Scripts\VolumetricFire.cs" />
-    <Compile Include="Assets\Art\Progress Bars\Scripts\SliderScripts.cs" />
-    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StealTheChest.cs" />
-    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\EqualizeTwoGroups.cs" />
-    <Compile Include="Assets\Scripts\Items\ArmorItem.cs" />
-    <Compile Include="Assets\Scripts\DataManager.cs" />
-    <Compile Include="Assets\Scripts\PlayerInventory.cs" />
-    <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\AdditiveHelpers.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerInput.cs" />
-    <Compile Include="Assets\Stuff from jzucc\AlignCollidersToCamera.cs" />
-    <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\Buttons\LoadNextLevelButton.cs" />
-    <Compile Include="Assets\Scripts\Clickable.cs" />
     <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\Buttons\SceneChangeButton.cs" />
-    <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\Buttons\ReloadSceneButton.cs" />
-    <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\SceneTransitionData.cs" />
-    <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\SceneTransitioner.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterruptTheAbility.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMover.cs" />
     <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\TransitionAnimation.cs" />
     <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\AnimType.cs" />
-    <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\Buttons\SceneButtonFunction.cs" />
-    <Compile Include="Assets\Scripts\UI\MicrogameUI.cs" />
+    <Compile Include="Assets\Scripts\Merchants\MerchantManager.cs" />
+    <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\AdditiveHelpers.cs" />
+    <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
     <Compile Include="Assets\Stuff from jzucc\JZSceneHelpers.cs" />
-    <Compile Include="Assets\Scripts\Microgames\MicrogameEffect.cs" />
+    <Compile Include="Assets\Stuff from jzucc\JZLayerExtensions.cs" />
+    <Compile Include="Assets\Art\Fire\Scripts\VolumetricFire.cs" />
+    <Compile Include="Assets\Art\Progress Bars\Scripts\SliderScripts.cs" />
+    <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\SceneTransitioner.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StealTheChest.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\EqualizeTwoGroups.cs" />
+    <Compile Include="Assets\Scripts\Items\ArmorItem.cs" />
+    <Compile Include="Assets\Stuff from jzucc\Scene Package\Scripts\Buttons\ReloadSceneButton.cs" />
+    <Compile Include="Assets\Scripts\DataManager.cs" />
+    <Compile Include="Assets\Scripts\PlayerInventory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -805,8 +805,8 @@
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.PlasticSCM.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
@@ -816,6 +816,9 @@
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PlasticSCM.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Services.Core">
       <HintPath>Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
@@ -852,9 +855,6 @@
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.InputSystem">
-      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

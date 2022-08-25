@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.EventSystems;
 
 /*
     game structure:
@@ -63,6 +61,9 @@ namespace ShrugWare
         [SerializeField]
         private BossUIManager bossUIManager;
 
+        [SerializeField]
+        Camera sceneCamera = null;
+
         private AudioManager audioManager;
 
         private float curTimeScale = 1.0f;
@@ -70,8 +71,8 @@ namespace ShrugWare
         public void SetCurTimeScale(float newTimeScale) { curTimeScale = newTimeScale; }
 
         // for now until we find something better, hold this so we know when to transition to our next microgame - TODO MAKE THIS BETTER
-        private float timeInMainScene = 0.0f;
-        public float GetTimeInMainScene() { return timeInMainScene; }
+        private float timeInBossScene = 0.0f;
+        public float GetTimeInBossScene() { return timeInBossScene; }
 
         // this is bad
         [SerializeField]
@@ -130,7 +131,8 @@ namespace ShrugWare
                 curBoss = BossGameManager.Instance.curBoss;
                 curTimeScale = BossGameManager.Instance.curTimeScale;
                 playerInfo.livesLeft = BossGameManager.Instance.playerInfo.livesLeft;
-                timeInMainScene = 0.0f;
+                timeInBossScene = 0.0f;
+                sceneCamera.enabled = true;
             }
 
             if(OverworldManager.Instance != null)
@@ -177,12 +179,13 @@ namespace ShrugWare
             // we need to keep playing, which means to pick and start a new microgame from our raid and boss if we're not dead
             if (gameState == GameState.BossScreen)
             {
-                timeInMainScene += Time.deltaTime;
+                timeInBossScene += Time.deltaTime;
 
                 bossUIManager.UpdateBetweenMicrogameText();
-                if (playerInfo.livesLeft > 0 && timeInMainScene >= DataManager.SECONDS_BETWEEN_MICROGAMES && !(curBoss is null))
+                if (playerInfo.livesLeft > 0 && timeInBossScene >= DataManager.SECONDS_BETWEEN_MICROGAMES && !(curBoss is null))
                 {
                     DataManager.Scenes nextScene = curBoss.PickNextMicrogame();
+                    bossUIManager.SetBossUICanvasEnabled(false);
                     LoadScene((int)nextScene);
                 }
             }
@@ -192,13 +195,13 @@ namespace ShrugWare
         {
             UpdateGameUI();
             HandleFromMicrogameTransition();
-            BossGameManager.Instance.LoadScene((int)DataManager.Scenes.WarbossKard);
+            bossUIManager.SetBossUICanvasEnabled(true);
+            BossGameManager.Instance.LoadScene((int)OverworldManager.Instance.CurLevel.SceneIDToLoad);
         }
 
         private void HandleFromMicrogameTransition()
         {
             gameState = GameState.BossScreen;
-            bossUIManager.SetMainCanvasEnabled(true);
             audioManager.PlayAudioClip(DataManager.AudioEffectTypes.BetweenMicrogame, .3f);
             if (!(curBoss is null))
             {
@@ -230,15 +233,7 @@ namespace ShrugWare
         // would be nice to get some kind of transition/animation for this to be smooth, something like warioware curtains opening and closing
         public void LoadScene(int sceneIndex)
         {
-            bool mainCanvasEnabled = false;
-            if (sceneIndex == (int)DataManager.Scenes.WarbossKard)
-            {
-                mainCanvasEnabled = true;
-            }
-
-            bossUIManager.SetMainCanvasEnabled(mainCanvasEnabled);
-            
-            timeInMainScene = 0.0f;
+            timeInBossScene = 0.0f;
             SceneManager.LoadScene(sceneIndex);
         }
 
@@ -288,10 +283,10 @@ namespace ShrugWare
             audioManager.StopAudio();
         }
 
-        public void PauseGame()
+        public void PauseGame(bool consumablesVisible = false)
         {
             gameState = GameState.Paused;
-            bossUIManager.ToggleConsumableVisibility(true);
+            bossUIManager.ToggleConsumableVisibility(consumablesVisible);
         }
 
         public void TakePlayerRaidDamage(float amount)
@@ -384,6 +379,11 @@ namespace ShrugWare
         public void UseConsumableItem(int templateId)
         {
             playerInventory.UseConsumableItem(templateId);
+        }
+
+        public void EnableBossCamera(bool enabled)
+        {
+            sceneCamera.enabled = false;
         }
     }
 }

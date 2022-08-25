@@ -292,8 +292,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_Father: {fileID: 2301266169212772606}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &705507996
 MonoBehaviour:
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Boss Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -392,12 +392,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -12.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2301266169212772606}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &963194229
@@ -460,9 +460,13 @@ PrefabInstance:
       propertyPath: bossName
       value: Warboss Kard
       objectReference: {fileID: 0}
+    - target: {fileID: 2301266168276219429, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: sceneCamera
+      value: 
+      objectReference: {fileID: 963194227}
     - target: {fileID: 2301266168276219430, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2301266168276219430, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: m_LocalPosition.x
@@ -525,5 +529,10 @@ PrefabInstance:
 --- !u!4 &2301266169212772605 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2301266169147293017, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+  m_PrefabInstance: {fileID: 2301266169212772604}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2301266169212772606 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2301266168276219430, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
   m_PrefabInstance: {fileID: 2301266169212772604}
   m_PrefabAsset: {fileID: 0}

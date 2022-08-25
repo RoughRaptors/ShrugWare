@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 40837961}
   - component: {fileID: 40837963}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Overworld Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -539,6 +539,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3684680153031174611, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
+      propertyPath: sceneCamera
+      value: 
+      objectReference: {fileID: 40837961}
     - target: {fileID: 3684680153031174611, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
       propertyPath: overworldUIManager
       value: 
