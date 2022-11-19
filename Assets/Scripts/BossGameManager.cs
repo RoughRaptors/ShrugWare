@@ -165,7 +165,6 @@ namespace ShrugWare
 
         private void Start()
         {
-            Screen.SetResolution(1920, 1080, false);
             Time.timeScale = curTimeScale;
             audioManager.PlayAudioClip(DataManager.AudioEffectTypes.MainMenu, .175f);
 
@@ -337,7 +336,7 @@ namespace ShrugWare
         {
             if (!(curBoss is null))
             {
-                curBoss.TakeDamage(amount * 5);
+                curBoss.TakeDamage(amount);
             }
         }
 

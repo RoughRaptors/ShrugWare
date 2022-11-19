@@ -191,14 +191,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 40837959}
-  m_LocalRotation: {x: 0.24184473, y: -0.66446304, z: 0.24184473, w: 0.66446304}
-  m_LocalPosition: {x: 7.5, y: 9, z: 0}
+  m_LocalRotation: {x: 0.3535534, y: -0.61237246, z: 0.3535534, w: 0.61237246}
+  m_LocalPosition: {x: 345, y: 200, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1760191008476382410}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 40, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: -90, z: 0}
 --- !u!114 &40837963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,9 +559,41 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1760191008037463165, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760191008037463165, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760191008037463165, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1760191008186366003, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760191008186366003, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760191008186366003, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760191008186366003, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760191008186366003, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 37.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760191008186366003, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3.6
       objectReference: {fileID: 0}
     - target: {fileID: 3684680153031174611, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
       propertyPath: sceneCamera
