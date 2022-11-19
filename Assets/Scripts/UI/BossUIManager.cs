@@ -137,6 +137,14 @@ namespace ShrugWare
 
         public void HandleWinGame()
         {
+            OverworldManager overworldManager = OverworldManager.Instance;
+            if (!overworldManager)
+            {
+                return;
+            }
+
+            overworldManager.CompleteLevel(overworldManager.CurLevel.LevelID);
+
             betweenMicrogameText.enabled = false;
             gameInfoText.text += "\n You beat the boss!";
             continueGameButton.GetComponentInChildren<Text>().text = "Back to Overworld";
@@ -157,11 +165,15 @@ namespace ShrugWare
 
         public void UpdateConsumableInfo()
         {
+            if (!OverworldManager.Instance)
+            { 
+                return; 
+            }
+
             healthPotionItem.GetComponentInChildren<Text>().text = "";
             maxHealthPotionItem.GetComponentInChildren<Text>().text = "";
 
-            if(!OverworldManager.Instance) return;
-
+            // bad, remove hard coding and make data driven
             Item healthPotion = OverworldManager.Instance.GetPlayerInventory().GetInventoryItem(0);
             Item maxHealthPotion = OverworldManager.Instance.GetPlayerInventory().GetInventoryItem(1);
             if(healthPotion != null)

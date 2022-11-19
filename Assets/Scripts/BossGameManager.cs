@@ -337,7 +337,7 @@ namespace ShrugWare
         {
             if (!(curBoss is null))
             {
-                curBoss.TakeDamage(amount);
+                curBoss.TakeDamage(amount * 5);
             }
         }
 

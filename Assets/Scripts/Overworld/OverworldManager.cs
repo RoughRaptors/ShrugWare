@@ -71,6 +71,12 @@ namespace ShrugWare{
             {
                 overworldMap.Add(newLevel.LevelID, newLevel);
             }
+
+            // we need an initial starting level
+            if (OverworldManager.Instance.CurLevel == null && newLevel.LevelType == DataManager.OverworldLevelType.Start)
+            {
+                OverworldManager.Instance.SetCurLevelById(newLevel.LevelID);
+            }
         }
 
         public bool IsLevelUnlocked(int levelID)
@@ -89,6 +95,7 @@ namespace ShrugWare{
             OverworldLevel overworldLevel = GetOverworldLevel(completedLevelID);
             if (overworldLevel != null)
             {
+                overworldLevel.Completed = true;
                 foreach (int idToUnlock in overworldLevel.LevelIDsToUnlock)
                 {
                     OverworldLevel overworldLevelToUnlock = GetOverworldLevel(idToUnlock);
@@ -129,12 +136,6 @@ namespace ShrugWare{
             {
                 // we don't enter these
                 return;
-            }
-
-            EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
-            if (eventSystem != null)
-            {
-                eventSystem.enabled = false;
             }
 
             OverworldUIManager.Instance.SetCanvasEnabled(false);

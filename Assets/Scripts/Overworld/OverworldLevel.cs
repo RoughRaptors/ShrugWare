@@ -23,18 +23,15 @@ namespace ShrugWare
         List<int> levelIDsToUnlock = new List<int>();
         public List<int> LevelIDsToUnlock { get { return levelIDsToUnlock; } }
 
+        bool completed = false;
+        public bool Completed { get; set; }
+
         bool unlocked = false;
         public bool Unlocked { get; set; }
 
         private void Start()
         {
             OverworldManager.Instance.AddLevel(this);
-
-            // we need an initial starting level
-            if (OverworldManager.Instance.CurLevel == null && levelType == DataManager.OverworldLevelType.Start)
-            {
-                OverworldManager.Instance.SetCurLevelById(levelID);
-            }
         }
 
         public void EnterLevel()
