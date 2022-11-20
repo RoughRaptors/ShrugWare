@@ -140,8 +140,7 @@ namespace ShrugWare
                 playerInventory = OverworldManager.Instance.GetPlayerInventory();
                 if(playerInventory != null)
                 {
-                    playerInventory.RecalculateStats();
-            
+                    playerInventory.RecalculateStats();            
                 }
                 else
                 {
@@ -181,7 +180,7 @@ namespace ShrugWare
                 timeInBossScene += Time.deltaTime;
 
                 bossUIManager.UpdateBetweenMicrogameText();
-                if (playerInfo.livesLeft > 0 && timeInBossScene >= DataManager.SECONDS_BETWEEN_MICROGAMES && !(curBoss is null))
+                if (playerInfo.livesLeft >= 0 && timeInBossScene >= DataManager.SECONDS_BETWEEN_MICROGAMES && !(curBoss is null))
                 {
                     DataManager.Scenes nextScene = curBoss.PickNextMicrogame();
                     bossUIManager.SetBossUICanvasEnabled(false);
@@ -222,7 +221,7 @@ namespace ShrugWare
                 PauseGame();
                 bossUIManager.HandleWinGame();
             }
-            else if(playerInfo.livesLeft == 0)
+            else if(playerInfo.livesLeft < 0)
             {
                 PauseGame();
                 bossUIManager.HandleGameOver();
@@ -290,7 +289,7 @@ namespace ShrugWare
 
         public void TakePlayerRaidDamage(float amount)
         {
-            float totalAmount = amount;
+            float totalAmount = amount * 5;
             float mitigationModifier = 0;
             if(OverworldManager.Instance) playerInventory.GetMitigation();
             if(mitigationModifier > 0)
@@ -336,7 +335,7 @@ namespace ShrugWare
         {
             if (!(curBoss is null))
             {
-                curBoss.TakeDamage(amount);
+                curBoss.TakeDamage(amount * 5);
             }
         }
 
@@ -383,6 +382,12 @@ namespace ShrugWare
         public void EnableBossCamera(bool enabled)
         {
             sceneCamera.enabled = false;
+        }
+
+        public void ResetPlayer()
+        {
+            playerInfo = new PlayerInfo(DataManager.PLAYER_START_HP, DataManager.PLAYER_MAX_HP, DataManager.PLAYER_STARTING_LIVES);
+            gameState = GameState.BossScreen;
         }
     }
 }

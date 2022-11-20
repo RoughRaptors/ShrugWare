@@ -45,12 +45,16 @@ namespace ShrugWare
                 // set all of our shit back - figure out a better solution later if there is one - TODO MAKE THIS BETTER
                 timeScaleInputField = BossUIManager.Instance.timeScaleInputField;
                 timeScaleInputField.text = "Time Scale: " + BossGameManager.Instance.GetCurTimeScale().ToString("F3");
+                mainUICanvas = BossUIManager.Instance.mainUICanvas;
+                mainUICanvas.SetActive(true);
 
 #if !UNITY_EDITOR
                 // don't show this outside of the editor, it's debug
                 timeScaleInputField.gameObject.SetActive(false);
 #endif
             }
+
+            continueGameButton.GetComponentInChildren<Text>().text = "Continue";
         }
 
         // Start is called before the first frame update
@@ -122,9 +126,12 @@ namespace ShrugWare
             bossHealthBar.gameObject.SetActive(false);
             gameInfoText.enabled = true;
 
-            // we killed the boss, change the functionality here
-            if(BossGameManager.Instance.CurBoss.isDead)
+            // we died or killed the boss, go back instead
+            if(BossGameManager.Instance.GetPlayerInfo().livesLeft < 0 || BossGameManager.Instance.CurBoss.isDead)
             {
+                // set us back up for next time
+                BossGameManager.Instance.ResetPlayer();
+
                 mainUICanvas.SetActive(false);
                 BossGameManager.Instance.EnableBossCamera(false);
                 BossGameManager.Instance.LoadScene((int)DataManager.Scenes.Overworld);
@@ -158,9 +165,11 @@ namespace ShrugWare
         }
 
         public void HandleGameOver()
-        {
+        {            
             betweenMicrogameText.enabled = false;
-            gameInfoText.text += "\n \n 50 DKP MINUS!";
+            gameInfoText.text = "Game Over! \n 50 DKP MINUS!";
+            continueGameButton.GetComponentInChildren<Text>().text = "Back To Overworld";
+            continueGameButton.gameObject.SetActive(true);
         }
 
         public void UpdateConsumableInfo()
