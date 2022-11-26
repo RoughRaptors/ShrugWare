@@ -11,14 +11,22 @@ namespace ShrugWare
         GameObject[] fireballs = new GameObject[0];
 
         [SerializeField] private float FIREBALL_MOVE_SPEED = 60.0f;
-        [SerializeField] private float minPlayerStartPos = -40f;
-        [SerializeField] private float maxPlayerStartPos = 15f;
-
+        [SerializeField] private float minPlayerStartPos = -50f;
+        [SerializeField] private float maxPlayerStartPos = 40f;
+        [SerializeField] private float minBallScale = 5.0f;
+        [SerializeField] private float maxBallScale = 17.5f;
 
         protected override void Awake()
         {
             base.Awake();
             playerObject.transform.position = new Vector2(playerObject.transform.position.x, Random.Range(minPlayerStartPos, maxPlayerStartPos));
+
+            // set each fireball to a random scale
+            foreach (GameObject fireball in fireballs)
+            {
+                float newScale = Random.Range(minBallScale, maxBallScale + 1);
+                fireball.gameObject.transform.localScale = new Vector3(newScale, newScale, newScale);
+            }
         }
 
         protected override void Start()
