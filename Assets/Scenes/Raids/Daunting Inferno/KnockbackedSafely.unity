@@ -555,7 +555,19 @@ PrefabInstance:
       objectReference: {fileID: 2121694381}
     - target: {fileID: 2434016125122565296, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: instructionText
-      value: Knockback
+      value: Knockback (to safety)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6878079186030299948, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_text
+      value: KNOCKBACK (to safe zone)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6878079186030299948, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_fontSize
+      value: 134.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6878079186030299948, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278255360
       objectReference: {fileID: 0}
     - target: {fileID: 7751155465472654597, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_Name
@@ -682,7 +694,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2157940693982119806, guid: 392f146ff7fe2e1418f1c1b9a623a9b2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 392f146ff7fe2e1418f1c1b9a623a9b2, type: 3}
 --- !u!1 &648809326 stripped
 GameObject:
