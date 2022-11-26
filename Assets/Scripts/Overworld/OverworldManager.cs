@@ -77,14 +77,33 @@ namespace ShrugWare{
             {
                 OverworldManager.Instance.SetCurLevelById(newLevel.LevelID);
             }
+
+            // we want to show the locked vfx if we've not completed the level and it's available to do
+            if (newLevel.Locked && !newLevel.Completed && newLevel.LockedRenderMaterials.Count > 0)
+            {
+                // make a new material array to use that's large enough to fit locked + current materials
+                Material[] matArr = new Material[newLevel.LockedRenderMaterials.Count + 1];
+
+                // set default mesh renderer and compensate in the for loop
+                matArr[0] = newLevel.GetComponent<MeshRenderer>().materials[0];
+
+                // these are offset because i'm an idiot
+                for(int i = 1; i <= newLevel.LockedRenderMaterials.Count; ++i)
+                {
+                    matArr[i] = newLevel.LockedRenderMaterials[i - 1];
+                }
+
+                // set our materials array back
+                newLevel.GetComponent<MeshRenderer>().materials = matArr;
+            }
         }
 
-        public bool IsLevelUnlocked(int levelID)
+        public bool IsLevelLocked(int levelID)
         {
             OverworldLevel overworldLevel = GetOverworldLevel(levelID);
             if(overworldLevel != null)
             {
-                return overworldLevel.Unlocked;
+                return overworldLevel.Locked;
             }
 
             return false;
@@ -96,25 +115,48 @@ namespace ShrugWare{
             if (overworldLevel != null)
             {
                 overworldLevel.Completed = true;
+
+                // now unlock the next level(s)
                 foreach (int idToUnlock in overworldLevel.LevelIDsToUnlock)
                 {
                     OverworldLevel overworldLevelToUnlock = GetOverworldLevel(idToUnlock);
                     if(overworldLevelToUnlock != null)
                     {
-                        overworldLevelToUnlock.Unlocked = true;
+                        overworldLevelToUnlock.Locked = false;
+                        UpdateMeshRendererMaterials(overworldLevelToUnlock);
                     }
                 }
             }
         }
 
+        // disable the materials that we were showing for it being locked
+        private void UpdateMeshRendererMaterials(OverworldLevel overworldLevelToUnlock)
+        {
+            if (!overworldLevelToUnlock.Completed && overworldLevelToUnlock.LockedRenderMaterials.Count > 0)
+            {
+                // lazy, set default, it should exist
+                // originally was gonna create a new copy of the array with the original's meshes being calculated, but i know i'm not changing that right now 
+                Material[] newMatArr = new Material[1];
+                newMatArr[0] = overworldLevelToUnlock.GetComponent<MeshRenderer>().materials[0];
+                overworldLevelToUnlock.GetComponent<MeshRenderer>().materials = newMatArr;
+            }
+        }
+        
         public void SetCurLevelById(int levelID)
         {
-            // only change if it's valid
+            // only change if we've unlocked it
             OverworldLevel overworldLevel = GetOverworldLevel(levelID);
             if (overworldLevel != null)
             {
-                curLevel = overworldLevel;
-                overworldUIManager.UpdateUI();
+                if (!overworldLevel.Locked)
+                {
+                    curLevel = overworldLevel;
+                    overworldUIManager.UpdateUI();
+                }
+                else
+                {
+                    Debug.Log("Level not unlocked");
+                }
             }
         }
 
@@ -132,7 +174,7 @@ namespace ShrugWare{
 
         public void EnterLevel(OverworldLevel level)
         {
-            if (level.LevelType == DataManager.OverworldLevelType.Start)
+            if (level.LevelType == DataManager.OverworldLevelType.Start || level.Locked)
             {
                 // we don't enter these
                 return;
