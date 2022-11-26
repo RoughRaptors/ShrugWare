@@ -159,6 +159,7 @@ namespace ShrugWare
                 curBoss = new Tuzi();
             }
 
+            EnableBossCamera(true);
             audioManager = GetComponent<AudioManager>();
         }
 
@@ -289,7 +290,11 @@ namespace ShrugWare
 
         public void TakePlayerRaidDamage(float amount)
         {
+#if UNITY_EDITOR
             float totalAmount = amount * 5;
+#else
+            float totalAmount = amount;
+#endif
             float mitigationModifier = 0;
             if(OverworldManager.Instance) playerInventory.GetMitigation();
             if(mitigationModifier > 0)
@@ -385,13 +390,13 @@ namespace ShrugWare
 
         public void EnableBossCamera(bool enabled)
         {
-            sceneCamera.enabled = false;
+            sceneCamera.enabled = enabled;
         }
 
         public void ResetPlayer()
         {
             playerInfo = new PlayerInfo(DataManager.PLAYER_START_HP, DataManager.PLAYER_MAX_HP, DataManager.PLAYER_STARTING_LIVES);
-            gameState = GameState.BossScreen ;
+            gameState = GameState.BossScreen;
             curBoss = null;
         }
     }
