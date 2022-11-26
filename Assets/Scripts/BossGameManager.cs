@@ -159,6 +159,7 @@ namespace ShrugWare
                 curBoss = new Tuzi();
             }
 
+            EnableBossCamera(true);
             audioManager = GetComponent<AudioManager>();
         }
 
@@ -180,7 +181,7 @@ namespace ShrugWare
                 timeInBossScene += Time.deltaTime;
 
                 bossUIManager.UpdateBetweenMicrogameText();
-                if (playerInfo.livesLeft >= 0 && timeInBossScene >= DataManager.SECONDS_BETWEEN_MICROGAMES && !(curBoss is null))
+                if (playerInfo.livesLeft >= 0 && timeInBossScene >= DataManager.SECONDS_BETWEEN_MICROGAMES && !(curBoss is null) && !curBoss.isDead)
                 {
                     DataManager.Scenes nextScene = curBoss.PickNextMicrogame();
                     bossUIManager.SetBossUICanvasEnabled(false);
@@ -289,7 +290,11 @@ namespace ShrugWare
 
         public void TakePlayerRaidDamage(float amount)
         {
+#if UNITY_EDITOR
             float totalAmount = amount * 5;
+#else
+            float totalAmount = amount;
+#endif
             float mitigationModifier = 0;
             if(OverworldManager.Instance) playerInventory.GetMitigation();
             if(mitigationModifier > 0)
@@ -335,7 +340,11 @@ namespace ShrugWare
         {
             if (!(curBoss is null))
             {
+#if UNITY_EDITOR
                 curBoss.TakeDamage(amount * 5);
+#else
+                curBoss.TakeDamage(amount);
+#endif
             }
         }
 
@@ -381,13 +390,14 @@ namespace ShrugWare
 
         public void EnableBossCamera(bool enabled)
         {
-            sceneCamera.enabled = false;
+            sceneCamera.enabled = enabled;
         }
 
         public void ResetPlayer()
         {
             playerInfo = new PlayerInfo(DataManager.PLAYER_START_HP, DataManager.PLAYER_MAX_HP, DataManager.PLAYER_STARTING_LIVES);
             gameState = GameState.BossScreen;
+            curBoss = null;
         }
     }
 }

@@ -23,11 +23,25 @@ namespace ShrugWare
         List<int> levelIDsToUnlock = new List<int>();
         public List<int> LevelIDsToUnlock { get { return levelIDsToUnlock; } }
 
-        bool completed = false;
-        public bool Completed { get; set; }
+        [SerializeField]
+        List<Material> lockedRenderMaterials =new List<Material>();
+        public List<Material> LockedRenderMaterials { get { return lockedRenderMaterials; } }
 
-        bool unlocked = false;
-        public bool Unlocked { get; set; }
+        [SerializeField]
+        bool completed = false;
+        public bool Completed
+        {
+            get { return completed; }
+            set { completed = value; }
+        }
+
+        [SerializeField]
+        bool locked = true;
+        public bool Locked
+        {
+            get { return locked; }
+            set { locked = value; }
+        }
 
         private void Start()
         {

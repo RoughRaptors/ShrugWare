@@ -40,8 +40,15 @@ namespace ShrugWare
             OverworldLevel curLevel = OverworldManager.Instance.GetOverworldLevel(OverworldManager.Instance.CurLevel.LevelID);
             if (curLevel != null)
             {
-                if(curLevel.Completed)
+                if (curLevel.Locked)
                 {
+                    curLevelText.text = "Cur Level ID: " + curLevel.LevelID.ToString() +
+                        "\n" + "Scene ID: " + curLevel.SceneIDToLoad +
+                        "\n" + "**LOCKED**";
+                }
+                else if (curLevel.Completed && curLevel.LevelType == DataManager.OverworldLevelType.Boss)
+                {
+                    // we can only complete boss levels
                     curLevelText.text = "Cur Level ID: " + curLevel.LevelID.ToString() +
                         "\n" + "Scene ID: " + curLevel.SceneIDToLoad +
                         "\n" + "**COMPLETED**";
@@ -63,6 +70,11 @@ namespace ShrugWare
 
         public void EnterCurLevelClicked()
         {
+            if(OverworldManager.Instance.CurLevel == null)
+            {
+                return;
+            }
+
             // don't go in completed boss levels (yet!)
             OverworldLevel overworldLevel = OverworldManager.Instance.GetOverworldLevel(OverworldManager.Instance.CurLevel.LevelID);
             if (overworldLevel != null && !(overworldLevel.LevelType == DataManager.OverworldLevelType.Boss && overworldLevel.Completed))
