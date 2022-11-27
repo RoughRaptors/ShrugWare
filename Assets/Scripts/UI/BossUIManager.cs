@@ -129,12 +129,11 @@ namespace ShrugWare
             // we died or killed the boss, go back instead
             if(BossGameManager.Instance.GetPlayerInfo().livesLeft < 0 || BossGameManager.Instance.CurBoss.isDead)
             {
-                // set us back up for next time
-                BossGameManager.Instance.ResetScene();
-
                 mainUICanvas.SetActive(false);
                 BossGameManager.Instance.EnableBossCamera(false);
                 BossGameManager.Instance.LoadScene((int)DataManager.Scenes.Overworld);
+                Destroy(BossGameManager.Instance.gameObject);
+
                 return;
             }
 
