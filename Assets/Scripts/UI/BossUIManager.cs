@@ -130,7 +130,7 @@ namespace ShrugWare
             if(BossGameManager.Instance.GetPlayerInfo().livesLeft < 0 || BossGameManager.Instance.CurBoss.isDead)
             {
                 // set us back up for next time
-                BossGameManager.Instance.ResetPlayer();
+                BossGameManager.Instance.ResetScene();
 
                 mainUICanvas.SetActive(false);
                 BossGameManager.Instance.EnableBossCamera(false);
