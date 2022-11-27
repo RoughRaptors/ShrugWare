@@ -123,6 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &337458186
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -173,6 +174,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6916883364932605153, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
+      propertyPath: m_Name
+      value: Overworld Manager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
