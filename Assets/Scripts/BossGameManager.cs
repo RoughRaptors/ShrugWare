@@ -159,7 +159,6 @@ namespace ShrugWare
                 curBoss = new Tuzi();
             }
 
-            EnableBossCamera(true);
             audioManager = GetComponent<AudioManager>();
             EnableBossCamera(true);
         }
@@ -391,7 +390,7 @@ namespace ShrugWare
 
         public void EnableBossCamera(bool enabled)
         {
-        
+            bossSceneCamera.gameObject.SetActive(enabled);
         }
 
         public void ResetScene()
