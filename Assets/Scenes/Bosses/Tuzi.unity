@@ -464,6 +464,10 @@ PrefabInstance:
       propertyPath: sceneCamera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 2301266168276219429, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: bossSceneCamera
+      value: 
+      objectReference: {fileID: 963194227}
     - target: {fileID: 2301266168276219430, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: m_RootOrder
       value: 0
