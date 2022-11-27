@@ -21,6 +21,9 @@ namespace ShrugWare{
         [SerializeField]
         OverworldUIManager overworldUIManager;
 
+        [SerializeField]
+        Camera sceneCamera = null;
+
         Dictionary<int, OverworldLevel> overworldMap = new Dictionary<int, OverworldLevel>();
 
         private OverworldLevel curLevel = null;

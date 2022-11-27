@@ -62,7 +62,7 @@ namespace ShrugWare
         private BossUIManager bossUIManager;
 
         [SerializeField]
-        Camera bossSceneCamera = null;
+        Camera sceneCamera = null;
 
         private AudioManager audioManager;
 
@@ -132,7 +132,7 @@ namespace ShrugWare
                 curTimeScale = BossGameManager.Instance.curTimeScale;
                 playerInfo.livesLeft = BossGameManager.Instance.playerInfo.livesLeft;
                 timeInBossScene = 0.0f;
-                EnableBossCamera(true);
+                sceneCamera.enabled = true;
             }
 
             if(OverworldManager.Instance != null)
@@ -140,7 +140,7 @@ namespace ShrugWare
                 playerInventory = OverworldManager.Instance.GetPlayerInventory();
                 if(playerInventory != null)
                 {
-                    playerInventory.RecalculateStats();
+                    playerInventory.RecalculateStats();            
                 }
                 else
                 {
@@ -161,7 +161,6 @@ namespace ShrugWare
 
             EnableBossCamera(true);
             audioManager = GetComponent<AudioManager>();
-            EnableBossCamera(true);
         }
 
         private void Start()
@@ -391,10 +390,10 @@ namespace ShrugWare
 
         public void EnableBossCamera(bool enabled)
         {
-        
+            sceneCamera.enabled = enabled;
         }
 
-        public void ResetScene()
+        public void ResetPlayer()
         {
             playerInfo = new PlayerInfo(DataManager.PLAYER_START_HP, DataManager.PLAYER_MAX_HP, DataManager.PLAYER_STARTING_LIVES);
             gameState = GameState.BossScreen;
