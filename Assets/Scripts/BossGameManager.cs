@@ -392,12 +392,5 @@ namespace ShrugWare
         {
             bossSceneCamera.gameObject.SetActive(enabled);
         }
-
-        public void ResetScene()
-        {
-            playerInfo = new PlayerInfo(DataManager.PLAYER_START_HP, DataManager.PLAYER_MAX_HP, DataManager.PLAYER_STARTING_LIVES);
-            gameState = GameState.BossScreen;
-            curBoss = null;
-        }
     }
 }

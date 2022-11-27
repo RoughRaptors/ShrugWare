@@ -14,6 +14,9 @@ namespace ShrugWare
         GameObject mainUICanvas;
 
         [SerializeField]
+        GameObject levelsObj;
+
+        [SerializeField]
         Text curLevelText;
 
         private void Awake()
@@ -65,6 +68,7 @@ namespace ShrugWare
         public void SetCanvasEnabled(bool enabled)
         {
             mainUICanvas.SetActive(enabled);
+            levelsObj.SetActive(enabled);
             UpdateUI();
         }
 
