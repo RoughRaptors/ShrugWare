@@ -130,8 +130,9 @@ namespace ShrugWare
             if(BossGameManager.Instance.GetPlayerInfo().livesLeft < 0 || BossGameManager.Instance.CurBoss.isDead)
             {
                 mainUICanvas.SetActive(false);
-                BossGameManager.Instance.EnableBossCamera(false);
                 BossGameManager.Instance.LoadScene((int)DataManager.Scenes.Overworld);
+
+                // do we want to un-singleton BossGameManager? destroy this for now
                 Destroy(BossGameManager.Instance.gameObject);
 
                 return;

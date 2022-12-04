@@ -106,12 +106,13 @@ namespace ShrugWare
 
         public enum GameState
         {
+            Inactive, // if we're not in a game
             BossScreen, // the top level of the boss loop hierarchy - in between games
             Paused,
             InMicrogame,
         }
 
-        private GameState gameState = GameState.Paused;
+        private GameState gameState = GameState.Inactive;
         public GameState GetGameState() { return gameState; }
         public void SetGameState(GameState gState) { gameState = gState; }
 
