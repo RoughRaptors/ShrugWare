@@ -5,14 +5,14 @@ using UnityEngine.EventSystems;
 
 namespace ShrugWare{
 
-/* 
-    this connects the game world together by OverworldLevels
-        each OverworldLevel will represent a single playable game level space
-            type that can be seen in DataManager.OverworldLevelTypes
-            list of OverworldLevels that it unlocks upon completion
-        one game scenario per OverworldLevel (merchant, trash, boss...)
-    the manager controls things, NOT the levels
-*/
+    /* 
+        this connects the game world together by OverworldLevels
+            each OverworldLevel will represent a single playable game level space
+                type that can be seen in DataManager.OverworldLevelTypes
+                list of OverworldLevels that it unlocks upon completion
+            one game scenario per OverworldLevel (merchant, trash, boss...)
+        the manager controls things, NOT the levels
+    */
 
     public class OverworldManager : MonoBehaviour
     {

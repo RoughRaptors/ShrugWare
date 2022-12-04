@@ -64,6 +64,7 @@ namespace ShrugWare
         void Start()
         {
             SetupInventory();
+            UpdateCurrencies();
         }
 
         private void SetupInventory()
@@ -182,11 +183,17 @@ namespace ShrugWare
         {
             if (selectedItem.item != null)
             {
-                PlayerInventory inventory = OverworldManager.Instance.GetPlayerInventory();
-                if (inventory != null && inventory.GetCurrencyAmount(selectedItem.currency) >= selectedItem.price)
+                PlayerInventory playerInventory = OverworldManager.Instance.GetPlayerInventory();
+                if (playerInventory != null && playerInventory.GetCurrencyAmount(selectedItem.currency) >= selectedItem.price)
                 {
-                    inventory.AddItemToInventory(selectedItem.item);
-                    inventory.RemoveCurrency(selectedItem.currency, selectedItem.price);
+                    // don't allow multiple purchases of the same armor piece
+                    if(selectedItem.item is ArmorItem && playerInventory.GetInventoryItem(selectedItem.item.templateId) != null)
+                    {
+                        return;
+                    }
+
+                    playerInventory.AddItemToInventory(selectedItem.item);
+                    playerInventory.RemoveCurrency(selectedItem.currency, selectedItem.price);
                     UpdateCurrencies();
 
                     // todo - fix this when we refactor, for now just disable the item

@@ -25,7 +25,7 @@ namespace ShrugWare
             foreach (GameObject fireball in fireballs)
             {
                 float newScale = Random.Range(minBallScale, maxBallScale + 1);
-                fireball.gameObject.transform.localScale = new Vector3(newScale, newScale, newScale);
+                fireball.transform.localScale = new Vector3(newScale, newScale, newScale);
             }
         }
 
@@ -52,9 +52,9 @@ namespace ShrugWare
             base.OnMyGameTick(timePercentLeft);
             foreach(GameObject fireball in fireballs)
             {
-                fireball.transform.position = 
-                Vector3.MoveTowards(fireball.transform.position, new Vector3(-100, fireball.transform.position.y, 0),
-                FIREBALL_MOVE_SPEED * (Random.Range(1, 1.5f) * Time.deltaTime));
+                fireball.transform.position =
+                    Vector3.MoveTowards(fireball.transform.position, new Vector3(-100, fireball.transform.position.y, 0),
+                    FIREBALL_MOVE_SPEED * (Random.Range(1, 1.5f) * Time.deltaTime));
             }
         }
 
