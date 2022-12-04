@@ -109,13 +109,22 @@ namespace ShrugWare
 
         protected void SetMicrogameEndText(bool victory)
         {
-            string text = victory ? victoryText : defaultDefeatText;
+            string text = defaultDefeatText;
+            if(victory)
+            {
+                text = victoryText;
+            }
+
             SetMicrogameEndText(victory, text);
         }
 
         protected void SetMicrogameEndText(bool victory, string text)
         {
-            if(endTextSet) return;
+            if (endTextSet)
+            {
+                return;
+            }
+
             MicrogameEndText?.Invoke(victory, text);
             MicrogameEnded?.Invoke();
             endTextSet = true;
@@ -132,8 +141,15 @@ namespace ShrugWare
         {
             foreach(MicrogameEffect effect in effects)
             {
-                if(effect.addOnWin) winEffects.Add(effect.effect);
-                if(effect.addOnLoss) lossEffects.Add(effect.effect);
+                if (effect.addOnWin)
+                {
+                    winEffects.Add(effect.effect);
+                }
+
+                if (effect.addOnLoss)
+                {
+                    lossEffects.Add(effect.effect);
+                }
             }
         }
 
