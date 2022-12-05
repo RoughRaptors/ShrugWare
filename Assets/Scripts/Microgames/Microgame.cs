@@ -7,13 +7,13 @@ namespace ShrugWare
 {
     public abstract class Microgame : MonoBehaviour
     {
-        [Header ("Microgame Text")]
+        [Header("Microgame Text")]
         [SerializeField] private string victoryText = "";
         [SerializeField] private string defaultDefeatText = "";
         [SerializeField] private float postTimerWait = 0f; //Delay between timer ending and result being given. Currently only used by knockback
         protected string startText = ""; //Set after opening delay time. Currently only used by rotation microgame
 
-        [Header ("Microgame Specific")]
+        [Header("Microgame Specific")]
         [SerializeField] private List<MicrogameEffect> effects = new List<MicrogameEffect>();
 
         // used to restrict player input and introduce a delay to the beginning of a microgame
@@ -33,7 +33,11 @@ namespace ShrugWare
         private bool endTextSet = false;
 
 
-        protected virtual void Awake() { }
+        protected virtual void Awake()
+        {
+            OnMyGameAwake();
+        }
+
         protected virtual void Start()
         {
             // will be null if individually loading scenes
@@ -44,14 +48,11 @@ namespace ShrugWare
             }
 
             microGameTime = DataManager.MICROGAME_DURATION_SECONDS;
-            if (BossGameManager.Instance != null) //If debuggind and we don't have the game manager
-            {
-                microGameTime *= BossGameManager.Instance.GetCurTimeScale();
-            }
 
             SetEffects();
             StartCoroutine(PlayMicrogame());
         }
+
         protected virtual void OnEnable() { }
         protected virtual void OnDisable() { }
 
@@ -71,7 +72,7 @@ namespace ShrugWare
                 float timePercentLeft = timeLeft / microGameTime;
                 OnMyGameTick(timePercentLeft);
                 MicrogameTick?.Invoke(timePercentLeft);
-                return timeLeft <= 0;  
+                return timeLeft <= 0;
             });
 
             //Time out
@@ -79,7 +80,8 @@ namespace ShrugWare
             yield return new WaitForSeconds(postTimerWait);
             HandleMicrogameEnd(VictoryCheck());
         }
-        
+
+        protected virtual void OnMyGameAwake() { }
         protected virtual void OnMyGameStart() { }
         protected virtual void OnMyGameTick(float timePercentLeft) { }
         protected virtual void TimeOut() { }
