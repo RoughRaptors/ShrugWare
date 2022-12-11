@@ -1261,6 +1261,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossUIManager: {fileID: 2301266169147293018}
+  bossSceneCamera: {fileID: 0}
+  bossName: 
 --- !u!114 &2301266168276219428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1284,6 +1286,10 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 163ebe8ba7a04c34c8e861557f6d80ea, type: 3}
   - audioEffect: 4
     audioClip: {fileID: 8300000, guid: 683304f955c0ee341818181c327a561f, type: 3}
+  - audioEffect: 5
+    audioClip: {fileID: 8300000, guid: 2bdd71b100ce6a749b918611f75fad87, type: 3}
+  - audioEffect: 6
+    audioClip: {fileID: 8300000, guid: 1c6caebd616669340a8968ad0746116c, type: 3}
 --- !u!1 &2301266168308091703
 GameObject:
   m_ObjectHideFlags: 0

@@ -282,6 +282,10 @@ namespace ShrugWare
                 currenciesText.text = "Gold: " + inventory.GetCurrencyAmount(DataManager.Currencies.Generic).ToString();
                 currenciesText.text += "\nDaunting Inferno Marks: " + inventory.GetCurrencyAmount(DataManager.Currencies.DauntingInferno).ToString();
             }
+            else
+            {
+                currenciesText.text = "ERROR. NO INVENTORY";
+            }
         }
 
         public void ExitMerchantClicked()
