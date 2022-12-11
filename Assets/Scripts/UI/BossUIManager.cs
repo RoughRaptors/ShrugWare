@@ -91,22 +91,6 @@ namespace ShrugWare
                     AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.MicrogameTimerDing);
                 }
             }
-
-            /*
-            Debug.Log("Time left: " + timeLeft.ToString());
-            if((timeLeft % 1 < float.Epsilon * 100) && timeLeft > 0)
-            {
-                // play on every x.00
-                AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.MicrogameTimerTick);
-                Debug.LogWarning("Played Tick. Time left: " + timeLeft.ToString());
-            }
-            else if (Mathf.Approximately(timeLeft, 0) && timeLeft <= 0)
-            {
-                // don't preemptively call this or call it extra. timeLeft should be negative or 0
-                AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.MicrogameTimerDing);
-                Debug.LogWarning("Played Ding. Time left: " + timeLeft.ToString());
-            }
-            */
         }
 
         public void ConfirmTimeScaleButtonClicked()
