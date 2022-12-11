@@ -81,7 +81,9 @@ namespace ShrugWare
             BetweenMicrogame,
             UsePotion,
             MerchantPurchase,
-            ButtonClick
+            ButtonClick,
+            MicrogameTimerTick,
+            MicrogameTimerDing
         }
 
         public enum OverworldLevelType

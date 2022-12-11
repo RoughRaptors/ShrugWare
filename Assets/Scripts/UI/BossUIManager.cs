@@ -34,6 +34,8 @@ namespace ShrugWare
         [SerializeField]
         HealthBar bossHealthBar = null;
 
+        bool countdownTimerRunning = false;
+
         private void Awake()
         {
             if (Instance == null)
@@ -67,11 +69,27 @@ namespace ShrugWare
 
         public void UpdateBetweenMicrogameText()
         {
+            float timeLeft = DataManager.SECONDS_BETWEEN_MICROGAMES - BossGameManager.Instance.GetTimeInBossScene();
             betweenMicrogameText.enabled = true;
-            betweenMicrogameText.text = "Next Level In: " + (DataManager.SECONDS_BETWEEN_MICROGAMES - BossGameManager.Instance.GetTimeInBossScene()).ToString("F2") + "s";
+            betweenMicrogameText.text = "Next Level In: " + timeLeft.ToString("F2") + "s";
             if (BossGameManager.Instance.GetPreviouslyRanEffects().Count > 0)
             {
                 betweenMicrogameText.text += "\n" + BossGameManager.Instance.GetPreviousEffectInfoString();
+            }
+
+            if (countdownTimerRunning)
+            {
+                // play a sound effect on every even number except for 0. just do a countdown then a ding at 0
+                if (timeLeft > 0 && (timeLeft % 1 < 0.05f ))
+                {
+                    AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.MicrogameTimerTick);
+                    countdownTimerRunning = true;
+                }
+                else if (timeLeft <= 0.0f)
+                {
+                    countdownTimerRunning = false;
+                    AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.MicrogameTimerDing);
+                }
             }
         }
 
@@ -111,6 +129,7 @@ namespace ShrugWare
         public void SetBossUICanvasEnabled(bool enabled)
         {
             mainUICanvas.SetActive(enabled);
+            countdownTimerRunning = false;
         }
 
         public void SetTimescaleInputFieldText(string newText)
@@ -125,9 +144,10 @@ namespace ShrugWare
             playerHealthBar.gameObject.SetActive(false);
             bossHealthBar.gameObject.SetActive(false);
             gameInfoText.enabled = true;
+            countdownTimerRunning = true;
 
             // we died or killed the boss, go back instead
-            if(BossGameManager.Instance.GetPlayerInfo().livesLeft < 0 || BossGameManager.Instance.CurBoss.isDead)
+            if (BossGameManager.Instance.GetPlayerInfo().livesLeft < 0 || BossGameManager.Instance.CurBoss.isDead)
             {
                 mainUICanvas.SetActive(false);
                 BossGameManager.Instance.LoadScene((int)DataManager.Scenes.Overworld);

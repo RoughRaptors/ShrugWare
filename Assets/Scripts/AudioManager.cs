@@ -34,6 +34,7 @@ namespace ShrugWare
                 audioSourceEffects = gameObject.AddComponent<AudioSource>();
             }
         }
+
         private AudioClip GetAudioClip(DataManager.AudioEffectTypes audioEffectType)
         {
             foreach (AudioEffectClip effectClip in audioEffects)
