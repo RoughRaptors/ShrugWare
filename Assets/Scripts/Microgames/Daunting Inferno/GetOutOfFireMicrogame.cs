@@ -9,13 +9,13 @@ namespace ShrugWare
         protected override void OnEnable()
         {
             base.OnEnable();
-            PlayerCollider.OnGoodExit += FireEscape;
+            PlayerCollider.OnBadExit += FireEscape;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-            PlayerCollider.OnGoodExit -= FireEscape;
+            PlayerCollider.OnBadExit -= FireEscape;
         }
 
         protected override bool VictoryCheck() => !inFire;
