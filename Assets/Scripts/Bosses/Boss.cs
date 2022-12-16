@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace ShrugWare
 {
@@ -33,7 +33,8 @@ namespace ShrugWare
             }
 
             // randomly grab one and remove it from our list
-            int microgameSceneIndex = Random.Range(0, mechanics.Count); // exclusive max
+            UnityEngine.Random.InitState((int)System.DateTime.Now.Ticks);
+            int microgameSceneIndex = UnityEngine.Random.Range(0, mechanics.Count); // exclusive max
             DataManager.Scenes scene = mechanics[microgameSceneIndex];
             mechanics.RemoveAt(microgameSceneIndex);
 
