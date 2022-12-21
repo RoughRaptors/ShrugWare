@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ShrugWare
 {
@@ -14,6 +15,12 @@ namespace ShrugWare
         [SerializeField]
         GameObject fireballInitObj;
 
+        [SerializeField]
+        Text healthText;
+
+        [SerializeField]
+        Text timeRemainingText;
+
         const float FIREBALL_X_MIN = -10;
         const float FIREBALL_X_MAX = 125;
         const float FIREBALL_Y_MIN = -30;
@@ -21,10 +28,15 @@ namespace ShrugWare
         const float FIREBALL_SPEED_MIN = 0.05f;
         const float FIREBALL_SPEED_MAX = 0.2f;
 
-        const float FIREBALL_SPAWN_INTERVAL = 0.5f;
-        float timeSinceLastSpawn = 0.0f;
+        const float FIREBALL_SPAWN_INTERVAL = 0.75f;
+        private float timeSinceLastSpawn = 0.0f;
 
         private float timeInGame = 0.0f;
+        private float timeRemaining;
+        private const float PLAYER_SPEED = 50.0f;
+
+        private int healthRemaining = 5;
+        bool gameRunning = false;
 
         private enum FromDirection
         {
@@ -39,7 +51,6 @@ namespace ShrugWare
             public Vector3 position;
             public Vector3 targetPos;
             public float speed;
-            FromDirection fromDir;
         }
 
         private List<Fireball> fireballsList = new List<Fireball>();
@@ -47,15 +58,35 @@ namespace ShrugWare
         private void Start()
         {
             // initial wave
-            for(int i = 0; i < 15; ++i)
+            for(int i = 0; i < 10; ++i)
             {
                 SpawnFireball(FromDirection.FromRight);
             }
+
+            gameRunning = true;
+            healthText.text = "HP: " + healthRemaining.ToString();
         }
 
         private void Update()
         {
-            if(timeSinceLastSpawn >= FIREBALL_SPAWN_INTERVAL)
+            if(gameRunning)
+            {
+                HandlePlayerMovement();
+                HandleFireballs();
+                timeInGame += Time.deltaTime;
+            }
+
+            timeRemainingText.text = "Time Remaining: " + (DataManager.MINIGAME_DURATION_SECONDS - timeInGame).ToString("F2");
+            if(timeInGame >= DataManager.MINIGAME_DURATION_SECONDS)
+            {
+                // out of time, we won
+                gameRunning = false;
+            }
+        }
+
+        private void HandleFireballs()
+        {
+            if (timeSinceLastSpawn >= FIREBALL_SPAWN_INTERVAL)
             {
                 timeSinceLastSpawn = 0;
 
@@ -64,7 +95,7 @@ namespace ShrugWare
                 if ((int)timeInGame != 0 && (int)timeInGame % 30 == 0)
                 {
                     // spawn top
-                    for (int i = 0; i < 15; ++i)
+                    for (int i = 0; i < 10; ++i)
                     {
                         SpawnFireball(FromDirection.FromBottom);
                     }
@@ -72,20 +103,29 @@ namespace ShrugWare
                 else if ((int)timeInGame != 0 && (int)timeInGame % 15 == 0)
                 {
                     // spawn bottom
-                    for (int i = 0; i < 15; ++i)
+                    for (int i = 0; i < 10; ++i)
                     {
                         SpawnFireball(FromDirection.FromTop);
                     }
                 }
 
+                // spawn if enough time has been spent
+                if (timeInGame > 30)
+                {
+                    SpawnFireball(FromDirection.FromBottom);
+                }
+
+                if (timeInGame > 15)
+                {
+                    SpawnFireball(FromDirection.FromTop);
+                }
+
+                // always spawn from here
                 SpawnFireball(FromDirection.FromRight);
-                SpawnFireball(FromDirection.FromBottom);
-                SpawnFireball(FromDirection.FromTop);
             }
 
             UpdateFireballs();
             timeSinceLastSpawn += Time.deltaTime;
-            timeInGame += Time.deltaTime;
         }
 
         private void SpawnFireball(FromDirection fromDir)
@@ -147,6 +187,56 @@ namespace ShrugWare
 
                 fireball.fireballObj.transform.position =
                     Vector3.MoveTowards(fireball.fireballObj.transform.position, fireball.targetPos, fireball.speed);
+            }
+        }
+
+        private void HandlePlayerMovement()
+        {
+            Vector3 newPos = this.transform.position;
+            if (Input.GetKey(KeyCode.W))
+            {
+                newPos.y += PLAYER_SPEED * Time.deltaTime;
+            }
+
+            if (Input.GetKey(KeyCode.S))
+            {
+                newPos.y -= PLAYER_SPEED * Time.deltaTime;
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                newPos.x -= PLAYER_SPEED * Time.deltaTime;
+            }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                newPos.x += PLAYER_SPEED * Time.deltaTime;
+            }
+
+            this.transform.position = newPos;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            // damage the player
+            --healthRemaining;
+            healthText.text = "HP: " + healthRemaining.ToString();
+            if (healthRemaining < 0)
+            {
+                healthText.text = "YOU ARE DED";
+                gameRunning = false;
+            }
+
+            // destroy the fireball and remove it from the list
+            for (int i = 0; i < fireballsList.Count; ++i)
+            {
+                Fireball fireball = fireballsList[i];
+                if (fireball.fireballObj == other.gameObject)
+                {
+                    fireballsList.RemoveAt(i);
+                    Destroy(fireball.fireballObj);
+                    break;
+                }
             }
         }
     }
