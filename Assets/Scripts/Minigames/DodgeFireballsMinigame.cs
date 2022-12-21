@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace ShrugWare
 {
@@ -10,16 +10,19 @@ namespace ShrugWare
     // 15s-30s come from top + right
     // 30s-45s come from bottom + top + right
 
-    public class DodgeFireballs : Minigame
+    public class DodgeFireballsMinigame : Minigame
     {
         [SerializeField]
         GameObject fireballInitObj;
 
         [SerializeField]
-        Text healthText;
+        Text statusText;
 
         [SerializeField]
         Text timeRemainingText;
+
+        [SerializeField]
+        GameObject continueButton;
 
         const float FIREBALL_X_MIN = -10;
         const float FIREBALL_X_MAX = 125;
@@ -55,6 +58,11 @@ namespace ShrugWare
 
         private List<Fireball> fireballsList = new List<Fireball>();
 
+        private void Awake()
+        {
+            continueButton.SetActive(false);
+        }
+
         private void Start()
         {
             // initial wave
@@ -64,7 +72,7 @@ namespace ShrugWare
             }
 
             gameRunning = true;
-            healthText.text = "HP: " + healthRemaining.ToString();
+            statusText.text = "HP: " + healthRemaining.ToString();
         }
 
         private void Update()
@@ -81,6 +89,9 @@ namespace ShrugWare
             {
                 // out of time, we won
                 gameRunning = false;
+                statusText.text = "Boss time!";
+
+                continueButton.SetActive(true);
             }
         }
 
@@ -220,11 +231,12 @@ namespace ShrugWare
         {
             // damage the player
             --healthRemaining;
-            healthText.text = "HP: " + healthRemaining.ToString();
+            statusText.text = "HP: " + healthRemaining.ToString();
             if (healthRemaining < 0)
             {
-                healthText.text = "YOU ARE DED";
+                statusText.text = "YOU ARE DED";
                 gameRunning = false;
+                continueButton.SetActive(true);
             }
 
             // destroy the fireball and remove it from the list
@@ -238,6 +250,22 @@ namespace ShrugWare
                     break;
                 }
             }
+        }
+
+        public void OnContinueButtonClicked()
+        {
+            OverworldManager overworldManager = OverworldManager.Instance;
+            if (!overworldManager)
+            {
+                return;
+            }
+
+            if (healthRemaining >= 0)
+            {
+                overworldManager.CompleteLevel(overworldManager.CurLevel.LevelID);
+            }
+
+            SceneManager.LoadScene((int)DataManager.Scenes.Overworld);
         }
     }
 }
