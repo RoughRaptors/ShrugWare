@@ -18,49 +18,49 @@ EditorBuildSettings:
     path: Assets/Scenes/Bosses/Warboss Kard 1.unity
     guid: 7345200c9fef7da4690d87b8f6896ad3
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/GetOutOfFireScene.unity
+    path: Assets/Scenes/Microgames/Daunting Inferno/GetOutOfFireScene.unity
     guid: e2ad56e2653a17b449b892aaaf7dde53
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/CastFrostboltMicrogame.unity
+    path: Assets/Scenes/Microgames/Daunting Inferno/CastFrostboltMicrogame.unity
     guid: bf3a9ec2b9f669d4b90d5421e4d57544
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/TauntTheAdds.unity
+    path: Assets/Scenes/Microgames/Daunting Inferno/TauntTheAdds.unity
     guid: 777b6ab6aa978904d81bdf23fe6a2c1f
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/InterceptTheFireball.unity
+    path: Assets/Scenes/Microgames/Daunting Inferno/InterceptTheFireball.unity
     guid: 00c3b4ee2b4934e489d2a961b478ee81
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/PerformTheRotation.unity
+    path: Assets/Scenes/Microgames/Daunting Inferno/PerformTheRotation.unity
     guid: 95ab459b495cb7447be4637f61a3a150
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/StackPowerstones.unity
+    path: Assets/Scenes/Microgames/Daunting Inferno/StackPowerstones.unity
     guid: 008b61ca4b59ccc4d825a3db0092ec77
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/SidestepTheFireball.unity
+    path: Assets/Scenes/Microgames/Daunting Inferno/SidestepTheFireball.unity
     guid: c671ac6363b1aeb4fa988e7dbd0aefb3
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/DodgeTheFireballPattern.unity
+    path: Assets/Scenes/Microgames/Daunting Inferno/DodgeTheFireballPattern.unity
     guid: 74b348f30a13919469adc6cbc0a5520d
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/StackUpForMeteor.unity
+    path: Assets/Scenes/Microgames/Daunting Inferno/StackUpForMeteor.unity
     guid: ef193a3a6e392e941822b48bf3b560f8
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/SpreadOutForMeteor.unity
+    path: Assets/Scenes/Microgames/Daunting Inferno/SpreadOutForMeteor.unity
     guid: 24cf4d3570f7282409dcb6d206285008
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/EqualizeTwoGroups.unity
+    path: Assets/Scenes/Microgames/Daunting Inferno/EqualizeTwoGroups.unity
     guid: 1fc8e39649ba7684fb8ad4f397ad059d
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/InterruptTheAbility.unity
+    path: Assets/Scenes/Microgames/Daunting Inferno/InterruptTheAbility.unity
     guid: acfa2c51ef16cd64f883a0f96018ad5f
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/KnockbackedSafely.unity
+    path: Assets/Scenes/Microgames/Daunting Inferno/KnockbackedSafely.unity
     guid: c9be61a879ab05843b4aa0e73cac8bcf
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/MatchPolarity.unity
+    path: Assets/Scenes/Microgames/Daunting Inferno/MatchPolarity.unity
     guid: fcdc7055661e3bb4d84f92be35df7ad8
   - enabled: 1
-    path: Assets/Scenes/Raids/Daunting Inferno/StealTheChest.unity
+    path: Assets/Scenes/Microgames/Daunting Inferno/StealTheChest.unity
     guid: 65ecb1f9d1f35384f8bf8d4d59311d0a
   - enabled: 1
     path: Assets/Scenes/Bosses/Tuzi.unity

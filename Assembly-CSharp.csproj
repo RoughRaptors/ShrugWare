@@ -56,7 +56,7 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\BossGameManager.cs" />
+    <Compile Include="Assets\Scripts\Bosses\BossGameManager.cs" />
     <Compile Include="Assets\Scripts\Overworld\OverworldLevel.cs" />
     <Compile Include="Assets\Art\Fire\Scripts\OscillateLightBrightness.cs" />
     <Compile Include="Assets\Scripts\Items\ConsumableItem.cs" />
@@ -72,37 +72,39 @@
     <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\Art\Lightning Bolt\LightningBoltScript.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StackPowerstones.cs" />
-    <Compile Include="Assets\Scripts\TutorialManager.cs" />
+    <Compile Include="Assets\Scripts\Various Other\TutorialManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCollider.cs" />
-    <Compile Include="Assets\Scripts\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\Audio\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\KnockbackedSafely.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterceptTheFireball.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\DauntingInfernoRaid.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StackUpForMeteor.cs" />
     <Compile Include="Assets\Scripts\Microgames\Microgame.cs" />
-    <Compile Include="Assets\Scripts\Raid.cs" />
+    <Compile Include="Assets\Scripts\Various Other\Raid.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\PerformTheRotation.cs" />
     <Compile Include="Assets\Scripts\Bosses\Tuzi.cs" />
     <Compile Include="Assets\Scripts\Overworld\OverworldManager.cs" />
-    <Compile Include="Assets\Scripts\AudioEffectClip.cs" />
+    <Compile Include="Assets\Scripts\Audio\AudioEffectClip.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\SidestepTheFireball.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInput.cs" />
-    <Compile Include="Assets\Scripts\OverworldUIManager.cs" />
-    <Compile Include="Assets\Scripts\Clickable.cs" />
+    <Compile Include="Assets\Scripts\Overworld\OverworldUIManager.cs" />
+    <Compile Include="Assets\Scripts\Various Other\Clickable.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\CastFrostboltMicrogame.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\SpreadOutForMeteor.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterruptTheAbility.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMover.cs" />
     <Compile Include="Assets\Scripts\Merchants\MerchantManager.cs" />
     <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
-    <Compile Include="Assets\Scripts\JZLayerExtensions.cs" />
+    <Compile Include="Assets\Scripts\Various Other\JZLayerExtensions.cs" />
     <Compile Include="Assets\Art\Fire\Scripts\VolumetricFire.cs" />
     <Compile Include="Assets\Art\Progress Bars\Scripts\SliderScripts.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StealTheChest.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\EqualizeTwoGroups.cs" />
     <Compile Include="Assets\Scripts\Items\ArmorItem.cs" />
-    <Compile Include="Assets\Scripts\DataManager.cs" />
-    <Compile Include="Assets\Scripts\PlayerInventory.cs" />
+    <Compile Include="Assets\Scripts\Various Other\DataManager.cs" />
+    <Compile Include="Assets\Scripts\Various Other\PlayerInventory.cs" />
+    <Compile Include="Assets\Scripts\Minigames\Minigame.cs" />
+    <Compile Include="Assets\Scripts\Minigames\DodgeFireballs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
