@@ -105,6 +105,7 @@
     <Compile Include="Assets\Scripts\Various Other\DataManager.cs" />
     <Compile Include="Assets\Scripts\Various Other\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\Minigames\DodgeFireballsMinigame.cs" />
+    <Compile Include="Assets\Scripts\Minigames\Minigame.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
