@@ -168,6 +168,18 @@ namespace ShrugWare
             }
         }
 
+        public void AddCurrency(DataManager.Currencies currency, int amount)
+        {
+            if (currencies.ContainsKey(currency))
+            {
+                currencies[currency] += amount;
+            }
+            else
+            {
+                currencies.Add(currency, amount);
+            }
+        }
+
         public void RemoveCurrency(DataManager.Currencies currency, int amount)
         {
             if(currencies.ContainsKey(currency))

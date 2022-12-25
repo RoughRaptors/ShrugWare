@@ -267,6 +267,7 @@ namespace ShrugWare
 
             if (healthRemaining >= 0)
             {
+                OverworldManager.Instance.GetPlayerInventory().AddCurrency(DataManager.Currencies.Generic, 500);
                 overworldManager.CompleteLevel(overworldManager.CurLevel.LevelID);
             }
 

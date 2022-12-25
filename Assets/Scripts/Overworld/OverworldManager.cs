@@ -21,15 +21,6 @@ namespace ShrugWare{
         [SerializeField]
         OverworldUIManager overworldUIManager;
 
-        [SerializeField]
-        GameObject levelId5To3Connection;
-
-        [SerializeField]
-        GameObject levelId3To4Connection;
-
-        [SerializeField]
-        GameObject levelId0To5Connection;
-
         Dictionary<int, OverworldLevel> overworldMap = new Dictionary<int, OverworldLevel>();
 
         private OverworldLevel curLevel = null;
@@ -132,18 +123,9 @@ namespace ShrugWare{
                         UpdateMeshRendererMaterials(overworldLevelToUnlock);
 
                         // update the connection
-                        // would be nice to just make a LevelConnection class and set it up programatically
-                        if (overworldLevelToUnlock.LevelID == 4)
+                        foreach(GameObject levelConnection in overworldLevelToUnlock.OutgoingLevelConnections)
                         {
-                            levelId3To4Connection.GetComponent<MeshRenderer>().material.color = Color.green;
-                        }
-                        else if(overworldLevelToUnlock.LevelID == 3)
-                        {
-                            levelId5To3Connection.GetComponent<MeshRenderer>().material.color = Color.green;
-                        }
-                        else if (overworldLevelToUnlock.LevelID == 5)
-                        {
-                            levelId0To5Connection.GetComponent<MeshRenderer>().material.color = Color.green;
+                            levelConnection.GetComponent<MeshRenderer>().material.color = Color.green;
                         }
                     }
                 }
