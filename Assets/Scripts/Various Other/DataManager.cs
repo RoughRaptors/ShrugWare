@@ -28,6 +28,7 @@ namespace ShrugWare
             StealTheChest,
             MICROGAME_END = 18,// PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
             Tuzi,
+            DodgeFireballsMinigame,
         }
 
         public enum StatModifierType
@@ -96,7 +97,8 @@ namespace ShrugWare
             Boss
         }
 
-        public static float MICROGAME_DURATION_SECONDS = 3.5f; // we can override this in the child Microgame's Start() - microgameDurationRemaining
+        public static float MICROGAME_DURATION_SECONDS = 3.5f; // we can override this in the child Microgame's Start() - microGameTime
+        public static float MINIGAME_DURATION_SECONDS = 45.0f;
         public static float SECONDS_TO_START_MICROGAME = 1.35f; // how long we wait for the microgame to start when on the scene - to orient the player
         public static float SECONDS_BETWEEN_MICROGAMES = 3.75f; // how long we wait before starting another microgame inside of GameManager
 

@@ -17,6 +17,8 @@ namespace ShrugWare
             {
                 Destroy(gameObject);
             }
+
+            OverworldManager.Instance.CompleteLevel(OverworldManager.Instance.CurLevel.LevelID);
         }
 
         public void OnBackClicked()
