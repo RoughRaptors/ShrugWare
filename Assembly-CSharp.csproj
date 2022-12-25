@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\Overworld\OverworldLevel.cs" />
     <Compile Include="Assets\Art\Fire\Scripts\OscillateLightBrightness.cs" />
     <Compile Include="Assets\Scripts\Items\ConsumableItem.cs" />
+    <Compile Include="Assets\Scripts\Minigames\DodgeFireballs.cs" />
     <Compile Include="Assets\Scripts\Bosses\Warboss Kard.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\TauntTheAdds.cs" />
     <Compile Include="Assets\Scripts\Microgames\MicrogameEffect.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Assets\Scripts\Various Other\TutorialManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCollider.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\Minigames\DodgeFireballsMinigame.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\KnockbackedSafely.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterceptTheFireball.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\DauntingInfernoRaid.cs" />
@@ -104,8 +106,6 @@
     <Compile Include="Assets\Scripts\Items\ArmorItem.cs" />
     <Compile Include="Assets\Scripts\Various Other\DataManager.cs" />
     <Compile Include="Assets\Scripts\Various Other\PlayerInventory.cs" />
-    <Compile Include="Assets\Scripts\Minigames\DodgeFireballsMinigame.cs" />
-    <Compile Include="Assets\Scripts\Minigames\Minigame.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

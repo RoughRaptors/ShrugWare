@@ -31,6 +31,11 @@ namespace ShrugWare
         const float FIREBALL_SPEED_MIN = 0.05f;
         const float FIREBALL_SPEED_MAX = 0.2f;
 
+        const float PLAYER_X_MIN = -13;
+        const float PLAYER_X_MAX = 115;
+        const float PLAYER_Y_MIN = -30;
+        const float PLAYER_Y_MAX = 35;
+
         const float FIREBALL_SPAWN_INTERVAL = 0.75f;
         private float timeSinceLastSpawn = 0.0f;
 
@@ -204,22 +209,22 @@ namespace ShrugWare
         private void HandlePlayerMovement()
         {
             Vector3 newPos = this.transform.position;
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W) && transform.position.y < PLAYER_Y_MAX)
             {
                 newPos.y += PLAYER_SPEED * Time.deltaTime;
             }
 
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.S) && transform.position.y > PLAYER_Y_MIN)
             {
                 newPos.y -= PLAYER_SPEED * Time.deltaTime;
             }
 
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A) && transform.position.x > PLAYER_X_MIN)
             {
                 newPos.x -= PLAYER_SPEED * Time.deltaTime;
             }
 
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D) && transform.position.x < PLAYER_X_MAX)
             {
                 newPos.x += PLAYER_SPEED * Time.deltaTime;
             }
