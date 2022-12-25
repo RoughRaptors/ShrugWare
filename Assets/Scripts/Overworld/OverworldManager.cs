@@ -27,6 +27,9 @@ namespace ShrugWare{
         [SerializeField]
         GameObject levelId3To4Connection;
 
+        [SerializeField]
+        GameObject levelId0To5Connection;
+
         Dictionary<int, OverworldLevel> overworldMap = new Dictionary<int, OverworldLevel>();
 
         private OverworldLevel curLevel = null;
@@ -137,6 +140,10 @@ namespace ShrugWare{
                         else if(overworldLevelToUnlock.LevelID == 3)
                         {
                             levelId5To3Connection.GetComponent<MeshRenderer>().material.color = Color.green;
+                        }
+                        else if (overworldLevelToUnlock.LevelID == 5)
+                        {
+                            levelId0To5Connection.GetComponent<MeshRenderer>().material.color = Color.green;
                         }
                     }
                 }
