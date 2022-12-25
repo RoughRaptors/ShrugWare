@@ -27,7 +27,11 @@ namespace ShrugWare
         List<Material> lockedRenderMaterials =new List<Material>();
         public List<Material> LockedRenderMaterials { get { return lockedRenderMaterials; } }
 
+        // the list of connection objects that this level points to
         [SerializeField]
+        List<GameObject> outgoingLevelConnections;
+        public List<GameObject> OutgoingLevelConnections { get { return outgoingLevelConnections; } }
+
         bool completed = false;
         public bool Completed
         {
