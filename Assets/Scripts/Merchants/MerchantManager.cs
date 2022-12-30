@@ -183,7 +183,7 @@ namespace ShrugWare
         {
             if (selectedItem.item != null)
             {
-                PlayerInventory playerInventory = OverworldManager.Instance.GetPlayerInventory();
+                PlayerInventory playerInventory = OverworldManager.Instance.PlayerInventory;
                 if (playerInventory != null && playerInventory.GetCurrencyAmount(selectedItem.currency) >= selectedItem.price)
                 {
                     // don't allow multiple purchases of the same armor piece
@@ -276,7 +276,7 @@ namespace ShrugWare
 
         public void UpdateCurrencies()
         {
-            PlayerInventory inventory = OverworldManager.Instance.GetPlayerInventory();
+            PlayerInventory inventory = OverworldManager.Instance.PlayerInventory;
             if (inventory != null)
             {
                 currenciesText.text = "Gold: " + inventory.GetCurrencyAmount(DataManager.Currencies.Generic).ToString();

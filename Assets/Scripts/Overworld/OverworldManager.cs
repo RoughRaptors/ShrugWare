@@ -30,8 +30,19 @@ namespace ShrugWare{
             set { curLevel = value; }
         }
 
-        private PlayerInventory inventory = new PlayerInventory();
-        public PlayerInventory GetPlayerInventory() { return inventory; }
+        private PlayerInventory playerInventory = new PlayerInventory();
+        public PlayerInventory PlayerInventory { get { return playerInventory; } }
+
+        [SerializeField]
+        private List<RandomEvent> randomEventList = new List<RandomEvent>();
+
+        // the current random event that is triggered
+        private RandomEvent curRandomEvent;
+        public RandomEvent CurRandomEvent 
+        {
+            get { return curRandomEvent; }
+            set { curRandomEvent = value; }
+        }
 
         private void Awake()
         {
@@ -54,9 +65,9 @@ namespace ShrugWare{
 
         private void Start()
         {
-            if (inventory == null)
+            if (playerInventory == null)
             {
-                inventory = new PlayerInventory();
+                playerInventory = new PlayerInventory();
             }
 
             overworldUIManager.UpdateUI();
@@ -181,6 +192,17 @@ namespace ShrugWare{
             {
                 // we don't enter these
                 return;
+            }
+
+            // 10% chance we trigger an event
+            int rand = UnityEngine.Random.Range(0, 100);
+            if (rand < 10 && (level.LevelType == DataManager.OverworldLevelType.Trash || level.LevelType == DataManager.OverworldLevelType.Boss))
+            {
+                // pick a random event
+                int randomEventIndex = UnityEngine.Random.Range(0, randomEventList.Count);
+                curRandomEvent = randomEventList[randomEventIndex];
+
+                // don't need to do anything else, we use this cached value later in Minigame and Microgame
             }
 
             OverworldUIManager.Instance.SetCanvasEnabled(false);
