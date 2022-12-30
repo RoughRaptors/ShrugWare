@@ -129,7 +129,7 @@ namespace ShrugWare
             }
 
             curMitigationPercent = 0;
-            BossGameManager.Instance.ResetMaxHP();
+            BossGameManager.Instance.ResetPlayerRaidMaxHP();
 
             if (HasSetBonus())
             {
@@ -146,7 +146,7 @@ namespace ShrugWare
                         else if (effect.effectType == DataManager.StatModifierType.PlayerMaxHealth)
                         {
                             int effectAmount = (int)(BossGameManager.Instance.GetPlayerInfo().maxPlayerHealth * (effect.amount / 100.0f));
-                            BossGameManager.Instance.AddToMaxHP(effectAmount);
+                            BossGameManager.Instance.AddToPlayerRaidMaxHP(effectAmount);
                             BossGameManager.Instance.HealPlayerRaid(effectAmount);
                         }
                     }

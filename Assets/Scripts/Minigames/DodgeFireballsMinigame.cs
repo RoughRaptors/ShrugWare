@@ -70,8 +70,11 @@ namespace ShrugWare
 
         private void Start()
         {
+            base.Start();
+            healthRemaining += healthToAdd;
+
             // initial wave
-            for(int i = 0; i < 10; ++i)
+            for (int i = 0; i < 10; ++i)
             {
                 SpawnFireball(FromDirection.FromRight);
             }
@@ -267,7 +270,7 @@ namespace ShrugWare
 
             if (healthRemaining >= 0)
             {
-                OverworldManager.Instance.GetPlayerInventory().AddCurrency(DataManager.Currencies.Generic, 500);
+                OverworldManager.Instance.PlayerInventory.AddCurrency(DataManager.Currencies.Generic, 500);
                 overworldManager.CompleteLevel(overworldManager.CurLevel.LevelID);
             }
 
