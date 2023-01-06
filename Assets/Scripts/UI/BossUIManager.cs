@@ -203,8 +203,8 @@ namespace ShrugWare
             maxHealthPotionItem.GetComponentInChildren<Text>().text = "";
 
             // bad, remove hard coding and make data driven
-            Item healthPotion = OverworldManager.Instance.GetPlayerInventory().GetInventoryItem(0);
-            Item maxHealthPotion = OverworldManager.Instance.GetPlayerInventory().GetInventoryItem(1);
+            Item healthPotion = OverworldManager.Instance.PlayerInventory.GetInventoryItem(0);
+            Item maxHealthPotion = OverworldManager.Instance.PlayerInventory.GetInventoryItem(1);
             if(healthPotion != null)
             {
                 healthPotionItem.GetComponentInChildren<Text>().text += "Health Potion\n+25% Heal\nQuantity: " + healthPotion.itemQuantity;

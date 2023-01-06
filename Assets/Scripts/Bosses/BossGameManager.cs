@@ -98,6 +98,9 @@ namespace ShrugWare
             public int livesLeft;
         }
 
+        // events can modifier our hp. we pull from DataManger.PLAYER_START_HP, so we need an offset to calculate our actual hp
+        private int hpOffset;
+
         PlayerInfo playerInfo = new PlayerInfo(DataManager.PLAYER_START_HP, DataManager.PLAYER_MAX_HP, DataManager.PLAYER_STARTING_LIVES);
         public PlayerInfo GetPlayerInfo() { return playerInfo; }
 
@@ -138,7 +141,7 @@ namespace ShrugWare
 
             if(OverworldManager.Instance != null)
             {
-                playerInventory = OverworldManager.Instance.GetPlayerInventory();
+                playerInventory = OverworldManager.Instance.PlayerInventory;
                 if(playerInventory != null)
                 {
                     playerInventory.RecalculateStats();
@@ -168,6 +171,9 @@ namespace ShrugWare
         {
             Time.timeScale = curTimeScale;
             audioManager.PlayAudioClip(DataManager.AudioEffectTypes.MainMenu, .175f);
+
+            // apply the modifiers from our random event, if we have one
+            ApplyRandomEventModifiers();
 
             // our raid and boss data needs to be populated by this point
             UpdateGameUI();
@@ -368,14 +374,20 @@ namespace ShrugWare
             previouslyRanEffects.Add(effect);
         }
 
-        public void AddToMaxHP(int amount)
+        public void AddToPlayerRaidMaxHP(int amount)
         {
             playerInfo.maxPlayerHealth += amount;
+            playerInfo.curPlayerHealth += amount;
         }
 
-        public void ResetMaxHP()
+        public void ResetPlayerRaidMaxHP()
         {
             playerInfo.maxPlayerHealth = DataManager.PLAYER_MAX_HP;
+        }
+
+        public void SetToMaxHP()
+        {
+            playerInfo.curPlayerHealth = DataManager.PLAYER_MAX_HP + hpOffset;
         }
 
         public void UpdateGameUI()
@@ -392,6 +404,29 @@ namespace ShrugWare
         public void EnableBossCamera(bool enabled)
         {
             bossSceneCamera.gameObject.SetActive(enabled);
+        }
+
+        private void ApplyRandomEventModifiers()
+        {
+            if (OverworldManager.Instance.CurRandomEvent != null)
+            {
+                foreach (DataManager.StatEffect effect in OverworldManager.Instance.CurRandomEvent.eventEffects)
+                {
+                    if (effect.effectType == DataManager.StatModifierType.PlayerMaxHealth)
+                    {
+                        // until we find a better solution, just hack it a *25 since microgames have more hp
+                        hpOffset = (int)(effect.amount * 25);
+                        AddToPlayerRaidMaxHP(hpOffset);
+                    }
+                    else if (effect.effectType == DataManager.StatModifierType.Timescale)
+                    {
+                        ModifyTimeScale(effect.amount);
+                    }
+                }
+            }
+
+            // kill it so we don't run it again
+            OverworldManager.Instance.CurRandomEvent = null;
         }
     }
 }
