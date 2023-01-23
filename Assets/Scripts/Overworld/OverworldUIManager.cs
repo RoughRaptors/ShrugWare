@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace ShrugWare
 {
-
     public class OverworldUIManager : MonoBehaviour
     {
         public static OverworldUIManager Instance;
@@ -16,6 +17,9 @@ namespace ShrugWare
 
         [SerializeField]
         Text curLevelText;
+
+        [SerializeField]
+        GameObject randomEventUIObj;
 
         private void Awake()
         {
@@ -83,6 +87,23 @@ namespace ShrugWare
             {
                 overworldLevel.EnterLevel();
             }
+        }
+
+        public void OnRandomEventTriggered()
+        {
+            // pop up the random event window and load the next scene on button press. 0 index is the text, 1 index is the button text
+            // for some reason it won't let me change the color in the editor
+            randomEventUIObj.SetActive(true);
+            randomEventUIObj.GetComponentsInChildren<TextMeshProUGUI>()[0].color = new Color(0, 150, 150);
+            randomEventUIObj.GetComponentsInChildren<TextMeshProUGUI>()[0].text =
+                OverworldManager.Instance.CurRandomEvent.eventName + "\n\n" + OverworldManager.Instance.CurRandomEvent.eventText;
+        }
+
+        public void OnRandomEventContinuePressed()
+        {
+            randomEventUIObj.SetActive(false);
+            OverworldUIManager.Instance.SetCanvasEnabled(false);
+            SceneManager.LoadScene((int)OverworldManager.Instance.CurLevel.SceneIDToLoad);
         }
     }
 }

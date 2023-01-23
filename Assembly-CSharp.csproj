@@ -61,6 +61,7 @@
     <Compile Include="Assets\Art\Fire\Scripts\OscillateLightBrightness.cs" />
     <Compile Include="Assets\Scripts\Items\ConsumableItem.cs" />
     <Compile Include="Assets\Scripts\Minigames\DodgeFireballs.cs" />
+    <Compile Include="Assets\Scripts\Various Other\RandomEvent.cs" />
     <Compile Include="Assets\Scripts\Bosses\Warboss Kard.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\TauntTheAdds.cs" />
     <Compile Include="Assets\Scripts\Microgames\MicrogameEffect.cs" />
