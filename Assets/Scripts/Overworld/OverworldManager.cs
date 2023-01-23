@@ -201,7 +201,7 @@ namespace ShrugWare{
                 // pick a random event
                 int randomEventIndex = UnityEngine.Random.Range(0, randomEventList.Count);
                 curRandomEvent = randomEventList[randomEventIndex];
-
+                
                 // don't need to do anything else, we use this cached value later
                 curLevel = level;
                 overworldUIManager.OnRandomEventTriggered();
