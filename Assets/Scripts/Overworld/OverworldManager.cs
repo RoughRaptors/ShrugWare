@@ -196,13 +196,16 @@ namespace ShrugWare{
 
             // 10% chance we trigger an event
             int rand = UnityEngine.Random.Range(0, 100);
-            if (rand < 10 && (level.LevelType == DataManager.OverworldLevelType.Trash || level.LevelType == DataManager.OverworldLevelType.Boss))
+            if (rand < 100 && (level.LevelType == DataManager.OverworldLevelType.Trash || level.LevelType == DataManager.OverworldLevelType.Boss))
             {
                 // pick a random event
                 int randomEventIndex = UnityEngine.Random.Range(0, randomEventList.Count);
                 curRandomEvent = randomEventList[randomEventIndex];
 
-                // don't need to do anything else, we use this cached value later in Minigame and Microgame
+                // don't need to do anything else, we use this cached value later
+                curLevel = level;
+                overworldUIManager.OnRandomEventTriggered();
+                return;
             }
 
             OverworldUIManager.Instance.SetCanvasEnabled(false);
