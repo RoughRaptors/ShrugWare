@@ -28,8 +28,8 @@ namespace ShrugWare
         const float FIREBALL_X_MAX = 125;
         const float FIREBALL_Y_MIN = -30;
         const float FIREBALL_Y_MAX = 40;
-        const float FIREBALL_SPEED_MIN = 0.05f;
-        const float FIREBALL_SPEED_MAX = 0.2f;
+        const float FIREBALL_SPEED_MIN = 0.045f;
+        const float FIREBALL_SPEED_MAX = 0.175f;
 
         const float PLAYER_X_MIN = -13;
         const float PLAYER_X_MAX = 115;
@@ -43,7 +43,9 @@ namespace ShrugWare
         private float timeRemaining;
         private const float PLAYER_SPEED = 50.0f;
 
-        private int healthRemaining = 5;
+        // float so we can take partial damage via damage mitigation. it's not clean but blegh
+        private const float START_HEALTH = 5;
+        private float healthRemaining = 5;
         bool gameRunning = false;
 
         private enum FromDirection
@@ -71,7 +73,7 @@ namespace ShrugWare
         private void Start()
         {
             base.Start();
-            healthRemaining += healthToAdd;
+            healthRemaining = START_HEALTH + healthToAdd;
 
             // initial wave
             for (int i = 0; i < 10; ++i)
@@ -237,8 +239,15 @@ namespace ShrugWare
 
         private void OnTriggerEnter(Collider other)
         {
+            float mitigation = 0;
+            if (OverworldManager.Instance != null)
+            {
+                mitigation = OverworldManager.Instance.PlayerInventory.GetMitigation();
+            }
+
             // damage the player
-            --healthRemaining;
+            float damageTaken = 1.0f - (mitigation / 100);
+            healthRemaining -= damageTaken;
             statusText.text = "HP: " + healthRemaining.ToString();
             if (healthRemaining < 0)
             {

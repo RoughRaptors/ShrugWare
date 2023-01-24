@@ -350,6 +350,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &644738995 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5156833369608619646, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
+  m_PrefabInstance: {fileID: 337458186}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26cf345817dc04a4f88c8e93f5229eec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &717042796
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,7 +385,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 717042796}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -650.8892, y: -1317.237, z: 25.931824}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -476,7 +487,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 862999830}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 644738995}
+        m_TargetAssemblyTypeName: ShrugWare.OverworldUIManager, Assembly-CSharp
+        m_MethodName: OnRandomEventContinuePressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &862999830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -832,9 +855,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventID: 0
-  eventName: Server Crash Good
+  eventName: Server Go Boom
   eventText: Oh no! The server crashed. You had to relog but were quick and avoided
-    the queue. <br><br><br> For the next encounter, gain 2 health.
+    the queue. <br><br><br> For the next encounter, gain 2 max health.
   eventEffects:
   - effectType: 1
     amount: 2
