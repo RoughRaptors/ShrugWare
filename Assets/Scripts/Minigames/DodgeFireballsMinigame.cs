@@ -28,8 +28,8 @@ namespace ShrugWare
         const float FIREBALL_X_MAX = 125;
         const float FIREBALL_Y_MIN = -30;
         const float FIREBALL_Y_MAX = 40;
-        const float FIREBALL_SPEED_MIN = 0.045f;
-        const float FIREBALL_SPEED_MAX = 0.175f;
+        const float FIREBALL_SPEED_MIN = 0.45f;
+        const float FIREBALL_SPEED_MAX = 0.75f;
 
         const float PLAYER_X_MIN = -13;
         const float PLAYER_X_MAX = 115;
