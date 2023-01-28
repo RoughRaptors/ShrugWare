@@ -18,12 +18,15 @@ namespace ShrugWare
                 Destroy(gameObject);
             }
 
-            OverworldManager.Instance.CompleteLevel(OverworldManager.Instance.CurLevel.LevelID);
+            if (OverworldManager.Instance != null)
+            {
+                OverworldManager.Instance.CompleteLevel(OverworldManager.Instance.CurLevel.LevelID);
+            }
         }
 
         public void OnBackClicked()
         {
-            SceneManager.LoadScene((int)DataManager.Scenes.Overworld);
+            SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
         }
     }
 }

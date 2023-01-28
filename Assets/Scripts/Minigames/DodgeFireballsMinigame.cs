@@ -40,7 +40,6 @@ namespace ShrugWare
         private float timeSinceLastSpawn = 0.0f;
 
         private float timeInGame = 0.0f;
-        private float timeRemaining;
         private const float PLAYER_SPEED = 50.0f;
 
         // float so we can take partial damage via damage mitigation. it's not clean but blegh
@@ -70,7 +69,7 @@ namespace ShrugWare
             continueButton.SetActive(false);
         }
 
-        private void Start()
+        private new void Start()
         {
             base.Start();
             healthRemaining = START_HEALTH + healthToAdd;
@@ -82,7 +81,7 @@ namespace ShrugWare
             }
 
             gameRunning = true;
-            statusText.text = "HP: " + healthRemaining.ToString();
+            statusText.text = "HP: " + healthRemaining.ToString("F2");
         }
 
         private void Update()
@@ -283,7 +282,7 @@ namespace ShrugWare
                 overworldManager.CompleteLevel(overworldManager.CurLevel.LevelID);
             }
 
-            SceneManager.LoadScene((int)DataManager.Scenes.Overworld);
+            SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
         }
     }
 }
