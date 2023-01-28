@@ -150,7 +150,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainUICanvas: {fileID: 5156833369608619632}
+  levelsObj: {fileID: 0}
   curLevelText: {fileID: 5156833369608619633}
+  randomEventUIObj: {fileID: 0}
 --- !u!1 &6916883363414150009
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,39 +269,8 @@ MonoBehaviour:
   sceneIDToLoad: 3
   levelIDsToUnlock: 04000000
   lockedRenderMaterials: []
-  completed: 0
+  outgoingLevelConnections: []
   locked: 0
---- !u!1 &6916883363804789653
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6916883363804789652}
-  m_Layer: 0
-  m_Name: Player Inventory
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6916883363804789652
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6916883363804789653}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5156833369608619635}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6916883363897651458
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,7 +462,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5156833369608619635}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!108 &6916883364385712254
 Light:
@@ -692,7 +663,7 @@ MonoBehaviour:
   levelIDsToUnlock: 
   lockedRenderMaterials:
   - {fileID: 2100000, guid: 80854854dada12e488c8a92caade5a86, type: 2}
-  completed: 0
+  outgoingLevelConnections: []
   locked: 1
 --- !u!1 &6916883364615106111
 GameObject:
@@ -809,7 +780,7 @@ MonoBehaviour:
   sceneIDToLoad: 2
   levelIDsToUnlock: 
   lockedRenderMaterials: []
-  completed: 1
+  outgoingLevelConnections: []
   locked: 0
 --- !u!1 &6916883364638777854
 GameObject:
@@ -842,7 +813,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5156833369608619635}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 60, y: -90, z: 0}
 --- !u!20 &6916883364638777840
 Camera:
@@ -1282,7 +1253,7 @@ MonoBehaviour:
   sceneIDToLoad: 0
   levelIDsToUnlock: 
   lockedRenderMaterials: []
-  completed: 1
+  outgoingLevelConnections: []
   locked: 0
 --- !u!1 &6916883364932605153
 GameObject:
@@ -1314,7 +1285,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6916883364308918713}
-  - {fileID: 6916883363804789652}
   - {fileID: 6916883364638777843}
   - {fileID: 6916883364385712241}
   m_Father: {fileID: 0}
@@ -1333,6 +1303,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   overworldUIManager: {fileID: 5156833369608619646}
+  randomEventList:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &6916883365041668279
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,5 +1422,5 @@ MonoBehaviour:
   sceneIDToLoad: 1
   levelIDsToUnlock: 
   lockedRenderMaterials: []
-  completed: 1
+  outgoingLevelConnections: []
   locked: 0
