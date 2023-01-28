@@ -227,6 +227,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6916883363414150011, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
+      propertyPath: sceneIDToLoad
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916883363414150011, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
       propertyPath: lockedRenderMaterials.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -242,9 +246,17 @@ PrefabInstance:
       propertyPath: outgoingLevelConnections.Array.data[0]
       value: 
       objectReference: {fileID: 1722284711}
+    - target: {fileID: 6916883364490232712, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
+      propertyPath: sceneIDToLoad
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6916883364615106097, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
       propertyPath: completed
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916883364615106097, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
+      propertyPath: sceneIDToLoad
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6916883364707373246, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -277,6 +289,10 @@ PrefabInstance:
     - target: {fileID: 6916883365041668265, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
       propertyPath: completed
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6916883365041668265, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
+      propertyPath: sceneIDToLoad
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6916883365041668265, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
       propertyPath: levelConnections.Array.size
@@ -1133,7 +1149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelID: 5
   levelType: 4
-  sceneIDToLoad: 20
+  sceneIDToLoad: 21
   levelIDsToUnlock: 03000000
   lockedRenderMaterials: []
   outgoingLevelConnections:

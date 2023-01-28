@@ -6,12 +6,13 @@ namespace ShrugWare
         [System.Serializable]
         public enum Scenes
         {
-            Overworld = 0,
+            MainMenuScene = 0,
+            OverworldScene,
             TutorialScene,
             MerchantScene,
             WarbossKard, 
-            MICROGAME_START = 4, // KEEP IN SYNC
-            GetOutOfFire = 4,    // KEEP IN SYNC
+            MICROGAME_START = 5, // KEEP IN SYNC
+            GetOutOfFire = 5,    // KEEP IN SYNC
             CastFrostbolt,
             TauntTheAdds,
             InterceptTheFireball,
@@ -26,7 +27,7 @@ namespace ShrugWare
             KnockbackedSafelty,
             MatchPolarity,
             StealTheChest,
-            MICROGAME_END = 18,// PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            MICROGAME_END = 19,// PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
             Tuzi,
             DodgeFireballsMinigame,
         }
