@@ -44,7 +44,7 @@ namespace ShrugWare
 
         private List<Fireball> fireballsList = new List<Fireball>();
 
-        private void Start()
+        private new void Start()
         {
             // initial wave
             for(int i = 0; i < 15; ++i)
