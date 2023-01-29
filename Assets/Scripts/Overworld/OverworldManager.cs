@@ -44,6 +44,13 @@ namespace ShrugWare{
             set { curRandomEvent = value; }
         }
 
+        // it's possible that when reading a random event, we click a level on accident underneath the ui. don't allow that
+        private bool waitingOnRandomEvent = false;
+        public bool WaitingOnRandomEvent
+        {
+            get { return waitingOnRandomEvent; }
+        }
+
         private void Awake()
         {
             if (Instance == null)
@@ -196,7 +203,7 @@ namespace ShrugWare{
 
             // 10% chance we trigger an event
             int rand = UnityEngine.Random.Range(0, 100);
-            if (rand < 25 && (level.LevelType == DataManager.OverworldLevelType.Trash || level.LevelType == DataManager.OverworldLevelType.Boss))
+            if (rand < 250 && (level.LevelType == DataManager.OverworldLevelType.Trash || level.LevelType == DataManager.OverworldLevelType.Boss))
             {
                 // pick a random event
                 int randomEventIndex = UnityEngine.Random.Range(0, randomEventList.Count);
@@ -205,6 +212,7 @@ namespace ShrugWare{
                 // don't need to do anything else, we use this cached value later
                 curLevel = level;
                 overworldUIManager.OnRandomEventTriggered();
+                waitingOnRandomEvent = true;
                 return;
             }
 
