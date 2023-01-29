@@ -102,6 +102,7 @@ namespace ShrugWare
 
         public void OnRandomEventContinuePressed()
         {
+            OverworldManager.Instance.WaitingOnRandomEvent = false;
             randomEventUIObj.SetActive(false);
             OverworldUIManager.Instance.SetCanvasEnabled(false);
             SceneManager.LoadScene((int)OverworldManager.Instance.CurLevel.SceneIDToLoad);

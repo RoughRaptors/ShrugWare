@@ -49,6 +49,7 @@ namespace ShrugWare{
         public bool WaitingOnRandomEvent
         {
             get { return waitingOnRandomEvent; }
+            set { waitingOnRandomEvent = value; }
         }
 
         private void Awake()
