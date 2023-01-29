@@ -108,7 +108,6 @@
     <Compile Include="Assets\Scripts\Items\ArmorItem.cs" />
     <Compile Include="Assets\Scripts\Various Other\DataManager.cs" />
     <Compile Include="Assets\Scripts\Various Other\PlayerInventory.cs" />
-    <Compile Include="Assets\Scripts\Various Other\MainMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
