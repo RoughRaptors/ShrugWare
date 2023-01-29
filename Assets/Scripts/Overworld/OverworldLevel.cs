@@ -59,7 +59,10 @@ namespace ShrugWare
 
         private void OnMouseDown()
         {
-            OverworldManager.Instance.SetCurLevelById(levelID);
+            if (!OverworldManager.Instance.WaitingOnRandomEvent)
+            {
+                OverworldManager.Instance.SetCurLevelById(levelID);
+            }
         }
     }
 }
