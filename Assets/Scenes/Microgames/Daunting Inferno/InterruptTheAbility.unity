@@ -401,6 +401,7 @@ MonoBehaviour:
       asPercentage: 0
     addOnWin: 1
     addOnLoss: 1
+  controlScheme: 1
   abilityBar: {fileID: 274319489}
   interruptButton: {fileID: 1325052455}
 --- !u!1 &392852466
@@ -585,6 +586,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 805840967773421276, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1100847505480773095, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -600,6 +605,22 @@ PrefabInstance:
     - target: {fileID: 2434016125122565296, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: instructionText
       value: INTERRUPT (wait for it)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434016125122565296, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: controlSchemeImage
+      value: 
+      objectReference: {fileID: 1130467278}
+    - target: {fileID: 2434016125122565296, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: WASDControlSchemeImage
+      value: 
+      objectReference: {fileID: 1130467279}
+    - target: {fileID: 2434016125122565296, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: mouseControlSchemeImage
+      value: 
+      objectReference: {fileID: 1130467278}
+    - target: {fileID: 4526303557921183138, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7751155465472654597, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_Name
@@ -658,6 +679,16 @@ PrefabInstance:
 --- !u!224 &1130467277 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9163045961086937154, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+  m_PrefabInstance: {fileID: 1130467276}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1130467278 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8346620444918593810, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+  m_PrefabInstance: {fileID: 1130467276}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1130467279 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2860528049304986484, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
   m_PrefabInstance: {fileID: 1130467276}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1314940422

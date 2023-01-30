@@ -1307,6 +1307,18 @@ PrefabInstance:
       propertyPath: instructionText
       value: Fire Bad!
       objectReference: {fileID: 0}
+    - target: {fileID: 2434016125122565296, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: controlSchemeImage
+      value: 
+      objectReference: {fileID: 1010856116}
+    - target: {fileID: 2434016125122565296, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: WASDControlSchemeImage
+      value: 
+      objectReference: {fileID: 1010856116}
+    - target: {fileID: 2434016125122565296, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: mouseControlSchemeImage
+      value: 
+      objectReference: {fileID: 1010856115}
     - target: {fileID: 7751155465472654597, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_Name
       value: Microgame UI
@@ -1361,6 +1373,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+--- !u!1 &1010856115 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8346620444918593810, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+  m_PrefabInstance: {fileID: 1010856114}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1010856116 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2860528049304986484, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+  m_PrefabInstance: {fileID: 1010856114}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1155859091
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3717,6 +3739,7 @@ MonoBehaviour:
       asPercentage: 0
     addOnWin: 1
     addOnLoss: 1
+  controlScheme: 0
 --- !u!1001 &2127744954
 PrefabInstance:
   m_ObjectHideFlags: 0

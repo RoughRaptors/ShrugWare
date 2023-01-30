@@ -21,7 +21,7 @@ namespace ShrugWare
         [SerializeField] private Color winTextColor = Color.green;
         [SerializeField] private Color loseTextColor = Color.red;
 
-
+        [SerializeField] private GameObject controlSchemeImage;
 
         private void OnValidate()
         {
@@ -31,6 +31,8 @@ namespace ShrugWare
         private void Awake()
         {
             myMicrogame = FindObjectOfType<Microgame>();
+            controlSchemeImage.SetActive(true);
+
         }
 
         private void OnEnable()
@@ -54,10 +56,15 @@ namespace ShrugWare
 
         private void OnMicrogameStart(string startText)
         {
-            if(string.IsNullOrEmpty(startText))
+            controlSchemeImage.SetActive(false);
+            if (string.IsNullOrEmpty(startText))
+            {
                 instructionTextUI.enabled = false;
+            }
             else
+            {
                 SetInstructionText(startText, introTextColor);
+            }
         }
 
         private void OnMicrogameEnd(bool victory, string displayText)

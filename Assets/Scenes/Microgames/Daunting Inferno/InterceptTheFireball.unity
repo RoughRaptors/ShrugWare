@@ -348,6 +348,18 @@ PrefabInstance:
       propertyPath: instructionText
       value: Save the healer
       objectReference: {fileID: 0}
+    - target: {fileID: 2434016125122565296, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: controlSchemeImage
+      value: 
+      objectReference: {fileID: 1406095289}
+    - target: {fileID: 2434016125122565296, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: WASDControlSchemeImage
+      value: 
+      objectReference: {fileID: 1406095289}
+    - target: {fileID: 2434016125122565296, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: mouseControlSchemeImage
+      value: 
+      objectReference: {fileID: 1406095288}
     - target: {fileID: 7751155465472654597, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_Name
       value: Microgame UI
@@ -402,6 +414,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+--- !u!1 &1406095288 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8346620444918593810, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+  m_PrefabInstance: {fileID: 1406095287}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1406095289 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2860528049304986484, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+  m_PrefabInstance: {fileID: 1406095287}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1566686648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -650,6 +672,7 @@ MonoBehaviour:
       asPercentage: 0
     addOnWin: 1
     addOnLoss: 1
+  controlScheme: 0
   playerObject: {fileID: 114926076}
   fireballObject: {fileID: 708319694}
   healerObject: {fileID: 1807666803}

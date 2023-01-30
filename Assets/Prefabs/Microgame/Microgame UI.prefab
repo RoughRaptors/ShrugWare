@@ -49,6 +49,9 @@ MonoBehaviour:
   instructionText: 
   instructionTextUI: {fileID: 6878079186030299948}
   timerBar: {fileID: 1100847505808109910}
+  introTextColor: {r: 0, g: 1, b: 0, a: 1}
+  winTextColor: {r: 0, g: 1, b: 0, a: 1}
+  loseTextColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1001 &7751155466560733070
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -258,6 +261,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Microgame Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1889755052401989227, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
+      propertyPath: m_Name
+      value: WASD Image
+      objectReference: {fileID: 0}
     - target: {fileID: 3810742682450603125, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
       propertyPath: m_text
       value: 
@@ -265,6 +272,14 @@ PrefabInstance:
     - target: {fileID: 3810742682450603125, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
       propertyPath: m_fontSize
       value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3810742682450603125, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6971377348762163589, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7266377873029941950, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
       propertyPath: m_AnchorMax.x
@@ -274,6 +289,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9066116586388612329, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: fa490ee77b68b6045a3c2e2376e0e224, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
 --- !u!114 &1100847505808109910 stripped
