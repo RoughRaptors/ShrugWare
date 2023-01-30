@@ -220,6 +220,10 @@ PrefabInstance:
       propertyPath: instructionText
       value: Stack up!
       objectReference: {fileID: 0}
+    - target: {fileID: 2434016125122565296, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: controlSchemeImage
+      value: 
+      objectReference: {fileID: 177983243}
     - target: {fileID: 7751155465472654597, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_Name
       value: Microgame UI
@@ -274,6 +278,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+--- !u!1 &177983243 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2860528049304986484, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+  m_PrefabInstance: {fileID: 177983242}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &449541680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -470,6 +479,7 @@ MonoBehaviour:
       asPercentage: 0
     addOnWin: 1
     addOnLoss: 1
+  controlScheme: 0
   playerObject: {fileID: 760236644}
   meteorObject: {fileID: 1029492006}
   groupMembers:

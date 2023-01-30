@@ -32,6 +32,14 @@ namespace ShrugWare
         public event Action<bool, string> MicrogameEndText;
         private bool endTextSet = false;
 
+        [Serializable]
+        public enum ControlScheme
+        {
+            Keyboard = 0,
+            Mouse
+        }
+
+        [SerializeField] private ControlScheme controlScheme;
 
         protected virtual void Awake()
         {
@@ -58,6 +66,9 @@ namespace ShrugWare
 
         private IEnumerator PlayMicrogame()
         {
+            // show the control scheme
+            
+
             //Wait initial delay time
             yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
             MicrogameStartText?.Invoke(startText);
@@ -81,7 +92,11 @@ namespace ShrugWare
             HandleMicrogameEnd(VictoryCheck());
         }
 
-        protected virtual void OnMyGameAwake() { }
+        protected virtual void OnMyGameAwake() 
+        { 
+
+        }
+
         protected virtual void OnMyGameStart() { }
         protected virtual void OnMyGameTick(float timePercentLeft) { }
         protected virtual void TimeOut() { }

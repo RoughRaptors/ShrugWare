@@ -463,14 +463,17 @@ MonoBehaviour:
       asPercentage: 0
     addOnWin: 1
     addOnLoss: 1
+  controlScheme: 0
   playerObject: {fileID: 1518460224}
   fireballs:
   - {fileID: 551321346}
   - {fileID: 850894194}
   - {fileID: 495941263}
   FIREBALL_MOVE_SPEED: 60
-  minPlayerStartPos: -50
-  maxPlayerStartPos: 40
+  minPlayerStartPosX: -80
+  maxPlayerStartPosX: 80
+  minPlayerStartPosY: -40
+  maxPlayerStartPosY: 20
   minBallScale: 5
   maxBallScale: 15
 --- !u!1001 &1518460223
@@ -680,6 +683,22 @@ PrefabInstance:
       propertyPath: instructionText
       value: Dodge them all
       objectReference: {fileID: 0}
+    - target: {fileID: 2434016125122565296, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: controlSchemeImage
+      value: 
+      objectReference: {fileID: 7751155465286772617}
+    - target: {fileID: 2434016125122565296, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: WASDControlSchemeImage
+      value: 
+      objectReference: {fileID: 7751155465286772617}
+    - target: {fileID: 2434016125122565296, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: mouseControlSchemeImage
+      value: 
+      objectReference: {fileID: 7751155465286772618}
+    - target: {fileID: 6878079186030299948, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_text
+      value: DODGE THEM ALL
+      objectReference: {fileID: 0}
     - target: {fileID: 7751155465472654597, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_Name
       value: Microgame UI
@@ -700,12 +719,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8346620444918593810, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9163045961094295231, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+--- !u!1 &7751155465286772617 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2860528049304986484, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+  m_PrefabInstance: {fileID: 7751155465286772616}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7751155465286772618 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8346620444918593810, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+  m_PrefabInstance: {fileID: 7751155465286772616}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8912454715031906626
 PrefabInstance:
   m_ObjectHideFlags: 0

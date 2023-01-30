@@ -81,7 +81,6 @@
     <Compile Include="Assets\Scripts\Minigames\DodgeFireballsMinigame.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\KnockbackedSafely.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterceptTheFireball.cs" />
-    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\DauntingInfernoRaid.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StackUpForMeteor.cs" />
     <Compile Include="Assets\Scripts\Microgames\Microgame.cs" />
     <Compile Include="Assets\Scripts\Various Other\Raid.cs" />
