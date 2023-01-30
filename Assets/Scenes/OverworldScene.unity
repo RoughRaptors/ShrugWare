@@ -173,7 +173,7 @@ PrefabInstance:
     - target: {fileID: 5156833369608619624, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1905336806}
     - target: {fileID: 5156833369608619624, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
       propertyPath: m_RenderMode
       value: 0
