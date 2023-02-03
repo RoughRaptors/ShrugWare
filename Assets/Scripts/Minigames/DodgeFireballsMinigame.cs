@@ -57,7 +57,6 @@ namespace ShrugWare
         protected struct Fireball
         {
             public GameObject fireballObj;
-            public Vector3 position;
             public Vector3 targetPos;
             public float speed;
         }
