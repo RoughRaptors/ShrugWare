@@ -1092,8 +1092,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ShrugWare.DodgeFireballsMinigame, Assembly-CSharp
+      - m_Target: {fileID: 788327635}
+        m_TargetAssemblyTypeName: ShrugWare.ShootAsteroidsMinigame, Assembly-CSharp
         m_MethodName: OnContinueButtonClicked
         m_Mode: 1
         m_Arguments:

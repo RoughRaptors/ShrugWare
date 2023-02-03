@@ -37,17 +37,17 @@ namespace ShrugWare
 
         const int NUM_ASTEROIDS = 15;
         const float ASTEROID_X_MIN = -10;
-        const float ASTEROID_X_MAX = 125;
+        const float ASTEROID_X_MAX = 110;
         const float ASTEROID_Y_MIN = -30;
         const float ASTEROID_Y_MAX = 40;
 
         const float PLAYER_X_MIN = -25;
-        const float PLAYER_X_MAX = 120;
+        const float PLAYER_X_MAX = 110;
         const float PLAYER_Y_MIN = -30;
         const float PLAYER_Y_MAX = 50;
         const float PLAYER_BUFFER = 5.0f;
 
-        private Vector3 playerVelocity;
+        float timeScale = 1.0f;
 
         // keep track of this so we can modify it when our bullets collide in ShootAsteroidsMinigameAsteroid
         public static int NumAsteroidsDestroyed = 0;
@@ -60,16 +60,16 @@ namespace ShrugWare
         private new void Start()
         {
             base.Start();
+            this.transform.position = new Vector3(50, 0, 0);
             healthRemaining = START_HEALTH + healthToAdd;
+            NumAsteroidsDestroyed = 0;
 
-            for (int i = 0; i < 15; ++i)
+            for (int i = 0; i < NUM_ASTEROIDS; ++i)
             {
                 SpawnAsteroid();
             }
 
-            playerVelocity = this.transform.GetComponent<Rigidbody>().velocity;
             gameRunning = true;
-            NumAsteroidsDestroyed = 0;
             statusText.text = "HP: " + healthRemaining.ToString("F2");
         }
 
@@ -84,16 +84,17 @@ namespace ShrugWare
             timeRemainingText.text = "Time Remaining: " + (DataManager.MINIGAME_DURATION_SECONDS - timeInGame).ToString("F2");
             if (timeInGame >= DataManager.MINIGAME_DURATION_SECONDS)
             {
-                // out of time
-                if(NumAsteroidsDestroyed == NUM_ASTEROIDS)
-                {
-                    // we won
-                    statusText.text = "Boss time!";
-
-                    // we get rewards in OnContinueButtonClicked
-                }
-
+                // out of time ,we lost
                 gameRunning = false;
+                statusText.text = "NO TIME LEFT!";
+                continueButton.SetActive(true);
+            }
+
+            // destroyed all
+            if(NumAsteroidsDestroyed == NUM_ASTEROIDS)
+            {
+                gameRunning = false;
+                statusText.text = "Boss time!";
                 continueButton.SetActive(true);
             }
         }
@@ -107,7 +108,18 @@ namespace ShrugWare
 
             float asteroidXPos = Random.Range(ASTEROID_X_MIN, ASTEROID_X_MAX);
             float asteroidYPos = Random.Range(ASTEROID_Y_MIN, ASTEROID_Y_MAX);
-            newAsteroid.asteroidObj.transform.position = new Vector3(asteroidXPos, asteroidYPos, 0);
+            Vector3 newPos = new Vector3(asteroidXPos, asteroidYPos, 0);
+
+            // make sure we're not spawning this asteroid on top of the player, it will hurt us
+            if (Vector3.Distance(this.transform.position, newPos) > 10)
+            {
+                // let's just count it as destroyed in this edge case
+                newAsteroid.asteroidObj.transform.position = new Vector3(asteroidXPos, asteroidYPos, 0);
+            }
+            else
+            {
+                ++NumAsteroidsDestroyed;
+            }
         }
 
         // use physics instead of just moving the transform so we can have momentum
@@ -140,8 +152,30 @@ namespace ShrugWare
                 newBullet.transform.forward = this.transform.forward;
                 newBullet.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
                 newBullet.SetActive(true);
+
+                // speed up the game per bullet shot
+                timeScale += 0.01f;
+                Time.timeScale = timeScale;
             }
 
+            if(transform.position.x < -21)
+            {
+                transform.position = new Vector3(120, transform.position.y, 0);
+            }
+            else if(transform.position.x > 120)
+            {
+                transform.position = new Vector3(-21, transform.position.y, 0);
+            }
+            else if (transform.position.y < -35)
+            {
+                transform.position = new Vector3(transform.position.x, 45, 0);
+            }
+            else if (transform.position.y > 45)
+            {
+                transform.position = new Vector3(transform.position.x, -35, 0);
+            }
+
+            /*
             // https://stackoverflow.com/questions/49102831/teleporting-character-from-edge-to-edge-of-the-screen
             //you get a world space coord and transform it to viewport space.
             Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
@@ -167,6 +201,7 @@ namespace ShrugWare
 
             //and here it gets transformed back to world space.
             transform.position = Camera.main.ViewportToWorldPoint(pos);
+            */
         }
 
         // we physically collided with an asteroid
@@ -184,7 +219,7 @@ namespace ShrugWare
             statusText.text = "HP: " + healthRemaining.ToString();
             if (healthRemaining < 0)
             {
-                statusText.text = "YOU ARE DED";
+                statusText.text = "Le DED!";
                 gameRunning = false;
                 continueButton.SetActive(true);
             }
@@ -192,6 +227,7 @@ namespace ShrugWare
             // we died
             if (healthRemaining < 0)
             {
+                gameRunning = false;
                 statusText.text = "Le DED!";
                 Destroy(other.gameObject);
             }
@@ -211,6 +247,8 @@ namespace ShrugWare
                 overworldManager.CompleteLevel(overworldManager.CurLevel.LevelID);
             }
 
+            // set this back
+            Time.timeScale = 1.0f;
             SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
         }
     }
