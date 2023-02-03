@@ -107,6 +107,7 @@
     <Compile Include="Assets\Scripts\Items\ArmorItem.cs" />
     <Compile Include="Assets\Scripts\Various Other\DataManager.cs" />
     <Compile Include="Assets\Scripts\Various Other\PlayerInventory.cs" />
+    <Compile Include="Assets\Scripts\Minigames\ShootAsteroidsMinigame.cs" />
     <Compile Include="Assets\Scripts\Minigames\ShootAsteroidsMinigameAsteroid.cs" />
   </ItemGroup>
   <ItemGroup>
