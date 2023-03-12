@@ -78,7 +78,7 @@ namespace ShrugWare
         private void SetupPlayer()
         {
             playerPositive = Random.Range(0, 2) == 0;
-            if(playerPositive)
+            if (playerPositive)
             {
                 playerPositiveObj.SetActive(true);
             }
@@ -103,7 +103,7 @@ namespace ShrugWare
         {
             bool isNegative = electricField != positiveGroupObj;
 
-            if(isNegative ^ playerPositive)
+            if (isNegative ^ playerPositive)
             {
                 polarityMatched = true;
             }
