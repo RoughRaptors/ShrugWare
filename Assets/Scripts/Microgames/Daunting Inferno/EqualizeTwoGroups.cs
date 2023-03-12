@@ -31,7 +31,7 @@ namespace ShrugWare
         protected override void OnEnable()
         {
             base.OnEnable();
-            PlayerCollider.OnGoodCollision += MakeEqual;
+            PlayerCollider.OnGoodCollision += CheckMakeEqual;
             PlayerCollider.OnBadCollision += EqualCheck;
             PlayerCollider.OnGoodExit += BreakEqual;
         }
@@ -39,7 +39,7 @@ namespace ShrugWare
         protected override void OnDisable()
         {
             base.OnDisable();
-            PlayerCollider.OnGoodCollision -= MakeEqual;
+            PlayerCollider.OnGoodCollision -= CheckMakeEqual;
             PlayerCollider.OnBadCollision -= EqualCheck;
             PlayerCollider.OnGoodExit -= BreakEqual;
         }
@@ -81,9 +81,12 @@ namespace ShrugWare
             }
         }
 
-        private void MakeEqual(GameObject members)
+        private void CheckMakeEqual(GameObject members)
         {
-            stackedEqually = true;
+            if(members == groupOfTwoObj)
+            {
+                stackedEqually = true;
+            }
         }
 
         private void BreakEqual(GameObject members)

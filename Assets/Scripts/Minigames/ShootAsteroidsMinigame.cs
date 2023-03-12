@@ -28,7 +28,7 @@ namespace ShrugWare
         GameObject continueButton;
 
         private float timeInGame = 0.0f;
-        private const float PLAYER_SPEED = 50.0f;
+        private const float PLAYER_SPEED = 20.0f;
 
         // float so we can take partial damage via damage mitigation. it's not clean but blegh
         private const float START_HEALTH = 5;
@@ -134,11 +134,11 @@ namespace ShrugWare
             // rotate left/right
             if (Input.GetKey(KeyCode.A))
             {
-                transform.Rotate(0, 0, 1);
+                transform.Rotate(0, 0, .33f);
             }
             else if (Input.GetKey(KeyCode.D))
             {
-                transform.Rotate(0, 0, -1);
+                transform.Rotate(0, 0, -.33f);
             }
 
             // shoot
@@ -204,9 +204,15 @@ namespace ShrugWare
             */
         }
 
-        // we physically collided with an asteroid
+        // we physically collided with something
         private void OnTriggerEnter(Collider other)
         {
+            // don't hit our own bullets
+            if(other.tag == "Bullet")
+            {
+                return;
+            }
+
             float mitigation = 0;
             if (OverworldManager.Instance != null)
             {
