@@ -170,7 +170,7 @@ namespace ShrugWare
         private void Start()
         {
             Time.timeScale = curTimeScale;
-            audioManager.PlayAudioClip(DataManager.AudioEffectTypes.MainMenu, .175f);
+            //audioManager.PlayAudioClip(DataManager.AudioEffectTypes.MainMenu, .175f);
 
             // apply the modifiers from our random event, if we have one
             ApplyRandomEventModifiers();
