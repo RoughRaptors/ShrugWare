@@ -12,6 +12,10 @@ namespace ShrugWare
             // https://forum.unity.com/threads/errors-with-the-urp-debug-manager.987795/
 
             DebugManager.instance.enableRuntimeUI = false;
+        }
+
+        private void Start()
+        {
             GetComponent<AudioManager>().PlayAudioClip(DataManager.AudioEffectTypes.MainMenu, .175f);
         }
 
