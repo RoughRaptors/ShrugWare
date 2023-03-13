@@ -134,11 +134,11 @@ namespace ShrugWare
             // rotate left/right
             if (Input.GetKey(KeyCode.A))
             {
-                transform.Rotate(0, 0, .33f);
+                transform.Rotate(0, 0, 1);
             }
             else if (Input.GetKey(KeyCode.D))
             {
-                transform.Rotate(0, 0, -.33f);
+                transform.Rotate(0, 0, -1);
             }
 
             // shoot
