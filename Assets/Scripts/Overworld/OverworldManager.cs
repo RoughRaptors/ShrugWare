@@ -116,6 +116,10 @@ namespace ShrugWare{
 
         public bool IsLevelLocked(int levelID)
         {
+#if UNITY_EDITOR
+            return false;
+#endif
+
             OverworldLevel overworldLevel = GetOverworldLevel(levelID);
             if(overworldLevel != null)
             {
@@ -170,7 +174,11 @@ namespace ShrugWare{
             OverworldLevel overworldLevel = GetOverworldLevel(levelID);
             if (overworldLevel != null)
             {
-                if (!overworldLevel.Locked)
+                bool force = false;
+#if UNITY_EDITOR
+                force = true;
+#endif
+                if (!overworldLevel.Locked || force)
                 {
                     curLevel = overworldLevel;
                     overworldUIManager.UpdateUI();
@@ -196,7 +204,12 @@ namespace ShrugWare{
 
         public void EnterLevel(OverworldLevel level)
         {
-            if (level.LevelType == DataManager.OverworldLevelType.Start || level.Locked)
+            bool force = false;
+#if UNITY_EDITOR
+            force = true;
+#endif
+
+            if (level.LevelType == DataManager.OverworldLevelType.Start || level.Locked && !force)
             {
                 // we don't enter these
                 return;

@@ -54,7 +54,6 @@ namespace ShrugWare
         protected override void TimeOut()
         {
             playerObject.DisableMovement();
-            playerObject.GetComponent<Collider>().enabled = false; //Turns off the collider that keeps the player in bounds
             ApplyKnockback();
         }
 
