@@ -423,6 +423,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1007673627}
   - component: {fileID: 1007673626}
+  - component: {fileID: 1007673628}
   m_Layer: 0
   m_Name: Main Menu
   m_TagString: Untagged
@@ -458,6 +459,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1007673628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007673625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 998e21fa9dfe06d428831deee77e44bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioEffects:
+  - audioEffect: 0
+    audioClip: {fileID: 8300000, guid: e7bbaf9d2fb718448b9f893459af7805, type: 3}
+  - audioEffect: 1
+    audioClip: {fileID: 8300000, guid: 800bfb05f15a77e428ccf3bb044ae43d, type: 3}
+  - audioEffect: 2
+    audioClip: {fileID: 8300000, guid: 95b4311419b5e3b4ab4900b1baa966e7, type: 3}
+  - audioEffect: 3
+    audioClip: {fileID: 8300000, guid: 163ebe8ba7a04c34c8e861557f6d80ea, type: 3}
+  - audioEffect: 4
+    audioClip: {fileID: 8300000, guid: 683304f955c0ee341818181c327a561f, type: 3}
+  - audioEffect: 5
+    audioClip: {fileID: 8300000, guid: 2bdd71b100ce6a749b918611f75fad87, type: 3}
+  - audioEffect: 6
+    audioClip: {fileID: 8300000, guid: 1c6caebd616669340a8968ad0746116c, type: 3}
 --- !u!1 &1038310650
 GameObject:
   m_ObjectHideFlags: 0
