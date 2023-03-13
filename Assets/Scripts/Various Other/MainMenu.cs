@@ -15,6 +15,11 @@ namespace ShrugWare
             GetComponent<AudioManager>().PlayAudioClip(DataManager.AudioEffectTypes.MainMenu, .175f);
         }
 
+        private void Start()
+        {
+            GetComponent<AudioManager>().PlayAudioClip(DataManager.AudioEffectTypes.MainMenu, .175f);
+        }
+
         public void OnStartClicked()
         {
             SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
