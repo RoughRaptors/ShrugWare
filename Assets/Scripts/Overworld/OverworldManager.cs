@@ -203,7 +203,6 @@ namespace ShrugWare{
             {
                 playerPos = playerObj.transform.position;
                 levelPos = curLevel.gameObject.transform.position;
-                Debug.Log(Vector3.Distance(playerPos, levelPos));
                 playerObj.transform.position = Vector3.MoveTowards(playerPos, levelPos, 5 * Time.deltaTime);
                 yield return 0;
             }
