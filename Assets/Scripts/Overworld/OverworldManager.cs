@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 namespace ShrugWare{
 
@@ -20,6 +21,9 @@ namespace ShrugWare{
 
         [SerializeField]
         OverworldUIManager overworldUIManager;
+
+        [SerializeField]
+        GameObject playerObj;
 
         Dictionary<int, OverworldLevel> overworldMap = new Dictionary<int, OverworldLevel>();
 
@@ -181,6 +185,7 @@ namespace ShrugWare{
                 if (!overworldLevel.Locked || force)
                 {
                     curLevel = overworldLevel;
+                    StartCoroutine(MovePlayerToLevel());
                     overworldUIManager.UpdateUI();
                 }
                 else
@@ -188,6 +193,23 @@ namespace ShrugWare{
                     Debug.Log("Level not unlocked");
                 }
             }
+        }
+
+        private IEnumerator MovePlayerToLevel()
+        {
+            Vector3 playerPos = playerObj.transform.position;
+            Vector3 levelPos = curLevel.gameObject.transform.position;
+            while (Vector3.Distance(playerPos, levelPos) > 0.1f)
+            {
+                playerPos = playerObj.transform.position;
+                levelPos = curLevel.gameObject.transform.position;
+                Debug.Log(Vector3.Distance(playerPos, levelPos));
+                playerObj.transform.position = Vector3.MoveTowards(playerPos, levelPos, 5 * Time.deltaTime);
+                yield return 0;
+            }
+
+            // move it up above the level
+            playerObj.transform.position = new Vector3(playerObj.transform.position.x, playerObj.transform.position.y + 1, playerObj.transform.position.z);
         }
 
         public OverworldLevel GetOverworldLevel(int levelID)
