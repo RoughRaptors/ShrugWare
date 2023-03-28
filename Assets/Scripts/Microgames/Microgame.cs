@@ -66,9 +66,6 @@ namespace ShrugWare
 
         private IEnumerator PlayMicrogame()
         {
-            // show the control scheme
-            
-
             //Wait initial delay time
             yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
             MicrogameStartText?.Invoke(startText);
