@@ -32,6 +32,13 @@ namespace ShrugWare
         List<GameObject> outgoingLevelConnections;
         public List<GameObject> OutgoingLevelConnections { get { return outgoingLevelConnections; } }
 
+        [SerializeField]
+        List<int> adjacentMapLevels = new List<int>(); 
+        public List<int> AdjacentMapLevels
+        {
+            get { return adjacentMapLevels; }
+        }
+
         bool completed = false;
         public bool Completed
         {

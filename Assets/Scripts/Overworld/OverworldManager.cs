@@ -175,16 +175,24 @@ namespace ShrugWare{
         public void SetCurLevelById(int levelID)
         {
             // only change if we've unlocked it
-            OverworldLevel overworldLevel = GetOverworldLevel(levelID);
-            if (overworldLevel != null)
+            OverworldLevel newOverworldLevel = GetOverworldLevel(levelID);
+            if (newOverworldLevel != null)
             {
                 bool force = false;
 #if UNITY_EDITOR
                 force = true;
 #endif
-                if (!overworldLevel.Locked || force)
+                // only move there if our current level is adjacent to the new level
+                bool adjacent = false;
+                if(curLevel != null && curLevel.AdjacentMapLevels.Contains(levelID))
                 {
-                    curLevel = overworldLevel;
+                    adjacent = true;
+                }
+
+                // special case for curLevel being null. this will happen in the beginning of the game before we set curLevel and only should happen once
+                if ((!newOverworldLevel.Locked && adjacent) || force || curLevel == null)
+                {
+                    curLevel = newOverworldLevel;
                     StartCoroutine(MovePlayerToLevel());
                     overworldUIManager.UpdateUI();
                 }
