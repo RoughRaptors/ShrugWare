@@ -28,7 +28,8 @@ namespace ShrugWare
         GameObject continueButton;
 
         private float timeInGame = 0.0f;
-        private const float PLAYER_SPEED = 20.0f;
+        private const float PLAYER_SPEED = 25.0f;
+        private const float TURN_SPEED = 0.75f;
 
         // float so we can take partial damage via damage mitigation. it's not clean but blegh
         private const float START_HEALTH = 5;
@@ -134,11 +135,11 @@ namespace ShrugWare
             // rotate left/right
             if (Input.GetKey(KeyCode.A))
             {
-                transform.Rotate(0, 0, .33f);
+                transform.Rotate(0, 0, TURN_SPEED);
             }
             else if (Input.GetKey(KeyCode.D))
             {
-                transform.Rotate(0, 0, -.33f);
+                transform.Rotate(0, 0, -TURN_SPEED);
             }
 
             // shoot
@@ -146,18 +147,10 @@ namespace ShrugWare
                 || Input.GetKeyDown(KeyCode.Mouse0)
                 || Input.GetKeyDown(KeyCode.Mouse1))
             {
-                // fire and forget, we'll stop after 45 seconds anyways
-                GameObject newBullet = Instantiate(bulletInitObj);
-                newBullet.transform.position = this.transform.position;
-                newBullet.transform.forward = this.transform.forward;
-                newBullet.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
-                newBullet.SetActive(true);
-
-                // speed up the game per bullet shot
-                timeScale += 0.01f;
-                Time.timeScale = timeScale;
+                Shoot();
             }
 
+            // edges of map. teleport to the other side
             if(transform.position.x < -21)
             {
                 transform.position = new Vector3(120, transform.position.y, 0);
@@ -174,34 +167,135 @@ namespace ShrugWare
             {
                 transform.position = new Vector3(transform.position.x, -35, 0);
             }
+        }
 
-            /*
-            // https://stackoverflow.com/questions/49102831/teleporting-character-from-edge-to-edge-of-the-screen
-            //you get a world space coord and transform it to viewport space.
-            Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
-
-            //everything from here on is in viewport space where 0,0 is the bottom 
-            //left of your screen and 1,1 the top right.
-            if (pos.x < 0.0f)
+        private void Shoot()
+        {
+            // how many bullets should we fire based on our armor (shoot extra bullets instead of mitigation)
+            int numBullets = 5;
+            if (OverworldManager.Instance != null)
             {
-                pos = new Vector3(1.0f, pos.y, pos.z);
-            }
-            else if (pos.x >= 1.0f)
-            {
-                pos = new Vector3(0.0f, pos.y, pos.z);
-            }
-            if (pos.y < 0.0f)
-            {
-                pos = new Vector3(pos.x, 1.0f, pos.z);
-            }
-            else if (pos.y >= 1.0f)
-            {
-                pos = new Vector3(pos.x, 0.0f, pos.z);
+                numBullets = Mathf.Max((int)OverworldManager.Instance.PlayerInventory.GetMitigation() / 10, 1);
             }
 
-            //and here it gets transformed back to world space.
-            transform.position = Camera.main.ViewportToWorldPoint(pos);
-            */
+            // lazy
+            if (numBullets == 5)
+            {
+                GameObject newBullet1 = Instantiate(bulletInitObj);
+                newBullet1.transform.position = new Vector3(this.transform.position.x - 1, this.transform.position.y, this.transform.position.z);
+                newBullet1.transform.forward = this.transform.forward;
+                newBullet1.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
+                newBullet1.SetActive(true);
+
+                GameObject newBullet2 = Instantiate(bulletInitObj);
+                newBullet2.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
+                newBullet2.transform.forward = this.transform.forward;
+                newBullet2.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
+                newBullet2.SetActive(true);
+
+                GameObject newBullet3 = Instantiate(bulletInitObj);
+                newBullet3.transform.position = new Vector3(this.transform.position.x + 1, this.transform.position.y, this.transform.position.z);
+                newBullet3.transform.forward = this.transform.forward;
+                newBullet3.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
+                newBullet3.SetActive(true);
+
+                GameObject newBullet4 = Instantiate(bulletInitObj);
+                newBullet4.transform.position = new Vector3(this.transform.position.x - 0.5f, this.transform.position.y + 1 + this.transform.position.z);
+                newBullet4.transform.forward = this.transform.forward;
+                newBullet4.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
+                newBullet4.SetActive(true);
+
+                GameObject newBullet5 = Instantiate(bulletInitObj);
+                newBullet5.transform.position = new Vector3(this.transform.position.x + 0.5f, this.transform.position.y + 1, this.transform.position.z);
+                newBullet5.transform.forward = this.transform.forward;
+                newBullet5.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
+                newBullet5.SetActive(true);
+
+                GameObject newBullet6 = Instantiate(bulletInitObj);
+                newBullet6.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 1.9f, this.transform.position.z);
+                newBullet6.transform.forward = this.transform.forward;
+                newBullet6.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
+                newBullet6.SetActive(true);
+
+                // extra bullet for set bonus, shoot backwards
+                GameObject backwardsBullet = Instantiate(bulletInitObj);
+                backwardsBullet.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 1.9f, this.transform.position.z);
+                backwardsBullet.transform.forward = -this.transform.forward;
+                backwardsBullet.GetComponent<Rigidbody>().velocity = -this.transform.right * 15.0f;
+                backwardsBullet.SetActive(true);
+            }
+            else if (numBullets == 4)
+            {
+                GameObject newBullet1 = Instantiate(bulletInitObj);
+                newBullet1.transform.position = new Vector3(this.transform.position.x - 1.5f, this.transform.position.y, this.transform.position.z);
+                newBullet1.transform.forward = this.transform.forward;
+                newBullet1.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
+                newBullet1.SetActive(true);
+
+                GameObject newBullet2 = Instantiate(bulletInitObj);
+                newBullet2.transform.position = new Vector3(this.transform.position.x - 0.5f, this.transform.position.y, this.transform.position.z);
+                newBullet2.transform.forward = this.transform.forward;
+                newBullet2.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
+                newBullet2.SetActive(true);
+
+                GameObject newBullet3 = Instantiate(bulletInitObj);
+                newBullet3.transform.position = new Vector3(this.transform.position.x + 1, this.transform.position.y, this.transform.position.z);
+                newBullet3.transform.forward = this.transform.forward;
+                newBullet3.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
+                newBullet3.SetActive(true);
+
+                GameObject newBullet4 = Instantiate(bulletInitObj);
+                newBullet4.transform.position = new Vector3(this.transform.position.x + 2, this.transform.position.y, this.transform.position.z);
+                newBullet4.transform.forward = this.transform.forward;
+                newBullet4.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
+                newBullet4.SetActive(true);
+            }
+            else if (numBullets == 3)
+            {
+                GameObject newBullet1 = Instantiate(bulletInitObj);
+                newBullet1.transform.position = new Vector3(this.transform.position.x - 1, this.transform.position.y, this.transform.position.z);
+                newBullet1.transform.forward = this.transform.forward;
+                newBullet1.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
+                newBullet1.SetActive(true);
+
+                GameObject newBullet2 = Instantiate(bulletInitObj);
+                newBullet2.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 1, this.transform.position.z);
+                newBullet2.transform.forward = this.transform.forward;
+                newBullet2.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
+                newBullet2.SetActive(true);
+
+                GameObject newBullet3 = Instantiate(bulletInitObj);
+                newBullet3.transform.position = new Vector3(this.transform.position.x + 1, this.transform.position.y, this.transform.position.z);
+                newBullet3.transform.forward = this.transform.forward;
+                newBullet3.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
+                newBullet3.SetActive(true);
+            }
+            else if (numBullets == 2)
+            {
+                GameObject newBullet1 = Instantiate(bulletInitObj);
+                newBullet1.transform.position = new Vector3(this.transform.position.x - 1, this.transform.position.y, this.transform.position.z);
+                newBullet1.transform.forward = this.transform.forward;
+                newBullet1.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
+                newBullet1.SetActive(true);
+
+                GameObject newBullet2 = Instantiate(bulletInitObj);
+                newBullet2.transform.position = new Vector3(this.transform.position.x + 1, this.transform.position.y, this.transform.position.z);
+                newBullet2.transform.forward = this.transform.forward;
+                newBullet2.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
+                newBullet2.SetActive(true);
+            }
+            else
+            {
+                GameObject newBullet = Instantiate(bulletInitObj);
+                newBullet.transform.position = this.transform.position;
+                newBullet.transform.forward = this.transform.forward;
+                newBullet.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
+                newBullet.SetActive(true);
+            }
+
+            // speed up the game per bullet shot
+            timeScale += 0.01f;
+            Time.timeScale = timeScale;
         }
 
         // we physically collided with something
@@ -213,10 +307,11 @@ namespace ShrugWare
                 return;
             }
 
+            // no mitigation for now, this is a dps based minigame
             float mitigation = 0;
             if (OverworldManager.Instance != null)
             {
-                mitigation = OverworldManager.Instance.PlayerInventory.GetMitigation();
+                //mitigation = OverworldManager.Instance.PlayerInventory.GetMitigation();
             }
 
             // damage the player
