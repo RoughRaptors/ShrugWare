@@ -34,6 +34,9 @@ namespace ShrugWare
         [SerializeField]
         HealthBar bossHealthBar = null;
 
+        [SerializeField]
+        GameObject lootScreenObj;
+
         bool countdownTimerRunning = false;
 
         private void Awake()
@@ -162,7 +165,7 @@ namespace ShrugWare
             BossGameManager.Instance.ContinueGame();
         }
 
-        public void HandleWinGame()
+        public void HandleBeatBoss(DataManager.Currencies lootCurrency, int lootAmount)
         {
             OverworldManager overworldManager = OverworldManager.Instance;
             if (!overworldManager)
@@ -173,7 +176,7 @@ namespace ShrugWare
             overworldManager.CompleteLevel(overworldManager.CurLevel.LevelID);
 
             betweenMicrogameText.enabled = false;
-            gameInfoText.text += "\n You beat the boss!";
+            gameInfoText.text = "\n You beat the boss!\nReceived Daunting Inferno Marks x " + lootAmount;
             continueGameButton.GetComponentInChildren<Text>().text = "Back to Overworld";
             continueGameButton.gameObject.SetActive(true);
         }
