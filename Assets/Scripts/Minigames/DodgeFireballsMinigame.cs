@@ -97,7 +97,10 @@ namespace ShrugWare
             {
                 // out of time, we won
                 gameRunning = false;
-                statusText.text = "Boss time!";
+
+                int lootAmount = 500;
+                statusText.text = "Boss time!\nReceived " + lootAmount + " gold";
+                OverworldManager.Instance.PlayerInventory.AddCurrency(DataManager.Currencies.Generic, lootAmount);
 
                 continueButton.SetActive(true);
             }
@@ -277,7 +280,6 @@ namespace ShrugWare
 
             if (healthRemaining >= 0)
             {
-                OverworldManager.Instance.PlayerInventory.AddCurrency(DataManager.Currencies.Generic, 500);
                 overworldManager.CompleteLevel(overworldManager.CurLevel.LevelID);
             }
 

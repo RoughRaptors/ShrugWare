@@ -32,15 +32,6 @@ namespace ShrugWare
         public event Action<bool, string> MicrogameEndText;
         private bool endTextSet = false;
 
-        [Serializable]
-        public enum ControlScheme
-        {
-            Keyboard = 0,
-            Mouse
-        }
-
-        [SerializeField] private ControlScheme controlScheme;
-
         protected virtual void Awake()
         {
             OnMyGameAwake();

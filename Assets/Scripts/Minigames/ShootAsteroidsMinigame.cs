@@ -85,7 +85,7 @@ namespace ShrugWare
             timeRemainingText.text = "Time Remaining: " + (DataManager.MINIGAME_DURATION_SECONDS - timeInGame).ToString("F2");
             if (timeInGame >= DataManager.MINIGAME_DURATION_SECONDS)
             {
-                // out of time ,we lost
+                // out of time, we lost
                 gameRunning = false;
                 statusText.text = "NO TIME LEFT!";
                 continueButton.SetActive(true);
@@ -95,7 +95,9 @@ namespace ShrugWare
             if(NumAsteroidsDestroyed == NUM_ASTEROIDS)
             {
                 gameRunning = false;
-                statusText.text = "Boss time!";
+                int lootAmount = 500;
+                OverworldManager.Instance.PlayerInventory.AddCurrency(DataManager.Currencies.Generic, lootAmount);
+                statusText.text = "Boss time!\nReceived " + lootAmount + " gold";
                 continueButton.SetActive(true);
             }
         }
@@ -344,7 +346,6 @@ namespace ShrugWare
 
             if (healthRemaining >= 0)
             {
-                OverworldManager.Instance.PlayerInventory.AddCurrency(DataManager.Currencies.Generic, 500);
                 overworldManager.CompleteLevel(overworldManager.CurLevel.LevelID);
             }
 

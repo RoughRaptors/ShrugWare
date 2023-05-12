@@ -227,7 +227,12 @@ namespace ShrugWare
 
                 // pause the game and wait for the player to hit the continue button
                 PauseGame();
-                bossUIManager.HandleWinGame();
+
+                // award loot
+                DataManager.Currencies lootCurrency = DataManager.Currencies.DauntingInferno;
+                int lootAmount = 1500;
+                OverworldManager.Instance.PlayerInventory.AddCurrency(lootCurrency, lootAmount);
+                bossUIManager.HandleBeatBoss(lootCurrency, lootAmount);
             }
             else if(playerInfo.livesLeft < 0)
             {
