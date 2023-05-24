@@ -149,8 +149,8 @@ namespace ShrugWare{
                         overworldLevelToUnlock.Locked = false;
                         UpdateMeshRendererMaterials(overworldLevelToUnlock);
 
-                        // update the connection
-                        foreach(GameObject levelConnection in overworldLevelToUnlock.OutgoingLevelConnections)
+                        // update the connection of our current level
+                        foreach(GameObject levelConnection in overworldLevel.OutgoingLevelConnections)
                         {
                             levelConnection.GetComponent<MeshRenderer>().material.color = Color.green;
                         }
