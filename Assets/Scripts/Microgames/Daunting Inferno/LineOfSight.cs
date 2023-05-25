@@ -45,12 +45,16 @@ namespace ShrugWare
         {
             // did our raycast hit the player?
             RaycastHit hit;
-            if (Physics.Raycast(bossObject.transform.position, (bossObject.transform.position - playerObject.transform.position), out hit, 1000))
+            if (Physics.Raycast(bossObject.transform.position, (playerObject.transform.position - bossObject.transform.position), out hit, 1000))
             {
-                return true;
+                if(hit.collider.tag == "Player")
+                {
+                    // boss can see us, we lose
+                    return false;
+                }
             }
 
-            return false;
+            return true;
         }
     }
 }
