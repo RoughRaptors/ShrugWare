@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 5810172}
   - component: {fileID: 5810171}
   - component: {fileID: 5810174}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 193004338}
   - component: {fileID: 193004337}
   - component: {fileID: 193004336}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -747,7 +747,7 @@ GameObject:
   - component: {fileID: 1385624283}
   - component: {fileID: 1385624282}
   - component: {fileID: 1385624281}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -852,7 +852,7 @@ GameObject:
   - component: {fileID: 1534101981}
   - component: {fileID: 1534101980}
   - component: {fileID: 1534101979}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1005,56 +1005,21 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6008722839044481440, guid: 5b210609803658e488f512fc13a6163e, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 263555676715289244, guid: 5b210609803658e488f512fc13a6163e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1000011821036864, guid: 5b210609803658e488f512fc13a6163e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1591987686}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b210609803658e488f512fc13a6163e, type: 3}
 --- !u!1 &1591987681 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1000011821036864, guid: 5b210609803658e488f512fc13a6163e, type: 3}
   m_PrefabInstance: {fileID: 1591987680}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1591987686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1591987681}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaec71e6aed9d4c459adbdc49e7e317c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  victoryText: LOLINVIS
-  defaultDefeatText: Hide better
-  postTimerWait: 0
-  effects:
-  - effect:
-      effectType: 0
-      amount: 34
-      asPercentage: 0
-    addOnWin: 0
-    addOnLoss: 1
-  - effect:
-      effectType: 2
-      amount: 20
-      asPercentage: 0
-    addOnWin: 1
-    addOnLoss: 0
-  - effect:
-      effectType: 3
-      amount: 0.05
-      asPercentage: 0
-    addOnWin: 1
-    addOnLoss: 1
-  playerObject: {fileID: 1591987681}
-  bossObject: {fileID: 1928649317}
 --- !u!1001 &1928649316
 PrefabInstance:
   m_ObjectHideFlags: 0

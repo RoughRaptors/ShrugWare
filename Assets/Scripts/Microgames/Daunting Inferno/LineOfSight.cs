@@ -37,28 +37,17 @@ namespace ShrugWare
             // rotate around until he's facing forward
             bossObject.transform.Rotate(Vector3.up * 52 * Time.deltaTime);
 
-            RaycastHit hit;
-            if (Physics.Raycast(bossObject.transform.position, (bossObject.transform.position - playerObject.transform.position), out hit, 100))
-            {
-
-            }
-
-            Debug.DrawRay(bossObject.transform.position, bossObject.transform.position - playerObject.transform.position, Color.green);
-
-            //Vector3 forward = bossObject.transform.TransformDirection(Vector3.forward) * 10;
-            //Debug.DrawRay(bossObject.transform.position, forward, Color.green);
+            Debug.DrawRay(bossObject.transform.position, playerObject.transform.position - bossObject.transform.position, Color.green);
 
         }
 
         protected override bool VictoryCheck()
         {
+            // did our raycast hit the player?
             RaycastHit hit;
-            if (Physics.Raycast(bossObject.transform.position, (bossObject.transform.position - playerObject.transform.position), out hit, 100))
+            if (Physics.Raycast(bossObject.transform.position, (bossObject.transform.position - playerObject.transform.position), out hit, 1000))
             {
-                if (hit.collider.tag != "Player")
-                {
-                    return true;
-                }
+                return true;
             }
 
             return false;
