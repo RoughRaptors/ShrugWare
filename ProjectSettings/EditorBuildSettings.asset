@@ -66,6 +66,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Microgames/Daunting Inferno/StealTheChest.unity
     guid: 65ecb1f9d1f35384f8bf8d4d59311d0a
   - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/LineOfSight.unity
+    guid: 3b28252842c3d354381ad3b35250f858
+  - enabled: 1
     path: Assets/Scenes/Bosses/Tuzi.unity
     guid: 2724fc1884c1ac04b939f5b7df9ffed6
   - enabled: 1

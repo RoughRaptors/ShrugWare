@@ -99,6 +99,7 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StealTheChest.cs" />
     <Compile Include="Assets\Scripts\Overworld\OverworldLevel.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StackPowerstones.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\LineOfSight.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\SidestepTheFireball.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioEffectClip.cs" />
