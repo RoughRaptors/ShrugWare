@@ -27,8 +27,8 @@ using UnityEngine.SceneManagement;
     to add a new microgame: 
     1: copy an existing microgame scene and rename it
     2: create/copy a script for the new microgame and open the scene
-    3: in unity -> file -> build settings -> add open scene
-    4: in DataManager.cs -> add the new scene name to the enum Scenes and update the MICROGAME_END value
+    3: in DataManager.cs -> add the new scene name to the enum Scenes and update the MICROGAME_END value
+    4: in unity -> file -> build settings -> add open scene
 */
 
 /*
@@ -44,6 +44,7 @@ Get Out Of Fire - Get out of the fire
 Intercept The Fireball -  Run into the fireball before it hits the party
 Interrupt The Ability - Hit the interrupt ability at the proper timing as the boss is casting
 Knockbacked Safely - Get knocked backwards into a safe zone
+Line of Sight - LOS the boss in time
 Match Polarity - Move to the party members of the same electric positive or negative sign as you
 Spread Out For Meteor - Spread out from everyone else for a meteor attack
 Sidestep The Fireball - Sidestep a fireball coming at you

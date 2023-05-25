@@ -27,7 +27,8 @@ namespace ShrugWare
             KnockbackedSafelty,
             MatchPolarity,
             StealTheChest,
-            MICROGAME_END = 19,// PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            LineOfSight,
+            MICROGAME_END = 20,// PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
             Tuzi,
             DodgeFireballsMinigame,
             ShootAsteroidsMinigame,
