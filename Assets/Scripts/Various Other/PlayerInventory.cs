@@ -268,5 +268,18 @@ namespace ShrugWare
 
             return item;
         }
+
+        public bool HasArmor(int templateId)
+        {
+            foreach (KeyValuePair<DataManager.ArmorSlot, ArmorItem> armor in equippedArmor)
+            {
+                if(armor.Value != null && armor.Value.templateId == templateId)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

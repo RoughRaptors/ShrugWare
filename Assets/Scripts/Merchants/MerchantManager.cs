@@ -124,7 +124,14 @@ namespace ShrugWare
             diHelmItem.currency = DataManager.Currencies.DauntingInferno;
             diHelmItem.price = 1000;
 
-            itemsForSale.Add(diHelm.templateId, diHelmItem);
+            if(!OverworldManager.Instance.PlayerInventory.HasArmor(diHelm.templateId))
+            {
+                itemsForSale.Add(diHelm.templateId, diHelmItem);
+            }
+            else
+            {
+                helmObj.SetActive(false);
+            }
 
             // chest
             ArmorItem diChest = new ArmorItem(DataManager.ArmorSlot.Chest, DataManager.ArmorSet.DauntingInferno);
@@ -137,7 +144,14 @@ namespace ShrugWare
             diChestItem.currency = DataManager.Currencies.DauntingInferno;
             diChestItem.price = 1000;
 
-            itemsForSale.Add(diChest.templateId, diChestItem);
+            if (!OverworldManager.Instance.PlayerInventory.HasArmor(diChest.templateId))
+            {
+                itemsForSale.Add(diChest.templateId, diChestItem);
+            }
+            else 
+            { 
+                chestObj.SetActive(false); 
+            }
 
             // gloves
             ArmorItem diGloves = new ArmorItem(DataManager.ArmorSlot.Gloves, DataManager.ArmorSet.DauntingInferno);
@@ -150,7 +164,14 @@ namespace ShrugWare
             diGlovesItem.currency = DataManager.Currencies.DauntingInferno;
             diGlovesItem.price = 1000;
 
-            itemsForSale.Add(diGloves.templateId, diGlovesItem);
+            if (!OverworldManager.Instance.PlayerInventory.HasArmor(diGloves.templateId))
+            {
+                itemsForSale.Add(diGloves.templateId, diGlovesItem);
+            }
+            else
+            {
+                glovesObj.SetActive(false);
+            }
 
             // legs
             ArmorItem diLegs = new ArmorItem(DataManager.ArmorSlot.Legs, DataManager.ArmorSet.DauntingInferno);
@@ -163,7 +184,14 @@ namespace ShrugWare
             diLegsItem.currency = DataManager.Currencies.DauntingInferno;
             diLegsItem.price = 1000;
 
-            itemsForSale.Add(diLegs.templateId, diLegsItem);
+            if (!OverworldManager.Instance.PlayerInventory.HasArmor(diLegs.templateId))
+            {
+                itemsForSale.Add(diLegs.templateId, diLegsItem);
+            }
+            else
+            {
+                legsObj.SetActive(false);
+            }
 
             // boots
             ArmorItem diBoots = new ArmorItem(DataManager.ArmorSlot.Boots, DataManager.ArmorSet.DauntingInferno);
@@ -176,7 +204,14 @@ namespace ShrugWare
             diBootsItem.currency = DataManager.Currencies.DauntingInferno;
             diBootsItem.price = 1000;
 
-            itemsForSale.Add(diBoots.templateId, diBootsItem);
+            if (!OverworldManager.Instance.PlayerInventory.HasArmor(diBoots.templateId))
+            {
+                itemsForSale.Add(diBoots.templateId, diBootsItem);
+            }
+            else
+            {
+                bootsObj.SetActive(false);
+            }
         }
 
         public void OnBuyButtonClicked()

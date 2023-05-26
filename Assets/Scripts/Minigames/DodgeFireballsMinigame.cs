@@ -93,7 +93,7 @@ namespace ShrugWare
             }
 
             timeRemainingText.text = "Time Remaining: " + (DataManager.MINIGAME_DURATION_SECONDS - timeInGame).ToString("F2");
-            if(timeInGame >= DataManager.MINIGAME_DURATION_SECONDS)
+            if(gameRunning && timeInGame >= DataManager.MINIGAME_DURATION_SECONDS)
             {
                 // out of time, we won
                 gameRunning = false;

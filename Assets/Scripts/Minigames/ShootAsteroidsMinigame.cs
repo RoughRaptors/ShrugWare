@@ -92,7 +92,7 @@ namespace ShrugWare
             }
 
             // destroyed all
-            if(NumAsteroidsDestroyed == NUM_ASTEROIDS)
+            if(gameRunning && NumAsteroidsDestroyed == NUM_ASTEROIDS)
             {
                 gameRunning = false;
                 int lootAmount = 500;
