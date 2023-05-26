@@ -71,6 +71,9 @@ namespace ShrugWare{
                 overworldMap = OverworldManager.Instance.overworldMap;
                 curLevel = OverworldManager.Instance.curLevel;
 
+                // for some reason this isn't working
+                // playerObj.SetActive(true);
+
                 OverworldUIManager.Instance.SetCanvasEnabled(true);
             }
         }
@@ -258,6 +261,9 @@ namespace ShrugWare{
                 waitingOnRandomEvent = true;
                 return;
             }
+
+            // hide the player - for some reason the enable isn't working
+            // playerObj.SetActive(false);
 
             OverworldUIManager.Instance.SetCanvasEnabled(false);
             SceneManager.LoadScene((int)level.SceneIDToLoad);
