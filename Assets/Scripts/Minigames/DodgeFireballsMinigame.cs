@@ -83,7 +83,7 @@ namespace ShrugWare
             statusText.text = "HP: " + healthRemaining.ToString("F2");
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if(gameRunning)
             {

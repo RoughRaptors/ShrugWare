@@ -33,7 +33,7 @@ namespace ShrugWare
 
         // float so we can take partial damage via damage mitigation. it's not clean but blegh
         private const float START_HEALTH = 5;
-        private const float SHOOT_COOLDOWN = 0.5f;
+        private const float SHOOT_COOLDOWN = 0.15f;
         private float timeSinceLastShot = 0.0f;
 
         private float healthRemaining = 5;
@@ -77,7 +77,7 @@ namespace ShrugWare
             statusText.text = "HP: " + healthRemaining.ToString("F2");
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (gameRunning)
             {
@@ -131,6 +131,8 @@ namespace ShrugWare
         // use physics instead of just moving the transform so we can have momentum
         private void HandlePlayerMovement()
         {
+            timeSinceLastShot += Time.deltaTime;
+
             // give thruster in facing direction
             if (Input.GetKey(KeyCode.W))
             {
@@ -153,6 +155,7 @@ namespace ShrugWare
                 || Input.GetKeyDown(KeyCode.Mouse0)
                 || Input.GetKeyDown(KeyCode.Mouse1)))
             {
+                timeSinceLastShot = 0;
                 Shoot();
             }
 

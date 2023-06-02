@@ -79,6 +79,9 @@ namespace ShrugWare{
 
         private void Start()
         {
+            // set fps so players don't have varying speeds
+            Application.targetFrameRate = 60;
+
             if (playerInventory == null)
             {
                 playerInventory = new PlayerInventory();
@@ -181,9 +184,9 @@ namespace ShrugWare{
             if (newOverworldLevel != null)
             {
                 bool force = false;
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
                 force = true;
-#endif
+//#endif
                 // only move there if our current level is adjacent to the new level
                 bool adjacent = false;
                 if(curLevel != null && curLevel.AdjacentMapLevels.Contains(levelID))
@@ -236,9 +239,9 @@ namespace ShrugWare{
         public void EnterLevel(OverworldLevel level)
         {
             bool force = false;
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
             force = true;
-#endif
+//#endif
 
             if (level.LevelType == DataManager.OverworldLevelType.Start || level.Locked && !force)
             {
