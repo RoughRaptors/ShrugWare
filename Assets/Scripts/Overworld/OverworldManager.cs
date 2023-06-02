@@ -70,9 +70,8 @@ namespace ShrugWare{
                 // set all of our shit back - figure out a better solution later if there is one - TODO MAKE THIS BETTER
                 overworldMap = OverworldManager.Instance.overworldMap;
                 curLevel = OverworldManager.Instance.curLevel;
-
-                // for some reason this isn't working
-                // playerObj.SetActive(true);
+                playerObj = OverworldManager.Instance.playerObj;
+                playerObj.SetActive(true);
 
                 OverworldUIManager.Instance.SetCanvasEnabled(true);
             }
@@ -262,8 +261,8 @@ namespace ShrugWare{
                 return;
             }
 
-            // hide the player - for some reason the enable isn't working
-            // playerObj.SetActive(false);
+            // hide the player
+            playerObj.SetActive(false);
 
             OverworldUIManager.Instance.SetCanvasEnabled(false);
             SceneManager.LoadScene((int)level.SceneIDToLoad);

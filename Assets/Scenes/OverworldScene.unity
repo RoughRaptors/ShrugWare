@@ -137,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 425767533, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
       propertyPath: sceneIDToLoad
-      value: 23
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 425767533, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
       propertyPath: adjacentMapLevels.Array.size
