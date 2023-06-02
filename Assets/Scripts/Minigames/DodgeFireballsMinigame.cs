@@ -28,8 +28,8 @@ namespace ShrugWare
         const float FIREBALL_X_MAX = 125;
         const float FIREBALL_Y_MIN = -30;
         const float FIREBALL_Y_MAX = 40;
-        const float FIREBALL_SPEED_MIN = 0.45f;
-        const float FIREBALL_SPEED_MAX = 0.75f;
+        const float FIREBALL_SPEED_MIN = 45;
+        const float FIREBALL_SPEED_MAX = 75;
 
         const float PLAYER_X_MIN = -13;
         const float PLAYER_X_MAX = 115;
@@ -83,7 +83,7 @@ namespace ShrugWare
             statusText.text = "HP: " + healthRemaining.ToString("F2");
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if(gameRunning)
             {
@@ -208,7 +208,7 @@ namespace ShrugWare
                 }
 
                 fireball.fireballObj.transform.position =
-                    Vector3.MoveTowards(fireball.fireballObj.transform.position, fireball.targetPos, fireball.speed);
+                    Vector3.MoveTowards(fireball.fireballObj.transform.position, fireball.targetPos, fireball.speed * Time.deltaTime);
             }
         }
 

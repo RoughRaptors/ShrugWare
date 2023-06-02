@@ -28,11 +28,14 @@ namespace ShrugWare
         GameObject continueButton;
 
         private float timeInGame = 0.0f;
-        private const float PLAYER_SPEED = 25.0f;
-        private const float TURN_SPEED = 0.75f;
+        private const float PLAYER_SPEED = 12.5f;
+        private const float TURN_SPEED = 7.5f;
 
         // float so we can take partial damage via damage mitigation. it's not clean but blegh
         private const float START_HEALTH = 5;
+        private const float SHOOT_COOLDOWN = 0.15f;
+        private float timeSinceLastShot = 0.0f;
+
         private float healthRemaining = 5;
         bool gameRunning = false;
 
@@ -74,7 +77,7 @@ namespace ShrugWare
             statusText.text = "HP: " + healthRemaining.ToString("F2");
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (gameRunning)
             {
@@ -128,10 +131,12 @@ namespace ShrugWare
         // use physics instead of just moving the transform so we can have momentum
         private void HandlePlayerMovement()
         {
+            timeSinceLastShot += Time.deltaTime;
+
             // give thruster in facing direction
             if (Input.GetKey(KeyCode.W))
             {
-                this.GetComponent<Rigidbody>().AddRelativeForce(2.5f, 0.0f, 0);
+                this.GetComponent<Rigidbody>().AddRelativeForce(PLAYER_SPEED, 0.0f, 0);
             }
 
             // rotate left/right
@@ -145,10 +150,12 @@ namespace ShrugWare
             }
 
             // shoot
-            if (Input.GetKeyDown(KeyCode.Space)
+            if (timeSinceLastShot >= SHOOT_COOLDOWN &&
+                (Input.GetKeyDown(KeyCode.Space)
                 || Input.GetKeyDown(KeyCode.Mouse0)
-                || Input.GetKeyDown(KeyCode.Mouse1))
+                || Input.GetKeyDown(KeyCode.Mouse1)))
             {
+                timeSinceLastShot = 0;
                 Shoot();
             }
 
