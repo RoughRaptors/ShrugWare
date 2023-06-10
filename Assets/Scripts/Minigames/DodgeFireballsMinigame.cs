@@ -24,10 +24,10 @@ namespace ShrugWare
         [SerializeField]
         GameObject continueButton;
 
-        const float FIREBALL_X_MIN = -10;
+        const float FIREBALL_X_MIN = -25;
         const float FIREBALL_X_MAX = 125;
-        const float FIREBALL_Y_MIN = -30;
-        const float FIREBALL_Y_MAX = 40;
+        const float FIREBALL_Y_MIN = -40;
+        const float FIREBALL_Y_MAX = 50;
         const float FIREBALL_SPEED_MIN = 45;
         const float FIREBALL_SPEED_MAX = 75;
 
