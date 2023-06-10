@@ -13,31 +13,23 @@ namespace ShrugWare
         [SerializeField] 
         float FIREBALL_MOVE_SPEED = 60.0f;
 
-        [SerializeField] 
-        private float minPlayerStartPosX = -80;
-
-        [SerializeField] 
-        private float maxPlayerStartPosX = 80;
-
-        [SerializeField]
-        float minPlayerStartPosY = -40f;
-
-        [SerializeField]
-        float maxPlayerStartPosY = 20f;
-
         [SerializeField]
         float minBallScale = 5.0f;
 
         [SerializeField]
         float maxBallScale = 17.5f;
 
+        const float MIN_PLAYER_X_START_POS = -80;
+        const float MAX_PLAYER_X_START_POS = 0;
+        const float MIN_PLAYER_Y_START_POS = -50f;
+        const float MAX_PLAYER_Y_START_POS = 30;
 
         protected override void Awake()
         {
             base.Awake();
 
-            float spawnPosX = Random.Range(minPlayerStartPosX, maxPlayerStartPosX);
-            float spawnPosY = Random.Range(minPlayerStartPosY, maxPlayerStartPosY);
+            float spawnPosX = Random.Range(MIN_PLAYER_X_START_POS, MAX_PLAYER_X_START_POS);
+            float spawnPosY = Random.Range(MIN_PLAYER_Y_START_POS, MAX_PLAYER_Y_START_POS);
             playerObject.transform.position = new Vector2(spawnPosX, spawnPosY);
 
             // set each fireball to a random scale
@@ -57,13 +49,13 @@ namespace ShrugWare
         protected override void OnEnable()
         {
             base.OnEnable();
-            PlayerCollider.OnAnyCollision += PlayerCollision;
+            PlayerCollider.OnBadCollision += PlayerCollision;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-            PlayerCollider.OnAnyCollision -= PlayerCollision;
+            PlayerCollider.OnBadCollision -= PlayerCollision;
         }
 
         protected override void OnMyGameTick(float timePercentLeft)
