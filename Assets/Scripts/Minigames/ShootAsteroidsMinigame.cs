@@ -33,7 +33,7 @@ namespace ShrugWare
 
         // float so we can take partial damage via damage mitigation. it's not clean but blegh
         private const float START_HEALTH = 5;
-        private const float SHOOT_COOLDOWN = 0.15f;
+        private const float SHOOT_COOLDOWN = 0.75f;
         private float timeSinceLastShot = 0.0f;
 
         private float healthRemaining = 5;
@@ -151,9 +151,9 @@ namespace ShrugWare
 
             // shoot
             if (timeSinceLastShot >= SHOOT_COOLDOWN &&
-                (Input.GetKeyDown(KeyCode.Space)
-                || Input.GetKeyDown(KeyCode.Mouse0)
-                || Input.GetKeyDown(KeyCode.Mouse1)))
+                (Input.GetKey(KeyCode.Space)
+                || Input.GetKey(KeyCode.Mouse0)
+                || Input.GetKey(KeyCode.Mouse1)))
             {
                 timeSinceLastShot = 0;
                 Shoot();
