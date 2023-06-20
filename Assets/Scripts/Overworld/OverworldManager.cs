@@ -75,6 +75,8 @@ namespace ShrugWare{
 
                 OverworldUIManager.Instance.SetCanvasEnabled(true);
             }
+
+            // GetComponent<AudioManager>().PlayAudioClip(DataManager.AudioEffectTypes.Overworld, .25f);
         }
 
         private void Start()
@@ -250,8 +252,9 @@ namespace ShrugWare{
             }
 
             // 10% chance we trigger an event
+            bool isTrashOrBoss = level.LevelType == DataManager.OverworldLevelType.Trash || level.LevelType == DataManager.OverworldLevelType.Boss;
             int rand = UnityEngine.Random.Range(0, 100);
-            if (rand < 25 && (level.LevelType == DataManager.OverworldLevelType.Trash || level.LevelType == DataManager.OverworldLevelType.Boss))
+            if (rand < 25 && isTrashOrBoss)
             {
                 // pick a random event
                 int randomEventIndex = UnityEngine.Random.Range(0, randomEventList.Count);
@@ -266,6 +269,11 @@ namespace ShrugWare{
 
             // hide the player
             playerObj.SetActive(false);
+
+            if(isTrashOrBoss)
+            {
+                // GetComponent<AudioManager>().StopAudio();
+            }
 
             OverworldUIManager.Instance.SetCanvasEnabled(false);
             SceneManager.LoadScene((int)level.SceneIDToLoad);

@@ -171,7 +171,6 @@ namespace ShrugWare
         private void Start()
         {
             Time.timeScale = curTimeScale;
-            //audioManager.PlayAudioClip(DataManager.AudioEffectTypes.MainMenu, .175f);
 
             // apply the modifiers from our random event, if we have one
             ApplyRandomEventModifiers();
@@ -303,11 +302,7 @@ namespace ShrugWare
 
         public void TakePlayerRaidDamage(float amount)
         {
-#if UNITY_EDITOR
-            float totalAmount = amount * 5;
-#else
             float totalAmount = amount;
-#endif
             float mitigationModifier = 0;
             if(OverworldManager.Instance) playerInventory.GetMitigation();
             if(mitigationModifier > 0)
@@ -354,7 +349,7 @@ namespace ShrugWare
             if (!(curBoss is null))
             {
 #if UNITY_EDITOR
-                curBoss.TakeDamage(amount * 5);
+                amount = CurBoss.curHealth;
 #else
                 curBoss.TakeDamage(amount);
 #endif

@@ -69,7 +69,7 @@ namespace ShrugWare
                 }
 
                 // if it's main menu music, use the audio source for music
-                if (audioEffectType == DataManager.AudioEffectTypes.MainMenu)
+                if (audioEffectType == DataManager.AudioEffectTypes.MainMenu || audioEffectType == DataManager.AudioEffectTypes.Overworld)
                 {
                     audioSourceMusic.PlayOneShot(audioClip, volumeScale);
                 }
