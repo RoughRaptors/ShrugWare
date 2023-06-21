@@ -87,7 +87,8 @@ namespace ShrugWare
             MerchantPurchase,
             ButtonClick,
             MicrogameTimerTick,
-            MicrogameTimerDing
+            MicrogameTimerDing,
+            Overworld
         }
 
         public enum OverworldLevelType

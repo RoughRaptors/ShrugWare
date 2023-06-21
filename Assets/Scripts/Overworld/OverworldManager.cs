@@ -75,6 +75,9 @@ namespace ShrugWare{
 
                 OverworldUIManager.Instance.SetCanvasEnabled(true);
             }
+
+            // delay it to give our audio manager time to populate
+            Invoke("PlayOverworldMusic", 0.1f);
         }
 
         private void Start()
@@ -184,9 +187,9 @@ namespace ShrugWare{
             if (newOverworldLevel != null)
             {
                 bool force = false;
-//#if UNITY_EDITOR
+#if UNITY_EDITOR
                 force = true;
-//#endif
+#endif
                 // only move there if our current level is adjacent to the new level
                 bool adjacent = false;
                 if(curLevel != null && curLevel.AdjacentMapLevels.Contains(levelID))
@@ -250,8 +253,9 @@ namespace ShrugWare{
             }
 
             // 10% chance we trigger an event
+            bool isTrashOrBoss = level.LevelType == DataManager.OverworldLevelType.Trash || level.LevelType == DataManager.OverworldLevelType.Boss;
             int rand = UnityEngine.Random.Range(0, 100);
-            if (rand < 25 && (level.LevelType == DataManager.OverworldLevelType.Trash || level.LevelType == DataManager.OverworldLevelType.Boss))
+            if (rand < 25 && isTrashOrBoss)
             {
                 // pick a random event
                 int randomEventIndex = UnityEngine.Random.Range(0, randomEventList.Count);
@@ -267,8 +271,18 @@ namespace ShrugWare{
             // hide the player
             playerObj.SetActive(false);
 
+            if(isTrashOrBoss)
+            {
+                GetComponent<AudioManager>().StopAudio();
+            }
+
             OverworldUIManager.Instance.SetCanvasEnabled(false);
             SceneManager.LoadScene((int)level.SceneIDToLoad);
+        }
+
+        private void PlayOverworldMusic()
+        {
+            GetComponent<AudioManager>().PlayAudioClip(DataManager.AudioEffectTypes.Overworld, .25f);
         }
     }
 }
