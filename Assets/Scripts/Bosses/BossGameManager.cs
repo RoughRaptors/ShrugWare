@@ -164,7 +164,7 @@ namespace ShrugWare
                 curBoss = new Tuzi();
             }
 
-            audioManager = GetComponent<AudioManager>();
+            audioManager = OverworldManager.Instance.GetComponent<AudioManager>();
             EnableBossCamera(true);
         }
 

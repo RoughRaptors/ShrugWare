@@ -76,7 +76,8 @@ namespace ShrugWare{
                 OverworldUIManager.Instance.SetCanvasEnabled(true);
             }
 
-            // GetComponent<AudioManager>().PlayAudioClip(DataManager.AudioEffectTypes.Overworld, .25f);
+            // delay it to give our audio manager time to populate
+            Invoke("PlayOverworldMusic", 0.1f);
         }
 
         private void Start()
@@ -186,9 +187,9 @@ namespace ShrugWare{
             if (newOverworldLevel != null)
             {
                 bool force = false;
-//#if UNITY_EDITOR
+#if UNITY_EDITOR
                 force = true;
-//#endif
+#endif
                 // only move there if our current level is adjacent to the new level
                 bool adjacent = false;
                 if(curLevel != null && curLevel.AdjacentMapLevels.Contains(levelID))
@@ -272,11 +273,16 @@ namespace ShrugWare{
 
             if(isTrashOrBoss)
             {
-                // GetComponent<AudioManager>().StopAudio();
+                GetComponent<AudioManager>().StopAudio();
             }
 
             OverworldUIManager.Instance.SetCanvasEnabled(false);
             SceneManager.LoadScene((int)level.SceneIDToLoad);
+        }
+
+        private void PlayOverworldMusic()
+        {
+            GetComponent<AudioManager>().PlayAudioClip(DataManager.AudioEffectTypes.Overworld, .25f);
         }
     }
 }
