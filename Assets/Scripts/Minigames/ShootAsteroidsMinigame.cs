@@ -33,7 +33,7 @@ namespace ShrugWare
 
         // float so we can take partial damage via damage mitigation. it's not clean but blegh
         private const float START_HEALTH = 5;
-        private const float SHOOT_COOLDOWN = 0.75f;
+        private const float SHOOT_COOLDOWN = 0.65f;
         private float timeSinceLastShot = 0.0f;
 
         private float healthRemaining = 5;
@@ -329,7 +329,7 @@ namespace ShrugWare
             statusText.text = "HP: " + healthRemaining.ToString();
             if (healthRemaining < 0)
             {
-                statusText.text = "Le DED!";
+                statusText.text = "Aim better!";
                 gameRunning = false;
                 continueButton.SetActive(true);
             }
@@ -338,7 +338,7 @@ namespace ShrugWare
             if (healthRemaining < 0)
             {
                 gameRunning = false;
-                statusText.text = "Le DED!";
+                statusText.text = "Aim better!";
                 Destroy(other.gameObject);
             }
         }
@@ -351,7 +351,8 @@ namespace ShrugWare
                 return;
             }
 
-            if (healthRemaining >= 0)
+            // did we win?
+            if (healthRemaining >= 0 && NumAsteroidsDestroyed == NUM_ASTEROIDS)
             {
                 overworldManager.CompleteLevel(overworldManager.CurLevel.LevelID);
             }
