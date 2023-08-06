@@ -108,18 +108,6 @@ namespace ShrugWare
             timeScaleInputField.text = "Time Scale: " + BossGameManager.Instance.GetCurTimeScale().ToString("F3");
         }
 
-        public void FillGameInfoText(Boss curBoss, BossGameManager.PlayerInfo playerInfo)
-        {
-            if (!(curBoss is null))
-            {
-                gameInfoText.text = "Rezzes Left: " + playerInfo.livesLeft.ToString();
-            }
-            else
-            {
-                Debug.Log("Raid or Boss null in FillGameInfoText");
-            }
-        }
-
         public void UpdateHealthBars()
         {
             playerHealthBar.gameObject.SetActive(true);
@@ -146,7 +134,7 @@ namespace ShrugWare
             continueGameButton.gameObject.SetActive(false);
             playerHealthBar.gameObject.SetActive(false);
             bossHealthBar.gameObject.SetActive(false);
-            gameInfoText.enabled = true;
+            gameInfoText.enabled = false;
             countdownTimerRunning = true;
 
             // we died or killed the boss, go back instead

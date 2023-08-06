@@ -108,6 +108,6 @@ namespace ShrugWare
 
         public static int PLAYER_START_HP = 100;
         public static int PLAYER_MAX_HP = 100;
-        public static int PLAYER_STARTING_LIVES = 3;
+        public static int PLAYER_STARTING_LIVES = 0; // used to be 3, make it 0 to make it harder and emphasize progression
     }
 }

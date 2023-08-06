@@ -270,14 +270,21 @@ namespace ShrugWare
                 }
             }
 
-            string timescaleModStr = "\nTimescaleMod: +";
-            if(timeScaleModification < 0.0f)
+            string effectInfoStr = "";
+            if (raidDamageTaken > 0)
             {
-                timescaleModStr = "\nTimescaleMod: -";
+                effectInfoStr += "Your raid took " + raidDamageTaken.ToString() + " damage\n";
+            }
+            
+            if(bossDamageTaken > 0)
+            {
+                effectInfoStr += curBoss.bossName + " took " + bossDamageTaken.ToString() + " damage\n";
             }
 
-            string effectInfoStr = "Raid Damage: " + raidDamageTaken.ToString() + 
-                "\nBoss Damage: " + bossDamageTaken.ToString() + timescaleModStr + timeScaleModification.ToString() + "\n";
+            if(timeScaleModification > 0)
+            {
+                effectInfoStr += "The timescale increased by " + timeScaleModification.ToString();
+            }
 
             return effectInfoStr;
         }
@@ -349,10 +356,9 @@ namespace ShrugWare
             if (!(curBoss is null))
             {
 #if UNITY_EDITOR
-                amount = CurBoss.curHealth;
-#else
-                curBoss.TakeDamage(amount);
+                //amount = CurBoss.curHealth;
 #endif
+                curBoss.TakeDamage(amount);
             }
         }
 
@@ -394,7 +400,6 @@ namespace ShrugWare
         public void UpdateGameUI()
         {
             bossUIManager.UpdateHealthBars();
-            bossUIManager.FillGameInfoText(curBoss, playerInfo);
         }
 
         public void UseConsumableItem(int templateId)

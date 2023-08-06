@@ -246,7 +246,7 @@ namespace ShrugWare{
             force = true;
 //#endif
 
-            if (level.LevelType == DataManager.OverworldLevelType.Start || level.Locked && !force)
+            if (level.LevelType == DataManager.OverworldLevelType.Start || (level.Locked && !force))
             {
                 // we don't enter these
                 return;
@@ -269,9 +269,11 @@ namespace ShrugWare{
             }
 
             // hide the player
+            // todo - fix this, it doesn't work. for whatever reason it only works when attached to a debugger
             playerObj.SetActive(false);
+            Invoke("test", 0.0f);
 
-            if(isTrashOrBoss)
+            if (isTrashOrBoss)
             {
                 GetComponent<AudioManager>().StopAudio();
             }
@@ -283,6 +285,11 @@ namespace ShrugWare{
         private void PlayOverworldMusic()
         {
             GetComponent<AudioManager>().PlayAudioClip(DataManager.AudioEffectTypes.Overworld, .25f);
+        }
+
+        void test()
+        {
+            playerObj.SetActive(false);
         }
     }
 }
