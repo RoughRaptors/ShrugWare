@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 718481394}
   - component: {fileID: 718481393}
   - component: {fileID: 718481392}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fireball 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -458,7 +458,7 @@ GameObject:
   - component: {fileID: 809634734}
   - component: {fileID: 809634733}
   - component: {fileID: 809634732}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fireball 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1002,7 +1002,7 @@ GameObject:
   - component: {fileID: 1357080767}
   - component: {fileID: 1357080766}
   - component: {fileID: 1357080765}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fireball 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1107,7 +1107,7 @@ GameObject:
   - component: {fileID: 1575178015}
   - component: {fileID: 1575178014}
   - component: {fileID: 1575178013}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fireball 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1278,7 +1278,7 @@ GameObject:
   - component: {fileID: 1736208012}
   - component: {fileID: 1736208011}
   - component: {fileID: 1736208010}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fireball 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1651,7 +1651,7 @@ GameObject:
   - component: {fileID: 2024772941}
   - component: {fileID: 2024772940}
   - component: {fileID: 2024772939}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fireball 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1756,7 +1756,7 @@ GameObject:
   - component: {fileID: 2066684845}
   - component: {fileID: 2066684844}
   - component: {fileID: 2066684843}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 'Fireball 0 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
