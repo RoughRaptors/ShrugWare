@@ -38,6 +38,7 @@ namespace ShrugWare
         GameObject lootScreenObj;
 
         bool countdownTimerRunning = false;
+        bool gameOver = false;
 
         private void Awake()
         {
@@ -65,6 +66,7 @@ namespace ShrugWare
         // Start is called before the first frame update
         void Start()
         {
+            gameOver = false;
             betweenMicrogameText.enabled = false;
             timeScaleInputField.text = "Time Scale: " + BossGameManager.Instance.GetCurTimeScale().ToString("F3");
             UpdateConsumableInfo();
@@ -73,8 +75,13 @@ namespace ShrugWare
         public void UpdateBetweenMicrogameText()
         {
             float timeLeft = DataManager.SECONDS_BETWEEN_MICROGAMES - BossGameManager.Instance.GetTimeInBossScene();
-            betweenMicrogameText.enabled = true;
-            betweenMicrogameText.text = "Next Level In: " + timeLeft.ToString("F2") + "s";
+
+            if (!gameOver)
+            {
+                betweenMicrogameText.enabled = true;
+                betweenMicrogameText.text = "Next Level In: " + timeLeft.ToString("F2") + "s";
+            }
+
             if (BossGameManager.Instance.GetPreviouslyRanEffects().Count > 0)
             {
                 betweenMicrogameText.text += "\n" + BossGameManager.Instance.GetPreviousEffectInfoString();
@@ -134,7 +141,7 @@ namespace ShrugWare
             continueGameButton.gameObject.SetActive(false);
             playerHealthBar.gameObject.SetActive(false);
             bossHealthBar.gameObject.SetActive(false);
-            gameInfoText.enabled = false;
+            gameInfoText.gameObject.SetActive(false);
             countdownTimerRunning = true;
 
             // we died or killed the boss, go back instead
@@ -170,8 +177,10 @@ namespace ShrugWare
         }
 
         public void HandleGameOver()
-        {            
+        {
+            gameOver = true;
             betweenMicrogameText.enabled = false;
+            gameInfoText.gameObject.SetActive(true);
             gameInfoText.text = "Game Over! \n 50 DKP MINUS!";
             continueGameButton.GetComponentInChildren<Text>().text = "Back To Overworld";
             continueGameButton.gameObject.SetActive(true);

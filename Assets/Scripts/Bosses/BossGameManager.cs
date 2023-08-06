@@ -299,7 +299,7 @@ namespace ShrugWare
 
         public void TakePlayerRaidDamage(float amount)
         {
-            float totalAmount = amount;
+            float totalAmount = amount * 5;
             float mitigationModifier = 0;
             if(OverworldManager.Instance) playerInventory.GetMitigation();
             if(mitigationModifier > 0)
