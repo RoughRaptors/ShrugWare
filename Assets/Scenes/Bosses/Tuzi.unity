@@ -456,11 +456,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2301266167672538499, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 95
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 2301266167760245459, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 35
+      value: 95
       objectReference: {fileID: 0}
     - target: {fileID: 2301266167922393855, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: m_AnchorMax.x
@@ -541,6 +541,10 @@ PrefabInstance:
     - target: {fileID: 2301266168276219434, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: m_Name
       value: Boss GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301266168396734783, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_Name
+      value: Max Health Potion
       objectReference: {fileID: 0}
     - target: {fileID: 2301266168648160312, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: m_Camera
