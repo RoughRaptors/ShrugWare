@@ -169,12 +169,6 @@ namespace ShrugWare
             continueGameButton.gameObject.SetActive(true);
         }
 
-        public void HandlePauseGame()
-        {
-            continueGameButton.GetComponentInChildren<Text>().text = "Continue to " + BossGameManager.Instance.CurBoss.bossName;
-            continueGameButton.gameObject.SetActive(true);
-        }
-
         public void HandleGameOver()
         {            
             betweenMicrogameText.enabled = false;

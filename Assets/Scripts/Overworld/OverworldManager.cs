@@ -271,7 +271,6 @@ namespace ShrugWare{
             // hide the player
             // todo - fix this, it doesn't work. for whatever reason it only works when attached to a debugger
             playerObj.SetActive(false);
-            Invoke("test", 0.0f);
 
             if (isTrashOrBoss)
             {
@@ -285,11 +284,6 @@ namespace ShrugWare{
         private void PlayOverworldMusic()
         {
             GetComponent<AudioManager>().PlayAudioClip(DataManager.AudioEffectTypes.Overworld, .25f);
-        }
-
-        void test()
-        {
-            playerObj.SetActive(false);
         }
     }
 }
