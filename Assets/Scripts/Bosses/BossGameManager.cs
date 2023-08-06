@@ -225,9 +225,6 @@ namespace ShrugWare
             {
                 curBoss.isDead = true;
 
-                // pause the game and wait for the player to hit the continue button
-                PauseGame();
-
                 // award loot
                 DataManager.Currencies lootCurrency = DataManager.Currencies.DauntingInferno;
                 int lootAmount = 1500;
@@ -236,7 +233,6 @@ namespace ShrugWare
             }
             else if(playerInfo.livesLeft < 0)
             {
-                PauseGame();
                 bossUIManager.HandleGameOver();
             }
         }
@@ -270,7 +266,7 @@ namespace ShrugWare
                 }
             }
 
-            string effectInfoStr = "";
+            string effectInfoStr = "\n";
             if (raidDamageTaken > 0)
             {
                 effectInfoStr += "Your raid took " + raidDamageTaken.ToString() + " damage\n";
@@ -297,14 +293,8 @@ namespace ShrugWare
         public void ContinueGame()
         {
             gameState = GameState.BossScreen;
-            bossUIManager.ToggleConsumableVisibility(false);
+            //bossUIManager.ToggleConsumableVisibility(false); // allow potions in between microgames
             audioManager.StopAudio();
-        }
-
-        public void PauseGame(bool consumablesVisible = false)
-        {
-            gameState = GameState.Paused;
-            bossUIManager.ToggleConsumableVisibility(consumablesVisible);
         }
 
         public void TakePlayerRaidDamage(float amount)
