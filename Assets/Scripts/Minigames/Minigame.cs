@@ -23,7 +23,14 @@ namespace ShrugWare
                 {
                     if (effect.effectType == DataManager.StatModifierType.PlayerMaxHealth)
                     {
-                        healthToAdd += (int)effect.amount;
+                        if (effect.asPercentage)
+                        {
+                            healthToAdd = (int)(DataManager.PLAYER_START_HEALTH_MICROGAME * (effect.amount / 100));
+                        }
+                        else
+                        {
+                            // nothing yet
+                        }
                     }
                 }
 
