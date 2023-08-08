@@ -46,6 +46,7 @@ namespace ShrugWare
             OverworldLevel curLevel = OverworldManager.Instance.GetOverworldLevel(OverworldManager.Instance.CurLevel.LevelID);
             if (curLevel != null)
             {
+#if UNITY_EDITOR
                 if (curLevel.Locked)
                 {
                     curLevelText.text = "Cur Level ID: " + curLevel.LevelID.ToString() +
@@ -65,6 +66,7 @@ namespace ShrugWare
                         "\n" + "Scene ID: " + curLevel.SceneIDToLoad +
                         "\n" + "Type : " + curLevel.LevelType.ToString();
                 }
+#endif
             }
         }
 
