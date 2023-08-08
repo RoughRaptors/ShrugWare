@@ -29,6 +29,7 @@ namespace ShrugWare
             }
 
             ++ShootAsteroidsMinigame.NumAsteroidsDestroyed;
+            ShootAsteroidsMinigame.NumAsteroidsDestroyed += 15;
         }
     }
 }

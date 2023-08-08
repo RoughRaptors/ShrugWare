@@ -27,6 +27,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject continueButton;
 
+        [SerializeField]
+        Text endGameText;
+
         private float timeInGame = 0.0f;
         private const float PLAYER_SPEED = 12.5f;
         private const float TURN_SPEED = 7.5f;
@@ -95,12 +98,12 @@ namespace ShrugWare
             }
 
             // destroyed all
-            if(gameRunning && NumAsteroidsDestroyed == NUM_ASTEROIDS)
+            if(gameRunning && NumAsteroidsDestroyed >= NUM_ASTEROIDS)
             {
                 gameRunning = false;
                 int lootAmount = 500;
                 OverworldManager.Instance.PlayerInventory.AddCurrency(DataManager.Currencies.Generic, lootAmount);
-                statusText.text = "Boss time!\nReceived " + lootAmount + " gold";
+                endGameText.text = "Boss time!\nReceived " + lootAmount + " gold";
                 continueButton.SetActive(true);
             }
         }
@@ -119,12 +122,13 @@ namespace ShrugWare
             // make sure we're not spawning this asteroid on top of the player, it will hurt us
             if (Vector3.Distance(this.transform.position, newPos) > 10)
             {
-                // let's just count it as destroyed in this edge case
                 newAsteroid.asteroidObj.transform.position = new Vector3(asteroidXPos, asteroidYPos, 0);
             }
             else
             {
-                ++NumAsteroidsDestroyed;
+                // spawn a new one since this wasn't far enough from the player
+                Destroy(newAsteroidObj.gameObject);
+                SpawnAsteroid();
             }
         }
 
@@ -329,16 +333,10 @@ namespace ShrugWare
             statusText.text = "HP: " + healthRemaining.ToString();
             if (healthRemaining < 0)
             {
+                // we died
                 statusText.text = "Aim better!";
                 gameRunning = false;
                 continueButton.SetActive(true);
-            }
-
-            // we died
-            if (healthRemaining < 0)
-            {
-                gameRunning = false;
-                statusText.text = "Aim better!";
                 Destroy(other.gameObject);
             }
         }

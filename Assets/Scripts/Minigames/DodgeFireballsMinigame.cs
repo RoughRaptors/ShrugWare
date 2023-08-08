@@ -24,6 +24,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject continueButton;
 
+        [SerializeField]
+        Text endGameText;
+
         const float FIREBALL_X_MIN = -25;
         const float FIREBALL_X_MAX = 125;
         const float FIREBALL_Y_MIN = -40;
@@ -99,7 +102,7 @@ namespace ShrugWare
                 gameRunning = false;
 
                 int lootAmount = 500;
-                statusText.text = "Boss time!\nReceived " + lootAmount + " gold";
+                endGameText.text = "Boss time!\nReceived " + lootAmount + " gold";
                 OverworldManager.Instance.PlayerInventory.AddCurrency(DataManager.Currencies.Generic, lootAmount);
 
                 continueButton.SetActive(true);
