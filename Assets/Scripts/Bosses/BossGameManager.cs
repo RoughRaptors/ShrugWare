@@ -102,7 +102,8 @@ namespace ShrugWare
         // events can modifier our hp. we pull from DataManger.PLAYER_START_HP, so we need an offset to calculate our actual hp
         private int hpOffset;
 
-        PlayerInfo playerInfo = new PlayerInfo(DataManager.PLAYER_START_HP, DataManager.PLAYER_MAX_HP, DataManager.PLAYER_STARTING_LIVES);
+        PlayerInfo playerInfo = new PlayerInfo(DataManager.PLAYER_START_HP_BOSSENCOUNTER,
+            DataManager.PLAYER_MAX_HP_BOSSENCOUNTER, DataManager.PLAYER_STARTING_LIVES_BOSSENCOUNTER);
         public PlayerInfo GetPlayerInfo() { return playerInfo; }
 
         private List<DataManager.StatEffect> previouslyRanEffects = new List<DataManager.StatEffect>();
@@ -346,7 +347,7 @@ namespace ShrugWare
             if (!(curBoss is null))
             {
 #if UNITY_EDITOR
-                //amount = CurBoss.curHealth;
+                amount = CurBoss.curHealth;
 #endif
                 curBoss.TakeDamage(amount);
             }
@@ -379,12 +380,12 @@ namespace ShrugWare
 
         public void ResetPlayerRaidMaxHP()
         {
-            playerInfo.maxPlayerHealth = DataManager.PLAYER_MAX_HP;
+            playerInfo.maxPlayerHealth = DataManager.PLAYER_MAX_HP_BOSSENCOUNTER;
         }
 
         public void SetToMaxHP()
         {
-            playerInfo.curPlayerHealth = DataManager.PLAYER_MAX_HP + hpOffset;
+            playerInfo.curPlayerHealth = DataManager.PLAYER_MAX_HP_BOSSENCOUNTER + hpOffset;
         }
 
         public void UpdateGameUI()
@@ -410,9 +411,16 @@ namespace ShrugWare
                 {
                     if (effect.effectType == DataManager.StatModifierType.PlayerMaxHealth)
                     {
-                        // until we find a better solution, just hack it a *25 since microgames have more hp
-                        hpOffset = (int)(effect.amount * 25);
-                        AddToPlayerRaidMaxHP(hpOffset);
+                        if (effect.asPercentage)
+                        {
+                            // until we find a better solution, just hack it a *25 since microgames have more hp
+                            hpOffset = (int)(playerInfo.maxPlayerHealth * (effect.amount / 100));
+                            AddToPlayerRaidMaxHP(hpOffset);
+                        }
+                        else
+                        {
+                            // nothing yet
+                        }
                     }
                     else if (effect.effectType == DataManager.StatModifierType.Timescale)
                     {

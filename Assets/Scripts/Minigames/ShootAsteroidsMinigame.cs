@@ -35,7 +35,6 @@ namespace ShrugWare
         private const float TURN_SPEED = 7.5f;
 
         // float so we can take partial damage via damage mitigation. it's not clean but blegh
-        private const float START_HEALTH = 5;
         private const float SHOOT_COOLDOWN = 0.65f;
         private float timeSinceLastShot = 0.0f;
 
@@ -68,7 +67,7 @@ namespace ShrugWare
         {
             base.Start();
             this.transform.position = new Vector3(50, 0, 0);
-            healthRemaining = START_HEALTH + healthToAdd;
+            healthRemaining = DataManager.PLAYER_START_HEALTH_MICROGAME + healthToAdd;
             NumAsteroidsDestroyed = 0;
 
             for (int i = 0; i < NUM_ASTEROIDS; ++i)
