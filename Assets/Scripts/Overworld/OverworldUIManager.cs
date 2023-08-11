@@ -86,7 +86,7 @@ namespace ShrugWare
 
             // don't go in completed boss levels (yet!)
             OverworldLevel overworldLevel = OverworldManager.Instance.GetOverworldLevel(OverworldManager.Instance.CurLevel.LevelID);
-            if (overworldLevel != null && !(overworldLevel.LevelType == DataManager.OverworldLevelType.Boss && overworldLevel.Completed))
+            //if (overworldLevel != null && !(overworldLevel.LevelType == DataManager.OverworldLevelType.Boss && overworldLevel.Completed))
             {
                 overworldLevel.EnterLevel();
             }

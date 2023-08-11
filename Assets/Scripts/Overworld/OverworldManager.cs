@@ -242,9 +242,9 @@ namespace ShrugWare{
         public void EnterLevel(OverworldLevel level)
         {
             bool force = false;
-//#if UNITY_EDITOR
+#if UNITY_EDITOR
             force = true;
-//#endif
+#endif
 
             if (level.LevelType == DataManager.OverworldLevelType.Start || (level.Locked && !force))
             {
