@@ -79,12 +79,16 @@ namespace ShrugWare
             if (!gameOver)
             {
                 betweenMicrogameText.enabled = true;
-                betweenMicrogameText.text = "Next Level In: " + timeLeft.ToString("F2") + "s";
+                betweenMicrogameText.text = "Next Level In: " + timeLeft.ToString("F2") + "s\n";
+            }
+            else
+            {
+                betweenMicrogameText.text = "";
             }
 
             if (BossGameManager.Instance.GetPreviouslyRanEffects().Count > 0)
             {
-                betweenMicrogameText.text += "\n" + BossGameManager.Instance.GetPreviousEffectInfoString();
+                betweenMicrogameText.text += BossGameManager.Instance.GetPreviousEffectInfoString();
             }
 
             if (countdownTimerRunning)
@@ -170,8 +174,12 @@ namespace ShrugWare
 
             overworldManager.CompleteLevel(overworldManager.CurLevel.LevelID);
 
-            betweenMicrogameText.enabled = false;
-            gameInfoText.text = "\n You beat the boss!\nReceived Daunting Inferno Marks x " + lootAmount;
+            gameOver = true;
+            healthPotionItem.gameObject.SetActive(false);
+            maxHealthPotionItem.gameObject.SetActive(false);
+            gameInfoText.gameObject.SetActive(true);
+            gameInfoText.text = "You beat the boss!\nReceived Daunting Inferno Marks x " + lootAmount;
+            gameInfoText.enabled = true;
             continueGameButton.GetComponentInChildren<Text>().text = "Back to Overworld";
             continueGameButton.gameObject.SetActive(true);
         }
@@ -179,6 +187,8 @@ namespace ShrugWare
         public void HandleGameOver()
         {
             gameOver = true;
+            healthPotionItem.gameObject.SetActive(false);
+            maxHealthPotionItem.gameObject.SetActive(false);
             betweenMicrogameText.enabled = false;
             gameInfoText.gameObject.SetActive(true);
             gameInfoText.text = "Game Over! \n 50 DKP MINUS!";

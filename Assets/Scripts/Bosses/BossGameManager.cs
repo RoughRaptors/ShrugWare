@@ -102,6 +102,8 @@ namespace ShrugWare
         // events can modifier our hp. we pull from DataManger.PLAYER_START_HP, so we need an offset to calculate our actual hp
         private int hpOffset;
 
+        private bool needsToRecalculateStats = false;
+
         PlayerInfo playerInfo = new PlayerInfo(DataManager.PLAYER_START_HP_BOSSENCOUNTER,
             DataManager.PLAYER_MAX_HP_BOSSENCOUNTER, DataManager.PLAYER_STARTING_LIVES_BOSSENCOUNTER);
         public PlayerInfo GetPlayerInfo() { return playerInfo; }
@@ -126,6 +128,7 @@ namespace ShrugWare
             // this will be called every time we swap back to our main scene
             if (Instance == null)
             {
+                needsToRecalculateStats = true;
                 DontDestroyOnLoad(gameObject);
                 Instance = this;
             }
@@ -141,22 +144,9 @@ namespace ShrugWare
                 EnableBossCamera(true);
             }
 
-            if(OverworldManager.Instance != null)
-            {
-                playerInventory = OverworldManager.Instance.PlayerInventory;
-                if(playerInventory != null)
-                {
-                    playerInventory.RecalculateStats();
-                }
-                else
-                {
-                    playerInventory = new PlayerInventory();
-                }
-            }
-
             // bad
             // set our boss
-            if(curBoss == null && bossName == "Warboss Kard")
+            if (curBoss == null && bossName == "Warboss Kard")
             {
                 curBoss = new WarbossKard();
             }
@@ -178,6 +168,24 @@ namespace ShrugWare
 
             // our raid and boss data needs to be populated by this point
             UpdateGameUI();
+
+            if (needsToRecalculateStats)
+            {
+                if (OverworldManager.Instance != null)
+                {
+                    playerInventory = OverworldManager.Instance.PlayerInventory;
+                    if (playerInventory != null)
+                    {
+                        //playerInventory.RecalculateStats();
+                    }
+                    else
+                    {
+                        playerInventory = new PlayerInventory();
+                    }
+
+                    needsToRecalculateStats = false;
+                }
+            }
         }
 
         private void Update()

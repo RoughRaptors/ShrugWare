@@ -349,7 +349,7 @@ namespace ShrugWare
             }
 
             // did we win?
-            if (healthRemaining >= 0 && NumAsteroidsDestroyed == NUM_ASTEROIDS)
+            if (healthRemaining >= 0 && NumAsteroidsDestroyed >= NUM_ASTEROIDS)
             {
                 overworldManager.CompleteLevel(overworldManager.CurLevel.LevelID);
             }
