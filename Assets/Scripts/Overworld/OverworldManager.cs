@@ -255,7 +255,7 @@ namespace ShrugWare{
             // 10% chance we trigger an event
             bool isTrashOrBoss = level.LevelType == DataManager.OverworldLevelType.Trash || level.LevelType == DataManager.OverworldLevelType.Boss;
             int rand = UnityEngine.Random.Range(0, 100);
-            if (rand < 100 && isTrashOrBoss)
+            if (rand < 10 && isTrashOrBoss)
             {
                 // pick a random event
                 int randomEventIndex = UnityEngine.Random.Range(0, randomEventList.Count);
