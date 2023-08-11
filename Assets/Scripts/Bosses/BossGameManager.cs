@@ -102,7 +102,7 @@ namespace ShrugWare
         // events can modifier our hp. we pull from DataManger.PLAYER_START_HP, so we need an offset to calculate our actual hp
         private int hpOffset;
 
-        private bool needsToRecalculateStats = false;
+        private bool hasCalculatedStats = false;
 
         PlayerInfo playerInfo = new PlayerInfo(DataManager.PLAYER_START_HP_BOSSENCOUNTER,
             DataManager.PLAYER_MAX_HP_BOSSENCOUNTER, DataManager.PLAYER_STARTING_LIVES_BOSSENCOUNTER);
@@ -127,8 +127,7 @@ namespace ShrugWare
         {
             // this will be called every time we swap back to our main scene
             if (Instance == null)
-            {
-                needsToRecalculateStats = true;
+            { 
                 DontDestroyOnLoad(gameObject);
                 Instance = this;
             }
@@ -163,29 +162,26 @@ namespace ShrugWare
         {
             Time.timeScale = curTimeScale;
 
+            if (OverworldManager.Instance != null)
+            {
+                playerInventory = OverworldManager.Instance.PlayerInventory;
+                if (playerInventory != null && !hasCalculatedStats)
+                {
+                    playerInventory.RecalculateStats();
+                }
+                else
+                {
+                    playerInventory = new PlayerInventory();
+                }
+
+                hasCalculatedStats = true;
+            }
+
             // apply the modifiers from our random event, if we have one
             ApplyRandomEventModifiers();
 
             // our raid and boss data needs to be populated by this point
             UpdateGameUI();
-
-            if (needsToRecalculateStats)
-            {
-                if (OverworldManager.Instance != null)
-                {
-                    playerInventory = OverworldManager.Instance.PlayerInventory;
-                    if (playerInventory != null)
-                    {
-                        //playerInventory.RecalculateStats();
-                    }
-                    else
-                    {
-                        playerInventory = new PlayerInventory();
-                    }
-
-                    needsToRecalculateStats = false;
-                }
-            }
         }
 
         private void Update()
@@ -308,7 +304,7 @@ namespace ShrugWare
 
         public void TakePlayerRaidDamage(float amount)
         {
-            float totalAmount = amount * 5;
+            float totalAmount = amount;// * 5;
             float mitigationModifier = 0;
             if(OverworldManager.Instance) playerInventory.GetMitigation();
             if(mitigationModifier > 0)
