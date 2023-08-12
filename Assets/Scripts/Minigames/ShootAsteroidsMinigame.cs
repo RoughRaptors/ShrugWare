@@ -30,6 +30,12 @@ namespace ShrugWare
         [SerializeField]
         Text endGameText;
 
+        [SerializeField]
+        GameObject bulletSpawn1;
+
+        [SerializeField]
+        GameObject bulletSpawn2;
+
         private float timeInGame = 0.0f;
         private const float PLAYER_SPEED = 12.5f;
         private const float TURN_SPEED = 7.5f;
@@ -192,43 +198,7 @@ namespace ShrugWare
 
             // lazy
             if (numBullets == 5)
-            {
-                GameObject newBullet1 = Instantiate(bulletInitObj);
-                newBullet1.transform.position = new Vector3(this.transform.position.x - 1, this.transform.position.y, this.transform.position.z);
-                newBullet1.transform.forward = this.transform.forward;
-                newBullet1.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
-                newBullet1.SetActive(true);
-
-                GameObject newBullet2 = Instantiate(bulletInitObj);
-                newBullet2.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
-                newBullet2.transform.forward = this.transform.forward;
-                newBullet2.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
-                newBullet2.SetActive(true);
-
-                GameObject newBullet3 = Instantiate(bulletInitObj);
-                newBullet3.transform.position = new Vector3(this.transform.position.x + 1, this.transform.position.y, this.transform.position.z);
-                newBullet3.transform.forward = this.transform.forward;
-                newBullet3.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
-                newBullet3.SetActive(true);
-
-                GameObject newBullet4 = Instantiate(bulletInitObj);
-                newBullet4.transform.position = new Vector3(this.transform.position.x - 0.5f, this.transform.position.y + 1 + this.transform.position.z);
-                newBullet4.transform.forward = this.transform.forward;
-                newBullet4.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
-                newBullet4.SetActive(true);
-
-                GameObject newBullet5 = Instantiate(bulletInitObj);
-                newBullet5.transform.position = new Vector3(this.transform.position.x + 0.5f, this.transform.position.y + 1, this.transform.position.z);
-                newBullet5.transform.forward = this.transform.forward;
-                newBullet5.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
-                newBullet5.SetActive(true);
-
-                GameObject newBullet6 = Instantiate(bulletInitObj);
-                newBullet6.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 1.9f, this.transform.position.z);
-                newBullet6.transform.forward = this.transform.forward;
-                newBullet6.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
-                newBullet6.SetActive(true);
-
+            { 
                 // extra bullet for set bonus, shoot backwards
                 GameObject backwardsBullet = Instantiate(bulletInitObj);
                 backwardsBullet.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 1.9f, this.transform.position.z);
@@ -236,65 +206,18 @@ namespace ShrugWare
                 backwardsBullet.GetComponent<Rigidbody>().velocity = -this.transform.right * 15.0f;
                 backwardsBullet.SetActive(true);
             }
-            else if (numBullets == 4)
+
+            if (numBullets > 1)
             {
-                GameObject newBullet1 = Instantiate(bulletInitObj);
-                newBullet1.transform.position = new Vector3(this.transform.position.x - 1.5f, this.transform.position.y, this.transform.position.z);
-                newBullet1.transform.forward = this.transform.forward;
-                newBullet1.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
-                newBullet1.SetActive(true);
+                GameObject bullet1 = Instantiate(bulletInitObj);
+                bullet1.transform.position = bulletSpawn1.transform.position;
+                bullet1.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
+                bullet1.SetActive(true);
 
-                GameObject newBullet2 = Instantiate(bulletInitObj);
-                newBullet2.transform.position = new Vector3(this.transform.position.x - 0.5f, this.transform.position.y, this.transform.position.z);
-                newBullet2.transform.forward = this.transform.forward;
-                newBullet2.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
-                newBullet2.SetActive(true);
-
-                GameObject newBullet3 = Instantiate(bulletInitObj);
-                newBullet3.transform.position = new Vector3(this.transform.position.x + 1, this.transform.position.y, this.transform.position.z);
-                newBullet3.transform.forward = this.transform.forward;
-                newBullet3.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
-                newBullet3.SetActive(true);
-
-                GameObject newBullet4 = Instantiate(bulletInitObj);
-                newBullet4.transform.position = new Vector3(this.transform.position.x + 2, this.transform.position.y, this.transform.position.z);
-                newBullet4.transform.forward = this.transform.forward;
-                newBullet4.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
-                newBullet4.SetActive(true);
-            }
-            else if (numBullets == 3)
-            {
-                GameObject newBullet1 = Instantiate(bulletInitObj);
-                newBullet1.transform.position = new Vector3(this.transform.position.x - 1, this.transform.position.y, this.transform.position.z);
-                newBullet1.transform.forward = this.transform.forward;
-                newBullet1.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
-                newBullet1.SetActive(true);
-
-                GameObject newBullet2 = Instantiate(bulletInitObj);
-                newBullet2.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 1, this.transform.position.z);
-                newBullet2.transform.forward = this.transform.forward;
-                newBullet2.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
-                newBullet2.SetActive(true);
-
-                GameObject newBullet3 = Instantiate(bulletInitObj);
-                newBullet3.transform.position = new Vector3(this.transform.position.x + 1, this.transform.position.y, this.transform.position.z);
-                newBullet3.transform.forward = this.transform.forward;
-                newBullet3.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
-                newBullet3.SetActive(true);
-            }
-            else if (numBullets == 2)
-            {
-                GameObject newBullet1 = Instantiate(bulletInitObj);
-                newBullet1.transform.position = new Vector3(this.transform.position.x - 1, this.transform.position.y, this.transform.position.z);
-                newBullet1.transform.forward = this.transform.forward;
-                newBullet1.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
-                newBullet1.SetActive(true);
-
-                GameObject newBullet2 = Instantiate(bulletInitObj);
-                newBullet2.transform.position = new Vector3(this.transform.position.x + 1, this.transform.position.y, this.transform.position.z);
-                newBullet2.transform.forward = this.transform.forward;
-                newBullet2.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
-                newBullet2.SetActive(true);
+                GameObject bullet2 = Instantiate(bulletInitObj);
+                bullet2.transform.position = bulletSpawn2.transform.position;
+                bullet2.GetComponent<Rigidbody>().velocity = this.transform.right * 15.0f;
+                bullet2.SetActive(true);
             }
             else
             {
@@ -306,7 +229,7 @@ namespace ShrugWare
             }
 
             // speed up the game per bullet shot
-            timeScale += 0.01f;
+            timeScale += 0.05f;
             Time.timeScale = timeScale;
         }
 
