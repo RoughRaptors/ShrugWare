@@ -19,10 +19,10 @@ namespace ShrugWare
         [SerializeField]
         float maxBallScale = 17.5f;
 
-        const float MIN_PLAYER_X_START_POS = -49.9f;
-        const float MAX_PLAYER_X_START_POS = 51.5f;
-        const float MIN_PLAYER_Y_START_POS = -25.9f;
-        const float MAX_PLAYER_Y_START_POS = 28.8f;
+        const float MIN_PLAYER_X_START_POS = -80;
+        const float MAX_PLAYER_X_START_POS = 0;
+        const float MIN_PLAYER_Y_START_POS = -50f;
+        const float MAX_PLAYER_Y_START_POS = 30.0;
 
         protected override void Awake()
         {
