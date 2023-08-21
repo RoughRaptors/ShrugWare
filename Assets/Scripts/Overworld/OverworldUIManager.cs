@@ -38,6 +38,10 @@ namespace ShrugWare
 
         public void UpdateUI()
         {
+            // only show debug text in editor
+#if !UNITY_EDITOR
+            return;
+#endif
             if(OverworldManager.Instance == null || OverworldManager.Instance.CurLevel == null)
             {
                 return;

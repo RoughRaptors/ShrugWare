@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Minigames\ShootAsteroidsMinigameAsteroid.cs" />
+    <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCollider.cs" />
     <Compile Include="Assets\Scripts\Merchants\MerchantManager.cs" />
     <Compile Include="Assets\Scripts\Various Other\JZLayerExtensions.cs" />
@@ -79,12 +80,15 @@
     <Compile Include="Assets\Scripts\Player\PlayerMover.cs" />
     <Compile Include="Assets\Scripts\Minigames\Minigame.cs" />
     <Compile Include="Assets\Art\Fire\Scripts\OscillateLightBrightness.cs" />
+    <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterceptTheFireball.cs" />
     <Compile Include="Assets\Scripts\Items\ArmorItem.cs" />
     <Compile Include="Assets\Scripts\Various Other\RandomEvent.cs" />
     <Compile Include="Assets\Scripts\Overworld\OverworldManager.cs" />
     <Compile Include="Assets\Scripts\Various Other\Raid.cs" />
+    <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csParticleMove.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\DodgeTheFireballPattern.cs" />
+    <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csMouseOrbit.cs" />
     <Compile Include="Assets\Scripts\Minigames\ShootAsteroidsMinigame.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\SpreadOutForMeteor.cs" />
     <Compile Include="Assets\Scripts\Various Other\Clickable.cs" />
@@ -94,13 +98,18 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\PerformTheRotation.cs" />
     <Compile Include="Assets\Scripts\Various Other\MainMenu.cs" />
     <Compile Include="Assets\Art\Progress Bars\Scripts\SliderScripts.cs" />
+    <Compile Include="Assets\Art\KY_effects\Script\ConGUI.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\GetOutOfFireMicrogame.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StealTheChest.cs" />
     <Compile Include="Assets\Scripts\Overworld\OverworldLevel.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StackPowerstones.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\LineOfSight.cs" />
+    <Compile Include="Assets\Art\KY_effects\Script\Lighting.cs" />
+    <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csShowAllEffect.cs" />
+    <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csAnimationSpin.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioManager.cs" />
+    <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\SidestepTheFireball.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioEffectClip.cs" />
     <Compile Include="Assets\Scripts\Bosses\Tuzi.cs" />
@@ -119,6 +128,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\Art\KY_effects\MagicEffectsPackFree\ReadMe.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
