@@ -229,7 +229,7 @@ namespace ShrugWare
             }
 
             // speed up the game per bullet shot
-            timeScale += 0.05f;
+            timeScale += 0.025f;
             Time.timeScale = timeScale;
         }
 
