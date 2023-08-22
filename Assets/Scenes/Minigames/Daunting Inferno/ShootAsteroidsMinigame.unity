@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 690659859}
   - component: {fileID: 690659858}
   - component: {fileID: 690659857}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Spawn Point 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -472,7 +472,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1655,7 +1655,7 @@ GameObject:
   - component: {fileID: 1950952922}
   - component: {fileID: 1950952921}
   - component: {fileID: 1950952920}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Spawn Point 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1697,7 +1697,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
