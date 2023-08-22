@@ -383,6 +383,7 @@ MonoBehaviour:
   enemies:
   - {fileID: 1642837739}
   - {fileID: 105905187}
+  portalObj: {fileID: 0}
 --- !u!1001 &871738582
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -9,6 +9,9 @@ namespace ShrugWare
         List<Clickable> enemies = new List<Clickable>();
         Dictionary<Clickable, Vector3> enemyTargetPositions = new Dictionary<Clickable, Vector3>();
 
+        [SerializeField]
+        GameObject portalObj;
+
         private const float ENEMY_MOVE_SPEED = 1.5f;
         private const float X_MIN = -3.20f;
         private const float X_MAX = 3.20f;
@@ -32,6 +35,8 @@ namespace ShrugWare
             {
                 enemy.Clicked += Taunted;
                 enemy.gameObject.SetActive(true);
+                Instantiate(portalObj);
+                portalObj.transform.position = enemy.transform.position;
             }
         }
 
