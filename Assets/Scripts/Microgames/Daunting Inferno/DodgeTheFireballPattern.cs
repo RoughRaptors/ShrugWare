@@ -37,6 +37,8 @@ namespace ShrugWare
             {
                 float newScale = Random.Range(minBallScale, maxBallScale + 1);
                 fireball.transform.localScale = new Vector3(newScale, newScale, newScale);
+                ParticleSystem.MainModule main = fireball.GetComponentInChildren<ParticleSystem>().main;
+                main.startSize = newScale * 2;
             }
         }
 
