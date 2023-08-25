@@ -40,16 +40,17 @@ namespace ShrugWare
         {
             // only show debug text in editor
 #if !UNITY_EDITOR
+            curLevelText.text = "";
             return;
 #endif
-            if(OverworldManager.Instance == null || OverworldManager.Instance.CurLevel == null)
+            if (OverworldManager.Instance == null || OverworldManager.Instance.CurLevel == null)
             {
                 return;
             }
 
             OverworldLevel curLevel = OverworldManager.Instance.GetOverworldLevel(OverworldManager.Instance.CurLevel.LevelID);
             if (curLevel != null)
-            {
+            {                
 #if UNITY_EDITOR
                 if (curLevel.Locked)
                 {
