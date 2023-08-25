@@ -70,7 +70,7 @@ namespace ShrugWare{
                 // set all of our shit back - figure out a better solution later if there is one - TODO MAKE THIS BETTER
                 overworldMap = OverworldManager.Instance.overworldMap;
                 curLevel = OverworldManager.Instance.curLevel;
-                playerObj = OverworldManager.Instance.playerObj;
+                playerObj = OverworldManager.Instance.playerObj; 
                 playerObj.SetActive(true);
 
                 OverworldUIManager.Instance.SetCanvasEnabled(true);
