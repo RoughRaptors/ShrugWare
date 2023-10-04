@@ -1687,6 +1687,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6855048251138854181, guid: 5b210609803658e488f512fc13a6163e, type: 3}
+      propertyPath: badMasks.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855048251138854181, guid: 5b210609803658e488f512fc13a6163e, type: 3}
+      propertyPath: goodMasks.m_Bits
+      value: 320
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 263555676715289244, guid: 5b210609803658e488f512fc13a6163e, type: 3}
     m_RemovedGameObjects: []

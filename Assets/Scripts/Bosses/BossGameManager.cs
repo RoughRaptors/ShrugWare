@@ -2,33 +2,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/*
-    game structure:
-    each raid is composed of multiple bosses
-        contains a list of bosses and a curBossIndex
-    each boss is composed of multiple mechanics
-        contains a list of scene IDs and a curSceneId
-        each boss has health
-    each mechanic is a scene - a microgame
-        each mechanic contains a list of effects to be ran that can modify the following either positively or negatively:
-            modify player hp
-            modify boss hp
-            modify timescale
-    progress through that bosses minigames and perform well enough to not wipe and defeat the boss
-    progress through each raid by defeating all bosses
-
-    you are able to leave raids in between bosses to visit a merchant
-        to reach the merchant, you must successfully pass a number of meta microgames
-        merchant is currency based - each raid has their own currency type
-        sells armor and consumables
-*/
-
 /* 
     to add a new microgame: 
     1: copy an existing microgame scene and rename it
     2: create/copy a script for the new microgame and open the scene
     3: in DataManager.cs -> add the new scene name to the enum Scenes and update the MICROGAME_END value
-    4: in unity -> file -> build settings -> add open scene
+    4: in unity -> file -> build settings -> add open scene and move it into the proper place
 */
 
 /*
@@ -46,6 +25,7 @@ Interrupt The Ability - Hit the interrupt ability at the proper timing as the bo
 Knockbacked Safely - Get knocked backwards into a safe zone
 Line of Sight - LOS the boss in time
 Match Polarity - Move to the party members of the same electric positive or negative sign as you
+Run In - Leeroy run into the boss room
 Spread Out For Meteor - Spread out from everyone else for a meteor attack
 Sidestep The Fireball - Sidestep a fireball coming at you
 Stack Up For Meteor - Stack up on everyone for a meteor attack
