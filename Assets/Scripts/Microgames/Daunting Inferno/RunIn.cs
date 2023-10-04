@@ -42,10 +42,5 @@ namespace ShrugWare
         {
             insideRoom = true;
         }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            
-        }
     }
 }
