@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ShrugWare
 {
     /// <summary>
-    /// Sends relevant collisions as events to be picked up by microgrames
+    /// Sends relevant collisions as events to be picked up by microgames
     /// </summary>
     public class PlayerCollider : MonoBehaviour
     {
