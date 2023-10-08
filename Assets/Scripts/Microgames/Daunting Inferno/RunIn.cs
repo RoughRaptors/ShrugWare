@@ -41,6 +41,7 @@ namespace ShrugWare
         private void SetInsideRoom(GameObject obj)
         {
             insideRoom = true;
+            SetMicrogameEndText(true);
         }
     }
 }

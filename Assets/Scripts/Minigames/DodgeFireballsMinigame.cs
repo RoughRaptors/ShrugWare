@@ -171,7 +171,7 @@ namespace ShrugWare
                 yPos = UnityEngine.Random.Range(FIREBALL_Y_MIN, FIREBALL_Y_MAX);
                 newFireballObj.transform.position = new Vector3(xPos, yPos, 0);
 
-                Vector3 targetPos = new Vector3(-25, yPos, 0);
+                Vector3 targetPos = new Vector3(-50, yPos, 0);
                 newFireball.targetPos = targetPos;
             }
             else if (fromDir == FromDirection.FromTop)
@@ -201,6 +201,12 @@ namespace ShrugWare
             for(int i = 0; i < fireballsList.Count; ++i)
             {
                 Fireball fireball = fireballsList[i];
+
+                // not sure why but pressing 'z' triggers this to be null and break
+                if(fireball.fireballObj == null)
+                {
+                    break;
+                }
 
                 // done with it
                 if (fireball.fireballObj.transform.position == fireball.targetPos)
