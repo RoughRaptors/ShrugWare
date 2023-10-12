@@ -39,7 +39,7 @@ namespace ShrugWare
         const float PLAYER_Y_MIN = -30;
         const float PLAYER_Y_MAX = 35;
 
-        const float FIREBALL_SPAWN_INTERVAL = 0.75f;
+        const float FIREBALL_SPAWN_INTERVAL = 0.9f;
         private float timeSinceLastSpawn = 0.0f;
 
         private float timeInGame = 0.0f;
