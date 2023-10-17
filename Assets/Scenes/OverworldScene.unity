@@ -938,7 +938,7 @@ MonoBehaviour:
   - {fileID: 1271426023}
   - {fileID: 1624887014}
   - {fileID: 836791562}
-  adjacentMapLevels: 010000000200000005000000
+  adjacentMapLevels: 010000000200000003000000
   locked: 0
 --- !u!65 &1094519809
 BoxCollider:
@@ -1182,7 +1182,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1652987369}
   m_LocalRotation: {x: 0.3210197, y: -0.63003683, z: 0.3210197, w: 0.63003683}
-  m_LocalPosition: {x: -1.81, y: 0.49, z: 2.24}
+  m_LocalPosition: {x: -1.95, y: 0.59, z: 2.24}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
