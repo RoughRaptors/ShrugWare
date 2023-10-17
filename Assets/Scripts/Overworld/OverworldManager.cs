@@ -106,23 +106,10 @@ namespace ShrugWare{
                 OverworldManager.Instance.SetCurLevelById(newLevel.LevelID);
             }
 
-            // we want to show the locked vfx if we've not completed the level and it's available to do
-            if (newLevel.Locked && !newLevel.Completed && newLevel.LockedRenderMaterials.Count > 0)
+            // we want to show the level as locked if we've not completed it and it's locked
+            if (newLevel.Locked && !newLevel.Completed)
             {
-                // make a new material array to use that's large enough to fit locked + current materials
-                Material[] matArr = new Material[newLevel.LockedRenderMaterials.Count + 1];
-
-                // set default mesh renderer and compensate in the for loop
-                matArr[0] = newLevel.GetComponent<MeshRenderer>().materials[0];
-
-                // these are offset because i'm an idiot
-                for(int i = 1; i <= newLevel.LockedRenderMaterials.Count; ++i)
-                {
-                    matArr[i] = newLevel.LockedRenderMaterials[i - 1];
-                }
-
-                // set our materials array back
-                newLevel.GetComponent<MeshRenderer>().materials = matArr;
+                newLevel.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
             }
         }
 
@@ -155,7 +142,7 @@ namespace ShrugWare{
                     if(overworldLevelToUnlock != null)
                     {
                         overworldLevelToUnlock.Locked = false;
-                        UpdateMeshRendererMaterials(overworldLevelToUnlock);
+                        SetDefaultLevelColor(overworldLevelToUnlock);
 
                         // update the connection of our current level
                         foreach(GameObject levelConnection in overworldLevel.OutgoingLevelConnections)
@@ -167,16 +154,11 @@ namespace ShrugWare{
             }
         }
 
-        // disable the materials that we were showing for it being locked
-        private void UpdateMeshRendererMaterials(OverworldLevel overworldLevelToUnlock)
+        private void SetDefaultLevelColor(OverworldLevel overworldLevelToUnlock)
         {
-            if (!overworldLevelToUnlock.Completed && overworldLevelToUnlock.LockedRenderMaterials.Count > 0)
+            if (!overworldLevelToUnlock.Completed)
             {
-                // lazy, set default, it should exist
-                // originally was gonna create a new copy of the array with the original's meshes being calculated, but i know i'm not changing that right now 
-                Material[] newMatArr = new Material[1];
-                newMatArr[0] = overworldLevelToUnlock.GetComponent<MeshRenderer>().materials[0];
-                overworldLevelToUnlock.GetComponent<MeshRenderer>().materials = newMatArr;
+                overworldLevelToUnlock.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255);
             }
         }
         

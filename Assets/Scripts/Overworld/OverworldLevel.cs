@@ -23,10 +23,6 @@ namespace ShrugWare
         List<int> levelIDsToUnlock = new List<int>();
         public List<int> LevelIDsToUnlock { get { return levelIDsToUnlock; } }
 
-        [SerializeField]
-        List<Material> lockedRenderMaterials =new List<Material>();
-        public List<Material> LockedRenderMaterials { get { return lockedRenderMaterials; } }
-
         // the list of connection objects that this level points to
         [SerializeField]
         List<GameObject> outgoingLevelConnections;
