@@ -938,7 +938,7 @@ MonoBehaviour:
   - {fileID: 1271426023}
   - {fileID: 1624887014}
   - {fileID: 836791562}
-  adjacentMapLevels: 010000000200000005000000
+  adjacentMapLevels: 010000000200000003000000
   locked: 0
 --- !u!65 &1094519809
 BoxCollider:
