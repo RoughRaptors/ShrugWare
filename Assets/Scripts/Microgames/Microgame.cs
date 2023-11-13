@@ -10,7 +10,7 @@ namespace ShrugWare
         [Header("Microgame Text")]
         [SerializeField] private string victoryText = "";
         [SerializeField] private string defaultDefeatText = "";
-        [SerializeField] private float postTimerWait = 0f; //Delay between timer ending and result being given. Currently only used by knockback
+        [SerializeField] private float postTimerWait = 0f; //Delay between timer ending and result being given.
         protected string startText = ""; //Set after opening delay time. Currently only used by rotation microgame
 
         [Header("Microgame Specific")]
@@ -23,7 +23,7 @@ namespace ShrugWare
         private List<DataManager.StatEffect> winEffects = new List<DataManager.StatEffect>();
         private List<DataManager.StatEffect> lossEffects = new List<DataManager.StatEffect>();
 
-        // temp hack to allow for a brief pause in between microgame timers running out
+        // allow for a brief pause in between microgame timers running out
         private bool hasRunEndCondition = false;
         public event Action<string> MicrogameStartText;
         public event Action MicrogameStarted;
