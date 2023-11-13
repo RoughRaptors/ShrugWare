@@ -75,8 +75,15 @@ public class LaserBeam
         {
             // this is bad but i'm not sure how else to get a reference to the current microgame that's running
             // i tried events but it didn't work out
-            if(true || BossGameManager.Instance != null && BossGameManager.Instance.GetCurSceneIndex() == (int)DataManager.Scenes.LaserLineOfSight)
+            if(BossGameManager.Instance != null && BossGameManager.Instance.GetCurSceneIndex() == (int)DataManager.Scenes.LaserLineOfSight)
             {
+                LaserLineOfSight.LaserHit();
+                laserIndices.Add(hitInfo.point);
+                UpdateLaser();
+            }
+            else if(BossGameManager.Instance == null)
+            {
+                // make this still work in the case where we're running just this scene
                 LaserLineOfSight.LaserHit();
                 laserIndices.Add(hitInfo.point);
                 UpdateLaser();

@@ -10,7 +10,7 @@ namespace ShrugWare
         [Header("Microgame Text")]
         [SerializeField] private string victoryText = "";
         [SerializeField] private string defaultDefeatText = "";
-        [SerializeField] private float postTimerWait = 0f; //Delay between timer ending and result being given. Currently only used by knockback
+        [SerializeField] private float postTimerWait = 0f; //Delay between timer ending and result being given.
         protected string startText = ""; //Set after opening delay time. Currently only used by rotation microgame
 
         [Header("Microgame Specific")]

@@ -8,6 +8,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject[] laserObjs;
 
+        [SerializeField]
+        PlayerMover playerObject = null;
+
         public static bool hasBeenHit = false;
         private float timeRunning = 0.0f;
         private const float TIME_TO_ENABLE_LASERS = 3.5f;
@@ -41,6 +44,11 @@ namespace ShrugWare
             if(timeRunning >= TIME_TO_ENABLE_LASERS)
             {
                 EnableLasers();
+            }
+            else if(hasBeenHit || timeRunning > base.microGameTime)
+            {
+                // stop moving if we hit a laser
+                playerObject.DisableMovement();
             }
         }
 
