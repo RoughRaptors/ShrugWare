@@ -23,7 +23,7 @@ namespace ShrugWare
         private List<DataManager.StatEffect> winEffects = new List<DataManager.StatEffect>();
         private List<DataManager.StatEffect> lossEffects = new List<DataManager.StatEffect>();
 
-        // temp hack to allow for a brief pause in between microgame timers running out
+        // allow for a brief pause in between microgame timers running out
         private bool hasRunEndCondition = false;
         public event Action<string> MicrogameStartText;
         public event Action MicrogameStarted;

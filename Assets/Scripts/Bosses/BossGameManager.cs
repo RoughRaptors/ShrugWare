@@ -103,6 +103,9 @@ namespace ShrugWare
         public GameState GetGameState() { return gameState; }
         public void SetGameState(GameState gState) { gameState = gState; }
 
+        private int curSceneIndex;
+        public float GetCurSceneIndex() { return curSceneIndex; }
+
         private void Awake()
         {
             // this will be called every time we swap back to our main scene
@@ -226,6 +229,7 @@ namespace ShrugWare
         public void LoadScene(int sceneIndex)
         {
             timeInBossScene = 0.0f;
+            curSceneIndex = sceneIndex;
             SceneManager.LoadScene(sceneIndex);
         }
 

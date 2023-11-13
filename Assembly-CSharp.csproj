@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Various Other\TutorialManager.cs" />
     <Compile Include="Assets\Scripts\Minigames\DodgeFireballsMinigame.cs" />
     <Compile Include="Assets\Scripts\Various Other\PlayerInventory.cs" />
+    <Compile Include="Assets\Scripts\Various Other\Laser\LaserBeam.cs" />
     <Compile Include="Assets\Scripts\Items\ConsumableItem.cs" />
     <Compile Include="Assets\Scripts\Various Other\DataManager.cs" />
     <Compile Include="Assets\Scripts\Overworld\OverworldUIManager.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\GetOutOfFireMicrogame.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StealTheChest.cs" />
+    <Compile Include="Assets\Scripts\Various Other\Laser\ShootLaser.cs" />
     <Compile Include="Assets\Scripts\Overworld\OverworldLevel.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StackPowerstones.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\LineOfSight.cs" />
@@ -120,6 +122,7 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterruptTheAbility.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StackUpForMeteor.cs" />
     <Compile Include="Assets\Scripts\UI\BossUIManager.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\LaserLineOfSight.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\TauntTheAdds.cs" />
   </ItemGroup>
   <ItemGroup>

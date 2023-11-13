@@ -29,7 +29,8 @@ namespace ShrugWare
             StealTheChest,
             LineOfSight,
             RunIn,
-            MICROGAME_END = 21,// PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            LaserLineOfSight,
+            MICROGAME_END = 22,// PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
             Tuzi,
             DodgeFireballsMinigame,
             ShootAsteroidsMinigame,
