@@ -42,13 +42,13 @@ public class LaserBeam
 
         Ray ray = new Ray(rayPos, rayDir);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 100))
+        if (Physics.Raycast(ray, out hit, 125))
         {
             CheckHit(hit, dir, laser);
         }
         else
         {
-            laserIndices.Add(ray.GetPoint(100));
+            laserIndices.Add(ray.GetPoint(125));
             UpdateLaser();
         }
     }
@@ -67,24 +67,29 @@ public class LaserBeam
     {
         if(hitInfo.collider.gameObject.tag == "Mirror")
         {
-            Vector3 pos = hitInfo.point;
-            Vector3 dir = Vector3.Reflect(direction, hitInfo.normal);
-            CastRay(pos, direction, laser);
+            Vector3 newPos = hitInfo.point;
+            Vector3 newDir = Vector3.Reflect(direction, hitInfo.normal);
+            CastRay(newPos, newDir, laser);
         }
         else if(hitInfo.collider.gameObject.tag == "Player")
         {
-            // this is bad but i'm not sure how else to get a reference to the current microgame that's running
+            // this is bad but i'm not sure how else to call a function on the current running microgame
             // i tried events but it didn't work out
-            if(BossGameManager.Instance != null && BossGameManager.Instance.GetCurSceneIndex() == (int)DataManager.Scenes.LaserLineOfSight)
+            if (hitInfo.collider.gameObject.scene.buildIndex == (int)DataManager.Scenes.LaserLineOfSightVertical)
             {
-                LaserLineOfSight.LaserHit();
+                LaserLineOfSightVertical.LaserHit();
                 laserIndices.Add(hitInfo.point);
                 UpdateLaser();
             }
-            else if(BossGameManager.Instance == null)
+            else if (hitInfo.collider.gameObject.scene.buildIndex == (int)DataManager.Scenes.LaserLineOfSightHorizonal)
             {
-                // make this still work in the case where we're running just this scene
-                LaserLineOfSight.LaserHit();
+                LaserLineOfSightHorizontal.LaserHit();
+                laserIndices.Add(hitInfo.point);
+                UpdateLaser();
+            }
+            else if (hitInfo.collider.gameObject.scene.buildIndex == (int)DataManager.Scenes.LaserLineOfSightDiagonal)
+            {
+                LaserLineOfSightDiagonal.LaserHit();
                 laserIndices.Add(hitInfo.point);
                 UpdateLaser();
             }

@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace ShrugWare
 {
-    public class LaserLineOfSight : Microgame
+    public class LaserLineOfSightHorizontal : Microgame
     {
         [SerializeField]
         GameObject[] laserObjs;
@@ -13,7 +13,6 @@ namespace ShrugWare
 
         public static bool hasBeenHit = false;
         private float timeRunning = 0.0f;
-        private const float TIME_TO_ENABLE_LASERS = 3.5f;
 
         protected override void Start()
         {
@@ -41,11 +40,11 @@ namespace ShrugWare
 
             // don't enable the lasers until the end of the microgame
             timeRunning += Time.deltaTime;
-            if(timeRunning >= TIME_TO_ENABLE_LASERS)
+            if(timeRunning >= microGameTime)
             {
                 EnableLasers();
             }
-            else if(hasBeenHit || timeRunning > base.microGameTime)
+            else if(hasBeenHit || timeRunning > microGameTime)
             {
                 // stop moving if we hit a laser
                 playerObject.DisableMovement();
