@@ -23,6 +23,9 @@ Get Out Of Fire - Get out of the fire
 Intercept The Fireball -  Run into the fireball before it hits the party
 Interrupt The Ability - Hit the interrupt ability at the proper timing as the boss is casting
 Knockbacked Safely - Get knocked backwards into a safe zone
+Laser Line of Sight Diagonal - LOS the lasers
+Laser Line of Sight Horizontal - LOS the lasers
+Laser Line of Sight Vertical - LOS the lasers
 Line of Sight - LOS the boss in time
 Match Polarity - Move to the party members of the same electric positive or negative sign as you
 Run In - Leeroy run into the boss room
