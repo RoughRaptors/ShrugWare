@@ -52,6 +52,12 @@ namespace ShrugWare
                 playerObject.DisableMovement();
             }
         }
+
+        public static void LaserHit()
+        {
+            hasBeenHit = true;
+        }
+        
         protected override bool VictoryCheck()
         {
             return !hasBeenHit;
@@ -65,7 +71,7 @@ namespace ShrugWare
                 laserObj.GetComponent<ShootLaser>().enabled = true;
             }
         }
-
+        
         public void LaserHit(GameObject gameObj)
         {
             hasBeenHit = true;
