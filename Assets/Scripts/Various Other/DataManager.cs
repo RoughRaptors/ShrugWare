@@ -36,6 +36,7 @@ namespace ShrugWare
             Tuzi,
             DodgeFireballsMinigame,
             ShootAsteroidsMinigame,
+            HeiganDanceMinigame,
         }
 
         public enum StatModifierType

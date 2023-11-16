@@ -45,6 +45,9 @@ namespace ShrugWare
                 OnBadExit?.Invoke(other.gameObject);
             }
         }
+        public static void LaserHit(GameObject other)
+        {
+            OnBadCollision?.Invoke(other.gameObject);
+        }
     }
-
 }

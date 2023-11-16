@@ -1602,7 +1602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d21b6578c331de41af25a23980449db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  victoryText: Avoid the lasers
+  victoryText: Avoided the zappy
   defaultDefeatText: Zapped
   postTimerWait: 1
   effects:

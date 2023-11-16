@@ -118,6 +118,7 @@
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\SidestepTheFireball.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioEffectClip.cs" />
+    <Compile Include="Assets\Scripts\Minigames\HeiganDanceMinigame.cs" />
     <Compile Include="Assets\Scripts\Bosses\Tuzi.cs" />
     <Compile Include="Assets\Scripts\Bosses\Boss.cs" />
     <Compile Include="Assets\Scripts\Microgames\Microgame.cs" />
