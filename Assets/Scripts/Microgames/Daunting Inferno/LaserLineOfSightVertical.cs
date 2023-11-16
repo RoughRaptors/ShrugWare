@@ -22,11 +22,13 @@ namespace ShrugWare
         protected override void OnEnable()
         {
             base.OnEnable();
+            PlayerCollider.OnBadCollision += LaserHit;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
+            PlayerCollider.OnBadCollision -= LaserHit;
         }
 
         protected override void OnMyGameStart()
@@ -50,12 +52,6 @@ namespace ShrugWare
                 playerObject.DisableMovement();
             }
         }
-
-        public static void LaserHit()
-        {
-            hasBeenHit = true;
-        }
-
         protected override bool VictoryCheck()
         {
             return !hasBeenHit;
@@ -63,10 +59,16 @@ namespace ShrugWare
 
         private void EnableLasers()
         {
-            foreach(GameObject laserObj in laserObjs)
+            playerObject.DisableMovement();
+            foreach (GameObject laserObj in laserObjs)
             {
                 laserObj.GetComponent<ShootLaser>().enabled = true;
             }
+        }
+
+        public void LaserHit(GameObject gameObj)
+        {
+            hasBeenHit = true;
         }
     }
 }

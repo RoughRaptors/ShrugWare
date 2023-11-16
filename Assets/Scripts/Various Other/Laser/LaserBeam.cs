@@ -65,34 +65,18 @@ public class LaserBeam
 
     void CheckHit(RaycastHit hitInfo, Vector3 direction, LineRenderer laser)
     {
-        if(hitInfo.collider.gameObject.tag == "Mirror")
+        if (hitInfo.collider.gameObject.tag == "Mirror")
         {
             Vector3 newPos = hitInfo.point;
             Vector3 newDir = Vector3.Reflect(direction, hitInfo.normal);
             CastRay(newPos, newDir, laser);
         }
-        else if(hitInfo.collider.gameObject.tag == "Player")
+        else if (hitInfo.collider.gameObject.tag == "Player")
         {
-            // this is bad but i'm not sure how else to call a function on the current running microgame
-            // i tried events but it didn't work out
-            if (hitInfo.collider.gameObject.scene.buildIndex == (int)DataManager.Scenes.LaserLineOfSightVertical)
-            {
-                LaserLineOfSightVertical.LaserHit();
-                laserIndices.Add(hitInfo.point);
-                UpdateLaser();
-            }
-            else if (hitInfo.collider.gameObject.scene.buildIndex == (int)DataManager.Scenes.LaserLineOfSightHorizonal)
-            {
-                LaserLineOfSightHorizontal.LaserHit();
-                laserIndices.Add(hitInfo.point);
-                UpdateLaser();
-            }
-            else if (hitInfo.collider.gameObject.scene.buildIndex == (int)DataManager.Scenes.LaserLineOfSightDiagonal)
-            {
-                LaserLineOfSightDiagonal.LaserHit();
-                laserIndices.Add(hitInfo.point);
-                UpdateLaser();
-            }
+            // we hit the player with a laser, tell it we got hit.
+            PlayerCollider.LaserHit(hitInfo.collider.gameObject);
+            laserIndices.Add(hitInfo.point);
+            UpdateLaser();
         }
         else
         {
