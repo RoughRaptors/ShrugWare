@@ -709,6 +709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad796bf3b079e640a8317b4913b2c2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  microgameTimeDuration: 45
   asteroidInitObj: {fileID: 1091756485}
   bulletInitObj: {fileID: 1744087650}
   statusText: {fileID: 477954541}

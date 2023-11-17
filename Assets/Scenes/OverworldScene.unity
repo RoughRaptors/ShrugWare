@@ -774,7 +774,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelID: 5
   levelType: 4
-  sceneIDToLoad: 24
+  sceneIDToLoad: 28
   levelIDsToUnlock: 06000000
   outgoingLevelConnections:
   - {fileID: 1883518349}
@@ -1203,7 +1203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelID: 3
   levelType: 4
-  sceneIDToLoad: 23
+  sceneIDToLoad: 26
   levelIDsToUnlock: 04000000
   outgoingLevelConnections:
   - {fileID: 1185105574}

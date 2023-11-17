@@ -52,11 +52,6 @@ namespace ShrugWare
                 playerObject.DisableMovement();
             }
         }
-
-        public static void LaserHit()
-        {
-            hasBeenHit = true;
-        }
         
         protected override bool VictoryCheck()
         {

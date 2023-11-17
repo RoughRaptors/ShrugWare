@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Bullet
   - Mirror
+  - Laser
+  - Barrier
+  - Tile
   layers:
   - Default
   - TransparentFX

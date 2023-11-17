@@ -93,8 +93,8 @@ namespace ShrugWare
                 timeInGame += Time.deltaTime;
             }
 
-            timeRemainingText.text = "Time Remaining: " + (DataManager.MINIGAME_DURATION_SECONDS - timeInGame).ToString("F2");
-            if (timeInGame >= DataManager.MINIGAME_DURATION_SECONDS)
+            timeRemainingText.text = "Time Remaining: " + (microgameTimeDuration - timeInGame).ToString("F2");
+            if (timeInGame >= microgameTimeDuration)
             {
                 // out of time, we lost
                 gameRunning = false;

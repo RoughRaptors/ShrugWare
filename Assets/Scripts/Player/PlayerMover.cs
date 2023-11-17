@@ -26,17 +26,25 @@ namespace ShrugWare
 
         private void OnEnable()
         {
-            myMicrogame.MicrogameStarted += EnableMovement;
-            myMicrogame.MicrogameEnded += DisableMovement;
+            if(myMicrogame != null)
+            {
+                myMicrogame.MicrogameStarted += EnableMovement;
+                myMicrogame.MicrogameEnded += DisableMovement;
+            }
+
             movement.performed += StartMove;
             movement.canceled += StopMove;
         }
 
         private void OnDisable()
         {
+            if(myMicrogame != null)
+            {
+                myMicrogame.MicrogameStarted -= DisableMovement;
+                myMicrogame.MicrogameEnded -= DisableMovement;
+            }
+
             movement.Disable();
-            myMicrogame.MicrogameStarted -= DisableMovement;
-            myMicrogame.MicrogameEnded -= DisableMovement;
             movement.performed -= StartMove;
             movement.canceled -= StopMove;
         }
