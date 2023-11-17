@@ -53,11 +53,6 @@ namespace ShrugWare
             }
         }
 
-        public static void LaserHit()
-        {
-            hasBeenHit = true;
-        }
-
         protected override bool VictoryCheck()
         {
             return !hasBeenHit;

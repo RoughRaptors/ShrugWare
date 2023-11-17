@@ -21,13 +21,18 @@ public class LaserBeam
         this.laserObj = new GameObject();
         this.laserObj.name = "Laser Beam";
         this.laserObj.layer = 7; // enemy attack
+        this.laserObj.tag = "Laser";
 
         this.laserLineRenderer = new LineRenderer();
         this.laserLineRenderer = this.laserObj.AddComponent(typeof(LineRenderer)) as LineRenderer;
         GameObject laserParent = GameObject.Find("Lasers");
-        this.laserLineRenderer.transform.parent = laserParent.transform;
+        if(laserParent != null)
+        {
+            this.laserLineRenderer.transform.parent = laserParent.transform;
+        }
+
         this.laserLineRenderer.startWidth = 2.5f;
-        this.laserLineRenderer.endWidth = 5.0f;
+        this.laserLineRenderer.endWidth = 4.0f;
         this.laserLineRenderer.material = material;
         this.laserLineRenderer.startColor = Color.red;
         this.laserLineRenderer.endColor = Color.red;
@@ -74,7 +79,7 @@ public class LaserBeam
         else if (hitInfo.collider.gameObject.tag == "Player")
         {
             // we hit the player with a laser, tell it we got hit.
-            PlayerCollider.LaserHit(hitInfo.collider.gameObject);
+            PlayerCollider.LaserHit(laserObj);
             laserIndices.Add(hitInfo.point);
             UpdateLaser();
         }
