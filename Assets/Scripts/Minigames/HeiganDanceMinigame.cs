@@ -6,11 +6,6 @@ using UnityEngine.Rendering.Universal;
 
 namespace ShrugWare
 {
-    // 45 seconds long
-    // 0-15s - come from right
-    // 15s-30s come from top + right
-    // 30s-45s come from bottom + top + right
-
     public class HeiganDanceMinigame : Minigame
     {
         [SerializeField]
@@ -86,6 +81,7 @@ namespace ShrugWare
             statusText.text = "HP: " + healthRemaining.ToString("F2");
 
             // just start everything as green
+            // then randomly pick tiles to change
             foreach(GameObject tileObj in tileObjs)
             {
                 ++numGreenTilesLit;
@@ -225,7 +221,7 @@ namespace ShrugWare
 
             healthRemaining -= damageTaken;
             statusText.text = "HP: " + healthRemaining.ToString("F2");
-            if (healthRemaining < 0)
+            if (healthRemaining <= 0)
             {
                 statusText.text = "YOU ARE DED";
                 gameRunning = false;

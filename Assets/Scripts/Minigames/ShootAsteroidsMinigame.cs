@@ -253,7 +253,7 @@ namespace ShrugWare
             float damageTaken = 1.0f - (mitigation / 100);
             healthRemaining -= damageTaken;
             statusText.text = "HP: " + healthRemaining.ToString();
-            if (healthRemaining < 0)
+            if (healthRemaining <= 0)
             {
                 // we died
                 statusText.text = "Aim better!";

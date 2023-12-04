@@ -32,7 +32,11 @@ namespace ShrugWare
             LaserLineOfSightVertical,
             LaserLineOfSightHorizonal,
             LaserLineOfSightDiagonal,
-            MICROGAME_END = 24,// PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            LaserLineOfSightVerticalAlternative,
+            LaserLineOfSightHorizonalAlternative,
+            LaserLineOfSightDiagonalAlternative,
+            AttackTheBossTiming,
+            MICROGAME_END = 28,// PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
             Tuzi,
             DodgeFireballsMinigame,
             ShootAsteroidsMinigame,
