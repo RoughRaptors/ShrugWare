@@ -12,6 +12,7 @@ using UnityEngine.SceneManagement;
 
 /*
 -- Clicking Mechanics --
+Attack The Boss Timing - Click the attack button in the light green
 Cast Frostbolt - Click the frostbolt button out of three options
 Taunt The Adds - Click x amount of adds running around the screen.
 Perform The Rotation - Click the shown abilities in the correct order
@@ -23,9 +24,9 @@ Get Out Of Fire - Get out of the fire
 Intercept The Fireball -  Run into the fireball before it hits the party
 Interrupt The Ability - Hit the interrupt ability at the proper timing as the boss is casting
 Knockbacked Safely - Get knocked backwards into a safe zone
-Laser Line of Sight Diagonal - LOS the lasers
-Laser Line of Sight Horizontal - LOS the lasers
-Laser Line of Sight Vertical - LOS the lasers
+Laser Line of Sight Diagonal + Alternative - LOS the lasers
+Laser Line of Sight Horizontal + Alternative - LOS the lasers
+Laser Line of Sight Vertical + Alternative - LOS the lasers
 Line of Sight - LOS the boss in time
 Match Polarity - Move to the party members of the same electric positive or negative sign as you
 Run In - Leeroy run into the boss room

@@ -81,6 +81,18 @@ EditorBuildSettings:
     path: Assets/Scenes/Microgames/Daunting Inferno/LaserLineOfSightDiagonal.unity
     guid: 0a0c213f6b200fe40b2bb5e95fc4672a
   - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/LaserLineOfSightVerticalAlternative.unity
+    guid: 21125948524180e46a366322863973c5
+  - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/LaserLineOfSightHorizonalAlternative.unity
+    guid: 5fb68242da7873b438ff0622b0ca74ee
+  - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/LaserLineOfSightDiagonalAlternative.unity
+    guid: 9e5a4c685ec822445b45879e4bba373f
+  - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/AttackTheBossTiming.unity
+    guid: fd5a5f9ffc1c62b4cb719e4951cb705b
+  - enabled: 1
     path: Assets/Scenes/Bosses/Tuzi.unity
     guid: 2724fc1884c1ac04b939f5b7df9ffed6
   - enabled: 1

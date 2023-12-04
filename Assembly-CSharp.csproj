@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Merchants\MerchantManager.cs" />
     <Compile Include="Assets\Scripts\Various Other\JZLayerExtensions.cs" />
     <Compile Include="Assets\Scripts\Bosses\Warboss Kard.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\LaserLineOfSightVerticalAlternative.cs" />
     <Compile Include="Assets\Scripts\UI\MicrogameUI.cs" />
     <Compile Include="Assets\Art\Fire\Scripts\VolumetricFire.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Assets\Scripts\Various Other\DataManager.cs" />
     <Compile Include="Assets\Scripts\Overworld\OverworldUIManager.cs" />
     <Compile Include="Assets\Scripts\Microgames\MicrogameEffect.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\AttackTheBossTiming.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\MatchPolarity.cs" />
     <Compile Include="Assets\Art\Lightning Bolt\LightningBoltScript.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\CastFrostboltMicrogame.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="Assets\Scripts\Various Other\Clickable.cs" />
     <Compile Include="Assets\Scripts\Bosses\BossGameManager.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\KnockbackedSafely.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\LaserLineOfSightHorizonalAlternative.cs" />
     <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\PerformTheRotation.cs" />
     <Compile Include="Assets\Scripts\Various Other\MainMenu.cs" />
@@ -115,6 +118,7 @@
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csShowAllEffect.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csAnimationSpin.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\LaserLineOfSightDiagonalAlternative.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\SidestepTheFireball.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioEffectClip.cs" />

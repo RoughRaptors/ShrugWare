@@ -171,9 +171,8 @@ namespace ShrugWare{
 #if UNITY_EDITOR
                 force = true;
 #endif
-                // only move there if our current level is adjacent to the new level
                 bool adjacent = false;
-                if(curLevel != null && curLevel.AdjacentMapLevels.Contains(levelID))
+                if (curLevel != null && curLevel.AdjacentMapLevels.Contains(levelID))
                 {
                     adjacent = true;
                 }
@@ -182,7 +181,7 @@ namespace ShrugWare{
                 if ((!newOverworldLevel.Locked && adjacent) || force || curLevel == null)
                 {
                     curLevel = newOverworldLevel;
-                    StartCoroutine(MovePlayerToLevel());
+                    StartCoroutine(MovePlayerToLevel(adjacent));
                     overworldUIManager.UpdateUI();
                 }
                 else
@@ -192,8 +191,11 @@ namespace ShrugWare{
             }
         }
 
-        private IEnumerator MovePlayerToLevel()
+        private IEnumerator MovePlayerToLevel(bool adjacent)
         {
+            // if we're not adjacent, we need to travel to the level along a path
+
+
             Vector3 playerPos = playerObj.transform.position;
             Vector3 levelPos = curLevel.gameObject.transform.position;
             while (Vector3.Distance(playerPos, levelPos) > 0.1f)

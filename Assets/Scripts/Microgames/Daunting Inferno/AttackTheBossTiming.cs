@@ -1,0 +1,60 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace ShrugWare
+{
+    public class AttackTheBossTiming : Microgame
+    {
+        [SerializeField]
+        Slider timingSlider;
+
+        private bool attackedSucceeded = false;
+        private bool goingLeft = false;
+        private float sliderSpeed = 100.0f;
+
+        new private void Start()
+        {
+            base.Start();
+
+            // randomize it a bit
+            sliderSpeed = Random.Range(sliderSpeed, sliderSpeed * 2);
+        }
+
+        protected override void OnMyGameStart()
+        {
+            base.OnMyGameStart();
+        }
+
+        protected override void OnMyGameTick(float timePercentLeft)
+        {
+            base.OnMyGameTick(timePercentLeft);
+
+            if(goingLeft && timingSlider.value >= 0)
+            {
+                timingSlider.value -= sliderSpeed * Time.deltaTime;
+            }
+            else if(!goingLeft && timingSlider.value <= 100)
+            {
+                timingSlider.value += sliderSpeed * Time.deltaTime;
+            }
+
+            // swap directions
+            if(timingSlider.value == 0 || timingSlider.value == 100)
+            {
+                goingLeft = !goingLeft;
+            }
+        }
+
+        protected override bool VictoryCheck() => attackedSucceeded;
+
+        // success if we're in the right 90% of the slider
+        public void AttackButtonPressed()
+        {
+            float attackValue = timingSlider.value;
+            if (attackValue >= 80)
+            {
+                attackedSucceeded = true;
+            }
+        }
+    }
+}
