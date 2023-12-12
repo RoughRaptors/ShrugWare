@@ -8,6 +8,7 @@ namespace ShrugWare
         [SerializeField]
         Slider timingSlider;
 
+        private bool attackPressed = false;
         private bool attackedSucceeded = false;
         private bool goingLeft = false;
         private float sliderSpeed = 100.0f;
@@ -29,31 +30,44 @@ namespace ShrugWare
         {
             base.OnMyGameTick(timePercentLeft);
 
-            if(goingLeft && timingSlider.value >= 0)
+            if (!attackPressed)
             {
-                timingSlider.value -= sliderSpeed * Time.deltaTime;
-            }
-            else if(!goingLeft && timingSlider.value <= 100)
-            {
-                timingSlider.value += sliderSpeed * Time.deltaTime;
-            }
+                if (goingLeft && timingSlider.value >= 0)
+                {
+                    timingSlider.value -= sliderSpeed * Time.deltaTime;
+                }
+                else if (!goingLeft && timingSlider.value <= 100)
+                {
+                    timingSlider.value += sliderSpeed * Time.deltaTime;
+                }
 
-            // swap directions
-            if(timingSlider.value == 0 || timingSlider.value == 100)
-            {
-                goingLeft = !goingLeft;
+                // swap directions
+                if (timingSlider.value == 0 || timingSlider.value == 100)
+                {
+                    goingLeft = !goingLeft;
+                }
             }
         }
 
         protected override bool VictoryCheck() => attackedSucceeded;
 
-        // success if we're in the right 90% of the slider
+        // success if we're in the right 80% of the slider
         public void AttackButtonPressed()
         {
-            float attackValue = timingSlider.value;
-            if (attackValue >= 80)
+            if (!attackPressed)
             {
-                attackedSucceeded = true;
+                attackPressed = true;
+
+                float attackValue = timingSlider.value;
+                if (attackValue >= 80)
+                {
+                    attackedSucceeded = true;
+                    SetMicrogameEndText(true, "Yay timing");
+                }
+                else
+                {
+                    SetMicrogameEndText(false, "Not quite");
+                }
             }
         }
     }
