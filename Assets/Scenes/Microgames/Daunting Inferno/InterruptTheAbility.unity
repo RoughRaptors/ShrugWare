@@ -408,7 +408,7 @@ MonoBehaviour:
       asPercentage: 0
     addOnWin: 1
     addOnLoss: 1
-  abilityBar: {fileID: 0}
+  abilityBar: {fileID: 274319489}
   interruptButton: {fileID: 1325052455}
 --- !u!1 &392852466
 GameObject:
