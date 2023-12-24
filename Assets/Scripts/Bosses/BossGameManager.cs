@@ -203,7 +203,12 @@ namespace ShrugWare
         private void HandleFromMicrogameTransition()
         {
             gameState = GameState.BossScreen;
-            audioManager.PlayAudioClip(DataManager.AudioEffectTypes.BetweenMicrogame, .3f);
+
+            if (!curBoss.isDead)
+            {
+                audioManager.PlayAudioClip(DataManager.AudioEffectTypes.BetweenMicrogame, .3f);
+            }
+
             if (!(curBoss is null))
             {
                 CheckAndHandleEndCondition();
