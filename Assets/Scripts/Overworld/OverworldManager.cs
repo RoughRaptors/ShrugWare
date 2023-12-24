@@ -252,15 +252,7 @@ namespace ShrugWare{
                 return;
             }
 
-            // hide the player
-            // todo - fix this, it doesn't work. for whatever reason it only works when attached to a debugger
-            playerObj.SetActive(false);
-
-            if (isTrashOrBoss)
-            {
-                GetComponent<AudioManager>().StopAudio();
-            }
-
+            GetComponent<AudioManager>().StopAudio();
             OverworldUIManager.Instance.SetCanvasEnabled(false);
             SceneManager.LoadScene((int)level.SceneIDToLoad);
         }
@@ -268,6 +260,15 @@ namespace ShrugWare{
         private void PlayOverworldMusic()
         {
             GetComponent<AudioManager>().PlayAudioClip(DataManager.AudioEffectTypes.Overworld, .25f);
+        }
+
+        public void RandomEventContinuePressed()
+        {            
+            // hide the player
+            // todo - fix this, it doesn't work. for whatever reason it only works when attached to a debugger
+            playerObj.SetActive(false);
+
+            GetComponent<AudioManager>().StopAudio();
         }
     }
 }

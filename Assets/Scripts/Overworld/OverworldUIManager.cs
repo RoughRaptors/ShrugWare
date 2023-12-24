@@ -109,6 +109,13 @@ namespace ShrugWare
 
         public void OnRandomEventContinuePressed()
         {
+            bool isTrashOrBoss = OverworldManager.Instance.CurLevel.LevelType == DataManager.OverworldLevelType.Trash
+                || OverworldManager.Instance.CurLevel.LevelType == DataManager.OverworldLevelType.Boss;
+            if (isTrashOrBoss)
+            {
+                OverworldManager.Instance.RandomEventContinuePressed();
+            }
+
             OverworldManager.Instance.WaitingOnRandomEvent = false;
             randomEventUIObj.SetActive(false);
             OverworldUIManager.Instance.SetCanvasEnabled(false);
