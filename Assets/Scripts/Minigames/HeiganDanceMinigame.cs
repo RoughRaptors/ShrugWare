@@ -135,10 +135,10 @@ namespace ShrugWare
 
             if (!exploited)
             {
-                timeRemainingText.text = "Time Remaining: " + (microgameTimeDuration - totalTimeInGame).ToString("F2");
+                timeRemainingText.text = "Time Remaining: " + (minigameDuration - totalTimeInGame).ToString("F2");
             }
 
-            if(gameRunning && totalTimeInGame >= microgameTimeDuration)
+            if(gameRunning && totalTimeInGame >= minigameDuration)
             {
                 // out of time, we won
                 gameRunning = false;

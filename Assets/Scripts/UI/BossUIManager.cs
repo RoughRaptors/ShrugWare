@@ -29,13 +29,13 @@ namespace ShrugWare
         GameObject maxHealthPotionItem = null;
 
         [SerializeField]
+        GameObject moveSpeedPotionItem = null;
+
+        [SerializeField]
         HealthBar playerHealthBar = null;
 
         [SerializeField]
         HealthBar bossHealthBar = null;
-
-        [SerializeField]
-        GameObject lootScreenObj;
 
         bool countdownTimerRunning = false;
         bool gameOver = false;
@@ -177,6 +177,7 @@ namespace ShrugWare
             gameOver = true;
             healthPotionItem.gameObject.SetActive(false);
             maxHealthPotionItem.gameObject.SetActive(false);
+            moveSpeedPotionItem.gameObject.SetActive(false);
             gameInfoText.gameObject.SetActive(true);
             gameInfoText.text = "You beat the boss!\nReceived Daunting Inferno Marks x " + lootAmount;
             gameInfoText.enabled = true;
@@ -189,6 +190,7 @@ namespace ShrugWare
             gameOver = true;
             healthPotionItem.gameObject.SetActive(false);
             maxHealthPotionItem.gameObject.SetActive(false);
+            moveSpeedPotionItem.gameObject.SetActive(false);
             betweenMicrogameText.enabled = false;
             gameInfoText.gameObject.SetActive(true);
             gameInfoText.text = "Game Over! \n 50 DKP MINUS!";
@@ -205,11 +207,13 @@ namespace ShrugWare
 
             healthPotionItem.GetComponentInChildren<Text>().text = "";
             maxHealthPotionItem.GetComponentInChildren<Text>().text = "";
+            moveSpeedPotionItem.GetComponentInChildren<Text>().text = "";
 
             // bad, remove hard coding and make data driven
             Item healthPotion = OverworldManager.Instance.PlayerInventory.GetInventoryItem(0);
             Item maxHealthPotion = OverworldManager.Instance.PlayerInventory.GetInventoryItem(1);
-            if(healthPotion != null)
+            Item moveSpeedPotion = OverworldManager.Instance.PlayerInventory.GetInventoryItem(7);
+            if (healthPotion != null)
             {
                 healthPotionItem.GetComponentInChildren<Text>().text += "Health Potion\n+25% Heal\nQuantity: " + healthPotion.itemQuantity;
             }
@@ -217,6 +221,11 @@ namespace ShrugWare
             if(maxHealthPotion != null)
             {
                 maxHealthPotionItem.GetComponentInChildren<Text>().text += "\nMax Health Potion\n+10% Max HP\nQuantity: " + maxHealthPotion.itemQuantity;
+            }
+
+            if (moveSpeedPotionItem != null)
+            {
+                moveSpeedPotionItem.GetComponentInChildren<Text>().text += "\nMove Speed Potion\n+10% Max HP\nQuantity: " + moveSpeedPotion.itemQuantity;
             }
         }
 

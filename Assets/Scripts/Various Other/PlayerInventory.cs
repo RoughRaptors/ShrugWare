@@ -12,6 +12,7 @@ namespace ShrugWare
         private Dictionary<DataManager.ArmorSlot, ArmorItem> equippedArmor = new Dictionary<DataManager.ArmorSlot, ArmorItem>(5);
 
         private float curMitigationPercent = 0.0f;
+        private float moveSpeedBonus = 0.0f;
 
         public PlayerInventory()
         {
@@ -31,6 +32,12 @@ namespace ShrugWare
             maxHPEffect.effectType = DataManager.StatModifierType.PlayerMaxHealth;
             maxHPEffect.asPercentage = true;
 
+            // +15% move speed
+            DataManager.StatEffect moveSpeedEffect;
+            moveSpeedEffect.amount = 15;
+            moveSpeedEffect.effectType = DataManager.StatModifierType.PlayerMoveSpeed;
+            moveSpeedEffect.asPercentage = true;
+
             // todo - untie from Merchant template ids by making items data driven
             ConsumableItem healthPotionItem = new ConsumableItem();
             healthPotionItem.itemName = "Health Potion";
@@ -45,6 +52,13 @@ namespace ShrugWare
             maxHealthPotionItem.templateId = 1;
             maxHealthPotionItem.AddEffect(maxHPEffect);
             inventoryItems.Add(maxHealthPotionItem.templateId, maxHealthPotionItem);
+
+            ConsumableItem moveSpeedPotionItem = new ConsumableItem();
+            moveSpeedPotionItem.itemName = "Move Speed Potion";
+            moveSpeedPotionItem.itemQuantity = 0;
+            moveSpeedPotionItem.templateId = 7;
+            moveSpeedPotionItem.AddEffect(moveSpeedEffect);
+            inventoryItems.Add(moveSpeedPotionItem.templateId, moveSpeedPotionItem);
 
             foreach (DataManager.ArmorSlot slot in Enum.GetValues(typeof(DataManager.ArmorSlot)))
             {
@@ -228,6 +242,16 @@ namespace ShrugWare
         public float GetMitigation() 
         {
             return curMitigationPercent;
+        }
+
+        public void SetMoveSpeedBonus(float amount)
+        {
+            moveSpeedBonus = amount;
+        }
+
+        public float GetMoveSpeedBonus()
+        {
+            return moveSpeedBonus;
         }
 
         public bool HasSetBonus()

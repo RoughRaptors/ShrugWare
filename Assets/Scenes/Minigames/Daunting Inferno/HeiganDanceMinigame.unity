@@ -1214,7 +1214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34cc6f56f75c2f443bfdd70b690ef7f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  microgameTimeDuration: 30
+  minigameDuration: 30
   statusText: {fileID: 477954541}
   timeRemainingText: {fileID: 275741407}
   continueButton: {fileID: 1166657083}

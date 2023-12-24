@@ -142,6 +142,7 @@ namespace ShrugWare
             }
 
             audioManager = OverworldManager.Instance.GetComponent<AudioManager>();
+
             EnableBossCamera(true);
         }
 
@@ -286,8 +287,10 @@ namespace ShrugWare
         public void ContinueGame()
         {
             gameState = GameState.BossScreen;
-            //bossUIManager.ToggleConsumableVisibility(false); // allow potions in between microgames
-            audioManager.StopAudio();
+            if (audioManager != null)
+            {
+                audioManager.StopAudio();
+            }
         }
 
         public void TakePlayerRaidDamage(float amount)

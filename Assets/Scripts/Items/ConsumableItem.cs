@@ -26,6 +26,11 @@ namespace ShrugWare
                     BossGameManager.Instance.HealPlayerRaid((int)amount);
                     return true;
                 }
+                else if (effect.effectType == DataManager.StatModifierType.PlayerMoveSpeed)
+                {
+                    OverworldManager.Instance.PlayerInventory.SetMoveSpeedBonus(effect.amount);
+                    return true;
+                }
             }
 
             return false;

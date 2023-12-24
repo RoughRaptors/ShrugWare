@@ -10,7 +10,8 @@ namespace ShrugWare
         private InputAction movement => playerInput.Map.Movement;
         private Rigidbody rb = null;
 
-        [SerializeField] private float moveSpeed = 60f;
+        private const float BASE_MOVE_SPEED = 60.0f;
+        [SerializeField] protected float moveSpeed = 60f;
         [SerializeField] private bool moveUp = true;
         [SerializeField] private bool moveDown = true;
         [SerializeField] private bool moveLeft = true;
@@ -34,6 +35,11 @@ namespace ShrugWare
 
             movement.performed += StartMove;
             movement.canceled += StopMove;
+
+            if (OverworldManager.Instance != null)
+            {
+                moveSpeed = BASE_MOVE_SPEED + OverworldManager.Instance.PlayerInventory.GetMoveSpeedBonus();
+            }
         }
 
         private void OnDisable()

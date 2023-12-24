@@ -28,7 +28,10 @@ namespace ShrugWare
         GameObject healthPotionObj = null;
 
         [SerializeField]
-        GameObject maxHalthPotionObj = null;
+        GameObject maxHealthPotionObj = null;
+
+        [SerializeField]
+        GameObject moveSpeedPotionObj = null;
 
         [SerializeField]
         Text currenciesText = null;
@@ -87,6 +90,12 @@ namespace ShrugWare
             damageReductionEffect.effectType = DataManager.StatModifierType.IncomingDamage;
             damageReductionEffect.asPercentage = true;
 
+            // 10% run speed bonus
+            DataManager.StatEffect runSpeedEffect;
+            runSpeedEffect.amount = 15;
+            runSpeedEffect.effectType = DataManager.StatModifierType.PlayerMoveSpeed;
+            runSpeedEffect.asPercentage = true;
+
             // hp potion
             ConsumableItem healthPotion = new ConsumableItem();
             healthPotion.itemName = "Health Potion";
@@ -96,7 +105,7 @@ namespace ShrugWare
             ItemForSale healthPotionItem;
             healthPotionItem.item = healthPotion;
             healthPotionItem.currency = DataManager.Currencies.Generic;
-            healthPotionItem.price = 500;
+            healthPotionItem.price = 250;
 
             itemsForSale.Add(healthPotion.templateId, healthPotionItem);
 
@@ -109,9 +118,22 @@ namespace ShrugWare
             ItemForSale maxHealthPotionItem;
             maxHealthPotionItem.item = maxHealthPotion;
             maxHealthPotionItem.currency = DataManager.Currencies.Generic;
-            maxHealthPotionItem.price = 500;
+            maxHealthPotionItem.price = 250;
 
             itemsForSale.Add(maxHealthPotion.templateId, maxHealthPotionItem);
+
+            // run speed potion
+            ConsumableItem moveSpeedPotion = new ConsumableItem();
+            moveSpeedPotion.itemName = "Move Speed Potion";
+            moveSpeedPotion.templateId = 7;
+            moveSpeedPotion.AddEffect(runSpeedEffect);
+
+            ItemForSale moveSpeedPotionItem;
+            moveSpeedPotionItem.item = moveSpeedPotion;
+            moveSpeedPotionItem.currency = DataManager.Currencies.Generic;
+            moveSpeedPotionItem.price = 500;
+
+            itemsForSale.Add(moveSpeedPotion.templateId, moveSpeedPotionItem);
 
             // helmet
             ArmorItem diHelm = new ArmorItem(DataManager.ArmorSlot.Head, DataManager.ArmorSet.DauntingInferno);
@@ -278,7 +300,7 @@ namespace ShrugWare
                 }
                 else if (selectedItem.item.templateId == 1)
                 {
-                    objToChange = maxHalthPotionObj;
+                    objToChange = maxHealthPotionObj;
                 }
                 else if (selectedItem.item.templateId == 2)
                 {
@@ -299,6 +321,10 @@ namespace ShrugWare
                 else if (selectedItem.item.templateId == 6)
                 {
                     objToChange = bootsObj;
+                }
+                else if (selectedItem.item.templateId == 7)
+                {
+                    objToChange = moveSpeedPotionObj;
                 }
 
                 if (objToChange != null)

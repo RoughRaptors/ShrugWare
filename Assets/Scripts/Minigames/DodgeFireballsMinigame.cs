@@ -2,13 +2,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Data;
 
 namespace ShrugWare
 {
-    // 45 seconds long
-    // 0-15s - come from right
-    // 15s-30s come from top + right
-    // 30s-45s come from bottom + top + right
+    // 30 seconds long
+    // 0-10s - come from right
+    // 10s-20s come from top + right
+    // 20s-30s come from top + right + bottom
 
     public class DodgeFireballsMinigame : Minigame
     {
@@ -27,28 +28,41 @@ namespace ShrugWare
         [SerializeField]
         Text endGameText;
 
-        const float FIREBALL_X_MIN = -25;
-        const float FIREBALL_X_MAX = 125;
-        const float FIREBALL_Y_MIN = -40;
-        const float FIREBALL_Y_MAX = 50;
-        const float FIREBALL_SPEED_MIN = 45;
-        const float FIREBALL_SPEED_MAX = 75;
+        [SerializeField]
+        GameObject topIndicatorObj;
 
-        const float PLAYER_X_MIN = -13;
-        const float PLAYER_X_MAX = 115;
-        const float PLAYER_Y_MIN = -30;
-        const float PLAYER_Y_MAX = 35;
+        [SerializeField]
+        GameObject bottomIndicatorObj;
 
-        const float FIREBALL_SPAWN_INTERVAL = 0.9f;
+        private const float FIREBALL_X_MIN = -25;
+        private const float FIREBALL_X_MAX = 125;
+        private const float FIREBALL_Y_MIN = -40;
+        private const float FIREBALL_Y_MAX = 50;
+        private const float FIREBALL_SPEED_MIN = 45;
+        private const float FIREBALL_SPEED_MAX = 75;
+
+        private const float PLAYER_X_MIN = -13;
+        private const float PLAYER_X_MAX = 115;
+        private const float PLAYER_Y_MIN = -30;
+        private const float PLAYER_Y_MAX = 35;
+
+        private const float FIREBALL_SPAWN_INTERVAL = 0.9f;
+        private const float TOP_INDICATOR_SPAWN_TIME = 7.5f;
+        private const float BOTTOM_INDICATOR_SPAWN_TIME = 17.5f;
         private float timeSinceLastSpawn = 0.0f;
+        private bool hasSpawnedTopIndicator = false;
+        private bool hasSpawnedBottomIndicator = false;
 
         private float timeInGame = 0.0f;
         private const float PLAYER_SPEED = 50.0f;
 
-        // float so we can take partial damage via damage mitigation. it's not clean but blegh
+        // float so we can take partial damage via damage mitigation
         private const float START_HEALTH = 5;
         private float healthRemaining = 5;
-        bool gameRunning = false;
+        private bool gameRunning = false;
+
+        private const int TOP_PATTERN_SPAWN_TIME = 10;
+        private const int BOTTOM_PATTERN_SPAWN_TIME = 20;
 
         private enum FromDirection
         {
@@ -68,6 +82,7 @@ namespace ShrugWare
 
         private void Awake()
         {
+            minigameDuration = 30;
             continueButton.SetActive(false);
         }
 
@@ -93,17 +108,34 @@ namespace ShrugWare
                 HandlePlayerMovement();
                 HandleFireballs();
                 timeInGame += Time.deltaTime;
+
+                if (!hasSpawnedBottomIndicator && timeInGame >= BOTTOM_INDICATOR_SPAWN_TIME)
+                {
+                    bottomIndicatorObj.SetActive(true);
+                    hasSpawnedBottomIndicator = true;
+                    Invoke("DeactivateBottomIndicator", 2.5f);
+                }
+                else if (!hasSpawnedTopIndicator && timeInGame >= TOP_INDICATOR_SPAWN_TIME)
+                {
+                    topIndicatorObj.SetActive(true);
+                    hasSpawnedTopIndicator = true;
+                    Invoke("DeactivateTopIndicator", 2.5f);
+                }
             }
 
-            timeRemainingText.text = "Time Remaining: " + (microgameTimeDuration - timeInGame).ToString("F2");
-            if(gameRunning && timeInGame >= microgameTimeDuration)
+            timeRemainingText.text = "Time Remaining: " + (minigameDuration - timeInGame).ToString("F2");
+            if(gameRunning && timeInGame >= minigameDuration)
             {
                 // out of time, we won
                 gameRunning = false;
 
                 int lootAmount = 500;
                 endGameText.text = "Boss time!\nReceived " + lootAmount + " gold";
-                OverworldManager.Instance.PlayerInventory.AddCurrency(DataManager.Currencies.Generic, lootAmount);
+
+                if (OverworldManager.Instance != null)
+                {
+                    OverworldManager.Instance.PlayerInventory.AddCurrency(DataManager.Currencies.Generic, lootAmount);
+                }
 
                 continueButton.SetActive(true);
             }
@@ -115,19 +147,18 @@ namespace ShrugWare
             {
                 timeSinceLastSpawn = 0;
 
-                // cast down to int to be able to cleanly mod 15
-                // spawn more at 15s and 30s
-                if ((int)timeInGame != 0 && (int)timeInGame % 30 == 0)
+                // spawn more at 20s and 10s
+                if ((int)timeInGame != 0 && (int)timeInGame % BOTTOM_PATTERN_SPAWN_TIME == 0)
                 {
-                    // spawn top
+                    // spawn bottom
                     for (int i = 0; i < 10; ++i)
                     {
                         SpawnFireball(FromDirection.FromBottom);
                     }
                 }
-                else if ((int)timeInGame != 0 && (int)timeInGame % 15 == 0)
+                else if ((int)timeInGame != 0 && (int)timeInGame % TOP_PATTERN_SPAWN_TIME == 0)
                 {
-                    // spawn bottom
+                    // spawn top
                     for (int i = 0; i < 10; ++i)
                     {
                         SpawnFireball(FromDirection.FromTop);
@@ -135,12 +166,12 @@ namespace ShrugWare
                 }
 
                 // spawn if enough time has been spent
-                if (timeInGame > 30)
+                if (timeInGame >= BOTTOM_PATTERN_SPAWN_TIME)
                 {
                     SpawnFireball(FromDirection.FromBottom);
                 }
 
-                if (timeInGame > 15)
+                if (timeInGame >= TOP_PATTERN_SPAWN_TIME)
                 {
                     SpawnFireball(FromDirection.FromTop);
                 }
@@ -259,7 +290,7 @@ namespace ShrugWare
             float damageTaken = 1.0f - (mitigation / 100);
             healthRemaining -= damageTaken;
             statusText.text = "HP: " + healthRemaining.ToString();
-            if (healthRemaining <= 0)
+            if (healthRemaining < 0)
             {
                 statusText.text = "YOU ARE DED";
                 gameRunning = false;
@@ -293,6 +324,16 @@ namespace ShrugWare
             }
 
             SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
+        }
+
+        private void DeactivateTopIndicator()
+        {
+            topIndicatorObj.SetActive(false);
+        }
+
+        private void DeactivateBottomIndicator()
+        {
+            bottomIndicatorObj.SetActive(false);
         }
     }
 }
