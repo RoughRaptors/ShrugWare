@@ -8,7 +8,7 @@ namespace ShrugWare
     public abstract class Minigame : MonoBehaviour
     {
         [SerializeField]
-        protected float microgameTimeDuration;
+        protected float minigameDuration;
 
         protected int healthToAdd = 0;
 

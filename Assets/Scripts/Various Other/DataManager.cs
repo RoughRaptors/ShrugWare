@@ -50,7 +50,8 @@ namespace ShrugWare
             BossCurHealth,
             Timescale,
             OutgoingDamage,
-            IncomingDamage
+            IncomingDamage,
+            PlayerMoveSpeed
         }
 
         [System.Serializable]
