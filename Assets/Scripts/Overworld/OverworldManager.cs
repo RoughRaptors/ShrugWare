@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEditor;
 
 namespace ShrugWare{
 
@@ -235,10 +236,10 @@ namespace ShrugWare{
                 return;
             }
 
-            // 10% chance we trigger an event
+            // 15% chance we trigger an event
             bool isTrashOrBoss = level.LevelType == DataManager.OverworldLevelType.Trash || level.LevelType == DataManager.OverworldLevelType.Boss;
             int rand = UnityEngine.Random.Range(0, 100);
-            if (rand < 10 && isTrashOrBoss)
+            if (rand < 15 && isTrashOrBoss)
             {
                 // pick a random event
                 int randomEventIndex = UnityEngine.Random.Range(0, randomEventList.Count);

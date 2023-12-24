@@ -1306,7 +1306,7 @@ MonoBehaviour:
     addOnLoss: 0
   - effect:
       effectType: 3
-      amount: 0.05
+      amount: 0.5
       asPercentage: 0
     addOnWin: 1
     addOnLoss: 1
