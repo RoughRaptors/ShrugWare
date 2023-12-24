@@ -64,8 +64,13 @@ namespace ShrugWare
                 // ie if timescale is 1.25, that's 25% faster
                 if (BossGameManager.Instance != null)
                 {
-                    audioSourceMusic.pitch = BossGameManager.Instance.GetCurTimeScale();
-                    audioSourceEffects.pitch = BossGameManager.Instance.GetCurTimeScale();
+                    // the audio change on timescale increase is way more noticable than the game speed increase
+                    // lower the significance of the audio timescale increase
+                    if (audioEffectType == DataManager.AudioEffectTypes.BetweenMicrogame)
+                    {
+                        audioSourceMusic.pitch = BossGameManager.Instance.GetCurTimeScale() * 0.85f;
+                        audioSourceEffects.pitch = BossGameManager.Instance.GetCurTimeScale() * 0.85f;
+                    }
                 }
 
                 // if it's main menu music, use the audio source for music

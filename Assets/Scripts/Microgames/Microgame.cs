@@ -144,10 +144,19 @@ namespace ShrugWare
 
         private void SetEffects()
         {
-            foreach(MicrogameEffect effect in effects)
+            for(int i = 0; i < effects.Count; ++i)
             {
+                MicrogameEffect effect = effects[i];
+                
+                // double our timescale increase for now
+                if (effect.effect.effectType == DataManager.StatModifierType.Timescale)
+                {
+                    effect.effect.amount *= 2;
+                }
+
                 if (effect.addOnWin)
                 {
+
                     winEffects.Add(effect.effect);
                 }
 
@@ -181,7 +190,7 @@ namespace ShrugWare
             }
             else if(effect.effectType == DataManager.StatModifierType.Timescale)
             {
-                BossGameManager.Instance.ModifyTimeScale(effect.amount);
+                BossGameManager.Instance.AddToTimeScale(effect.amount);
             }
         }
     }

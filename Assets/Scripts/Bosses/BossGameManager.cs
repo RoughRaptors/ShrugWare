@@ -170,6 +170,8 @@ namespace ShrugWare
 
             // our raid and boss data needs to be populated by this point
             UpdateGameUI();
+
+            SetTimescale(1);
         }
 
         private void Update()
@@ -222,6 +224,8 @@ namespace ShrugWare
                 DataManager.Currencies lootCurrency = DataManager.Currencies.DauntingInferno;
                 int lootAmount = 1500;
                 OverworldManager.Instance.PlayerInventory.AddCurrency(lootCurrency, lootAmount);
+                
+                SetTimescale(1);
                 bossUIManager.HandleBeatBoss(lootCurrency, lootAmount);
             }
             else if(playerInfo.livesLeft < 0)
@@ -342,7 +346,7 @@ namespace ShrugWare
             if (!(curBoss is null))
             {
 #if UNITY_EDITOR
-                amount = CurBoss.curHealth;
+                //amount = CurBoss.curHealth;
 #endif
                 curBoss.TakeDamage(amount);
             }
@@ -355,7 +359,7 @@ namespace ShrugWare
             bossUIManager.SetTimescaleInputFieldText("Time Scale: " + curTimeScale.ToString("F3"));
         }
 
-        public void ModifyTimeScale(float amount)
+        public void AddToTimeScale(float amount)
         {
             curTimeScale += amount;
             Time.timeScale = curTimeScale;
@@ -419,7 +423,7 @@ namespace ShrugWare
                     }
                     else if (effect.effectType == DataManager.StatModifierType.Timescale)
                     {
-                        ModifyTimeScale(effect.amount);
+                        AddToTimeScale(effect.amount);
                     }
                 }
 
