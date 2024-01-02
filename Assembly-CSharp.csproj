@@ -79,12 +79,14 @@
     <Compile Include="Assets\Scripts\Various Other\DataManager.cs" />
     <Compile Include="Assets\Scripts\Overworld\OverworldUIManager.cs" />
     <Compile Include="Assets\Scripts\Microgames\MicrogameEffect.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\AvoidTheLasers.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\AttackTheBossTiming.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\MatchPolarity.cs" />
     <Compile Include="Assets\Art\Lightning Bolt\LightningBoltScript.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\CastFrostboltMicrogame.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonGlow.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMover.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\ColoredPlatforms.cs" />
     <Compile Include="Assets\Scripts\Minigames\Minigame.cs" />
     <Compile Include="Assets\Art\Fire\Scripts\OscillateLightBrightness.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
