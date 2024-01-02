@@ -41,7 +41,9 @@ namespace ShrugWare
             LaserLineOfSightDiagonalAlternative,
             AttackTheBossTiming,
             NavigateTheMaze,
-            MICROGAME_END = 29// PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            ColoredPlatforms,
+            AvoidTheLasers,
+            MICROGAME_END = 35// PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatModifierType

@@ -37,6 +37,7 @@ public class LaserBeam
         this.laserLineRenderer.startColor = Color.red;
         this.laserLineRenderer.endColor = Color.red;
         this.laserLineRenderer.sortingOrder = 2;
+        this.laserLineRenderer.useWorldSpace = false;
 
         CastRay(pos, dir, laserLineRenderer);
     }
