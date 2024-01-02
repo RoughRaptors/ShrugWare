@@ -11,8 +11,12 @@ namespace ShrugWare
             TutorialScene,
             MerchantScene,
             WarbossKard, 
-            MICROGAME_START = 5, // KEEP IN SYNC
-            GetOutOfFire = 5,    // KEEP IN SYNC
+            Tuzi,
+            DodgeFireballsMinigame,
+            ShootAsteroidsMinigame,
+            HeiganDanceMinigame,
+            MICROGAME_START = 9, // KEEP IN SYNC
+            GetOutOfFire = 9,    // KEEP IN SYNC
             CastFrostbolt,
             TauntTheAdds,
             InterceptTheFireball,
@@ -36,11 +40,8 @@ namespace ShrugWare
             LaserLineOfSightHorizonalAlternative,
             LaserLineOfSightDiagonalAlternative,
             AttackTheBossTiming,
-            MICROGAME_END = 28,// PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
-            Tuzi,
-            DodgeFireballsMinigame,
-            ShootAsteroidsMinigame,
-            HeiganDanceMinigame,
+            NavigateTheMaze,
+            MICROGAME_END = 29// PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatModifierType

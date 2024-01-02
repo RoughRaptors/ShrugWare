@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\MatchPolarity.cs" />
     <Compile Include="Assets\Art\Lightning Bolt\LightningBoltScript.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\CastFrostboltMicrogame.cs" />
+    <Compile Include="Assets\Scripts\UI\ButtonGlow.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMover.cs" />
     <Compile Include="Assets\Scripts\Minigames\Minigame.cs" />
     <Compile Include="Assets\Art\Fire\Scripts\OscillateLightBrightness.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\SidestepTheFireball.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioEffectClip.cs" />
     <Compile Include="Assets\Scripts\Minigames\HeiganDanceMinigame.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\NavigateTheMaze.cs" />
     <Compile Include="Assets\Scripts\Bosses\Tuzi.cs" />
     <Compile Include="Assets\Scripts\Bosses\Boss.cs" />
     <Compile Include="Assets\Scripts\Microgames\Microgame.cs" />
