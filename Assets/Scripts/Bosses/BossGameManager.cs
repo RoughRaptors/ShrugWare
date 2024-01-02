@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
     2: create/copy a script for the new microgame and open the scene
     3: in DataManager.cs -> add the new scene name to the enum Scenes and update the MICROGAME_END value
     4: in unity -> file -> build settings -> add open scene and move it into the proper place
+    5: make sure the overworld levels didn't get screwed up and have the wrong level set
 */
 
 /*
