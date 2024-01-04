@@ -15,10 +15,13 @@ using UnityEngine.SceneManagement;
 -- Clicking Mechanics --
 Attack The Boss Timing - Click the attack button in the light green
 Cast Frostbolt - Click the frostbolt button out of three options
+Craft The Item - Drag items into slots
 Taunt The Adds - Click x amount of adds running around the screen.
 Perform The Rotation - Click the shown abilities in the correct order
 
 -- 2.5D Character Movement --
+Avoid The Lasers - Avoid a spinning laser
+Colored Platforms - Get on the green platform
 Dodge The Fireball - Dodge a fireball coming at you
 Equalize The Two Groups -  Move to the group that will make the party member numbers even
 Get Out Of Fire - Get out of the fire
@@ -30,9 +33,10 @@ Laser Line of Sight Horizontal + Alternative - LOS the lasers
 Laser Line of Sight Vertical + Alternative - LOS the lasers
 Line of Sight - LOS the boss in time
 Match Polarity - Move to the party members of the same electric positive or negative sign as you
+Navigate The Maze - Navigate a maze to get to the end
 Run In - Leeroy run into the boss room
-Spread Out For Meteor - Spread out from everyone else for a meteor attack
 Sidestep The Fireball - Sidestep a fireball coming at you
+Spread Out For Meteor - Spread out from everyone else for a meteor attack
 Stack Up For Meteor - Stack up on everyone for a meteor attack
 Stack Powerstones - Collect powerups around the area
 Steal The Chest - Collect the chest before your team members get it
