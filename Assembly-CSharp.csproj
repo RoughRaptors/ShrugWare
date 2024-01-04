@@ -92,6 +92,7 @@
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterceptTheFireball.cs" />
     <Compile Include="Assets\Scripts\Items\ArmorItem.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\CraftTheItem.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\LaserLineOfSightVertical.cs" />
     <Compile Include="Assets\Scripts\Various Other\RandomEvent.cs" />
     <Compile Include="Assets\Scripts\Overworld\OverworldManager.cs" />

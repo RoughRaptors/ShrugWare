@@ -113,5 +113,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Microgames/Daunting Inferno/AvoidTheLasers.unity
     guid: 9ff200ad049403e46949b0ca7c48cd06
+  - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/CraftTheItem.unity
+    guid: 8a076559008cc2842a8703180641f63b
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: dd69bd027abc73c48b5382fd6cab7dda, type: 2}
