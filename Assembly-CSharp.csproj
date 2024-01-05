@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\LaserLineOfSightVerticalAlternative.cs" />
     <Compile Include="Assets\Scripts\UI\MicrogameUI.cs" />
     <Compile Include="Assets\Art\Fire\Scripts\VolumetricFire.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\BuyTheExpensiveItem.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\Scripts\Various Other\TutorialManager.cs" />
     <Compile Include="Assets\Scripts\Minigames\DodgeFireballsMinigame.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterceptTheFireball.cs" />
     <Compile Include="Assets\Scripts\Items\ArmorItem.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\CraftTheItem.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\BuyTheCheapItem.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\LaserLineOfSightVertical.cs" />
     <Compile Include="Assets\Scripts\Various Other\RandomEvent.cs" />
     <Compile Include="Assets\Scripts\Overworld\OverworldManager.cs" />
