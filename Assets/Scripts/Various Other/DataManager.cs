@@ -44,7 +44,9 @@ namespace ShrugWare
             ColoredPlatforms,
             AvoidTheLasers,
             CraftTheItem,
-            MICROGAME_END = 36// PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            BuyExpensiveItem,
+            BuyCheapItem,
+            MICROGAME_END = 38// PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatModifierType

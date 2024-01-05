@@ -116,5 +116,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Microgames/Daunting Inferno/CraftTheItem.unity
     guid: 8a076559008cc2842a8703180641f63b
+  - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/BuyExpensiveItem.unity
+    guid: e1161f267da4229498d716b84fcd207f
+  - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/BuyCheapItem.unity
+    guid: 7ca3ea9a75f36eb4b8bcf710c94678aa
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: dd69bd027abc73c48b5382fd6cab7dda, type: 2}
