@@ -156,7 +156,6 @@ namespace ShrugWare
 
                 if (effect.addOnWin)
                 {
-
                     winEffects.Add(effect.effect);
                 }
 

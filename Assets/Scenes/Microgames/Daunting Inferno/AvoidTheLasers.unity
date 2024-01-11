@@ -874,8 +874,7 @@ MonoBehaviour:
       asPercentage: 0
     addOnWin: 1
     addOnLoss: 1
-  laserParent1: {fileID: 539053363}
-  laserParent2: {fileID: 0}
+  laserParent: {fileID: 539053363}
 --- !u!1 &983545015
 GameObject:
   m_ObjectHideFlags: 0

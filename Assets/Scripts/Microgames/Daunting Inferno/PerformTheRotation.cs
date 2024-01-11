@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using TMPro;
 
 namespace ShrugWare
 {
@@ -17,6 +18,9 @@ namespace ShrugWare
         [SerializeField]
         Button iceBlastButtonObj = null;
 
+        [SerializeField]
+        TextMeshProUGUI instructionsText = null;
+
         private enum RotationMapping
         {
             Frostbolt = 0,
@@ -26,20 +30,29 @@ namespace ShrugWare
 
         private List<RotationMapping> rotation = new List<RotationMapping>();
 
-        protected override void Start()
+        protected override void OnMyGameStart()
         {
-            base.Start();
+            base.OnMyGameStart();
 
             // get a random, 3 button rotation
             rotation.Add((RotationMapping)0);
             rotation.Add((RotationMapping)1);
             rotation.Add((RotationMapping)2);
             rotation = rotation.OrderBy(i => Random.value).ToList();
+
             startText = rotation[0].ToString() + " -> " + rotation[1].ToString() + " -> " + rotation[2];
+            instructionsText.text = startText;
+            instructionsText.enabled = true;
 
             frostboltButtonObj.onClick.AddListener(() => ButtonPressed(frostboltButtonObj, RotationMapping.Frostbolt));
             glacialSpikeButtonObj.onClick.AddListener(() => ButtonPressed(glacialSpikeButtonObj, RotationMapping.GlacialSpike));
             iceBlastButtonObj.onClick.AddListener(() => ButtonPressed(iceBlastButtonObj, RotationMapping.IceBlast));
+
+            // this is a hard microgame when too fast and, there's not enough time, give it a time boost the faster the timescale is
+            if(BossGameManager.Instance != null)
+            {
+                microGameTime += BossGameManager.Instance.GetCurTimeScale() * 0.75f;
+            }
         }
 
         protected override bool VictoryCheck() => rotation.Count == 0;

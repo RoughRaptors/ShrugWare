@@ -32,7 +32,6 @@ namespace ShrugWare
         {
             myMicrogame = FindObjectOfType<Microgame>();
             controlSchemeImage.SetActive(true);
-
         }
 
         private void OnEnable()
