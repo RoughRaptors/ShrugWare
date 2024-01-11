@@ -56,6 +56,13 @@ namespace ShrugWare{
             set { waitingOnRandomEvent = value; }
         }
 
+        private bool isDebugMode = false;
+        public bool IsDebugMode
+        {
+            get { return isDebugMode; }
+            set { isDebugMode = value; }
+        }
+
         private void Awake()
         {
             if (Instance == null)

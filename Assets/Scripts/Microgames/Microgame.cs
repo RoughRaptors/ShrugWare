@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ShrugWare
 {
@@ -110,6 +111,10 @@ namespace ShrugWare
                 // defer this a bit to allow the player to see the results at the end of the time limit
                 StartCoroutine(LoadScene(wonMicrogame));
             }
+            else if(OverworldManager.Instance != null && OverworldManager.Instance.IsDebugMode)
+            {
+                SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
+            }
         }
 
         protected void SetMicrogameEndText(bool victory)
@@ -138,7 +143,7 @@ namespace ShrugWare
         public IEnumerator LoadScene(bool wonMicrogame)
         {
             yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
-            
+
             BossGameManager.Instance.MicrogameCompleted(wonMicrogame);
         }
 
