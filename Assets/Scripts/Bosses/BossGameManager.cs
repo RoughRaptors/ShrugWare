@@ -146,7 +146,10 @@ namespace ShrugWare
                 curBoss = new Tuzi();
             }
 
-            audioManager = OverworldManager.Instance.GetComponent<AudioManager>();
+            if (OverworldManager.Instance != null)
+            {
+                audioManager = OverworldManager.Instance.GetComponent<AudioManager>();
+            }
 
             EnableBossCamera(true);
         }
@@ -440,6 +443,11 @@ namespace ShrugWare
                 // kill it so we don't run it again
                 OverworldManager.Instance.CurRandomEvent = null;
             }
+        }
+
+        public void EnableInstructionsText()
+        {
+            //bossUIManager.
         }
     }
 }

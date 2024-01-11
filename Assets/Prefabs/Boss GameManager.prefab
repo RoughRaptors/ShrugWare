@@ -2149,9 +2149,9 @@ MonoBehaviour:
   mainUICanvas: {fileID: 2301266169278598949}
   healthPotionItem: {fileID: 2301266168308091703}
   maxHealthPotionItem: {fileID: 2301266168396734783}
+  moveSpeedPotionItem: {fileID: 0}
   playerHealthBar: {fileID: 2301266167672538492}
   bossHealthBar: {fileID: 2301266167760245452}
-  lootScreenObj: {fileID: 0}
 --- !u!1 &2301266169226462635
 GameObject:
   m_ObjectHideFlags: 0
@@ -2397,11 +2397,11 @@ RectTransform:
   - {fileID: 2301266169434336933}
   - {fileID: 2301266167762544719}
   - {fileID: 2301266167982848522}
-  - {fileID: 2301266168178238716}
   - {fileID: 2301266168308091696}
   - {fileID: 2301266168396734776}
   - {fileID: 2301266167672538499}
   - {fileID: 2301266167760245459}
+  - {fileID: 2301266168178238716}
   m_Father: {fileID: 2301266169147293017}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

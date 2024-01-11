@@ -5,9 +5,9 @@ namespace ShrugWare
     public class AvoidTheLasers : Microgame
     {
         [SerializeField]
-        GameObject laserParent1;
+        GameObject laserParent;
 
-        const float ROTATESPEED = 30.0f;
+        float rotateSpeed = 30.0f;
         bool hasBeenHit = false;
 
         protected override void Start()
@@ -30,12 +30,19 @@ namespace ShrugWare
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
+
+            // 50/50 to rotate either direction
+            if (Random.Range(0, 2) == 0)
+            {
+                rotateSpeed *= -1;
+            }
         }
 
         protected override void OnMyGameTick(float timePercentLeft)
         {
             base.OnMyGameTick(timePercentLeft);
-            laserParent1.transform.Rotate(0, 0, -ROTATESPEED * Time.deltaTime);
+            
+            laserParent.transform.Rotate(0, 0, rotateSpeed * Time.deltaTime);
         }
 
         protected override bool VictoryCheck()
