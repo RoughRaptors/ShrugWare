@@ -38,7 +38,6 @@ namespace ShrugWare
         {
             base.Start();
 
-            microGameTime = 300;
             AssignItemSprites();
             GeneratePrices();
         }

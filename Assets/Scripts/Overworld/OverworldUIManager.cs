@@ -2,6 +2,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Collections.Generic;
+using System;
+using UnityEditor;
+using System.Linq;
 
 namespace ShrugWare
 {
@@ -20,6 +24,9 @@ namespace ShrugWare
 
         [SerializeField]
         GameObject randomEventUIObj;
+
+        [SerializeField]
+        TMP_Dropdown debugDropdown;
 
         private void Awake()
         {
@@ -118,8 +125,42 @@ namespace ShrugWare
 
             OverworldManager.Instance.WaitingOnRandomEvent = false;
             randomEventUIObj.SetActive(false);
-            OverworldUIManager.Instance.SetCanvasEnabled(false);
+            SetCanvasEnabled(false);
             SceneManager.LoadScene((int)OverworldManager.Instance.CurLevel.SceneIDToLoad);
+        }
+
+        public void OnDebugButtonPressed()
+        {
+            // if the debug menu is already open, make the button enter the level
+            if(OverworldManager.Instance.IsDebugMode)
+            {
+                SetCanvasEnabled(false);
+
+                // offset our index
+                int sceneIndex = debugDropdown.value + (int)DataManager.Scenes.MICROGAME_START;
+                SceneManager.LoadScene(sceneIndex);
+            }
+            else
+            {
+                List<string> debugScenes = new List<string>();
+                string[] scenes = new string[SceneManager.sceneCountInBuildSettings];
+                for (int sceneIndex = (int)DataManager.Scenes.MICROGAME_START; sceneIndex <= (int)DataManager.Scenes.MICROGAME_END; ++sceneIndex)
+                {
+                    scenes[sceneIndex] = SceneUtility.GetScenePathByBuildIndex(sceneIndex);
+                    debugScenes.Add("Scene Id: " + sceneIndex.ToString() + ": " + scenes[sceneIndex]);
+                }
+
+                debugDropdown.AddOptions(debugScenes);
+            }
+
+            debugDropdown.gameObject.SetActive(true);
+            OverworldManager.Instance.IsDebugMode = true;
+        }
+
+        public void OnStopDebuggingPressed()
+        {
+            debugDropdown.gameObject.SetActive(false);
+            OverworldManager.Instance.IsDebugMode = false;
         }
     }
 }
