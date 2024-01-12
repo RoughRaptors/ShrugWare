@@ -142,15 +142,11 @@ namespace ShrugWare
             }
             else
             {
-                string[] scenes = EditorBuildSettings.scenes
-                            .Where(scene => scene.enabled)
-                            .Select(scene => scene.path)
-                            .ToArray();
-                
-                // could use scenes.ToList() but we want to start and end at a certain point
                 List<string> debugScenes = new List<string>();
+                string[] scenes = new string[SceneManager.sceneCountInBuildSettings];
                 for (int sceneIndex = (int)DataManager.Scenes.MICROGAME_START; sceneIndex <= (int)DataManager.Scenes.MICROGAME_END; ++sceneIndex)
                 {
+                    scenes[sceneIndex] = SceneUtility.GetScenePathByBuildIndex(sceneIndex);
                     debugScenes.Add("Scene Id: " + sceneIndex.ToString() + ": " + scenes[sceneIndex]);
                 }
 
