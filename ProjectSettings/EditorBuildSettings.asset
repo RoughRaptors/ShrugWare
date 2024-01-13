@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MerchantScene.unity
     guid: d14131625f363864c9811f8fa3b0c1e3
   - enabled: 1
+    path: Assets/Scenes/InfiniteMode.unity
+    guid: ce43b317e443f1640bb159fc33ede545
+  - enabled: 1
     path: Assets/Scenes/Bosses/Warboss Kard.unity
     guid: 7345200c9fef7da4690d87b8f6896ad3
   - enabled: 1

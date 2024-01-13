@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\LaserLineOfSightDiagonal.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\RunIn.cs" />
+    <Compile Include="Assets\Scripts\Various Other\InfiniteModeManager.cs" />
     <Compile Include="Assets\Scripts\Minigames\ShootAsteroidsMinigameAsteroid.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCollider.cs" />

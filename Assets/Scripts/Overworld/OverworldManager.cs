@@ -259,6 +259,7 @@ namespace ShrugWare{
                 return;
             }
 
+            playerObj.SetActive(false);
             GetComponent<AudioManager>().StopAudio();
             OverworldUIManager.Instance.SetCanvasEnabled(false);
             SceneManager.LoadScene((int)level.SceneIDToLoad);

@@ -10,13 +10,14 @@ namespace ShrugWare
             OverworldScene,
             TutorialScene,
             MerchantScene,
+            InfiniteModeScene,
             WarbossKard, 
             Tuzi,
             DodgeFireballsMinigame,
             ShootAsteroidsMinigame,
             HeiganDanceMinigame,
-            MICROGAME_START = 9, // KEEP IN SYNC
-            GetOutOfFire = 9,    // KEEP IN SYNC
+            MICROGAME_START = 10, // KEEP IN SYNC
+            GetOutOfFire = 10,    // KEEP IN SYNC
             CastFrostbolt,
             TauntTheAdds,
             InterceptTheFireball,
@@ -46,7 +47,7 @@ namespace ShrugWare
             CraftTheItem,
             BuyExpensiveItem,
             BuyCheapItem,
-            MICROGAME_END = 38// PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            MICROGAME_END = 39 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatModifierType
@@ -114,7 +115,8 @@ namespace ShrugWare
             End,
             Merchant,
             Trash,
-            Boss
+            Boss,
+            Infinite
         }
 
         public static float MICROGAME_DURATION_SECONDS = 3.5f; // we can override this in the child Microgame's Start() - microGameTime

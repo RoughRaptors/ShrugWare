@@ -72,6 +72,16 @@ namespace ShrugWare
                         audioSourceEffects.pitch = BossGameManager.Instance.GetCurTimeScale() * 0.85f;
                     }
                 }
+                else if(InfiniteModeManager.Instance != null)
+                {
+                    // the audio change on timescale increase is way more noticable than the game speed increase
+                    // lower the significance of the audio timescale increase
+                    if (audioEffectType == DataManager.AudioEffectTypes.BetweenMicrogame)
+                    {
+                        audioSourceMusic.pitch = InfiniteModeManager.Instance.GetCurTimeScale() * 0.85f;
+                        audioSourceEffects.pitch = InfiniteModeManager.Instance.GetCurTimeScale() * 0.85f;
+                    }
+                }
 
                 // if it's main menu music, use the audio source for music
                 if (audioEffectType == DataManager.AudioEffectTypes.MainMenu || audioEffectType == DataManager.AudioEffectTypes.Overworld)
