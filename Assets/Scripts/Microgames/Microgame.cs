@@ -115,6 +115,10 @@ namespace ShrugWare
             {
                 SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
             }
+            else if(InfiniteModeManager.Instance != null && OverworldManager.Instance.CurLevel.LevelType == DataManager.OverworldLevelType.Infinite)
+            {
+                StartCoroutine(LoadScene(wonMicrogame));
+            }
         }
 
         protected void SetMicrogameEndText(bool victory)
@@ -144,7 +148,14 @@ namespace ShrugWare
         {
             yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
 
-            BossGameManager.Instance.MicrogameCompleted(wonMicrogame);
+            if(OverworldManager.Instance.CurLevel.LevelType == DataManager.OverworldLevelType.Infinite)
+            {
+                InfiniteModeManager.Instance.MicrogameCompleted(wonMicrogame);
+            }
+            else
+            {
+                BossGameManager.Instance.MicrogameCompleted(wonMicrogame);
+            }            
         }
 
         private void SetEffects()

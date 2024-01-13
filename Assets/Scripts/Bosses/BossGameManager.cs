@@ -61,7 +61,6 @@ namespace ShrugWare
         public float GetCurTimeScale() { return curTimeScale; }
         public void SetCurTimeScale(float newTimeScale) { curTimeScale = newTimeScale; }
 
-        // for now until we find something better, hold this so we know when to transition to our next microgame - TODO MAKE THIS BETTER
         private float timeInBossScene = 0.0f;
         public float GetTimeInBossScene() { return timeInBossScene; }
 
@@ -206,7 +205,7 @@ namespace ShrugWare
             UpdateGameUI();
             HandleFromMicrogameTransition();
             bossUIManager.SetBossUICanvasEnabled(true);
-            BossGameManager.Instance.LoadScene((int)OverworldManager.Instance.CurLevel.SceneIDToLoad);
+            LoadScene((int)OverworldManager.Instance.CurLevel.SceneIDToLoad);
         }
 
         private void HandleFromMicrogameTransition()
@@ -444,11 +443,6 @@ namespace ShrugWare
                 // kill it so we don't run it again
                 OverworldManager.Instance.CurRandomEvent = null;
             }
-        }
-
-        public void EnableInstructionsText()
-        {
-            //bossUIManager.
         }
     }
 }
