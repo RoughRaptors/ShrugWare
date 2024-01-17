@@ -28,6 +28,12 @@ namespace ShrugWare
         [SerializeField]
         TMP_Dropdown debugDropdown;
 
+        [SerializeField]
+        Button debugButton;
+
+        [SerializeField]
+        Button stopDebugButton;
+
         private void Awake()
         {
             Application.targetFrameRate = 60;
@@ -153,12 +159,15 @@ namespace ShrugWare
                 debugDropdown.AddOptions(debugScenes);
             }
 
+            stopDebugButton.gameObject.SetActive(true);
             debugDropdown.gameObject.SetActive(true);
             OverworldManager.Instance.IsDebugMode = true;
         }
 
         public void OnStopDebuggingPressed()
         {
+            debugButton.gameObject.SetActive(true);
+            stopDebugButton.gameObject.SetActive(false);
             debugDropdown.gameObject.SetActive(false);
             OverworldManager.Instance.IsDebugMode = false;
         }

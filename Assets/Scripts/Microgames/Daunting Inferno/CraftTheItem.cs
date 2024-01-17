@@ -1,8 +1,8 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UnityEditor.PlayerSettings;
-using static UnityEngine.GraphicsBuffer;
+using System.Collections.Generic;
 
 namespace ShrugWare
 {
@@ -31,10 +31,29 @@ namespace ShrugWare
         private bool item2InSlot = false;
         private bool item3InSlot = false;
 
-        const float X_MIN = -3500;
-        const float X_MAX = -350;
-        const float Y_MIN = -1500;
-        const float Y_MAX = -500;
+        const float X_MIN = -1700;
+        const float X_MAX = 1700;
+        const float Y_MIN = -600;
+        const float Y_MAX = 900;
+
+        GraphicRaycaster m_Raycaster;
+        PointerEventData m_PointerEventData;
+        EventSystem m_EventSystem;
+
+        [SerializeField]
+        TextMeshProUGUI mousePosText;
+
+        [SerializeField]
+        TextMeshProUGUI resource1LocText;
+
+        [SerializeField]
+        TextMeshProUGUI resource2LocText;
+
+        [SerializeField]
+        TextMeshProUGUI resource3LocText;
+
+        [SerializeField]
+        TextMeshProUGUI raycastText;
 
         new private void Start()
         {
@@ -45,7 +64,10 @@ namespace ShrugWare
         {
             base.OnMyGameStart();
 
-            microGameTime = 200;
+            m_Raycaster = GetComponent<GraphicRaycaster>();
+            m_EventSystem = GetComponent<EventSystem>();
+
+            microGameTime = 2000;
             SpawnResources();
         }
 
@@ -53,11 +75,18 @@ namespace ShrugWare
         {
             base.OnMyGameTick(timePercentLeft);
 
+            mousePosText.text = Input.mousePosition.ToString("F2");
+            resource1LocText.text = resource1.transform.localPosition.ToString();
+            resource2LocText.text = resource2.transform.localPosition.ToString();
+            resource3LocText.text = resource3.transform.localPosition.ToString();
+
             // drag our items
             if (Input.GetMouseButton(0))
             {
                 RaycastHit raycastHit;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Vector2 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y);
+                Ray ray = Camera.main.ScreenPointToRay(mousePos);
+                raycastText.text = ray.ToString();
                 if (Physics.Raycast(ray, out raycastHit))
                 {
                     if (raycastHit.transform != null)
@@ -69,7 +98,7 @@ namespace ShrugWare
                 }
                 else if (selectedObject != null)
                 {
-                    // don't unselect the object if we are still dragging but we drag off of the item too quickly
+                    // don't unselect the object if we are still dragging but we drag off of the item too quickly such that our mouse goes off it
                     selectedObject.transform.position = ray.GetPoint(100);
                 }
             }
@@ -99,19 +128,19 @@ namespace ShrugWare
             {
                 float offset = 5;
                 float acceptableDistance = 7.0f;
-                float distanceFromBorder1 = Vector3.Distance(selectedObject.transform.position, border1Center.transform.position) - offset;
+                float distanceFromBorder1 = Vector2.Distance(selectedObject.transform.position, border1Center.transform.position) - offset;
                 if(distanceFromBorder1 < acceptableDistance)
                 {
                     item1InSlot = true;
                 }
 
-                float distanceFromBorder2 = Vector3.Distance(selectedObject.transform.position, border2Center.transform.position) - offset;
+                float distanceFromBorder2 = Vector2.Distance(selectedObject.transform.position, border2Center.transform.position) - offset;
                 if (distanceFromBorder2 < acceptableDistance)
                 {
                     item2InSlot = true;
                 }
 
-                float distanceFromBorder3 = Vector3.Distance(selectedObject.transform.position, border3Center.transform.position) - offset;
+                float distanceFromBorder3 = Vector2.Distance(selectedObject.transform.position, border3Center.transform.position) - offset;
                 if (distanceFromBorder3 < acceptableDistance)
                 {
                     item3InSlot = true;
@@ -142,12 +171,12 @@ namespace ShrugWare
             {
                 float xPos = Random.Range(X_MIN, X_MAX);
                 float yPos = Random.Range(Y_MIN, Y_MAX);
-                Vector2 spawnPos = new Vector3(xPos, yPos, 0);
+                Vector2 spawnPos = new Vector2(xPos, yPos);
 
-                float acceptableDistance = 30.0f;
-                float distanceFromBorder1 = Vector2.Distance(resourceObj.transform.position, border1Center.transform.position);
-                float distanceFromBorder2 = Vector2.Distance(resourceObj.transform.position, border2Center.transform.position);
-                float distanceFromBorder3 = Vector2.Distance(resourceObj.transform.position, border3Center.transform.position);
+                float acceptableDistance = 25.0f;
+                float distanceFromBorder1 = Vector2.Distance(spawnPos, border1Center.transform.position);
+                float distanceFromBorder2 = Vector2.Distance(spawnPos, border2Center.transform.position);
+                float distanceFromBorder3 = Vector2.Distance(spawnPos, border3Center.transform.position);
                 if (distanceFromBorder1 > acceptableDistance && distanceFromBorder2 > acceptableDistance && distanceFromBorder3 > acceptableDistance)
                 {
                     resourceObj.transform.localPosition = spawnPos;
