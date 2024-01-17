@@ -56,8 +56,6 @@ namespace ShrugWare
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
-
-            //microGameTime = 2000;
             SpawnResources();
         }
 
