@@ -791,9 +791,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5156833369608619646, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
+      propertyPath: debugButton
+      value: 
+      objectReference: {fileID: 120874968}
+    - target: {fileID: 5156833369608619646, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
       propertyPath: debugDropdown
       value: 
       objectReference: {fileID: 1730672781}
+    - target: {fileID: 5156833369608619646, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
+      propertyPath: stopDebugButton
+      value: 
+      objectReference: {fileID: 1882188345}
     - target: {fileID: 5875763676836992559, guid: b0c56453976bd59409d7b5c7cb65b8db, type: 3}
       propertyPath: m_SizeDelta.x
       value: 700
@@ -3000,7 +3008,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1882188344
 RectTransform:
   m_ObjectHideFlags: 0

@@ -86,5 +86,13 @@ namespace ShrugWare
             SetMicrogameEndText(true);
             bossObj.GetComponentInChildren<SkinnedMeshRenderer>().material.color = Color.cyan;
         }
+
+        public void OtherButtonPressed()
+        {
+            fireballButton.gameObject.SetActive(false);
+            frostboltButton.gameObject.SetActive(false);
+            healButton.gameObject.SetActive(false);
+            SetMicrogameEndText(false);
+        }
     }
 }
