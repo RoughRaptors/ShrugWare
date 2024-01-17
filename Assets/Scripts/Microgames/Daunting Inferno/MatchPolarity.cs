@@ -1,3 +1,4 @@
+using UnityEditor.Rendering;
 using UnityEngine;
 
 namespace ShrugWare
@@ -24,14 +25,15 @@ namespace ShrugWare
 
         private bool polarityMatched = false;
 
-        private Vector3 electricityStartPos;
+        private bool playerPositive = false;
+        private float projectileSpeed = 0.75f;
 
-        bool playerPositive = false;
+        private const float PLAYER_X_MIN = -90;
+        private const float PLAYER_X_MAX = 90;
 
         new private void Start()
         {
             base.Start();
-            electricityStartPos = eletricityObj.transform.position;
             playerNegativeObj.SetActive(false);
             playerPositiveObj.SetActive(false);
             SetupGroupMembers();
@@ -62,7 +64,7 @@ namespace ShrugWare
         protected override void OnMyGameTick(float timePercentLeft)
         {
             base.OnMyGameTick(timePercentLeft);
-            eletricityObj.transform.position = Vector3.Lerp(electricityStartPos, playerObject.transform.position, 1 - timePercentLeft);
+            eletricityObj.transform.position = Vector3.Lerp(eletricityObj.transform.position, playerObject.transform.position, projectileSpeed * Time.deltaTime);
         }
 
         protected override bool VictoryCheck()
@@ -77,6 +79,8 @@ namespace ShrugWare
 
         private void SetupPlayer()
         {
+            float xPos = Random.Range(PLAYER_X_MIN, PLAYER_X_MAX);
+            playerObject.transform.position = new Vector2(xPos, 0);
             playerPositive = Random.Range(0, 2) == 0;
             if (playerPositive)
             {
