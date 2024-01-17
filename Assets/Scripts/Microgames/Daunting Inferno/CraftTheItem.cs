@@ -1,8 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using System.Collections.Generic;
 
 namespace ShrugWare
 {
@@ -36,10 +33,6 @@ namespace ShrugWare
         const float Y_MIN = -600;
         const float Y_MAX = 900;
 
-        GraphicRaycaster m_Raycaster;
-        PointerEventData m_PointerEventData;
-        EventSystem m_EventSystem;
-
         [SerializeField]
         TextMeshProUGUI mousePosText;
 
@@ -63,11 +56,6 @@ namespace ShrugWare
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
-
-            m_Raycaster = GetComponent<GraphicRaycaster>();
-            m_EventSystem = GetComponent<EventSystem>();
-
-            microGameTime = 2000;
             SpawnResources();
         }
 

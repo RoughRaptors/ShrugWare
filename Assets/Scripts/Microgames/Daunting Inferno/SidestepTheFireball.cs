@@ -11,10 +11,8 @@ namespace ShrugWare
         GameObject[] fireballObjects = null;
 
         private const float FIREBALL_MOVE_SPEED = 30.0f;
-        private const float FIREBALL_X_MIN = -70.0f;
+        private const float FIREBALL_X_MIN = -100.0f;
         private const float FIREBALL_X_MAX = 100.0f;
-        private const float FIREBALL_Y_MIN = 25.0f;
-        private const float FIREBALL_Y_MAX = 45.0f;
 
         protected override void OnEnable()
         {
@@ -34,8 +32,7 @@ namespace ShrugWare
             foreach (GameObject fireballObj in fireballObjects)
             {
                 float xSpawnPos = Random.Range(FIREBALL_X_MIN, FIREBALL_X_MAX);
-                float ySpawnPos = Random.Range(FIREBALL_Y_MIN, FIREBALL_Y_MAX);
-                fireballObj.transform.position = new Vector3(xSpawnPos, ySpawnPos, 0);
+                fireballObj.transform.position = new Vector3(xSpawnPos, 75);
             }
         }
 
