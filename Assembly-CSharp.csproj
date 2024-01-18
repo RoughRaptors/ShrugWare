@@ -134,6 +134,7 @@
     <Compile Include="Assets\Scripts\Bosses\Tuzi.cs" />
     <Compile Include="Assets\Scripts\Bosses\Boss.cs" />
     <Compile Include="Assets\Scripts\Microgames\Microgame.cs" />
+    <Compile Include="Assets\Scripts\Various Other\DragUIObject.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\EqualizeTwoGroups.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterruptTheAbility.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StackUpForMeteor.cs" />

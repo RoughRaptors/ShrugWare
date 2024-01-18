@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace ShrugWare
 {
@@ -57,20 +60,25 @@ namespace ShrugWare
         {
             base.OnMyGameStart();
             SpawnResources();
+
+
+            microGameTime = 1000;
+
+            // this is a hard microgame when too fast and, there's not enough time, give it a time boost the faster the timescale is
+            if (BossGameManager.Instance != null)
+            {
+                microGameTime += BossGameManager.Instance.GetCurTimeScale() * 0.75f;
+            }
         }
 
         protected override void OnMyGameTick(float timePercentLeft)
         {
             base.OnMyGameTick(timePercentLeft);
 
-            mousePosText.text = Input.mousePosition.ToString("F2");
-            resource1LocText.text = resource1.transform.localPosition.ToString();
-            resource2LocText.text = resource2.transform.localPosition.ToString();
-            resource3LocText.text = resource3.transform.localPosition.ToString();
-
             // drag our items
             if (Input.GetMouseButton(0))
             {
+                /*
                 RaycastHit raycastHit;
                 Vector2 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y);
                 Ray ray = Camera.main.ScreenPointToRay(mousePos);
@@ -89,12 +97,15 @@ namespace ShrugWare
                     // don't unselect the object if we are still dragging but we drag off of the item too quickly such that our mouse goes off it
                     selectedObject.transform.position = ray.GetPoint(100);
                 }
+                */
             }
 
             // check distance from borders on mouse up
             if(Input.GetMouseButtonUp(0))
             {
-                CheckDistance();
+                CheckDistance(resource1);
+                CheckDistance(resource2);
+                CheckDistance(resource3);
 
                 if (item1InSlot && item2InSlot && item3InSlot)
                 {
@@ -108,35 +119,30 @@ namespace ShrugWare
             return item1InSlot && item2InSlot && item3InSlot;
         }
 
-        private void CheckDistance()
+        public void CheckDistance(GameObject resourceObj)
         {
             // when we drop an object, determine its distance from the three borders
             // if it's less than an amount, it's "in"
-            if(selectedObject != null)
+
+            float offset = 5;
+            float acceptableDistance = 7.0f;
+            float distanceFromBorder1 = Vector2.Distance(resourceObj.transform.position, border1Center.transform.position) - offset;
+            if (distanceFromBorder1 < acceptableDistance)
             {
-                float offset = 5;
-                float acceptableDistance = 7.0f;
-                float distanceFromBorder1 = Vector2.Distance(selectedObject.transform.position, border1Center.transform.position) - offset;
-                if(distanceFromBorder1 < acceptableDistance)
-                {
-                    item1InSlot = true;
-                }
-
-                float distanceFromBorder2 = Vector2.Distance(selectedObject.transform.position, border2Center.transform.position) - offset;
-                if (distanceFromBorder2 < acceptableDistance)
-                {
-                    item2InSlot = true;
-                }
-
-                float distanceFromBorder3 = Vector2.Distance(selectedObject.transform.position, border3Center.transform.position) - offset;
-                if (distanceFromBorder3 < acceptableDistance)
-                {
-                    item3InSlot = true;
-                }
+                item1InSlot = true;
             }
 
-            // unselect our item
-            selectedObject = null;
+            float distanceFromBorder2 = Vector2.Distance(resourceObj.transform.position, border2Center.transform.position) - offset;
+            if (distanceFromBorder2 < acceptableDistance)
+            {
+                item2InSlot = true;
+            }
+
+            float distanceFromBorder3 = Vector2.Distance(resourceObj.transform.position, border3Center.transform.position) - offset;
+            if (distanceFromBorder3 < acceptableDistance)
+            {
+                item3InSlot = true;
+            }
         }
 
         private void SpawnResources()
