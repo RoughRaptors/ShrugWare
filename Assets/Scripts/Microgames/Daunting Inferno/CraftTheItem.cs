@@ -26,7 +26,6 @@ namespace ShrugWare
         [SerializeField]
         GameObject border3Center;
 
-        GameObject selectedObject;
         private bool item1InSlot = false;
         private bool item2InSlot = false;
         private bool item3InSlot = false;
@@ -35,21 +34,6 @@ namespace ShrugWare
         const float X_MAX = 1700;
         const float Y_MIN = -600;
         const float Y_MAX = 900;
-
-        [SerializeField]
-        TextMeshProUGUI mousePosText;
-
-        [SerializeField]
-        TextMeshProUGUI resource1LocText;
-
-        [SerializeField]
-        TextMeshProUGUI resource2LocText;
-
-        [SerializeField]
-        TextMeshProUGUI resource3LocText;
-
-        [SerializeField]
-        TextMeshProUGUI raycastText;
 
         new private void Start()
         {
@@ -61,9 +45,6 @@ namespace ShrugWare
             base.OnMyGameStart();
             SpawnResources();
 
-
-            microGameTime = 1000;
-
             // this is a hard microgame when too fast and, there's not enough time, give it a time boost the faster the timescale is
             if (BossGameManager.Instance != null)
             {
@@ -74,31 +55,6 @@ namespace ShrugWare
         protected override void OnMyGameTick(float timePercentLeft)
         {
             base.OnMyGameTick(timePercentLeft);
-
-            // drag our items
-            if (Input.GetMouseButton(0))
-            {
-                /*
-                RaycastHit raycastHit;
-                Vector2 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y);
-                Ray ray = Camera.main.ScreenPointToRay(mousePos);
-                raycastText.text = ray.ToString();
-                if (Physics.Raycast(ray, out raycastHit))
-                {
-                    if (raycastHit.transform != null)
-                    {
-                        // move our object to the hit point of the raycast
-                        raycastHit.transform.position = raycastHit.point;
-                        selectedObject = raycastHit.transform.gameObject;
-                    }
-                }
-                else if (selectedObject != null)
-                {
-                    // don't unselect the object if we are still dragging but we drag off of the item too quickly such that our mouse goes off it
-                    selectedObject.transform.position = ray.GetPoint(100);
-                }
-                */
-            }
 
             // check distance from borders on mouse up
             if(Input.GetMouseButtonUp(0))
@@ -147,6 +103,11 @@ namespace ShrugWare
 
         private void SpawnResources()
         {
+            // don't let them exploit by setting one in all 3 slots sequentially
+            item1InSlot = false;
+            item2InSlot = false;
+            item3InSlot = false;
+
             TrySpawnResource(resource1);
             TrySpawnResource(resource2);
             TrySpawnResource(resource3);
