@@ -55,7 +55,20 @@ namespace ShrugWare
         [SerializeField]
         Camera bossSceneCamera = null;
 
+        // this is bad
+        [SerializeField]
+        string bossName;
+
+        private Boss curBoss;
+        public Boss CurBoss { get; set; }
+
+        [SerializeField]
+        List<AudioClip> microgameMusic = new List<AudioClip>();
+
+        public List<AudioClip> GetMicrogameMusic() { return microgameMusic; }
+
         private AudioManager audioManager;
+        public AudioManager GetAudioManager() { return audioManager; }
 
         private float curTimeScale = 1.0f;
         public float GetCurTimeScale() { return curTimeScale; }
@@ -63,13 +76,6 @@ namespace ShrugWare
 
         private float timeInBossScene = 0.0f;
         public float GetTimeInBossScene() { return timeInBossScene; }
-
-        // this is bad
-        [SerializeField]
-        string bossName;
-
-        private Boss curBoss;
-        public Boss CurBoss { get; set; }
 
         PlayerInventory playerInventory;
 
@@ -443,6 +449,16 @@ namespace ShrugWare
                 // kill it so we don't run it again
                 OverworldManager.Instance.CurRandomEvent = null;
             }
+        }
+
+        public AudioClip GetAudioClipFromIndex(int index)
+        {
+            if(index < microgameMusic.Count)
+            {
+                return microgameMusic[index];
+            }
+
+            return null;
         }
     }
 }

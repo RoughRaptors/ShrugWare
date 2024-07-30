@@ -278,5 +278,15 @@ namespace ShrugWare{
 
             GetComponent<AudioManager>().StopAudio();
         }
+
+        public void PlayMusicClip(AudioClip audioClip, DataManager.AudioEffectTypes audioType, float volumeScale = 1)
+        {
+            GetComponent<AudioManager>().PlayMusicClip(audioClip, audioType);
+        }
+
+        public void StopMusic()
+        {
+            GetComponent<AudioManager>().StopAudio();
+        }
     }
 }

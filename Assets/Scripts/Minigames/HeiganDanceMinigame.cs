@@ -247,6 +247,7 @@ namespace ShrugWare
                 overworldManager.CompleteLevel(overworldManager.CurLevel.LevelID);
             }
 
+            overworldManager.StopMusic();
             SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
         }
 

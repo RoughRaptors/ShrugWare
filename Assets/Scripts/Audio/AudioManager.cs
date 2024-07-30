@@ -7,7 +7,11 @@ namespace ShrugWare
 {
     public class AudioManager : MonoBehaviour
     {
-        public List<AudioEffectClip> audioEffects = new List<AudioEffectClip>();
+        [SerializeField]
+        List<AudioEffectClip> audioEffects = new List<AudioEffectClip>();
+
+        [SerializeField]
+        List<AudioEffectClip> microgameClips = new List<AudioEffectClip>();
 
         private AudioSource audioSourceMusic;
         private AudioSource audioSourceEffects;
@@ -95,8 +99,27 @@ namespace ShrugWare
             }
         }
 
+        public void PlayMusicClip(AudioClip audioClip, DataManager.AudioEffectTypes audioType, float volumeScale = 1)
+        {
+            if (audioSourceMusic == null)
+            {
+                return;
+            }
+
+            audioSourceMusic.Stop();
+
+            // minigames are normal speed
+            if (audioType == DataManager.AudioEffectTypes.MicrogameMusic)
+            {
+                audioSourceMusic.pitch = BossGameManager.Instance.GetCurTimeScale() * 0.85f;
+            }
+
+            audioSourceMusic.PlayOneShot(audioClip, volumeScale);
+        }
+
         public void StopAudio()
         {
+            audioSourceEffects.Stop();
             audioSourceMusic.Stop();
         }
     }
