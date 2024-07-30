@@ -94,7 +94,7 @@ namespace ShrugWare
             public int livesLeft;
         }
 
-        // events can modifier our hp. we pull from DataManger.PLAYER_START_HP, so we need an offset to calculate our actual hp
+        // events and armor can modifier our hp. we pull from DataManger.PLAYER_START_HP, so we need an offset to calculate our actual hp
         private int hpOffset;
 
         private bool hasCalculatedStats = false;
@@ -178,6 +178,8 @@ namespace ShrugWare
 
                 hasCalculatedStats = true;
             }
+
+            // add mitigation to hp
 
             // apply the modifiers from our random event, if we have one
             ApplyRandomEventModifiers();
@@ -432,7 +434,7 @@ namespace ShrugWare
                         if (effect.asPercentage)
                         {
                             // until we find a better solution, just hack it a *25 since microgames have more hp
-                            hpOffset = (int)(playerInfo.maxPlayerHealth * (effect.amount / 100));
+                            hpOffset = (int)(DataManager.PLAYER_START_HP_BOSSENCOUNTER * (effect.amount / 100));
                             AddToPlayerRaidMaxHP(hpOffset);
                         }
                         else

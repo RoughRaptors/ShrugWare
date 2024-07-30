@@ -180,6 +180,9 @@ namespace ShrugWare
                     }
                 }
             }
+
+            BossGameManager.Instance.AddToPlayerRaidMaxHP((int)curMitigationPercent);
+            BossGameManager.Instance.HealPlayerRaid((int)curMitigationPercent);
         }
 
         public void AddCurrency(DataManager.Currencies currency, int amount)
