@@ -105,7 +105,9 @@ namespace ShrugWare
             ButtonClick,
             MicrogameTimerTick,
             MicrogameTimerDing,
-            Overworld
+            Overworld,
+            MicrogameMusic,
+            MinigameMusic
         }
 
         public enum OverworldLevelType
@@ -127,6 +129,6 @@ namespace ShrugWare
         public static int PLAYER_MAX_HP_BOSSENCOUNTER = 100;
         public static int PLAYER_STARTING_LIVES_BOSSENCOUNTER = 0; // used to be 3, make it 0 to make it harder and emphasize progression
 
-        public static int PLAYER_START_HEALTH_MICROGAME = 5;
+        public static int PLAYER_START_HEALTH_MINIGAME = 5;
     }
 }

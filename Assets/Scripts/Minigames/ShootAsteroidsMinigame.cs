@@ -73,7 +73,7 @@ namespace ShrugWare
         {
             base.Start();
             this.transform.position = new Vector3(50, 0, 0);
-            healthRemaining = DataManager.PLAYER_START_HEALTH_MICROGAME + healthToAdd;
+            healthRemaining = DataManager.PLAYER_START_HEALTH_MINIGAME + healthToAdd;
             NumAsteroidsDestroyed = 0;
 
             for (int i = 0; i < NUM_ASTEROIDS; ++i)

@@ -86,7 +86,13 @@ namespace ShrugWare
 
         }
 
-        protected virtual void OnMyGameStart() { }
+        protected virtual void OnMyGameStart()
+        {
+            int randMusicIndex = UnityEngine.Random.Range(0, BossGameManager.Instance.GetMicrogameMusic().Count);
+            AudioClip audioClip = BossGameManager.Instance.GetAudioClipFromIndex(randMusicIndex);
+            BossGameManager.Instance.GetAudioManager().PlayMusicClip(audioClip, DataManager.AudioEffectTypes.MicrogameMusic);
+        }
+
         protected virtual void OnMyGameTick(float timePercentLeft) { }
         protected virtual void TimeOut() { }
         protected abstract bool VictoryCheck();

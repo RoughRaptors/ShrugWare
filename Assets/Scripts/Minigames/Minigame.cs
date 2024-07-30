@@ -10,12 +10,16 @@ namespace ShrugWare
         [SerializeField]
         protected float minigameDuration;
 
+        [SerializeField]
+        AudioClip minigameMusic;
+
         protected int healthToAdd = 0;
 
         protected virtual void Start()
         {
             // apply the random event modifiers
             ApplyRandomEventModifiers();
+            OverworldManager.Instance.PlayMusicClip(minigameMusic, DataManager.AudioEffectTypes.MinigameMusic);
         }
 
         private void ApplyRandomEventModifiers()
@@ -28,7 +32,7 @@ namespace ShrugWare
                     {
                         if (effect.asPercentage)
                         {
-                            healthToAdd = (int)(DataManager.PLAYER_START_HEALTH_MICROGAME * (effect.amount / 100));
+                            healthToAdd = (int)(DataManager.PLAYER_START_HEALTH_MINIGAME * (effect.amount / 100));
                         }
                         else
                         {
