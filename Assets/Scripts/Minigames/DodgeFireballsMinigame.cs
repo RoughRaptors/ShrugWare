@@ -6,7 +6,7 @@ using System.Data;
 
 namespace ShrugWare
 {
-    // 30 seconds long
+    // need to collect x collectibles
     // 0-10s - come from right
     // 10s-20s come from top + right
     // 20s-30s come from top + right + bottom
@@ -17,10 +17,10 @@ namespace ShrugWare
         GameObject fireballInitObj;
 
         [SerializeField]
-        Text statusText;
+        GameObject collectibleInitObj;
 
         [SerializeField]
-        Text timeRemainingText;
+        Text playerHealthText;
 
         [SerializeField]
         GameObject continueButton;
@@ -34,6 +34,13 @@ namespace ShrugWare
         [SerializeField]
         GameObject bottomIndicatorObj;
 
+        [SerializeField]
+        Text enemyHealthText;
+
+        // just to have some variation have some different sprites that spawn in
+        [SerializeField]
+        List<Sprite> collectibleObjectSprites = new List<Sprite>();
+
         private const float FIREBALL_X_MIN = -25;
         private const float FIREBALL_X_MAX = 125;
         private const float FIREBALL_Y_MIN = -40;
@@ -45,6 +52,15 @@ namespace ShrugWare
         private const float PLAYER_X_MAX = 115;
         private const float PLAYER_Y_MIN = -30;
         private const float PLAYER_Y_MAX = 35;
+
+        private const int ENEMY_START_HEALTH = 100;
+        private float enemyHealth = ENEMY_START_HEALTH;
+
+        private const int COLLECTIBLE_DAMAGE = 10;
+        private const float COLLECTIBLE_X_MIN = -5;
+        private const float COLLECTIBLE_X_MAX = 110;
+        private const float COLLECTIBLE_Y_MIN = -25;
+        private const float COLLECTIBLE_Y_MAX = 30;
 
         private const float FIREBALL_SPAWN_INTERVAL = 0.9f;
         private const float TOP_INDICATOR_SPAWN_TIME = 7.5f;
@@ -82,7 +98,6 @@ namespace ShrugWare
 
         private void Awake()
         {
-            minigameDuration = 30;
             continueButton.SetActive(false);
         }
 
@@ -97,8 +112,10 @@ namespace ShrugWare
                 SpawnFireball(FromDirection.FromRight);
             }
 
+            SpawnCollectible();
+
             gameRunning = true;
-            statusText.text = "HP: " + healthRemaining.ToString("F2");
+            playerHealthText.text = "HP: " + healthRemaining.ToString("F2");
         }
 
         private void FixedUpdate()
@@ -121,23 +138,6 @@ namespace ShrugWare
                     hasSpawnedTopIndicator = true;
                     Invoke("DeactivateTopIndicator", 2.5f);
                 }
-            }
-
-            timeRemainingText.text = "Time Remaining: " + (minigameDuration - timeInGame).ToString("F2");
-            if(gameRunning && timeInGame >= minigameDuration)
-            {
-                // out of time, we won
-                gameRunning = false;
-
-                int lootAmount = 500;
-                endGameText.text = "Boss time!\nReceived " + lootAmount + " gold";
-
-                if (OverworldManager.Instance != null)
-                {
-                    OverworldManager.Instance.PlayerInventory.AddCurrency(DataManager.Currencies.Generic, lootAmount);
-                }
-
-                continueButton.SetActive(true);
             }
         }
 
@@ -280,33 +280,15 @@ namespace ShrugWare
 
         private void OnTriggerEnter(Collider other)
         {
-            float mitigation = 0;
-            if (OverworldManager.Instance != null)
+            if (other.gameObject.layer == 7)
             {
-                mitigation = OverworldManager.Instance.PlayerInventory.GetMitigation();
+                // enemy attack
+                CollideFireball(other);
             }
-
-            // damage the player
-            float damageTaken = 1.0f - (mitigation / 100);
-            healthRemaining -= damageTaken;
-            statusText.text = "HP: " + healthRemaining.ToString();
-            if (healthRemaining < 0)
+            else if(other.gameObject.layer == 8)
             {
-                statusText.text = "YOU ARE DED";
-                gameRunning = false;
-                continueButton.SetActive(true);
-            }
-
-            // destroy the fireball and remove it from the list
-            for (int i = 0; i < fireballsList.Count; ++i)
-            {
-                Fireball fireball = fireballsList[i];
-                if (fireball.fireballObj == other.gameObject)
-                {
-                    fireballsList.RemoveAt(i);
-                    Destroy(fireball.fireballObj);
-                    break;
-                }
+                // friendly collider
+                CollideCollectible(other);
             }
         }
 
@@ -335,6 +317,81 @@ namespace ShrugWare
         private void DeactivateBottomIndicator()
         {
             bottomIndicatorObj.SetActive(false);
+        }
+
+        private void SpawnCollectible()
+        {
+            float xPos = UnityEngine.Random.Range(COLLECTIBLE_X_MIN, COLLECTIBLE_X_MAX);
+            float yPos = UnityEngine.Random.Range(COLLECTIBLE_Y_MIN, COLLECTIBLE_Y_MAX);
+            Vector3 locationVec = new Vector3(xPos, yPos, 0);
+            GameObject newCollectible = Instantiate(collectibleInitObj);
+            newCollectible.transform.position = locationVec;
+
+            int spriteIndex = UnityEngine.Random.Range(0, collectibleObjectSprites.Count);
+            newCollectible.GetComponent<SpriteRenderer>().sprite = collectibleObjectSprites[spriteIndex];
+
+            newCollectible.SetActive(true);
+        }
+
+        private void CollideFireball(Collider other)
+        {
+            float mitigation = 0;
+            if (OverworldManager.Instance != null)
+            {
+                mitigation = OverworldManager.Instance.PlayerInventory.GetMitigation();
+            }
+
+            // damage the player
+            float damageTaken = 1.0f - (mitigation / 100);
+            //healthRemaining -= damageTaken;
+            playerHealthText.text = "Player Health: " + healthRemaining.ToString();
+            if (healthRemaining < 0)
+            {
+                playerHealthText.text = "YOU ARE DED";
+                gameRunning = false;
+                continueButton.SetActive(true);
+            }
+
+            // destroy the fireball and remove it from the list
+            for (int i = 0; i < fireballsList.Count; ++i)
+            {
+                Fireball fireball = fireballsList[i];
+                if (fireball.fireballObj == other.gameObject)
+                {
+                    fireballsList.RemoveAt(i);
+                    Destroy(fireball.fireballObj);
+                    break;
+                }
+            }
+        }
+
+        private void CollideCollectible(Collider other)
+        {
+            enemyHealth -= COLLECTIBLE_DAMAGE;
+            enemyHealthText.text = "Enemy Health: " + enemyHealth;
+
+            if (enemyHealth <= 0)
+            {
+                gameRunning = false;
+
+                int lootAmount = 500;
+                endGameText.text = "Boss time!\nReceived " + lootAmount + " gold";
+
+                if (OverworldManager.Instance != null)
+                {
+                    OverworldManager.Instance.PlayerInventory.AddCurrency(DataManager.Currencies.Generic, lootAmount);
+                }
+
+                enemyHealthText.text = "ded";
+
+                continueButton.SetActive(true);
+            }
+            else
+            {
+                SpawnCollectible();
+            }
+
+            Destroy(other.gameObject);
         }
     }
 }

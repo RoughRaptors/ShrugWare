@@ -121,8 +121,8 @@ namespace ShrugWare
             Infinite
         }
 
-        public static float MICROGAME_DURATION_SECONDS = 3.5f; // we can override this in the child Microgame's Start() - microGameTime
-        public static float SECONDS_TO_START_MICROGAME = 1.35f; // how long we wait for the microgame to start when on the scene - to orient the player
+        public static float MICROGAME_DURATION_SECONDS = 3.75f; // we can override this in the child Microgame's Start() - microGameTime
+        public static float SECONDS_TO_START_MICROGAME = 1.5f; // how long we wait for the microgame to start when on the scene - to orient the player
         public static float SECONDS_BETWEEN_MICROGAMES = 3.75f; // how long we wait before starting another microgame inside of GameManager
 
         public static int PLAYER_START_HP_BOSSENCOUNTER = 100;

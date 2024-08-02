@@ -19,7 +19,12 @@ namespace ShrugWare
         {
             // apply the random event modifiers
             ApplyRandomEventModifiers();
-            OverworldManager.Instance.PlayMusicClip(minigameMusic, DataManager.AudioEffectTypes.MinigameMusic);
+
+            if (OverworldManager.Instance != null)
+            {
+                OverworldManager.Instance.PlayMusicClip(minigameMusic, DataManager.AudioEffectTypes.MinigameMusic);
+                Invoke("RestartMusic", minigameMusic.length);
+            }
         }
 
         private void ApplyRandomEventModifiers()
@@ -44,6 +49,11 @@ namespace ShrugWare
                 // kill it so we don't run it again
                 OverworldManager.Instance.CurRandomEvent = null;
             }
+        }
+
+        private void RestartMusic()
+        {
+            OverworldManager.Instance.PlayMusicClip(minigameMusic, DataManager.AudioEffectTypes.MinigameMusic);
         }
     }
 }

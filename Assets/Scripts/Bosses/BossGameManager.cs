@@ -186,8 +186,6 @@ namespace ShrugWare
 
             // our raid and boss data needs to be populated by this point
             UpdateGameUI();
-
-            SetTimescale(1);
         }
 
         private void Update()
@@ -251,6 +249,7 @@ namespace ShrugWare
             }
             else if(playerInfo.livesLeft < 0)
             {
+                SetTimescale(1);
                 bossUIManager.HandleGameOver();
             }
         }
