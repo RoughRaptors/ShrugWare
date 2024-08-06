@@ -47,7 +47,8 @@ namespace ShrugWare
             CraftTheItem,
             BuyExpensiveItem,
             BuyCheapItem,
-            MICROGAME_END = 39 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            ShootTheBoss,
+            MICROGAME_END = 40 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatModifierType

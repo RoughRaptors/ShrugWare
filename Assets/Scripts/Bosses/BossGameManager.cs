@@ -36,6 +36,7 @@ Line of Sight - LOS the boss in time
 Match Polarity - Move to the party members of the same electric positive or negative sign as you
 Navigate The Maze - Navigate a maze to get to the end
 Run In - Leeroy run into the boss room
+Shoot The Boss - Aim with mouse, shoot enemy(s)
 Sidestep The Fireball - Sidestep a fireball coming at you
 Spread Out For Meteor - Spread out from everyone else for a meteor attack
 Stack Up For Meteor - Stack up on everyone for a meteor attack

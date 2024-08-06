@@ -105,6 +105,7 @@
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csParticleMove.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\DodgeTheFireballPattern.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csMouseOrbit.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\ShootTheBoss.cs" />
     <Compile Include="Assets\Scripts\Minigames\ShootAsteroidsMinigame.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\SpreadOutForMeteor.cs" />
     <Compile Include="Assets\Scripts\Various Other\Clickable.cs" />

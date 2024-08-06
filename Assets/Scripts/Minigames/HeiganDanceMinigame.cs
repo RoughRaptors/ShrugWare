@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.Universal;
+using System.Linq;
 
 namespace ShrugWare
 {
@@ -12,7 +13,7 @@ namespace ShrugWare
         Text statusText;
 
         [SerializeField]
-        Text timeRemainingText;
+        Text enemyHealthText;
 
         [SerializeField]
         GameObject continueButton;
@@ -32,22 +33,30 @@ namespace ShrugWare
         [SerializeField]
         GameObject[] tileObjs;
 
+        // use this to make sure the player spawns on a green tile
         [SerializeField]
         GameObject startingTileObj;
 
+        // just to have some variation have some different sprites that spawn in
+        [SerializeField]
+        List<Sprite> collectibleObjectSprites = new List<Sprite>();
+
+        [SerializeField]
+        GameObject collectibleObj;
+
         private const float TIME_TO_SWITCH_COLORS = 3.5f;
+        private const float PLAYER_SPEED = 50.0f;
         private float timeSinceLastColorSwitch = 0.0f;
         private float totalTimeInGame = 0.0f;
-        private const float PLAYER_SPEED = 50.0f;
 
         // float so we can take partial damage via damage mitigation
         private const float START_HEALTH = 5;
+        
+        private const int COLLECTIBLE_DAMAGE = 10;
+        private const int ENEMY_START_HEALTH = 100;
+        private float enemyHealth = ENEMY_START_HEALTH;
 
         private const int NUM_EACH_COLOR = 6;
-
-        private int numGreenTilesLit = 0;
-        private int numYellowTilesLit = 0;
-        private int numRedTilesLit = 0;
 
         private List<GameObject> greenTiles = new List<GameObject>();
         private List<GameObject> yellowTiles = new List<GameObject>();
@@ -55,7 +64,6 @@ namespace ShrugWare
 
         private float healthRemaining = 5;
         private bool gameRunning = false;
-        bool exploited = false;
 
         private void Awake()
         {
@@ -84,35 +92,46 @@ namespace ShrugWare
             // then randomly pick tiles to change
             foreach(GameObject tileObj in tileObjs)
             {
-                ++numGreenTilesLit;
-                tileObj.GetComponent<MeshRenderer>().material = greenMaterial;
+                MakeTileGreen(tileObj);
                 greenTiles.Add(tileObj);
             }
 
-            // turn numYellowTilesLit from green to yellow
-            for (; numYellowTilesLit < NUM_EACH_COLOR; ++numYellowTilesLit)
+            // turn NUM_EACH_COLOR to yellow
+            int numIterations = 0;
+            while (numIterations < NUM_EACH_COLOR)
             {
-                --numGreenTilesLit;
-                int randomGreenTileIndex = Random.Range(0, greenTiles.Count);
-                GameObject randomTile = tileObjs[randomGreenTileIndex];
-                randomTile.GetComponent<MeshRenderer>().material = yellowMaterial;
+                ++numIterations;
+                
+                int randomTileIndex = Random.Range(0, greenTiles.Count);
+                GameObject randomTile = greenTiles[randomTileIndex];
+                MakeTileYellow(randomTile);
                 greenTiles.Remove(randomTile);
                 yellowTiles.Add(randomTile);
             }
 
-            // turn numRedTilesLit from yellow to red
-            for(; numRedTilesLit < NUM_EACH_COLOR; ++numRedTilesLit)
+            // turn NUM_EACH_COLOR to red
+            numIterations = 0;
+            while (numIterations < NUM_EACH_COLOR)
             {
-                --numYellowTilesLit;
-                int randomYellowTileIndex = Random.Range(0, yellowTiles.Count);
-                GameObject randomTile = tileObjs[randomYellowTileIndex];
-                randomTile.GetComponent<MeshRenderer>().material = redMaterial;
-                yellowTiles.Remove(randomTile);
+                ++numIterations;
+
+                int randomTileIndex = Random.Range(0, greenTiles.Count);
+                GameObject randomTile = greenTiles[randomTileIndex];
+                MakeTileRed(randomTile);
+                greenTiles.Remove(randomTile);
                 redTiles.Add(randomTile);
             }
 
-            // change the spawn tile to green
+            // change the spawn tile to green and remove it if it's yellow/red
             MakeTileGreen(startingTileObj);
+            if (!greenTiles.Contains(startingTileObj))
+            {
+                greenTiles.Add(startingTileObj);
+                yellowTiles.Remove(startingTileObj);
+                redTiles.Remove(startingTileObj);
+            }
+
+            SpawnCollectible();
         }
 
         private void FixedUpdate()
@@ -124,7 +143,7 @@ namespace ShrugWare
                 // this doesn't reset
                 totalTimeInGame += Time.deltaTime;
 
-                // this does
+                // this does reset
                 timeSinceLastColorSwitch += Time.deltaTime;
                 if(timeSinceLastColorSwitch >= TIME_TO_SWITCH_COLORS)
                 {
@@ -132,27 +151,21 @@ namespace ShrugWare
                     RotateTileColors();
                 }
             }
+        }
 
-            if (!exploited)
+        private void WinGame()
+        {
+            gameRunning = false;
+
+            int lootAmount = 500;
+            endGameText.text = "Boss time!\nReceived " + lootAmount + " gold";
+
+            if (OverworldManager.Instance != null)
             {
-                timeRemainingText.text = "Time Remaining: " + (minigameDuration - totalTimeInGame).ToString("F2");
+                OverworldManager.Instance.PlayerInventory.AddCurrency(DataManager.Currencies.Generic, lootAmount);
             }
-
-            if(gameRunning && totalTimeInGame >= minigameDuration)
-            {
-                // out of time, we won
-                gameRunning = false;
-
-                int lootAmount = 500;
-                endGameText.text = "Boss time!\nReceived " + lootAmount + " gold";
-
-                if (OverworldManager.Instance != null)
-                {
-                    OverworldManager.Instance.PlayerInventory.AddCurrency(DataManager.Currencies.Generic, lootAmount);
-                }
-
-                continueButton.SetActive(true);
-            }
+            
+            continueButton.SetActive(true);
         }
 
         private void HandlePlayerMovement()
@@ -188,18 +201,38 @@ namespace ShrugWare
             if(other.gameObject.tag == "Barrier")
             {
                 healthRemaining = 0;
-                exploited = true;
-                statusText.text = "Quack";
-                timeRemainingText.text = "Quack";
+                CheckAndHandleDeath();
+
+                statusText.text = "QUACK";
+                enemyHealthText.text = "QUACK";
+            }
+            else if(other.gameObject.tag == "Collectible")
+            {
+                Destroy(other.gameObject);
+
+                enemyHealth -= COLLECTIBLE_DAMAGE;
+                enemyHealthText.text = "Enemy Health: " + enemyHealth.ToString();
+                if (enemyHealth <= 0)
+                {
+                    gameRunning = false;
+                    WinGame();
+                }
+                else
+                {                    
+                    SpawnCollectible();
+                }
             }
         }
 
         private void OnTriggerStay(Collider other)
         {
-            MeshRenderer meshRenderer = other.gameObject.GetComponent<MeshRenderer>();
-            if (meshRenderer != null && meshRenderer.material.color == Color.red)
+            if (gameRunning)
             {
-                DamagePlayer(other.gameObject);
+                MeshRenderer meshRenderer = other.gameObject.GetComponent<MeshRenderer>();
+                if (meshRenderer != null && meshRenderer.material.color == Color.red)
+                {
+                    DamagePlayer(other.gameObject);
+                }
             }
         }
 
@@ -221,16 +254,16 @@ namespace ShrugWare
 
             healthRemaining -= damageTaken;
             statusText.text = "HP: " + healthRemaining.ToString("F2");
+            CheckAndHandleDeath();
+        }
+
+        private void CheckAndHandleDeath()
+        {
             if (healthRemaining <= 0)
             {
                 statusText.text = "YOU ARE DED";
                 gameRunning = false;
                 continueButton.SetActive(true);
-            }
-
-            if (exploited)
-            {
-                statusText.text = "Quack";
             }
         }
 
@@ -242,7 +275,7 @@ namespace ShrugWare
                 return;
             }
 
-            if (healthRemaining >= 0)
+            if (healthRemaining > 0)
             {
                 overworldManager.CompleteLevel(overworldManager.CurLevel.LevelID);
             }
@@ -270,6 +303,7 @@ namespace ShrugWare
                 modifiedTiles.Add(greenTile);
             }
 
+            // our tiles are now yellow, remove from green
             foreach (GameObject tileToRemove in yellowTiles)
             {
                 greenTiles.Remove(tileToRemove);
@@ -287,6 +321,7 @@ namespace ShrugWare
                 }
             }
 
+            // our tiles are now red, remove from yellow
             foreach (GameObject tileToRemove in redTiles)
             {
                 yellowTiles.Remove(tileToRemove);
@@ -304,6 +339,7 @@ namespace ShrugWare
                 }
             }
 
+            // our tiles are now green, remove from red
             foreach (GameObject tileToRemove in greenTiles)
             {
                 redTiles.Remove(tileToRemove);
@@ -323,6 +359,19 @@ namespace ShrugWare
         private void MakeTileRed(GameObject tileObj)
         {
             tileObj.GetComponent<MeshRenderer>().material = redMaterial;
+        }
+
+        private void SpawnCollectible()
+        {
+            GameObject newCollectible = Instantiate(collectibleObj);
+
+            int spriteIndex = UnityEngine.Random.Range(0, collectibleObjectSprites.Count);
+            newCollectible.GetComponent<SpriteRenderer>().sprite = collectibleObjectSprites[spriteIndex];
+
+            // pick a random tile to spawn on
+            int tileIndex = UnityEngine.Random.Range(0, tileObjs.Length);
+            newCollectible.transform.position = new Vector3(tileObjs[tileIndex].transform.position.x, tileObjs[tileIndex].transform.position.y, -1);
+            newCollectible.SetActive(true);
         }
     }
 }
