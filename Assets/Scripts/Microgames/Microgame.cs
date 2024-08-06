@@ -20,6 +20,8 @@ namespace ShrugWare
         // used to restrict player input and introduce a delay to the beginning of a microgame
         protected float microGameTime = 0;
 
+        protected float timeElapsed = 0;
+
         // the effects to trigger if you win or lose
         private List<DataManager.StatEffect> winEffects = new List<DataManager.StatEffect>();
         private List<DataManager.StatEffect> lossEffects = new List<DataManager.StatEffect>();
@@ -68,7 +70,9 @@ namespace ShrugWare
             float timeLeft = microGameTime;
             yield return new WaitUntil(() =>
             {
+                // comment this line to have infinite time to test a microgame
                 timeLeft -= Time.deltaTime;
+                timeElapsed += Time.deltaTime;
                 float timePercentLeft = timeLeft / microGameTime;
                 OnMyGameTick(timePercentLeft);
                 MicrogameTick?.Invoke(timePercentLeft);

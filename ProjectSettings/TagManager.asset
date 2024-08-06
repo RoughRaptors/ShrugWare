@@ -9,11 +9,12 @@ TagManager:
   - Laser
   - Barrier
   - Tile
+  - Collectible
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy Body
   - Water
   - UI
   - Ally
@@ -21,7 +22,7 @@ TagManager:
   - Friendly Collider
   - Player Body
   - Wall
-  - 
+  - Friendly Attack
   - 
   - 
   - 
