@@ -15,6 +15,9 @@ namespace ShrugWare
 
         private bool inSafeZone = false;
 
+        private Vector3 platformTargetPos;
+
+        private const int PLATFORM_SPEED = 50;
         private const float X_MIN = -30.0f;
         private const float X_MAX = 30.0f;
 
@@ -45,10 +48,17 @@ namespace ShrugWare
         protected override void OnMyGameTick(float timePercentLeft)
         {
             base.OnMyGameTick(timePercentLeft);
+
             float angle = Mathf.Atan2(playerObject.transform.position.y - arrowObj.transform.position.y,
                 playerObject.transform.position.x - arrowObj.transform.position.x);
 
             arrowObj.transform.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg);
+
+            safeZoneObj.transform.position = Vector3.MoveTowards(safeZoneObj.transform.position, platformTargetPos, PLATFORM_SPEED * Time.deltaTime);
+            if(safeZoneObj.transform.position == platformTargetPos)
+            {
+                platformTargetPos = new Vector3(-platformTargetPos.x, platformTargetPos.y, platformTargetPos.z);
+            }
         }
 
         protected override void TimeOut()
@@ -64,6 +74,19 @@ namespace ShrugWare
             safeZoneObj.SetActive(false);
             float xPos = Random.Range(X_MIN, X_MAX);
             safeZoneObj.transform.position = new Vector3(xPos, -12, 0);
+
+            Vector3 targetPos;
+            bool negative = UnityEngine.Random.Range(0, 2) == 0;
+            if (negative)
+            {
+                targetPos = new Vector3(X_MIN, -12, 0);
+            }
+            else
+            {
+                targetPos = new Vector3(X_MAX, -12, 0);
+            }
+
+            platformTargetPos = targetPos;
         }
 
         private void ApplyKnockback()

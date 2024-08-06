@@ -59,7 +59,7 @@ namespace ShrugWare
                 attackPressed = true;
 
                 float attackValue = timingSlider.value;
-                if (attackValue >= 80)
+                if (attackValue >= 70)
                 {
                     attackedSucceeded = true;
                     SetMicrogameEndText(true, "Yay timing");

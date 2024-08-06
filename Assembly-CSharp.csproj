@@ -95,6 +95,7 @@
     <Compile Include="Assets\Art\Fire\Scripts\OscillateLightBrightness.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterceptTheFireball.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\MeleeTheBoss.cs" />
     <Compile Include="Assets\Scripts\Items\ArmorItem.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\CraftTheItem.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\BuyTheCheapItem.cs" />

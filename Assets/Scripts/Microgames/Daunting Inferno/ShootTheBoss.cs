@@ -16,6 +16,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject enemyObj;
 
+        [SerializeField]
+        TextMeshProUGUI debugText;
+
         private LineRenderer lineRenderer;
 
         private const int BULLET_SPEED = 175;
@@ -35,8 +38,8 @@ namespace ShrugWare
 
             lineRenderer = GetComponent<LineRenderer>();
             lineRenderer.enabled = false;
+
             enemyObj.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
-            Debug.Log(timeElapsed);
 
             PickEnemyMovePosition();
         }
@@ -85,9 +88,12 @@ namespace ShrugWare
             lineRenderer.SetPosition(0, startPos);
 
             Vector3 mousePosModified = Input.mousePosition;
-            mousePosModified.z = 10;
+            mousePosModified.z = 500;
             Vector3 endPos = Camera.main.ScreenToWorldPoint(mousePosModified);
             lineRenderer.SetPosition(1, endPos);
+
+            Debug.Log(mousePosModified);
+            debugText.text = "Mouse Pos: " + mousePosModified.ToString() + "\nEnd Pos: " + endPos.ToString();
         }
 
         private void Shoot()

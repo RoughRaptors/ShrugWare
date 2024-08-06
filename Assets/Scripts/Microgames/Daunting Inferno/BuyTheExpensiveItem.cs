@@ -30,6 +30,7 @@ namespace ShrugWare
         [SerializeField]
         List<GameObject> weaponObjs;
 
+        private bool gameWon = false;
         private bool merchant1Correct = false;
         private bool merchant2Correct = false;
         private bool merchant3Correct = false;
@@ -64,7 +65,7 @@ namespace ShrugWare
 
         protected override bool VictoryCheck()
         {
-            return false;
+            return gameWon;
         }
 
         private void AssignItemSprites()
@@ -113,6 +114,7 @@ namespace ShrugWare
                 || (gameObj.name == "Merchant 2 Body" && merchant2Correct)
                 || (gameObj.name == "Merchant 3 Body" && merchant3Correct))
             {
+                gameWon = true;
                 SetMicrogameEndText(true);
             }
             else
