@@ -88,11 +88,11 @@ namespace ShrugWare
             lineRenderer.SetPosition(0, startPos);
 
             Vector3 mousePosModified = Input.mousePosition;
-            mousePosModified.z = 500;
+            mousePosModified.z = 10;
+
             Vector3 endPos = Camera.main.ScreenToWorldPoint(mousePosModified);
             lineRenderer.SetPosition(1, endPos);
 
-            Debug.Log(mousePosModified);
             debugText.text = "Mouse Pos: " + mousePosModified.ToString() + "\nEnd Pos: " + endPos.ToString();
         }
 
