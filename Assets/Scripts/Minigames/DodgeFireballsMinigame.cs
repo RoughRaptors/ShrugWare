@@ -63,8 +63,6 @@ namespace ShrugWare
         private const float COLLECTIBLE_Y_MAX = 30;
 
         private const float FIREBALL_SPAWN_INTERVAL = 0.9f;
-        private const float TOP_INDICATOR_SPAWN_TIME = 7.5f;
-        private const float BOTTOM_INDICATOR_SPAWN_TIME = 17.5f;
         private float timeSinceLastSpawn = 0.0f;
         private bool hasSpawnedTopIndicator = false;
         private bool hasSpawnedBottomIndicator = false;
@@ -77,8 +75,8 @@ namespace ShrugWare
         private float healthRemaining = 5;
         private bool gameRunning = false;
 
-        private const int TOP_PATTERN_SPAWN_TIME = 10;
-        private const int BOTTOM_PATTERN_SPAWN_TIME = 20;
+        private const int TOP_PATTERN_SPAWN_TIME = 5;
+        private const int BOTTOM_PATTERN_SPAWN_TIME = 10;
 
         private enum FromDirection
         {
@@ -126,13 +124,13 @@ namespace ShrugWare
                 HandleFireballs();
                 timeInGame += Time.deltaTime;
 
-                if (!hasSpawnedBottomIndicator && timeInGame >= BOTTOM_INDICATOR_SPAWN_TIME)
+                if (!hasSpawnedBottomIndicator && timeInGame >= BOTTOM_PATTERN_SPAWN_TIME)
                 {
                     bottomIndicatorObj.SetActive(true);
                     hasSpawnedBottomIndicator = true;
                     Invoke("DeactivateBottomIndicator", 2.5f);
                 }
-                else if (!hasSpawnedTopIndicator && timeInGame >= TOP_INDICATOR_SPAWN_TIME)
+                else if (!hasSpawnedTopIndicator && timeInGame >= TOP_PATTERN_SPAWN_TIME)
                 {
                     topIndicatorObj.SetActive(true);
                     hasSpawnedTopIndicator = true;
