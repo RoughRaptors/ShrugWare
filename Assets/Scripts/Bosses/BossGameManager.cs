@@ -34,6 +34,7 @@ Laser Line of Sight Horizontal + Alternative - LOS the lasers
 Laser Line of Sight Vertical + Alternative - LOS the lasers
 Line of Sight - LOS the boss in time
 Match Polarity - Move to the party members of the same electric positive or negative sign as you
+Melee The Boss - hit boss with your sword (just collide)
 Navigate The Maze - Navigate a maze to get to the end
 Run In - Leeroy run into the boss room
 Shoot The Boss - Aim with mouse, shoot enemy(s)
@@ -311,6 +312,7 @@ namespace ShrugWare
 
         public void ContinueGame()
         {
+            SetTimescale(1);
             gameState = GameState.BossScreen;
             if (audioManager != null)
             {

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace ShrugWare
@@ -7,7 +8,10 @@ namespace ShrugWare
         [SerializeField]
         GameObject[] tiles;
 
-        GameObject curTile;
+        private GameObject curTile;
+
+        private const float ROTATE_TIME = 1.0f;
+        private float timeSpent = 0;
 
         protected override void Start()
         {
@@ -31,12 +35,20 @@ namespace ShrugWare
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
-            SetTileColors();
+            RotateColors();
         }
 
         protected override void OnMyGameTick(float timePercentLeft)
         {
             base.OnMyGameTick(timePercentLeft);
+
+            // don't rotate if we're about to end the game because that's unfair
+            timeSpent += Time.deltaTime;
+            if(timeSpent >= ROTATE_TIME && timeElapsed <= microGameTime - 1.0f)
+            {
+                timeSpent = 0;
+                RotateColors();
+            }
         }
 
         protected override bool VictoryCheck()
@@ -54,19 +66,16 @@ namespace ShrugWare
             curTile = gameObj;
         }
 
-        private void SetTileColors()
+        private void RotateColors()
         {
-            if (tiles.Length > 0)
+            foreach (GameObject tile in tiles)
             {
-                foreach (GameObject tile in tiles)
-                {
-                    tile.GetComponent<MeshRenderer>().material.color = Color.red;
-                }
-
-                // roll 0-2, that's our green
-                int greenRand = Random.Range(0, 3);
-                tiles[greenRand].GetComponent<MeshRenderer>().material.color = Color.green;
+                tile.GetComponent<MeshRenderer>().material.color = Color.red;
             }
+
+            // roll 0-2, that's our green
+            int greenRand = UnityEngine.Random.Range(0, 3);
+            tiles[greenRand].GetComponent<MeshRenderer>().material.color = Color.green;
         }
     }
 }
