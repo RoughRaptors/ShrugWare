@@ -302,7 +302,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 200, y: 200, z: 1}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -310,8 +310,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0.14285606
+        time: 0.04624176
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -590,7 +590,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2849529206403513945, guid: faf80821339dc28479fdd5995c2e8a32, type: 3}
       propertyPath: orthographic
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2849529206403513945, guid: faf80821339dc28479fdd5995c2e8a32, type: 3}
+      propertyPath: orthographic size
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2849529206403513945, guid: faf80821339dc28479fdd5995c2e8a32, type: 3}
       propertyPath: m_BackGroundColor.b
@@ -622,7 +626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2849529206403513950, guid: faf80821339dc28479fdd5995c2e8a32, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -95
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2849529206403513950, guid: faf80821339dc28479fdd5995c2e8a32, type: 3}
       propertyPath: m_LocalRotation.w
@@ -651,6 +655,10 @@ PrefabInstance:
     - target: {fileID: 2849529206403513950, guid: faf80821339dc28479fdd5995c2e8a32, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2849529206403513951, guid: faf80821339dc28479fdd5995c2e8a32, type: 3}
+      propertyPath: m_RendererIndex
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
