@@ -122,5 +122,11 @@ namespace ShrugWare
             audioSourceEffects.Stop();
             audioSourceMusic.Stop();
         }
+
+        public void ResetPitch()
+        {
+            audioSourceMusic.pitch = BossGameManager.Instance.GetCurTimeScale() * 0.85f;
+            audioSourceEffects.pitch = BossGameManager.Instance.GetCurTimeScale() * 0.85f;
+        }
     }
 }
