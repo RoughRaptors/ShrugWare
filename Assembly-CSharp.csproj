@@ -112,7 +112,6 @@
     <Compile Include="Assets\Scripts\Various Other\Clickable.cs" />
     <Compile Include="Assets\Scripts\Bosses\BossGameManager.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\KnockbackedSafely.cs" />
-    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\LaserLineOfSightHorizonalAlternative.cs" />
     <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\PerformTheRotation.cs" />
     <Compile Include="Assets\Scripts\Various Other\MainMenu.cs" />
@@ -130,7 +129,6 @@
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csShowAllEffect.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csAnimationSpin.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioManager.cs" />
-    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\LaserLineOfSightDiagonalAlternative.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\SidestepTheFireball.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioEffectClip.cs" />
