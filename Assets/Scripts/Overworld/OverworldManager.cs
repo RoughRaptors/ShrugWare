@@ -56,6 +56,9 @@ namespace ShrugWare{
             set { waitingOnRandomEvent = value; }
         }
 
+        [SerializeField]
+        GameObject cameraObj;
+
         private bool isDebugMode = false;
         public bool IsDebugMode
         {
@@ -77,7 +80,8 @@ namespace ShrugWare{
                 // set all of our shit back - figure out a better solution later if there is one - TODO MAKE THIS BETTER
                 overworldMap = OverworldManager.Instance.overworldMap;
                 curLevel = OverworldManager.Instance.curLevel;
-                playerObj = OverworldManager.Instance.playerObj; 
+                playerObj = OverworldManager.Instance.playerObj;
+                EnableCamera();
                 playerObj.SetActive(true);
 
                 OverworldUIManager.Instance.SetCanvasEnabled(true);
@@ -259,6 +263,7 @@ namespace ShrugWare{
                 return;
             }
 
+            DisableCamera();
             playerObj.SetActive(false);
             GetComponent<AudioManager>().StopAudio();
             OverworldUIManager.Instance.SetCanvasEnabled(false);
@@ -287,6 +292,16 @@ namespace ShrugWare{
         public void StopMusic()
         {
             GetComponent<AudioManager>().StopAudio();
+        }
+
+        public void EnableCamera()
+        {
+            cameraObj.GetComponent<Camera>().enabled = true;
+        }
+
+        public void DisableCamera()
+        {
+            cameraObj.GetComponent<Camera>().enabled = false;
         }
     }
 }

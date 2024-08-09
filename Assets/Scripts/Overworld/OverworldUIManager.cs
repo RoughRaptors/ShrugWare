@@ -43,6 +43,7 @@ namespace ShrugWare
             }
             else if (Instance != this)
             {
+                OverworldManager.Instance.EnableCamera();
                 Destroy(gameObject);
             }
 
@@ -141,6 +142,7 @@ namespace ShrugWare
             if(OverworldManager.Instance.IsDebugMode)
             {
                 SetCanvasEnabled(false);
+                OverworldManager.Instance.DisableCamera();
 
                 // offset our index
                 int sceneIndex = debugDropdown.value + (int)DataManager.Scenes.MICROGAME_START;
