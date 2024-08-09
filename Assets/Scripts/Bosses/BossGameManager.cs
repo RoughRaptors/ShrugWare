@@ -377,6 +377,7 @@ namespace ShrugWare
 
         public void SetTimescale(float newTimescale)
         {
+            audioManager.ResetPitch();
             curTimeScale = newTimescale;
             Time.timeScale = curTimeScale;
             bossUIManager.SetTimescaleInputFieldText("Time Scale: " + curTimeScale.ToString("F3"));
