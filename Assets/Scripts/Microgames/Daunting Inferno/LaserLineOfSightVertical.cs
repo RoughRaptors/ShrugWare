@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections.Generic;
 
 namespace ShrugWare
 {
-    public class LaserLineOfSightVertical : Microgame
+    public class LaserLineOfSightVerical : Microgame
     {
         [SerializeField]
         GameObject[] laserObjs;
@@ -11,8 +12,12 @@ namespace ShrugWare
         [SerializeField]
         PlayerMover playerObject = null;
 
-        public static bool hasBeenHit = false;
+        [SerializeField]
+        GameObject[] walls;
+
+        private static bool hasBeenHit = false;
         private float timeRunning = 0.0f;
+        private int negative = 1;
 
         protected override void Start()
         {
@@ -34,6 +39,17 @@ namespace ShrugWare
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
+
+            // 50/50 chance to go up or down
+            if (UnityEngine.Random.Range(0, 2) == 0)
+            {
+                negative = -1;
+            }
+
+            foreach (GameObject obj in walls)
+            {
+                obj.SetActive(true);
+            }
         }
 
         protected override void OnMyGameTick(float timePercentLeft)
@@ -42,17 +58,19 @@ namespace ShrugWare
 
             // don't enable the lasers until the end of the microgame
             timeRunning += Time.deltaTime;
-            if(timeRunning >= microGameTime)
+            if (timeRunning >= microGameTime)
             {
                 EnableLasers();
             }
-            else if(hasBeenHit || timeRunning > microGameTime)
+            else if (hasBeenHit || timeRunning > microGameTime)
             {
                 // stop moving if we hit a laser
                 playerObject.DisableMovement();
             }
+
+            MoveWalls();
         }
-        
+
         protected override bool VictoryCheck()
         {
             return !hasBeenHit;
@@ -66,10 +84,18 @@ namespace ShrugWare
                 laserObj.GetComponent<ShootLaser>().enabled = true;
             }
         }
-        
-        public void LaserHit(GameObject gameObj)
+
+        private void LaserHit(GameObject gameObj)
         {
             hasBeenHit = true;
+        }
+
+        private void MoveWalls()
+        {
+            foreach (GameObject wall in walls)
+            {
+                wall.transform.position = new Vector3(Mathf.PingPong(Time.time * 20, 80) * negative, wall.transform.position.y, wall.transform.position.z);
+            }
         }
     }
 }
