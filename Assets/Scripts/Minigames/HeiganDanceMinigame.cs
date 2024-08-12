@@ -51,7 +51,8 @@ namespace ShrugWare
 
         // float so we can take partial damage via damage mitigation
         private const float START_HEALTH = 5;
-        
+
+        private const float COLLECTIBLE_SPAWN_DISTANCE = 30;
         private const int COLLECTIBLE_DAMAGE = 10;
         private const int ENEMY_START_HEALTH = 100;
         private float enemyHealth = ENEMY_START_HEALTH;
@@ -363,15 +364,26 @@ namespace ShrugWare
 
         private void SpawnCollectible()
         {
-            GameObject newCollectible = Instantiate(collectibleObj);
+            int numFails = 0;
+            while(numFails < 10)
+            {
+                int tileIndex = UnityEngine.Random.Range(0, tileObjs.Length);
+                float distance = Vector3.Distance(this.transform.position, tileObjs[tileIndex].transform.position);
+                if (distance >= COLLECTIBLE_SPAWN_DISTANCE && numFails < 10)
+                {
+                    GameObject newCollectible = Instantiate(collectibleObj);
+                    newCollectible.SetActive(true);
 
-            int spriteIndex = UnityEngine.Random.Range(0, collectibleObjectSprites.Count);
-            newCollectible.GetComponent<SpriteRenderer>().sprite = collectibleObjectSprites[spriteIndex];
+                    int spriteIndex = UnityEngine.Random.Range(0, collectibleObjectSprites.Count);
+                    newCollectible.GetComponent<SpriteRenderer>().sprite = collectibleObjectSprites[spriteIndex];
 
-            // pick a random tile to spawn on
-            int tileIndex = UnityEngine.Random.Range(0, tileObjs.Length);
-            newCollectible.transform.position = new Vector3(tileObjs[tileIndex].transform.position.x, tileObjs[tileIndex].transform.position.y, -1);
-            newCollectible.SetActive(true);
+                    // pick a random tile to spawn on
+                    newCollectible.transform.position = new Vector3(tileObjs[tileIndex].transform.position.x, tileObjs[tileIndex].transform.position.y, -1);
+                    break;
+                }
+
+                ++numFails;
+            }
         }
     }
 }

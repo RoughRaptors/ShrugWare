@@ -56,6 +56,7 @@ namespace ShrugWare
         private const int ENEMY_START_HEALTH = 100;
         private float enemyHealth = ENEMY_START_HEALTH;
 
+        private const float COLLECTIBLE_SPAWN_DISTANCE = 35;
         private const int COLLECTIBLE_DAMAGE = 10;
         private const float COLLECTIBLE_X_MIN = -5;
         private const float COLLECTIBLE_X_MAX = 110;
@@ -319,16 +320,28 @@ namespace ShrugWare
 
         private void SpawnCollectible()
         {
-            float xPos = UnityEngine.Random.Range(COLLECTIBLE_X_MIN, COLLECTIBLE_X_MAX);
-            float yPos = UnityEngine.Random.Range(COLLECTIBLE_Y_MIN, COLLECTIBLE_Y_MAX);
-            Vector3 locationVec = new Vector3(xPos, yPos, 0);
-            GameObject newCollectible = Instantiate(collectibleInitObj);
-            newCollectible.transform.position = locationVec;
+            int numTries = 0;
+            while(numTries < 10)
+            {
+                float xPos = UnityEngine.Random.Range(COLLECTIBLE_X_MIN, COLLECTIBLE_X_MAX);
+                float yPos = UnityEngine.Random.Range(COLLECTIBLE_Y_MIN, COLLECTIBLE_Y_MAX);
+                Vector3 locationVec = new Vector3(xPos, yPos, 0);
 
-            int spriteIndex = UnityEngine.Random.Range(0, collectibleObjectSprites.Count);
-            newCollectible.GetComponent<SpriteRenderer>().sprite = collectibleObjectSprites[spriteIndex];
+                float distance = Vector3.Distance(this.transform.position, locationVec);
+                if (distance > COLLECTIBLE_SPAWN_DISTANCE)
+                {
+                    GameObject newCollectible = Instantiate(collectibleInitObj);
+                    newCollectible.transform.position = locationVec;
 
-            newCollectible.SetActive(true);
+                    int spriteIndex = UnityEngine.Random.Range(0, collectibleObjectSprites.Count);
+                    newCollectible.GetComponent<SpriteRenderer>().sprite = collectibleObjectSprites[spriteIndex];
+
+                    newCollectible.SetActive(true);
+                    break;
+                }
+
+                ++numTries;
+            }
         }
 
         private void CollideFireball(Collider other)
