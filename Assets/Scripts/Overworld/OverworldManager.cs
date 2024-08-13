@@ -66,6 +66,12 @@ namespace ShrugWare{
             set { isDebugMode = value; }
         }
 
+        private AudioManager audioManager;
+        public AudioManager AudioManager
+        {
+            get { return audioManager; }
+        }
+
         private void Awake()
         {
             if (Instance == null)
@@ -101,6 +107,7 @@ namespace ShrugWare{
                 playerInventory = new PlayerInventory();
             }
 
+            audioManager = GetComponent<AudioManager>();
             overworldUIManager.UpdateUI();
         }
 
@@ -263,9 +270,14 @@ namespace ShrugWare{
                 return;
             }
 
-            DisableCamera();
             playerObj.SetActive(false);
-            GetComponent<AudioManager>().StopAudio();
+
+            // only stop if we enter a trash/boss/infinite level
+            if(isTrashOrBoss || level.LevelType == DataManager.OverworldLevelType.Infinite)
+            {
+                audioManager.StopAudio();
+            }
+
             OverworldUIManager.Instance.SetCanvasEnabled(false);
             SceneManager.LoadScene((int)level.SceneIDToLoad);
         }

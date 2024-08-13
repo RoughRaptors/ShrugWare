@@ -179,7 +179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2301266168276219429, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: microgameMusic.Array.size
-      value: 43
+      value: 41
       objectReference: {fileID: 0}
     - target: {fileID: 2301266168276219429, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: microgameMusic.Array.data[0]

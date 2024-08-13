@@ -18,10 +18,7 @@ namespace ShrugWare
 
         private void OnEnable()
         {
-            if (BossGameManager.Instance != null)
-            {
-                SwapColor();
-            }
+            SwapColor();
         }
 
         private void SwapColor()
