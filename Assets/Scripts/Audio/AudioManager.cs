@@ -10,9 +10,6 @@ namespace ShrugWare
         [SerializeField]
         List<AudioEffectClip> audioEffects = new List<AudioEffectClip>();
 
-        [SerializeField]
-        List<AudioEffectClip> microgameClips = new List<AudioEffectClip>();
-
         private AudioSource audioSourceMusic;
         private AudioSource audioSourceEffects;
 
@@ -111,7 +108,17 @@ namespace ShrugWare
             // minigames are normal speed
             if (audioType == DataManager.AudioEffectTypes.MicrogameMusic)
             {
-                audioSourceMusic.pitch = BossGameManager.Instance.GetCurTimeScale() * 0.85f;
+                float curTimeScale = 1;
+                if(BossGameManager.Instance != null)
+                {
+                    curTimeScale = BossGameManager.Instance.GetCurTimeScale();
+                }
+                else if(InfiniteModeManager.Instance != null)
+                {
+                    curTimeScale = InfiniteModeManager.Instance.GetCurTimeScale();
+                }
+
+                audioSourceMusic.pitch = curTimeScale * 0.85f;
             }
 
             audioSourceMusic.PlayOneShot(audioClip, volumeScale);

@@ -24,6 +24,14 @@ public class InfiniteModeManager : MonoBehaviour
     [SerializeField]
     Camera cameraObj;
 
+    [SerializeField]
+    List<AudioClip> microgameMusic = new List<AudioClip>();
+
+    private AudioManager audioManager;
+    public AudioManager GetAudioManager() { return audioManager; }
+
+    public List<AudioClip> GetMicrogameMusic() { return microgameMusic; }
+
     private const int STARTING_LIVES = 3;
     private int score = 0;
     private int livesLeft = STARTING_LIVES;
@@ -35,8 +43,6 @@ public class InfiniteModeManager : MonoBehaviour
     private List<DataManager.Scenes> scenes = new List<DataManager.Scenes>();
 
     private float timeInBossScene = 0.0f;
-
-    private AudioManager audioManager;
 
     public enum GameState
     {
@@ -53,6 +59,7 @@ public class InfiniteModeManager : MonoBehaviour
         if (Instance == null)
         {
             DontDestroyOnLoad(gameObject);
+            audioManager = OverworldManager.Instance.AudioManager;
             Instance = this;
         }
         else if (Instance != this)
@@ -88,12 +95,7 @@ public class InfiniteModeManager : MonoBehaviour
         }
 
         gameState = GameState.BossScreen;
-        cameraObj.gameObject.SetActive(true);
-
-        if (OverworldManager.Instance != null)
-        {
-            audioManager = OverworldManager.Instance.GetComponent<AudioManager>();
-        }
+        EnableCamera();
     }
 
     private void Update()
@@ -124,6 +126,11 @@ public class InfiniteModeManager : MonoBehaviour
         }
     }
 
+    private void PlayBetweenMicrogameTimerDing()
+    {
+        audioManager.PlayAudioClip(DataManager.AudioEffectTypes.MicrogameTimerDing, .3f);
+    }
+
     public void OnStartPressed()
     {
         started = true;
@@ -132,6 +139,11 @@ public class InfiniteModeManager : MonoBehaviour
         {
             gameState = GameState.BossScreen;
             timeToNextMicrogameText.gameObject.SetActive(true);
+
+            PlayBetweenMicrogameTimerDing();
+            Invoke("PlayBetweenMicrogameTimerDing", 1.5f);
+            Invoke("PlayBetweenMicrogameTimerDing", 2.5f);
+            Invoke("PlayBetweenMicrogameTimerDing", 3.5f);
         }
         else
         {
@@ -139,7 +151,6 @@ public class InfiniteModeManager : MonoBehaviour
             timeToNextMicrogameText.gameObject.SetActive(false);
             scoreText.gameObject.SetActive(false);
             livesLeftText.gameObject.SetActive(false);
-            cameraObj.gameObject.SetActive(false);
             livesLeft = STARTING_LIVES;
             score = 0;
             SetTimescale(1);
@@ -199,7 +210,7 @@ public class InfiniteModeManager : MonoBehaviour
             HandleDied();
         }
 
-        SceneManager.LoadScene((int)OverworldManager.Instance.CurLevel.SceneIDToLoad);
+        SceneManager.LoadScene((int)DataManager.Scenes.InfiniteModeScene);
     }
 
     private void HandleDied()
@@ -223,5 +234,25 @@ public class InfiniteModeManager : MonoBehaviour
         curTimeScale += amount;
         Time.timeScale = curTimeScale;
         livesLeftText.text = "Lives Left: " + livesLeft.ToString() + "\nTimescale: " + curTimeScale.ToString();
+    }
+
+    public AudioClip GetAudioClipFromIndex(int index)
+    {
+        if (index < microgameMusic.Count)
+        {
+            return microgameMusic[index];
+        }
+
+        return null;
+    }
+
+    public void EnableCamera()
+    {
+        cameraObj.enabled = true;
+    }
+
+    public void DisableCamera()
+    {
+        cameraObj.enabled = false;
     }
 }

@@ -98,6 +98,13 @@ namespace ShrugWare
                 AudioClip audioClip = BossGameManager.Instance.GetAudioClipFromIndex(randMusicIndex);
                 BossGameManager.Instance.GetAudioManager().PlayMusicClip(audioClip, DataManager.AudioEffectTypes.MicrogameMusic);
             }
+            else if(InfiniteModeManager.Instance != null)
+            {
+                int randMusicIndex = UnityEngine.Random.Range(0, InfiniteModeManager.Instance.GetMicrogameMusic().Count);
+                AudioClip audioClip = InfiniteModeManager.Instance.GetAudioClipFromIndex(randMusicIndex);
+                InfiniteModeManager.Instance.GetAudioManager().PlayMusicClip(audioClip, DataManager.AudioEffectTypes.MicrogameMusic);
+                InfiniteModeManager.Instance.DisableCamera();
+            }
         }
 
         protected virtual void OnMyGameTick(float timePercentLeft) { }
@@ -128,7 +135,7 @@ namespace ShrugWare
             {
                 SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
             }
-            else if(InfiniteModeManager.Instance != null && OverworldManager.Instance.CurLevel.LevelType == DataManager.OverworldLevelType.Infinite)
+            else if(InfiniteModeManager.Instance != null)
             {
                 StartCoroutine(LoadScene(wonMicrogame));
             }
@@ -161,7 +168,7 @@ namespace ShrugWare
         {
             yield return new WaitForSeconds(DataManager.SECONDS_TO_START_MICROGAME);
 
-            if(OverworldManager.Instance.CurLevel.LevelType == DataManager.OverworldLevelType.Infinite)
+            if(InfiniteModeManager.Instance != null)
             {
                 InfiniteModeManager.Instance.MicrogameCompleted(wonMicrogame);
             }

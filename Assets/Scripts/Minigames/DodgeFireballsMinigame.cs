@@ -97,6 +97,7 @@ namespace ShrugWare
 
         private void Awake()
         {
+            OverworldManager.Instance.DisableCamera();
             continueButton.SetActive(false);
         }
 
