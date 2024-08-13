@@ -109,6 +109,7 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\ShootTheBoss.cs" />
     <Compile Include="Assets\Scripts\Minigames\ShootAsteroidsMinigame.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\SpreadOutForMeteor.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerHighlighter.cs" />
     <Compile Include="Assets\Scripts\Various Other\Clickable.cs" />
     <Compile Include="Assets\Scripts\Bosses\BossGameManager.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\KnockbackedSafely.cs" />
