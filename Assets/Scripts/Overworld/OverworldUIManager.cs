@@ -93,6 +93,10 @@ namespace ShrugWare
             mainUICanvas.SetActive(enabled);
             levelsObj.SetActive(enabled);
             UpdateUI();
+            if (enabled && OverworldManager.Instance != null)
+            {
+                OverworldManager.Instance.EnableCamera();
+            }
         }
 
         public void EnterCurLevelClicked()

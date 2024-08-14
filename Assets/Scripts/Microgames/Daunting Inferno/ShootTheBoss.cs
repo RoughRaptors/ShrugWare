@@ -16,9 +16,6 @@ namespace ShrugWare
         [SerializeField]
         GameObject enemyObj;
 
-        [SerializeField]
-        TextMeshProUGUI debugText;
-
         private LineRenderer lineRenderer;
 
         private const int BULLET_SPEED = 175;
@@ -44,14 +41,6 @@ namespace ShrugWare
             PickEnemyMovePosition();
         }
 
-        private void OnEnable()
-        {
-        }
-
-        private void OnDisable()
-        {
-        }
-
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
@@ -64,16 +53,19 @@ namespace ShrugWare
         {
             base.OnMyGameTick(timePercentLeft);
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                Shoot();
-            }
-
             if (!enemyHit)
             {
-                DrawLine();
-                time += Time.deltaTime / microGameTime;
-                enemyObj.transform.position = Vector3.Lerp(enemyStartPos, enemyMovePos, time);
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Shoot();
+                }
+
+                if (!enemyHit)
+                {
+                    DrawLine();
+                    time += Time.deltaTime / microGameTime;
+                    enemyObj.transform.position = Vector3.Lerp(enemyStartPos, enemyMovePos, time);
+                }
             }
         }
 
@@ -92,8 +84,6 @@ namespace ShrugWare
 
             Vector3 endPos = Camera.main.ScreenToWorldPoint(mousePosModified);
             lineRenderer.SetPosition(1, endPos);
-
-            debugText.text = "Mouse Pos: " + mousePosModified.ToString() + "\nEnd Pos: " + endPos.ToString();
         }
 
         private void Shoot()
