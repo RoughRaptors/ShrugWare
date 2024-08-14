@@ -26,6 +26,7 @@ namespace ShrugWare
 
         public void OnBackClicked()
         {
+            OverworldManager.Instance.ReadyScene(true);
             SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
         }
     }

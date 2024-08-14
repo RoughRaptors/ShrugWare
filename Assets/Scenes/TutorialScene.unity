@@ -585,6 +585,7 @@ GameObject:
   - component: {fileID: 1391419967}
   - component: {fileID: 1391419966}
   - component: {fileID: 1391419970}
+  - component: {fileID: 1391419971}
   m_Layer: 5
   m_Name: Tutorial Menu Canvas
   m_TagString: Untagged
@@ -692,6 +693,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a944d8f2fb7484490e04fa99f486de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!81 &1391419971
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391419965}
+  m_Enabled: 1
 --- !u!4 &1702016527 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2436309999093736161, guid: c8d795483a4fe054c9a9e1461458c02e, type: 3}

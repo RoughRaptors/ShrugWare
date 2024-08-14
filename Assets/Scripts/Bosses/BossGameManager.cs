@@ -371,16 +371,16 @@ namespace ShrugWare
 #if UNITY_EDITOR
                 //amount = CurBoss.curHealth;
 #endif
-                curBoss.TakeDamage(amount);
+                curBoss.TakeDamage(100);
             }
         }
 
         public void SetTimescale(float newTimescale)
         {
-            audioManager.ResetPitch();
             curTimeScale = newTimescale;
             Time.timeScale = curTimeScale;
             bossUIManager.SetTimescaleInputFieldText("Time Scale: " + curTimeScale.ToString("F3"));
+            audioManager.ResetPitch();
         }
 
         public void AddToTimeScale(float amount)

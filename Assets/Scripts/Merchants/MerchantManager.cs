@@ -359,6 +359,7 @@ namespace ShrugWare
             prevSelectedObj = null;
             selectedItem.item = null;
 
+            OverworldManager.Instance.ReadyScene(true);
             SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
         }
     }

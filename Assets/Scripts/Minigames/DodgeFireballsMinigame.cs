@@ -97,7 +97,7 @@ namespace ShrugWare
 
         private void Awake()
         {
-            OverworldManager.Instance.DisableCamera();
+            OverworldManager.Instance.ReadyScene(false);
             continueButton.SetActive(false);
         }
 
@@ -130,13 +130,13 @@ namespace ShrugWare
                 {
                     bottomIndicatorObj.SetActive(true);
                     hasSpawnedBottomIndicator = true;
-                    Invoke("DeactivateBottomIndicator", 2.5f);
+                    Invoke("DeactivateBottomIndicator", 2.0f);
                 }
                 else if (!hasSpawnedTopIndicator && timeInGame >= TOP_PATTERN_SPAWN_TIME)
                 {
                     topIndicatorObj.SetActive(true);
                     hasSpawnedTopIndicator = true;
-                    Invoke("DeactivateTopIndicator", 2.5f);
+                    Invoke("DeactivateTopIndicator", 2.0f);
                 }
             }
         }
@@ -306,6 +306,7 @@ namespace ShrugWare
             }
 
             overworldManager.StopMusic();
+            overworldManager.ReadyScene(true);
             SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
         }
 

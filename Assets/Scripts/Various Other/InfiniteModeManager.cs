@@ -156,7 +156,9 @@ public class InfiniteModeManager : MonoBehaviour
             SetTimescale(1);
             started = false;
             gameState = GameState.Inactive;
+            OverworldManager.Instance.ReadyScene(true);
             SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
+            Destroy(this);
         }
     }
 
