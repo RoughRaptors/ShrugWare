@@ -282,6 +282,7 @@ namespace ShrugWare
             }
 
             overworldManager.StopMusic();
+            overworldManager.ReadyScene(true);
             SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
         }
 

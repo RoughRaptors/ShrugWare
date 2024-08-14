@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEditor;
+using UnityEngine.EventSystems;
 
 namespace ShrugWare{
 
@@ -72,12 +73,21 @@ namespace ShrugWare{
             get { return audioManager; }
         }
 
+        [SerializeField]
+        GameObject eventSystemObj;
+
+        [SerializeField]
+        GameObject audioListenerObj;
+
         private void Awake()
         {
             if (Instance == null)
             {
                 DontDestroyOnLoad(gameObject);
                 Instance = this;
+
+                // give the audio manager time
+                Invoke("PlayOverworldMusic", 0.1f);
             }
             else if (Instance != this)
             {
@@ -87,14 +97,10 @@ namespace ShrugWare{
                 overworldMap = OverworldManager.Instance.overworldMap;
                 curLevel = OverworldManager.Instance.curLevel;
                 playerObj = OverworldManager.Instance.playerObj;
-                EnableCamera();
                 playerObj.SetActive(true);
 
                 OverworldUIManager.Instance.SetCanvasEnabled(true);
             }
-
-            // delay it to give our audio manager time to populate
-            Invoke("PlayOverworldMusic", 0.1f);
         }
 
         private void Start()
@@ -108,6 +114,7 @@ namespace ShrugWare{
             }
 
             audioManager = GetComponent<AudioManager>();
+            ReadyScene(true);
             overworldUIManager.UpdateUI();
         }
 
@@ -128,6 +135,33 @@ namespace ShrugWare{
             if (newLevel.Locked && !newLevel.Completed)
             {
                 newLevel.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
+            }
+        }
+
+        public void ReadyScene(bool enabled)
+        {
+            Time.timeScale = 1.0f;
+            audioManager.ResetPitch(true);
+
+            if (enabled)
+            {
+                EnableCamera();
+                EnableEventSystem();
+                EnableAudioListener();
+
+                // only do this on trash/boss/infinite levels because those have their own audio
+                if (curLevel != null && (curLevel.LevelType == DataManager.OverworldLevelType.Trash || curLevel.LevelType == DataManager.OverworldLevelType.Boss 
+                    || curLevel.LevelType == DataManager.OverworldLevelType.Infinite))
+                {
+                    // give the audio manager time
+                    Invoke("PlayOverworldMusic", 0.1f);
+                }
+            }
+            else
+            {
+                DisableCamera();
+                DisableEventSystem();
+                DisableAudioListener();
             }
         }
 
@@ -278,13 +312,14 @@ namespace ShrugWare{
                 audioManager.StopAudio();
             }
 
-            OverworldUIManager.Instance.SetCanvasEnabled(false);
             SceneManager.LoadScene((int)level.SceneIDToLoad);
+            OverworldUIManager.Instance.SetCanvasEnabled(false);
+            ReadyScene(false);
         }
 
         private void PlayOverworldMusic()
         {
-            GetComponent<AudioManager>().PlayAudioClip(DataManager.AudioEffectTypes.Overworld, .25f);
+           audioManager.PlayMusicClip(DataManager.AudioEffectTypes.Overworld, .25f);
         }
 
         public void RandomEventContinuePressed()
@@ -293,27 +328,47 @@ namespace ShrugWare{
             // todo - fix this, it doesn't work. for whatever reason it only works when attached to a debugger
             playerObj.SetActive(false);
 
-            GetComponent<AudioManager>().StopAudio();
+            audioManager.StopAudio();
         }
 
         public void PlayMusicClip(AudioClip audioClip, DataManager.AudioEffectTypes audioType, float volumeScale = 1)
         {
-            GetComponent<AudioManager>().PlayMusicClip(audioClip, audioType);
+            audioManager.PlayMusicClip(audioClip, audioType);
         }
 
         public void StopMusic()
         {
-            GetComponent<AudioManager>().StopAudio();
+            audioManager.StopAudio();
         }
 
         public void EnableCamera()
         {
-            cameraObj.GetComponent<Camera>().enabled = true;
+            cameraObj.SetActive(true);
         }
 
         public void DisableCamera()
         {
-            cameraObj.GetComponent<Camera>().enabled = false;
+            cameraObj.SetActive(false);
+        }
+
+        private void EnableEventSystem()
+        {
+            eventSystemObj.SetActive(true);
+        }
+
+        private void DisableEventSystem()
+        {
+            eventSystemObj.SetActive(false);
+        }
+
+        private void EnableAudioListener()
+        {
+            //audioListenerObj.SetActive(true);
+        }
+
+        private void DisableAudioListener()
+        {
+            //audioListenerObj.SetActive(false);
         }
     }
 }

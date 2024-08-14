@@ -14,6 +14,8 @@ namespace ShrugWare
         private AudioSource audioSourceEffects;
 
         public static AudioManager Instance;
+
+        const float MUSIC_PITCH_MULTIPLY_VALUE = 0.85f;
         private void Awake()
         {
             if (Instance == null)
@@ -69,8 +71,8 @@ namespace ShrugWare
                     // lower the significance of the audio timescale increase
                     if (audioEffectType == DataManager.AudioEffectTypes.BetweenMicrogame)
                     {
-                        audioSourceMusic.pitch = BossGameManager.Instance.GetCurTimeScale() * 0.85f;
-                        audioSourceEffects.pitch = BossGameManager.Instance.GetCurTimeScale() * 0.85f;
+                        audioSourceMusic.pitch = BossGameManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE;
+                        audioSourceEffects.pitch = BossGameManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE;
                     }
                 }
                 else if(InfiniteModeManager.Instance != null)
@@ -79,24 +81,16 @@ namespace ShrugWare
                     // lower the significance of the audio timescale increase
                     if (audioEffectType == DataManager.AudioEffectTypes.BetweenMicrogame)
                     {
-                        audioSourceMusic.pitch = InfiniteModeManager.Instance.GetCurTimeScale() * 0.85f;
-                        audioSourceEffects.pitch = InfiniteModeManager.Instance.GetCurTimeScale() * 0.85f;
+                        audioSourceMusic.pitch = InfiniteModeManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE;
+                        audioSourceEffects.pitch = InfiniteModeManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE;
                     }
                 }
 
-                // if it's main menu music, use the audio source for music
-                if (audioEffectType == DataManager.AudioEffectTypes.MainMenu || audioEffectType == DataManager.AudioEffectTypes.Overworld)
-                {
-                    audioSourceMusic.PlayOneShot(audioClip, volumeScale);
-                }
-                else
-                {
-                    audioSourceEffects.PlayOneShot(audioClip, volumeScale);
-                }
+                audioSourceEffects.PlayOneShot(audioClip, volumeScale);
             }
         }
 
-        public void PlayMusicClip(AudioClip audioClip, DataManager.AudioEffectTypes audioType, float volumeScale = 1)
+        private void PlayMusicClipSetupHelper(DataManager.AudioEffectTypes audioType)
         {
             if (audioSourceMusic == null)
             {
@@ -109,18 +103,30 @@ namespace ShrugWare
             if (audioType == DataManager.AudioEffectTypes.MicrogameMusic)
             {
                 float curTimeScale = 1;
-                if(BossGameManager.Instance != null)
+                if (BossGameManager.Instance != null)
                 {
                     curTimeScale = BossGameManager.Instance.GetCurTimeScale();
                 }
-                else if(InfiniteModeManager.Instance != null)
+                else if (InfiniteModeManager.Instance != null)
                 {
                     curTimeScale = InfiniteModeManager.Instance.GetCurTimeScale();
                 }
 
-                audioSourceMusic.pitch = curTimeScale * 0.85f;
+                audioSourceMusic.pitch = curTimeScale * MUSIC_PITCH_MULTIPLY_VALUE;
             }
+        }
 
+        public void PlayMusicClip(DataManager.AudioEffectTypes audioType, float volumeScale)
+        {
+            PlayMusicClipSetupHelper(audioType);
+            AudioClip audioClip = GetAudioClip(audioType);
+            audioSourceMusic.PlayOneShot(audioClip, volumeScale);
+        }
+
+        public void PlayMusicClip(AudioClip audioClip, DataManager.AudioEffectTypes audioType, float volumeScale = 1)
+        {
+            PlayMusicClipSetupHelper(audioType);
+            audioSourceMusic.Stop();
             audioSourceMusic.PlayOneShot(audioClip, volumeScale);
         }
 
@@ -130,10 +136,24 @@ namespace ShrugWare
             audioSourceMusic.Stop();
         }
 
-        public void ResetPitch()
+        public void ResetPitch(bool ignoreVal = false)
         {
-            audioSourceMusic.pitch = BossGameManager.Instance.GetCurTimeScale() * 0.85f;
-            audioSourceEffects.pitch = BossGameManager.Instance.GetCurTimeScale() * 0.85f;
+            float curTimeScale = 1.0f;
+            if (BossGameManager.Instance != null)
+            {
+                curTimeScale = BossGameManager.Instance.GetCurTimeScale();
+            }
+
+            if(!ignoreVal)
+            {
+                audioSourceMusic.pitch = curTimeScale * MUSIC_PITCH_MULTIPLY_VALUE;
+                audioSourceEffects.pitch = curTimeScale * MUSIC_PITCH_MULTIPLY_VALUE;
+            }
+            else
+            {
+                audioSourceMusic.pitch = curTimeScale;
+                audioSourceEffects.pitch = curTimeScale;
+            }
         }
     }
 }

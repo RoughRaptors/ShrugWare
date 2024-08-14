@@ -2747,7 +2747,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148458907}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!20 &1148458909
 Camera:
   m_ObjectHideFlags: 0
@@ -3750,6 +3750,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5939575726936673359, guid: 5b210609803658e488f512fc13a6163e, type: 3}
     - {fileID: 6855048251138854181, guid: 5b210609803658e488f512fc13a6163e, type: 3}
+    - {fileID: 6047643640439186488, guid: 5b210609803658e488f512fc13a6163e, type: 3}
     m_RemovedGameObjects:
     - {fileID: 739940542547739880, guid: 5b210609803658e488f512fc13a6163e, type: 3}
     m_AddedGameObjects: []

@@ -43,7 +43,6 @@ namespace ShrugWare
             }
             else if (Instance != this)
             {
-                OverworldManager.Instance.EnableCamera();
                 Destroy(gameObject);
             }
 
