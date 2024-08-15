@@ -201,7 +201,7 @@ namespace ShrugWare
                 bossUIManager.UpdateBetweenMicrogameText();
                 if (playerInfo.livesLeft >= 0 && timeInBossScene >= DataManager.SECONDS_BETWEEN_MICROGAMES && !(curBoss is null) && !curBoss.isDead)
                 {
-                    DataManager.Scenes nextScene = DataManager.Scenes.ShootTheBoss; //curBoss.PickNextMicrogame();
+                    DataManager.Scenes nextScene = curBoss.PickNextMicrogame();
                     bossUIManager.SetBossUICanvasEnabled(false);
                     EnableBossCamera(false);
                     LoadScene((int)nextScene);
