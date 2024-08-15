@@ -246,21 +246,16 @@ namespace ShrugWare{
 
         private IEnumerator MovePlayerToLevel(bool adjacent)
         {
-            // if we're not adjacent, we need to travel to the level along a path
-
-
             Vector3 playerPos = playerObj.transform.position;
-            Vector3 levelPos = curLevel.gameObject.transform.position;
-            while (Vector3.Distance(playerPos, levelPos) > 0.1f)
+            Vector3 targetPos = curLevel.gameObject.transform.position;
+            while (Vector3.Distance(playerPos, targetPos) > 0.1f)
             {
+                // spawn to the left and center of the level object
                 playerPos = playerObj.transform.position;
-                levelPos = curLevel.gameObject.transform.position;
-                playerObj.transform.position = Vector3.MoveTowards(playerPos, levelPos, 5 * Time.deltaTime);
+                targetPos = new Vector3(curLevel.gameObject.transform.position.x - 0.9f, curLevel.gameObject.transform.position.y - 0.6f, curLevel.gameObject.transform.position.z);
+                playerObj.transform.position = Vector3.MoveTowards(playerPos, targetPos, 5 * Time.deltaTime);
                 yield return 0;
             }
-
-            // move it up above the level
-            playerObj.transform.position = new Vector3(playerObj.transform.position.x, playerObj.transform.position.y + 1, playerObj.transform.position.z);
         }
 
         public OverworldLevel GetOverworldLevel(int levelID)
