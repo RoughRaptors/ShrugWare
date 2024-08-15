@@ -46,7 +46,12 @@ namespace ShrugWare
                 Destroy(gameObject);
             }
 
-            Instance.SetCanvasEnabled(true);            
+            Instance.SetCanvasEnabled(true);
+
+#if UNITY_EDITOR
+            curLevelText.gameObject.SetActive(true);
+            debugButton.gameObject.SetActive(true);
+#endif
         }
 
         public void UpdateUI()
