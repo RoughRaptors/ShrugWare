@@ -373,7 +373,7 @@ namespace ShrugWare
 #if UNITY_EDITOR
                 //amount = CurBoss.curHealth;
 #endif
-                curBoss.TakeDamage(100);
+                curBoss.TakeDamage(amount);
             }
         }
 
