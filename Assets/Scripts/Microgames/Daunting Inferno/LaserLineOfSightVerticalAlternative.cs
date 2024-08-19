@@ -11,6 +11,11 @@ namespace ShrugWare
         [SerializeField]
         PlayerMover playerObject = null;
 
+        [SerializeField]
+        GameObject barrierObj;
+
+        private bool movingLeft = false;
+
         public static bool hasBeenHit = false;
         private float timeRunning = 0.0f;
 
@@ -34,6 +39,8 @@ namespace ShrugWare
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
+
+            movingLeft = UnityEngine.Random.Range(0, 2) == 0;
         }
 
         protected override void OnMyGameTick(float timePercentLeft)
@@ -51,6 +58,14 @@ namespace ShrugWare
                 // stop moving if we hit a laser
                 playerObject.DisableMovement();
             }
+
+            float xDir = 0.5f;
+            if(movingLeft)
+            {
+                xDir *= -1.0f;
+            }
+
+            barrierObj.transform.position = new Vector3(barrierObj.transform.position.x + xDir, barrierObj.transform.position.y, barrierObj.transform.position.z);
         }
         
         protected override bool VictoryCheck()

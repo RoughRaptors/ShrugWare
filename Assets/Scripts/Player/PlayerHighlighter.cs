@@ -6,6 +6,7 @@ using UnityEditor;
 
 namespace ShrugWare
 {
+    // start off with the player object flashing to make it clear it is you
     public class PlayerHighlighter : MonoBehaviour
     {
         const float TIME_TO_STOP = 1.5f;

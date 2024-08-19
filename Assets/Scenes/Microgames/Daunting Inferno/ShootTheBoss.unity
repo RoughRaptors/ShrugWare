@@ -396,7 +396,6 @@ MonoBehaviour:
   playerObj: {fileID: 1591987681}
   bulletObj: {fileID: 1786556112}
   enemyObj: {fileID: 76374415}
-  debugText: {fileID: 0}
 --- !u!65 &76374424
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -745,6 +744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 263555676715289244, guid: 5b210609803658e488f512fc13a6163e, type: 3}
+    - {fileID: 6047643640439186488, guid: 5b210609803658e488f512fc13a6163e, type: 3}
     m_RemovedGameObjects:
     - {fileID: 739940542547739880, guid: 5b210609803658e488f512fc13a6163e, type: 3}
     m_AddedGameObjects: []
