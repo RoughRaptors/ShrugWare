@@ -45,6 +45,7 @@ namespace ShrugWare
             fireballButton.gameObject.SetActive(true);
             frostboltButton.gameObject.SetActive(true);
             healButton.gameObject.SetActive(true);
+            bossObj.SetActive(true);
         }
 
         protected override bool VictoryCheck()

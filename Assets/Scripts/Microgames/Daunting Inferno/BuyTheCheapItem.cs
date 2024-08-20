@@ -30,6 +30,9 @@ namespace ShrugWare
         [SerializeField]
         List<GameObject> weaponObjs;
 
+        [SerializeField]
+        GameObject merchantsAndItemsObj;
+
         private bool merchant1Correct = false;
         private bool merchant2Correct = false;
         private bool merchant3Correct = false;
@@ -37,9 +40,6 @@ namespace ShrugWare
         new private void Start()
         {
             base.Start();
-
-            AssignItemSprites();
-            GeneratePrices();
         }
 
         private void OnEnable()
@@ -55,6 +55,14 @@ namespace ShrugWare
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
+
+            AssignItemSprites();
+            GeneratePrices();
+
+            merchantsAndItemsObj.SetActive(true);
+            merchant1Text.gameObject.SetActive(true);
+            merchant2Text.gameObject.SetActive(true);
+            merchant3Text.gameObject.SetActive(true);
         }
 
         protected override void OnMyGameTick(float timePercentLeft)
@@ -81,7 +89,7 @@ namespace ShrugWare
 
             // staff. only 1 left
             weaponObjs[0].GetComponent<SpriteRenderer>().sprite = staffSprite;
-            weaponObjs.Remove(weaponObjs[0]);
+            // weaponObjs.Remove(weaponObjs[0]); this generates an error, the line isn't needed
         }
 
         private void GeneratePrices()

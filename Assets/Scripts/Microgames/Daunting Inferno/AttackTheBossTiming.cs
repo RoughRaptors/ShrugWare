@@ -8,6 +8,9 @@ namespace ShrugWare
         [SerializeField]
         Slider timingSlider;
 
+        [SerializeField]
+        GameObject boss;
+
         private bool attackPressed = false;
         private bool attackedSucceeded = false;
         private bool goingLeft = false;
@@ -24,6 +27,8 @@ namespace ShrugWare
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
+
+            boss.SetActive(true);
         }
 
         protected override void OnMyGameTick(float timePercentLeft)
