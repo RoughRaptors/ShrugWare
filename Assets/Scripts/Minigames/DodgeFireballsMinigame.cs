@@ -56,6 +56,10 @@ namespace ShrugWare
         private const int ENEMY_START_HEALTH = 100;
         private float enemyHealth = ENEMY_START_HEALTH;
 
+        // if we've been hit within INVULN_TIME, don't do damage
+        private float invulnExpireTime = 0.0f;
+        private const float INVULN_DURATION = 0.8f;
+
         private const float COLLECTIBLE_SPAWN_DISTANCE = 35;
         private const int COLLECTIBLE_DAMAGE = 10;
         private const float COLLECTIBLE_X_MIN = -5;
@@ -97,7 +101,11 @@ namespace ShrugWare
 
         private void Awake()
         {
-            OverworldManager.Instance.ReadyScene(false);
+            if (OverworldManager.Instance != null)
+            {
+                OverworldManager.Instance.ReadyScene(false);
+            }
+
             continueButton.SetActive(false);
         }
 
@@ -348,15 +356,26 @@ namespace ShrugWare
 
         private void CollideFireball(Collider other)
         {
+            // don't get hit multiple times repeatedly from a big cluster
+            bool invuln = invulnExpireTime > Time.time;
+            if (Time.time > invulnExpireTime)
+            {
+                invulnExpireTime = Time.time + INVULN_DURATION;
+            }
+
             float mitigation = 0;
             if (OverworldManager.Instance != null)
             {
                 mitigation = OverworldManager.Instance.PlayerInventory.GetMitigation();
             }
 
-            // damage the player
+            // maybe damage the player
             float damageTaken = 1.0f - (mitigation / 100);
-            healthRemaining -= damageTaken;
+            if (!invuln)
+            {
+                healthRemaining -= damageTaken;
+            }
+
             playerHealthText.text = "Player Health: " + healthRemaining.ToString();
             if (healthRemaining < 0)
             {
@@ -376,6 +395,8 @@ namespace ShrugWare
                     break;
                 }
             }
+
+            SwapColor();
         }
 
         private void CollideCollectible(Collider other)
@@ -405,6 +426,35 @@ namespace ShrugWare
             }
 
             Destroy(other.gameObject);
+        }
+
+        // flash colors when we get hit
+        private void SwapColor()
+        {
+            foreach (SpriteRenderer renderer in GetComponentsInChildren<SpriteRenderer>())
+            {
+                if (renderer.color == Color.red)
+                {
+                    renderer.color = Color.white;
+                }
+                else
+                {
+                    renderer.color = Color.red;
+                }
+            }
+
+            if(invulnExpireTime > Time.time)
+            {
+                Invoke("SwapColor", 0.2f);
+            }
+            else
+            {
+                // make sure we end up back to normal
+                foreach (SpriteRenderer renderer in GetComponentsInChildren<SpriteRenderer>())
+                {
+                    renderer.color = Color.white;
+                }
+            }
         }
     }
 }

@@ -21,6 +21,9 @@ namespace ShrugWare
         [SerializeField]
         TextMeshProUGUI instructionsText = null;
 
+        [SerializeField]
+        GameObject bossObj;
+
         private enum RotationMapping
         {
             Frostbolt = 0,
@@ -53,6 +56,8 @@ namespace ShrugWare
             {
                 microGameTime += BossGameManager.Instance.GetCurTimeScale() * 0.8f;
             }
+
+            bossObj.SetActive(true);
         }
 
         protected override bool VictoryCheck() => rotation.Count == 0;

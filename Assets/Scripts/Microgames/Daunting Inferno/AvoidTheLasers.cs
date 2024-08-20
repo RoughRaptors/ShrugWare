@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShrugWare
@@ -7,6 +8,16 @@ namespace ShrugWare
         [SerializeField]
         GameObject laserParent;
 
+        [SerializeField]
+        List<Vector3> playerSpawnPosList = new List<Vector3>();
+
+        [SerializeField]
+        GameObject playerObj;
+
+        [SerializeField]
+        GameObject playerSpriteParent;
+
+        float delay = 0.75f;
         float rotateSpeed = 30.0f;
         bool hasBeenHit = false;
 
@@ -19,6 +30,11 @@ namespace ShrugWare
         {
             base.OnEnable();
             PlayerCollider.OnBadCollision += LaserHit;
+
+            int randIndex = UnityEngine.Random.Range(0, playerSpawnPosList.Count);
+            playerObj.transform.position = playerSpawnPosList[randIndex];
+            
+            playerSpriteParent.SetActive(true);
         }
 
         protected override void OnDisable()
@@ -32,17 +48,22 @@ namespace ShrugWare
             base.OnMyGameStart();
 
             // 50/50 to rotate either direction
-            if (Random.Range(0, 2) == 0)
+            if (UnityEngine.Random.Range(0, 2) == 0)
             {
                 rotateSpeed *= -1;
             }
+
+            laserParent.SetActive(true);
         }
 
         protected override void OnMyGameTick(float timePercentLeft)
         {
             base.OnMyGameTick(timePercentLeft);
-            
-            laserParent.transform.Rotate(0, 0, rotateSpeed * Time.deltaTime);
+
+            if (timeElapsed >= delay)
+            {
+                laserParent.transform.Rotate(0, 0, rotateSpeed * Time.deltaTime);
+            }
         }
 
         protected override bool VictoryCheck()

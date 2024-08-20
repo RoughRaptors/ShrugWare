@@ -4,6 +4,9 @@ namespace ShrugWare
 {
     public class RunIn : Microgame
     {
+        [SerializeField]
+        GameObject enemiesObj;
+
         bool insideRoom = false;
 
         protected override void Start()
@@ -26,6 +29,8 @@ namespace ShrugWare
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
+
+            enemiesObj.SetActive(true);
         }
 
         protected override void OnMyGameTick(float timePercentLeft)
