@@ -11,6 +11,9 @@ namespace ShrugWare
         [SerializeField]
         Button interruptButton;
 
+        [SerializeField]
+        GameObject bossObj;
+
         // take some time to spawn to make it challenging
         private bool interrupted = false;
         private float castDelay = 0.0f;
@@ -27,6 +30,9 @@ namespace ShrugWare
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
+
+            bossObj.SetActive(true);
+
             interruptButton.gameObject.SetActive(true);
             castDelay = Random.Range(0.5f, 1.5f);
             castTimePercent -= castDelay / microGameTime;

@@ -350,6 +350,7 @@ MonoBehaviour:
   glacialSpikeButtonObj: {fileID: 1325052455}
   iceBlastButtonObj: {fileID: 1213044723}
   instructionsText: {fileID: 1955166943}
+  bossObj: {fileID: 1861609731}
 --- !u!1 &723481294
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,6 +824,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 1919012471076396, guid: 55776efecb0cd134ea5f418c2f97a705, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4023215848608658, guid: 55776efecb0cd134ea5f418c2f97a705, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1156,6 +1161,11 @@ GameObject:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2860528049304986484, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
   m_PrefabInstance: {fileID: 1685075158}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1861609731 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1919012471076396, guid: 55776efecb0cd134ea5f418c2f97a705, type: 3}
+  m_PrefabInstance: {fileID: 1333577242}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1955166943 stripped
 MonoBehaviour:

@@ -4,6 +4,15 @@ namespace ShrugWare
 {
     public class NavigateTheMaze : Microgame
     {
+        [SerializeField]
+        GameObject mazeObj;
+
+        [SerializeField]
+        GameObject allyObj;
+
+        [SerializeField]
+        GameObject playerRendererObj;
+
         bool reachedTank = false;
 
         protected override void Start()
@@ -24,6 +33,10 @@ namespace ShrugWare
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
+
+            playerRendererObj.SetActive(true);
+            mazeObj.SetActive(true);
+            allyObj.SetActive(true);
         }
 
         protected override void OnMyGameTick(float timePercentLeft)

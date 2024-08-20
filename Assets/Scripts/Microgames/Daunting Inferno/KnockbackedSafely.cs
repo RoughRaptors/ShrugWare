@@ -42,6 +42,8 @@ namespace ShrugWare
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
+
+            arrowObj.SetActive(true);
             safeZoneObj.SetActive(true);
         }
 

@@ -8,6 +8,15 @@ namespace ShrugWare
         [SerializeField]
         GameObject[] tiles;
 
+        [SerializeField]
+        GameObject playerSpriteRendererObj;
+
+        [SerializeField]
+        GameObject lasersParentObj;
+
+        [SerializeField]
+        GameObject tilesParentObj;
+
         private GameObject curTile;
 
         private const float ROTATE_TIME = 1.0f;
@@ -35,6 +44,11 @@ namespace ShrugWare
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
+
+            playerSpriteRendererObj.SetActive(true);
+            lasersParentObj.SetActive(true);
+            tilesParentObj.SetActive(true);
+
             RotateColors();
         }
 

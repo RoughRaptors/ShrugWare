@@ -28,6 +28,8 @@ namespace ShrugWare
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
+
+            bossObject.SetActive(true);
         }
 
         protected override void OnMyGameTick(float timePercentLeft)
