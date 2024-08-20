@@ -82,7 +82,7 @@ namespace ShrugWare
 
             // staff. only 1 left
             weaponObjs[0].GetComponent<SpriteRenderer>().sprite = staffSprite;
-            weaponObjs.Remove(weaponObjs[0]);
+            //weaponObjs.Remove(weaponObjs[0]); this can generate an error, we don't need the line anyways
         }
 
         private void GeneratePrices()
