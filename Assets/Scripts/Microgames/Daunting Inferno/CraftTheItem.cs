@@ -78,23 +78,22 @@ namespace ShrugWare
         public void CheckDistance(GameObject resourceObj)
         {
             // when we drop an object, determine its distance from the three borders
-            // if it's less than an amount, it's "in"
-
-            float offset = 5;
-            float acceptableDistance = 7.0f;
-            float distanceFromBorder1 = Vector2.Distance(resourceObj.transform.position, border1Center.transform.position) - offset;
+            float acceptableDistance = 0.01f;
+            float distanceFromBorder1 = Vector2.Distance(resourceObj.transform.position, border1Center.transform.position);
             if (distanceFromBorder1 < acceptableDistance)
             {
                 item1InSlot = true;
+                return;
             }
 
-            float distanceFromBorder2 = Vector2.Distance(resourceObj.transform.position, border2Center.transform.position) - offset;
+            float distanceFromBorder2 = Vector2.Distance(resourceObj.transform.position, border2Center.transform.position);
             if (distanceFromBorder2 < acceptableDistance)
             {
                 item2InSlot = true;
+                return;
             }
 
-            float distanceFromBorder3 = Vector2.Distance(resourceObj.transform.position, border3Center.transform.position) - offset;
+            float distanceFromBorder3 = Vector2.Distance(resourceObj.transform.position, border3Center.transform.position);
             if (distanceFromBorder3 < acceptableDistance)
             {
                 item3InSlot = true;
