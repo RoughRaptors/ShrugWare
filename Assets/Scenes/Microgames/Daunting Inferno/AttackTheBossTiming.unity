@@ -659,6 +659,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6000045991272703237, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 829477471}
     - target: {fileID: 6878079186030299948, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_text
       value: TIMING IS EVERYTHING
@@ -723,6 +727,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 829477471}
+    - target: {fileID: 9163045961086937155, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 0.31
+      objectReference: {fileID: 0}
     - target: {fileID: 9163045961094295231, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -770,7 +778,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1919012471076396, guid: 55776efecb0cd134ea5f418c2f97a705, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4023215848608658, guid: 55776efecb0cd134ea5f418c2f97a705, type: 3}
       propertyPath: m_RootOrder

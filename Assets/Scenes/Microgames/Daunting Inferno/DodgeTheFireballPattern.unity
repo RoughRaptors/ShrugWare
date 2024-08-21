@@ -1392,6 +1392,10 @@ PrefabInstance:
       propertyPath: mouseControlSchemeImage
       value: 
       objectReference: {fileID: 7751155465286772618}
+    - target: {fileID: 6000045991272703237, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 963194227}
     - target: {fileID: 6878079186030299948, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_text
       value: DODGE THEM ALL
@@ -1431,6 +1435,10 @@ PrefabInstance:
     - target: {fileID: 9163045961086937155, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_SortingOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9163045961086937155, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: 9163045961086937278, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_IsActive

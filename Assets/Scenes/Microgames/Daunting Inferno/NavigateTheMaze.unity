@@ -275,6 +275,10 @@ PrefabInstance:
       propertyPath: mouseControlSchemeImage
       value: 
       objectReference: {fileID: 37259707}
+    - target: {fileID: 6000045991272703237, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1308512112}
     - target: {fileID: 6878079186030299948, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_text
       value: BE VERY VERY SNEAKY
@@ -331,6 +335,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1308512112}
+    - target: {fileID: 9163045961086937155, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 0.31
+      objectReference: {fileID: 0}
     - target: {fileID: 9163045961094295231, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -497,6 +505,10 @@ MonoBehaviour:
   mazeObj: {fileID: 433176756}
   allyObj: {fileID: 579047430}
   playerRendererObj: {fileID: 1713020099}
+  spawnPoints:
+  - {x: -2.4, y: -43.7}
+  - {x: -23, y: -28}
+  - {x: 50, y: -28}
 --- !u!1 &237833091
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,7 +632,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000013304306144, guid: 30ef59945f2a7ea499bbbe10a7d48f1a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4000011914616612, guid: 30ef59945f2a7ea499bbbe10a7d48f1a, type: 3}
       propertyPath: m_RootOrder
@@ -689,7 +701,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &433176757
 Transform:
   m_ObjectHideFlags: 0

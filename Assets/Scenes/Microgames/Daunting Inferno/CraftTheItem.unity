@@ -658,7 +658,7 @@ GameObject:
   - component: {fileID: 813909990}
   - component: {fileID: 813909989}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Item 1 Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1224,7 +1224,7 @@ GameObject:
   - component: {fileID: 1344725175}
   - component: {fileID: 1344725174}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Item 2 Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1564,7 +1564,7 @@ GameObject:
   - component: {fileID: 1639078719}
   - component: {fileID: 1639078718}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Item 3 Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2104,6 +2104,18 @@ PrefabInstance:
       propertyPath: mouseControlSchemeImage
       value: 
       objectReference: {fileID: 7751155465286772618}
+    - target: {fileID: 2918950947151639476, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6000045991272703237, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 963194227}
+    - target: {fileID: 6000045991272703237, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_PlaneDistance
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 6878079186030299948, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_text
       value: DRAG TO CRAFT
@@ -2150,7 +2162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9163045961086937152, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9163045961086937152, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_MatchWidthOrHeight
@@ -2166,35 +2178,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9163045961086937154, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_Pivot.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9163045961086937154, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_Pivot.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9163045961086937154, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 3840
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9163045961086937154, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 2159.2383
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9163045961086937154, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.053477217
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9163045961086937154, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.053477217
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9163045961086937154, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.053477217
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9163045961086937154, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -411.7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9163045961086937154, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2222,7 +2234,7 @@ PrefabInstance:
       objectReference: {fileID: 963194227}
     - target: {fileID: 9163045961086937155, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_RenderMode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9163045961086937155, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_PixelPerfect
@@ -2231,6 +2243,10 @@ PrefabInstance:
     - target: {fileID: 9163045961086937155, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_SortingOrder
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9163045961086937155, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: 9163045961086937155, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_UpdateRectTransformForStandalone

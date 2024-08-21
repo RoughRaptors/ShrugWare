@@ -463,6 +463,10 @@ PrefabInstance:
       propertyPath: controlSchemeImage
       value: 
       objectReference: {fileID: 1180451356}
+    - target: {fileID: 6000045991272703237, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 493026688}
     - target: {fileID: 7751155465472654597, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_Name
       value: Microgame UI
@@ -515,6 +519,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 493026688}
+    - target: {fileID: 9163045961086937155, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 0.31
+      objectReference: {fileID: 0}
     - target: {fileID: 9163045961094295231, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0

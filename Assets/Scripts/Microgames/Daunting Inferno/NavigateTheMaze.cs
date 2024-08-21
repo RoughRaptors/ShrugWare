@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShrugWare
@@ -12,6 +13,9 @@ namespace ShrugWare
 
         [SerializeField]
         GameObject playerRendererObj;
+
+        [SerializeField]
+        List<Vector2> spawnPoints = new List<Vector2>();
 
         bool reachedTank = false;
 
@@ -34,6 +38,8 @@ namespace ShrugWare
         {
             base.OnMyGameStart();
 
+            SpawnPlayer();
+
             playerRendererObj.SetActive(true);
             mazeObj.SetActive(true);
             allyObj.SetActive(true);
@@ -53,6 +59,12 @@ namespace ShrugWare
         {
             reachedTank = true;
             SetMicrogameEndText(true);
+        }
+
+        private void SpawnPlayer()
+        {
+            int randIndex = UnityEngine.Random.Range(0, spawnPoints.Count);
+            this.transform.position = spawnPoints[randIndex];
         }
     }
 }
