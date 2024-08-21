@@ -677,7 +677,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: RANDOM EVENT TEXT HERE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f3907b6542410fe4690876bb9e2aaee9, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -741,7 +741,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1997327540
@@ -1013,8 +1013,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Merchant
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f3907b6542410fe4690876bb9e2aaee9, type: 2}
+  m_sharedMaterial: {fileID: -7160399711097202284, guid: f3907b6542410fe4690876bb9e2aaee9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1841,8 +1841,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Instructions
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f3907b6542410fe4690876bb9e2aaee9, type: 2}
+  m_sharedMaterial: {fileID: -7160399711097202284, guid: f3907b6542410fe4690876bb9e2aaee9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1975,8 +1975,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Trash Encounter 2
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f3907b6542410fe4690876bb9e2aaee9, type: 2}
+  m_sharedMaterial: {fileID: -7160399711097202284, guid: f3907b6542410fe4690876bb9e2aaee9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2109,8 +2109,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Tuzi
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f3907b6542410fe4690876bb9e2aaee9, type: 2}
+  m_sharedMaterial: {fileID: -7160399711097202284, guid: f3907b6542410fe4690876bb9e2aaee9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2245,8 +2245,8 @@ MonoBehaviour:
 
     encounter'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f3907b6542410fe4690876bb9e2aaee9, type: 2}
+  m_sharedMaterial: {fileID: -7160399711097202284, guid: f3907b6542410fe4690876bb9e2aaee9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2458,8 +2458,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Warboss Kard
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f3907b6542410fe4690876bb9e2aaee9, type: 2}
+  m_sharedMaterial: {fileID: -7160399711097202284, guid: f3907b6542410fe4690876bb9e2aaee9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4257,6 +4257,8 @@ MonoBehaviour:
   cameraObj: {fileID: 6916883364638777854}
   eventSystemObj: {fileID: 6916883364730560409}
   audioListenerObj: {fileID: 5001412686196148785}
+  microgameMusic: []
+  microgameBackgrounds: []
 --- !u!1 &6916883365041668279
 GameObject:
   m_ObjectHideFlags: 0
