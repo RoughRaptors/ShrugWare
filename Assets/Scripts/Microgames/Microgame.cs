@@ -92,18 +92,17 @@ namespace ShrugWare
 
         protected virtual void OnMyGameStart()
         {
-            if (BossGameManager.Instance != null)
+            // on start pick a random audio piece and sprite
+            if(OverworldManager.Instance != null)
             {
-                int randMusicIndex = UnityEngine.Random.Range(0, BossGameManager.Instance.GetMicrogameMusic().Count);
-                AudioClip audioClip = BossGameManager.Instance.GetAudioClipFromIndex(randMusicIndex);
-                BossGameManager.Instance.GetAudioManager().PlayMusicClip(audioClip, DataManager.AudioEffectTypes.MicrogameMusic);
-            }
-            else if(InfiniteModeManager.Instance != null)
-            {
-                int randMusicIndex = UnityEngine.Random.Range(0, InfiniteModeManager.Instance.GetMicrogameMusic().Count);
-                AudioClip audioClip = InfiniteModeManager.Instance.GetAudioClipFromIndex(randMusicIndex);
-                InfiniteModeManager.Instance.GetAudioManager().PlayMusicClip(audioClip, DataManager.AudioEffectTypes.MicrogameMusic);
-                InfiniteModeManager.Instance.DisableCamera();
+                int randMusicIndex = UnityEngine.Random.Range(0, OverworldManager.Instance.GetMicrogameMusic().Count);
+                AudioClip audioClip = OverworldManager.Instance.GetMicrogameAudioClipFromIndex(randMusicIndex);
+                OverworldManager.Instance.AudioManager.PlayMusicClip(audioClip, DataManager.AudioEffectTypes.MicrogameMusic);
+
+                if(InfiniteModeManager.Instance != null)
+                {
+                    InfiniteModeManager.Instance.DisableCamera();
+                }
             }
         }
 
@@ -174,6 +173,11 @@ namespace ShrugWare
             }
             else
             {
+                if (OverworldManager.Instance != null && BossGameManager.Instance != null && !BossGameManager.Instance.CurBoss.isDead)
+                {
+                    OverworldManager.Instance.AudioManager.PlayAudioClip(DataManager.AudioEffectTypes.BetweenMicrogame, .3f);
+                }
+
                 BossGameManager.Instance.MicrogameCompleted(wonMicrogame);
             }            
         }

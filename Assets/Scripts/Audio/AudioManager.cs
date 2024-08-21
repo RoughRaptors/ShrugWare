@@ -143,6 +143,10 @@ namespace ShrugWare
             {
                 curTimeScale = BossGameManager.Instance.GetCurTimeScale();
             }
+            else if(InfiniteModeManager.Instance != null)
+            {
+                curTimeScale = InfiniteModeManager.Instance.GetCurTimeScale();
+            }
 
             if(!ignoreVal)
             {
