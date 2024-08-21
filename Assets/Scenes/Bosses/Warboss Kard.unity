@@ -901,6 +901,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6120917857530018629, guid: 759e9f28df73beb4a8a496137843b8e3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -77
+      objectReference: {fileID: 0}
     - target: {fileID: 6676354983392105198, guid: 759e9f28df73beb4a8a496137843b8e3, type: 3}
       propertyPath: m_Name
       value: Move Speed Potion
