@@ -1,4 +1,6 @@
+using System.ComponentModel;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 namespace ShrugWare
 {
@@ -9,6 +11,9 @@ namespace ShrugWare
 
         [SerializeField]
         GameObject bossObject = null;
+
+        [SerializeField]
+        GameObject laserObj = null;
 
         protected override void Start()
         {
@@ -36,15 +41,24 @@ namespace ShrugWare
         {
             base.OnMyGameTick(timePercentLeft);
 
-            // rotate around until he's facing forward
-            bossObject.transform.Rotate(Vector3.up * 52 * Time.deltaTime);
-
-            Debug.DrawRay(bossObject.transform.position, playerObject.transform.position - bossObject.transform.position, Color.green);
-
+            Quaternion targetRotation = Quaternion.LookRotation(-transform.forward, Vector3.up);
+            bossObject.transform.rotation = Quaternion.Slerp(bossObject.transform.rotation, targetRotation, 1.0f * Time.deltaTime);
         }
 
         protected override bool VictoryCheck()
         {
+            // draw a laser from the boss to the player
+            Vector3 target = laserObj.transform.position;
+            target.z = 0f;
+
+            Vector3 objectPos = playerObject.transform.position;
+            target.x -= objectPos.x;
+            target.y -= objectPos.y;
+
+            float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
+            laserObj.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 180));
+            laserObj.GetComponent<ShootLaser>().enabled = true;
+
             // did our raycast hit the player?
             RaycastHit hit;
             if (Physics.Raycast(bossObject.transform.position, (playerObject.transform.position - bossObject.transform.position), out hit, 1000))
