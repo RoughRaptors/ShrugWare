@@ -1249,48 +1249,6 @@ MonoBehaviour:
   bossUIManager: {fileID: 2301266169147293018}
   bossSceneCamera: {fileID: 7780805136668817670}
   bossName: Warboss Kard
-  microgameMusic:
-  - {fileID: 8300000, guid: 9236a1db72c4228408e4b951979c6c58, type: 3}
-  - {fileID: 8300000, guid: b4c79e71ef6b2ea4f80f47e31acac86d, type: 3}
-  - {fileID: 8300000, guid: 6a43580d5858b094587f79e90b03d04a, type: 3}
-  - {fileID: 8300000, guid: debacbfabb56da549a5910e897daa22a, type: 3}
-  - {fileID: 8300000, guid: 83040face9f86f44dbc39b29c3e2a0fd, type: 3}
-  - {fileID: 8300000, guid: a820ac199cbdf784db6def5ef4b5a335, type: 3}
-  - {fileID: 8300000, guid: 2d93ab08f34bd344eaabeed861ae862e, type: 3}
-  - {fileID: 8300000, guid: b7603fd4ef9764e41bba7e6645fd40c5, type: 3}
-  - {fileID: 8300000, guid: 1851f6bd9a317cc4eadbff3f040e9f43, type: 3}
-  - {fileID: 8300000, guid: 3701090d51437cd479ba1c8bef20a818, type: 3}
-  - {fileID: 8300000, guid: 6ba3c1e1b9f950142988035c83282429, type: 3}
-  - {fileID: 8300000, guid: 76c4f3ff4c3cff146a4ed59144b62754, type: 3}
-  - {fileID: 8300000, guid: 6fb6978ddc964d44bbb29408f7755d16, type: 3}
-  - {fileID: 8300000, guid: 7783aac769bb9b84cbc5c937cd5c05e2, type: 3}
-  - {fileID: 8300000, guid: 9a31f56999bf98c44a6a03dca89e3d02, type: 3}
-  - {fileID: 8300000, guid: 7d4f11dc291b15442a20234bff4a1947, type: 3}
-  - {fileID: 8300000, guid: d0b73aea408e54f40adb5a6fd70f29f2, type: 3}
-  - {fileID: 8300000, guid: 6225ce640ee0729478fbc06f9f80e221, type: 3}
-  - {fileID: 8300000, guid: 60cbbde28e332074c9f353d0f5d11544, type: 3}
-  - {fileID: 8300000, guid: c1baa04314426404bb0a4ceb570851dc, type: 3}
-  - {fileID: 8300000, guid: 51f0f714146db5a438a211d5ba3d9777, type: 3}
-  - {fileID: 8300000, guid: d0d616de34676eb48b61368f3cc6b612, type: 3}
-  - {fileID: 8300000, guid: bf249db19c442fa41a0d57a3019b28c7, type: 3}
-  - {fileID: 8300000, guid: 1849a1d7328072a48babdb0bf150db59, type: 3}
-  - {fileID: 8300000, guid: 49f05071930cf13438cb9fb007c85a8c, type: 3}
-  - {fileID: 8300000, guid: 0779e1ae9da7065439fe88ee3f3d569b, type: 3}
-  - {fileID: 8300000, guid: 8b227211af314484998b9e72f55fa2a2, type: 3}
-  - {fileID: 8300000, guid: 410e8c083857d0740bb882bbbc4f32a1, type: 3}
-  - {fileID: 8300000, guid: ce71bcb0e9239184aac4a232c2edfcbf, type: 3}
-  - {fileID: 8300000, guid: 1fa8ea92cc5c2d043a92c0fc3e4c31ba, type: 3}
-  - {fileID: 8300000, guid: ab76d05a5331d2549b45d89e730274fc, type: 3}
-  - {fileID: 8300000, guid: 91e6b0b80642446439a7fbb236a4109c, type: 3}
-  - {fileID: 8300000, guid: 7be7b1a296748ef44b057040b1ba8099, type: 3}
-  - {fileID: 8300000, guid: 272a20bf9fdfb2541a5c14c0fb7423ec, type: 3}
-  - {fileID: 8300000, guid: d5b7335c4a855d245b4d1dda357d3922, type: 3}
-  - {fileID: 8300000, guid: 76f3c3a13ec62384392a916c66b15a47, type: 3}
-  - {fileID: 8300000, guid: c07ae4b1aa202954aab4feef95fe2537, type: 3}
-  - {fileID: 8300000, guid: 75fffeddb8313144b80e4b69eef9a859, type: 3}
-  - {fileID: 8300000, guid: 2f788bbc041e1384bb556b0625c4fdd4, type: 3}
-  - {fileID: 8300000, guid: 3315fa057b1f8ee4598abe33cfdfa355, type: 3}
-  - {fileID: 8300000, guid: cd8c5285b8665fb4da44758fda4928d2, type: 3}
 --- !u!1 &2301266168308091703
 GameObject:
   m_ObjectHideFlags: 0
@@ -1382,7 +1340,7 @@ GameObject:
   - component: {fileID: 2301266168396734776}
   - component: {fileID: 2301266168396734777}
   m_Layer: 0
-  m_Name: Max Health Potion (1)
+  m_Name: Max Health Potion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

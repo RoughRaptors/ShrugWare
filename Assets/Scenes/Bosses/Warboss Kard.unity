@@ -145,6 +145,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2301266167762950514, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: d7cffddcbc0cc8f4ebe6e28eb9804082, type: 3}
+    - target: {fileID: 2301266167762950514, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301266167762950514, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2301266167922393855, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -769,6 +781,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Max Health Potion
       objectReference: {fileID: 0}
+    - target: {fileID: 2301266168535161563, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: d7cffddcbc0cc8f4ebe6e28eb9804082, type: 3}
+    - target: {fileID: 2301266168535161563, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301266168535161563, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2301266169147293018, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: moveSpeedPotionItem
       value: 
@@ -809,10 +833,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2301266169212772606}
     m_Modifications:
+    - target: {fileID: 4070794081568365474, guid: 759e9f28df73beb4a8a496137843b8e3, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: d7cffddcbc0cc8f4ebe6e28eb9804082, type: 3}
+    - target: {fileID: 4070794081568365474, guid: 759e9f28df73beb4a8a496137843b8e3, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070794081568365474, guid: 759e9f28df73beb4a8a496137843b8e3, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4148158398625171221, guid: 759e9f28df73beb4a8a496137843b8e3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2301266169212772605}
+    - target: {fileID: 4203655711603690866, guid: 759e9f28df73beb4a8a496137843b8e3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4770340872534819032, guid: 759e9f28df73beb4a8a496137843b8e3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 6111307172304155161, guid: 759e9f28df73beb4a8a496137843b8e3, type: 3}
       propertyPath: m_RootOrder
       value: 7
