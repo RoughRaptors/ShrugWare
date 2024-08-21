@@ -27,6 +27,11 @@ public class InfiniteModeManager : MonoBehaviour
     [SerializeField]
     List<AudioClip> microgameMusic = new List<AudioClip>();
 
+    [SerializeField]
+    List<Sprite> microgameBackgrounds = new List<Sprite>();
+
+    public List<Sprite> GetMicrogameBackgrounds() { return microgameBackgrounds; }
+
     private AudioManager audioManager;
     public AudioManager GetAudioManager() { return audioManager; }
 

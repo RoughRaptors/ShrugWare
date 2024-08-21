@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4772138874952234634}
   - component: {fileID: 7013441011294696335}
   - component: {fileID: 9148905233641319124}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: Background Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,6 +194,7 @@ MonoBehaviour:
   winTextColor: {r: 0, g: 1, b: 0, a: 1}
   loseTextColor: {r: 1, g: 0, b: 0, a: 1}
   controlSchemeImage: {fileID: 0}
+  backgroundCanvas: {fileID: 6000045991272703237}
 --- !u!1001 &7751155467006191449
 PrefabInstance:
   m_ObjectHideFlags: 0

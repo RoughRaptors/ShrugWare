@@ -64,14 +64,6 @@ namespace ShrugWare
         private Boss curBoss;
         public Boss CurBoss { get; set; }
 
-        [SerializeField]
-        List<AudioClip> microgameMusic = new List<AudioClip>();
-
-        public List<AudioClip> GetMicrogameMusic() { return microgameMusic; }
-
-        private AudioManager audioManager;
-        public AudioManager GetAudioManager() { return audioManager; }
-
         private float curTimeScale = 1.0f;
         public float GetCurTimeScale() { return curTimeScale; }
         public void SetCurTimeScale(float newTimeScale) { curTimeScale = newTimeScale; }
@@ -154,11 +146,6 @@ namespace ShrugWare
                 curBoss = new Tuzi();
             }
 
-            if (OverworldManager.Instance != null)
-            {
-                audioManager = OverworldManager.Instance.GetComponent<AudioManager>();
-            }
-
             EnableBossCamera(true);
         }
 
@@ -221,11 +208,6 @@ namespace ShrugWare
         {
             gameState = GameState.BossScreen;
             EnableBossCamera(true);
-
-            if (!curBoss.isDead)
-            {
-                audioManager.PlayAudioClip(DataManager.AudioEffectTypes.BetweenMicrogame, .3f);
-            }
 
             if (!(curBoss is null))
             {
@@ -316,9 +298,9 @@ namespace ShrugWare
         {
             SetTimescale(1);
             gameState = GameState.BossScreen;
-            if (audioManager != null)
+            if (OverworldManager.Instance != null)
             {
-                audioManager.StopAudio();
+                OverworldManager.Instance.AudioManager.StopAudio();
             }
         }
 
@@ -382,7 +364,7 @@ namespace ShrugWare
             curTimeScale = newTimescale;
             Time.timeScale = curTimeScale;
             bossUIManager.SetTimescaleInputFieldText("Time Scale: " + curTimeScale.ToString("F3"));
-            audioManager.ResetPitch();
+            OverworldManager.Instance.ResetAudioPitch();
         }
 
         public void AddToTimeScale(float amount)
@@ -456,16 +438,6 @@ namespace ShrugWare
                 // kill it so we don't run it again
                 OverworldManager.Instance.CurRandomEvent = null;
             }
-        }
-
-        public AudioClip GetAudioClipFromIndex(int index)
-        {
-            if(index < microgameMusic.Count)
-            {
-                return microgameMusic[index];
-            }
-
-            return null;
         }
     }
 }

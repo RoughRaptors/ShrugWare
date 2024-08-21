@@ -78,7 +78,7 @@ namespace ShrugWare
         public void CheckDistance(GameObject resourceObj)
         {
             // when we drop an object, determine its distance from the three borders
-            float acceptableDistance = 0.01f;
+            float acceptableDistance = 0.0075f;
             float distanceFromBorder1 = Vector2.Distance(resourceObj.transform.position, border1Center.transform.position);
             if (distanceFromBorder1 < acceptableDistance)
             {

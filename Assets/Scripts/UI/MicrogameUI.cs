@@ -23,6 +23,8 @@ namespace ShrugWare
 
         [SerializeField] private GameObject controlSchemeImage;
 
+        [SerializeField] Canvas backgroundCanvas;
+
         private void OnValidate()
         {
             SetInstructionText(instructionText, introTextColor);
@@ -32,6 +34,13 @@ namespace ShrugWare
         {
             myMicrogame = FindObjectOfType<Microgame>();
             controlSchemeImage.SetActive(true);
+
+            if(OverworldManager.Instance != null)
+            {
+                int randSpriteIndex = UnityEngine.Random.Range(0, OverworldManager.Instance.GetMicrogameBackgrounds().Count);
+                Sprite sprite = OverworldManager.Instance.GetMicrogameBackgrounds()[randSpriteIndex];
+                backgroundCanvas.GetComponent<Image>().sprite = sprite;
+            }
         }
 
         private void OnEnable()
