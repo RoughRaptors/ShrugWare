@@ -30,6 +30,7 @@ namespace ShrugWare
         private bool item2InSlot = false;
         private bool item3InSlot = false;
 
+        const float DISTANCE_THRESHOLD = .009f;
         const float X_MIN = -1700;
         const float X_MAX = 1700;
         const float Y_MIN = -600;
@@ -48,7 +49,7 @@ namespace ShrugWare
             // this is a hard microgame when too fast and, there's not enough time, give it a time boost the faster the timescale is
             if (BossGameManager.Instance != null)
             {
-                microGameTime += BossGameManager.Instance.GetCurTimeScale() * 1.75f;
+                microGameTime += BossGameManager.Instance.GetCurTimeScale() * 2.0f;
             }
         }
 
@@ -78,23 +79,22 @@ namespace ShrugWare
         public void CheckDistance(GameObject resourceObj)
         {
             // when we drop an object, determine its distance from the three borders
-            float acceptableDistance = 0.0075f;
             float distanceFromBorder1 = Vector2.Distance(resourceObj.transform.position, border1Center.transform.position);
-            if (distanceFromBorder1 < acceptableDistance)
+            if (distanceFromBorder1 <= DISTANCE_THRESHOLD)
             {
                 item1InSlot = true;
                 return;
             }
 
             float distanceFromBorder2 = Vector2.Distance(resourceObj.transform.position, border2Center.transform.position);
-            if (distanceFromBorder2 < acceptableDistance)
+            if (distanceFromBorder2 <= DISTANCE_THRESHOLD)
             {
                 item2InSlot = true;
                 return;
             }
 
             float distanceFromBorder3 = Vector2.Distance(resourceObj.transform.position, border3Center.transform.position);
-            if (distanceFromBorder3 < acceptableDistance)
+            if (distanceFromBorder3 <= DISTANCE_THRESHOLD)
             {
                 item3InSlot = true;
             }

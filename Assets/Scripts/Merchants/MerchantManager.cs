@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace ShrugWare
 {
@@ -34,7 +33,13 @@ namespace ShrugWare
         GameObject moveSpeedPotionObj = null;
 
         [SerializeField]
-        Text currenciesText = null;
+        Text currencyInfoText = null;
+
+        [SerializeField]
+        GameObject armorTab = null;
+
+        [SerializeField]
+        GameObject potionsTab = null;
 
         public static MerchantManager Instance = null;
         
@@ -48,6 +53,7 @@ namespace ShrugWare
         private Dictionary<int, ItemForSale> itemsForSale = new Dictionary<int, ItemForSale>();
         public Dictionary<int, ItemForSale> GetItemsForSale() { return itemsForSale; }
 
+        private List<ItemForSale> selectedItems = new List<ItemForSale>();
         private ItemForSale selectedItem;
         private GameObject prevSelectedObj;
 
@@ -67,7 +73,7 @@ namespace ShrugWare
         void Start()
         {
             SetupInventory();
-            UpdateCurrencies();
+            UpdateCurrenciesText();
         }
 
         private void SetupInventory()
@@ -106,6 +112,7 @@ namespace ShrugWare
             healthPotionItem.item = healthPotion;
             healthPotionItem.currency = DataManager.Currencies.Generic;
             healthPotionItem.price = 250;
+            healthPotionItem.item.itemObj = healthPotionObj;
 
             itemsForSale.Add(healthPotion.templateId, healthPotionItem);
 
@@ -119,6 +126,7 @@ namespace ShrugWare
             maxHealthPotionItem.item = maxHealthPotion;
             maxHealthPotionItem.currency = DataManager.Currencies.Generic;
             maxHealthPotionItem.price = 250;
+            maxHealthPotionItem.item.itemObj = maxHealthPotionObj;
 
             itemsForSale.Add(maxHealthPotion.templateId, maxHealthPotionItem);
 
@@ -132,6 +140,7 @@ namespace ShrugWare
             moveSpeedPotionItem.item = moveSpeedPotion;
             moveSpeedPotionItem.currency = DataManager.Currencies.Generic;
             moveSpeedPotionItem.price = 500;
+            moveSpeedPotionItem.item.itemObj = moveSpeedPotionObj;
 
             itemsForSale.Add(moveSpeedPotion.templateId, moveSpeedPotionItem);
 
@@ -145,6 +154,7 @@ namespace ShrugWare
             diHelmItem.item = diHelm;
             diHelmItem.currency = DataManager.Currencies.DauntingInferno;
             diHelmItem.price = 1000;
+            diHelm.itemObj = helmObj;
 
             if(!OverworldManager.Instance.PlayerInventory.HasArmor(diHelm.templateId))
             {
@@ -165,6 +175,7 @@ namespace ShrugWare
             diChestItem.item = diChest;
             diChestItem.currency = DataManager.Currencies.DauntingInferno;
             diChestItem.price = 1000;
+            diChest.itemObj = chestObj;
 
             if (!OverworldManager.Instance.PlayerInventory.HasArmor(diChest.templateId))
             {
@@ -185,6 +196,7 @@ namespace ShrugWare
             diGlovesItem.item = diGloves;
             diGlovesItem.currency = DataManager.Currencies.DauntingInferno;
             diGlovesItem.price = 1000;
+            diGloves.itemObj = glovesObj;
 
             if (!OverworldManager.Instance.PlayerInventory.HasArmor(diGloves.templateId))
             {
@@ -205,6 +217,7 @@ namespace ShrugWare
             diLegsItem.item = diLegs;
             diLegsItem.currency = DataManager.Currencies.DauntingInferno;
             diLegsItem.price = 1000;
+            diLegs.itemObj = legsObj;
 
             if (!OverworldManager.Instance.PlayerInventory.HasArmor(diLegs.templateId))
             {
@@ -225,6 +238,7 @@ namespace ShrugWare
             diBootsItem.item = diBoots;
             diBootsItem.currency = DataManager.Currencies.DauntingInferno;
             diBootsItem.price = 1000;
+            diBoots.itemObj = bootsObj;
 
             if (!OverworldManager.Instance.PlayerInventory.HasArmor(diBoots.templateId))
             {
@@ -243,7 +257,7 @@ namespace ShrugWare
                 PlayerInventory playerInventory = OverworldManager.Instance.PlayerInventory;
                 if (playerInventory != null && playerInventory.GetCurrencyAmount(selectedItem.currency) >= selectedItem.price)
                 {
-                    // don't allow multiple purchases of the same armor piece
+                    // don't allow multiple purchases of the same armor piece. this shouldn't be hit but have it just in case
                     if(selectedItem.item is ArmorItem && playerInventory.GetInventoryItem(selectedItem.item.templateId) != null)
                     {
                         return;
@@ -251,38 +265,21 @@ namespace ShrugWare
 
                     playerInventory.AddItemToInventory(selectedItem.item);
                     playerInventory.RemoveCurrency(selectedItem.currency, selectedItem.price);
-                    UpdateCurrencies();
+                    UpdateCurrenciesText();
 
-                    // todo - fix this when we refactor, for now just disable the item
-                    if (selectedItem.item.templateId == 2)
+                    // remove the armor from the ui. we don't do this for potions
+                    if(selectedItem.item is ArmorItem)
                     {
-                        helmObj.SetActive(false);
-                    }
-                    else if (selectedItem.item.templateId == 3)
-                    {
-                        chestObj.SetActive(false);
-                    }
-                    else if (selectedItem.item.templateId == 4)
-                    {
-                        glovesObj.SetActive(false);
-                    }
-                    else if (selectedItem.item.templateId == 5)
-                    {
-                        legsObj.SetActive(false);
-                    }
-                    else if (selectedItem.item.templateId == 6)
-                    {
-                        bootsObj.SetActive(false);
-                    }
+                        selectedItem.item.itemObj.SetActive(false);
 
-                    prevSelectedObj.GetComponentInChildren<RawImage>().color = UnityEngine.Color.white;
-                    prevSelectedObj = null;
-                    selectedItem.item = null;
+                        prevSelectedObj.GetComponentInChildren<RawImage>().color = UnityEngine.Color.white;
+                        prevSelectedObj = null;
+                        selectedItem.item = null;
+                    }
                 }
             }
         }
 
-        // todo - fix this when we refactor
         public void OnItemSelected(int itemTemplateId)
         {
             if(itemsForSale.ContainsKey(itemTemplateId))
@@ -292,41 +289,8 @@ namespace ShrugWare
                     prevSelectedObj.GetComponentInChildren<RawImage>().color = UnityEngine.Color.white;
                 }
 
-                GameObject objToChange = null;
                 selectedItem = itemsForSale[itemTemplateId];
-                if(selectedItem.item.templateId == 0)
-                {
-                    objToChange = healthPotionObj;
-                }
-                else if (selectedItem.item.templateId == 1)
-                {
-                    objToChange = maxHealthPotionObj;
-                }
-                else if (selectedItem.item.templateId == 2)
-                {
-                    objToChange = helmObj;
-                }
-                else if (selectedItem.item.templateId == 3)
-                {
-                    objToChange = chestObj;
-                }
-                else if (selectedItem.item.templateId == 4)
-                {
-                    objToChange = glovesObj;
-                }
-                else if (selectedItem.item.templateId == 5)
-                {
-                    objToChange = legsObj;
-                }
-                else if (selectedItem.item.templateId == 6)
-                {
-                    objToChange = bootsObj;
-                }
-                else if (selectedItem.item.templateId == 7)
-                {
-                    objToChange = moveSpeedPotionObj;
-                }
-
+                GameObject objToChange = selectedItem.item.itemObj;
                 if (objToChange != null)
                 {
                     prevSelectedObj = objToChange;
@@ -335,17 +299,23 @@ namespace ShrugWare
             }
         }
 
-        public void UpdateCurrencies()
+        public void UpdateCurrenciesText()
         {
             PlayerInventory inventory = OverworldManager.Instance.PlayerInventory;
             if (inventory != null)
             {
-                currenciesText.text = "Gold: " + inventory.GetCurrencyAmount(DataManager.Currencies.Generic).ToString();
-                currenciesText.text += "\nDaunting Inferno Marks: " + inventory.GetCurrencyAmount(DataManager.Currencies.DauntingInferno).ToString();
+                if(armorTab.activeInHierarchy)
+                {
+                    currencyInfoText.text = "Daunting Inferno Marks: " + inventory.GetCurrencyAmount(DataManager.Currencies.DauntingInferno).ToString();
+                }
+                else if (potionsTab.activeInHierarchy)
+                {
+                    currencyInfoText.text = "Gold: " + inventory.GetCurrencyAmount(DataManager.Currencies.Generic).ToString();
+                }
             }
             else
             {
-                currenciesText.text = "ERROR. NO INVENTORY";
+                currencyInfoText.text = "ERROR. NO INVENTORY";
             }
         }
 
@@ -361,6 +331,24 @@ namespace ShrugWare
 
             OverworldManager.Instance.ReadyScene(true);
             SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
+        }
+
+        public void OnArmorTabButtonClicked()
+        {
+            selectedItem.item = null;
+            prevSelectedObj = null;
+            armorTab.SetActive(true);
+            potionsTab.SetActive(false);
+            UpdateCurrenciesText();
+        }
+
+        public void OnPotionsTabButtonClicked()
+        {
+            selectedItem.item = null;
+            prevSelectedObj = null;
+            armorTab.SetActive(false);
+            potionsTab.SetActive(true);
+            UpdateCurrenciesText();
         }
     }
 }

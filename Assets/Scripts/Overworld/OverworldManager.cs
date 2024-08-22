@@ -155,7 +155,7 @@ namespace ShrugWare{
             {
                 EnableCamera();
                 EnableEventSystem();
-                EnableAudioListener();
+                //EnableAudioListener();
 
                 // only do this on trash/boss/infinite levels because those have their own audio
                 if (curLevel != null && (curLevel.LevelType == DataManager.OverworldLevelType.Trash || curLevel.LevelType == DataManager.OverworldLevelType.Boss 
@@ -169,7 +169,7 @@ namespace ShrugWare{
             {
                 DisableCamera();
                 DisableEventSystem();
-                DisableAudioListener();
+                //DisableAudioListener();
             }
         }
 
@@ -315,9 +315,9 @@ namespace ShrugWare{
                 audioManager.StopAudio();
             }
 
-            SceneManager.LoadScene((int)level.SceneIDToLoad);
             OverworldUIManager.Instance.SetCanvasEnabled(false);
             ReadyScene(false);
+            SceneManager.LoadScene((int)level.SceneIDToLoad);
         }
 
         private void PlayOverworldMusic()
@@ -366,12 +366,12 @@ namespace ShrugWare{
 
         private void EnableAudioListener()
         {
-            //audioListenerObj.SetActive(true);
+            audioListenerObj.SetActive(true);
         }
 
         private void DisableAudioListener()
         {
-            //audioListenerObj.SetActive(false);
+            audioListenerObj.SetActive(false);
         }
 
         public AudioClip GetMicrogameAudioClipFromIndex(int index)
