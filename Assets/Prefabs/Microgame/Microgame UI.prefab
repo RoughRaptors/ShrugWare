@@ -313,12 +313,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3810742682450603125, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
       propertyPath: m_fontSize
-      value: 36
+      value: 203.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 3810742682450603125, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
+      propertyPath: m_margin.w
+      value: -53.66594
       objectReference: {fileID: 0}
     - target: {fileID: 3810742682450603125, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: b2d3b6bb411c14744879421be3e74ab3, type: 2}
+      objectReference: {fileID: 11400000, guid: 64702862845ae124fbd8b87cc9dc699f, type: 2}
     - target: {fileID: 3810742682450603125, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
       propertyPath: m_fontStyle
       value: 1
@@ -328,13 +332,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3810742682450603125, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 3810742682450603125, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-<<<<<<< HEAD
-      objectReference: {fileID: -8397483667399805507, guid: f3907b6542410fe4690876bb9e2aaee9, type: 2}
-=======
-      objectReference: {fileID: 4024143618573626597, guid: b2d3b6bb411c14744879421be3e74ab3, type: 2}
->>>>>>> 1763962750fd6fee2218c210fed5f838261cf438
+      objectReference: {fileID: -2101745192850265713, guid: 64702862845ae124fbd8b87cc9dc699f, type: 2}
+    - target: {fileID: 3810742682450603125, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3810742682450603125, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278255360
+      objectReference: {fileID: 0}
     - target: {fileID: 3810742682450603125, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
