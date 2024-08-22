@@ -58,16 +58,18 @@ namespace ShrugWare
 
         // if we've been hit within INVULN_TIME, don't do damage
         private float invulnExpireTime = 0.0f;
-        private const float INVULN_DURATION = 0.8f;
+        private const float INVULN_DURATION = 0.85f;
 
-        private const float COLLECTIBLE_SPAWN_DISTANCE = 35;
+        private const int NUM_FIREBALLS_IN_WAVE_MIN = 5;
+        private const int NUM_FIREBALLS_IN_WAVE_MAX = 10;
+        private const float COLLECTIBLE_SPAWN_DISTANCE = 30;
         private const int COLLECTIBLE_DAMAGE = 10;
         private const float COLLECTIBLE_X_MIN = -5;
         private const float COLLECTIBLE_X_MAX = 110;
         private const float COLLECTIBLE_Y_MIN = -25;
         private const float COLLECTIBLE_Y_MAX = 30;
 
-        private const float FIREBALL_SPAWN_INTERVAL = 0.9f;
+        private const float FIREBALL_SPAWN_INTERVAL = 0.825f;
         private float timeSinceLastSpawn = 0.0f;
         private bool hasSpawnedTopIndicator = false;
         private bool hasSpawnedBottomIndicator = false;
@@ -80,8 +82,8 @@ namespace ShrugWare
         private float healthRemaining = 5;
         private bool gameRunning = false;
 
-        private const int TOP_PATTERN_SPAWN_TIME = 5;
-        private const int BOTTOM_PATTERN_SPAWN_TIME = 10;
+        private const int TOP_PATTERN_SPAWN_TIME = 6;
+        private const int BOTTOM_PATTERN_SPAWN_TIME = 11;
 
         private enum FromDirection
         {
@@ -155,11 +157,12 @@ namespace ShrugWare
             {
                 timeSinceLastSpawn = 0;
 
-                // spawn more at 20s and 10s
+                // spawn more at certain times
                 if ((int)timeInGame != 0 && (int)timeInGame % BOTTOM_PATTERN_SPAWN_TIME == 0)
                 {
                     // spawn bottom
-                    for (int i = 0; i < 10; ++i)
+                    int numInWave = UnityEngine.Random.Range(NUM_FIREBALLS_IN_WAVE_MIN, NUM_FIREBALLS_IN_WAVE_MAX + 1);
+                    for (int i = 0; i < numInWave; ++i)
                     {
                         SpawnFireball(FromDirection.FromBottom);
                     }
@@ -167,7 +170,8 @@ namespace ShrugWare
                 else if ((int)timeInGame != 0 && (int)timeInGame % TOP_PATTERN_SPAWN_TIME == 0)
                 {
                     // spawn top
-                    for (int i = 0; i < 10; ++i)
+                    int numInWave = UnityEngine.Random.Range(NUM_FIREBALLS_IN_WAVE_MIN, NUM_FIREBALLS_IN_WAVE_MAX + 1);
+                    for (int i = 0; i < numInWave; ++i)
                     {
                         SpawnFireball(FromDirection.FromTop);
                     }
@@ -379,6 +383,7 @@ namespace ShrugWare
             playerHealthText.text = "Player Health: " + healthRemaining.ToString();
             if (healthRemaining < 0)
             {
+                DisableFireballs();
                 playerHealthText.text = "YOU ARE DED";
                 gameRunning = false;
                 continueButton.SetActive(true);
@@ -418,6 +423,7 @@ namespace ShrugWare
 
                 enemyHealthText.text = "ded";
 
+                DisableFireballs();
                 continueButton.SetActive(true);
             }
             else
@@ -454,6 +460,14 @@ namespace ShrugWare
                 {
                     renderer.color = Color.white;
                 }
+            }
+        }
+
+        private void DisableFireballs()
+        {
+            foreach(Fireball fireball in fireballsList)
+            {
+                fireball.fireballObj.SetActive(false);
             }
         }
     }

@@ -16,6 +16,8 @@ namespace ShrugWare
         protected List<DataManager.StatEffect> effects = new List<DataManager.StatEffect>();
         public List<DataManager.StatEffect> GetEffects() { return effects; }
 
+        public GameObject itemObj;
+
         public void AddEffect(DataManager.StatEffect effect)
         {
             effects.Add(effect);

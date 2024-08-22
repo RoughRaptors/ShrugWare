@@ -2014,6 +2014,10 @@ PrefabInstance:
       propertyPath: moveRight
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6008722839044481440, guid: 5b210609803658e488f512fc13a6163e, type: 3}
+      propertyPath: m_Size.y
+      value: 6.5
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5939575726936673359, guid: 5b210609803658e488f512fc13a6163e, type: 3}
     - {fileID: 6047643640439186488, guid: 5b210609803658e488f512fc13a6163e, type: 3}
