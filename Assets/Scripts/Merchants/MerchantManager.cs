@@ -54,8 +54,6 @@ namespace ShrugWare
         public Dictionary<int, ItemForSale> GetItemsForSale() { return itemsForSale; }
 
         private List<ItemForSale> selectedItems = new List<ItemForSale>();
-        private ItemForSale selectedItem;
-        private GameObject prevSelectedObj;
 
         private void Awake()
         {
@@ -252,30 +250,32 @@ namespace ShrugWare
 
         public void OnBuyButtonClicked()
         {
-            if (selectedItem.item != null)
+            if(selectedItems.Count > 0)
             {
+                int totalCost = GetTotalCostForSelectedItems();
                 PlayerInventory playerInventory = OverworldManager.Instance.PlayerInventory;
-                if (playerInventory != null && playerInventory.GetCurrencyAmount(selectedItem.currency) >= selectedItem.price)
+
+                // if we have enough, iterate again and buy everything
+                // used selectedItems[0] because they should all be the same currency
+                if (totalCost <= playerInventory.GetCurrencyAmount(selectedItems[0].currency))
                 {
-                    // don't allow multiple purchases of the same armor piece. this shouldn't be hit but have it just in case
-                    if(selectedItem.item is ArmorItem && playerInventory.GetInventoryItem(selectedItem.item.templateId) != null)
+                    foreach (ItemForSale selectedItem in selectedItems)
                     {
-                        return;
+                        // unselect it
+                        selectedItem.item.itemObj.GetComponentInChildren<RawImage>().color = UnityEngine.Color.white;
+                        
+                        playerInventory.AddItemToInventory(selectedItem.item);
+                        playerInventory.RemoveCurrency(selectedItem.currency, selectedItem.price);
+
+                        // remove the armor from the ui. we don't do this for potions
+                        if (selectedItem.item is ArmorItem)
+                        {
+                            selectedItem.item.itemObj.SetActive(false);
+                        }
                     }
 
-                    playerInventory.AddItemToInventory(selectedItem.item);
-                    playerInventory.RemoveCurrency(selectedItem.currency, selectedItem.price);
+                    selectedItems.Clear();
                     UpdateCurrenciesText();
-
-                    // remove the armor from the ui. we don't do this for potions
-                    if(selectedItem.item is ArmorItem)
-                    {
-                        selectedItem.item.itemObj.SetActive(false);
-
-                        prevSelectedObj.GetComponentInChildren<RawImage>().color = UnityEngine.Color.white;
-                        prevSelectedObj = null;
-                        selectedItem.item = null;
-                    }
                 }
             }
         }
@@ -284,16 +284,18 @@ namespace ShrugWare
         {
             if(itemsForSale.ContainsKey(itemTemplateId))
             {
-                if (prevSelectedObj != null)
-                {
-                    prevSelectedObj.GetComponentInChildren<RawImage>().color = UnityEngine.Color.white;
-                }
-
-                selectedItem = itemsForSale[itemTemplateId];
+                ItemForSale selectedItem = itemsForSale[itemTemplateId];
                 GameObject objToChange = selectedItem.item.itemObj;
-                if (objToChange != null)
+                if (selectedItems.Contains(selectedItem))
                 {
-                    prevSelectedObj = objToChange;
+                    // this is already selected, deselect it
+                    selectedItems.Remove(selectedItem);
+                    objToChange.GetComponentInChildren<RawImage>().color = UnityEngine.Color.white;
+                }
+                else
+                {
+                    // select it
+                    selectedItems.Add(selectedItem);
                     objToChange.GetComponentInChildren<RawImage>().color = UnityEngine.Color.green;
                 }
             }
@@ -321,22 +323,19 @@ namespace ShrugWare
 
         public void ExitMerchantClicked()
         {
-            if (prevSelectedObj != null)
-            {
-                prevSelectedObj.GetComponentInChildren<RawImage>().color = UnityEngine.Color.white;
-            }
-
-            prevSelectedObj = null;
-            selectedItem.item = null;
-
             OverworldManager.Instance.ReadyScene(true);
             SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
         }
 
         public void OnArmorTabButtonClicked()
         {
-            selectedItem.item = null;
-            prevSelectedObj = null;
+            // unselect everything
+            foreach(ItemForSale selectedItem in selectedItems)
+            {
+                selectedItem.item.itemObj.GetComponentInChildren<RawImage>().color = UnityEngine.Color.white;
+            }
+
+            selectedItems.Clear();
             armorTab.SetActive(true);
             potionsTab.SetActive(false);
             UpdateCurrenciesText();
@@ -344,11 +343,38 @@ namespace ShrugWare
 
         public void OnPotionsTabButtonClicked()
         {
-            selectedItem.item = null;
-            prevSelectedObj = null;
+            // unselect everything
+            foreach (ItemForSale selectedItem in selectedItems)
+            {
+                selectedItem.item.itemObj.GetComponentInChildren<RawImage>().color = UnityEngine.Color.white;
+            }
+            
+            selectedItems.Clear();
             armorTab.SetActive(false);
             potionsTab.SetActive(true);
             UpdateCurrenciesText();
+        }
+
+        private int GetTotalCostForSelectedItems()
+        {
+            // iterate through and calculate if we have enough to buy everything combined
+            int totalCost = 0;
+            DataManager.Currencies currency = DataManager.Currencies.Generic;
+            PlayerInventory playerInventory = OverworldManager.Instance.PlayerInventory;
+            foreach (ItemForSale selectedItem in selectedItems)
+            {
+                // don't allow multiple purchases of the same armor piece. this shouldn't be hit but have it just in case
+                if (selectedItem.item is ArmorItem && playerInventory.GetInventoryItem(selectedItem.item.templateId) != null)
+                {
+                    continue;
+                }
+
+                // should only be one currency per buy action. we have different tabs for different currency types
+                currency = selectedItem.currency;
+                totalCost += selectedItem.price;
+            }
+
+            return totalCost;
         }
     }
 }
