@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -206,9 +207,9 @@ namespace ShrugWare
                 return; 
             }
 
-            healthPotionItem.GetComponentInChildren<Text>().text = "";
-            maxHealthPotionItem.GetComponentInChildren<Text>().text = "";
-            moveSpeedPotionItem.GetComponentInChildren<Text>().text = "";
+            healthPotionItem.GetComponentInChildren<TextMeshProUGUI>().text = "";
+            maxHealthPotionItem.GetComponentInChildren<TextMeshProUGUI>().text = "";
+            moveSpeedPotionItem.GetComponentInChildren<TextMeshProUGUI>().text = "";
 
             // bad, remove hard coding and make data driven
             Item healthPotion = OverworldManager.Instance.PlayerInventory.GetInventoryItem(0);
@@ -216,17 +217,17 @@ namespace ShrugWare
             Item moveSpeedPotion = OverworldManager.Instance.PlayerInventory.GetInventoryItem(7);
             if (healthPotion != null)
             {
-                healthPotionItem.GetComponentInChildren<Text>().text += "Health Potion\n+25% Heal\nQuantity: " + healthPotion.itemQuantity;
+                healthPotionItem.GetComponentInChildren<TextMeshProUGUI>().text += "Health Potion\n+25% Heal\nQuantity: " + healthPotion.itemQuantity;
             }
 
             if(maxHealthPotion != null)
             {
-                maxHealthPotionItem.GetComponentInChildren<Text>().text += "\nMax Health Potion\n+10% Max HP\nQuantity: " + maxHealthPotion.itemQuantity;
+                maxHealthPotionItem.GetComponentInChildren<TextMeshProUGUI>().text += "Max Health Potion\n+10% Max HP\nQuantity: " + maxHealthPotion.itemQuantity;
             }
 
             if (moveSpeedPotionItem != null)
             {
-                moveSpeedPotionItem.GetComponentInChildren<Text>().text += "\nMove Speed Potion\n+10% Max HP\nQuantity: " + moveSpeedPotion.itemQuantity;
+                moveSpeedPotionItem.GetComponentInChildren<TextMeshProUGUI>().text += "Move Speed Potion\n+10% Max HP\nQuantity: " + moveSpeedPotion.itemQuantity;
             }
         }
 
