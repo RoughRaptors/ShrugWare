@@ -107,7 +107,7 @@ namespace ShrugWare
             {
                 gameRunning = false;
                 int lootAmount = 500;
-                OverworldManager.Instance.PlayerInventory.AddCurrency(DataManager.Currencies.Generic, lootAmount);
+                OverworldManager.Instance.PlayerInventory.AddCurrency(DataManager.Currencies.Gold, lootAmount);
                 endGameText.text = "Boss time!\nReceived " + lootAmount + " gold";
                 continueButton.SetActive(true);
             }

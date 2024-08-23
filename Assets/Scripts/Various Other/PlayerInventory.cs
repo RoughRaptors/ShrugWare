@@ -17,8 +17,8 @@ namespace ShrugWare
         public PlayerInventory()
         {
             // starting inventory
-            currencies.Add(DataManager.Currencies.Generic, 500);
-            currencies.Add(DataManager.Currencies.DauntingInferno, 2500);
+            currencies.Add(DataManager.Currencies.Gold, 500);
+            currencies.Add(DataManager.Currencies.DKP, 2500);
 
             // 25% player heal
             DataManager.StatEffect healPlayerEffect;

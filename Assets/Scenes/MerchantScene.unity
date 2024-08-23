@@ -684,7 +684,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '10%
 
-    1000 DI Marks'
+    1000 DKP'
 --- !u!222 &488822198
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -845,7 +845,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '10%
 
-    1000 DI Marks'
+    1000 DKP'
 --- !u!222 &602358904
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1536,7 +1536,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '10%
 
-    1000 DI Marks'
+    1000 DKP'
 --- !u!222 &1074302896
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4295,7 +4295,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "10% \n1000 DI Marks"
+  m_Text: "10% \n1000 DKP"
 --- !u!222 &1873825474
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4456,7 +4456,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '10%
 
-    1000 DI Marks'
+    1000 DKP'
 --- !u!222 &1948466963
 CanvasRenderer:
   m_ObjectHideFlags: 0
