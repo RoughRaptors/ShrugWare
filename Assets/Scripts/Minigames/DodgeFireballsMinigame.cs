@@ -418,7 +418,7 @@ namespace ShrugWare
 
                 if (OverworldManager.Instance != null)
                 {
-                    OverworldManager.Instance.PlayerInventory.AddCurrency(DataManager.Currencies.Generic, lootAmount);
+                    OverworldManager.Instance.PlayerInventory.AddCurrency(DataManager.Currencies.Gold, lootAmount);
                 }
 
                 enemyHealthText.text = "ded";

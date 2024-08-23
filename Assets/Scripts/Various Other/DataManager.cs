@@ -77,8 +77,9 @@ namespace ShrugWare
 
         public enum Currencies
         {
-            Generic = 0,
-            DauntingInferno
+            Gold = 0,
+            DauntingInferno,
+            DKP
         }
 
         public enum ArmorSlot

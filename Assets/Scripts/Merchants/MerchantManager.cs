@@ -108,7 +108,7 @@ namespace ShrugWare
 
             ItemForSale healthPotionItem;
             healthPotionItem.item = healthPotion;
-            healthPotionItem.currency = DataManager.Currencies.Generic;
+            healthPotionItem.currency = DataManager.Currencies.Gold;
             healthPotionItem.price = 250;
             healthPotionItem.item.itemObj = healthPotionObj;
 
@@ -122,7 +122,7 @@ namespace ShrugWare
 
             ItemForSale maxHealthPotionItem;
             maxHealthPotionItem.item = maxHealthPotion;
-            maxHealthPotionItem.currency = DataManager.Currencies.Generic;
+            maxHealthPotionItem.currency = DataManager.Currencies.Gold;
             maxHealthPotionItem.price = 250;
             maxHealthPotionItem.item.itemObj = maxHealthPotionObj;
 
@@ -136,7 +136,7 @@ namespace ShrugWare
 
             ItemForSale moveSpeedPotionItem;
             moveSpeedPotionItem.item = moveSpeedPotion;
-            moveSpeedPotionItem.currency = DataManager.Currencies.Generic;
+            moveSpeedPotionItem.currency = DataManager.Currencies.Gold;
             moveSpeedPotionItem.price = 500;
             moveSpeedPotionItem.item.itemObj = moveSpeedPotionObj;
 
@@ -150,7 +150,7 @@ namespace ShrugWare
 
             ItemForSale diHelmItem;
             diHelmItem.item = diHelm;
-            diHelmItem.currency = DataManager.Currencies.DauntingInferno;
+            diHelmItem.currency = DataManager.Currencies.DKP;
             diHelmItem.price = 1000;
             diHelm.itemObj = helmObj;
 
@@ -171,7 +171,7 @@ namespace ShrugWare
 
             ItemForSale diChestItem;
             diChestItem.item = diChest;
-            diChestItem.currency = DataManager.Currencies.DauntingInferno;
+            diChestItem.currency = DataManager.Currencies.DKP;
             diChestItem.price = 1000;
             diChest.itemObj = chestObj;
 
@@ -192,7 +192,7 @@ namespace ShrugWare
 
             ItemForSale diGlovesItem;
             diGlovesItem.item = diGloves;
-            diGlovesItem.currency = DataManager.Currencies.DauntingInferno;
+            diGlovesItem.currency = DataManager.Currencies.DKP;
             diGlovesItem.price = 1000;
             diGloves.itemObj = glovesObj;
 
@@ -213,7 +213,7 @@ namespace ShrugWare
 
             ItemForSale diLegsItem;
             diLegsItem.item = diLegs;
-            diLegsItem.currency = DataManager.Currencies.DauntingInferno;
+            diLegsItem.currency = DataManager.Currencies.DKP;
             diLegsItem.price = 1000;
             diLegs.itemObj = legsObj;
 
@@ -234,7 +234,7 @@ namespace ShrugWare
 
             ItemForSale diBootsItem;
             diBootsItem.item = diBoots;
-            diBootsItem.currency = DataManager.Currencies.DauntingInferno;
+            diBootsItem.currency = DataManager.Currencies.DKP;
             diBootsItem.price = 1000;
             diBoots.itemObj = bootsObj;
 
@@ -308,11 +308,11 @@ namespace ShrugWare
             {
                 if(armorTab.activeInHierarchy)
                 {
-                    currencyInfoText.text = "Daunting Inferno Marks: " + inventory.GetCurrencyAmount(DataManager.Currencies.DauntingInferno).ToString();
+                    currencyInfoText.text = "DKP: " + inventory.GetCurrencyAmount(DataManager.Currencies.DKP).ToString();
                 }
                 else if (potionsTab.activeInHierarchy)
                 {
-                    currencyInfoText.text = "Gold: " + inventory.GetCurrencyAmount(DataManager.Currencies.Generic).ToString();
+                    currencyInfoText.text = "Gold: " + inventory.GetCurrencyAmount(DataManager.Currencies.Gold).ToString();
                 }
             }
             else
@@ -359,7 +359,7 @@ namespace ShrugWare
         {
             // iterate through and calculate if we have enough to buy everything combined
             int totalCost = 0;
-            DataManager.Currencies currency = DataManager.Currencies.Generic;
+            DataManager.Currencies currency = DataManager.Currencies.Gold;
             PlayerInventory playerInventory = OverworldManager.Instance.PlayerInventory;
             foreach (ItemForSale selectedItem in selectedItems)
             {

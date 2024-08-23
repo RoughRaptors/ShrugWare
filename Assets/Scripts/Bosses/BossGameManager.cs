@@ -226,7 +226,7 @@ namespace ShrugWare
                 curBoss.isDead = true;
 
                 // award loot
-                DataManager.Currencies lootCurrency = DataManager.Currencies.DauntingInferno;
+                DataManager.Currencies lootCurrency = DataManager.Currencies.DKP;
                 int lootAmount = 1500;
                 OverworldManager.Instance.PlayerInventory.AddCurrency(lootCurrency, lootAmount);
                 

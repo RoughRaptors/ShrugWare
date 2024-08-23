@@ -181,7 +181,7 @@ namespace ShrugWare
             maxHealthPotionItem.gameObject.SetActive(false);
             moveSpeedPotionItem.gameObject.SetActive(false);
             gameInfoText.gameObject.SetActive(true);
-            gameInfoText.text = "You beat the boss!\nReceived Daunting Inferno Marks x " + lootAmount;
+            gameInfoText.text = "You beat the boss!\nReceived  " + lootAmount + " DKP";
             gameInfoText.enabled = true;
             continueGameButton.GetComponentInChildren<Text>().text = "Back to Overworld";
             continueGameButton.gameObject.SetActive(true);
