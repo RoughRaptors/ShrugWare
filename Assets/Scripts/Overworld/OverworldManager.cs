@@ -126,6 +126,22 @@ namespace ShrugWare{
             overworldUIManager.UpdateUI();
         }
 
+        private void Update()
+        {
+            // tilde
+            if (Input.GetKeyDown(KeyCode.BackQuote))
+            {
+                if (isDebugMode)
+                {
+                    overworldUIManager.OnStopDebuggingPressed();
+                }
+                else
+                {
+                    overworldUIManager.EnableDebugging();
+                }
+            }
+        }
+
         public void AddLevel(OverworldLevel newLevel)
         {
             if(!overworldMap.ContainsKey(newLevel.LevelID))

@@ -61,7 +61,7 @@ namespace ShrugWare
         private const float INVULN_DURATION = 0.85f;
 
         private const int NUM_FIREBALLS_IN_WAVE_MIN = 5;
-        private const int NUM_FIREBALLS_IN_WAVE_MAX = 10;
+        private const int NUM_FIREBALLS_IN_WAVE_MAX = 9;
         private const float COLLECTIBLE_SPAWN_DISTANCE = 30;
         private const int COLLECTIBLE_DAMAGE = 10;
         private const float COLLECTIBLE_X_MIN = -5;
@@ -69,7 +69,7 @@ namespace ShrugWare
         private const float COLLECTIBLE_Y_MIN = -25;
         private const float COLLECTIBLE_Y_MAX = 30;
 
-        private const float FIREBALL_SPAWN_INTERVAL = 0.825f;
+        private const float FIREBALL_SPAWN_INTERVAL = 0.875f;
         private float timeSinceLastSpawn = 0.0f;
         private bool hasSpawnedTopIndicator = false;
         private bool hasSpawnedBottomIndicator = false;
@@ -82,8 +82,8 @@ namespace ShrugWare
         private float healthRemaining = 5;
         private bool gameRunning = false;
 
-        private const int TOP_PATTERN_SPAWN_TIME = 6;
-        private const int BOTTOM_PATTERN_SPAWN_TIME = 11;
+        private const int TOP_PATTERN_SPAWN_TIME = 7;
+        private const int BOTTOM_PATTERN_SPAWN_TIME = 12;
 
         private enum FromDirection
         {
