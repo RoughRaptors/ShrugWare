@@ -485,8 +485,10 @@ MonoBehaviour:
     addOnWin: 1
     addOnLoss: 1
   abilityBar: {fileID: 274319489}
-  interruptButton: {fileID: 1325052455}
+  interruptButton: {fileID: 1325052453}
   bossObj: {fileID: 1634194059}
+  attackButton1: {fileID: 401366509}
+  attackButton2: {fileID: 656935073}
 --- !u!1 &392852466
 GameObject:
   m_ObjectHideFlags: 0
