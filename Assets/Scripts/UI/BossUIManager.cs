@@ -97,13 +97,20 @@ namespace ShrugWare
                 // play a sound effect on every even number except for 0. just do a countdown then a ding at 0
                 if (timeLeft > 0 && (timeLeft % 1 < 0.05f ))
                 {
-                    AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.MicrogameTimerTick);
+                    if (AudioManager.Instance != null)
+                    {
+                        AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.MicrogameTimerTick);
+                    }
                     countdownTimerRunning = true;
                 }
                 else if (timeLeft <= 0.0f)
                 {
                     countdownTimerRunning = false;
-                    AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.MicrogameTimerDing);
+
+                    if (AudioManager.Instance != null)
+                    {
+                        AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.MicrogameTimerDing);
+                    }
                 }
             }
         }
@@ -162,7 +169,11 @@ namespace ShrugWare
                 return;
             }
 
-            AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.ButtonClick);
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.ButtonClick);
+            }
+
             BossGameManager.Instance.ContinueGame();
         }
 

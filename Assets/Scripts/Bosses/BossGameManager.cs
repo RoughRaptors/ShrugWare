@@ -205,10 +205,18 @@ namespace ShrugWare
             timeInBossScene = 0.0f;
             curSceneIndex = sceneId;
 
-            sceneTransitionAnim.SetTrigger("End");
-            yield return new WaitForSeconds(1);
-            SceneManager.LoadScene(sceneId);
-            sceneTransitionAnim.SetTrigger("Start");
+            // only play a transition if it's a microgame
+            if (sceneId >= (int)DataManager.Scenes.MICROGAME_START && sceneId <= (int)DataManager.Scenes.MICROGAME_END)
+            {
+                sceneTransitionAnim.SetTrigger("End");
+                yield return new WaitForSeconds(1);
+                SceneManager.LoadScene(sceneId);
+                sceneTransitionAnim.SetTrigger("Start");
+            }
+            else
+            {
+                SceneManager.LoadScene(sceneId);
+            }
         }
 
         public void MicrogameCompleted(bool wonMicrogame)
@@ -258,9 +266,13 @@ namespace ShrugWare
         // would be nice to get some kind of transition/animation for this to be smooth, something like warioware curtains opening and closing
         public void LoadScene(int sceneIndex)
         {
+            StartCoroutine(LoadLevel(sceneIndex));
+
+            /*
             timeInBossScene = 0.0f;
             curSceneIndex = sceneIndex;
             SceneManager.LoadScene(sceneIndex);
+            */
         }
 
         public string GetPreviousEffectInfoString()
@@ -379,7 +391,11 @@ namespace ShrugWare
             curTimeScale = newTimescale;
             Time.timeScale = curTimeScale;
             bossUIManager.SetTimescaleInputFieldText("Time Scale: " + curTimeScale.ToString("F3"));
-            OverworldManager.Instance.ResetAudioPitch();
+
+            if (OverworldManager.Instance != null)
+            {
+                OverworldManager.Instance.ResetAudioPitch();
+            }
         }
 
         public void AddToTimeScale(float amount)
