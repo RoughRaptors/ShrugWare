@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /* 
     to add a new microgame: 
@@ -67,6 +68,12 @@ namespace ShrugWare
 
         [SerializeField]
         Animator sceneTransitionAnim;
+
+        [SerializeField]
+        Image sceneTransitionLeftImage;
+
+        [SerializeField]
+        Image sceneTransitionRightImage;
 
         private float curTimeScale = 1.0f;
         public float GetCurTimeScale() { return curTimeScale; }
@@ -151,6 +158,7 @@ namespace ShrugWare
             }
 
             EnableBossCamera(true);
+            sceneTransitionAnim.speed = 0.0f;
         }
 
         private void Start()
@@ -204,6 +212,9 @@ namespace ShrugWare
         {
             timeInBossScene = 0.0f;
             curSceneIndex = sceneId;
+            sceneTransitionAnim.speed = 1.0f;
+            sceneTransitionLeftImage.color = new Color(sceneTransitionLeftImage.color.r, sceneTransitionLeftImage.color.b, sceneTransitionLeftImage.color.g, 1.0f);
+            sceneTransitionRightImage.color = new Color(sceneTransitionRightImage.color.r, sceneTransitionRightImage.color.b, sceneTransitionRightImage.color.g, 1.0f);
 
             // only play a transition if it's a microgame
             if (sceneId >= (int)DataManager.Scenes.MICROGAME_START && sceneId <= (int)DataManager.Scenes.MICROGAME_END)
@@ -263,16 +274,9 @@ namespace ShrugWare
             }
         }
 
-        // would be nice to get some kind of transition/animation for this to be smooth, something like warioware curtains opening and closing
         public void LoadScene(int sceneIndex)
         {
             StartCoroutine(LoadLevel(sceneIndex));
-
-            /*
-            timeInBossScene = 0.0f;
-            curSceneIndex = sceneIndex;
-            SceneManager.LoadScene(sceneIndex);
-            */
         }
 
         public string GetPreviousEffectInfoString()
