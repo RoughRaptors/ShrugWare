@@ -135,6 +135,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2301266167672538499, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 649
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301266167672538499, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 156
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301266167760245459, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 648.99994
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301266167760245459, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 52
+      objectReference: {fileID: 0}
     - target: {fileID: 2301266167922393855, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -142,6 +158,26 @@ PrefabInstance:
     - target: {fileID: 2301266167922393855, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301266167982848521, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301266167982848523, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301266167982848523, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301266167982848523, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301266167982848523, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2301266168217593136, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: m_AnchorMax.x

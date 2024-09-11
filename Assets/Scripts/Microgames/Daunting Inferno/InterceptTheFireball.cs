@@ -18,8 +18,8 @@ namespace ShrugWare
         private const float HEALER_X_MAX = 50;
         private const float PLAYER_X_MIN = -50.0f;
         private const float PLAYER_X_MAX = 50.0f;
-        private const float PLAYER_Y_MIN = -30.0f;
-        private const float PLAYER_Y_MAX = 35.0f;
+        private const float PLAYER_Y_MIN = -40.0f;
+        private const float PLAYER_Y_MAX = 18;
         private const float FIREBALL_X_MIN = -100;
         private const float FIREBALL_X_MAX = 100;
 
@@ -30,12 +30,18 @@ namespace ShrugWare
             base.Start();
         }
 
-        protected override void OnMyGameStart()
+        protected override void OnMyGameAwake()
         {
-            base.OnMyGameStart();
+            base.OnMyGameAwake();
+
             SetupFireball();
             SetupPlayerObject();
             SetupHealer();
+        }
+
+        protected override void OnMyGameStart()
+        {
+            base.OnMyGameStart();
         }
 
         protected override void OnEnable()
