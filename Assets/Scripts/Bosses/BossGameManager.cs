@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -63,6 +64,9 @@ namespace ShrugWare
 
         private Boss curBoss;
         public Boss CurBoss { get; set; }
+
+        [SerializeField]
+        Animator sceneTransitionAnim;
 
         private float curTimeScale = 1.0f;
         public float GetCurTimeScale() { return curTimeScale; }
@@ -191,9 +195,20 @@ namespace ShrugWare
                     DataManager.Scenes nextScene = curBoss.PickNextMicrogame();
                     bossUIManager.SetBossUICanvasEnabled(false);
                     EnableBossCamera(false);
-                    LoadScene((int)nextScene);
+                    StartCoroutine(LoadLevel((int)nextScene));
                 }
             }
+        }
+
+        private IEnumerator LoadLevel(int sceneId)
+        {
+            timeInBossScene = 0.0f;
+            curSceneIndex = sceneId;
+
+            sceneTransitionAnim.SetTrigger("End");
+            yield return new WaitForSeconds(1);
+            SceneManager.LoadScene(sceneId);
+            sceneTransitionAnim.SetTrigger("Start");
         }
 
         public void MicrogameCompleted(bool wonMicrogame)

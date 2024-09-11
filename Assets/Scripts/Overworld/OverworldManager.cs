@@ -87,6 +87,9 @@ namespace ShrugWare{
         List<Sprite> microgameBackgrounds = new List<Sprite>();
         public List<Sprite> GetMicrogameBackgrounds() { return microgameBackgrounds; }
 
+        // don't allow the player to move multiple spaces at once
+        private bool isMoving = false;
+
         private void Awake()
         {
             if (Instance == null)
@@ -255,7 +258,7 @@ namespace ShrugWare{
                 }
 
                 // special case for curLevel being null. this will happen in the beginning of the game before we set curLevel and only should happen once
-                if ((!newOverworldLevel.Locked && adjacent) || force || curLevel == null)
+                if ((!newOverworldLevel.Locked && adjacent && !isMoving) || force || curLevel == null)
                 {
                     curLevel = newOverworldLevel;
                     StartCoroutine(MovePlayerToLevel(adjacent));
@@ -270,6 +273,8 @@ namespace ShrugWare{
 
         private IEnumerator MovePlayerToLevel(bool adjacent)
         {
+            isMoving = true;
+
             Vector3 playerPos = playerObj.transform.position;
             Vector3 targetPos = curLevel.gameObject.transform.position;
             while (Vector3.Distance(playerPos, targetPos) > 0.1f)
@@ -280,6 +285,8 @@ namespace ShrugWare{
                 playerObj.transform.position = Vector3.MoveTowards(playerPos, targetPos, 5 * Time.deltaTime);
                 yield return 0;
             }
+
+            isMoving = false;
         }
 
         public OverworldLevel GetOverworldLevel(int levelID)
