@@ -30,7 +30,7 @@ namespace ShrugWare
         private bool item2InSlot = false;
         private bool item3InSlot = false;
 
-        const float DISTANCE_THRESHOLD = .009f;
+        const float DISTANCE_THRESHOLD = 0.035f;
         const float X_MIN = -1700;
         const float X_MAX = 1700;
         const float Y_MIN = -600;
@@ -60,6 +60,10 @@ namespace ShrugWare
             // check distance from borders on mouse up
             if(Input.GetMouseButtonUp(0))
             {
+                item1InSlot = false;
+                item2InSlot = false;
+                item3InSlot = false;
+
                 CheckDistance(resource1);
                 CheckDistance(resource2);
                 CheckDistance(resource3);

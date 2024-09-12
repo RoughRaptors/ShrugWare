@@ -34,6 +34,9 @@ namespace ShrugWare
         [SerializeField]
         Button stopDebugButton;
 
+        [SerializeField]
+        GameObject enterLevelButtonObj;
+
         private void Awake()
         {
             Application.targetFrameRate = 60;
@@ -90,6 +93,16 @@ namespace ShrugWare
                         "\n" + "Type : " + curLevel.LevelType.ToString();
                 }
 #endif
+
+                // don't show the enter level button on the start level, it was confusing some people
+                if(curLevel.LevelType == DataManager.OverworldLevelType.Start)
+                {
+                    enterLevelButtonObj.SetActive(false);
+                }
+                else
+                {
+                    enterLevelButtonObj.SetActive(true);
+                }
             }
         }
 
