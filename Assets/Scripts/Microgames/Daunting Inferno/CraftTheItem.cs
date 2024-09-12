@@ -30,7 +30,7 @@ namespace ShrugWare
         private bool item2InSlot = false;
         private bool item3InSlot = false;
 
-        const int DISTANCE_THRESHOLD = 95;
+        const float DISTANCE_THRESHOLD = 0.035f;
         const float X_MIN = -1700;
         const float X_MAX = 1700;
         const float Y_MIN = -600;
