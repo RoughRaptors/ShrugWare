@@ -313,7 +313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3810742682450603125, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
       propertyPath: m_fontSize
-      value: 203.65
+      value: 175
       objectReference: {fileID: 0}
     - target: {fileID: 3810742682450603125, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
       propertyPath: m_margin.w
@@ -381,7 +381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6971377348762163589, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 400
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7266377873029941950, guid: bef9ee8823de8e342ab120b2f8488a27, type: 3}
       propertyPath: m_AnchorMax.x

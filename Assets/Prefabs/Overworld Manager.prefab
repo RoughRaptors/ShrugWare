@@ -3688,6 +3688,7 @@ MonoBehaviour:
   debugDropdown: {fileID: 734678338769102764}
   debugButton: {fileID: 7197022636650547720}
   stopDebugButton: {fileID: 3530489824409564555}
+  enterLevelButtonObj: {fileID: 6916883364707373247}
 --- !u!1 &5329994495571197636
 GameObject:
   m_ObjectHideFlags: 0

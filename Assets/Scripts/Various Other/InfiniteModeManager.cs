@@ -1,4 +1,5 @@
 using ShrugWare;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -29,6 +30,15 @@ public class InfiniteModeManager : MonoBehaviour
 
     [SerializeField]
     List<Sprite> microgameBackgrounds = new List<Sprite>();
+
+    [SerializeField]
+    Animator sceneTransitionAnim;
+
+    [SerializeField]
+    Image sceneTransitionLeftImage;
+
+    [SerializeField]
+    Image sceneTransitionRightImage;
 
     public List<Sprite> GetMicrogameBackgrounds() { return microgameBackgrounds; }
 
@@ -101,6 +111,8 @@ public class InfiniteModeManager : MonoBehaviour
 
         gameState = GameState.BossScreen;
         EnableCamera();
+
+        sceneTransitionAnim.speed = 0.0f;
     }
 
     private void Update()
@@ -185,7 +197,31 @@ public class InfiniteModeManager : MonoBehaviour
 
         timeInBossScene = 0;
         gameState = GameState.InMicrogame;
-        SceneManager.LoadScene((int)scene);
+        StartCoroutine(LoadLevel((int)scene));
+        //SceneManager.LoadScene((int)scene);
+    }
+
+
+    private IEnumerator LoadLevel(int sceneId)
+    {
+        sceneTransitionLeftImage.color = new Color(sceneTransitionLeftImage.color.r, sceneTransitionLeftImage.color.b, sceneTransitionLeftImage.color.g, 1.0f);
+        sceneTransitionRightImage.color = new Color(sceneTransitionRightImage.color.r, sceneTransitionRightImage.color.b, sceneTransitionRightImage.color.g, 1.0f);
+
+        sceneTransitionAnim.speed = 1.0f;
+        yield return new WaitForSeconds(1);
+
+        // only play a transition if it's a microgame
+        if (sceneId >= (int)DataManager.Scenes.MICROGAME_START && sceneId <= (int)DataManager.Scenes.MICROGAME_END)
+        {
+            sceneTransitionAnim.SetTrigger("End");
+            yield return new WaitForSeconds(1);
+            SceneManager.LoadScene(sceneId);
+            sceneTransitionAnim.SetTrigger("Start");
+        }
+        else
+        {
+            SceneManager.LoadScene(sceneId);
+        }
     }
 
     public void MicrogameCompleted(bool won)
@@ -216,6 +252,8 @@ public class InfiniteModeManager : MonoBehaviour
         {
             HandleDied();
         }
+
+
 
         SceneManager.LoadScene((int)DataManager.Scenes.InfiniteModeScene);
     }
