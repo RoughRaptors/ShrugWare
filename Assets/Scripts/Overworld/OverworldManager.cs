@@ -89,7 +89,7 @@ namespace ShrugWare{
 
         // don't allow the player to move multiple spaces at once
         private bool isMoving = false;
-
+        
         // when we click a non-adjacent level, we need to keep track of our path
         private List<Vector3> pathToLevel = new List<Vector3>();
 
@@ -309,8 +309,6 @@ namespace ShrugWare{
             {
                 return;
             }
-
-            
         }
 
         public OverworldLevel GetOverworldLevel(int levelID)
