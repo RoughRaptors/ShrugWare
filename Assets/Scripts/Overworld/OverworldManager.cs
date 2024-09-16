@@ -259,19 +259,22 @@ namespace ShrugWare{
                 // special case for curLevel being null. this will happen in the beginning of the game before we set curLevel and only should happen once
                 if ((!newOverworldLevel.Locked && !isMoving) || force || curLevel == null)
                 {
-                    bool adjacent = false;
-                    if (curLevel != null && curLevel.AdjacentMapLevels.Contains(levelID) || curLevel == null)
+                    if (!isMoving)
                     {
-                        adjacent = true;
-                    }
-
-                    if (adjacent)
-                    {
-                        StartCoroutine(MovePlayerToLevel(newOverworldLevel));
-                    }
-                    else
-                    {
-                        GeneratePathToLevel(newOverworldLevel);
+                        bool adjacent = false;
+                        if (curLevel != null && curLevel.AdjacentMapLevels.Contains(levelID) || curLevel == null)
+                        {
+                            adjacent = true;
+                        }
+                        
+                        if (adjacent)
+                        {
+                            StartCoroutine(MovePlayerToLevel(newOverworldLevel));
+                        }
+                        else
+                        {
+                            GeneratePathToLevel(newOverworldLevel);
+                        }
                     }
 
                     overworldUIManager.UpdateUI();
@@ -285,17 +288,15 @@ namespace ShrugWare{
 
         private IEnumerator MovePlayerToLevel(OverworldLevel targetOverworldLevel)
         {
-            curLevel = targetOverworldLevel;
             isMoving = true;
 
-            Vector3 playerPos = playerObj.transform.position;
-            Vector3 targetPos = targetOverworldLevel.transform.position;
-            while (Vector3.Distance(playerPos, targetPos) > 0.1f)
+            curLevel = targetOverworldLevel;
+
+            // spawn to the left and center of the level object
+            Vector3 targetPos = new Vector3(curLevel.transform.position.x - 1.0f, curLevel.transform.position.y - 0.6f, curLevel.transform.position.z);
+            while (Vector3.Distance(playerObj.transform.position, targetPos) > 0.1f)
             {
-                // spawn to the left and center of the level object
-                playerPos = playerObj.transform.position;
-                targetPos = new Vector3(targetOverworldLevel.transform.position.x, targetOverworldLevel.transform.position.y, targetOverworldLevel.transform.position.z);
-                playerObj.transform.position = Vector3.MoveTowards(playerPos, targetPos, 5 * Time.deltaTime);
+                playerObj.transform.position = Vector3.MoveTowards(playerObj.transform.position, targetPos, 5 * Time.deltaTime);
                 yield return 0;
             }
 
