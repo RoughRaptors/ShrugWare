@@ -90,6 +90,9 @@ namespace ShrugWare{
         // don't allow the player to move multiple spaces at once
         private bool isMoving = false;
 
+        // when we click a non-adjacent level, we need to keep track of our path
+        private List<Vector3> pathToLevel = new List<Vector3>();
+
         private void Awake()
         {
             if (Instance == null)
@@ -163,6 +166,8 @@ namespace ShrugWare{
             {
                 newLevel.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
             }
+
+            Debug.Log(newLevel.name + ": " + newLevel.transform.position);
         }
 
         public void ReadyScene(bool enabled)
@@ -251,17 +256,24 @@ namespace ShrugWare{
 #if UNITY_EDITOR
                 force = true;
 #endif
-                bool adjacent = false;
-                if (curLevel != null && curLevel.AdjacentMapLevels.Contains(levelID))
-                {
-                    adjacent = true;
-                }
-
                 // special case for curLevel being null. this will happen in the beginning of the game before we set curLevel and only should happen once
-                if ((!newOverworldLevel.Locked && adjacent && !isMoving) || force || curLevel == null)
+                if ((!newOverworldLevel.Locked && !isMoving) || force || curLevel == null)
                 {
-                    curLevel = newOverworldLevel;
-                    StartCoroutine(MovePlayerToLevel(adjacent));
+                    bool adjacent = false;
+                    if (curLevel != null && curLevel.AdjacentMapLevels.Contains(levelID) || curLevel == null)
+                    {
+                        adjacent = true;
+                    }
+
+                    if (adjacent)
+                    {
+                        StartCoroutine(MovePlayerToLevel(newOverworldLevel));
+                    }
+                    else
+                    {
+                        GeneratePathToLevel(newOverworldLevel);
+                    }
+
                     overworldUIManager.UpdateUI();
                 }
                 else
@@ -271,22 +283,33 @@ namespace ShrugWare{
             }
         }
 
-        private IEnumerator MovePlayerToLevel(bool adjacent)
+        private IEnumerator MovePlayerToLevel(OverworldLevel targetOverworldLevel)
         {
+            curLevel = targetOverworldLevel;
             isMoving = true;
 
             Vector3 playerPos = playerObj.transform.position;
-            Vector3 targetPos = curLevel.gameObject.transform.position;
+            Vector3 targetPos = targetOverworldLevel.transform.position;
             while (Vector3.Distance(playerPos, targetPos) > 0.1f)
             {
                 // spawn to the left and center of the level object
                 playerPos = playerObj.transform.position;
-                targetPos = new Vector3(curLevel.gameObject.transform.position.x - 0.9f, curLevel.gameObject.transform.position.y - 0.6f, curLevel.gameObject.transform.position.z);
+                targetPos = new Vector3(targetOverworldLevel.transform.position.x, targetOverworldLevel.transform.position.y, targetOverworldLevel.transform.position.z);
                 playerObj.transform.position = Vector3.MoveTowards(playerPos, targetPos, 5 * Time.deltaTime);
                 yield return 0;
             }
 
             isMoving = false;
+        }
+
+        private void GeneratePathToLevel(OverworldLevel level)
+        {
+            if(curLevel == level)
+            {
+                return;
+            }
+
+            
         }
 
         public OverworldLevel GetOverworldLevel(int levelID)
