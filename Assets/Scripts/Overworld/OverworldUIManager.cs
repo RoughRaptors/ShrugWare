@@ -69,7 +69,7 @@ namespace ShrugWare
                 return;
             }
 
-            OverworldLevel curLevel = OverworldManager.Instance.GetOverworldLevel(OverworldManager.Instance.CurLevel.LevelID);
+            OverworldLevel curLevel = OverworldManager.Instance.GetOverworldLevelByID(OverworldManager.Instance.CurLevel.LevelID);
             if (curLevel != null)
             {                
 #if UNITY_EDITOR
@@ -125,7 +125,7 @@ namespace ShrugWare
             }
 
             // don't go in completed boss levels (yet!)
-            OverworldLevel overworldLevel = OverworldManager.Instance.GetOverworldLevel(OverworldManager.Instance.CurLevel.LevelID);
+            OverworldLevel overworldLevel = OverworldManager.Instance.GetOverworldLevelByID(OverworldManager.Instance.CurLevel.LevelID);
             //if (overworldLevel != null && !(overworldLevel.LevelType == DataManager.OverworldLevelType.Boss && overworldLevel.Completed))
             {
                 overworldLevel.EnterLevel();
