@@ -166,8 +166,6 @@ namespace ShrugWare{
             {
                 newLevel.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
             }
-
-            Debug.Log(newLevel.name + ": " + newLevel.transform.position);
         }
 
         public void ReadyScene(bool enabled)
@@ -273,8 +271,13 @@ namespace ShrugWare{
                         }
                         else
                         {
+                            pathToLevel.Clear();
                             List<int> visitedList = new List<int>();
+                            visitedList.Add(CurLevel.LevelID);
                             GeneratePathToLevel(curLevel.LevelID, newOverworldLevel.LevelID, ref visitedList);
+                            pathToLevel.Reverse();
+
+                            StartCoroutine(FollowPathToLevel());
                         }
                     }
 
@@ -293,7 +296,7 @@ namespace ShrugWare{
 
             curLevel = targetOverworldLevel;
 
-            // spawn to the left and center of the level object
+            // be at the left and center of the level object
             Vector3 targetPos = new Vector3(curLevel.transform.position.x - 1.0f, curLevel.transform.position.y - 0.6f, curLevel.transform.position.z);
             while (Vector3.Distance(playerObj.transform.position, targetPos) > 0.1f)
             {
@@ -329,6 +332,27 @@ namespace ShrugWare{
 
             pathToLevel.Remove(lookedAtLevelID);
             return false;
+        }
+
+        IEnumerator FollowPathToLevel()
+        {
+            isMoving = true;
+
+            foreach(int levelID in pathToLevel)
+            {
+                OverworldLevel level = GetOverworldLevelByID(levelID);
+                StartCoroutine(MovePlayerToLevel(level));
+
+                // we're going to maybe be moving in MovePlayerToLevel. wait until we're done before going to the next level node
+                while (isMoving)
+                {
+                    yield return null;
+                }
+            }
+
+            isMoving = false;
+
+            overworldUIManager.UpdateUI();
         }
 
         public OverworldLevel GetOverworldLevelByID(int levelID)
