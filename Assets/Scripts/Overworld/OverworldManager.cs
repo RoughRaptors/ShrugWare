@@ -166,6 +166,8 @@ namespace ShrugWare{
             {
                 newLevel.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
             }
+
+            Debug.Log(newLevel.name + ": " + newLevel.transform.position);
         }
 
         public void ReadyScene(bool enabled)
@@ -301,7 +303,7 @@ namespace ShrugWare{
 
             isMoving = false;
         }
-
+        
         private bool GeneratePathToLevel(int lookedAtLevelID, int targetLevelID, ref List<int> visited)
         {
             if(lookedAtLevelID == targetLevelID)
