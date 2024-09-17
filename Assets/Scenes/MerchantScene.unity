@@ -702,7 +702,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 534587589}
-  - component: {fileID: 534587590}
   m_Layer: 0
   m_Name: Armor Tab Button
   m_TagString: Untagged
@@ -728,51 +727,6 @@ Transform:
   - {fileID: 1567718231}
   m_Father: {fileID: 1428571292}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &534587590
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 534587588}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 115, y: 115}
-  m_EdgeRadius: 0
 --- !u!1 &602358901
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,7 +1011,7 @@ GameObject:
   - component: {fileID: 772007318}
   - component: {fileID: 772007317}
   m_Layer: 5
-  m_Name: Item Image
+  m_Name: Potions Item Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2133,7 +2087,7 @@ GameObject:
   - component: {fileID: 1177651911}
   - component: {fileID: 1177651910}
   m_Layer: 5
-  m_Name: Item Image
+  m_Name: Armor Item Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2202,7 +2156,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1211035292}
-  - component: {fileID: 1211035293}
   m_Layer: 0
   m_Name: Potion Tab Button
   m_TagString: Untagged
@@ -2228,51 +2181,6 @@ Transform:
   - {fileID: 89368035}
   m_Father: {fileID: 1428571292}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1211035293
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1211035291}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 115, y: 115}
-  m_EdgeRadius: 0
 --- !u!1 &1216322442
 GameObject:
   m_ObjectHideFlags: 0
@@ -2572,6 +2480,8 @@ MonoBehaviour:
   currencyInfoText: {fileID: 255697542}
   armorTab: {fileID: 1305886778}
   potionsTab: {fileID: 636281899}
+  armorTabButton: {fileID: 534587588}
+  potionsTabButton: {fileID: 1211035291}
 --- !u!4 &1268754879
 Transform:
   m_ObjectHideFlags: 0

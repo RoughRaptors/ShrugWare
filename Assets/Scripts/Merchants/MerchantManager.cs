@@ -41,6 +41,12 @@ namespace ShrugWare
         [SerializeField]
         GameObject potionsTab = null;
 
+        [SerializeField]
+        GameObject armorTabButton = null;
+
+        [SerializeField]
+        GameObject potionsTabButton = null;
+
         public static MerchantManager Instance = null;
         
         public struct ItemForSale
@@ -72,21 +78,17 @@ namespace ShrugWare
         {
             SetupInventory();
             UpdateCurrenciesText();
+
+            // default is armor, gray out potions
+            potionsTabButton.GetComponentInChildren<RawImage>().color = Color.gray;
+            armorTabButton.GetComponentInChildren<Button>().image.color = Color.red;
         }
 
         private void SetupInventory()
         {
-            // 25% player heal
-            DataManager.StatEffect healPlayerEffect;
-            healPlayerEffect.amount = 25;
-            healPlayerEffect.effectType = DataManager.StatModifierType.PlayerCurHealth;
-            healPlayerEffect.asPercentage = true;
-
-            // +10% max hp
-            DataManager.StatEffect maxHPEffect;
-            maxHPEffect.amount = 10;
-            maxHPEffect.effectType = DataManager.StatModifierType.PlayerMaxHealth;
-            maxHPEffect.asPercentage = true;
+            CreateHealthPotion();
+            CreateMaxHealthPotion();
+            CreateRunSpeedPotion();
 
             // +10% damage reduction
             DataManager.StatEffect damageReductionEffect;
@@ -94,13 +96,21 @@ namespace ShrugWare
             damageReductionEffect.effectType = DataManager.StatModifierType.IncomingDamage;
             damageReductionEffect.asPercentage = true;
 
-            // 10% run speed bonus
-            DataManager.StatEffect runSpeedEffect;
-            runSpeedEffect.amount = 15;
-            runSpeedEffect.effectType = DataManager.StatModifierType.PlayerMoveSpeed;
-            runSpeedEffect.asPercentage = true;
+            CreateHelmet(damageReductionEffect);
+            CreateChest(damageReductionEffect);
+            CreateGloves(damageReductionEffect);
+            CreateLegs(damageReductionEffect);
+            CreateBoots(damageReductionEffect);
+        }
 
-            // hp potion
+        private void CreateHealthPotion()
+        {
+            // 25% player heal
+            DataManager.StatEffect healPlayerEffect;
+            healPlayerEffect.amount = 25;
+            healPlayerEffect.effectType = DataManager.StatModifierType.PlayerCurHealth;
+            healPlayerEffect.asPercentage = true;
+
             ConsumableItem healthPotion = new ConsumableItem();
             healthPotion.itemName = "Health Potion";
             healthPotion.templateId = 0;
@@ -113,8 +123,16 @@ namespace ShrugWare
             healthPotionItem.item.itemObj = healthPotionObj;
 
             itemsForSale.Add(healthPotion.templateId, healthPotionItem);
+        }
 
-            // max hp potion
+        private void CreateMaxHealthPotion()
+        {
+            // +10% max hp
+            DataManager.StatEffect maxHPEffect;
+            maxHPEffect.amount = 10;
+            maxHPEffect.effectType = DataManager.StatModifierType.PlayerMaxHealth;
+            maxHPEffect.asPercentage = true;
+
             ConsumableItem maxHealthPotion = new ConsumableItem();
             maxHealthPotion.itemName = "Increase Max Health Potion";
             maxHealthPotion.templateId = 1;
@@ -127,8 +145,16 @@ namespace ShrugWare
             maxHealthPotionItem.item.itemObj = maxHealthPotionObj;
 
             itemsForSale.Add(maxHealthPotion.templateId, maxHealthPotionItem);
+        }
 
-            // run speed potion
+        private void CreateRunSpeedPotion()
+        {
+            // 10% run speed bonus
+            DataManager.StatEffect runSpeedEffect;
+            runSpeedEffect.amount = 15;
+            runSpeedEffect.effectType = DataManager.StatModifierType.PlayerMoveSpeed;
+            runSpeedEffect.asPercentage = true;
+
             ConsumableItem moveSpeedPotion = new ConsumableItem();
             moveSpeedPotion.itemName = "Move Speed Potion";
             moveSpeedPotion.templateId = 7;
@@ -141,7 +167,10 @@ namespace ShrugWare
             moveSpeedPotionItem.item.itemObj = moveSpeedPotionObj;
 
             itemsForSale.Add(moveSpeedPotion.templateId, moveSpeedPotionItem);
+        }
 
+        private void CreateHelmet(DataManager.StatEffect damageReductionEffect)
+        {
             // helmet
             ArmorItem diHelm = new ArmorItem(DataManager.ArmorSlot.Head, DataManager.ArmorSet.DauntingInferno);
             diHelm.itemName = "Helm";
@@ -154,16 +183,21 @@ namespace ShrugWare
             diHelmItem.price = 1000;
             diHelm.itemObj = helmObj;
 
-            if(!OverworldManager.Instance.PlayerInventory.HasArmor(diHelm.templateId))
+            if (OverworldManager.Instance != null)
             {
-                itemsForSale.Add(diHelm.templateId, diHelmItem);
+                if (!OverworldManager.Instance.PlayerInventory.HasArmor(diHelm.templateId))
+                {
+                    itemsForSale.Add(diHelm.templateId, diHelmItem);
+                }
+                else
+                {
+                    bootsObj.SetActive(false);
+                }
             }
-            else
-            {
-                helmObj.SetActive(false);
-            }
+        }
 
-            // chest
+        private void CreateChest(DataManager.StatEffect damageReductionEffect)
+        {
             ArmorItem diChest = new ArmorItem(DataManager.ArmorSlot.Chest, DataManager.ArmorSet.DauntingInferno);
             diChest.itemName = "Chest";
             diChest.templateId = 3;
@@ -175,16 +209,20 @@ namespace ShrugWare
             diChestItem.price = 1000;
             diChest.itemObj = chestObj;
 
-            if (!OverworldManager.Instance.PlayerInventory.HasArmor(diChest.templateId))
+            if (OverworldManager.Instance != null)
             {
-                itemsForSale.Add(diChest.templateId, diChestItem);
+                if (!OverworldManager.Instance.PlayerInventory.HasArmor(diChest.templateId))
+                {
+                    itemsForSale.Add(diChest.templateId, diChestItem);
+                }
+                else
+                {
+                    chestObj.SetActive(false);
+                }
             }
-            else 
-            { 
-                chestObj.SetActive(false); 
-            }
-
-            // gloves
+        }
+        private void CreateGloves(DataManager.StatEffect damageReductionEffect)
+        {
             ArmorItem diGloves = new ArmorItem(DataManager.ArmorSlot.Gloves, DataManager.ArmorSet.DauntingInferno);
             diGloves.itemName = "Gloves";
             diGloves.templateId = 4;
@@ -196,16 +234,21 @@ namespace ShrugWare
             diGlovesItem.price = 1000;
             diGloves.itemObj = glovesObj;
 
-            if (!OverworldManager.Instance.PlayerInventory.HasArmor(diGloves.templateId))
+            if (OverworldManager.Instance != null)
             {
-                itemsForSale.Add(diGloves.templateId, diGlovesItem);
+                if (!OverworldManager.Instance.PlayerInventory.HasArmor(diGloves.templateId))
+                {
+                    itemsForSale.Add(diGloves.templateId, diGlovesItem);
+                }
+                else
+                {
+                    glovesObj.SetActive(false);
+                }
             }
-            else
-            {
-                glovesObj.SetActive(false);
-            }
+        }
 
-            // legs
+        private void CreateLegs(DataManager.StatEffect damageReductionEffect)
+        {
             ArmorItem diLegs = new ArmorItem(DataManager.ArmorSlot.Legs, DataManager.ArmorSet.DauntingInferno);
             diLegs.itemName = "Legs";
             diLegs.templateId = 5;
@@ -217,16 +260,21 @@ namespace ShrugWare
             diLegsItem.price = 1000;
             diLegs.itemObj = legsObj;
 
-            if (!OverworldManager.Instance.PlayerInventory.HasArmor(diLegs.templateId))
+            if (OverworldManager.Instance != null)
             {
-                itemsForSale.Add(diLegs.templateId, diLegsItem);
+                if (!OverworldManager.Instance.PlayerInventory.HasArmor(diLegs.templateId))
+                {
+                    itemsForSale.Add(diLegs.templateId, diLegsItem);
+                }
+                else
+                {
+                    legsObj.SetActive(false);
+                }
             }
-            else
-            {
-                legsObj.SetActive(false);
-            }
+        }
 
-            // boots
+        private void CreateBoots(DataManager.StatEffect damageReductionEffect)
+        {
             ArmorItem diBoots = new ArmorItem(DataManager.ArmorSlot.Boots, DataManager.ArmorSet.DauntingInferno);
             diBoots.itemName = "Boots";
             diBoots.templateId = 6;
@@ -238,13 +286,16 @@ namespace ShrugWare
             diBootsItem.price = 1000;
             diBoots.itemObj = bootsObj;
 
-            if (!OverworldManager.Instance.PlayerInventory.HasArmor(diBoots.templateId))
+            if(OverworldManager.Instance != null)
             {
-                itemsForSale.Add(diBoots.templateId, diBootsItem);
-            }
-            else
-            {
-                bootsObj.SetActive(false);
+                if (!OverworldManager.Instance.PlayerInventory.HasArmor(diBoots.templateId))
+                {
+                    itemsForSale.Add(diBoots.templateId, diBootsItem);
+                }
+                else
+                {
+                    bootsObj.SetActive(false);
+                }
             }
         }
 
@@ -303,21 +354,24 @@ namespace ShrugWare
 
         public void UpdateCurrenciesText()
         {
-            PlayerInventory inventory = OverworldManager.Instance.PlayerInventory;
-            if (inventory != null)
+            if (OverworldManager.Instance != null)
             {
-                if(armorTab.activeInHierarchy)
+                PlayerInventory inventory = OverworldManager.Instance.PlayerInventory;
+                if (inventory != null)
                 {
-                    currencyInfoText.text = "DKP: " + inventory.GetCurrencyAmount(DataManager.Currencies.DKP).ToString();
+                    if (armorTab.activeInHierarchy)
+                    {
+                        currencyInfoText.text = "DKP: " + inventory.GetCurrencyAmount(DataManager.Currencies.DKP).ToString();
+                    }
+                    else if (potionsTab.activeInHierarchy)
+                    {
+                        currencyInfoText.text = "Gold: " + inventory.GetCurrencyAmount(DataManager.Currencies.Gold).ToString();
+                    }
                 }
-                else if (potionsTab.activeInHierarchy)
+                else
                 {
-                    currencyInfoText.text = "Gold: " + inventory.GetCurrencyAmount(DataManager.Currencies.Gold).ToString();
+                    currencyInfoText.text = "ERROR. NO INVENTORY";
                 }
-            }
-            else
-            {
-                currencyInfoText.text = "ERROR. NO INVENTORY";
             }
         }
 
@@ -338,6 +392,10 @@ namespace ShrugWare
             selectedItems.Clear();
             armorTab.SetActive(true);
             potionsTab.SetActive(false);
+            armorTabButton.GetComponentInChildren<RawImage>().color = Color.white;
+            potionsTabButton.GetComponentInChildren<RawImage>().color = Color.grey;
+            armorTabButton.GetComponentInChildren<Button>().image.color = Color.red;
+            potionsTabButton.GetComponentInChildren<Button>().image.color = Color.white;
             UpdateCurrenciesText();
         }
 
@@ -352,6 +410,10 @@ namespace ShrugWare
             selectedItems.Clear();
             armorTab.SetActive(false);
             potionsTab.SetActive(true);
+            armorTabButton.GetComponentInChildren<RawImage>().color = Color.grey;
+            potionsTabButton.GetComponentInChildren<RawImage>().color = Color.white;
+            armorTabButton.GetComponentInChildren<Button>().image.color = Color.white;
+            potionsTabButton.GetComponentInChildren<Button>().image.color = Color.red;
             UpdateCurrenciesText();
         }
 
