@@ -33,6 +33,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject merchantsAndItemsObj;
 
+        [SerializeField]
+        GameObject signsObj;
+
         private bool gameWon = false;
         private bool merchant1Correct = false;
         private bool merchant2Correct = false;
@@ -64,6 +67,7 @@ namespace ShrugWare
             merchant1Text.gameObject.SetActive(true);
             merchant2Text.gameObject.SetActive(true);
             merchant3Text.gameObject.SetActive(true);
+            signsObj.SetActive(true);
         }
 
         protected override void OnMyGameTick(float timePercentLeft)

@@ -91,7 +91,7 @@ namespace ShrugWare{
         private bool isMoving = false;
 
         // when we click a non-adjacent level, we need to keep track of our path
-        private List<Vector3> pathToLevel = new List<Vector3>();
+        private List<int> pathToLevel = new List<int>();
 
         private void Awake()
         {
@@ -166,8 +166,6 @@ namespace ShrugWare{
             {
                 newLevel.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
             }
-
-            Debug.Log(newLevel.name + ": " + newLevel.transform.position);
         }
 
         public void ReadyScene(bool enabled)
@@ -203,7 +201,7 @@ namespace ShrugWare{
             return false;
 #endif
 
-            OverworldLevel overworldLevel = GetOverworldLevel(levelID);
+            OverworldLevel overworldLevel = GetOverworldLevelByID(levelID);
             if(overworldLevel != null)
             {
                 return overworldLevel.Locked;
@@ -214,7 +212,7 @@ namespace ShrugWare{
 
         public void CompleteLevel(int completedLevelID)
         {
-            OverworldLevel overworldLevel = GetOverworldLevel(completedLevelID);
+            OverworldLevel overworldLevel = GetOverworldLevelByID(completedLevelID);
             if (overworldLevel != null)
             {
                 overworldLevel.Completed = true;
@@ -222,7 +220,7 @@ namespace ShrugWare{
                 // now unlock the next level(s)
                 foreach (int idToUnlock in overworldLevel.LevelIDsToUnlock)
                 {
-                    OverworldLevel overworldLevelToUnlock = GetOverworldLevel(idToUnlock);
+                    OverworldLevel overworldLevelToUnlock = GetOverworldLevelByID(idToUnlock);
                     if(overworldLevelToUnlock != null)
                     {
                         overworldLevelToUnlock.Locked = false;
@@ -249,7 +247,7 @@ namespace ShrugWare{
         public void SetCurLevelById(int levelID)
         {
             // only change if we've unlocked it
-            OverworldLevel newOverworldLevel = GetOverworldLevel(levelID);
+            OverworldLevel newOverworldLevel = GetOverworldLevelByID(levelID);
             if (newOverworldLevel != null)
             {
                 bool force = false;
@@ -273,7 +271,8 @@ namespace ShrugWare{
                         }
                         else
                         {
-                            GeneratePathToLevel(newOverworldLevel);
+                            List<int> visitedList = new List<int>();
+                            GeneratePathToLevel(curLevel.LevelID, newOverworldLevel.LevelID, ref visitedList);
                         }
                     }
 
@@ -303,17 +302,34 @@ namespace ShrugWare{
             isMoving = false;
         }
 
-        private void GeneratePathToLevel(OverworldLevel level)
+        private bool GeneratePathToLevel(int lookedAtLevelID, int targetLevelID, ref List<int> visited)
         {
-            if(curLevel == level)
+            if(lookedAtLevelID == targetLevelID)
             {
-                return;
+                return true;
             }
 
-            
+            OverworldLevel level = GetOverworldLevelByID(lookedAtLevelID);
+            foreach (int connectingLevelID in level.AdjacentMapLevels)
+            {
+                if(visited.Contains(connectingLevelID))
+                {
+                    continue;
+                }
+
+                visited.Add(connectingLevelID);                
+                if(GeneratePathToLevel(connectingLevelID, targetLevelID, ref visited))
+                {
+                    pathToLevel.Add(connectingLevelID);
+                    return true;
+                }
+            }
+
+            pathToLevel.Remove(lookedAtLevelID);
+            return false;
         }
 
-        public OverworldLevel GetOverworldLevel(int levelID)
+        public OverworldLevel GetOverworldLevelByID(int levelID)
         {
             OverworldLevel overworldLevel = null;
             overworldMap.TryGetValue(levelID, out overworldLevel);
