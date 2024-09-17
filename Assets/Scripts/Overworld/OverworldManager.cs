@@ -273,8 +273,11 @@ namespace ShrugWare{
                         }
                         else
                         {
+                            pathToLevel.Clear();
                             List<int> visitedList = new List<int>();
+                            visitedList.Add(CurLevel.LevelID);
                             GeneratePathToLevel(curLevel.LevelID, newOverworldLevel.LevelID, ref visitedList);
+                            pathToLevel.Reverse();
                         }
                     }
 
