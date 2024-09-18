@@ -95,11 +95,11 @@ namespace ShrugWare
 #endif
 
                 // don't show the enter level button on the start level, it was confusing some people
-                if(curLevel.LevelType == DataManager.OverworldLevelType.Start)
+                if(curLevel.LevelType == DataManager.OverworldLevelType.Start || OverworldManager.Instance.IsMoving)
                 {
                     enterLevelButtonObj.SetActive(false);
                 }
-                else
+                else if(!OverworldManager.Instance.IsMoving)
                 {
                     enterLevelButtonObj.SetActive(true);
                 }
@@ -208,6 +208,16 @@ namespace ShrugWare
             debugDropdown.gameObject.SetActive(true);
             OverworldManager.Instance.IsDebugMode = true;
             PopulateDebugDropdown();
+        }
+
+        public void EnableStartButton()
+        {
+            enterLevelButtonObj.SetActive(true);
+        }
+
+        public void DisableStartButton()
+        {
+            enterLevelButtonObj.SetActive(false);
         }
     }
 }

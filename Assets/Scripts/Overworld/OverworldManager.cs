@@ -89,7 +89,11 @@ namespace ShrugWare{
 
         // don't allow the player to move multiple spaces at once
         private bool isMoving = false;
-        
+        public bool IsMoving
+        {
+            get { return isMoving; }
+        }
+
         // when we click a non-adjacent level, we need to keep track of our path
         private List<int> pathToLevel = new List<int>();
 
@@ -254,31 +258,24 @@ namespace ShrugWare{
 #if UNITY_EDITOR
                 force = true;
 #endif
-                // special case for curLevel being null. this will happen in the beginning of the game before we set curLevel and only should happen once
-                if ((!newOverworldLevel.Locked && !isMoving) || force || curLevel == null)
+                // in the beginning our curLevel will be null before it's set
+                if(curLevel == null)
+                {
+                    curLevel = newOverworldLevel;
+                }
+
+                if ((!newOverworldLevel.Locked && !isMoving) || force)
                 {
                     if (!isMoving)
                     {
-                        bool adjacent = false;
-                        if (curLevel != null && curLevel.AdjacentMapLevels.Contains(levelID) || curLevel == null)
-                        {
-                            adjacent = true;
-                        }
-                        
-                        if (adjacent)
-                        {
-                            StartCoroutine(MovePlayerToLevel(newOverworldLevel));
-                        }
-                        else
-                        {
-                            pathToLevel.Clear();
-                            List<int> visitedList = new List<int>();
-                            visitedList.Add(CurLevel.LevelID);
-                            GeneratePathToLevel(curLevel.LevelID, newOverworldLevel.LevelID, ref visitedList);
-                            pathToLevel.Reverse();
+                        pathToLevel.Clear();
+                        List<int> visitedList = new List<int>();
 
-                            StartCoroutine(FollowPathToLevel());
-                        }
+                        visitedList.Add(curLevel.LevelID);
+                        GeneratePathToLevel(curLevel.LevelID, newOverworldLevel.LevelID, ref visitedList);
+                        pathToLevel.Reverse();
+
+                        StartCoroutine(FollowPathToLevel());
                     }
 
                     overworldUIManager.UpdateUI();
@@ -337,8 +334,9 @@ namespace ShrugWare{
         IEnumerator FollowPathToLevel()
         {
             isMoving = true;
+            overworldUIManager.DisableStartButton();
 
-            foreach(int levelID in pathToLevel)
+            foreach (int levelID in pathToLevel)
             {
                 OverworldLevel level = GetOverworldLevelByID(levelID);
                 StartCoroutine(MovePlayerToLevel(level));
@@ -351,6 +349,7 @@ namespace ShrugWare{
             }
 
             isMoving = false;
+            overworldUIManager.EnableStartButton();
 
             overworldUIManager.UpdateUI();
         }
@@ -377,6 +376,12 @@ namespace ShrugWare{
             if (level.LevelType == DataManager.OverworldLevelType.Start || (level.Locked && !force))
             {
                 // we don't enter these
+                return;
+            }
+
+            // don't let them enter a level while moving, this is far safety even though we removed it in the ui
+            if(isMoving)
+            {
                 return;
             }
 
