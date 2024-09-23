@@ -94,14 +94,13 @@ namespace ShrugWare
                 }
 #endif
 
-                // don't show the enter level button on the start level, it was confusing some people
-                if(curLevel.LevelType == DataManager.OverworldLevelType.Start || OverworldManager.Instance.IsMoving)
-                {
-                    enterLevelButtonObj.SetActive(false);
-                }
-                else if(!OverworldManager.Instance.IsMoving)
+                if (curLevel.LevelType != DataManager.OverworldLevelType.Start && !OverworldManager.Instance.IsMoving)
                 {
                     enterLevelButtonObj.SetActive(true);
+                }
+                else
+                {
+                    enterLevelButtonObj.SetActive(false);
                 }
             }
         }
@@ -154,7 +153,7 @@ namespace ShrugWare
             OverworldManager.Instance.WaitingOnRandomEvent = false;
             randomEventUIObj.SetActive(false);
             SetCanvasEnabled(false);
-            SceneManager.LoadScene((int)OverworldManager.Instance.CurLevel.SceneIDToLoad);
+            SceneManager.LoadScene((int)OverworldManager.Instance.CurLevel.SceneIDToLoad, LoadSceneMode.Additive);
         }
 
         public void OnDebugButtonPressed()
@@ -167,7 +166,7 @@ namespace ShrugWare
 
                 // offset our index
                 int sceneIndex = debugDropdown.value + (int)DataManager.Scenes.MICROGAME_START;
-                SceneManager.LoadScene(sceneIndex);
+                SceneManager.LoadScene(sceneIndex, LoadSceneMode.Additive);
             }
             else
             {

@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEditor;
 using UnityEngine.EventSystems;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 namespace ShrugWare{
 
@@ -18,7 +19,7 @@ namespace ShrugWare{
 
     public class OverworldManager : MonoBehaviour
     {
-        public static OverworldManager Instance = null;
+        public static OverworldManager Instance { get; private set; } = null;
 
         [SerializeField]
         OverworldUIManager overworldUIManager;
@@ -97,43 +98,44 @@ namespace ShrugWare{
         // when we click a non-adjacent level, we need to keep track of our path
         private List<int> pathToLevel = new List<int>();
 
+        private const float PLAYER_X_OFFSET = 1.0f;
+        private const float PLAYER_Y_OFFSET = 0.6f;
+
         private void Awake()
         {
+            audioManager = GetComponent<AudioManager>();
+
             if (Instance == null)
             {
-                DontDestroyOnLoad(gameObject);
                 Instance = this;
+                DontDestroyOnLoad(gameObject);
 
-                // give the audio manager time
-                Invoke("PlayOverworldMusic", 0.1f);
+                PlayOverworldMusic();
             }
             else if (Instance != this)
             {
                 Destroy(gameObject);
-
-                // set all of our shit back - figure out a better solution later if there is one - TODO MAKE THIS BETTER
-                overworldMap = OverworldManager.Instance.overworldMap;
-                curLevel = OverworldManager.Instance.curLevel;
-                playerObj = OverworldManager.Instance.playerObj;
-                playerObj.SetActive(true);
-
-                OverworldUIManager.Instance.SetCanvasEnabled(true);
             }
+
+            audioListenerObj = Instance.audioListenerObj;
+            eventSystemObj = Instance.eventSystemObj;
+            overworldMap = Instance.overworldMap;
+            curLevel = Instance.curLevel;
+            playerObj = Instance.playerObj;
+            playerObj.SetActive(true);
+            overworldUIManager.UpdateUI();
+            ReadyScene(true);
         }
 
         private void Start()
         {
             // set fps so players don't have varying speeds
-            Application.targetFrameRate = 60;
+            Application.targetFrameRate = 60;            
 
             if (playerInventory == null)
             {
                 playerInventory = new PlayerInventory();
             }
-
-            audioManager = GetComponent<AudioManager>();
-            ReadyScene(true);
-            overworldUIManager.UpdateUI();
         }
 
         private void Update()
@@ -160,9 +162,9 @@ namespace ShrugWare{
             }
 
             // we need an initial starting level
-            if (OverworldManager.Instance.CurLevel == null && newLevel.LevelType == DataManager.OverworldLevelType.Start)
+            if (curLevel == null && newLevel.LevelType == DataManager.OverworldLevelType.Start)
             {
-                OverworldManager.Instance.SetCurLevelById(newLevel.LevelID);
+                SetCurLevelById(newLevel.LevelID);
             }
 
             // we want to show the level as locked if we've not completed it and it's locked
@@ -181,10 +183,17 @@ namespace ShrugWare{
             {
                 EnableCamera();
                 EnableEventSystem();
+                OverworldUIManager.Instance.SetCanvasEnabled(true);
                 //EnableAudioListener();
 
+                // move player to cur level (this will be null on start)
+                if (curLevel != null)
+                {
+                    playerObj.transform.position = new Vector3(curLevel.transform.position.x - PLAYER_X_OFFSET, curLevel.transform.position.y - PLAYER_Y_OFFSET, curLevel.transform.position.z);
+                }
+
                 // only do this on trash/boss/infinite levels because those have their own audio
-                if (curLevel != null && (curLevel.LevelType == DataManager.OverworldLevelType.Trash || curLevel.LevelType == DataManager.OverworldLevelType.Boss 
+                if (curLevel != null && (curLevel.LevelType == DataManager.OverworldLevelType.Trash || curLevel.LevelType == DataManager.OverworldLevelType.Boss
                     || curLevel.LevelType == DataManager.OverworldLevelType.Infinite))
                 {
                     // give the audio manager time
@@ -193,6 +202,12 @@ namespace ShrugWare{
             }
             else
             {
+                // don't stop the music because we won't be starting any new music here (yet at least)
+                if (curLevel.LevelType != DataManager.OverworldLevelType.Tutorial && curLevel.LevelType != DataManager.OverworldLevelType.Merchant)
+                {
+                    StopMusic();
+                }
+
                 DisableCamera();
                 DisableEventSystem();
                 //DisableAudioListener();
@@ -294,7 +309,7 @@ namespace ShrugWare{
             curLevel = targetOverworldLevel;
 
             // be at the left and center of the level object
-            Vector3 targetPos = new Vector3(curLevel.transform.position.x - 1.0f, curLevel.transform.position.y - 0.6f, curLevel.transform.position.z);
+            Vector3 targetPos = new Vector3(curLevel.transform.position.x - PLAYER_X_OFFSET, curLevel.transform.position.y - PLAYER_Y_OFFSET, curLevel.transform.position.z);
             while (Vector3.Distance(playerObj.transform.position, targetPos) > 0.1f)
             {
                 playerObj.transform.position = Vector3.MoveTowards(playerObj.transform.position, targetPos, 5 * Time.deltaTime);
@@ -369,9 +384,9 @@ namespace ShrugWare{
         public void EnterLevel(OverworldLevel level)
         {
             bool force = false;
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
             force = true;
-#endif
+//#endif
 
             if (level.LevelType == DataManager.OverworldLevelType.Start || (level.Locked && !force))
             {
@@ -411,7 +426,7 @@ namespace ShrugWare{
 
             OverworldUIManager.Instance.SetCanvasEnabled(false);
             ReadyScene(false);
-            SceneManager.LoadScene((int)level.SceneIDToLoad);
+            SceneManager.LoadScene((int)level.SceneIDToLoad, LoadSceneMode.Additive);
         }
 
         private void PlayOverworldMusic()

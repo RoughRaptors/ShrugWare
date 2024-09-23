@@ -40,5 +40,20 @@ namespace ShrugWare
 
             return scene;
         }
+
+        public static Boss InitializeBoss(string bossName)
+        {
+            Boss newBoss = null;
+            if (bossName == "Warboss Kard")
+            {
+                newBoss = new WarbossKard();
+            }
+            else if (bossName == "Tuzi")
+            {
+                newBoss = new Tuzi();
+            }
+
+            return newBoss;
+        }
     }
 }

@@ -154,6 +154,10 @@ PrefabInstance:
       propertyPath: bossName
       value: Tuzi
       objectReference: {fileID: 0}
+    - target: {fileID: 2301266168276219429, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: curBossObj
+      value: 
+      objectReference: {fileID: 1689201091}
     - target: {fileID: 2301266168276219430, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -229,7 +233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4906828391645816, guid: 38efdaadbfe1d624bbee439cb02e7661, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.5
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 4906828391645816, guid: 38efdaadbfe1d624bbee439cb02e7661, type: 3}
       propertyPath: m_LocalPosition.z
@@ -268,6 +272,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38efdaadbfe1d624bbee439cb02e7661, type: 3}
+--- !u!1 &1689201091 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1774625739149480, guid: 38efdaadbfe1d624bbee439cb02e7661, type: 3}
+  m_PrefabInstance: {fileID: 1689201090}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
