@@ -195,7 +195,6 @@ namespace ShrugWare
                     DataManager.Scenes nextScene = curBoss.PickNextMicrogame();
                     bossUIManager.SetBossUICanvasEnabled(false);
                     EnableBossCamera(false);
-                    //curBossObj.SetActive(false);
                     StartCoroutine(LoadLevel((int)nextScene));
                 }
             }
@@ -256,7 +255,8 @@ namespace ShrugWare
                 DataManager.Currencies lootCurrency = DataManager.Currencies.DKP;
                 int lootAmount = 1500;
                 OverworldManager.Instance.PlayerInventory.AddCurrency(lootCurrency, lootAmount);
-                
+
+                curBossObj.SetActive(false);
                 SetTimescale(1);
                 bossUIManager.HandleBeatBoss(lootCurrency, lootAmount);
             }
