@@ -110,14 +110,6 @@ namespace ShrugWare
                 DontDestroyOnLoad(gameObject);
 
                 PlayOverworldMusic();
-
-                /*
-                DontDestroyOnLoad(gameObject);
-                DontDestroyOnLoad(audioListenerObj);
-                DontDestroyOnLoad(eventSystemObj);
-                DontDestroyOnLoad(curLevel);
-                DontDestroyOnLoad(playerObj);
-                */
             }
             else if (Instance != this)
             {
@@ -187,7 +179,11 @@ namespace ShrugWare
         public void ReadyScene(bool enabled)
         {
             Time.timeScale = 1.0f;
-            audioManager.ResetPitch(true);
+
+            if (audioManager != null)
+            {
+                audioManager.ResetPitch(true);
+            }
 
             if (enabled)
             {
@@ -429,7 +425,7 @@ namespace ShrugWare
             playerObj.SetActive(false);
 
             // only stop if we enter a trash/boss/infinite level
-            if(isTrashOrBoss || level.LevelType == DataManager.OverworldLevelType.Infinite)
+            if(audioManager != null && (isTrashOrBoss || level.LevelType == DataManager.OverworldLevelType.Infinite))
             {
                 audioManager.StopAudio();
             }
@@ -441,7 +437,10 @@ namespace ShrugWare
 
         private void PlayOverworldMusic()
         {
-           audioManager.PlayMusicClip(DataManager.AudioEffectTypes.Overworld, .25f);
+            if (audioManager != null)
+            {
+                audioManager.PlayMusicClip(DataManager.AudioEffectTypes.Overworld, .25f);
+            }
         }
 
         public void RandomEventContinuePressed()
@@ -450,17 +449,26 @@ namespace ShrugWare
             // todo - fix this, it doesn't work. for whatever reason it only works when attached to a debugger
             playerObj.SetActive(false);
 
-            audioManager.StopAudio();
+            if (audioManager != null)
+            {
+                audioManager.StopAudio();
+            }
         }
 
         public void PlayMusicClip(AudioClip audioClip, DataManager.AudioEffectTypes audioType, float volumeScale = 1)
         {
-            audioManager.PlayMusicClip(audioClip, audioType);
+            if (audioManager != null)
+            {
+                audioManager.PlayMusicClip(audioClip, audioType);
+            }
         }
 
         public void StopMusic()
         {
-            audioManager.StopAudio();
+            if (audioManager != null)
+            {
+                audioManager.StopAudio();
+            }
         }
 
         public void EnableCamera()
@@ -505,7 +513,10 @@ namespace ShrugWare
 
         public void ResetAudioPitch()
         {
-            audioManager.ResetPitch();
+            if (audioManager != null)
+            {
+                audioManager.ResetPitch();
+            }
         }
     }
 }

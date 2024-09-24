@@ -12,8 +12,9 @@ public class LaserBeam
     GameObject laserObj;
     LineRenderer laserLineRenderer;
     List<Vector3> laserIndices = new List<Vector3>();
+    string parentName;
 
-    public LaserBeam(Vector3 pos, Vector3 dir, Material material)
+    public LaserBeam(Vector3 pos, Vector3 dir, Material material, string laserParentName)
     {
         this.pos = pos;
         this.dir = dir;
@@ -25,8 +26,30 @@ public class LaserBeam
 
         this.laserLineRenderer = new LineRenderer();
         this.laserLineRenderer = this.laserObj.AddComponent(typeof(LineRenderer)) as LineRenderer;
-        GameObject laserParent = GameObject.Find("Lasers");
-        if(laserParent != null)
+
+        GameObject laserParent;
+        if (laserParentName == "Top")
+        {
+            laserParent = GameObject.Find("Top Laser");
+        }
+        else if (laserParentName == "Bottom")
+        {
+            laserParent = GameObject.Find("Bottom Laser");
+        }
+        else if (laserParentName == "Left")
+        {
+            laserParent = GameObject.Find("Left Laser");
+        }
+        else if (laserParentName == "Right")
+        {
+            laserParent = GameObject.Find("Right Laser");
+        }
+        else
+        {
+            laserParent = GameObject.Find("Lasers");
+        }
+
+        if (laserParent != null)
         {
             this.laserLineRenderer.transform.parent = laserParent.transform;
         }
@@ -38,6 +61,8 @@ public class LaserBeam
         this.laserLineRenderer.endColor = Color.red;
         this.laserLineRenderer.sortingOrder = 2;
         this.laserLineRenderer.useWorldSpace = false;
+
+        parentName = laserParentName;
 
         CastRay(pos, dir, laserLineRenderer);
     }

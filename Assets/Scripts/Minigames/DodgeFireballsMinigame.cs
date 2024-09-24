@@ -401,7 +401,7 @@ namespace ShrugWare
                 }
             }
 
-            SwapColor();
+            FlashColor();
         }
 
         private void CollideCollectible(Collider other)
@@ -435,7 +435,7 @@ namespace ShrugWare
         }
 
         // flash colors when we get hit
-        private void SwapColor()
+        private void FlashColor()
         {
             foreach (SpriteRenderer renderer in GetComponentsInChildren<SpriteRenderer>())
             {
@@ -451,7 +451,7 @@ namespace ShrugWare
 
             if(invulnExpireTime > Time.time)
             {
-                Invoke("SwapColor", 0.2f);
+                Invoke("FlashColor", 0.2f);
             }
             else
             {

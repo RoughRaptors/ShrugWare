@@ -41,11 +41,11 @@ namespace ShrugWare
             {
                 topWall.SetActive(false);
             }
-            else if (randNumber == 0)
+            else if (randNumber == 1)
             {
                 bottomWall.SetActive(false);
             }
-            else if (randNumber == 0)
+            else if (randNumber == 2)
             {
                 leftWall.SetActive(false);
             }

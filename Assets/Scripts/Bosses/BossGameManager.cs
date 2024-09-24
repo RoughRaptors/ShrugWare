@@ -130,8 +130,15 @@ namespace ShrugWare
         private int curSceneIndex;
         public float GetCurSceneIndex() { return curSceneIndex; }
 
+        private AudioManager audioManager;
+        public AudioManager AudioManager
+        {
+            get { return audioManager; }
+        }
+
         private void Awake()
         {
+            audioManager = AudioManager.Instance;
             if (Instance == null)
             {
                 Instance = this;
@@ -145,6 +152,8 @@ namespace ShrugWare
             EnableBossCamera(true);
 
             curBoss = Instance.curBoss;
+            curBossObj = Instance.curBossObj;
+
             sceneTransitionAnim.speed = 0.0f;
 
             if(curBoss == null)
@@ -195,14 +204,14 @@ namespace ShrugWare
                     DataManager.Scenes nextScene = curBoss.PickNextMicrogame();
                     bossUIManager.SetBossUICanvasEnabled(false);
                     EnableBossCamera(false);
-                    //curBossObj.SetActive(false);
+                    curBossObj.SetActive(false);
                     StartCoroutine(LoadLevel((int)nextScene));
                 }
             }
         }
 
         private IEnumerator LoadLevel(int sceneId)
-        {            
+        {
             timeInBossScene = 0.0f;
             curSceneIndex = sceneId;
             sceneTransitionAnim.speed = 1.0f;
@@ -235,6 +244,7 @@ namespace ShrugWare
         {
             gameState = GameState.BossScreen;
             EnableBossCamera(true);
+            curBossObj.SetActive(true);
 
             if (!(curBoss is null))
             {
@@ -256,7 +266,8 @@ namespace ShrugWare
                 DataManager.Currencies lootCurrency = DataManager.Currencies.DKP;
                 int lootAmount = 1500;
                 OverworldManager.Instance.PlayerInventory.AddCurrency(lootCurrency, lootAmount);
-                
+
+                curBossObj.SetActive(false);
                 SetTimescale(1);
                 bossUIManager.HandleBeatBoss(lootCurrency, lootAmount);
             }
@@ -322,7 +333,11 @@ namespace ShrugWare
         {
             SetTimescale(1);
             gameState = GameState.BossScreen;
-            AudioManager.Instance.StopAudio();
+
+            if (audioManager != null)
+            {
+                audioManager.StopAudio();
+            }
         }
 
         public void TakePlayerRaidDamage(float amount)
@@ -374,7 +389,7 @@ namespace ShrugWare
             if (!(curBoss is null))
             {
 #if UNITY_EDITOR
-                //amount = CurBoss.curHealth;
+                amount = CurBoss.curHealth;
 #endif
                 curBoss.TakeDamage(amount);
             }

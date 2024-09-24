@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.Rendering.Universal;
-using System.Linq;
 
 namespace ShrugWare
 {
@@ -65,6 +63,9 @@ namespace ShrugWare
 
         private float healthRemaining = 5;
         private bool gameRunning = false;
+
+        private float laserInvulnExpireTime = 0.0f;
+        private const float LASER_INVULN_DURATION = 0.85f;
 
         private void Awake()
         {
@@ -142,10 +143,10 @@ namespace ShrugWare
                 HandlePlayerMovement();
 
                 // this doesn't reset
-                totalTimeInGame += Time.deltaTime;
+                totalTimeInGame += Time.fixedDeltaTime;
 
                 // this does reset
-                timeSinceLastColorSwitch += Time.deltaTime;
+                timeSinceLastColorSwitch += Time.fixedDeltaTime;
                 if(timeSinceLastColorSwitch >= TIME_TO_SWITCH_COLORS)
                 {
                     timeSinceLastColorSwitch = 0;
@@ -171,43 +172,38 @@ namespace ShrugWare
 
         private void HandlePlayerMovement()
         {
-            // laser handles out of bounds. can't go past it without dying
             Vector3 newPos = this.transform.position;
             if (Input.GetKey(KeyCode.W))
             {
-                newPos.y += PLAYER_SPEED * Time.deltaTime;
+                newPos.y += PLAYER_SPEED * Time.fixedDeltaTime;
             }
 
             if (Input.GetKey(KeyCode.S))
             {
-                newPos.y -= PLAYER_SPEED * Time.deltaTime;
+                newPos.y -= PLAYER_SPEED * Time.fixedDeltaTime;
             }
 
             if (Input.GetKey(KeyCode.A))
             {
-                newPos.x -= PLAYER_SPEED * Time.deltaTime;
+                newPos.x -= PLAYER_SPEED * Time.fixedDeltaTime;
             }
 
             if (Input.GetKey(KeyCode.D))
             {
-                newPos.x += PLAYER_SPEED * Time.deltaTime;
+                newPos.x += PLAYER_SPEED * Time.fixedDeltaTime;
             }
 
-            this.transform.position = newPos;
+            bool invuln = laserInvulnExpireTime > Time.time;
+            if (!invuln)
+            {
+                transform.position = newPos;
+            }
         }
 
         // funny exploit if you go around the lasers. there's barely enough room
         private void OnTriggerEnter(Collider other)
         {
-            if(other.gameObject.tag == "Barrier")
-            {
-                healthRemaining = 0;
-                CheckAndHandleDeath();
-
-                statusText.text = "QUACK";
-                enemyHealthText.text = "QUACK";
-            }
-            else if(other.gameObject.tag == "Collectible")
+            if(other.gameObject.tag == "Collectible")
             {
                 Destroy(other.gameObject);
 
@@ -245,12 +241,52 @@ namespace ShrugWare
                 mitigation = OverworldManager.Instance.PlayerInventory.GetMitigation();
             }
 
-            // everything ticks damage so make it dependent on time in the bad area
-            float damageTaken = (1.0f - (mitigation / 100)) * Time.deltaTime;
+            float damageTaken = 0.0f;
+            bool invuln = laserInvulnExpireTime > Time.time;
             if (collideObj.tag == "Laser")
             {
-                // don't tick from the laser, insta-kill to prevent going out of bounds
-                damageTaken = (1.0f - (mitigation / 100));
+                // don't get hit multiple times from a laser if you keep moving towards it after the knockback
+                if (Time.time > laserInvulnExpireTime)
+                {
+                    laserInvulnExpireTime = Time.time + LASER_INVULN_DURATION;
+                }
+
+                if (!invuln)
+                {
+                    damageTaken = 1.0f;
+                    FlashColor();
+                }
+
+                float speed = 25.0f;
+                Vector3 move = new Vector3(0, 0, 0);
+
+                Vector3 targetPos = transform.position;
+                if (collideObj.transform.parent.name == "Top Laser")
+                {
+                    targetPos = new Vector3(transform.position.x, transform.position.y - 10, transform.position.z);
+                }
+                else if (collideObj.transform.parent.name == "Bottom Laser")
+                {
+                    targetPos = new Vector3(transform.position.x, transform.position.y + 10, transform.position.z);
+                }
+                else if (collideObj.transform.parent.name == "Left Laser")
+                {
+                    targetPos = new Vector3(transform.position.x + 10, transform.position.y, transform.position.z);
+                }
+                else if (collideObj.transform.parent.name == "Right Laser")
+                {
+                    targetPos = new Vector3(transform.position.x - 10, transform.position.y, transform.position.z);
+                }
+
+                GetComponent<Rigidbody>().MovePosition(targetPos);
+            }
+            else
+            {
+                // this ticks damage so make it dependent on time in the bad area
+                if (!invuln)
+                {
+                    damageTaken = (1.0f - (mitigation / 100)) * Time.fixedDeltaTime;
+                }
             }
 
             healthRemaining -= damageTaken;
@@ -384,6 +420,35 @@ namespace ShrugWare
                 }
 
                 ++numFails;
+            }
+        }
+
+        // flash colors when we get hit
+        private void FlashColor()
+        {
+            foreach (SpriteRenderer renderer in GetComponentsInChildren<SpriteRenderer>())
+            {
+                if (renderer.color == Color.red)
+                {
+                    renderer.color = Color.white;
+                }
+                else
+                {
+                    renderer.color = Color.red;
+                }
+            }
+
+            if (laserInvulnExpireTime > Time.time)
+            {
+                Invoke("FlashColor", 0.2f);
+            }
+            else
+            {
+                // make sure we end up back to normal
+                foreach (SpriteRenderer renderer in GetComponentsInChildren<SpriteRenderer>())
+                {
+                    renderer.color = Color.white;
+                }
             }
         }
     }

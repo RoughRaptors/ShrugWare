@@ -39,6 +39,7 @@ namespace ShrugWare
         private bool merchant1Correct = false;
         private bool merchant2Correct = false;
         private bool merchant3Correct = false;
+        private bool wonGame = false;
 
         new private void Start()
         {
@@ -76,7 +77,7 @@ namespace ShrugWare
 
         protected override bool VictoryCheck()
         {
-            return false;
+            return wonGame;
         }
 
         private void AssignItemSprites()
@@ -125,6 +126,7 @@ namespace ShrugWare
                 || (gameObj.name == "Merchant 2 Body" && merchant2Correct)
                 || (gameObj.name == "Merchant 3 Body" && merchant3Correct))
             {
+                wonGame = true;
                 SetMicrogameEndText(true);
             }
             else

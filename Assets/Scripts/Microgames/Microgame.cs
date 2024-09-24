@@ -97,7 +97,11 @@ namespace ShrugWare
             {
                 int randMusicIndex = UnityEngine.Random.Range(0, OverworldManager.Instance.GetMicrogameMusic().Count);
                 AudioClip audioClip = OverworldManager.Instance.GetMicrogameAudioClipFromIndex(randMusicIndex);
-                AudioManager.Instance.PlayMusicClip(audioClip, DataManager.AudioEffectTypes.MicrogameMusic);
+
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayMusicClip(audioClip, DataManager.AudioEffectTypes.MicrogameMusic);
+                }
 
                 if(InfiniteModeManager.Instance != null)
                 {
@@ -173,7 +177,8 @@ namespace ShrugWare
             }
             else
             {
-                if (OverworldManager.Instance != null && BossGameManager.Instance != null && !BossGameManager.Instance.CurBoss.isDead)
+                if (AudioManager.Instance != null &&OverworldManager.Instance != null && 
+                    BossGameManager.Instance != null && !BossGameManager.Instance.CurBoss.isDead)
                 {
                     AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.BetweenMicrogame, .3f);
                 }
