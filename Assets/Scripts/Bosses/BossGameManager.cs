@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -75,6 +76,9 @@ namespace ShrugWare
         [SerializeField]
         Image sceneTransitionRightImage;
 
+        [SerializeField]
+        GameObject curBossObj;
+
         private float curTimeScale = 1.0f;
         public float GetCurTimeScale() { return curTimeScale; }
         public void SetCurTimeScale(float newTimeScale) { curTimeScale = newTimeScale; }
@@ -128,37 +132,25 @@ namespace ShrugWare
 
         private void Awake()
         {
-            // this will be called every time we swap back to our main scene
             if (Instance == null)
-            { 
-                DontDestroyOnLoad(gameObject);
+            {
                 Instance = this;
+                DontDestroyOnLoad(gameObject);
             }
             else if (Instance != this)
             {
                 Destroy(gameObject);
-
-                // set all of our shit back - figure out a better solution later if there is one - TODO MAKE THIS BETTER
-                curBoss = BossGameManager.Instance.curBoss;
-                curTimeScale = BossGameManager.Instance.curTimeScale;
-                playerInfo.livesLeft = BossGameManager.Instance.playerInfo.livesLeft;
-                timeInBossScene = 0.0f;
-                EnableBossCamera(true);
-            }
-
-            // bad
-            // set our boss
-            if (curBoss == null && bossName == "Warboss Kard")
-            {
-                curBoss = new WarbossKard();
-            }
-            else if (curBoss == null && bossName == "Tuzi")
-            {
-                curBoss = new Tuzi();
             }
 
             EnableBossCamera(true);
+            curBossObj.SetActive(true);
+            curBoss = Instance.curBoss;
             sceneTransitionAnim.speed = 0.0f;
+
+            if(curBoss == null)
+            {
+                curBoss = Boss.InitializeBoss(bossName);
+            }
         }
 
         private void Start()
@@ -209,7 +201,7 @@ namespace ShrugWare
         }
 
         private IEnumerator LoadLevel(int sceneId)
-        {
+        {            
             timeInBossScene = 0.0f;
             curSceneIndex = sceneId;
             sceneTransitionAnim.speed = 1.0f;
@@ -473,6 +465,11 @@ namespace ShrugWare
                 // kill it so we don't run it again
                 OverworldManager.Instance.CurRandomEvent = null;
             }
+        }
+
+        public void SetBoss(Boss boss)
+        {
+            curBoss = boss;
         }
     }
 }

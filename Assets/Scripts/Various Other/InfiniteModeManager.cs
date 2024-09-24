@@ -73,27 +73,28 @@ public class InfiniteModeManager : MonoBehaviour
     {
         if (Instance == null)
         {
-            DontDestroyOnLoad(gameObject);
-            audioManager = OverworldManager.Instance.AudioManager;
             Instance = this;
+            DontDestroyOnLoad(gameObject);
+            
+            audioManager = OverworldManager.Instance.AudioManager;
         }
         else if (Instance != this)
         {
             Destroy(gameObject);
-
-            curTimeScale = InfiniteModeManager.Instance.curTimeScale;
-            livesLeft = InfiniteModeManager.Instance.livesLeft;
-            livesLeftText = InfiniteModeManager.Instance.livesLeftText;
-            score = InfiniteModeManager.Instance.score;
-            scoreText = InfiniteModeManager.Instance.scoreText;
-            timeToNextMicrogameText = InfiniteModeManager.Instance.timeToNextMicrogameText;
-            cameraObj = InfiniteModeManager.Instance.cameraObj;
-            gameState = InfiniteModeManager.Instance.gameState;
-            startButton = InfiniteModeManager.Instance.startButton;
         }
 
+        curTimeScale = InfiniteModeManager.Instance.curTimeScale;
+        livesLeft = InfiniteModeManager.Instance.livesLeft;
+        livesLeftText = InfiniteModeManager.Instance.livesLeftText;
+        score = InfiniteModeManager.Instance.score;
+        scoreText = InfiniteModeManager.Instance.scoreText;
+        timeToNextMicrogameText = InfiniteModeManager.Instance.timeToNextMicrogameText;
+        cameraObj = InfiniteModeManager.Instance.cameraObj;
+        gameState = InfiniteModeManager.Instance.gameState;
+        startButton = InfiniteModeManager.Instance.startButton;
+
         // on first go around of this, it'll be inactive
-        if(gameState == GameState.Inactive)
+        if (gameState == GameState.Inactive)
         {
             timeToNextMicrogameText.gameObject.SetActive(false);
             startButton.enabled = true;
@@ -253,9 +254,7 @@ public class InfiniteModeManager : MonoBehaviour
             HandleDied();
         }
 
-
-
-        SceneManager.LoadScene((int)DataManager.Scenes.InfiniteModeScene);
+        SceneManager.LoadScene((int)DataManager.Scenes.InfiniteModeScene, LoadSceneMode.Additive);
     }
 
     private void HandleDied()

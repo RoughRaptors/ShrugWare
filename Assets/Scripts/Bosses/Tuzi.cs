@@ -14,6 +14,7 @@ namespace ShrugWare
             maxHealth = 100.0f;
 
             PopulateMechanicsList();
+            BossGameManager.Instance.SetBoss(this);
         }
 
         protected override void PopulateMechanicsList()
