@@ -143,7 +143,7 @@ namespace ShrugWare
             }
 
             EnableBossCamera(true);
-            curBossObj.SetActive(true);
+
             curBoss = Instance.curBoss;
             sceneTransitionAnim.speed = 0.0f;
 
@@ -195,6 +195,7 @@ namespace ShrugWare
                     DataManager.Scenes nextScene = curBoss.PickNextMicrogame();
                     bossUIManager.SetBossUICanvasEnabled(false);
                     EnableBossCamera(false);
+                    //curBossObj.SetActive(false);
                     StartCoroutine(LoadLevel((int)nextScene));
                 }
             }
@@ -321,10 +322,7 @@ namespace ShrugWare
         {
             SetTimescale(1);
             gameState = GameState.BossScreen;
-            if (OverworldManager.Instance != null)
-            {
-                OverworldManager.Instance.AudioManager.StopAudio();
-            }
+            AudioManager.Instance.StopAudio();
         }
 
         public void TakePlayerRaidDamage(float amount)
