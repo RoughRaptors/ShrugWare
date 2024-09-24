@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEditor;
 using UnityEngine.EventSystems;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 namespace ShrugWare
 {
