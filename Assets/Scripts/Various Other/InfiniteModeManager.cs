@@ -80,10 +80,7 @@ public class InfiniteModeManager : MonoBehaviour
         }
         else if (Instance != this)
         {
-            DontDestroyOnLoad(gameObject);
-
             Destroy(gameObject);
-            return;
         }
 
         curTimeScale = InfiniteModeManager.Instance.curTimeScale;
