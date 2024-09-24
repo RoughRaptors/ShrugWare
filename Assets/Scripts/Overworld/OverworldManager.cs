@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEditor;
 using UnityEngine.EventSystems;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 namespace ShrugWare
 {
@@ -140,7 +141,7 @@ namespace ShrugWare
         private void Start()
         {
             // set fps so players don't have varying speeds
-            Application.targetFrameRate = 60;
+            Application.targetFrameRate = 60;            
 
             ReadyScene(true);
 
@@ -396,9 +397,9 @@ namespace ShrugWare
         public void EnterLevel(OverworldLevel level)
         {
             bool force = false;
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
             force = true;
-#endif
+//#endif
 
             if (level.LevelType == DataManager.OverworldLevelType.Start || (level.Locked && !force))
             {

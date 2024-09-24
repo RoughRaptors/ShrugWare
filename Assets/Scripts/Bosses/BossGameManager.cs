@@ -143,6 +143,7 @@ namespace ShrugWare
             }
 
             EnableBossCamera(true);
+
             curBoss = Instance.curBoss;
             sceneTransitionAnim.speed = 0.0f;
 
@@ -201,7 +202,7 @@ namespace ShrugWare
         }
 
         private IEnumerator LoadLevel(int sceneId)
-        {
+        {            
             timeInBossScene = 0.0f;
             curSceneIndex = sceneId;
             sceneTransitionAnim.speed = 1.0f;
