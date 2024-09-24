@@ -104,14 +104,12 @@ namespace ShrugWare
 
         private void Awake()
         {
-            //audioManager = GetComponent<AudioManager>();
-
+            audioManager = AudioManager.Instance;
             if (Instance == null)
             {
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
 
-                audioManager = AudioManager.Instance;
                 PlayOverworldMusic();
 
                 /*
