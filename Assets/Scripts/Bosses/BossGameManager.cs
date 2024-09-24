@@ -143,7 +143,6 @@ namespace ShrugWare
             }
 
             EnableBossCamera(true);
-            curBossObj.SetActive(true);
             curBoss = Instance.curBoss;
             sceneTransitionAnim.speed = 0.0f;
 
@@ -195,13 +194,14 @@ namespace ShrugWare
                     DataManager.Scenes nextScene = curBoss.PickNextMicrogame();
                     bossUIManager.SetBossUICanvasEnabled(false);
                     EnableBossCamera(false);
+                    //curBossObj.SetActive(false);
                     StartCoroutine(LoadLevel((int)nextScene));
                 }
             }
         }
 
         private IEnumerator LoadLevel(int sceneId)
-        {            
+        {
             timeInBossScene = 0.0f;
             curSceneIndex = sceneId;
             sceneTransitionAnim.speed = 1.0f;
