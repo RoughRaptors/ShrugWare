@@ -2,9 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.Rendering.Universal;
-using System.Linq;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 namespace ShrugWare
 {
