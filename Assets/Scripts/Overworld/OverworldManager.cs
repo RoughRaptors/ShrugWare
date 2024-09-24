@@ -5,7 +5,8 @@ using System.Collections;
 using UnityEditor;
 using UnityEngine.EventSystems;
 
-namespace ShrugWare{
+namespace ShrugWare
+{
 
     /* 
         this connects the game world together by OverworldLevels
@@ -102,27 +103,38 @@ namespace ShrugWare{
 
         private void Awake()
         {
-            audioManager = GetComponent<AudioManager>();
+            //audioManager = GetComponent<AudioManager>();
 
             if (Instance == null)
             {
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
 
+                audioManager = AudioManager.Instance;
                 PlayOverworldMusic();
+
+                /*
+                DontDestroyOnLoad(gameObject);
+                DontDestroyOnLoad(audioListenerObj);
+                DontDestroyOnLoad(eventSystemObj);
+                DontDestroyOnLoad(curLevel);
+                DontDestroyOnLoad(playerObj);
+                */
             }
             else if (Instance != this)
             {
                 Destroy(gameObject);
+
+                audioListenerObj = Instance.audioListenerObj;
+                eventSystemObj = Instance.eventSystemObj;
+                overworldMap = Instance.overworldMap;
+                curLevel = Instance.curLevel;
+                playerObj = Instance.playerObj;
+                playerObj.SetActive(true);
             }
 
-            audioListenerObj = Instance.audioListenerObj;
-            eventSystemObj = Instance.eventSystemObj;
-            overworldMap = Instance.overworldMap;
-            curLevel = Instance.curLevel;
-            playerObj = Instance.playerObj;
-            playerObj.SetActive(true);
             overworldUIManager.UpdateUI();
+            ReadyScene(true);
         }
 
         private void Start()

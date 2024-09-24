@@ -321,10 +321,7 @@ namespace ShrugWare
         {
             SetTimescale(1);
             gameState = GameState.BossScreen;
-            if (OverworldManager.Instance != null)
-            {
-                OverworldManager.Instance.AudioManager.StopAudio();
-            }
+            AudioManager.Instance.StopAudio();
         }
 
         public void TakePlayerRaidDamage(float amount)

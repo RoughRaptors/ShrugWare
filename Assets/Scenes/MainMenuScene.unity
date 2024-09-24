@@ -369,6 +369,67 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\xAF\\_(\u30C4)_/\xAF-Ware"
+--- !u!1 &830605307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 830605309}
+  - component: {fileID: 830605310}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &830605309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830605307}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.186045, y: -11.98473, z: 160.12717}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &830605310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830605307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 998e21fa9dfe06d428831deee77e44bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioEffects:
+  - audioEffect: 0
+    audioClip: {fileID: 8300000, guid: e7bbaf9d2fb718448b9f893459af7805, type: 3}
+  - audioEffect: 1
+    audioClip: {fileID: 8300000, guid: 800bfb05f15a77e428ccf3bb044ae43d, type: 3}
+  - audioEffect: 2
+    audioClip: {fileID: 8300000, guid: 95b4311419b5e3b4ab4900b1baa966e7, type: 3}
+  - audioEffect: 3
+    audioClip: {fileID: 8300000, guid: 163ebe8ba7a04c34c8e861557f6d80ea, type: 3}
+  - audioEffect: 4
+    audioClip: {fileID: 8300000, guid: 683304f955c0ee341818181c327a561f, type: 3}
+  - audioEffect: 5
+    audioClip: {fileID: 8300000, guid: 2bdd71b100ce6a749b918611f75fad87, type: 3}
+  - audioEffect: 6
+    audioClip: {fileID: 8300000, guid: 1c6caebd616669340a8968ad0746116c, type: 3}
+  - audioEffect: 7
+    audioClip: {fileID: 8300000, guid: 5b14c81759917fa49b4051789261f7f3, type: 3}
 --- !u!1 &904114940
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,7 +514,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1007673626}
+      - m_Target: {fileID: 1007673631}
         m_TargetAssemblyTypeName: ShrugWare.MainMenu, Assembly-CSharp
         m_MethodName: OnStartClicked
         m_Mode: 1
@@ -527,8 +588,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1007673627}
-  - component: {fileID: 1007673626}
-  - component: {fileID: 1007673628}
+  - component: {fileID: 1007673631}
   - component: {fileID: 1007673629}
   m_Layer: 0
   m_Name: Main Menu
@@ -537,20 +597,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1007673626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1007673625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9920e1f2f6f45174abff76b64ee92d7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startButton: {fileID: 904114942}
-  tutorialButton: {fileID: 1730560846}
 --- !u!4 &1007673627
 Transform:
   m_ObjectHideFlags: 0
@@ -567,108 +613,6 @@ Transform:
   - {fileID: 1163829577}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1007673628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1007673625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 998e21fa9dfe06d428831deee77e44bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioEffects:
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: e7bbaf9d2fb718448b9f893459af7805, type: 3}
-  microgameClips:
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 9236a1db72c4228408e4b951979c6c58, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: b4c79e71ef6b2ea4f80f47e31acac86d, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 6a43580d5858b094587f79e90b03d04a, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: debacbfabb56da549a5910e897daa22a, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 83040face9f86f44dbc39b29c3e2a0fd, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: a820ac199cbdf784db6def5ef4b5a335, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 2d93ab08f34bd344eaabeed861ae862e, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: b7603fd4ef9764e41bba7e6645fd40c5, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 1851f6bd9a317cc4eadbff3f040e9f43, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 3701090d51437cd479ba1c8bef20a818, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 6ba3c1e1b9f950142988035c83282429, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 76c4f3ff4c3cff146a4ed59144b62754, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 6fb6978ddc964d44bbb29408f7755d16, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 7783aac769bb9b84cbc5c937cd5c05e2, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 9a31f56999bf98c44a6a03dca89e3d02, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 7d4f11dc291b15442a20234bff4a1947, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: d0b73aea408e54f40adb5a6fd70f29f2, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 6225ce640ee0729478fbc06f9f80e221, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 60cbbde28e332074c9f353d0f5d11544, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: c1baa04314426404bb0a4ceb570851dc, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 51f0f714146db5a438a211d5ba3d9777, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: d0d616de34676eb48b61368f3cc6b612, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: bf249db19c442fa41a0d57a3019b28c7, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 1849a1d7328072a48babdb0bf150db59, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 49f05071930cf13438cb9fb007c85a8c, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 0779e1ae9da7065439fe88ee3f3d569b, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 8b227211af314484998b9e72f55fa2a2, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 410e8c083857d0740bb882bbbc4f32a1, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: ce71bcb0e9239184aac4a232c2edfcbf, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 3c8c6a72d03333141baec8a3c4cf4ea7, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 1fa8ea92cc5c2d043a92c0fc3e4c31ba, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: ab76d05a5331d2549b45d89e730274fc, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 91e6b0b80642446439a7fbb236a4109c, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 7be7b1a296748ef44b057040b1ba8099, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 272a20bf9fdfb2541a5c14c0fb7423ec, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: d5b7335c4a855d245b4d1dda357d3922, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 76f3c3a13ec62384392a916c66b15a47, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: c07ae4b1aa202954aab4feef95fe2537, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 75fffeddb8313144b80e4b69eef9a859, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 2f788bbc041e1384bb556b0625c4fdd4, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 80469f682785d5e4f841dc270bbd457b, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: 3315fa057b1f8ee4598abe33cfdfa355, type: 3}
-  - audioEffect: 0
-    audioClip: {fileID: 8300000, guid: cd8c5285b8665fb4da44758fda4928d2, type: 3}
 --- !u!81 &1007673629
 AudioListener:
   m_ObjectHideFlags: 0
@@ -677,6 +621,21 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007673625}
   m_Enabled: 1
+--- !u!114 &1007673631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007673625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9920e1f2f6f45174abff76b64ee92d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startButton: {fileID: 904114942}
+  tutorialButton: {fileID: 1730560846}
+  audioManager: {fileID: 830605310}
 --- !u!1 &1038310650
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,7 +1148,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1007673626}
+      - m_Target: {fileID: 1007673631}
         m_TargetAssemblyTypeName: ShrugWare.MainMenu, Assembly-CSharp
         m_MethodName: OnTutorialClicked
         m_Mode: 1
@@ -1262,3 +1221,4 @@ SceneRoots:
   - {fileID: 1224016530}
   - {fileID: 1184401326}
   - {fileID: 1007673627}
+  - {fileID: 830605309}
