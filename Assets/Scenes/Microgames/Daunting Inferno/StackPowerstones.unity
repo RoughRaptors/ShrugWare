@@ -389,7 +389,7 @@ PrefabInstance:
       objectReference: {fileID: 990040647}
     - target: {fileID: 2434016125122565296, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: instructionText
-      value: Stack em up!
+      value: Collect!
       objectReference: {fileID: 0}
     - target: {fileID: 2434016125122565296, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: controlSchemeImage
