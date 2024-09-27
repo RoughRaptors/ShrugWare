@@ -16,8 +16,8 @@ namespace ShrugWare
             DodgeFireballsMinigame,
             ShootAsteroidsMinigame,
             HeiganDanceMinigame,
-            MICROGAME_START = 10, // KEEP IN SYNC
-            GetOutOfFire = 10,    // KEEP IN SYNC
+            MICROGAME_START = 11, // KEEP IN SYNC
+            GetOutOfFire = 11,    // KEEP IN SYNC
             CastFrostbolt,
             TauntTheAdds,
             InterceptTheFireball,
@@ -47,7 +47,7 @@ namespace ShrugWare
             BuyCheapItem,
             ShootTheBoss,
             MeleeTheBoss,
-            MICROGAME_END = 39 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            MICROGAME_END = 40 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatModifierType

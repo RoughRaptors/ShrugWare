@@ -254,7 +254,7 @@ public class InfiniteModeManager : MonoBehaviour
             HandleDied();
         }
 
-        SceneManager.LoadScene((int)DataManager.Scenes.InfiniteModeScene, LoadSceneMode.Additive);
+        SceneManager.LoadScene((int)DataManager.Scenes.InfiniteModeScene);
     }
 
     private void HandleDied()

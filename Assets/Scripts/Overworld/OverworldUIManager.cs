@@ -218,5 +218,11 @@ namespace ShrugWare
         {
             enterLevelButtonObj.SetActive(false);
         }
+
+        public void OnExitButtonPressed()
+        {
+            this.gameObject.SetActive(false);
+            OverworldManager.Instance.UnpauseGame();
+        }
     }
 }

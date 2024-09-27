@@ -15,7 +15,10 @@ namespace ShrugWare
 
         public static AudioManager Instance;
 
-        const float MUSIC_PITCH_MULTIPLY_VALUE = 0.85f;
+        private const float MUSIC_PITCH_MULTIPLY_VALUE = 0.85f;
+
+        private float audioVolume = 100.0f;
+
         private void Awake()
         {
             if (Instance == null)
@@ -72,7 +75,7 @@ namespace ShrugWare
                     // lower the significance of the audio timescale increase
                     if (audioEffectType == DataManager.AudioEffectTypes.BetweenMicrogame)
                     {
-                        audioSourceMusic.pitch = BossGameManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE;
+                        audioSourceMusic.pitch = BossGameManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE ;
                         audioSourceEffects.pitch = BossGameManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE;
                     }
                 }
@@ -159,6 +162,18 @@ namespace ShrugWare
                 audioSourceMusic.pitch = curTimeScale;
                 audioSourceEffects.pitch = curTimeScale;
             }
+        }
+
+        public float GetAudioVolume()
+        {
+            return audioVolume;
+        }
+
+        public void SetAudioVolume(float newAudioVolume)
+        {
+            audioVolume = newAudioVolume;
+            audioSourceMusic.volume = audioVolume / 100;
+            audioSourceEffects.volume = audioVolume / 100;
         }
     }
 }

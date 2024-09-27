@@ -36,7 +36,7 @@ namespace ShrugWare
         const float Y_MIN = -600;
         const float Y_MAX = 900;
 
-        new private void Start()
+        protected override void Start()
         {
             base.Start();
         }
@@ -49,7 +49,7 @@ namespace ShrugWare
             // this is a hard microgame when too fast and, there's not enough time, give it a time boost the faster the timescale is
             if (BossGameManager.Instance != null)
             {
-                microGameTime += BossGameManager.Instance.GetCurTimeScale() * 2.0f;
+                microGameTime += BossGameManager.Instance.GetCurTimeScale() * 2.5f;
             }
         }
 

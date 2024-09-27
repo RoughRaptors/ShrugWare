@@ -41,17 +41,17 @@ namespace ShrugWare
         private bool merchant2Correct = false;
         private bool merchant3Correct = false;
 
-        new private void Start()
+        protected override void Start()
         {
             base.Start();
         }
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
             PlayerCollider.OnGoodCollision += PurchasedItem;
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
             PlayerCollider.OnGoodCollision -= PurchasedItem;
         }

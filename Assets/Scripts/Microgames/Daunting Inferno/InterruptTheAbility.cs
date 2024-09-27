@@ -26,7 +26,7 @@ namespace ShrugWare
         private float castDelay = 0.0f;
         private float castTimePercent = 1;
 
-        new private void Start()
+        protected override void Start()
         {
             base.Start();
             interruptButton.SetActive(false);

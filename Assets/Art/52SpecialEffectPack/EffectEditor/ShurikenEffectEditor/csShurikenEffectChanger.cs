@@ -12,10 +12,18 @@ public class csShurikenEffectChanger : MonoBehaviour
         transform.localScale *= _Value;
 
 		foreach(ParticleSystem _ParticleSystem in ParticleSystems) {
-			_ParticleSystem.startSpeed *= _Value;
-			_ParticleSystem.startSize *= _Value;
-			_ParticleSystem.gravityModifier *= _Value;
-			SerializedObject _SerializedObject = new SerializedObject(_ParticleSystem);
+#pragma warning disable CS0618 // Type or member is obsolete
+            _ParticleSystem.startSpeed *= _Value;
+#pragma warning restore CS0618 // Type or member is obsolete
+
+#pragma warning disable CS0618 // Type or member is obsolete
+            _ParticleSystem.startSize *= _Value;
+#pragma warning restore CS0618 // Type or member is obsolete
+
+#pragma warning disable CS0618 // Type or member is obsolete
+            _ParticleSystem.gravityModifier *= _Value;
+#pragma warning restore CS0618 // Type or member is obsolete
+            SerializedObject _SerializedObject = new SerializedObject(_ParticleSystem);
 			_SerializedObject.FindProperty("CollisionModule.particleRadius").floatValue *= _Value;
 			_SerializedObject.FindProperty("ShapeModule.radius").floatValue *= _Value;
 			_SerializedObject.FindProperty("ShapeModule.boxX").floatValue *= _Value;
