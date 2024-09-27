@@ -41,18 +41,22 @@ namespace ShrugWare
         private bool merchant3Correct = false;
         private bool wonGame = false;
 
-        new private void Start()
+        protected override void Start()
         {
             base.Start();
         }
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
+
             PlayerCollider.OnGoodCollision += PurchasedItem;
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
+            base.OnDisable();
+
             PlayerCollider.OnGoodCollision -= PurchasedItem;
         }
 

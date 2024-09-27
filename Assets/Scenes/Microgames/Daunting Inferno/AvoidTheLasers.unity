@@ -302,6 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &238642560
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -653,7 +654,7 @@ Transform:
   m_GameObject: {fileID: 539053363}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10.5, z: 0}
+  m_LocalPosition: {x: 0, y: 8.5, z: 0}
   m_LocalScale: {x: 15, y: 15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -696,6 +697,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &701096360
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -908,9 +910,9 @@ MonoBehaviour:
   laserParent: {fileID: 539053363}
   playerSpawnPosList:
   - {x: 70, y: -50, z: 0}
-  - {x: 70, y: 25, z: 0}
-  - {x: -55, y: 25, z: 0}
-  - {x: -55, y: -35, z: 0}
+  - {x: 80, y: 35, z: 0}
+  - {x: -65, y: 35, z: 0}
+  - {x: -65, y: -50, z: 0}
   playerObj: {fileID: 1279346770}
   playerSpriteParent: {fileID: 2110779560}
 --- !u!1 &983545015
@@ -1122,6 +1124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &1493728768
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1434,6 +1437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &1792966332
 BoxCollider:
   m_ObjectHideFlags: 0

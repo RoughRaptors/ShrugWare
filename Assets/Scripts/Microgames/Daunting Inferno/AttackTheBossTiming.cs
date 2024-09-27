@@ -16,7 +16,7 @@ namespace ShrugWare
         private bool goingLeft = false;
         private float sliderSpeed = 100.0f;
 
-        new private void Start()
+        protected override void Start()
         {
             base.Start();
 

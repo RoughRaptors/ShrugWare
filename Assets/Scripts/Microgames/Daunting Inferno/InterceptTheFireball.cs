@@ -25,7 +25,7 @@ namespace ShrugWare
 
         private const float FIREBALL_MOVE_SPEED = 0.75f;
 
-        new private void Start()
+        protected override void Start()
         {
             base.Start();
         }

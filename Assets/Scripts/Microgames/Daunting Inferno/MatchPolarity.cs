@@ -31,7 +31,7 @@ namespace ShrugWare
         private const float PLAYER_X_MIN = -90;
         private const float PLAYER_X_MAX = 90;
 
-        new private void Start()
+        protected override void Start()
         {
             base.Start();
             playerNegativeObj.SetActive(false);

@@ -257,9 +257,6 @@ namespace ShrugWare
                     FlashColor();
                 }
 
-                float speed = 25.0f;
-                Vector3 move = new Vector3(0, 0, 0);
-
                 Vector3 targetPos = transform.position;
                 if (collideObj.transform.parent.name == "Top Laser")
                 {

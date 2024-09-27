@@ -223,7 +223,7 @@ namespace ShrugWare
             {
                 sceneTransitionAnim.SetTrigger("End");
                 yield return new WaitForSeconds(1);
-                SceneManager.LoadScene(sceneId);
+                SceneManager.LoadScene(sceneId, LoadSceneMode.Additive);
                 sceneTransitionAnim.SetTrigger("Start");
             }
             else
@@ -389,7 +389,7 @@ namespace ShrugWare
             if (!(curBoss is null))
             {
 #if UNITY_EDITOR
-                amount = CurBoss.curHealth;
+                //amount = CurBoss.curHealth;
 #endif
                 curBoss.TakeDamage(amount);
             }

@@ -88,6 +88,9 @@ namespace ShrugWare
         List<Sprite> microgameBackgrounds = new List<Sprite>();
         public List<Sprite> GetMicrogameBackgrounds() { return microgameBackgrounds; }
 
+        [SerializeField]
+        OptionsMenu optionsMenu;
+
         // don't allow the player to move multiple spaces at once
         private bool isMoving = false;
         public bool IsMoving
@@ -152,6 +155,20 @@ namespace ShrugWare
                 else
                 {
                     overworldUIManager.EnableDebugging();
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (optionsMenu.isActiveAndEnabled)
+                {
+                    RevertTimescale();
+                    optionsMenu.gameObject.SetActive(false);
+                }
+                else
+                {
+                    Time.timeScale = 0.0f;
+                    optionsMenu.gameObject.SetActive(true);
                 }
             }
         }
@@ -226,8 +243,10 @@ namespace ShrugWare
             return false;
 #endif
 
+#pragma warning disable CS0162 // Unreachable code detected
             OverworldLevel overworldLevel = GetOverworldLevelByID(levelID);
-            if(overworldLevel != null)
+#pragma warning restore CS0162 // Unreachable code detected
+            if (overworldLevel != null)
             {
                 return overworldLevel.Locked;
             }
@@ -516,6 +535,28 @@ namespace ShrugWare
             if (audioManager != null)
             {
                 audioManager.ResetPitch();
+            }
+        }
+
+        public void UnpauseGame()
+        {
+            RevertTimescale();
+        }
+        
+        public void RevertTimescale()
+        {
+            // we might be in a boss fight or infinite, in which case we set it back to what we had before
+            if (BossGameManager.Instance != null)
+            {
+                Time.timeScale = BossGameManager.Instance.GetCurTimeScale();
+            }
+            else if (InfiniteModeManager.Instance != null)
+            {
+                Time.timeScale = InfiniteModeManager.Instance.GetCurTimeScale();
+            }
+            else
+            {
+                Time.timeScale = 1.0f;
             }
         }
     }

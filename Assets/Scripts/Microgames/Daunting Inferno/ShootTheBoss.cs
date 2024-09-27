@@ -29,7 +29,7 @@ namespace ShrugWare
         private Vector3 enemyMovePos = new Vector3(0, 0, 0);
         private Vector3 enemyStartPos = new Vector3(0, 0, 0);
 
-        new private void Start()
+        protected override void Start()
         {
             base.Start();
 

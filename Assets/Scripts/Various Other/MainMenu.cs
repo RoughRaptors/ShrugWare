@@ -17,6 +17,9 @@ namespace ShrugWare
         [SerializeField]
         AudioManager audioManager;
 
+        [SerializeField]
+        GameObject optionsMenu;
+
         private void Awake()
         {
             // this was generating errors on dev build startup
@@ -35,6 +38,11 @@ namespace ShrugWare
         {
             audioManager.StopAudio();
             SceneManager.LoadScene((int)DataManager.Scenes.TutorialScene);
+        }
+
+        public void OnOpenOptionsClicked()
+        {
+            optionsMenu.SetActive(true);
         }
     }
 }
