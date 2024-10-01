@@ -9,7 +9,7 @@ namespace ShrugWare
     {
         private Dictionary<DataManager.Currencies, int> currencies = new Dictionary<DataManager.Currencies, int>();
         private Dictionary<int, Item> inventoryItems = new Dictionary<int, Item>();
-        private Dictionary<DataManager.ArmorSlot, ArmorItem> equippedArmor = new Dictionary<DataManager.ArmorSlot, ArmorItem>(5);
+        private Dictionary<DataManager.ArmorSlot, ArmorItem> equippedArmor = new Dictionary<DataManager.ArmorSlot, ArmorItem>(6);
 
         private float curMitigationPercent = 0.0f;
         private float moveSpeedBonus = 0.0f;
@@ -20,46 +20,6 @@ namespace ShrugWare
             currencies.Add(DataManager.Currencies.Gold, 500);
             currencies.Add(DataManager.Currencies.DKP, 2500);
 
-            // 25% player heal
-            DataManager.StatEffect healPlayerEffect;
-            healPlayerEffect.amount = 25;
-            healPlayerEffect.effectType = DataManager.StatModifierType.PlayerCurHealth;
-            healPlayerEffect.asPercentage = true;
-
-            // +10% max hp
-            DataManager.StatEffect maxHPEffect;
-            maxHPEffect.amount = 10;
-            maxHPEffect.effectType = DataManager.StatModifierType.PlayerMaxHealth;
-            maxHPEffect.asPercentage = true;
-
-            // +15% move speed
-            DataManager.StatEffect moveSpeedEffect;
-            moveSpeedEffect.amount = 15;
-            moveSpeedEffect.effectType = DataManager.StatModifierType.PlayerMoveSpeed;
-            moveSpeedEffect.asPercentage = true;
-
-            // todo - untie from Merchant template ids by making items data driven
-            ConsumableItem healthPotionItem = new ConsumableItem();
-            healthPotionItem.itemName = "Health Potion";
-            healthPotionItem.itemQuantity = 1;
-            healthPotionItem.templateId = 0;
-            healthPotionItem.AddEffect(healPlayerEffect);
-            inventoryItems.Add(healthPotionItem.templateId, healthPotionItem);
-
-            ConsumableItem maxHealthPotionItem = new ConsumableItem();
-            maxHealthPotionItem.itemName = "Increase Max Health Potion";
-            maxHealthPotionItem.itemQuantity = 1;
-            maxHealthPotionItem.templateId = 1;
-            maxHealthPotionItem.AddEffect(maxHPEffect);
-            inventoryItems.Add(maxHealthPotionItem.templateId, maxHealthPotionItem);
-
-            ConsumableItem moveSpeedPotionItem = new ConsumableItem();
-            moveSpeedPotionItem.itemName = "Move Speed Potion";
-            moveSpeedPotionItem.itemQuantity = 0;
-            moveSpeedPotionItem.templateId = 7;
-            moveSpeedPotionItem.AddEffect(moveSpeedEffect);
-            inventoryItems.Add(moveSpeedPotionItem.templateId, moveSpeedPotionItem);
-
             foreach (DataManager.ArmorSlot slot in Enum.GetValues(typeof(DataManager.ArmorSlot)))
             {
                 equippedArmor[DataManager.ArmorSlot.Head] = null;
@@ -67,9 +27,84 @@ namespace ShrugWare
                 equippedArmor[DataManager.ArmorSlot.Gloves] = null;
                 equippedArmor[DataManager.ArmorSlot.Legs] = null;
                 equippedArmor[DataManager.ArmorSlot.Boots] = null;
+                equippedArmor[DataManager.ArmorSlot.Accessory] = null;
             }
+
+            CreateHealthPotion();
+            CreateMaxHealthPotion();
+            CreateMoveSpeedPotion();
+            CreateAccessory();
         }
-        
+
+        private void CreateHealthPotion()
+        {
+            // 25% player heal
+            DataManager.StatEffect healPlayerEffect;
+            healPlayerEffect.amount = 25;
+            healPlayerEffect.effectType = DataManager.StatModifierType.PlayerCurHealth;
+            healPlayerEffect.asPercentage = true;
+
+            ConsumableItem healthPotionItem = new ConsumableItem();
+            healthPotionItem.itemName = "Health Potion";
+            healthPotionItem.itemQuantity = 1;
+            healthPotionItem.templateId = (int)DataManager.ItemTemplateIds.HealthPotion;
+            healthPotionItem.AddEffect(healPlayerEffect);
+            inventoryItems.Add(healthPotionItem.templateId, healthPotionItem);
+        }
+
+        private void CreateMaxHealthPotion()
+        {
+            // +10% max hp
+            DataManager.StatEffect maxHPEffect;
+            maxHPEffect.amount = 10;
+            maxHPEffect.effectType = DataManager.StatModifierType.PlayerMaxHealth;
+            maxHPEffect.asPercentage = true;
+
+            ConsumableItem maxHealthPotionItem = new ConsumableItem();
+            maxHealthPotionItem.itemName = "Increase Max Health Potion";
+            maxHealthPotionItem.itemQuantity = 1;
+            maxHealthPotionItem.templateId = (int)DataManager.ItemTemplateIds.MaxHealthPotion;
+            maxHealthPotionItem.AddEffect(maxHPEffect);
+            inventoryItems.Add(maxHealthPotionItem.templateId, maxHealthPotionItem);
+        }
+
+        private void CreateMoveSpeedPotion()
+        {
+            // +15% move speed
+            DataManager.StatEffect moveSpeedEffect;
+            moveSpeedEffect.amount = 15;
+            moveSpeedEffect.effectType = DataManager.StatModifierType.PlayerMoveSpeed;
+            moveSpeedEffect.asPercentage = true;
+
+            ConsumableItem moveSpeedPotionItem = new ConsumableItem();
+            moveSpeedPotionItem.itemName = "Move Speed Potion";
+            moveSpeedPotionItem.itemQuantity = 0;
+            moveSpeedPotionItem.templateId = (int)DataManager.ItemTemplateIds.RunSpeedPotion;
+            moveSpeedPotionItem.AddEffect(moveSpeedEffect);
+            inventoryItems.Add(moveSpeedPotionItem.templateId, moveSpeedPotionItem);
+        }
+
+        private void CreateAccessory()
+        {
+            DataManager.StatEffect microgameTimeEffect;
+            microgameTimeEffect.amount = 1.20f;
+            microgameTimeEffect.effectType = DataManager.StatModifierType.MicrogameTime;
+            microgameTimeEffect.asPercentage = true;
+
+            DataManager.StatEffect livesEffect;
+            livesEffect.amount = 1;
+            livesEffect.effectType = DataManager.StatModifierType.Lives;
+            livesEffect.asPercentage = false;
+
+            ArmorItem accessory = new ArmorItem(DataManager.ArmorSlot.Accessory, DataManager.ArmorSet.DauntingInferno);
+            accessory.itemName = "Accessory";
+            accessory.templateId = (int)DataManager.ItemTemplateIds.Accessory;
+            accessory.AddEffect(microgameTimeEffect);
+            accessory.AddEffect(livesEffect);
+
+            inventoryItems.Add(accessory.templateId, accessory);
+        }
+
         public int GetCurrencyAmount(DataManager.Currencies currencyType)
         {
             int amount = 0;
@@ -90,8 +125,8 @@ namespace ShrugWare
                 inventoryItems.Add(itemToAdd.templateId, itemToAdd);
             }
 
-            // if this is armor, auto equip it
-            if(itemToAdd is ArmorItem)
+            // if this is armor that isn't an accessory, auto equip it
+            if(itemToAdd is ArmorItem && (itemToAdd as ArmorItem).GetArmorSlot() != DataManager.ArmorSlot.Accessory)
             {
                 EquipArmorItem(itemToAdd as ArmorItem);
             }
@@ -99,18 +134,10 @@ namespace ShrugWare
 
         public void EquipArmorItem(ArmorItem armorToEquip)
         {
-            foreach(DataManager.StatEffect effect in armorToEquip.GetEffects())
-            {
-                curMitigationPercent += effect.amount;
-                if(curMitigationPercent > 100.0f)
-                {
-                    curMitigationPercent = 100.0f;
-                }
-            }
-
             if (equippedArmor.ContainsKey(armorToEquip.GetArmorSlot()))
             {
                 equippedArmor[armorToEquip.GetArmorSlot()] = armorToEquip;
+                inventoryItems.Remove(armorToEquip.templateId);
                 RecalculateStats();
             }
         }
@@ -144,6 +171,8 @@ namespace ShrugWare
 
             curMitigationPercent = 0;
             BossGameManager.Instance.ResetPlayerRaidMaxHP();
+            BossGameManager.Instance.ResetMicrogameTimeBonus();
+            BossGameManager.Instance.ResetLivesBonus();
 
             if (HasSetBonus())
             {
@@ -167,6 +196,8 @@ namespace ShrugWare
                 }
             }
 
+            float microgameTimeBonus = 0.0f;
+            int extraLives = 0;
             foreach (KeyValuePair<DataManager.ArmorSlot, ArmorItem> armor in equippedArmor)
             {
                 if (armor.Value != null)
@@ -177,12 +208,21 @@ namespace ShrugWare
                         {
                             curMitigationPercent += effect.amount;
                         }
+                        else if (effect.effectType == DataManager.StatModifierType.MicrogameTime)
+                        {
+                            microgameTimeBonus += effect.amount;
+                        }
+                        else if(effect.effectType == DataManager.StatModifierType.Lives)
+                        {
+                            extraLives += (int)effect.amount;
+                        }
                     }
                 }
             }
 
-            BossGameManager.Instance.AddToPlayerRaidMaxHP((int)curMitigationPercent);
-            BossGameManager.Instance.HealPlayerRaid((int)curMitigationPercent);
+            BossGameManager.Instance.AddToMicrogameTimeBonus(microgameTimeBonus);
+            BossGameManager.Instance.AddLives(extraLives);
+            BossGameManager.Instance.UpdateGameUI();
         }
 
         public void AddCurrency(DataManager.Currencies currency, int amount)
@@ -259,12 +299,12 @@ namespace ShrugWare
 
         public bool HasSetBonus()
         {
-            // check for armor set - this can be dumb and just check for 5 of the same
+            // check for armor set - this can be dumb and just check for 5 of the same (not accessory)
             int numSameArmorSetEquipped = 0;
             DataManager.ArmorSet prevSet = DataManager.ArmorSet.DauntingInferno;
             foreach (KeyValuePair<DataManager.ArmorSlot, ArmorItem> armor in equippedArmor)
             {
-                if (armor.Value != null)
+                if (armor.Value != null && armor.Value.GetArmorSlot() != DataManager.ArmorSlot.Accessory)
                 {
                     // if we have none, this means we haven't started yet so set our set to the current piece of armor
                     if (numSameArmorSetEquipped == 0)
@@ -285,7 +325,7 @@ namespace ShrugWare
                 }
             }
 
-            return numSameArmorSetEquipped == (int)DataManager.ArmorSlot.MAX + 1;
+            return numSameArmorSetEquipped == (int)DataManager.ArmorSlot.MAX;
         }
 
         public Item GetInventoryItem(int templateId)
@@ -307,6 +347,26 @@ namespace ShrugWare
             }
 
             return false;
+        }
+
+        // equip on casual unequip otherwise
+        public void DifficultyChanged(bool casualMode)
+        {
+            if(casualMode)
+            {
+                Item accessoryItem = null;
+                inventoryItems.TryGetValue((int)DataManager.ItemTemplateIds.Accessory, out accessoryItem);
+                if(accessoryItem != null)
+                {
+                    EquipArmorItem(accessoryItem as ArmorItem);
+                }
+            }
+            else
+            {
+                UnequipArmorSlot(DataManager.ArmorSlot.Accessory);
+            }
+
+            RecalculateStats();
         }
     }
 }

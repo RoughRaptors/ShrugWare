@@ -55,7 +55,7 @@ namespace ShrugWare
         public static BossGameManager Instance;
         
         [SerializeField]
-        private BossUIManager bossUIManager;
+        BossUIManager bossUIManager;
 
         [SerializeField]
         Camera bossSceneCamera = null;
@@ -114,6 +114,9 @@ namespace ShrugWare
 
         private List<DataManager.StatEffect> previouslyRanEffects = new List<DataManager.StatEffect>();
         public List<DataManager.StatEffect> GetPreviouslyRanEffects() { return previouslyRanEffects; }
+
+        private float microgameTimeBonus = 0.0f;
+        public float GetMicrogameTimeBonus() { return microgameTimeBonus; }
 
         public enum GameState
         {
@@ -355,13 +358,14 @@ namespace ShrugWare
             {
                 --playerInfo.livesLeft;
 
-                if (playerInfo.livesLeft > 0)
+                if (playerInfo.livesLeft >= 0)
                 {
                     playerInfo.curPlayerHealth = playerInfo.maxPlayerHealth;
                 }
                 else
                 {
                     playerInfo.curPlayerHealth = 0;
+                    
                 }
             }
 
@@ -483,6 +487,26 @@ namespace ShrugWare
         public void SetBoss(Boss boss)
         {
             curBoss = boss;
+        }
+
+        public void AddLives(int amount)
+        {
+            playerInfo.livesLeft += amount;
+        }
+
+        public void AddToMicrogameTimeBonus(float amount)
+        {
+            microgameTimeBonus += amount;
+        }
+
+        public void ResetMicrogameTimeBonus()
+        {
+            microgameTimeBonus = 0;
+        }
+
+        public void ResetLivesBonus()
+        {
+            playerInfo.livesLeft = DataManager.PLAYER_STARTING_LIVES_BOSSENCOUNTER;
         }
     }
 }
