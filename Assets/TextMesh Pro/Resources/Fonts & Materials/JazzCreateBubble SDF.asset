@@ -1186,6 +1186,21 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
+  - m_Index: 6
+    m_Metrics:
+      m_Width: 33.015625
+      m_Height: 41.234375
+      m_HorizontalBearingX: 2.4375
+      m_HorizontalBearingY: 49.6875
+      m_HorizontalAdvance: 37.625
+    m_GlyphRect:
+      m_X: 131
+      m_Y: 677
+      m_Width: 34
+      m_Height: 42
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
   m_CharacterTable:
   - m_ElementType: 1
     m_Unicode: 95
@@ -1462,6 +1477,10 @@ MonoBehaviour:
   - m_ElementType: 1
     m_Unicode: 74
     m_GlyphIndex: 45
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 35
+    m_GlyphIndex: 6
     m_Scale: 1
   m_AtlasTextures:
   - {fileID: 1307333345602048604}
@@ -1741,6 +1760,10 @@ MonoBehaviour:
     m_Y: 603
     m_Width: 55
     m_Height: 64
+  - m_X: 121
+    m_Y: 667
+    m_Width: 53
+    m_Height: 61
   m_FreeGlyphRects:
   - m_X: 48
     m_Y: 0
@@ -1902,10 +1925,6 @@ MonoBehaviour:
     m_Y: 932
     m_Width: 43
     m_Height: 12
-  - m_X: 156
-    m_Y: 540
-    m_Width: 867
-    m_Height: 202
   - m_X: 64
     m_Y: 742
     m_Width: 50
@@ -1954,14 +1973,6 @@ MonoBehaviour:
     m_Y: 920
     m_Width: 908
     m_Height: 12
-  - m_X: 171
-    m_Y: 540
-    m_Width: 852
-    m_Height: 323
-  - m_X: 173
-    m_Y: 540
-    m_Width: 850
-    m_Height: 483
   - m_X: 131
     m_Y: 805
     m_Width: 892
@@ -1974,18 +1985,34 @@ MonoBehaviour:
     m_Y: 603
     m_Width: 3
     m_Height: 25
+  - m_X: 156
+    m_Y: 540
+    m_Width: 867
+    m_Height: 127
+  - m_X: 171
+    m_Y: 728
+    m_Width: 852
+    m_Height: 135
+  - m_X: 173
+    m_Y: 728
+    m_Width: 850
+    m_Height: 295
+  - m_X: 174
+    m_Y: 540
+    m_Width: 849
+    m_Height: 483
   - m_X: 96
     m_Y: 667
-    m_Width: 927
+    m_Width: 25
     m_Height: 10
   - m_X: 121
-    m_Y: 667
+    m_Y: 728
     m_Width: 902
-    m_Height: 75
+    m_Height: 14
   - m_X: 151
     m_Y: 603
     m_Width: 872
-    m_Height: 139
+    m_Height: 64
   m_fontInfo:
     Name: 
     PointSize: 0

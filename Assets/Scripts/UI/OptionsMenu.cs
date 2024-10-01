@@ -28,12 +28,15 @@ namespace ShrugWare
 
         bool casualMode = false;
 
+        private AudioManager audioManager;
+
         // our audio manager is created by now
         private void Start()
         {
-            if (AudioManager.Instance != null)
+            audioManager = AudioManager.Instance;
+            if (audioManager  != null)
             {
-                audioVolumeSlider.value = AudioManager.Instance.GetAudioVolume();
+                audioVolumeSlider.value = audioManager.GetAudioVolume();
             }
 
             audioVolumeText.text = "Audio Volume: " + audioVolumeSlider.value.ToString();
@@ -41,7 +44,7 @@ namespace ShrugWare
 
         private void OnEnable()
         {
-            if(BossGameManager.Instance == null && OverworldManager.Instance == null
+            if (BossGameManager.Instance == null && OverworldManager.Instance == null
                 || (BossGameManager.Instance != null && BossGameManager.Instance.GetGameState() != BossGameManager.GameState.Inactive)
                 || (InfiniteModeManager.Instance != null && InfiniteModeManager.Instance.GetGameState() != InfiniteModeManager.GameState.Inactive))
             {
@@ -75,9 +78,9 @@ namespace ShrugWare
         {
             audioVolumeText.text = "Audio Volume: " + audioVolumeSlider.value.ToString();
 
-            if (AudioManager.Instance = null)
+            if (audioManager != null)
             {
-                AudioManager.Instance.SetAudioVolume(audioVolumeSlider.value);
+                audioManager.SetAudioVolume(audioVolumeSlider.value);
             }
         }
 
