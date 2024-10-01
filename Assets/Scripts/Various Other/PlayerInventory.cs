@@ -13,6 +13,7 @@ namespace ShrugWare
 
         private float curMitigationPercent = 0.0f;
         private float moveSpeedBonus = 0.0f;
+        private float maxHealthBonus = 0.0f;
 
         public PlayerInventory()
         {
@@ -96,11 +97,17 @@ namespace ShrugWare
             livesEffect.effectType = DataManager.StatModifierType.Lives;
             livesEffect.asPercentage = false;
 
+            DataManager.StatEffect incomingDamageEffect;
+            incomingDamageEffect.amount = 25;
+            incomingDamageEffect.effectType = DataManager.StatModifierType.IncomingDamage;
+            incomingDamageEffect.asPercentage = true;
+
             ArmorItem accessory = new ArmorItem(DataManager.ArmorSlot.Accessory, DataManager.ArmorSet.DauntingInferno);
             accessory.itemName = "Accessory";
             accessory.templateId = (int)DataManager.ItemTemplateIds.Accessory;
             accessory.AddEffect(microgameTimeEffect);
             accessory.AddEffect(livesEffect);
+            accessory.AddEffect(incomingDamageEffect);
 
             inventoryItems.Add(accessory.templateId, accessory);
         }
@@ -164,15 +171,14 @@ namespace ShrugWare
 
         public void RecalculateStats()
         {
-            if(BossGameManager.Instance == null)
+            if(BossGameManager.Instance != null)
             {
-                return;
+                BossGameManager.Instance.ResetPlayerRaidMaxHP();
+                BossGameManager.Instance.ResetMicrogameTimeBonus();
+                BossGameManager.Instance.ResetLivesBonus();
             }
 
             curMitigationPercent = 0;
-            BossGameManager.Instance.ResetPlayerRaidMaxHP();
-            BossGameManager.Instance.ResetMicrogameTimeBonus();
-            BossGameManager.Instance.ResetLivesBonus();
 
             if (HasSetBonus())
             {
@@ -188,9 +194,13 @@ namespace ShrugWare
                         }
                         else if (effect.effectType == DataManager.StatModifierType.PlayerMaxHealth)
                         {
-                            int effectAmount = (int)(BossGameManager.Instance.GetPlayerInfo().maxPlayerHealth * (effect.amount / 100.0f));
-                            BossGameManager.Instance.AddToPlayerRaidMaxHP(effectAmount);
-                            BossGameManager.Instance.HealPlayerRaid(effectAmount);
+                            maxHealthBonus += effect.amount;
+                            if (BossGameManager.Instance != null)
+                            {
+                                float effectAmount = (BossGameManager.Instance.GetPlayerInfo().maxPlayerHealth * (effect.amount / 100.0f));
+                                BossGameManager.Instance.AddToPlayerRaidMaxHP((int)effectAmount);
+                                BossGameManager.Instance.HealPlayerRaid((int)effectAmount);
+                            }
                         }
                     }
                 }
@@ -220,9 +230,12 @@ namespace ShrugWare
                 }
             }
 
-            BossGameManager.Instance.AddToMicrogameTimeBonus(microgameTimeBonus);
-            BossGameManager.Instance.AddLives(extraLives);
-            BossGameManager.Instance.UpdateGameUI();
+            if (BossGameManager.Instance != null)
+            {
+                BossGameManager.Instance.AddToMicrogameTimeBonus(microgameTimeBonus);
+                BossGameManager.Instance.AddLives(extraLives);
+                BossGameManager.Instance.UpdateGameUI();
+            }
         }
 
         public void AddCurrency(DataManager.Currencies currency, int amount)
@@ -280,7 +293,6 @@ namespace ShrugWare
 
             return usedConsumable;
         }
-
 
         public float GetMitigation() 
         {

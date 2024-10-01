@@ -74,6 +74,8 @@ namespace ShrugWare
         private bool hasSpawnedTopIndicator = false;
         private bool hasSpawnedBottomIndicator = false;
 
+        private float mitigation = 0.0f;
+
         private float timeInGame = 0.0f;
         private const float PLAYER_SPEED = 50.0f;
 
@@ -120,6 +122,12 @@ namespace ShrugWare
             for (int i = 0; i < 10; ++i)
             {
                 SpawnFireball(FromDirection.FromRight);
+            }
+
+            if (OverworldManager.Instance != null)
+            {
+                OverworldManager.Instance.PlayerInventory.RecalculateStats();
+                mitigation = OverworldManager.Instance.PlayerInventory.GetMitigation();
             }
 
             SpawnCollectible();
@@ -365,12 +373,6 @@ namespace ShrugWare
             if (Time.time > invulnExpireTime)
             {
                 invulnExpireTime = Time.time + INVULN_DURATION;
-            }
-
-            float mitigation = 0;
-            if (OverworldManager.Instance != null)
-            {
-                mitigation = OverworldManager.Instance.PlayerInventory.GetMitigation();
             }
 
             // maybe damage the player

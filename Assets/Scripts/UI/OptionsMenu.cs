@@ -20,14 +20,23 @@ namespace ShrugWare
         [SerializeField]
         TextMeshProUGUI restrictionText;
 
+        [SerializeField]
+        GameObject addItemPopup;
+
+        [SerializeField]
+        GameObject removeItemPopup;
+
         bool casualMode = false;
+
+        private AudioManager audioManager;
 
         // our audio manager is created by now
         private void Start()
         {
-            if (AudioManager.Instance != null)
+            audioManager = AudioManager.Instance;
+            if (audioManager  != null)
             {
-                audioVolumeSlider.value = AudioManager.Instance.GetAudioVolume();
+                audioVolumeSlider.value = audioManager.GetAudioVolume();
             }
 
             audioVolumeText.text = "Audio Volume: " + audioVolumeSlider.value.ToString();
@@ -35,7 +44,7 @@ namespace ShrugWare
 
         private void OnEnable()
         {
-            if(BossGameManager.Instance == null && OverworldManager.Instance == null
+            if (BossGameManager.Instance == null && OverworldManager.Instance == null
                 || (BossGameManager.Instance != null && BossGameManager.Instance.GetGameState() != BossGameManager.GameState.Inactive)
                 || (InfiniteModeManager.Instance != null && InfiniteModeManager.Instance.GetGameState() != InfiniteModeManager.GameState.Inactive))
             {
@@ -69,9 +78,9 @@ namespace ShrugWare
         {
             audioVolumeText.text = "Audio Volume: " + audioVolumeSlider.value.ToString();
 
-            if (AudioManager.Instance = null)
+            if (audioManager != null)
             {
-                AudioManager.Instance.SetAudioVolume(audioVolumeSlider.value);
+                audioManager.SetAudioVolume(audioVolumeSlider.value);
             }
         }
 
@@ -85,18 +94,33 @@ namespace ShrugWare
             this.gameObject.SetActive(false);
         }
 
-        // do we want to make this only changeable outside of a boss fight? maybe
         // give an item for casual mode that adds buffs
-        public void ChangeDifficulty()
+        public void OnChangeDifficultyToggled()
         {
+            casualMode = !casualMode;
+            if (casualMode)
+            {
+                addItemPopup.SetActive(true);
+                removeItemPopup.SetActive(false);
+            }
+            else
+            {
+                addItemPopup.SetActive(false);
+                removeItemPopup.SetActive(true);
+            }
+        }
+
+        public void OnItemPopupContinuePressed()
+        {
+            addItemPopup.SetActive(false);
+            removeItemPopup.SetActive(false);
             if (OverworldManager.Instance != null)
             {
-                casualMode = !casualMode;
                 OverworldManager.Instance.PlayerInventory.DifficultyChanged(casualMode);
             }
         }
 
-        public bool GetDifficulty()
+        public bool GetIsCasualMode()
         {
             return casualMode;
         }

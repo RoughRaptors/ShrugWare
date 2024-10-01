@@ -240,7 +240,11 @@ namespace ShrugWare
             UpdateGameUI();
             HandleFromMicrogameTransition();
             bossUIManager.SetBossUICanvasEnabled(true);
-            LoadScene((int)OverworldManager.Instance.CurLevel.SceneIDToLoad);
+
+            if (OverworldManager.Instance != null)
+            {
+                LoadScene((int)OverworldManager.Instance.CurLevel.SceneIDToLoad);
+            }
         }
 
         private void HandleFromMicrogameTransition()
