@@ -58,7 +58,9 @@ namespace ShrugWare
             Timescale,
             OutgoingDamage,
             IncomingDamage,
-            PlayerMoveSpeed
+            PlayerMoveSpeed,
+            MicrogameTime,
+            Lives
         }
 
         [System.Serializable]
@@ -75,6 +77,20 @@ namespace ShrugWare
             Consumable
         }
 
+        public enum ItemTemplateIds
+        {
+            HealthPotion = 0,
+            MaxHealthPotion,
+            Helm,
+            Chest,
+            Gloves,
+            Legs,
+            Boots,
+            RunSpeedPotion,
+            Accessory,
+            MAX = 8
+        }
+
         public enum Currencies
         {
             Gold = 0,
@@ -89,7 +105,8 @@ namespace ShrugWare
             Gloves,
             Legs,
             Boots,
-            MAX = 4
+            Accessory,
+            MAX = 5
         }
 
         public enum ArmorSet

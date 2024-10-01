@@ -113,7 +113,7 @@ namespace ShrugWare
 
             ConsumableItem healthPotion = new ConsumableItem();
             healthPotion.itemName = "Health Potion";
-            healthPotion.templateId = 0;
+            healthPotion.templateId = (int)DataManager.ItemTemplateIds.HealthPotion;
             healthPotion.AddEffect(healPlayerEffect);
 
             ItemForSale healthPotionItem;
@@ -135,7 +135,7 @@ namespace ShrugWare
 
             ConsumableItem maxHealthPotion = new ConsumableItem();
             maxHealthPotion.itemName = "Increase Max Health Potion";
-            maxHealthPotion.templateId = 1;
+            maxHealthPotion.templateId = (int)DataManager.ItemTemplateIds.MaxHealthPotion;
             maxHealthPotion.AddEffect(maxHPEffect);
 
             ItemForSale maxHealthPotionItem;
@@ -157,7 +157,7 @@ namespace ShrugWare
 
             ConsumableItem moveSpeedPotion = new ConsumableItem();
             moveSpeedPotion.itemName = "Move Speed Potion";
-            moveSpeedPotion.templateId = 7;
+            moveSpeedPotion.templateId = (int)DataManager.ItemTemplateIds.RunSpeedPotion;
             moveSpeedPotion.AddEffect(runSpeedEffect);
 
             ItemForSale moveSpeedPotionItem;
@@ -174,7 +174,7 @@ namespace ShrugWare
             // helmet
             ArmorItem diHelm = new ArmorItem(DataManager.ArmorSlot.Head, DataManager.ArmorSet.DauntingInferno);
             diHelm.itemName = "Helm";
-            diHelm.templateId = 2;
+            diHelm.templateId = (int)DataManager.ItemTemplateIds.Helm;
             diHelm.AddEffect(damageReductionEffect);
 
             ItemForSale diHelmItem;
@@ -200,7 +200,7 @@ namespace ShrugWare
         {
             ArmorItem diChest = new ArmorItem(DataManager.ArmorSlot.Chest, DataManager.ArmorSet.DauntingInferno);
             diChest.itemName = "Chest";
-            diChest.templateId = 3;
+            diChest.templateId = (int)DataManager.ItemTemplateIds.Chest;
             diChest.AddEffect(damageReductionEffect);
 
             ItemForSale diChestItem;
@@ -225,7 +225,7 @@ namespace ShrugWare
         {
             ArmorItem diGloves = new ArmorItem(DataManager.ArmorSlot.Gloves, DataManager.ArmorSet.DauntingInferno);
             diGloves.itemName = "Gloves";
-            diGloves.templateId = 4;
+            diGloves.templateId = (int)DataManager.ItemTemplateIds.Gloves;
             diGloves.AddEffect(damageReductionEffect);
 
             ItemForSale diGlovesItem;
@@ -251,7 +251,7 @@ namespace ShrugWare
         {
             ArmorItem diLegs = new ArmorItem(DataManager.ArmorSlot.Legs, DataManager.ArmorSet.DauntingInferno);
             diLegs.itemName = "Legs";
-            diLegs.templateId = 5;
+            diLegs.templateId = (int)DataManager.ItemTemplateIds.Legs;
             diLegs.AddEffect(damageReductionEffect);
 
             ItemForSale diLegsItem;
@@ -277,7 +277,7 @@ namespace ShrugWare
         {
             ArmorItem diBoots = new ArmorItem(DataManager.ArmorSlot.Boots, DataManager.ArmorSet.DauntingInferno);
             diBoots.itemName = "Boots";
-            diBoots.templateId = 6;
+            diBoots.templateId = (int)DataManager.ItemTemplateIds.Boots;
             diBoots.AddEffect(damageReductionEffect);
 
             ItemForSale diBootsItem;

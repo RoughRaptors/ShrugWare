@@ -68,6 +68,7 @@ public class InfiniteModeManager : MonoBehaviour
     }
 
     private GameState gameState = GameState.Inactive;
+    public GameState GetGameState() { return gameState; }
 
     private void Awake()
     {

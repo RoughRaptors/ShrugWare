@@ -31,6 +31,19 @@ namespace ShrugWare
             }
 
             infoText.text += curHP.ToString() + " / " + maxHP.ToString();
+
+            if(isPlayer)
+            {
+                if (BossGameManager.Instance.GetPlayerInfo().livesLeft < 0)
+                {
+                    infoText.text += "   Raid wipe";
+                }
+                else
+                {
+                    infoText.text += "   Lives: " + BossGameManager.Instance.GetPlayerInfo().livesLeft;
+                }
+            }
+
             GetComponent<Slider>().value = curHP / maxHP;
         }
     }

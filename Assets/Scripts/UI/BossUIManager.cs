@@ -12,13 +12,10 @@ namespace ShrugWare
         InputField timeScaleInputField = null;
 
         [SerializeField]
-        Text betweenMicrogameText = null;
+        TextMeshProUGUI infoText = null;
 
         [SerializeField]
         Button continueGameButton = null;
-
-        [SerializeField]
-        Text gameInfoText = null;
         
         [SerializeField]
         GameObject mainUICanvas = null;
@@ -68,7 +65,7 @@ namespace ShrugWare
         void Start()
         {
             gameOver = false;
-            betweenMicrogameText.enabled = false;
+            infoText.enabled = false;
             timeScaleInputField.text = "Time Scale: " + BossGameManager.Instance.GetCurTimeScale().ToString("F3");
             UpdateConsumableInfo();
         }
@@ -79,17 +76,17 @@ namespace ShrugWare
 
             if (!gameOver)
             {
-                betweenMicrogameText.enabled = true;
-                betweenMicrogameText.text = "Next Level In: " + timeLeft.ToString("F2") + "s\n";
+                infoText.enabled = true;
+                infoText.text = "Next Level In: " + timeLeft.ToString("F2") + "s\n";
             }
             else
             {
-                betweenMicrogameText.text = "";
+                infoText.text = "";
             }
 
             if (BossGameManager.Instance.GetPreviouslyRanEffects().Count > 0)
             {
-                betweenMicrogameText.text += BossGameManager.Instance.GetPreviousEffectInfoString();
+                infoText.text += BossGameManager.Instance.GetPreviousEffectInfoString();
             }
 
             if (countdownTimerRunning)
@@ -149,11 +146,11 @@ namespace ShrugWare
 
         public void OnContinueGameButtonClicked()
         {
-            betweenMicrogameText.enabled = true;
+            infoText.enabled = true;
             continueGameButton.gameObject.SetActive(false);
             playerHealthBar.gameObject.SetActive(false);
             bossHealthBar.gameObject.SetActive(false);
-            gameInfoText.gameObject.SetActive(false);
+            //betweenMicrogameText.gameObject.SetActive(false);
             countdownTimerRunning = true;
 
             // we died or killed the boss, go back instead
@@ -191,9 +188,9 @@ namespace ShrugWare
             healthPotionItem.gameObject.SetActive(false);
             maxHealthPotionItem.gameObject.SetActive(false);
             moveSpeedPotionItem.gameObject.SetActive(false);
-            gameInfoText.gameObject.SetActive(true);
-            gameInfoText.text = "You beat the boss!\nReceived  " + lootAmount + " DKP";
-            gameInfoText.enabled = true;
+            infoText.gameObject.SetActive(true);
+            infoText.text = "You beat the boss!\nReceived  " + lootAmount + " DKP";
+            infoText.enabled = true;
             continueGameButton.GetComponentInChildren<Text>().text = "Back to Overworld";
             continueGameButton.gameObject.SetActive(true);
         }
@@ -204,10 +201,10 @@ namespace ShrugWare
             healthPotionItem.gameObject.SetActive(false);
             maxHealthPotionItem.gameObject.SetActive(false);
             moveSpeedPotionItem.gameObject.SetActive(false);
-            betweenMicrogameText.enabled = false;
-            gameInfoText.gameObject.SetActive(true);
-            gameInfoText.text = "Game Over! \n 50 DKP MINUS!";
+            infoText.gameObject.SetActive(true);
+            infoText.text = "Game Over! \n 50 DKP MINUS!";
             continueGameButton.GetComponentInChildren<Text>().text = "Back To Overworld";
+            infoText.enabled = true;
             continueGameButton.gameObject.SetActive(true);
         }
 

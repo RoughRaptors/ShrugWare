@@ -42,14 +42,19 @@ namespace ShrugWare
 
         protected virtual void Start()
         {
+            microGameTime = DataManager.MICROGAME_DURATION_SECONDS;
+
             // will be null if individually loading scenes
             if (BossGameManager.Instance)
             {
                 BossGameManager.Instance.SetGameState(BossGameManager.GameState.InMicrogame);
                 Time.timeScale = BossGameManager.Instance.GetCurTimeScale();
-            }
 
-            microGameTime = DataManager.MICROGAME_DURATION_SECONDS;
+                if (BossGameManager.Instance.GetMicrogameTimeBonus() > 0)
+                {
+                    microGameTime *= BossGameManager.Instance.GetMicrogameTimeBonus();
+                }
+            }
 
             SetEffects();
             StartCoroutine(PlayMicrogame());
