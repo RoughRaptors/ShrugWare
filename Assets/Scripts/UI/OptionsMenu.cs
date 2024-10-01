@@ -20,6 +20,12 @@ namespace ShrugWare
         [SerializeField]
         TextMeshProUGUI restrictionText;
 
+        [SerializeField]
+        GameObject addItemPopup;
+
+        [SerializeField]
+        GameObject removeItemPopup;
+
         bool casualMode = false;
 
         // our audio manager is created by now
@@ -85,18 +91,33 @@ namespace ShrugWare
             this.gameObject.SetActive(false);
         }
 
-        // do we want to make this only changeable outside of a boss fight? maybe
         // give an item for casual mode that adds buffs
-        public void ChangeDifficulty()
+        public void OnChangeDifficultyToggled()
         {
+            casualMode = !casualMode;
+            if (casualMode)
+            {
+                addItemPopup.SetActive(true);
+                removeItemPopup.SetActive(false);
+            }
+            else
+            {
+                addItemPopup.SetActive(false);
+                removeItemPopup.SetActive(true);
+            }
+        }
+
+        public void OnItemPopupContinuePressed()
+        {
+            addItemPopup.SetActive(false);
+            removeItemPopup.SetActive(false);
             if (OverworldManager.Instance != null)
             {
-                casualMode = !casualMode;
                 OverworldManager.Instance.PlayerInventory.DifficultyChanged(casualMode);
             }
         }
 
-        public bool GetDifficulty()
+        public bool GetIsCasualMode()
         {
             return casualMode;
         }

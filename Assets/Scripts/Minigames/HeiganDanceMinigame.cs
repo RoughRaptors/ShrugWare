@@ -67,6 +67,8 @@ namespace ShrugWare
         private float laserInvulnExpireTime = 0.0f;
         private const float LASER_INVULN_DURATION = 0.85f;
 
+        private float mitigation = 0.0f;
+
         private void Awake()
         {
             continueButton.SetActive(false);
@@ -90,9 +92,15 @@ namespace ShrugWare
             gameRunning = true;
             statusText.text = "HP: " + healthRemaining.ToString("F2");
 
+            if (OverworldManager.Instance != null)
+            {
+                OverworldManager.Instance.PlayerInventory.RecalculateStats();
+                mitigation = OverworldManager.Instance.PlayerInventory.GetMitigation();
+            }
+
             // just start everything as green
             // then randomly pick tiles to change
-            foreach(GameObject tileObj in tileObjs)
+            foreach (GameObject tileObj in tileObjs)
             {
                 MakeTileGreen(tileObj);
                 greenTiles.Add(tileObj);
@@ -235,12 +243,6 @@ namespace ShrugWare
 
         private void DamagePlayer(GameObject collideObj)
         {
-            float mitigation = 0;
-            if (OverworldManager.Instance != null)
-            {
-                mitigation = OverworldManager.Instance.PlayerInventory.GetMitigation();
-            }
-
             float damageTaken = 0.0f;
             bool invuln = laserInvulnExpireTime > Time.time;
             if (collideObj.tag == "Laser")
