@@ -29,6 +29,14 @@ namespace ShrugWare
                         {
                             tooltipMessage += statEffect.effectDescriptionString + "\n";
                         }
+
+                        if(armorItem.GetSetBonuses().Count > 0)
+                        {
+                            foreach(DataManager.StatEffect statEffect in armorItem.GetSetBonuses())
+                            {
+                                tooltipMessage += statEffect.effectDescriptionString + "\n";
+                            }
+                        }
                     }
                 }
                 else if(templateId != -1)
