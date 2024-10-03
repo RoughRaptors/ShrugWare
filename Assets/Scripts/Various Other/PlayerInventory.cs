@@ -45,6 +45,7 @@ namespace ShrugWare
             healPlayerEffect.amount = 25;
             healPlayerEffect.effectType = DataManager.StatModifierType.PlayerCurHealth;
             healPlayerEffect.asPercentage = true;
+            healPlayerEffect.effectDescriptionString = healPlayerEffect.amount.ToString() + "% Heal";
 
             ConsumableItem healthPotionItem = new ConsumableItem();
             healthPotionItem.itemName = "Health Potion";
@@ -61,6 +62,7 @@ namespace ShrugWare
             maxHPEffect.amount = 10;
             maxHPEffect.effectType = DataManager.StatModifierType.PlayerMaxHealth;
             maxHPEffect.asPercentage = true;
+            maxHPEffect.effectDescriptionString = maxHPEffect.amount.ToString() + "% Max Health";
 
             ConsumableItem maxHealthPotionItem = new ConsumableItem();
             maxHealthPotionItem.itemName = "Increase Max Health Potion";
@@ -77,6 +79,7 @@ namespace ShrugWare
             moveSpeedEffect.amount = 15;
             moveSpeedEffect.effectType = DataManager.StatModifierType.PlayerMoveSpeed;
             moveSpeedEffect.asPercentage = true;
+            moveSpeedEffect.effectDescriptionString = moveSpeedEffect.amount.ToString() + "% Move Speed";
 
             ConsumableItem moveSpeedPotionItem = new ConsumableItem();
             moveSpeedPotionItem.itemName = "Move Speed Potion";
@@ -92,16 +95,19 @@ namespace ShrugWare
             microgameTimeEffect.amount = 1.20f;
             microgameTimeEffect.effectType = DataManager.StatModifierType.MicrogameTime;
             microgameTimeEffect.asPercentage = true;
+            microgameTimeEffect.effectDescriptionString = "";
 
             DataManager.StatEffect livesEffect;
             livesEffect.amount = 1;
             livesEffect.effectType = DataManager.StatModifierType.Lives;
             livesEffect.asPercentage = false;
+            livesEffect.effectDescriptionString = "";
 
             DataManager.StatEffect incomingDamageEffect;
             incomingDamageEffect.amount = 25;
             incomingDamageEffect.effectType = DataManager.StatModifierType.IncomingDamage;
             incomingDamageEffect.asPercentage = true;
+            incomingDamageEffect.effectDescriptionString = "";
 
             ArmorItem accessory = new ArmorItem(DataManager.ArmorSlot.Accessory, DataManager.ArmorSet.DauntingInferno);
             accessory.itemName = "Skull of the Noob";
