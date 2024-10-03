@@ -133,7 +133,7 @@ namespace ShrugWare
         private void Start()
         {
             // set fps so players don't have varying speeds
-            Application.targetFrameRate = 60;            
+            Application.targetFrameRate = 60;
 
             ReadyScene(true);
 
@@ -160,16 +160,12 @@ namespace ShrugWare
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (optionsMenu.isActiveAndEnabled)
-                {
-                    RevertTimescale();
-                    optionsMenu.gameObject.SetActive(false);
-                }
-                else
-                {
-                    Time.timeScale = 0.0f;
-                    optionsMenu.gameObject.SetActive(true);
-                }
+                SetupOptionsVisibility();
+            }
+
+            if(Input.GetKeyDown(KeyCode.I))
+            {
+                OnGearScreenPressed();
             }
         }
 
@@ -204,6 +200,7 @@ namespace ShrugWare
 
             if (enabled)
             {
+                EnablePlayerObject();
                 EnableCamera();
                 EnableEventSystem();
                 OverworldUIManager.Instance.SetCanvasEnabled(true);
@@ -231,6 +228,7 @@ namespace ShrugWare
                     StopMusic();
                 }
 
+                DisablePlayerObject();
                 DisableCamera();
                 DisableEventSystem();
                 //DisableAudioListener();
@@ -558,6 +556,43 @@ namespace ShrugWare
             {
                 Time.timeScale = 1.0f;
             }
+        }
+
+        private void EnablePlayerObject()
+        {
+            playerObj.SetActive(true);
+        }
+
+        private void DisablePlayerObject()
+        {
+            playerObj.SetActive(false);
+        }
+
+        public void OnGearScreenPressed()
+        {
+            OverworldUIManager.Instance.SetCanvasEnabled(false);
+            ReadyScene(false);
+
+            SceneManager.LoadScene((int)DataManager.Scenes.GearScreen, LoadSceneMode.Additive);
+        }
+
+        public void SetupOptionsVisibility()
+        {
+            if (optionsMenu.isActiveAndEnabled)
+            {
+                RevertTimescale();
+                optionsMenu.gameObject.SetActive(false);
+            }
+            else
+            {
+                Time.timeScale = 0.0f;
+                optionsMenu.gameObject.SetActive(true);
+            }
+        }
+
+        public void OnOptionsScreenPressed()
+        {
+            SetupOptionsVisibility();
         }
     }
 }

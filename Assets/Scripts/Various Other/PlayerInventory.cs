@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ShrugWare
 {
@@ -103,7 +104,7 @@ namespace ShrugWare
             incomingDamageEffect.asPercentage = true;
 
             ArmorItem accessory = new ArmorItem(DataManager.ArmorSlot.Accessory, DataManager.ArmorSet.DauntingInferno);
-            accessory.itemName = "Accessory";
+            accessory.itemName = "Skull of the Noob";
             accessory.templateId = (int)DataManager.ItemTemplateIds.Accessory;
             accessory.AddEffect(microgameTimeEffect);
             accessory.AddEffect(livesEffect);
@@ -344,6 +345,14 @@ namespace ShrugWare
         {
             Item item = null;
             inventoryItems.TryGetValue(templateId, out item);
+
+            return item;
+        }
+
+        public ArmorItem GetEquippedItem(DataManager.ArmorSlot slot)
+        {
+            ArmorItem item = null;
+            equippedArmor.TryGetValue(slot, out item);
 
             return item;
         }

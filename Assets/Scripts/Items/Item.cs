@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ShrugWare
 {
@@ -17,6 +18,8 @@ namespace ShrugWare
         public List<DataManager.StatEffect> GetEffects() { return effects; }
 
         public GameObject itemObj;
+
+        public RawImage itemImage { get; set; }
 
         public void AddEffect(DataManager.StatEffect effect)
         {
