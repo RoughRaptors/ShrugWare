@@ -80,8 +80,8 @@ namespace ShrugWare
         private const float PLAYER_SPEED = 50.0f;
 
         // float so we can take partial damage via damage mitigation
-        private const float START_HEALTH = 5;
-        private float healthRemaining = 5;
+        private const float START_HEALTH = 100;
+        private float healthRemaining = 100;
         private bool gameRunning = false;
 
         private const int TOP_PATTERN_SPAWN_TIME = 7;
@@ -376,7 +376,7 @@ namespace ShrugWare
             }
 
             // maybe damage the player
-            float damageTaken = 1.0f - (mitigation / 100);
+            float damageTaken = 20.0f - (mitigation / 100);
             if (!invuln)
             {
                 healthRemaining -= damageTaken;

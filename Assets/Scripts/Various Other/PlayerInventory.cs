@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ShrugWare
 {
@@ -344,6 +345,14 @@ namespace ShrugWare
         {
             Item item = null;
             inventoryItems.TryGetValue(templateId, out item);
+
+            return item;
+        }
+
+        public ArmorItem GetEquippedItem(DataManager.ArmorSlot slot)
+        {
+            ArmorItem item = null;
+            equippedArmor.TryGetValue(slot, out item);
 
             return item;
         }

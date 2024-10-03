@@ -122,6 +122,8 @@ namespace ShrugWare
             healthPotionItem.price = 250;
             healthPotionItem.item.itemObj = healthPotionObj;
 
+            healthPotion.itemImage = healthPotionObj.GetComponentInChildren<RawImage>();
+
             itemsForSale.Add(healthPotion.templateId, healthPotionItem);
         }
 
@@ -143,6 +145,8 @@ namespace ShrugWare
             maxHealthPotionItem.currency = DataManager.Currencies.Gold;
             maxHealthPotionItem.price = 250;
             maxHealthPotionItem.item.itemObj = maxHealthPotionObj;
+
+            maxHealthPotion.itemImage = maxHealthPotionObj.GetComponentInChildren<RawImage>();
 
             itemsForSale.Add(maxHealthPotion.templateId, maxHealthPotionItem);
         }
@@ -166,6 +170,8 @@ namespace ShrugWare
             moveSpeedPotionItem.price = 500;
             moveSpeedPotionItem.item.itemObj = moveSpeedPotionObj;
 
+            moveSpeedPotion.itemImage = moveSpeedPotionObj.GetComponentInChildren<RawImage>();
+
             itemsForSale.Add(moveSpeedPotion.templateId, moveSpeedPotionItem);
         }
 
@@ -183,6 +189,8 @@ namespace ShrugWare
             diHelmItem.price = 1000;
             diHelm.itemObj = helmObj;
 
+            diHelm.itemImage = helmObj.GetComponentInChildren<RawImage>();
+
             if (OverworldManager.Instance != null)
             {
                 if (!OverworldManager.Instance.PlayerInventory.HasArmor(diHelm.templateId))
@@ -191,7 +199,7 @@ namespace ShrugWare
                 }
                 else
                 {
-                    bootsObj.SetActive(false);
+                    helmObj.SetActive(false);
                 }
             }
         }
@@ -208,6 +216,8 @@ namespace ShrugWare
             diChestItem.currency = DataManager.Currencies.DKP;
             diChestItem.price = 1000;
             diChest.itemObj = chestObj;
+
+            diChest.itemImage = chestObj.GetComponentInChildren<RawImage>();
 
             if (OverworldManager.Instance != null)
             {
@@ -233,6 +243,8 @@ namespace ShrugWare
             diGlovesItem.currency = DataManager.Currencies.DKP;
             diGlovesItem.price = 1000;
             diGloves.itemObj = glovesObj;
+
+            diGloves.itemImage = glovesObj.GetComponentInChildren<RawImage>();
 
             if (OverworldManager.Instance != null)
             {
@@ -260,6 +272,8 @@ namespace ShrugWare
             diLegsItem.price = 1000;
             diLegs.itemObj = legsObj;
 
+            diLegs.itemImage = legsObj.GetComponentInChildren<RawImage>();
+
             if (OverworldManager.Instance != null)
             {
                 if (!OverworldManager.Instance.PlayerInventory.HasArmor(diLegs.templateId))
@@ -286,7 +300,9 @@ namespace ShrugWare
             diBootsItem.price = 1000;
             diBoots.itemObj = bootsObj;
 
-            if(OverworldManager.Instance != null)
+            diBoots.itemImage = bootsObj.GetComponentInChildren<RawImage>();
+
+            if (OverworldManager.Instance != null)
             {
                 if (!OverworldManager.Instance.PlayerInventory.HasArmor(diBoots.templateId))
                 {

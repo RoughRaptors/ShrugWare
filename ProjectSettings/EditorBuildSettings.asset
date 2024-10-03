@@ -36,6 +36,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Minigames/Daunting Inferno/HeiganDanceMinigame.unity
     guid: cf80239e292d0364ca10bbbc33dbae6d
   - enabled: 1
+    path: Assets/Scenes/GearScreenScene.unity
+    guid: da6dbe6cee47f1a4eaf8bb577b0e7143
+  - enabled: 1
     path: Assets/Scenes/Microgames/Daunting Inferno/GetOutOfFireScene.unity
     guid: e2ad56e2653a17b449b892aaaf7dde53
   - enabled: 1

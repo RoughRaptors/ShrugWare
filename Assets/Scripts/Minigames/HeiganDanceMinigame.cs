@@ -48,7 +48,8 @@ namespace ShrugWare
         private float totalTimeInGame = 0.0f;
 
         // float so we can take partial damage via damage mitigation
-        private const float START_HEALTH = 5;
+        private const float START_HEALTH = 100;
+        private float healthRemaining = 100;
 
         private const float COLLECTIBLE_SPAWN_DISTANCE = 30;
         private const int COLLECTIBLE_DAMAGE = 10;
@@ -61,7 +62,6 @@ namespace ShrugWare
         private List<GameObject> yellowTiles = new List<GameObject>();
         private List<GameObject> redTiles = new List<GameObject>();
 
-        private float healthRemaining = 5;
         private bool gameRunning = false;
 
         private float laserInvulnExpireTime = 0.0f;
@@ -255,7 +255,7 @@ namespace ShrugWare
 
                 if (!invuln)
                 {
-                    damageTaken = 1.0f;
+                    damageTaken = 20.0f;
                     FlashColor();
                 }
 
@@ -284,7 +284,7 @@ namespace ShrugWare
                 // this ticks damage so make it dependent on time in the bad area
                 if (!invuln)
                 {
-                    damageTaken = (1.0f - (mitigation / 100)) * Time.fixedDeltaTime;
+                    damageTaken = (20.0f - (mitigation / 100)) * Time.fixedDeltaTime;
                 }
             }
 
