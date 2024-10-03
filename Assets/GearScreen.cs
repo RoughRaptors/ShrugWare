@@ -36,6 +36,9 @@ namespace ShrugWare
         [SerializeField]
         private GameObject runSpeedPotionObj;
 
+        [SerializeField]
+        private GameObject accessoryObj;
+
         private float startTime;
 
         private PlayerInventory inventory;
@@ -74,6 +77,7 @@ namespace ShrugWare
                 HandleGlovesSlot();
                 HandleLegsSlot();
                 HandleBootsSlot();
+                HandleAccessorySlot();
 
                 HandleHealthPotionSlot();
                 HandleMaxHealthPotionSlot();
@@ -230,6 +234,21 @@ namespace ShrugWare
             }
 
             runSpeedPotionObj.GetComponentInChildren<RawImage>().color = runSpeedPotionColor;
+        }
+
+        private void HandleAccessorySlot()
+        {
+            Item acessoryItem = inventory.GetEquippedItem(DataManager.ArmorSlot.Accessory);
+            if(acessoryItem != null)
+            {
+                accessoryObj.SetActive(true);
+                accessoryObj.GetComponentInChildren<TextMeshProUGUI>().text = acessoryItem.itemName
+                    + "\nBoss Fights:\n    +1 lives\n    +20% microgame time\nMinigames:\n    +25% damage mitigation";
+            }
+            else
+            {
+                accessoryObj.SetActive(false);
+            }
         }
 
         private void ExitScene()

@@ -104,7 +104,7 @@ namespace ShrugWare
             incomingDamageEffect.asPercentage = true;
 
             ArmorItem accessory = new ArmorItem(DataManager.ArmorSlot.Accessory, DataManager.ArmorSet.DauntingInferno);
-            accessory.itemName = "Accessory";
+            accessory.itemName = "Skull of the Noob";
             accessory.templateId = (int)DataManager.ItemTemplateIds.Accessory;
             accessory.AddEffect(microgameTimeEffect);
             accessory.AddEffect(livesEffect);
