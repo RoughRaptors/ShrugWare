@@ -29,7 +29,7 @@ namespace ShrugWare
                 maxHPEffect.amount = 10;
                 maxHPEffect.effectType = DataManager.StatModifierType.PlayerMaxHealth;
                 maxHPEffect.asPercentage = true;
-                maxHPEffect.effectDescriptionString = "+10% Bonus Health";
+                maxHPEffect.effectDescriptionString = "\n\n5 Piece Set Bonus:\n+10% Bonus Health";
 
                 setBonuses.Add(maxHPEffect);
             }
