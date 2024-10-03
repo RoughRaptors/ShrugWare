@@ -91,6 +91,7 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\CastFrostboltMicrogame.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonGlow.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMover.cs" />
+    <Compile Include="Assets\Tooltip.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\ColoredPlatforms.cs" />
     <Compile Include="Assets\Scripts\Minigames\Minigame.cs" />
     <Compile Include="Assets\Art\Fire\Scripts\OscillateLightBrightness.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StackPowerstones.cs" />
     <Compile Include="Assets\GearScreen.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\LineOfSight.cs" />
+    <Compile Include="Assets\TooltipManager.cs" />
     <Compile Include="Assets\Art\KY_effects\Script\Lighting.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csShowAllEffect.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csAnimationSpin.cs" />

@@ -70,6 +70,7 @@ namespace ShrugWare
             public StatModifierType effectType;
             public float amount;
             public bool asPercentage;
+            public string effectDescriptionString;
         }
 
         public enum ItemType
@@ -107,7 +108,8 @@ namespace ShrugWare
             Legs,
             Boots,
             Accessory,
-            MAX = 5
+            MAX = 5,
+            NONE,
         }
 
         public enum ArmorSet

@@ -69,19 +69,22 @@ namespace ShrugWare
 
         private void SetupScreen()
         {
-            inventory = OverworldManager.Instance.PlayerInventory;
-            if (inventory != null)
+            if (OverworldManager.Instance != null)
             {
-                HandleHelmetSlot();
-                HandleChestSlot();
-                HandleGlovesSlot();
-                HandleLegsSlot();
-                HandleBootsSlot();
-                HandleAccessorySlot();
+                inventory = OverworldManager.Instance.PlayerInventory;
+                if (inventory != null)
+                {
+                    HandleHelmetSlot();
+                    HandleChestSlot();
+                    HandleGlovesSlot();
+                    HandleLegsSlot();
+                    HandleBootsSlot();
+                    HandleAccessorySlot();
 
-                HandleHealthPotionSlot();
-                HandleMaxHealthPotionSlot();
-                HandleRunSpeedPotionSlot();
+                    HandleHealthPotionSlot();
+                    HandleMaxHealthPotionSlot();
+                    HandleRunSpeedPotionSlot();
+                }
             }
         }
 

@@ -95,6 +95,7 @@ namespace ShrugWare
             damageReductionEffect.amount = 10;
             damageReductionEffect.effectType = DataManager.StatModifierType.IncomingDamage;
             damageReductionEffect.asPercentage = true;
+            damageReductionEffect.effectDescriptionString = damageReductionEffect.amount.ToString() + "% Damage Mitigation";
 
             CreateHelmet(damageReductionEffect);
             CreateChest(damageReductionEffect);
@@ -110,6 +111,7 @@ namespace ShrugWare
             healPlayerEffect.amount = 25;
             healPlayerEffect.effectType = DataManager.StatModifierType.PlayerCurHealth;
             healPlayerEffect.asPercentage = true;
+            healPlayerEffect.effectDescriptionString = healPlayerEffect.amount.ToString() + "% Heal";
 
             ConsumableItem healthPotion = new ConsumableItem();
             healthPotion.itemName = "Health Potion";
@@ -134,6 +136,7 @@ namespace ShrugWare
             maxHPEffect.amount = 10;
             maxHPEffect.effectType = DataManager.StatModifierType.PlayerMaxHealth;
             maxHPEffect.asPercentage = true;
+            maxHPEffect.effectDescriptionString = maxHPEffect.amount.ToString() + "% Max Health";
 
             ConsumableItem maxHealthPotion = new ConsumableItem();
             maxHealthPotion.itemName = "Increase Max Health Potion";
@@ -158,6 +161,7 @@ namespace ShrugWare
             runSpeedEffect.amount = 15;
             runSpeedEffect.effectType = DataManager.StatModifierType.PlayerMoveSpeed;
             runSpeedEffect.asPercentage = true;
+            runSpeedEffect.effectDescriptionString = runSpeedEffect.amount.ToString() + "% Move Speed";
 
             ConsumableItem moveSpeedPotion = new ConsumableItem();
             moveSpeedPotion.itemName = "Move Speed Potion";
