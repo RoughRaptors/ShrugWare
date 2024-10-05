@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEditor;
 using UnityEngine.EventSystems;
+using System.Diagnostics.Tracing;
 
 namespace ShrugWare
 {
@@ -104,6 +105,21 @@ namespace ShrugWare
         private const float PLAYER_X_OFFSET = 1.0f;
         private const float PLAYER_Y_OFFSET = 0.6f;
 
+        public enum OverworldGameState
+        {
+            None = 0,
+            Overworld,
+            TrashEncounter,
+            BossFight,
+            InfiniteMode,
+            GearScreen,
+            Tutorial,
+            Merchant
+        }
+
+        private OverworldGameState gameState = OverworldGameState.None;
+        public OverworldGameState GetOverworldGameState() { return gameState; }
+
         private void Awake()
         {
             audioManager = AudioManager.Instance;
@@ -200,6 +216,8 @@ namespace ShrugWare
 
             if (enabled)
             {
+                gameState = OverworldGameState.Overworld;
+
                 EnablePlayerObject();
                 EnableCamera();
                 EnableEventSystem();
@@ -447,6 +465,8 @@ namespace ShrugWare
                 audioManager.StopAudio();
             }
 
+            SetGameState(level.LevelType);
+
             OverworldUIManager.Instance.SetCanvasEnabled(false);
             ReadyScene(false);
             SceneManager.LoadScene((int)level.SceneIDToLoad, LoadSceneMode.Additive);
@@ -573,6 +593,7 @@ namespace ShrugWare
             OverworldUIManager.Instance.SetCanvasEnabled(false);
             ReadyScene(false);
 
+            gameState = OverworldGameState.GearScreen;
             SceneManager.LoadScene((int)DataManager.Scenes.GearScreen, LoadSceneMode.Additive);
         }
 
@@ -593,6 +614,30 @@ namespace ShrugWare
         public void OnOptionsScreenPressed()
         {
             SetupOptionsVisibility();
+        }
+
+        private void SetGameState(DataManager.OverworldLevelType levelType)
+        {
+            if (levelType == DataManager.OverworldLevelType.Trash)
+            {
+                gameState = OverworldGameState.TrashEncounter;
+            }
+            else if (levelType == DataManager.OverworldLevelType.Boss)
+            {
+                gameState = OverworldGameState.BossFight;
+            }
+            else if (levelType == DataManager.OverworldLevelType.Infinite)
+            {
+                gameState = OverworldGameState.InfiniteMode;
+            }
+            else if (levelType == DataManager.OverworldLevelType.Tutorial)
+            {
+                gameState = OverworldGameState.Tutorial;
+            }
+            else if (levelType == DataManager.OverworldLevelType.Merchant)
+            {
+                gameState = OverworldGameState.Merchant;
+            }
         }
     }
 }

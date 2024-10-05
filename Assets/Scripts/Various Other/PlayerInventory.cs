@@ -92,7 +92,7 @@ namespace ShrugWare
         private void CreateAccessory()
         {
             DataManager.StatEffect microgameTimeEffect;
-            microgameTimeEffect.amount = 1.20f;
+            microgameTimeEffect.amount = 20;
             microgameTimeEffect.effectType = DataManager.StatModifierType.MicrogameTime;
             microgameTimeEffect.asPercentage = true;
             microgameTimeEffect.effectDescriptionString = "";
@@ -291,7 +291,11 @@ namespace ShrugWare
                             // inventoryItems.Remove(consumableItem.templateId);
                         }
 
-                        AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.UsePotion, 0.4f);
+                        if (AudioManager.Instance != null)
+                        {
+                            AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.UsePotion, 0.4f);
+                        }
+
                         BossUIManager.Instance.UpdateConsumableInfo();
                         BossGameManager.Instance.UpdateGameUI();
                     }

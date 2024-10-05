@@ -124,6 +124,7 @@ namespace ShrugWare
             BossScreen, // the top level of the boss loop hierarchy - in between games
             Paused,
             InMicrogame,
+            WaitingToLoad
         }
 
         private GameState gameState = GameState.Inactive;
@@ -207,7 +208,8 @@ namespace ShrugWare
                     DataManager.Scenes nextScene = curBoss.PickNextMicrogame();
                     bossUIManager.SetBossUICanvasEnabled(false);
                     EnableBossCamera(false);
-                    curBossObj.SetActive(false);
+                    //curBossObj.SetActive(false);
+
                     StartCoroutine(LoadLevel((int)nextScene));
                 }
             }
@@ -251,7 +253,7 @@ namespace ShrugWare
         {
             gameState = GameState.BossScreen;
             EnableBossCamera(true);
-            curBossObj.SetActive(true);
+            //curBossObj.SetActive(true);
 
             if (!(curBoss is null))
             {
@@ -274,7 +276,7 @@ namespace ShrugWare
                 int lootAmount = 1500;
                 OverworldManager.Instance.PlayerInventory.AddCurrency(lootCurrency, lootAmount);
 
-                curBossObj.SetActive(false);
+                //curBossObj.SetActive(false);
                 SetTimescale(1);
                 bossUIManager.HandleBeatBoss(lootCurrency, lootAmount);
             }
@@ -351,7 +353,6 @@ namespace ShrugWare
         {
             float totalAmount = amount;// * 5;
             float mitigationModifier = 0;
-            if(OverworldManager.Instance) playerInventory.GetMitigation();
             if(mitigationModifier > 0)
             {
                 totalAmount = totalAmount * (mitigationModifier / 100);

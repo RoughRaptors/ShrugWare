@@ -44,9 +44,17 @@ namespace ShrugWare
 
         private void OnEnable()
         {
-            if (BossGameManager.Instance == null && OverworldManager.Instance == null
-                || (BossGameManager.Instance != null && BossGameManager.Instance.GetGameState() != BossGameManager.GameState.Inactive)
-                || (InfiniteModeManager.Instance != null && InfiniteModeManager.Instance.GetGameState() != InfiniteModeManager.GameState.Inactive))
+            bool validOverworldState = false;
+            if (OverworldManager.Instance != null)
+            {
+                if(OverworldManager.Instance.GetOverworldGameState() != OverworldManager.OverworldGameState.TrashEncounter
+                    && OverworldManager.Instance.GetOverworldGameState() != OverworldManager.OverworldGameState.InfiniteMode)
+                {
+                    validOverworldState = true;
+                }
+            }
+
+            if (!validOverworldState || BossGameManager.Instance != null)
             {
                 ColorBlock cb = difficultyToggle.colors;
                 cb.normalColor = Color.grey;
