@@ -92,16 +92,6 @@ namespace ShrugWare
             }
         }
 
-        public void OnExitButtonPressed()
-        {
-            if (OverworldManager.Instance != null)
-            {
-                OverworldManager.Instance.UnpauseGame();
-            }
-            
-            this.gameObject.SetActive(false);
-        }
-
         // give an item for casual mode that adds buffs
         public void OnChangeDifficultyToggled()
         {

@@ -62,9 +62,10 @@ public class InfiniteModeManager : MonoBehaviour
     public enum GameState
     {
         Inactive, // if we're not in a game
-        BossScreen, // the top level of the boss loop hierarchy - in between games
-        Paused,
+        MainScreen,
+        Waiting,
         InMicrogame,
+        Paused,
     }
 
     private GameState gameState = GameState.Inactive;
@@ -107,11 +108,10 @@ public class InfiniteModeManager : MonoBehaviour
             timeToNextMicrogameText.gameObject.SetActive(false);
             SetTimescale(1);
             livesLeftText.text = "Lives Left: " + livesLeft.ToString() + "\nTimescale: " + curTimeScale.ToString();
-            gameState = GameState.BossScreen;
             PopulateMechanicsList();
         }
 
-        gameState = GameState.BossScreen;
+        gameState = GameState.MainScreen;
         EnableCamera();
 
         sceneTransitionAnim.speed = 0.0f;
@@ -121,7 +121,7 @@ public class InfiniteModeManager : MonoBehaviour
     {
         // we will come back here whenever we load back from a microgame to the main scene
         // we need to keep playing, which means to pick and start a new microgame from our raid and boss if we're not dead
-        if (gameState == GameState.BossScreen)
+        if (gameState == GameState.MainScreen || gameState == GameState.Waiting)
         {            
             if(started && livesLeft >= 0)
             {
@@ -159,7 +159,7 @@ public class InfiniteModeManager : MonoBehaviour
         startButton.gameObject.SetActive(false);
         if (livesLeft >= 0)
         {
-            gameState = GameState.BossScreen;
+            gameState = GameState.Waiting;
             timeToNextMicrogameText.gameObject.SetActive(true);
 
             PlayBetweenMicrogameTimerDing();
@@ -231,7 +231,7 @@ public class InfiniteModeManager : MonoBehaviour
 
     public void MicrogameCompleted(bool won)
     {
-        gameState = GameState.BossScreen;
+        gameState = GameState.MainScreen;
         
         scoreText.gameObject.SetActive(true);
         livesLeftText.gameObject.SetActive(true);
@@ -250,7 +250,11 @@ public class InfiniteModeManager : MonoBehaviour
 
         if(livesLeft >= 0)
         {
-            audioManager.PlayAudioClip(DataManager.AudioEffectTypes.BetweenMicrogame, .3f);
+            if (audioManager != null)
+            {
+                audioManager.PlayAudioClip(DataManager.AudioEffectTypes.BetweenMicrogame, .3f);
+            }
+
             AddToTimeScale(0.1f);
         }
         else
@@ -263,6 +267,7 @@ public class InfiniteModeManager : MonoBehaviour
 
     private void HandleDied()
     {
+        gameState = GameState.MainScreen;
         timeToNextMicrogameText.gameObject.SetActive(false);
         started = false;
         score = 0;
