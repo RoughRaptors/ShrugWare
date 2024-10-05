@@ -255,7 +255,9 @@ namespace ShrugWare
 
                 if (!invuln)
                 {
-                    damageTaken = 20.0f;
+                    float baseDamage = 20.0f;
+                    float damageReduction = baseDamage * (mitigation / 100);
+                    damageTaken = baseDamage - damageReduction;
                     FlashColor();
                 }
 
@@ -284,7 +286,7 @@ namespace ShrugWare
                 // this ticks damage so make it dependent on time in the bad area
                 if (!invuln)
                 {
-                    damageTaken = (20.0f - (mitigation / 100)) * Time.fixedDeltaTime;
+                    damageTaken = (10.0f - (mitigation / 100)) * Time.fixedDeltaTime;
                 }
             }
 

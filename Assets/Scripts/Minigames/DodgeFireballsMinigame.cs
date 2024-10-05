@@ -376,10 +376,15 @@ namespace ShrugWare
             }
 
             // maybe damage the player
-            float damageTaken = 20.0f - (mitigation / 100);
-            if (!invuln)
+            float baseDamage = 20.0f;
+            float damageReduction = baseDamage * (mitigation / 100);
+            float damageTaken = baseDamage - damageReduction;
+            if (damageTaken > 0)
             {
-                healthRemaining -= damageTaken;
+                if (!invuln)
+                {
+                    healthRemaining -= damageTaken;
+                }
             }
 
             playerHealthText.text = "Player Health: " + healthRemaining.ToString();

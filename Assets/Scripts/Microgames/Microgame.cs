@@ -52,7 +52,8 @@ namespace ShrugWare
 
                 if (BossGameManager.Instance.GetMicrogameTimeBonus() > 0)
                 {
-                    microGameTime *= BossGameManager.Instance.GetMicrogameTimeBonus();
+                    float microgameTimeBonus = microGameTime * (BossGameManager.Instance.GetMicrogameTimeBonus() / 100);
+                    microGameTime += microgameTimeBonus;
                 }
             }
 

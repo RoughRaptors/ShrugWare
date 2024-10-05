@@ -135,7 +135,6 @@ namespace ShrugWare
         {
             Start = 0,
             Tutorial,
-            End,
             Merchant,
             Trash,
             Boss,

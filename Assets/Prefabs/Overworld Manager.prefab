@@ -257,9 +257,11 @@ MonoBehaviour:
   - effectType: 3
     amount: 0.05
     asPercentage: 0
+    effectDescriptionString: 
   - effectType: 1
     amount: -25
     asPercentage: 1
+    effectDescriptionString: 
 --- !u!1 &1310679168
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,6 +486,7 @@ MonoBehaviour:
   - effectType: 1
     amount: 25
     asPercentage: 1
+    effectDescriptionString: 
 --- !u!1 &1862538125
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,7 +1497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelID: 7
-  levelType: 6
+  levelType: 5
   sceneIDToLoad: 4
   levelIDsToUnlock: 
   outgoingLevelConnections: []
@@ -2021,7 +2024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelID: 6
-  levelType: 5
+  levelType: 4
   sceneIDToLoad: 6
   levelIDsToUnlock: 
   outgoingLevelConnections: []
@@ -3499,7 +3502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelID: 5
-  levelType: 4
+  levelType: 3
   sceneIDToLoad: 9
   levelIDsToUnlock: 06000000
   outgoingLevelConnections:
@@ -3759,7 +3762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelID: 4
-  levelType: 5
+  levelType: 4
   sceneIDToLoad: 5
   levelIDsToUnlock: 05000000
   outgoingLevelConnections:
@@ -3926,7 +3929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelID: 3
-  levelType: 4
+  levelType: 3
   sceneIDToLoad: 7
   levelIDsToUnlock: 04000000
   outgoingLevelConnections:
@@ -5798,7 +5801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelID: 2
-  levelType: 3
+  levelType: 2
   sceneIDToLoad: 3
   levelIDsToUnlock: 
   outgoingLevelConnections: []
@@ -6372,6 +6375,26 @@ PrefabInstance:
     - target: {fileID: 1279443735981390518, guid: ef49f3c0a4ff59c489db715b2a67ee04, type: 3}
       propertyPath: m_Name
       value: Options Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2649163845720963596, guid: ef49f3c0a4ff59c489db715b2a67ee04, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2649163845720963596, guid: ef49f3c0a4ff59c489db715b2a67ee04, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2649163845720963596, guid: ef49f3c0a4ff59c489db715b2a67ee04, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2649163845755252212, guid: ef49f3c0a4ff59c489db715b2a67ee04, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2649163845755252212, guid: ef49f3c0a4ff59c489db715b2a67ee04, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7835168330232023518, guid: ef49f3c0a4ff59c489db715b2a67ee04, type: 3}
       propertyPath: m_LocalPosition.x
