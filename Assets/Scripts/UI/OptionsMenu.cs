@@ -78,7 +78,7 @@ namespace ShrugWare
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                this.gameObject.SetActive(false);
+                OnExitButtonPressed();
             }
         }
 
@@ -121,6 +121,16 @@ namespace ShrugWare
         public bool GetIsCasualMode()
         {
             return casualMode;
+        }
+
+        public void OnExitButtonPressed()
+        {
+            this.gameObject.SetActive(false);
+
+            if (OverworldManager.Instance != null)
+            {
+                OverworldManager.Instance.RevertTimescale();
+            }
         }
     }
 }
