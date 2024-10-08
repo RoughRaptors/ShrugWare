@@ -134,6 +134,16 @@ namespace ShrugWare
             {
                 Destroy(gameObject);
 
+                /*
+                GameObject managerObj = GameObject.FindWithTag("Manager");
+                if(managerObj != null)
+                {
+
+                }
+                */
+
+                gameState = Instance.gameState;
+                optionsMenu = Instance.optionsMenu;
                 audioListenerObj = Instance.audioListenerObj;
                 eventSystemObj = Instance.eventSystemObj;
                 overworldMap = Instance.overworldMap;
@@ -150,8 +160,6 @@ namespace ShrugWare
         {
             // set fps so players don't have varying speeds
             Application.targetFrameRate = 60;
-
-            ReadyScene(true);
 
             if (playerInventory == null)
             {
@@ -218,10 +226,13 @@ namespace ShrugWare
             {
                 gameState = OverworldGameState.Overworld;
 
+                // hack. how do we fix this? Instance is different from this for some reason and it's not taking the change
+                OverworldManager.Instance.gameState = OverworldGameState.Overworld;
+
                 EnablePlayerObject();
                 EnableCamera();
                 EnableEventSystem();
-                OverworldUIManager.Instance.SetCanvasEnabled(true);
+                overworldUIManager.SetCanvasEnabled(true);
                 //EnableAudioListener();
 
                 // move player to cur level (this will be null on start)
@@ -638,6 +649,11 @@ namespace ShrugWare
             {
                 gameState = OverworldGameState.Merchant;
             }
+        }
+
+        public OptionsMenu GetOptionsMenu()
+        {
+            return optionsMenu;
         }
     }
 }

@@ -40,6 +40,11 @@ public class InfiniteModeManager : MonoBehaviour
     [SerializeField]
     Image sceneTransitionRightImage;
 
+    [SerializeField]
+    GameObject backButtonObj;
+
+    private OptionsMenu optionsMenu;
+
     public List<Sprite> GetMicrogameBackgrounds() { return microgameBackgrounds; }
 
     private AudioManager audioManager;
@@ -47,7 +52,7 @@ public class InfiniteModeManager : MonoBehaviour
 
     public List<AudioClip> GetMicrogameMusic() { return microgameMusic; }
 
-    private const int STARTING_LIVES = 3;
+    private const int STARTING_LIVES = 0;
     private int score = 0;
     private int livesLeft = STARTING_LIVES;
     private bool started = false;
@@ -77,8 +82,12 @@ public class InfiniteModeManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            
-            audioManager = OverworldManager.Instance.AudioManager;
+            backButtonObj.SetActive(true);
+
+            if (AudioManager.Instance != null)
+            {
+                audioManager = OverworldManager.Instance.AudioManager;
+            }
         }
         else if (Instance != this)
         {
@@ -98,6 +107,8 @@ public class InfiniteModeManager : MonoBehaviour
         // on first go around of this, it'll be inactive
         if (gameState == GameState.Inactive)
         {
+            optionsMenu = OverworldManager.Instance.GetOptionsMenu();
+            UnequipAccessory();
             timeToNextMicrogameText.gameObject.SetActive(false);
             startButton.enabled = true;
             startButton.gameObject.SetActive(true);
@@ -109,6 +120,10 @@ public class InfiniteModeManager : MonoBehaviour
             SetTimescale(1);
             livesLeftText.text = "Lives Left: " + livesLeft.ToString() + "\nTimescale: " + curTimeScale.ToString();
             PopulateMechanicsList();
+        }
+        else
+        {
+            startButton.gameObject.SetActive(false);
         }
 
         gameState = GameState.MainScreen;
@@ -161,6 +176,7 @@ public class InfiniteModeManager : MonoBehaviour
         {
             gameState = GameState.Waiting;
             timeToNextMicrogameText.gameObject.SetActive(true);
+            backButtonObj.SetActive(false);
 
             PlayBetweenMicrogameTimerDing();
             Invoke("PlayBetweenMicrogameTimerDing", 1.5f);
@@ -170,18 +186,16 @@ public class InfiniteModeManager : MonoBehaviour
         else
         {
             // we're dead, back out
-            timeToNextMicrogameText.gameObject.SetActive(false);
-            scoreText.gameObject.SetActive(false);
-            livesLeftText.gameObject.SetActive(false);
-            livesLeft = STARTING_LIVES;
-            score = 0;
-            SetTimescale(1);
-            started = false;
-            gameState = GameState.Inactive;
-            OverworldManager.Instance.ReadyScene(true);
-            SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
-            Destroy(this);
+            OnBackPressed();
         }
+    }
+
+    public void OnBackPressed()
+    {
+        TryEquipAccessory();
+        SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
+        Destroy(gameObject);
+        Instance = null;
     }
 
     private void PickNextMicrogame()
@@ -268,9 +282,10 @@ public class InfiniteModeManager : MonoBehaviour
     private void HandleDied()
     {
         gameState = GameState.MainScreen;
+        backButtonObj.SetActive(true);
         timeToNextMicrogameText.gameObject.SetActive(false);
         started = false;
-        score = 0;
+        //score = 0;
         livesLeftText.text = "You Died";
         startButton.gameObject.SetActive(true);
         startButton.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Back to overworld";
@@ -307,5 +322,35 @@ public class InfiniteModeManager : MonoBehaviour
     public void DisableCamera()
     {
         cameraObj.enabled = false;
+    }
+
+    private void UnequipAccessory()
+    {
+        if (OverworldManager.Instance != null)
+        {
+            PlayerInventory inventory = OverworldManager.Instance.PlayerInventory;
+            if (inventory != null)
+            {
+                inventory.UnequipArmorSlot(DataManager.ArmorSlot.Accessory);
+            }
+        }
+    }
+
+    private void TryEquipAccessory()
+    {
+        // only equip if casual mode is toggled
+        if (!optionsMenu.GetIsCasualMode())
+        {
+            return;
+        }
+
+        if (OverworldManager.Instance != null)
+        {
+            PlayerInventory inventory = OverworldManager.Instance.PlayerInventory;
+            if (inventory != null)
+            {
+                inventory.EquipItemInArmorSlot((int)DataManager.ItemTemplateIds.Accessory, DataManager.ArmorSlot.Accessory);
+            }
+        }
     }
 }
