@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 namespace ShrugWare
 {
@@ -156,23 +157,41 @@ namespace ShrugWare
             }
         }
 
+        public void EquipItemInArmorSlot(int itemTemplateId, DataManager.ArmorSlot slot)
+        {
+            Item item = GetInventoryItem(itemTemplateId);
+            if (item != null)
+            {
+                if (equippedArmor.ContainsKey(slot) && equippedArmor[slot] == null)
+                {
+                    equippedArmor[slot] = item as ArmorItem;
+                    inventoryItems.Remove(item.templateId);
+                }
+
+                RecalculateStats();
+            }
+        }
+
         public void UnequipArmorSlot(DataManager.ArmorSlot slot)
         {
             ArmorItem itemToUnequip = null;
-            if(equippedArmor.TryGetValue(slot, out itemToUnequip))
+            if (equippedArmor.TryGetValue(slot, out itemToUnequip))
             {
-                // if we already have the item in our inventory, increase the quantity, otherwise add it
-                if(inventoryItems.ContainsKey(itemToUnequip.templateId))
+                if (itemToUnequip != null)
                 {
-                    ++inventoryItems[itemToUnequip.templateId].itemQuantity;
-                }
-                else
-                {
-                    inventoryItems.Add(itemToUnequip.templateId, itemToUnequip);
-                }
+                    // if we already have the item in our inventory, increase the quantity, otherwise add it
+                    if (inventoryItems.ContainsKey(itemToUnequip.templateId))
+                    {
+                        ++inventoryItems[itemToUnequip.templateId].itemQuantity;
+                    }
+                    else
+                    {
+                        inventoryItems.Add(itemToUnequip.templateId, itemToUnequip);
+                    }
 
-                equippedArmor[slot] = null;
-                RecalculateStats();
+                    equippedArmor[slot] = null;
+                    RecalculateStats();
+                }
             }
         }
 
