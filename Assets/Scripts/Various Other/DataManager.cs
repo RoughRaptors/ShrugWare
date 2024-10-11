@@ -138,7 +138,8 @@ namespace ShrugWare
             Merchant,
             Trash,
             Boss,
-            Infinite
+            Infinite,
+            GearScreen
         }
 
         public static float MICROGAME_DURATION_SECONDS = 3.75f; // we can override this in the child Microgame's Start() - microGameTime
