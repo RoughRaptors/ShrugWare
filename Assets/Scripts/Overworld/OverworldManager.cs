@@ -127,20 +127,10 @@ namespace ShrugWare
             {
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
-
-                PlayOverworldMusic();
             }
             else if (Instance != this)
             {
                 Destroy(gameObject);
-
-                /*
-                GameObject managerObj = GameObject.FindWithTag("Manager");
-                if(managerObj != null)
-                {
-
-                }
-                */
 
                 gameState = Instance.gameState;
                 optionsMenu = Instance.optionsMenu;
@@ -150,6 +140,11 @@ namespace ShrugWare
                 curLevel = Instance.curLevel;
                 playerObj = Instance.playerObj;
                 playerObj.SetActive(true);
+            }
+
+            if (!audioManager.IsMusicPlaying())
+            {
+                PlayOverworldMusic();
             }
 
             overworldUIManager.UpdateUI();
@@ -252,7 +247,8 @@ namespace ShrugWare
             else
             {
                 // don't stop the music because we won't be starting any new music here (yet at least)
-                if (curLevel.LevelType != DataManager.OverworldLevelType.Tutorial && curLevel.LevelType != DataManager.OverworldLevelType.Merchant)
+                if (curLevel.LevelType != DataManager.OverworldLevelType.Tutorial && curLevel.LevelType != DataManager.OverworldLevelType.Merchant
+                    && gameState != OverworldGameState.GearScreen)
                 {
                     StopMusic();
                 }
@@ -487,7 +483,7 @@ namespace ShrugWare
         {
             if (audioManager != null)
             {
-                audioManager.PlayMusicClip(DataManager.AudioEffectTypes.Overworld, .25f);
+                audioManager.PlayMusicClip(DataManager.AudioEffectTypes.Overworld, 0.75f);
             }
         }
 
@@ -602,9 +598,9 @@ namespace ShrugWare
         public void OnGearScreenPressed()
         {
             OverworldUIManager.Instance.SetCanvasEnabled(false);
+            gameState = OverworldGameState.GearScreen;
             ReadyScene(false);
 
-            gameState = OverworldGameState.GearScreen;
             SceneManager.LoadScene((int)DataManager.Scenes.GearScreen, LoadSceneMode.Additive);
         }
 
@@ -648,6 +644,10 @@ namespace ShrugWare
             else if (levelType == DataManager.OverworldLevelType.Merchant)
             {
                 gameState = OverworldGameState.Merchant;
+            }
+            else if (levelType == DataManager.OverworldLevelType.GearScreen)
+            {
+                gameState = OverworldGameState.GearScreen;
             }
         }
 

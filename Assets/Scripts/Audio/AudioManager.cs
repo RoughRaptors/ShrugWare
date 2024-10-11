@@ -40,6 +40,8 @@ namespace ShrugWare
             {
                 audioSourceEffects = gameObject.AddComponent<AudioSource>();
             }
+
+            audioSourceMusic.loop = true;
         }
 
         private AudioClip GetAudioClip(DataManager.AudioEffectTypes audioEffectType)
@@ -75,7 +77,7 @@ namespace ShrugWare
                     // lower the significance of the audio timescale increase
                     if (audioEffectType == DataManager.AudioEffectTypes.BetweenMicrogame)
                     {
-                        audioSourceMusic.pitch = BossGameManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE ;
+                        audioSourceMusic.pitch = BossGameManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE;
                         audioSourceEffects.pitch = BossGameManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE;
                     }
                 }
@@ -120,18 +122,21 @@ namespace ShrugWare
             }
         }
 
-        public void PlayMusicClip(DataManager.AudioEffectTypes audioType, float volumeScale)
+        public void PlayMusicClip(DataManager.AudioEffectTypes audioType, float volumeScale = 1)
         {
             PlayMusicClipSetupHelper(audioType);
             AudioClip audioClip = GetAudioClip(audioType);
-            audioSourceMusic.PlayOneShot(audioClip, volumeScale);
+            audioSourceMusic.volume *= volumeScale;
+            audioSourceMusic.clip = audioClip;
+            audioSourceMusic.Play();
         }
 
         public void PlayMusicClip(AudioClip audioClip, DataManager.AudioEffectTypes audioType, float volumeScale = 1)
         {
             PlayMusicClipSetupHelper(audioType);
-            audioSourceMusic.Stop();
-            audioSourceMusic.PlayOneShot(audioClip, volumeScale);
+            audioSourceMusic.volume *= volumeScale;
+            audioSourceMusic.clip = audioClip;
+            audioSourceMusic.Play();
         }
 
         public void StopAudio()
@@ -174,6 +179,11 @@ namespace ShrugWare
             audioVolume = newAudioVolume;
             audioSourceMusic.volume = audioVolume / 100;
             audioSourceEffects.volume = audioVolume / 100;
+        }
+
+        public bool IsMusicPlaying()
+        {
+            return audioSourceMusic.isPlaying;
         }
     }
 }
