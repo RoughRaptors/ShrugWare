@@ -255,7 +255,7 @@ namespace ShrugWare
 
                 if (!invuln)
                 {
-                    float baseDamage = 20.0f;
+                    float baseDamage = 25.0f;
                     float damageReduction = baseDamage * (mitigation / 100);
                     damageTaken = baseDamage - damageReduction;
                     FlashColor();

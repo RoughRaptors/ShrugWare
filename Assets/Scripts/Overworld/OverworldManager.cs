@@ -142,7 +142,7 @@ namespace ShrugWare
                 playerObj.SetActive(true);
             }
 
-            if (!audioManager.IsMusicPlaying())
+            if (audioManager != null && !audioManager.IsMusicPlaying())
             {
                 PlayOverworldMusic();
             }

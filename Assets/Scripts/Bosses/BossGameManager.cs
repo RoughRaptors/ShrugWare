@@ -398,7 +398,7 @@ namespace ShrugWare
             if (!(curBoss is null))
             {
 #if UNITY_EDITOR
-                //amount = CurBoss.curHealth;
+                amount = CurBoss.curHealth;
 #endif
                 curBoss.TakeDamage(amount);
             }
