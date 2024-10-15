@@ -72,6 +72,11 @@ namespace ShrugWare
 
         public void UpdateBetweenMicrogameText()
         {
+            if(BossGameManager.Instance.CurBoss.isDead)
+            {
+                return;
+            }
+
             float timeLeft = DataManager.SECONDS_BETWEEN_MICROGAMES - BossGameManager.Instance.GetTimeInBossScene();
 
             if (!gameOver)
@@ -219,10 +224,9 @@ namespace ShrugWare
             maxHealthPotionItem.GetComponentInChildren<TextMeshProUGUI>().text = "";
             moveSpeedPotionItem.GetComponentInChildren<TextMeshProUGUI>().text = "";
 
-            // bad, remove hard coding and make data driven
-            Item healthPotion = OverworldManager.Instance.PlayerInventory.GetInventoryItem(0);
-            Item maxHealthPotion = OverworldManager.Instance.PlayerInventory.GetInventoryItem(1);
-            Item moveSpeedPotion = OverworldManager.Instance.PlayerInventory.GetInventoryItem(7);
+            Item healthPotion = OverworldManager.Instance.PlayerInventory.GetInventoryItem((int)DataManager.ItemTemplateIds.HealthPotion);
+            Item maxHealthPotion = OverworldManager.Instance.PlayerInventory.GetInventoryItem((int)DataManager.ItemTemplateIds.MaxHealthPotion);
+            Item moveSpeedPotion = OverworldManager.Instance.PlayerInventory.GetInventoryItem((int)DataManager.ItemTemplateIds.RunSpeedPotion);
             if (healthPotion != null)
             {
                 healthPotionItem.GetComponentInChildren<TextMeshProUGUI>().text += "Health Potion\n+25% Heal\nQuantity: " + healthPotion.itemQuantity;

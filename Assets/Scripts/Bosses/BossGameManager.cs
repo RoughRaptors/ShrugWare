@@ -77,6 +77,15 @@ namespace ShrugWare
         Image sceneTransitionRightImage;
 
         [SerializeField]
+        Image sceneTransitionControlSprite;
+
+        [SerializeField]
+        Sprite wasdSprite;
+
+        [SerializeField]
+        Sprite mouseClickSprite;
+
+        [SerializeField]
         GameObject curBossObj;
 
         private float curTimeScale = 1.0f;
@@ -153,6 +162,7 @@ namespace ShrugWare
                 Destroy(gameObject);
             }
 
+            audioManager.LoopMusic(false);
             EnableBossCamera(true);
 
             curBoss = Instance.curBoss;
@@ -226,10 +236,12 @@ namespace ShrugWare
             // only play a transition if it's a microgame
             if (sceneId >= (int)DataManager.Scenes.MICROGAME_START && sceneId <= (int)DataManager.Scenes.MICROGAME_END)
             {
+                float secondsToWait = 1.0f;
                 sceneTransitionAnim.SetTrigger("End");
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(secondsToWait);
                 SceneManager.LoadScene(sceneId, LoadSceneMode.Additive);
                 sceneTransitionAnim.SetTrigger("Start");
+                Invoke("DisableControlSchemeImage", secondsToWait);
             }
             else
             {
@@ -512,6 +524,26 @@ namespace ShrugWare
         public void ResetLivesBonus()
         {
             playerInfo.livesLeft = DataManager.PLAYER_STARTING_LIVES_BOSSENCOUNTER;
+        }
+
+        public void SetTransitionControlImage(bool enabled, bool isWASD)
+        {
+            sceneTransitionControlSprite.enabled = enabled;
+            sceneTransitionControlSprite.gameObject.SetActive(true);
+            if(isWASD)
+            {
+                sceneTransitionControlSprite.sprite = wasdSprite;
+            }
+            else
+            {
+                sceneTransitionControlSprite.sprite = mouseClickSprite;
+            }
+        }
+
+        private void DisableControlSchemeImage()
+        {
+            sceneTransitionControlSprite.gameObject.SetActive(false);
+            sceneTransitionControlSprite.enabled = false;
         }
     }
 }

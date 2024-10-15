@@ -135,26 +135,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 577762742515127960, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 865774112613490046, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
-      propertyPath: m_Avatar
-      value: 
-      objectReference: {fileID: 9000000, guid: 1f499d0eded7a4245b0c36149a43da4f, type: 3}
-    - target: {fileID: 865774112613490046, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: fb53b4d3a4f06844c90da7297e9082de, type: 2}
-    - target: {fileID: 2301266167672538499, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 114.999985
-      objectReference: {fileID: 0}
-    - target: {fileID: 2301266167760245459, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 52
-      objectReference: {fileID: 0}
     - target: {fileID: 2301266167922393855, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -215,25 +195,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 6973725547708716986, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7503696053193143754, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
-      propertyPath: m_text
-      value: GAME INFO TEXT
-      objectReference: {fileID: 0}
-    - target: {fileID: 7503696053193143754, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7503696053193143754, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
-      propertyPath: m_fontSize
-      value: 42.7
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 961465099085531772, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
