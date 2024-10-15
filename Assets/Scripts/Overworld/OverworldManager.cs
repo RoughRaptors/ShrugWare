@@ -82,10 +82,6 @@ namespace ShrugWare
         GameObject audioListenerObj;
 
         [SerializeField]
-        List<AudioClip> microgameMusic = new List<AudioClip>();
-        public List<AudioClip> GetMicrogameMusic() { return microgameMusic; }
-
-        [SerializeField]
         List<Sprite> microgameBackgrounds = new List<Sprite>();
         public List<Sprite> GetMicrogameBackgrounds() { return microgameBackgrounds; }
 
@@ -544,16 +540,6 @@ namespace ShrugWare
         private void DisableAudioListener()
         {
             audioListenerObj.SetActive(false);
-        }
-
-        public AudioClip GetMicrogameAudioClipFromIndex(int index)
-        {
-            if (index < microgameMusic.Count)
-            {
-                return microgameMusic[index];
-            }
-
-            return null;
         }
 
         public void ResetAudioPitch()

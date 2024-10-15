@@ -236,7 +236,7 @@ namespace ShrugWare
             // only play a transition if it's a microgame
             if (sceneId >= (int)DataManager.Scenes.MICROGAME_START && sceneId <= (int)DataManager.Scenes.MICROGAME_END)
             {
-                float secondsToWait = 1.0f;
+                float secondsToWait = 2.0f;
                 sceneTransitionAnim.SetTrigger("End");
                 yield return new WaitForSeconds(secondsToWait);
                 SceneManager.LoadScene(sceneId, LoadSceneMode.Additive);

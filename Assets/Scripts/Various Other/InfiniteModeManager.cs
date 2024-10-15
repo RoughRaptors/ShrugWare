@@ -47,9 +47,6 @@ public class InfiniteModeManager : MonoBehaviour
 
     public List<Sprite> GetMicrogameBackgrounds() { return microgameBackgrounds; }
 
-    private AudioManager audioManager;
-    public AudioManager GetAudioManager() { return audioManager; }
-
     public List<AudioClip> GetMicrogameMusic() { return microgameMusic; }
 
     private const int STARTING_LIVES = 0;
@@ -83,11 +80,6 @@ public class InfiniteModeManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             backButtonObj.SetActive(true);
-
-            if (AudioManager.Instance != null)
-            {
-                audioManager = OverworldManager.Instance.AudioManager;
-            }
         }
         else if (Instance != this)
         {
@@ -128,7 +120,8 @@ public class InfiniteModeManager : MonoBehaviour
 
         gameState = GameState.MainScreen;
         EnableCamera();
-        audioManager.LoopMusic(false);
+
+        AudioManager.Instance.LoopMusic(false);
 
         sceneTransitionAnim.speed = 0.0f;
     }
@@ -163,10 +156,7 @@ public class InfiniteModeManager : MonoBehaviour
 
     private void PlayBetweenMicrogameTimerDing()
     {
-        if (audioManager != null)
-        {
-            audioManager.PlayAudioClip(DataManager.AudioEffectTypes.MicrogameTimerDing, .3f);
-        }
+        AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.MicrogameTimerDing, .3f);
     }
 
     public void OnStartPressed()
@@ -265,10 +255,7 @@ public class InfiniteModeManager : MonoBehaviour
 
         if(livesLeft >= 0)
         {
-            if (audioManager != null)
-            {
-                audioManager.PlayAudioClip(DataManager.AudioEffectTypes.BetweenMicrogame, .3f);
-            }
+            AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.BetweenMicrogame, .3f);
 
             AddToTimeScale(0.1f);
         }
@@ -289,7 +276,7 @@ public class InfiniteModeManager : MonoBehaviour
         //score = 0;
         livesLeftText.text = "You Died";
         startButton.gameObject.SetActive(true);
-        startButton.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Back to overworld";
+        startButton.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "Back to Overworld";
     }
 
     public void SetTimescale(float newTimescale)
@@ -303,16 +290,6 @@ public class InfiniteModeManager : MonoBehaviour
         curTimeScale += amount;
         Time.timeScale = curTimeScale;
         livesLeftText.text = "Lives Left: " + livesLeft.ToString() + "\nTimescale: " + curTimeScale.ToString();
-    }
-
-    public AudioClip GetAudioClipFromIndex(int index)
-    {
-        if (index < microgameMusic.Count)
-        {
-            return microgameMusic[index];
-        }
-
-        return null;
     }
 
     public void EnableCamera()
