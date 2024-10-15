@@ -99,17 +99,13 @@ namespace ShrugWare
         protected virtual void OnMyGameStart()
         {
             // on start pick a random audio piece and sprite
-            if(OverworldManager.Instance != null)
+            if(AudioManager.Instance != null)
             {
-                int randMusicIndex = UnityEngine.Random.Range(0, OverworldManager.Instance.GetMicrogameMusic().Count);
-                AudioClip audioClip = OverworldManager.Instance.GetMicrogameAudioClipFromIndex(randMusicIndex);
+                int randMusicIndex = UnityEngine.Random.Range(0, AudioManager.Instance.GetMicrogameMusic().Count);
+                AudioClip audioClip = AudioManager.Instance.GetMicrogameAudioClipFromIndex(randMusicIndex);
+                AudioManager.Instance.PlayMusicClip(audioClip, DataManager.AudioEffectTypes.MicrogameMusic);
 
-                if (AudioManager.Instance != null)
-                {
-                    AudioManager.Instance.PlayMusicClip(audioClip, DataManager.AudioEffectTypes.MicrogameMusic);
-                }
-
-                if(InfiniteModeManager.Instance != null)
+                if (InfiniteModeManager.Instance != null)
                 {
                     InfiniteModeManager.Instance.DisableCamera();
                 }
