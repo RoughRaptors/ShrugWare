@@ -40,8 +40,6 @@ namespace ShrugWare
             {
                 audioSourceEffects = gameObject.AddComponent<AudioSource>();
             }
-
-            audioSourceMusic.loop = true;
         }
 
         private AudioClip GetAudioClip(DataManager.AudioEffectTypes audioEffectType)
@@ -184,6 +182,11 @@ namespace ShrugWare
         public bool IsMusicPlaying()
         {
             return audioSourceMusic.isPlaying;
+        }
+
+        public void LoopMusic(bool looping)
+        {
+            audioSourceMusic.loop = looping;
         }
     }
 }

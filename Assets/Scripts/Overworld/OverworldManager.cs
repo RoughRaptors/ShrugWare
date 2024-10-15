@@ -483,6 +483,7 @@ namespace ShrugWare
         {
             if (audioManager != null)
             {
+                audioManager.LoopMusic(true);
                 audioManager.PlayMusicClip(DataManager.AudioEffectTypes.Overworld, 0.75f);
             }
         }

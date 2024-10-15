@@ -128,6 +128,7 @@ public class InfiniteModeManager : MonoBehaviour
 
         gameState = GameState.MainScreen;
         EnableCamera();
+        audioManager.LoopMusic(false);
 
         sceneTransitionAnim.speed = 0.0f;
     }

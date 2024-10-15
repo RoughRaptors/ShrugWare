@@ -33,6 +33,7 @@ RectTransform:
   m_Children:
   - {fileID: 5598907756362670790}
   - {fileID: 9222933400405529406}
+  - {fileID: 2594387579103492149}
   m_Father: {fileID: 2248879936641701685}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1542,11 +1543,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossUIManager: {fileID: 2301266169147293018}
   bossSceneCamera: {fileID: 7780805136668817670}
-  bossName: Tuzi
+  bossName: Warboss Kard
   sceneTransitionAnim: {fileID: 2484913405819993759}
   sceneTransitionLeftImage: {fileID: 5937433440450782169}
   sceneTransitionRightImage: {fileID: 5822494152203781777}
-  curBossObj: {fileID: 0}
+  sceneTransitionControlSprite: {fileID: 5385898794955497625}
+  wasdSprite: {fileID: 21300000, guid: 8ec093e1f2e20a640a9a8297c42d26a2, type: 3}
+  mouseClickSprite: {fileID: 21300000, guid: 6bbee5535760f3b4ba782d162e882029, type: 3}
+  curBossObj: {fileID: 6973725547708716986}
 --- !u!1 &2301266168308091703
 GameObject:
   m_ObjectHideFlags: 0
@@ -3588,6 +3592,81 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!1 &8184848603896719208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2594387579103492149}
+  - component: {fileID: 3211414452007954544}
+  - component: {fileID: 5385898794955497625}
+  m_Layer: 0
+  m_Name: Controls Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &2594387579103492149
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8184848603896719208}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8873487148609880664}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 70}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3211414452007954544
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8184848603896719208}
+  m_CullTransparentMesh: 1
+--- !u!114 &5385898794955497625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8184848603896719208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &9053414427457741913
 GameObject:
   m_ObjectHideFlags: 0
@@ -3895,6 +3974,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55776efecb0cd134ea5f418c2f97a705, type: 3}
+--- !u!1 &6973725547708716986 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1919012471076396, guid: 55776efecb0cd134ea5f418c2f97a705, type: 3}
+  m_PrefabInstance: {fileID: 6971984793845555606}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6975860511641711108 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4023215848608658, guid: 55776efecb0cd134ea5f418c2f97a705, type: 3}

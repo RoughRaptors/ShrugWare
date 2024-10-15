@@ -33,13 +33,20 @@ namespace ShrugWare
         private void Awake()
         {
             myMicrogame = FindObjectOfType<Microgame>();
-            controlSchemeImage.SetActive(true);
+            //controlSchemeImage.SetActive(true);
 
             if(OverworldManager.Instance != null)
             {
                 int randSpriteIndex = UnityEngine.Random.Range(0, OverworldManager.Instance.GetMicrogameBackgrounds().Count);
                 Sprite sprite = OverworldManager.Instance.GetMicrogameBackgrounds()[randSpriteIndex];
                 backgroundCanvas.GetComponent<Image>().sprite = sprite;
+            }
+
+            // todo fix this - bad hard code. don't want to edit every scene right now
+            if (BossGameManager.Instance != null)
+            {
+                bool isWASD = controlSchemeImage.name == "WASD Image";
+                BossGameManager.Instance.SetTransitionControlImage(true, isWASD);
             }
         }
 
@@ -64,6 +71,11 @@ namespace ShrugWare
 
         private void OnMicrogameStart(string startText)
         {
+            if (BossGameManager.Instance != null)
+            {
+                BossGameManager.Instance.SetTransitionControlImage(false, false);
+            }
+
             controlSchemeImage.SetActive(false);
             if (string.IsNullOrEmpty(startText))
             {
