@@ -101,8 +101,20 @@ namespace ShrugWare
             // on start pick a random audio piece and sprite
             if(AudioManager.Instance != null)
             {
-                int randMusicIndex = UnityEngine.Random.Range(0, AudioManager.Instance.GetMicrogameMusic().Count);
-                AudioClip audioClip = AudioManager.Instance.GetMicrogameAudioClipFromIndex(randMusicIndex);
+                // keep the music separated for now. we can remove the old stuff once we have enough new stuff
+                AudioClip audioClip;
+                bool shouldUseSOMusic = UnityEngine.Random.Range(0, 2) == 0;
+                if (shouldUseSOMusic)
+                {
+                    int randMusicIndexSO = UnityEngine.Random.Range(0, AudioManager.Instance.GetMicrogameMusicSO().Count);
+                    audioClip = AudioManager.Instance.GetMicrogameAudioClipFromIndexSO(randMusicIndexSO);
+                }
+                else
+                {
+                    int randMusicIndex = UnityEngine.Random.Range(0, AudioManager.Instance.GetMicrogameMusic().Count);
+                    audioClip = AudioManager.Instance.GetMicrogameAudioClipFromIndex(randMusicIndex);
+                }
+
                 AudioManager.Instance.PlayMusicClip(audioClip, DataManager.AudioEffectTypes.MicrogameMusic);
 
                 if (InfiniteModeManager.Instance != null)
