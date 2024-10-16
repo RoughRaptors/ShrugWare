@@ -14,6 +14,10 @@ namespace ShrugWare
         List<AudioClip> microgameMusic = new List<AudioClip>();
         public List<AudioClip> GetMicrogameMusic() { return microgameMusic; }
 
+        [SerializeField]
+        List<AudioClipData> microgameMusicSO = new List<AudioClipData>();
+        public List<AudioClipData> GetMicrogameMusicSO() { return microgameMusicSO; }
+
         private AudioSource audioSourceMusic;
         private AudioSource audioSourceEffects;
 
@@ -152,6 +156,16 @@ namespace ShrugWare
             if (index < microgameMusic.Count)
             {
                 return microgameMusic[index];
+            }
+
+            return null;
+        }
+
+        public AudioClip GetMicrogameAudioClipFromIndexSO(int index)
+        {
+            if (index < microgameMusicSO.Count)
+            {
+                return microgameMusicSO[index].clip;
             }
 
             return null;
