@@ -1622,6 +1622,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7993644387541279028, guid: b077235ab3b046f47b50f273856b53d8, type: 3}
+      propertyPath: microgameMusicSO.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993644387541279028, guid: b077235ab3b046f47b50f273856b53d8, type: 3}
+      propertyPath: microgameMusicSO.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 665b5d345463aa347ba63c9e371263c1, type: 2}
+    - target: {fileID: 7993644387541279028, guid: b077235ab3b046f47b50f273856b53d8, type: 3}
+      propertyPath: microgameMusicSO.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: eccde15c61586514db670a28bc6a949d, type: 2}
+    - target: {fileID: 7993644387541279028, guid: b077235ab3b046f47b50f273856b53d8, type: 3}
+      propertyPath: microgameMusicSO.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: ec1544cda553df6419756d20479c311c, type: 2}
+    - target: {fileID: 7993644387541279028, guid: b077235ab3b046f47b50f273856b53d8, type: 3}
+      propertyPath: microgameMusicSO.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4164779af45dff249a510050f5c73821, type: 2}
+    - target: {fileID: 7993644387541279028, guid: b077235ab3b046f47b50f273856b53d8, type: 3}
+      propertyPath: microgameMusicSO.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: c358afd2130704f4fb7e578c38343dbb, type: 2}
+    - target: {fileID: 7993644387541279028, guid: b077235ab3b046f47b50f273856b53d8, type: 3}
+      propertyPath: microgameMusicSO.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: b0647ff7e0fdf14459e303fd9e879650, type: 2}
+    - target: {fileID: 7993644387541279028, guid: b077235ab3b046f47b50f273856b53d8, type: 3}
+      propertyPath: microgameMusicSO.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 45e5c29d560882b438eeaa8e81f455bf, type: 2}
+    - target: {fileID: 7993644387541279028, guid: b077235ab3b046f47b50f273856b53d8, type: 3}
+      propertyPath: microgameMusicSO.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0034fa603bf84764cbe8f267d060d0bb, type: 2}
+    - target: {fileID: 7993644387541279028, guid: b077235ab3b046f47b50f273856b53d8, type: 3}
+      propertyPath: microgameMusicSO.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: b8bab8899933c6c4983b1340860dfda7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
