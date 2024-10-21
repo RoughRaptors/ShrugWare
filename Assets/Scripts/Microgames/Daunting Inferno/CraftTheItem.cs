@@ -49,7 +49,7 @@ namespace ShrugWare
             // this is a hard microgame when too fast and, there's not enough time, give it a time boost the faster the timescale is
             if (BossGameManager.Instance != null)
             {
-                microGameTime += BossGameManager.Instance.GetCurTimeScale() * 2.5f;
+                microGameTime += BossGameManager.Instance.GetCurTimeScale() * 3.0f;
             }
         }
 

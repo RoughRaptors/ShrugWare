@@ -37,6 +37,12 @@ namespace ShrugWare
         [SerializeField]
         GameObject enterLevelButtonObj;
 
+        [SerializeField]
+        GameObject optionsButton;
+
+        [SerializeField]
+        GameObject gearButton;
+
         private void Awake()
         {
             Application.targetFrameRate = 60;
@@ -114,6 +120,9 @@ namespace ShrugWare
             {
                 OverworldManager.Instance.EnableCamera();
             }
+
+            EnableOptionsButton(true);
+            EnableGearScreenButton(true);
         }
 
         public void EnterCurLevelClicked()
@@ -223,6 +232,16 @@ namespace ShrugWare
         {
             this.gameObject.SetActive(false);
             OverworldManager.Instance.UnpauseGame();
+        }
+
+        public void EnableOptionsButton(bool enabled)
+        {
+            optionsButton.SetActive(enabled);
+        }
+
+        public void EnableGearScreenButton(bool enabled)
+        {
+            gearButton.SetActive(enabled);
         }
     }
 }
