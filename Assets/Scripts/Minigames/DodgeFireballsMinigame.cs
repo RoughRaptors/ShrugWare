@@ -41,6 +41,9 @@ namespace ShrugWare
         [SerializeField]
         List<Sprite> collectibleObjectSprites = new List<Sprite>();
 
+        [SerializeField]
+        Canvas canvas;
+
         private const float FIREBALL_X_MIN = -25;
         private const float FIREBALL_X_MAX = 125;
         private const float FIREBALL_Y_MIN = -40;
@@ -356,7 +359,10 @@ namespace ShrugWare
                     newCollectible.transform.position = locationVec;
 
                     int spriteIndex = UnityEngine.Random.Range(0, collectibleObjectSprites.Count);
-                    newCollectible.GetComponent<SpriteRenderer>().sprite = collectibleObjectSprites[spriteIndex];
+                    newCollectible.GetComponentInChildren<Image>().sprite = collectibleObjectSprites[spriteIndex];
+
+                    newCollectible.transform.SetParent(canvas.transform);
+                    newCollectible.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
                     newCollectible.SetActive(true);
                     break;
