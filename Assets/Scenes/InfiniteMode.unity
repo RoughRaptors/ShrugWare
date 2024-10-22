@@ -203,17 +203,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef49f3c0a4ff59c489db715b2a67ee04, type: 3}
---- !u!114 &506967364 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8586922171846002356, guid: ef49f3c0a4ff59c489db715b2a67ee04, type: 3}
-  m_PrefabInstance: {fileID: 506967363}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86578149214a2db41b2dab5482a4c309, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &506967365 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7716251681464268754, guid: ef49f3c0a4ff59c489db715b2a67ee04, type: 3}
@@ -513,7 +502,6 @@ MonoBehaviour:
   sceneTransitionAnim: {fileID: 4064549573090761546}
   sceneTransitionLeftImage: {fileID: 4008536673910374466}
   sceneTransitionRightImage: {fileID: 7576144822599841307}
-  optionsMenu: {fileID: 506967364}
   backButtonObj: {fileID: 1943725036}
 --- !u!224 &277344406762413288
 RectTransform:
@@ -683,8 +671,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Time to next microgame: '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 72f5601b3b88688458cc55f7e44b00fc, type: 2}
+  m_sharedMaterial: {fileID: 4635082770538325404, guid: 72f5601b3b88688458cc55f7e44b00fc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -965,8 +953,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Start
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 72f5601b3b88688458cc55f7e44b00fc, type: 2}
+  m_sharedMaterial: {fileID: 4635082770538325404, guid: 72f5601b3b88688458cc55f7e44b00fc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -990,7 +978,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 53.7
+  m_fontSize: 47.8
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1403,8 +1391,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Score: 0'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 72f5601b3b88688458cc55f7e44b00fc, type: 2}
+  m_sharedMaterial: {fileID: 4635082770538325404, guid: 72f5601b3b88688458cc55f7e44b00fc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1793,8 +1781,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Lives Left: 3'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 72f5601b3b88688458cc55f7e44b00fc, type: 2}
+  m_sharedMaterial: {fileID: 4635082770538325404, guid: 72f5601b3b88688458cc55f7e44b00fc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
