@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: mus_Disco_UFOHunter
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 435bb6419f668a44fac0a6b530300831, type: 3}
-  maxVolume: 0.5
+  maxVolume: 0.8
   pitch: 1
   randomPitch: 0
   variablePitchIfRandom: 0

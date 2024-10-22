@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: mus_PopHop_ImmortalKombat
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 140a432e3c51db44c966ecea1c86f328, type: 3}
-  maxVolume: 0.5
+  maxVolume: 0.8
   pitch: 1
   randomPitch: 0
   variablePitchIfRandom: 0
