@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: mus_Disco_Bonjourno
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 1c3f78e158a7a1c418a358b30ecc7bd8, type: 3}
-  maxVolume: 0.5
+  maxVolume: 0.8
   pitch: 1
   randomPitch: 0
   variablePitchIfRandom: 0

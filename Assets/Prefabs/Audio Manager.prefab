@@ -103,3 +103,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2f788bbc041e1384bb556b0625c4fdd4, type: 3}
   - {fileID: 8300000, guid: 3315fa057b1f8ee4598abe33cfdfa355, type: 3}
   - {fileID: 8300000, guid: cd8c5285b8665fb4da44758fda4928d2, type: 3}
+  microgameMusicSO:
+  - {fileID: 11400000, guid: 665b5d345463aa347ba63c9e371263c1, type: 2}
+  - {fileID: 11400000, guid: eccde15c61586514db670a28bc6a949d, type: 2}
+  - {fileID: 11400000, guid: ec1544cda553df6419756d20479c311c, type: 2}
+  - {fileID: 11400000, guid: 4164779af45dff249a510050f5c73821, type: 2}
+  - {fileID: 11400000, guid: c358afd2130704f4fb7e578c38343dbb, type: 2}
+  - {fileID: 11400000, guid: b0647ff7e0fdf14459e303fd9e879650, type: 2}
+  - {fileID: 11400000, guid: 45e5c29d560882b438eeaa8e81f455bf, type: 2}
+  - {fileID: 11400000, guid: 0034fa603bf84764cbe8f267d060d0bb, type: 2}
+  - {fileID: 11400000, guid: b8bab8899933c6c4983b1340860dfda7, type: 2}
+  - {fileID: 11400000, guid: c036778326251d349ad4fb24d9cabffe, type: 2}
+  - {fileID: 11400000, guid: 218686afd23e9a34ba56d84ec91d1dc5, type: 2}
