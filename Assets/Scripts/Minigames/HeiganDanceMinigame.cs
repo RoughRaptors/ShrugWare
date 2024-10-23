@@ -52,8 +52,12 @@ namespace ShrugWare
         private const float START_HEALTH = 100;
         private float healthRemaining = 100;
 
-        private const float COLLECTIBLE_SPAWN_DISTANCE = 30;
+#if UNITY_EDITOR
+        private const int COLLECTIBLE_DAMAGE = 100;
+#else
         private const int COLLECTIBLE_DAMAGE = 10;
+#endif
+        private const float COLLECTIBLE_SPAWN_DISTANCE = 30;
         private const int ENEMY_START_HEALTH = 100;
         private float enemyHealth = ENEMY_START_HEALTH;
 

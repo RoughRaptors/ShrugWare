@@ -119,20 +119,10 @@ namespace ShrugWare
 
         private void Awake()
         {
-            Debug.Log("AWAKEAWAKEAWAKEAWAKE");
-            if (AudioManager.Instance == null)
-            {
-                audioManager = new AudioManager();
-            }
-            else
-            {
-                audioManager = AudioManager.Instance;
-            }
-
+            audioManager = AudioManager.Instance;
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
             }
             else if (Instance != this)
             {
@@ -155,10 +145,19 @@ namespace ShrugWare
 
             overworldUIManager.UpdateUI();
             ReadyScene(true);
+
+            DontDestroyOnLoad(gameObject);
         }
 
         private void Start()
         {
+            // for some reason when we put this in Awake, it's not being hit
+            audioManager = AudioManager.Instance;
+            if (audioManager != null && !audioManager.IsMusicPlaying())
+            {
+                PlayOverworldMusic();
+            }
+
             // set fps so players don't have varying speeds
             Application.targetFrameRate = 60;
 

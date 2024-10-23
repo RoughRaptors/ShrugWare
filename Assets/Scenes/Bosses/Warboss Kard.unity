@@ -135,6 +135,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1381955963615149296, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 169
+      objectReference: {fileID: 0}
     - target: {fileID: 2301266167922393855, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -194,6 +198,14 @@ PrefabInstance:
     - target: {fileID: 2301266168276219434, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: m_Name
       value: Boss GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578551441229890934, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -69
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499098450759406256, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 44
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

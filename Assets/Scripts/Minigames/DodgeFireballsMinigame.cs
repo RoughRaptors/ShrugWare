@@ -67,7 +67,12 @@ namespace ShrugWare
         private const int NUM_FIREBALLS_IN_WAVE_MIN = 5;
         private const int NUM_FIREBALLS_IN_WAVE_MAX = 9;
         private const float COLLECTIBLE_SPAWN_DISTANCE = 30;
+#if UNITY_EDITOR
+        private const int COLLECTIBLE_DAMAGE = 100;
+#else
         private const int COLLECTIBLE_DAMAGE = 10;
+#endif
+
         private const float COLLECTIBLE_X_MIN = -5;
         private const float COLLECTIBLE_X_MAX = 110;
         private const float COLLECTIBLE_Y_MIN = -25;

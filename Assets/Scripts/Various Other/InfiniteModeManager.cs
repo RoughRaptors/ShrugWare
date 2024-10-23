@@ -78,7 +78,6 @@ public class InfiniteModeManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
             backButtonObj.SetActive(true);
         }
         else if (Instance != this)
@@ -122,6 +121,8 @@ public class InfiniteModeManager : MonoBehaviour
         EnableCamera();
 
         AudioManager.Instance.LoopMusic(false);
+
+        DontDestroyOnLoad(gameObject);
 
         sceneTransitionAnim.speed = 0.0f;
     }
