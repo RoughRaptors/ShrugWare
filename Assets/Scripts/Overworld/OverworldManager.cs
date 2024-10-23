@@ -5,6 +5,7 @@ using System.Collections;
 using UnityEditor;
 using UnityEngine.EventSystems;
 using System.Diagnostics.Tracing;
+using UnityEngine.Experimental.AI;
 
 namespace ShrugWare
 {
@@ -98,8 +99,8 @@ namespace ShrugWare
         // when we click a non-adjacent level, we need to keep track of our path
         private List<int> pathToLevel = new List<int>();
 
-        private const float PLAYER_X_OFFSET = 1.0f;
-        private const float PLAYER_Y_OFFSET = 0.6f;
+        private const float PLAYER_X_OFFSET = 13.0f;
+        private const float PLAYER_Y_OFFSET = 8.0f;
 
         public enum OverworldGameState
         {
@@ -122,7 +123,6 @@ namespace ShrugWare
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
             }
             else if (Instance != this)
             {
@@ -145,10 +145,19 @@ namespace ShrugWare
 
             overworldUIManager.UpdateUI();
             ReadyScene(true);
+
+            DontDestroyOnLoad(gameObject);
         }
 
         private void Start()
         {
+            // for some reason when we put this in Awake, it's not being hit
+            audioManager = AudioManager.Instance;
+            if (audioManager != null && !audioManager.IsMusicPlaying())
+            {
+                PlayOverworldMusic();
+            }
+
             // set fps so players don't have varying speeds
             Application.targetFrameRate = 60;
 
@@ -356,7 +365,7 @@ namespace ShrugWare
             Vector3 targetPos = new Vector3(curLevel.transform.position.x - PLAYER_X_OFFSET, curLevel.transform.position.y - PLAYER_Y_OFFSET, curLevel.transform.position.z);
             while (Vector3.Distance(playerObj.transform.position, targetPos) > 0.1f)
             {
-                playerObj.transform.position = Vector3.MoveTowards(playerObj.transform.position, targetPos, 5 * Time.deltaTime);
+                playerObj.transform.position = Vector3.MoveTowards(playerObj.transform.position, targetPos, 50 * Time.deltaTime);
                 yield return 0;
             }
 

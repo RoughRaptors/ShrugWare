@@ -25,7 +25,11 @@ namespace ShrugWare
             // this was generating errors on dev build startup
             // https://forum.unity.com/threads/errors-with-the-urp-debug-manager.987795/
             DebugManager.instance.enableRuntimeUI = false;
-            audioManager.PlayAudioClip(DataManager.AudioEffectTypes.MainMenu, .175f);
+        }
+
+        private void Start()
+        {
+            audioManager.PlayAudioClip(DataManager.AudioEffectTypes.MainMenu, .15f);
         }
 
         public void OnStartClicked()

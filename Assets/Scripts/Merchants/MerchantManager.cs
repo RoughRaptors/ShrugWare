@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -33,7 +34,7 @@ namespace ShrugWare
         GameObject moveSpeedPotionObj = null;
 
         [SerializeField]
-        Text currencyInfoText = null;
+        TextMeshProUGUI currencyInfoText = null;
 
         [SerializeField]
         GameObject armorTab = null;

@@ -20,6 +20,7 @@ namespace ShrugWare
 
         private AudioSource audioSourceMusic;
         private AudioSource audioSourceEffects;
+        private AudioSource audioSourceSecondaryEffects;
 
         public static AudioManager Instance;
 
@@ -32,7 +33,7 @@ namespace ShrugWare
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
+                //DontDestroyOnLoad(gameObject);
             }
             else if (Instance != this)
             {
@@ -47,6 +48,11 @@ namespace ShrugWare
             if (audioSourceEffects == null)
             {
                 audioSourceEffects = gameObject.AddComponent<AudioSource>();
+            }
+
+            if (audioSourceSecondaryEffects == null)
+            {
+                audioSourceSecondaryEffects = gameObject.AddComponent<AudioSource>();
             }
         }
 
@@ -63,14 +69,21 @@ namespace ShrugWare
             return null;
         }
 
-        public void PlayAudioClip(DataManager.AudioEffectTypes audioEffectType, float volumeScale = 1)
+        public void PlayAudioClip(DataManager.AudioEffectTypes audioEffectType, float volumeScale = 1, bool secondary = false)
         {
-            if(audioSourceMusic == null || audioSourceEffects == null)
+            if(audioSourceMusic == null || audioSourceEffects == null || audioSourceSecondaryEffects == null)
             {
                 return;
             }
 
-            audioSourceEffects.Stop();
+            if (!secondary)
+            {
+                audioSourceEffects.Stop();
+            }
+            else
+            {
+                audioSourceSecondaryEffects.Stop();
+            }
 
             AudioClip audioClip = GetAudioClip(audioEffectType);
             if(audioClip != null)
@@ -85,6 +98,7 @@ namespace ShrugWare
                     {
                         audioSourceMusic.pitch = BossGameManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE;
                         audioSourceEffects.pitch = BossGameManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE;
+                        audioSourceSecondaryEffects.pitch = BossGameManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE;
                     }
                 }
                 else if(InfiniteModeManager.Instance != null)
@@ -95,10 +109,18 @@ namespace ShrugWare
                     {
                         audioSourceMusic.pitch = InfiniteModeManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE;
                         audioSourceEffects.pitch = InfiniteModeManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE;
+                        audioSourceSecondaryEffects.pitch = InfiniteModeManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE;
                     }
                 }
 
-                audioSourceEffects.PlayOneShot(audioClip, volumeScale);
+                if (!secondary)
+                {
+                    audioSourceEffects.PlayOneShot(audioClip, volumeScale);
+                }
+                else
+                {
+                    audioSourceSecondaryEffects.PlayOneShot(audioClip, volumeScale);
+                }
             }
         }
 
@@ -148,6 +170,7 @@ namespace ShrugWare
         public void StopAudio()
         {
             audioSourceEffects.Stop();
+            audioSourceSecondaryEffects.Stop();
             audioSourceMusic.Stop();
         }
 
@@ -187,11 +210,13 @@ namespace ShrugWare
             {
                 audioSourceMusic.pitch = curTimeScale * MUSIC_PITCH_MULTIPLY_VALUE;
                 audioSourceEffects.pitch = curTimeScale * MUSIC_PITCH_MULTIPLY_VALUE;
+                audioSourceSecondaryEffects.pitch = curTimeScale * MUSIC_PITCH_MULTIPLY_VALUE;
             }
             else
             {
                 audioSourceMusic.pitch = curTimeScale;
                 audioSourceEffects.pitch = curTimeScale;
+                audioSourceSecondaryEffects.pitch = curTimeScale;
             }
         }
 
@@ -205,6 +230,7 @@ namespace ShrugWare
             audioVolume = newAudioVolume;
             audioSourceMusic.volume = audioVolume / 100;
             audioSourceEffects.volume = audioVolume / 100;
+            audioSourceSecondaryEffects.volume = audioVolume / 100;
         }
 
         public bool IsMusicPlaying()

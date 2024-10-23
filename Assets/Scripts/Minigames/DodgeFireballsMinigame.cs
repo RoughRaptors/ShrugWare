@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Data;
+using TMPro;
 
 namespace ShrugWare
 {
@@ -20,13 +21,13 @@ namespace ShrugWare
         GameObject collectibleInitObj;
 
         [SerializeField]
-        Text playerHealthText;
+        TextMeshProUGUI playerHealthText;
 
         [SerializeField]
         GameObject continueButton;
 
         [SerializeField]
-        Text endGameText;
+        TextMeshProUGUI endGameText;
 
         [SerializeField]
         GameObject topIndicatorObj;
@@ -35,7 +36,7 @@ namespace ShrugWare
         GameObject bottomIndicatorObj;
 
         [SerializeField]
-        Text enemyHealthText;
+        TextMeshProUGUI enemyHealthText;
 
         // just to have some variation have some different sprites that spawn in
         [SerializeField]
@@ -66,7 +67,12 @@ namespace ShrugWare
         private const int NUM_FIREBALLS_IN_WAVE_MIN = 5;
         private const int NUM_FIREBALLS_IN_WAVE_MAX = 9;
         private const float COLLECTIBLE_SPAWN_DISTANCE = 30;
+#if UNITY_EDITOR
+        private const int COLLECTIBLE_DAMAGE = 100;
+#else
         private const int COLLECTIBLE_DAMAGE = 10;
+#endif
+
         private const float COLLECTIBLE_X_MIN = -5;
         private const float COLLECTIBLE_X_MAX = 110;
         private const float COLLECTIBLE_Y_MIN = -25;

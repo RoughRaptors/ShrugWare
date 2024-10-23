@@ -154,7 +154,6 @@ namespace ShrugWare
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
             }
             else if (Instance != this)
             {
@@ -173,6 +172,8 @@ namespace ShrugWare
             {
                 curBoss = Boss.InitializeBoss(bossName);
             }
+
+            DontDestroyOnLoad(gameObject);
         }
 
         private void Start()
