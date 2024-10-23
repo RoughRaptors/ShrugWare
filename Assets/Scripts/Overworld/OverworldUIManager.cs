@@ -20,7 +20,7 @@ namespace ShrugWare
         GameObject levelsObj;
 
         [SerializeField]
-        Text curLevelText;
+        TextMeshProUGUI curLevelText;
 
         [SerializeField]
         GameObject randomEventUIObj;

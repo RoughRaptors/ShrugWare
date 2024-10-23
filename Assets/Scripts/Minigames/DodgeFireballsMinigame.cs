@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Data;
+using TMPro;
 
 namespace ShrugWare
 {
@@ -20,13 +21,13 @@ namespace ShrugWare
         GameObject collectibleInitObj;
 
         [SerializeField]
-        Text playerHealthText;
+        TextMeshProUGUI playerHealthText;
 
         [SerializeField]
         GameObject continueButton;
 
         [SerializeField]
-        Text endGameText;
+        TextMeshProUGUI endGameText;
 
         [SerializeField]
         GameObject topIndicatorObj;
@@ -35,7 +36,7 @@ namespace ShrugWare
         GameObject bottomIndicatorObj;
 
         [SerializeField]
-        Text enemyHealthText;
+        TextMeshProUGUI enemyHealthText;
 
         // just to have some variation have some different sprites that spawn in
         [SerializeField]

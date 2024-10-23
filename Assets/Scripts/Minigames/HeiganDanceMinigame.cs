@@ -2,22 +2,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace ShrugWare
 {
     public class HeiganDanceMinigame : Minigame
     {
         [SerializeField]
-        Text statusText;
+        TextMeshProUGUI statusText;
 
         [SerializeField]
-        Text enemyHealthText;
+        TextMeshProUGUI enemyHealthText;
 
         [SerializeField]
         GameObject continueButton;
 
         [SerializeField]
-        Text endGameText;
+        TextMeshProUGUI endGameText;
 
         [SerializeField]
         Material greenMaterial;
