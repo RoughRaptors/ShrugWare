@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29062e891a28f9f4a94decbbb27200a5, type: 3}
-  m_Name: mus_Disco_DrumDown
+  m_Name: sfx_microgame_fail
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: cce119677c0bafa4a893c09989cd66af, type: 3}
+  clip: {fileID: 8300000, guid: a4fe8211fb009744184504998e09c06b, type: 3}
   maxVolume: 0.8
   pitch: 1
   randomPitch: 0
