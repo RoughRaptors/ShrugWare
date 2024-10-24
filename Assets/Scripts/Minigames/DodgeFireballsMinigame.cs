@@ -45,6 +45,12 @@ namespace ShrugWare
         [SerializeField]
         Canvas canvas;
 
+        [SerializeField]
+        GameObject hitVFX;
+
+        [SerializeField]
+        GameObject collectVFX;
+
         private const float FIREBALL_X_MIN = -25;
         private const float FIREBALL_X_MAX = 125;
         private const float FIREBALL_Y_MIN = -40;
@@ -68,7 +74,7 @@ namespace ShrugWare
         private const int NUM_FIREBALLS_IN_WAVE_MAX = 9;
         private const float COLLECTIBLE_SPAWN_DISTANCE = 30;
 #if UNITY_EDITOR
-        private const int COLLECTIBLE_DAMAGE = 100;
+        private const int COLLECTIBLE_DAMAGE = 10;
 #else
         private const int COLLECTIBLE_DAMAGE = 10;
 #endif
@@ -120,6 +126,7 @@ namespace ShrugWare
             }
 
             continueButton.SetActive(false);
+            hitVFX.gameObject.transform.localScale = new Vector3(7.5f, 7.5f, 7.5f);
         }
 
         private new void Start()
@@ -420,6 +427,7 @@ namespace ShrugWare
                 }
             }
 
+            Instantiate(hitVFX, gameObject.transform.position, Quaternion.identity);
             FlashColor();
         }
 
@@ -450,6 +458,7 @@ namespace ShrugWare
                 SpawnCollectible();
             }
 
+            Instantiate(collectVFX, other.gameObject.transform.position, Quaternion.identity);
             Destroy(other.gameObject);
         }
 
