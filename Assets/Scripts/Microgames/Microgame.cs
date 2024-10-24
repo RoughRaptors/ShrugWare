@@ -57,6 +57,7 @@ namespace ShrugWare
                 }
             }
 
+            AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameIntro);
             SetEffects();
             StartCoroutine(PlayMicrogame());
         }
@@ -115,7 +116,7 @@ namespace ShrugWare
                     audioClip = AudioManager.Instance.GetMicrogameAudioClipFromIndex(randMusicIndex);
                 }
 
-                AudioManager.Instance.PlayMusicClip(audioClip, DataManager.AudioEffectTypes.MicrogameMusic);
+                AudioManager.Instance.PlayMusicClip(audioClip, DataManager.AudioType.MicrogameMusic);
 
                 if (InfiniteModeManager.Instance != null)
                 {
@@ -138,10 +139,12 @@ namespace ShrugWare
                 hasRunEndCondition = true;
                 if (wonMicrogame)
                 {
+                    AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameWin);
                     RunEffects(winEffects);
                 }
                 else
                 {
+                    AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameLose);
                     RunEffects(lossEffects);
                 }
 
@@ -194,7 +197,7 @@ namespace ShrugWare
                 if (AudioManager.Instance != null &&OverworldManager.Instance != null && 
                     BossGameManager.Instance != null && !BossGameManager.Instance.CurBoss.isDead)
                 {
-                    AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.BetweenMicrogame, .3f);
+                    AudioManager.Instance.PlayAudioClip(DataManager.AudioType.BetweenMicrogame, .3f);
                 }
 
                 BossGameManager.Instance.MicrogameCompleted(wonMicrogame);

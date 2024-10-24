@@ -28,15 +28,12 @@ namespace ShrugWare
 
         bool casualMode = false;
 
-        private AudioManager audioManager;
-
         // our audio manager is created by now
         private void Start()
         {
-            audioManager = AudioManager.Instance;
-            if (audioManager  != null)
+            if (AudioManager.Instance != null)
             {
-                audioVolumeSlider.value = audioManager.GetAudioVolume();
+                audioVolumeSlider.value = AudioManager.Instance.GetAudioVolume();
             }
 
             audioVolumeText.text = "Audio Volume: " + audioVolumeSlider.value.ToString();
@@ -86,9 +83,9 @@ namespace ShrugWare
         {
             audioVolumeText.text = "Audio Volume: " + audioVolumeSlider.value.ToString();
 
-            if (audioManager != null)
+            if (AudioManager.Instance != null)
             {
-                audioManager.SetAudioVolume(audioVolumeSlider.value);
+                AudioManager.Instance.SetAudioVolume(audioVolumeSlider.value);
             }
         }
 

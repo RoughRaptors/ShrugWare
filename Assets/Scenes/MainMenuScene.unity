@@ -1928,14 +1928,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7993644387541279028, guid: b077235ab3b046f47b50f273856b53d8, type: 3}
-      propertyPath: microgameMusicSO.Array.size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 7993644387541279028, guid: b077235ab3b046f47b50f273856b53d8, type: 3}
-      propertyPath: microgameMusicSO.Array.data[11]
-      value: 
-      objectReference: {fileID: 11400000, guid: a13a91a33edf49e46912b5e4789b85bc, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

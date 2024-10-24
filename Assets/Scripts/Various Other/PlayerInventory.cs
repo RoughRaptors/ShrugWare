@@ -311,7 +311,7 @@ namespace ShrugWare
 
                         if (AudioManager.Instance != null)
                         {
-                            AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.UsePotion, 0.4f, true);
+                            AudioManager.Instance.PlayAudioClip(DataManager.AudioType.UsePotion, 0.4f, true);
                         }
 
                         BossUIManager.Instance.UpdateConsumableInfo();

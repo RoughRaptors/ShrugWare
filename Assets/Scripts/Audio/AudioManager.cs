@@ -8,7 +8,7 @@ namespace ShrugWare
     public class AudioManager : MonoBehaviour
     {
         [SerializeField]
-        List<AudioEffectClip> audioEffects = new List<AudioEffectClip>();
+        List<AudioClipData> audioEffects = new List<AudioClipData>();
 
         [SerializeField]
         List<AudioClip> microgameMusic = new List<AudioClip>();
@@ -33,7 +33,6 @@ namespace ShrugWare
             if (Instance == null)
             {
                 Instance = this;
-                //DontDestroyOnLoad(gameObject);
             }
             else if (Instance != this)
             {
@@ -56,20 +55,20 @@ namespace ShrugWare
             }
         }
 
-        private AudioClip GetAudioClip(DataManager.AudioEffectTypes audioEffectType)
+        private AudioClip GetAudioClip(DataManager.AudioType audioEffectType)
         {
-            foreach (AudioEffectClip effectClip in audioEffects)
+            foreach (AudioClipData effectClip in audioEffects)
             {
-                if (effectClip.GetAudioEffectType() == audioEffectType)
+                if (effectClip.audioEffectType == audioEffectType)
                 {
-                    return effectClip.GetAudioClip();
+                    return effectClip.clip;
                 }
             }
 
             return null;
         }
 
-        public void PlayAudioClip(DataManager.AudioEffectTypes audioEffectType, float volumeScale = 1, bool secondary = false)
+        public void PlayAudioClip(DataManager.AudioType audioEffectType, float volumeScale = 1, bool secondary = false)
         {
             if(audioSourceMusic == null || audioSourceEffects == null || audioSourceSecondaryEffects == null)
             {
@@ -94,18 +93,24 @@ namespace ShrugWare
                 {
                     // the audio change on timescale increase is way more noticable than the game speed increase
                     // lower the significance of the audio timescale increase
-                    if (audioEffectType == DataManager.AudioEffectTypes.BetweenMicrogame)
+                    if (audioEffectType == DataManager.AudioType.BetweenMicrogame)
                     {
                         audioSourceMusic.pitch = BossGameManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE;
                         audioSourceEffects.pitch = BossGameManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE;
                         audioSourceSecondaryEffects.pitch = BossGameManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE;
+                    }
+                    else
+                    {
+                        audioSourceMusic.pitch = BossGameManager.Instance.GetCurTimeScale();
+                        audioSourceEffects.pitch = BossGameManager.Instance.GetCurTimeScale();
+                        audioSourceSecondaryEffects.pitch = BossGameManager.Instance.GetCurTimeScale();
                     }
                 }
                 else if(InfiniteModeManager.Instance != null)
                 {
                     // the audio change on timescale increase is way more noticable than the game speed increase
                     // lower the significance of the audio timescale increase
-                    if (audioEffectType == DataManager.AudioEffectTypes.BetweenMicrogame)
+                    if (audioEffectType == DataManager.AudioType.BetweenMicrogame)
                     {
                         audioSourceMusic.pitch = InfiniteModeManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE;
                         audioSourceEffects.pitch = InfiniteModeManager.Instance.GetCurTimeScale() * MUSIC_PITCH_MULTIPLY_VALUE;
@@ -124,7 +129,7 @@ namespace ShrugWare
             }
         }
 
-        private void PlayMusicClipSetupHelper(DataManager.AudioEffectTypes audioType)
+        private void PlayMusicClipSetupHelper(DataManager.AudioType audioType)
         {
             if (audioSourceMusic == null)
             {
@@ -134,7 +139,7 @@ namespace ShrugWare
             audioSourceMusic.Stop();
 
             // minigames are normal speed
-            if (audioType == DataManager.AudioEffectTypes.MicrogameMusic)
+            if (audioType == DataManager.AudioType.MicrogameMusic)
             {
                 float curTimeScale = 1;
                 if (BossGameManager.Instance != null)
@@ -150,7 +155,7 @@ namespace ShrugWare
             }
         }
 
-        public void PlayMusicClip(DataManager.AudioEffectTypes audioType, float volumeScale = 1)
+        public void PlayMusicClip(DataManager.AudioType audioType, float volumeScale = 1)
         {
             PlayMusicClipSetupHelper(audioType);
             AudioClip audioClip = GetAudioClip(audioType);
@@ -159,7 +164,7 @@ namespace ShrugWare
             audioSourceMusic.Play();
         }
 
-        public void PlayMusicClip(AudioClip audioClip, DataManager.AudioEffectTypes audioType, float volumeScale = 1)
+        public void PlayMusicClip(AudioClip audioClip, DataManager.AudioType audioType, float volumeScale = 1)
         {
             PlayMusicClipSetupHelper(audioType);
             audioSourceMusic.volume *= volumeScale;

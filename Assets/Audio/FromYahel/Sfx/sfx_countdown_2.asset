@@ -17,3 +17,4 @@ MonoBehaviour:
   pitch: 1
   randomPitch: 0
   variablePitchIfRandom: 0
+  audioEffectType: 5

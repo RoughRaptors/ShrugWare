@@ -8,12 +8,12 @@ namespace ShrugWare
     public class AudioEffectClip
     {
         [SerializeField]
-        DataManager.AudioEffectTypes audioEffect;
+        DataManager.AudioType audioEffect;
 
         [SerializeField]
         AudioClip audioClip;
 
-        public DataManager.AudioEffectTypes GetAudioEffectType() { return audioEffect; }
+        public DataManager.AudioType GetAudioEffectType() { return audioEffect; }
         public AudioClip GetAudioClip() { return audioClip; }
     }
 }
