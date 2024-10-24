@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: mus_JazzBossa_BobaTime
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: c2da4477dde8e9440856fb493b15ba85, type: 3}
-  maxVolume: 0.8
+  maxVolume: 0.75
   pitch: 1
   randomPitch: 0
   variablePitchIfRandom: 0

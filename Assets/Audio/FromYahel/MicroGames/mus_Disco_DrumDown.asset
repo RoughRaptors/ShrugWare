@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: mus_Disco_DrumDown
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: cce119677c0bafa4a893c09989cd66af, type: 3}
-  maxVolume: 0.8
+  maxVolume: 0.75
   pitch: 1
   randomPitch: 0
   variablePitchIfRandom: 0

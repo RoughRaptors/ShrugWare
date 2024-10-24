@@ -55,20 +55,20 @@ namespace ShrugWare
             }
         }
 
-        private AudioClip GetAudioClip(DataManager.AudioType audioEffectType)
+        private AudioClipData GetAudioClip(DataManager.AudioType audioEffectType)
         {
             foreach (AudioClipData effectClip in audioEffects)
             {
                 if (effectClip.audioEffectType == audioEffectType)
                 {
-                    return effectClip.clip;
+                    return effectClip;
                 }
             }
 
             return null;
         }
 
-        public void PlayAudioClip(DataManager.AudioType audioEffectType, float volumeScale = 1, bool secondary = false)
+        public void PlayAudioClip(DataManager.AudioType audioEffectType, bool secondary = false)
         {
             if(audioSourceMusic == null || audioSourceEffects == null || audioSourceSecondaryEffects == null)
             {
@@ -84,7 +84,7 @@ namespace ShrugWare
                 audioSourceSecondaryEffects.Stop();
             }
 
-            AudioClip audioClip = GetAudioClip(audioEffectType);
+            AudioClipData audioClip = GetAudioClip(audioEffectType);
             if(audioClip != null)
             {
                 // we want to play the audio clip scaled based on the current timescale
@@ -120,11 +120,11 @@ namespace ShrugWare
 
                 if (!secondary)
                 {
-                    audioSourceEffects.PlayOneShot(audioClip, volumeScale);
+                    audioSourceEffects.PlayOneShot(audioClip.clip, audioClip.maxVolume);
                 }
                 else
                 {
-                    audioSourceSecondaryEffects.PlayOneShot(audioClip, volumeScale);
+                    audioSourceSecondaryEffects.PlayOneShot(audioClip.clip, audioClip.maxVolume);
                 }
             }
         }
@@ -135,7 +135,7 @@ namespace ShrugWare
             {
                 return;
             }
-
+            
             audioSourceMusic.Stop();
 
             // minigames are normal speed
@@ -158,16 +158,16 @@ namespace ShrugWare
         public void PlayMusicClip(DataManager.AudioType audioType, float volumeScale = 1)
         {
             PlayMusicClipSetupHelper(audioType);
-            AudioClip audioClip = GetAudioClip(audioType);
-            audioSourceMusic.volume *= volumeScale;
-            audioSourceMusic.clip = audioClip;
+            AudioClipData audioClip = GetAudioClip(audioType);
+            audioSourceMusic.volume = audioClip.maxVolume;
+            audioSourceMusic.clip = audioClip.clip;
             audioSourceMusic.Play();
         }
 
         public void PlayMusicClip(AudioClip audioClip, DataManager.AudioType audioType, float volumeScale = 1)
         {
             PlayMusicClipSetupHelper(audioType);
-            audioSourceMusic.volume *= volumeScale;
+            audioSourceMusic.volume = volumeScale;
             audioSourceMusic.clip = audioClip;
             audioSourceMusic.Play();
         }
@@ -189,11 +189,11 @@ namespace ShrugWare
             return null;
         }
 
-        public AudioClip GetMicrogameAudioClipFromIndexSO(int index)
+        public AudioClipData GetMicrogameAudioClipFromIndexSO(int index)
         {
             if (index < microgameMusicSO.Count)
             {
-                return microgameMusicSO[index].clip;
+                return microgameMusicSO[index];
             }
 
             return null;

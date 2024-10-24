@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: mus_JazzBossa_CoffeeBreak
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 99ee8cfdab71a7e4d96098e6a02e0e26, type: 3}
-  maxVolume: 0.8
+  maxVolume: 0.75
   pitch: 1
   randomPitch: 0
   variablePitchIfRandom: 0

@@ -29,7 +29,7 @@ namespace ShrugWare
 
         private void Start()
         {
-            audioManager.PlayAudioClip(DataManager.AudioType.MainMenu, .15f);
+            audioManager.PlayAudioClip(DataManager.AudioType.MainMenu);
         }
 
         public void OnStartClicked()

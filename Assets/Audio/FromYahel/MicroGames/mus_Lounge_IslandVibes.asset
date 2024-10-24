@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: mus_Lounge_IslandVibes
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: b586a2c37c3e0104ea9c64d7c4b8da66, type: 3}
-  maxVolume: 0.8
+  maxVolume: 0.75
   pitch: 1
   randomPitch: 0
   variablePitchIfRandom: 0

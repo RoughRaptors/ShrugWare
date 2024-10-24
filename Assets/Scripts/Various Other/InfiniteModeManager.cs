@@ -157,7 +157,7 @@ public class InfiniteModeManager : MonoBehaviour
 
     private void PlayBetweenMicrogameTimerDing()
     {
-        AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameTimerDing, .3f);
+        AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameTimerDing);
     }
 
     public void OnStartPressed()
@@ -257,7 +257,7 @@ public class InfiniteModeManager : MonoBehaviour
 
         if(livesLeft >= 0)
         {
-            AudioManager.Instance.PlayAudioClip(DataManager.AudioType.BetweenMicrogame, .3f);
+            AudioManager.Instance.PlayAudioClip(DataManager.AudioType.BetweenMicrogame);
 
             AddToTimeScale(0.1f);
         }

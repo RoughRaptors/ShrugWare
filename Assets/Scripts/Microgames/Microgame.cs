@@ -34,6 +34,7 @@ namespace ShrugWare
         public event Action MicrogameEnded;
         public event Action<bool, string> MicrogameEndText;
         private bool endTextSet = false;
+        private bool victoryAudioHandled = false;
 
         protected virtual void Awake()
         {
@@ -104,19 +105,24 @@ namespace ShrugWare
             {
                 // keep the music separated for now. we can remove the old stuff once we have enough new stuff
                 AudioClip audioClip;
+                float vol = 1f;
                 bool shouldUseSOMusic = UnityEngine.Random.Range(0, 2) == 0;
                 if (shouldUseSOMusic)
                 {
                     int randMusicIndexSO = UnityEngine.Random.Range(0, AudioManager.Instance.GetMicrogameMusicSO().Count);
-                    audioClip = AudioManager.Instance.GetMicrogameAudioClipFromIndexSO(randMusicIndexSO);
+                    var clipData = AudioManager.Instance.GetMicrogameAudioClipFromIndexSO(randMusicIndexSO);
+                    audioClip = clipData.clip;
+                    vol = clipData.maxVolume;
+
                 }
                 else
                 {
                     int randMusicIndex = UnityEngine.Random.Range(0, AudioManager.Instance.GetMicrogameMusic().Count);
                     audioClip = AudioManager.Instance.GetMicrogameAudioClipFromIndex(randMusicIndex);
+                    vol = .7f;
                 }
 
-                AudioManager.Instance.PlayMusicClip(audioClip, DataManager.AudioType.MicrogameMusic);
+                AudioManager.Instance.PlayMusicClip(audioClip, DataManager.AudioType.MicrogameMusic, vol);
 
                 if (InfiniteModeManager.Instance != null)
                 {
@@ -129,6 +135,8 @@ namespace ShrugWare
         protected virtual void TimeOut() { }
         protected abstract bool VictoryCheck();
 
+        
+
         private void HandleMicrogameEnd(bool wonMicrogame)
         {
             SetMicrogameEndText(wonMicrogame);
@@ -139,12 +147,12 @@ namespace ShrugWare
                 hasRunEndCondition = true;
                 if (wonMicrogame)
                 {
-                    AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameWin);
+                    //AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameWin);
                     RunEffects(winEffects);
                 }
                 else
                 {
-                    AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameLose);
+                    //AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameLose);
                     RunEffects(lossEffects);
                 }
 
@@ -167,6 +175,12 @@ namespace ShrugWare
             if(victory)
             {
                 text = victoryText;
+            }
+            if(!victoryAudioHandled)
+            {
+                victoryAudioHandled = true;
+                if (victory) AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameWin);
+                else AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameLose);
             }
 
             SetMicrogameEndText(victory, text);
@@ -197,7 +211,7 @@ namespace ShrugWare
                 if (AudioManager.Instance != null &&OverworldManager.Instance != null && 
                     BossGameManager.Instance != null && !BossGameManager.Instance.CurBoss.isDead)
                 {
-                    AudioManager.Instance.PlayAudioClip(DataManager.AudioType.BetweenMicrogame, .3f);
+                    AudioManager.Instance.PlayAudioClip(DataManager.AudioType.BetweenMicrogame);
                 }
 
                 BossGameManager.Instance.MicrogameCompleted(wonMicrogame);

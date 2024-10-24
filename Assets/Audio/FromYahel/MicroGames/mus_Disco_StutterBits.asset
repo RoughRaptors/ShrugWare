@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: mus_Disco_StutterBits
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: c694695c3f280c442a48900ad6167108, type: 3}
-  maxVolume: 0.8
+  maxVolume: 0.75
   pitch: 1
   randomPitch: 0
   variablePitchIfRandom: 0
