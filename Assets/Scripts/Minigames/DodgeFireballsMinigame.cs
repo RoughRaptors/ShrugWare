@@ -46,10 +46,10 @@ namespace ShrugWare
         Canvas canvas;
 
         [SerializeField]
-        GameObject hitVFX;
+        List<GameObject> hitVFXList;
 
         [SerializeField]
-        GameObject collectVFX;
+        List<GameObject> collectVFXList;
 
         private const float FIREBALL_X_MIN = -25;
         private const float FIREBALL_X_MAX = 125;
@@ -74,7 +74,7 @@ namespace ShrugWare
         private const int NUM_FIREBALLS_IN_WAVE_MAX = 9;
         private const float COLLECTIBLE_SPAWN_DISTANCE = 30;
 #if UNITY_EDITOR
-        private const int COLLECTIBLE_DAMAGE = 10;
+        private const int COLLECTIBLE_DAMAGE = 20;
 #else
         private const int COLLECTIBLE_DAMAGE = 10;
 #endif
@@ -126,7 +126,11 @@ namespace ShrugWare
             }
 
             continueButton.SetActive(false);
-            hitVFX.gameObject.transform.localScale = new Vector3(7.5f, 7.5f, 7.5f);
+
+            foreach (GameObject vfx in hitVFXList)
+            {
+                vfx.gameObject.transform.localScale = new Vector3(4, 4, 4);
+            }
         }
 
         private new void Start()
@@ -427,7 +431,8 @@ namespace ShrugWare
                 }
             }
 
-            Instantiate(hitVFX, gameObject.transform.position, Quaternion.identity);
+            int index = UnityEngine.Random.Range(0, hitVFXList.Count);
+            Instantiate(hitVFXList[index], gameObject.transform.position, Quaternion.identity);
             FlashColor();
         }
 
@@ -458,7 +463,8 @@ namespace ShrugWare
                 SpawnCollectible();
             }
 
-            Instantiate(collectVFX, other.gameObject.transform.position, Quaternion.identity);
+            int index = UnityEngine.Random.Range(0, collectVFXList.Count);
+            Instantiate(collectVFXList[index], other.gameObject.transform.position, Quaternion.identity);
             Destroy(other.gameObject);
         }
 

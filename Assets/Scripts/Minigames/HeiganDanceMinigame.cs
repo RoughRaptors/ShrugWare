@@ -43,6 +43,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject collectibleObj;
 
+        [SerializeField]
+        List<GameObject> collectVFXList;
+
         private const float TIME_TO_SWITCH_COLORS = 3.5f;
         private const float PLAYER_SPEED = 50.0f;
         private float timeSinceLastColorSwitch = 0.0f;
@@ -53,7 +56,7 @@ namespace ShrugWare
         private float healthRemaining = 100;
 
 #if UNITY_EDITOR
-        private const int COLLECTIBLE_DAMAGE = 100;
+        private const int COLLECTIBLE_DAMAGE = 20;
 #else
         private const int COLLECTIBLE_DAMAGE = 10;
 #endif
@@ -218,6 +221,8 @@ namespace ShrugWare
         {
             if(other.gameObject.tag == "Collectible")
             {
+                int index = UnityEngine.Random.Range(0, collectVFXList.Count);
+                Instantiate(collectVFXList[index], other.gameObject.transform.position, Quaternion.identity);
                 Destroy(other.gameObject);
 
                 enemyHealth -= COLLECTIBLE_DAMAGE;
