@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace ShrugWare
 {
+    [Serializable]
     [CreateAssetMenu(fileName = "NewAudioClipData", menuName = "ScriptableObjects/AudioClipData", order = 2)]
     public class AudioClipData : ScriptableObject
     {
@@ -13,5 +15,6 @@ namespace ShrugWare
         public bool randomPitch = false;
         [Range(-1, 1)]
         public float variablePitchIfRandom;
+        public DataManager.AudioType audioEffectType;
     }
 }

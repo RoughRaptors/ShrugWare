@@ -70,12 +70,6 @@ namespace ShrugWare
             set { isDebugMode = value; }
         }
 
-        private AudioManager audioManager;
-        public AudioManager AudioManager
-        {
-            get { return audioManager; }
-        }
-
         [SerializeField]
         GameObject eventSystemObj;
 
@@ -119,7 +113,6 @@ namespace ShrugWare
 
         private void Awake()
         {
-            audioManager = AudioManager.Instance;
             if (Instance == null)
             {
                 Instance = this;
@@ -138,7 +131,7 @@ namespace ShrugWare
                 playerObj.SetActive(true);
             }
 
-            if (audioManager != null && !audioManager.IsMusicPlaying())
+            if (AudioManager.Instance != null && !AudioManager.Instance.IsMusicPlaying())
             {
                 PlayOverworldMusic();
             }
@@ -152,8 +145,7 @@ namespace ShrugWare
         private void Start()
         {
             // for some reason when we put this in Awake, it's not being hit
-            audioManager = AudioManager.Instance;
-            if (audioManager != null && !audioManager.IsMusicPlaying())
+            if (AudioManager.Instance != null && !AudioManager.Instance.IsMusicPlaying())
             {
                 PlayOverworldMusic();
             }
@@ -217,9 +209,9 @@ namespace ShrugWare
         {
             Time.timeScale = 1.0f;
 
-            if (audioManager != null)
+            if (AudioManager.Instance != null)
             {
-                audioManager.ResetPitch(true);
+                AudioManager.Instance.ResetPitch(true);
             }
 
             if (enabled)
@@ -322,7 +314,7 @@ namespace ShrugWare
             OverworldLevel newOverworldLevel = GetOverworldLevelByID(levelID);
             if (newOverworldLevel != null)
             {
-                bool force = false;
+                bool force = isDebugMode;
 #if UNITY_EDITOR
                 force = true;
 #endif
@@ -476,9 +468,9 @@ namespace ShrugWare
             playerObj.SetActive(false);
 
             // only stop if we enter a trash/boss/infinite level
-            if(audioManager != null && (isTrashOrBoss || level.LevelType == DataManager.OverworldLevelType.Infinite))
+            if(AudioManager.Instance != null && (isTrashOrBoss || level.LevelType == DataManager.OverworldLevelType.Infinite))
             {
-                audioManager.StopAudio();
+                AudioManager.Instance.StopAudio();
             }
 
             SetGameState(level.LevelType);
@@ -490,10 +482,10 @@ namespace ShrugWare
 
         private void PlayOverworldMusic()
         {
-            if (audioManager != null)
+            if (AudioManager.Instance != null)
             {
-                audioManager.LoopMusic(true);
-                audioManager.PlayMusicClip(DataManager.AudioEffectTypes.Overworld, 0.75f);
+                AudioManager.Instance.LoopMusic(true);
+                AudioManager.Instance.PlayMusicClip(DataManager.AudioType.Overworld, 0.75f);
             }
         }
 
@@ -503,25 +495,25 @@ namespace ShrugWare
             // todo - fix this, it doesn't work. for whatever reason it only works when attached to a debugger
             playerObj.SetActive(false);
 
-            if (audioManager != null)
+            if (AudioManager.Instance != null)
             {
-                audioManager.StopAudio();
+                AudioManager.Instance.StopAudio();
             }
         }
 
-        public void PlayMusicClip(AudioClip audioClip, DataManager.AudioEffectTypes audioType, float volumeScale = 1)
+        public void PlayMusicClip(AudioClip audioClip, DataManager.AudioType audioType, float volumeScale = 1)
         {
-            if (audioManager != null)
+            if (AudioManager.Instance != null)
             {
-                audioManager.PlayMusicClip(audioClip, audioType);
+                AudioManager.Instance.PlayMusicClip(audioClip, audioType);
             }
         }
 
         public void StopMusic()
         {
-            if (audioManager != null)
+            if (AudioManager.Instance != null)
             {
-                audioManager.StopAudio();
+                AudioManager.Instance.StopAudio();
             }
         }
 
@@ -557,9 +549,9 @@ namespace ShrugWare
 
         public void ResetAudioPitch()
         {
-            if (audioManager != null)
+            if (AudioManager.Instance != null)
             {
-                audioManager.ResetPitch();
+                AudioManager.Instance.ResetPitch();
             }
         }
 

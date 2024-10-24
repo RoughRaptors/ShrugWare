@@ -117,7 +117,7 @@ namespace ShrugWare
             DauntingInferno = 0
         }
 
-        public enum AudioEffectTypes
+        public enum AudioType
         {
             MainMenu = 0,
             BetweenMicrogame,
@@ -128,7 +128,11 @@ namespace ShrugWare
             MicrogameTimerDing,
             Overworld,
             MicrogameMusic,
-            MinigameMusic
+            MinigameMusic,
+            MicrogameIntro,
+            MicrogameOutro,
+            MicrogameWin,
+            MicrogameLose
         }
 
         public enum OverworldLevelType

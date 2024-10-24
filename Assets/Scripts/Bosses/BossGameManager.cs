@@ -142,15 +142,8 @@ namespace ShrugWare
         private int curSceneIndex;
         public float GetCurSceneIndex() { return curSceneIndex; }
 
-        private AudioManager audioManager;
-        public AudioManager AudioManager
-        {
-            get { return audioManager; }
-        }
-
         private void Awake()
         {
-            audioManager = AudioManager.Instance;
             if (Instance == null)
             {
                 Instance = this;
@@ -160,7 +153,7 @@ namespace ShrugWare
                 Destroy(gameObject);
             }
 
-            audioManager.LoopMusic(false);
+            AudioManager.Instance.LoopMusic(false);
             EnableBossCamera(true);
 
             curBoss = Instance.curBoss;
@@ -236,6 +229,7 @@ namespace ShrugWare
             // only play a transition if it's a microgame
             if (sceneId >= (int)DataManager.Scenes.MICROGAME_START && sceneId <= (int)DataManager.Scenes.MICROGAME_END)
             {
+                AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameIntro);
                 float secondsToWait = 2.0f;
                 sceneTransitionAnim.SetTrigger("End");
                 yield return new WaitForSeconds(secondsToWait);
@@ -355,9 +349,9 @@ namespace ShrugWare
             SetTimescale(1);
             gameState = GameState.BossScreen;
 
-            if (audioManager != null)
+            if (AudioManager.Instance != null)
             {
-                audioManager.StopAudio();
+                AudioManager.Instance.StopAudio();
             }
         }
 

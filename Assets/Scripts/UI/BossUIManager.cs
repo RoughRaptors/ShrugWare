@@ -101,8 +101,9 @@ namespace ShrugWare
                 {
                     if (AudioManager.Instance != null)
                     {
-                        AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.MicrogameTimerTick);
+                        AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameTimerTick);
                     }
+
                     countdownTimerRunning = true;
                 }
                 else if (timeLeft <= 0.0f)
@@ -111,7 +112,7 @@ namespace ShrugWare
 
                     if (AudioManager.Instance != null)
                     {
-                        AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.MicrogameTimerDing);
+                        AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameTimerDing);
                     }
                 }
             }
@@ -173,7 +174,7 @@ namespace ShrugWare
 
             if (AudioManager.Instance != null)
             {
-                AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.ButtonClick);
+                AudioManager.Instance.PlayAudioClip(DataManager.AudioType.ButtonClick);
             }
 
             BossGameManager.Instance.ContinueGame();

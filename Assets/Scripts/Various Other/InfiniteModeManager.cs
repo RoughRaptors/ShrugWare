@@ -157,7 +157,7 @@ public class InfiniteModeManager : MonoBehaviour
 
     private void PlayBetweenMicrogameTimerDing()
     {
-        AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.MicrogameTimerDing, .3f);
+        AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameTimerDing, .3f);
     }
 
     public void OnStartPressed()
@@ -224,8 +224,9 @@ public class InfiniteModeManager : MonoBehaviour
         // only play a transition if it's a microgame
         if (sceneId >= (int)DataManager.Scenes.MICROGAME_START && sceneId <= (int)DataManager.Scenes.MICROGAME_END)
         {
+            AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameOutro);
             sceneTransitionAnim.SetTrigger("End");
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
             SceneManager.LoadScene(sceneId);
             sceneTransitionAnim.SetTrigger("Start");
         }
@@ -256,7 +257,7 @@ public class InfiniteModeManager : MonoBehaviour
 
         if(livesLeft >= 0)
         {
-            AudioManager.Instance.PlayAudioClip(DataManager.AudioEffectTypes.BetweenMicrogame, .3f);
+            AudioManager.Instance.PlayAudioClip(DataManager.AudioType.BetweenMicrogame, .3f);
 
             AddToTimeScale(0.1f);
         }

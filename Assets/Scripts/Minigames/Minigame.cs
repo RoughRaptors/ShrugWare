@@ -22,7 +22,7 @@ namespace ShrugWare
 
             if (OverworldManager.Instance != null)
             {
-                OverworldManager.Instance.PlayMusicClip(minigameMusic, DataManager.AudioEffectTypes.MinigameMusic);
+                OverworldManager.Instance.PlayMusicClip(minigameMusic, DataManager.AudioType.MinigameMusic);
                 Invoke("RestartMusic", minigameMusic.length);
             }
         }
@@ -53,7 +53,7 @@ namespace ShrugWare
 
         private void RestartMusic()
         {
-            OverworldManager.Instance.PlayMusicClip(minigameMusic, DataManager.AudioEffectTypes.MinigameMusic);
+            OverworldManager.Instance.PlayMusicClip(minigameMusic, DataManager.AudioType.MinigameMusic);
         }
     }
 }
