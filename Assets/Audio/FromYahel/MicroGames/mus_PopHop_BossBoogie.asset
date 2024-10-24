@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: mus_PopHop_BossBoogie
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: eea87d2c6f5e2094096a1e3929e7160e, type: 3}
-  maxVolume: 0.8
+  maxVolume: 0.75
   pitch: 1
   randomPitch: 0
   variablePitchIfRandom: 0

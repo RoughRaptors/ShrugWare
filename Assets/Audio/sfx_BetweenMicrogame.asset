@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: sfx_BetweenMicrogame
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 800bfb05f15a77e428ccf3bb044ae43d, type: 3}
-  maxVolume: 1
+  maxVolume: 0.5
   pitch: 1
   randomPitch: 0
   variablePitchIfRandom: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: mus_Electro_TipToe
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 76d9a79733b71964ca9c4325eaaf2f41, type: 3}
-  maxVolume: 0.8
+  maxVolume: 0.75
   pitch: 1
   randomPitch: 0
   variablePitchIfRandom: 0
