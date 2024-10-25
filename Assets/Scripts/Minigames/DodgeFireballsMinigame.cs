@@ -2,10 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.Data;
 using TMPro;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
-using UnityEngine.InputSystem.EnhancedTouch;
 
 namespace ShrugWare
 {
