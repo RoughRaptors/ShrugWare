@@ -58,8 +58,12 @@ namespace ShrugWare
                 }
             }
 
-            AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameIntro);
+            if(AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameIntro);
+            }
             SetEffects();
+
             StartCoroutine(PlayMicrogame());
         }
 
@@ -178,9 +182,19 @@ namespace ShrugWare
             }
             if(!victoryAudioHandled)
             {
+                // maybe put inside the if? probably doesn't matter
                 victoryAudioHandled = true;
-                if (victory) AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameWin);
-                else AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameLose);
+                if (AudioManager.Instance != null)
+                {
+                    if (victory)
+                    {
+                        AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameWin);
+                    }
+                    else 
+                    { 
+                        AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameLose);
+                    }
+                }
             }
 
             SetMicrogameEndText(victory, text);

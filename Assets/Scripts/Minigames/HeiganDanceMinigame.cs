@@ -43,6 +43,18 @@ namespace ShrugWare
         [SerializeField]
         GameObject collectibleObj;
 
+        [SerializeField]
+        List<GameObject> collectVFXList;
+
+        [SerializeField]
+        Collider2D outerCollider;
+
+        [SerializeField]
+        Collider2D innerCollider;
+
+        [SerializeField]
+        Canvas collectibleCanvas;
+
         private const float TIME_TO_SWITCH_COLORS = 3.5f;
         private const float PLAYER_SPEED = 50.0f;
         private float timeSinceLastColorSwitch = 0.0f;
@@ -53,7 +65,7 @@ namespace ShrugWare
         private float healthRemaining = 100;
 
 #if UNITY_EDITOR
-        private const int COLLECTIBLE_DAMAGE = 100;
+        private const int COLLECTIBLE_DAMAGE = 20;
 #else
         private const int COLLECTIBLE_DAMAGE = 10;
 #endif
@@ -69,8 +81,11 @@ namespace ShrugWare
 
         private bool gameRunning = false;
 
-        private float laserInvulnExpireTime = 0.0f;
         private const float LASER_INVULN_DURATION = 0.85f;
+        private float laserInvulnExpireTime = -1.0f;
+
+        private const float TIME_BETWEEN_COLLECTIONS = 0.25f;
+        private float collectCooldownTime = -1.0f;
 
         private float mitigation = 0.0f;
 
@@ -213,28 +228,41 @@ namespace ShrugWare
             }
         }
 
-        // funny exploit if you go around the lasers. there's barely enough room
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            if(other.gameObject.tag == "Collectible")
+            if(other.tag != "Collectible")
             {
-                Destroy(other.gameObject);
+                return;
+            }
 
-                enemyHealth -= COLLECTIBLE_DAMAGE;
-                enemyHealthText.text = "Enemy Health: " + enemyHealth.ToString();
-                if (enemyHealth <= 0)
-                {
-                    gameRunning = false;
-                    WinGame();
-                }
-                else
-                {                    
-                    SpawnCollectible();
-                }
+            // i don't know wtf is wrong. sometimes the collectible is hit by each collider leading to a dupe, sometimes it's not hit at all
+            // fuck it just keep a timer and don't let the player collect multiple collectibles in a certain timeframe
+            if(collectCooldownTime > Time.time + TIME_BETWEEN_COLLECTIONS)
+            {
+                Debug.LogError("cooldown");
+                return;
+            }
+
+            int index = UnityEngine.Random.Range(0, collectVFXList.Count);
+            GameObject newVFX = Instantiate(collectVFXList[index], other.gameObject.transform.position, Quaternion.identity);
+            newVFX.transform.localScale *= 2.5f;
+            Destroy(other.gameObject);
+
+            enemyHealth -= COLLECTIBLE_DAMAGE;
+            enemyHealthText.text = "Enemy Health: " + enemyHealth.ToString();
+            if (enemyHealth <= 0)
+            {
+                gameRunning = false;
+                WinGame();
+            }
+            else
+            {
+                SpawnCollectible();
+                collectCooldownTime = Time.time + TIME_BETWEEN_COLLECTIONS;
             }
         }
 
-        private void OnTriggerStay(Collider other)
+        private void OnTriggerStay2D(Collider2D other)
         {
             if (gameRunning)
             {
@@ -248,8 +276,13 @@ namespace ShrugWare
 
         private void DamagePlayer(GameObject collideObj)
         {
-            float damageTaken = 0.0f;
             bool invuln = laserInvulnExpireTime > Time.time;
+            if(invuln)
+            {
+                return;
+            }
+
+            float damageTaken = 0.0f;
             if (collideObj.tag == "Laser")
             {
                 // don't get hit multiple times from a laser if you keep moving towards it after the knockback
@@ -258,15 +291,12 @@ namespace ShrugWare
                     laserInvulnExpireTime = Time.time + LASER_INVULN_DURATION;
                 }
 
-                if (!invuln)
-                {
-                    float baseDamage = 25.0f;
-                    float damageReduction = baseDamage * (mitigation / 100);
-                    damageTaken = baseDamage - damageReduction;
-                    FlashColor();
-                }
+                float baseDamage = 25.0f;
+                float damageReduction = baseDamage * (mitigation / 100);
+                damageTaken = baseDamage - damageReduction;
+                FlashColor();
 
-                Vector3 targetPos = transform.position;
+                Vector2 targetPos = transform.position;
                 if (collideObj.transform.parent.name == "Top Laser")
                 {
                     targetPos = new Vector3(transform.position.x, transform.position.y - 10, transform.position.z);
@@ -284,15 +314,12 @@ namespace ShrugWare
                     targetPos = new Vector3(transform.position.x - 10, transform.position.y, transform.position.z);
                 }
 
-                GetComponent<Rigidbody>().MovePosition(targetPos);
+                GetComponent<Rigidbody2D>().MovePosition(targetPos);
             }
             else
             {
                 // this ticks damage so make it dependent on time in the bad area
-                if (!invuln)
-                {
-                    damageTaken = (10.0f - (mitigation / 100)) * Time.fixedDeltaTime;
-                }
+                damageTaken = (10.0f - (mitigation / 100)) * Time.fixedDeltaTime;
             }
 
             healthRemaining -= damageTaken;
@@ -418,10 +445,11 @@ namespace ShrugWare
                     newCollectible.SetActive(true);
 
                     int spriteIndex = UnityEngine.Random.Range(0, collectibleObjectSprites.Count);
-                    newCollectible.GetComponent<SpriteRenderer>().sprite = collectibleObjectSprites[spriteIndex];
+                    newCollectible.GetComponentInChildren<SpriteRenderer>().sprite = collectibleObjectSprites[spriteIndex];
 
                     // pick a random tile to spawn on
                     newCollectible.transform.position = new Vector3(tileObjs[tileIndex].transform.position.x, tileObjs[tileIndex].transform.position.y, -1);
+                    newCollectible.transform.SetParent(collectibleCanvas.transform);
                     break;
                 }
 

@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Data;
 using TMPro;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 namespace ShrugWare
 {
@@ -45,6 +47,12 @@ namespace ShrugWare
         [SerializeField]
         Canvas canvas;
 
+        [SerializeField]
+        List<GameObject> hitVFXList;
+
+        [SerializeField]
+        List<GameObject> collectVFXList;
+
         private const float FIREBALL_X_MIN = -25;
         private const float FIREBALL_X_MAX = 125;
         private const float FIREBALL_Y_MIN = -40;
@@ -68,7 +76,7 @@ namespace ShrugWare
         private const int NUM_FIREBALLS_IN_WAVE_MAX = 9;
         private const float COLLECTIBLE_SPAWN_DISTANCE = 30;
 #if UNITY_EDITOR
-        private const int COLLECTIBLE_DAMAGE = 100;
+        private const int COLLECTIBLE_DAMAGE = 20;
 #else
         private const int COLLECTIBLE_DAMAGE = 10;
 #endif
@@ -120,6 +128,11 @@ namespace ShrugWare
             }
 
             continueButton.SetActive(false);
+
+            foreach (GameObject vfx in hitVFXList)
+            {
+                vfx.gameObject.transform.localScale = new Vector3(4, 4, 4);
+            }
         }
 
         private new void Start()
@@ -370,6 +383,7 @@ namespace ShrugWare
                     newCollectible.transform.SetParent(canvas.transform);
                     newCollectible.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
+
                     newCollectible.SetActive(true);
                     break;
                 }
@@ -420,6 +434,8 @@ namespace ShrugWare
                 }
             }
 
+            int index = UnityEngine.Random.Range(0, hitVFXList.Count);
+            Instantiate(hitVFXList[index], gameObject.transform.position, Quaternion.identity);
             FlashColor();
         }
 
@@ -450,6 +466,8 @@ namespace ShrugWare
                 SpawnCollectible();
             }
 
+            int index = UnityEngine.Random.Range(0, collectVFXList.Count);
+            Instantiate(collectVFXList[index], other.gameObject.transform.position, Quaternion.identity);
             Destroy(other.gameObject);
         }
 

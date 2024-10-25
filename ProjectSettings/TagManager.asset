@@ -11,6 +11,7 @@ TagManager:
   - Tile
   - Collectible
   - Manager
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -47,7 +48,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: UILayer
-    uniqueID: 798784207
     locked: 0
