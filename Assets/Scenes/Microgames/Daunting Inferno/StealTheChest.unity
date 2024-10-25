@@ -261,7 +261,7 @@ MonoBehaviour:
     addOnWin: 1
     addOnLoss: 1
   playerObject: {fileID: 538549391}
-  chestObj: {fileID: 0}
+  chestObj: {fileID: 659116896}
   groupMembers:
   - {fileID: 1756833635}
   - {fileID: 1174089783}
