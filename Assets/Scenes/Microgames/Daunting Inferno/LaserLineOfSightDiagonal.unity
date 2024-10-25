@@ -609,6 +609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &524343265
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -833,6 +834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &713458993
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -989,6 +991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &753764166
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1165,18 +1168,21 @@ MonoBehaviour:
       effectType: 0
       amount: 34
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 0
     addOnLoss: 1
   - effect:
       effectType: 2
       amount: 12.5
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 1
     addOnLoss: 0
   - effect:
       effectType: 3
       amount: 0.05
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 1
     addOnLoss: 1
   laserObjs:
@@ -1341,6 +1347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &1115325978
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1698,7 +1705,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6008722839044481440, guid: 5b210609803658e488f512fc13a6163e, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6008722839044481440, guid: 5b210609803658e488f512fc13a6163e, type: 3}
       propertyPath: m_IsTrigger
@@ -1767,6 +1774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &1707614311
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1957,6 +1965,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!1 &1829001578
 GameObject:
   m_ObjectHideFlags: 0

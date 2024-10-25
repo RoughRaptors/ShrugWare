@@ -305,6 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &340846837
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -623,6 +624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &652098125
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -787,6 +789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &814428858
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -963,18 +966,21 @@ MonoBehaviour:
       effectType: 0
       amount: 34
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 0
     addOnLoss: 1
   - effect:
       effectType: 2
       amount: 12.5
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 1
     addOnLoss: 0
   - effect:
       effectType: 3
       amount: 0.05
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 1
     addOnLoss: 1
   laserObjs:
@@ -1044,6 +1050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &819579903
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1268,6 +1275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &1246285737
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1462,7 +1470,6 @@ GameObject:
   - component: {fileID: 1385624283}
   - component: {fileID: 1385624282}
   - component: {fileID: 1385624281}
-  - component: {fileID: 1385624285}
   m_Layer: 10
   m_Name: Wall 1
   m_TagString: Untagged
@@ -1556,33 +1563,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 433176757}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!54 &1385624285
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1385624280}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &1399094086
 GameObject:
   m_ObjectHideFlags: 0
@@ -1631,6 +1611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &1399094089
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1750,6 +1731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &1409846413
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1869,6 +1851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &1419729990
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1988,6 +1971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &1487309964
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2382,6 +2366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!1 &1829001578
 GameObject:
   m_ObjectHideFlags: 0
@@ -2535,6 +2520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &1830637278
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2618,7 +2604,6 @@ GameObject:
   - component: {fileID: 1866033488}
   - component: {fileID: 1866033487}
   - component: {fileID: 1866033486}
-  - component: {fileID: 1866033489}
   m_Layer: 10
   m_Name: Wall 2
   m_TagString: Untagged
@@ -2712,33 +2697,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866033484}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &1866033489
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1866033484}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &1877836581
 GameObject:
   m_ObjectHideFlags: 0
@@ -2787,6 +2745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &1877836584
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2906,6 +2865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &1881602741
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3060,6 +3020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 51dab0a5ac188034a8dfbd146d00d046, type: 2}
+  laserParentName: 
 --- !u!65 &2108124744
 BoxCollider:
   m_ObjectHideFlags: 0

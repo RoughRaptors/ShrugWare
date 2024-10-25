@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Data;
 using TMPro;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 namespace ShrugWare
 {
@@ -380,6 +382,7 @@ namespace ShrugWare
 
                     newCollectible.transform.SetParent(canvas.transform);
                     newCollectible.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+
 
                     newCollectible.SetActive(true);
                     break;
