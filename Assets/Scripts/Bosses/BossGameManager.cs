@@ -22,7 +22,7 @@ Taunt The Adds - Click x amount of adds running around the screen.
 Perform The Rotation - Click the shown abilities in the correct order
 
 -- 2.5D Character Movement --
-Avoid The Lasers - Avoid a spinning laser
+Avoid The 8Lasers - Avoid a spinning laser
 Buy Cheap/Expensive Item - Purchase the proper item at a merchant
 Colored Platforms - Get on the green platform
 Dodge The Fireball - Dodge a fireball coming at you
