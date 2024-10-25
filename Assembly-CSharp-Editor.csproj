@@ -1122,10 +1122,6 @@
       <Project>{74E1E516-C5DF-C46A-3AB1-AAB5D4CD4C28}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="CFXR.WelcomeScreen.csproj">
-      <Project>{312ECC9E-C45D-15A9-82D0-C680E12CEFB5}</Project>
-      <Name>CFXR.WelcomeScreen</Name>
-    </ProjectReference>
     <ProjectReference Include="CFXRRuntime.csproj">
       <Project>{191F9B65-45C5-C21F-004F-CF3DFB9A5560}</Project>
       <Name>CFXRRuntime</Name>
