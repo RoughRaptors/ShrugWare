@@ -18,29 +18,29 @@ namespace ShrugWare
         public static event Action<GameObject> OnBadExit;
         public static event Action<GameObject> OnAnyExit;
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
             OnAnyCollision?.Invoke(other.gameObject);
 
-            if(goodMasks.HasLayer(other.gameObject.layer))
+            if (goodMasks.HasLayer(other.gameObject.layer))
             {
                 OnGoodCollision?.Invoke(other.gameObject);
             }
-            else if(badMasks.HasLayer(other.gameObject.layer))
+            else if (badMasks.HasLayer(other.gameObject.layer))
             {
                 OnBadCollision?.Invoke(other.gameObject);
             }
         }
 
-        private void OnTriggerExit(Collider other) 
+        private void OnTriggerExit2D(Collider2D other) 
         {
             OnAnyExit?.Invoke(other.gameObject);
 
-            if(goodMasks.HasLayer(other.gameObject.layer))
+            if (goodMasks.HasLayer(other.gameObject.layer))
             {
                 OnGoodExit?.Invoke(other.gameObject);
             }
-            else if(badMasks.HasLayer(other.gameObject.layer))
+            else if (badMasks.HasLayer(other.gameObject.layer))
             {
                 OnBadExit?.Invoke(other.gameObject);
             }
