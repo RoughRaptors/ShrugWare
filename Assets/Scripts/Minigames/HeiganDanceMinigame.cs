@@ -84,7 +84,7 @@ namespace ShrugWare
         private const float LASER_INVULN_DURATION = 0.85f;
         private float laserInvulnExpireTime = -1.0f;
 
-        private const float TIME_BETWEEN_COLLECTIONS = 0.25f;
+        private const float TIME_BETWEEN_COLLECTIONS = 1.0f;
         private float collectCooldownTime = -1.0f;
 
         private float mitigation = 0.0f;
