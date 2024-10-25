@@ -68,6 +68,7 @@
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csDestroyEffect.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCollider.cs" />
     <Compile Include="Assets\Scripts\Merchants\MerchantManager.cs" />
+    <Compile Include="Assets\Art\3D Lasers\HSFiles\Scripts\HS_HittedObject.cs" />
     <Compile Include="Assets\Scripts\Various Other\JZLayerExtensions.cs" />
     <Compile Include="Assets\Scripts\Bosses\Warboss Kard.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\LaserLineOfSightVerticalAlternative.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\ColoredPlatforms.cs" />
     <Compile Include="Assets\Scripts\Minigames\Minigame.cs" />
     <Compile Include="Assets\Art\Fire\Scripts\OscillateLightBrightness.cs" />
+    <Compile Include="Assets\Art\3D Lasers\HSFiles\Scripts\Hovl_DemoLasers.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterceptTheFireball.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\MeleeTheBoss.cs" />
@@ -129,12 +131,14 @@
     <Compile Include="Assets\Scripts\Overworld\OverworldLevel.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StackPowerstones.cs" />
     <Compile Include="Assets\GearScreen.cs" />
+    <Compile Include="Assets\Art\3D Lasers\HSFiles\Scripts\Hovl_Laser2.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\LineOfSight.cs" />
     <Compile Include="Assets\TooltipManager.cs" />
     <Compile Include="Assets\Art\KY_effects\Script\Lighting.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csShowAllEffect.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csAnimationSpin.cs" />
     <Compile Include="Assets\Scripts\Audio\AudioManager.cs" />
+    <Compile Include="Assets\Art\3D Lasers\HSFiles\Scripts\Hovl_LaserDemo.cs" />
     <Compile Include="Assets\ImageHelper.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectEditor.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\SidestepTheFireball.cs" />
@@ -148,6 +152,7 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterruptTheAbility.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StackUpForMeteor.cs" />
     <Compile Include="Assets\Scripts\UI\BossUIManager.cs" />
+    <Compile Include="Assets\Art\3D Lasers\HSFiles\Scripts\Hovl_Laser.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\TauntTheAdds.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -160,8 +165,11 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\Art\KY_effects\MagicEffectsPackFree\ReadMe.txt" />
+    <None Include="Assets\Art\3D Lasers\3D Lasers Pack\Demo scene lasers\If you want to use lasers in 2D.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\Art\3D Lasers\HSFiles\Shaders\Blend_CenterGlow.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\Art\3D Lasers\3D Lasers Pack\Demo scene lasers\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
@@ -173,6 +181,7 @@
     <None Include="Assets\Art\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_PASSES.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\Art\3D Lasers\HSFiles\Shaders\Add_CenterGlow.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\Art\Cartoon FX Remaster\CFXR Assets\Shaders\CFXR_URP.cginc" />
@@ -1167,10 +1176,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="CFXR.WelcomeScreen.csproj">
-      <Project>{312ECC9E-C45D-15A9-82D0-C680E12CEFB5}</Project>
-      <Name>CFXR.WelcomeScreen</Name>
-    </ProjectReference>
     <ProjectReference Include="CFXRRuntime.csproj">
       <Project>{191F9B65-45C5-C21F-004F-CF3DFB9A5560}</Project>
       <Name>CFXRRuntime</Name>
