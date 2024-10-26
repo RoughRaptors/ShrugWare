@@ -96,12 +96,12 @@ namespace ShrugWare
         
         protected void OnEnable()
         {
-            PlayerCollider.OnBadCollision += PlayerHit;
+            PlayerCollider.OnBadCollision += LaserHit;
         }
 
         protected void OnDisable()
         {
-            PlayerCollider.OnBadCollision -= PlayerHit;
+            PlayerCollider.OnBadCollision += LaserHit;
         }
 
         private new void Start()
@@ -294,22 +294,22 @@ namespace ShrugWare
                 float baseDamage = 25.0f;
                 float damageReduction = baseDamage * (mitigation / 100);
                 damageTaken = baseDamage - damageReduction;
-                FlashColor();
+                FlashColor();                
 
                 Vector2 targetPos = transform.position;
-                if (collideObj.transform.parent.name == "Top Laser")
+                if (collideObj.name == "Top Collider")
                 {
                     targetPos = new Vector3(transform.position.x, transform.position.y - 10, transform.position.z);
                 }
-                else if (collideObj.transform.parent.name == "Bottom Laser")
+                else if (collideObj.name == "Bottom Collider")
                 {
                     targetPos = new Vector3(transform.position.x, transform.position.y + 10, transform.position.z);
                 }
-                else if (collideObj.transform.parent.name == "Left Laser")
+                else if (collideObj.name == "Left Collider")
                 {
                     targetPos = new Vector3(transform.position.x + 10, transform.position.y, transform.position.z);
                 }
-                else if (collideObj.transform.parent.name == "Right Laser")
+                else if (collideObj.name == "Right Collider")
                 {
                     targetPos = new Vector3(transform.position.x - 10, transform.position.y, transform.position.z);
                 }
@@ -355,7 +355,7 @@ namespace ShrugWare
             SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
         }
 
-        private void PlayerHit(GameObject gameObj)
+        private void LaserHit(GameObject gameObj)
         {
             DamagePlayer(gameObj);
         }
