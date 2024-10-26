@@ -18,7 +18,7 @@ namespace ShrugWare
         public static event Action<GameObject> OnBadExit;
         public static event Action<GameObject> OnAnyExit;
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerEnter(Collider other)
         {
             OnAnyCollision?.Invoke(other.gameObject);
 
@@ -32,7 +32,7 @@ namespace ShrugWare
             }
         }
 
-        private void OnTriggerExit2D(Collider2D other) 
+        private void OnTriggerExit(Collider other)
         {
             OnAnyExit?.Invoke(other.gameObject);
 
@@ -45,6 +45,35 @@ namespace ShrugWare
                 OnBadExit?.Invoke(other.gameObject);
             }
         }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            OnAnyCollision?.Invoke(other.gameObject);
+
+            if(goodMasks.HasLayer(other.gameObject.layer))
+            {
+                OnGoodCollision?.Invoke(other.gameObject);
+            }
+            else if(badMasks.HasLayer(other.gameObject.layer))
+            {
+                OnBadCollision?.Invoke(other.gameObject);
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other) 
+        {
+            OnAnyExit?.Invoke(other.gameObject);
+
+            if(goodMasks.HasLayer(other.gameObject.layer))
+            {
+                OnGoodExit?.Invoke(other.gameObject);
+            }
+            else if(badMasks.HasLayer(other.gameObject.layer))
+            {
+                OnBadExit?.Invoke(other.gameObject);
+            }
+        }
+
         public static void LaserHit(GameObject other)
         {
             OnBadCollision?.Invoke(other.gameObject);

@@ -297,19 +297,19 @@ namespace ShrugWare
                 FlashColor();
 
                 Vector2 targetPos = transform.position;
-                if (collideObj.transform.parent.name == "Top Laser")
+                if (collideObj.name == "Top Collider")
                 {
                     targetPos = new Vector3(transform.position.x, transform.position.y - 10, transform.position.z);
                 }
-                else if (collideObj.transform.parent.name == "Bottom Laser")
+                else if (collideObj.name == "Bottom Collider")
                 {
                     targetPos = new Vector3(transform.position.x, transform.position.y + 10, transform.position.z);
                 }
-                else if (collideObj.transform.parent.name == "Left Laser")
+                else if (collideObj.name == "Left Collider")
                 {
                     targetPos = new Vector3(transform.position.x + 10, transform.position.y, transform.position.z);
                 }
-                else if (collideObj.transform.parent.name == "Right Laser")
+                else if (collideObj.name == "Right Collider")
                 {
                     targetPos = new Vector3(transform.position.x - 10, transform.position.y, transform.position.z);
                 }
