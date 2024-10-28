@@ -15,6 +15,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject wallParent;
 
+        [SerializeField]
+        List<GameObject> laserList = new List<GameObject>();
+
         private static bool hasBeenHit = false;
         private float timeRunning = 0.0f;
 
@@ -85,13 +88,14 @@ namespace ShrugWare
             playerObject.DisableMovement();
             foreach (GameObject laserObj in laserObjs)
             {
-
+                laserObj.SetActive(true);
             }
         }
 
         private void LaserHit(GameObject gameObj)
         {
             hasBeenHit = true;
+            SetMicrogameEndText(false);
         }
 
         private void MoveWalls()
