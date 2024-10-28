@@ -9,6 +9,7 @@ namespace ShrugWare
         private PlayerInput playerInput = null;
         private InputAction movement => playerInput.Map.Movement;
         private Rigidbody rb = null;
+        private Rigidbody2D rb2D = null;
 
         private const float BASE_MOVE_SPEED = 60.0f;
         [SerializeField] protected float moveSpeed = 60f;
@@ -23,6 +24,7 @@ namespace ShrugWare
             myMicrogame = FindObjectOfType<Microgame>();
             playerInput = new PlayerInput();
             rb = GetComponent<Rigidbody>();
+            rb2D = GetComponent<Rigidbody2D>();
         }
 
         private void OnEnable()
@@ -58,7 +60,15 @@ namespace ShrugWare
         private void EnableMovement() => movement.Enable();
         public void DisableMovement()
         {
-            rb.velocity = Vector3.zero;
+            if(rb != null)
+            {
+                rb.velocity = Vector3.zero;
+            }
+            else if (rb2D != null)
+            {
+                rb2D.velocity = Vector3.zero;
+            }
+
             movement.Disable();
         }
 
@@ -73,9 +83,27 @@ namespace ShrugWare
             float minY = moveDown ? -1 : 0;
             float maxY = moveUp ? 1 : 0;
             input.y = Mathf.Clamp(input.y, minY, maxY);
-            rb.velocity = input * moveSpeed;
+
+            if (rb != null)
+            {
+                rb.velocity = input * moveSpeed;
+            }
+            else if(rb2D != null)
+            {
+                rb2D.velocity = input * moveSpeed;
+            }
         }
 
-        private void StopMove(InputAction.CallbackContext context) => rb.velocity = Vector3.zero;
+        private void StopMove(InputAction.CallbackContext context)
+        {
+            if(rb != null)
+            {
+                rb.velocity = Vector3.zero;
+            }
+            else if (rb2D != null)
+            {
+                rb2D.velocity = Vector2.zero;
+            }
+        }
     }
 }

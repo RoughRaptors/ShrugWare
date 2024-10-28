@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters;
 using System;
 using UnityEngine;
+using ShrugWare;
 
 public class Hovl_Laser : MonoBehaviour
 {
@@ -49,18 +50,30 @@ public class Hovl_Laser : MonoBehaviour
         if (Laser != null && UpdateSaver == false)
         {
             Laser.SetPosition(0, transform.position);
-            RaycastHit hit; //DELETE THIS IF YOU WANT USE LASERS IN 2D
+
+            //RaycastHit hit; //DELETE THIS IF YOU WANT USE LASERS IN 2D
             //ADD THIS IF YOU WANNT TO USE LASERS IN 2D: RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.forward, MaxLength);       
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, MaxLength))//CHANGE THIS IF YOU WANT TO USE LASERRS IN 2D: if (hit.collider != null)
+            //if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, MaxLength))//CHANGE THIS IF YOU WANT TO USE LASERRS IN 2D: if (hit.collider != null)
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.forward, MaxLength);
+            if (hit.collider != null)
             {
                 //End laser position if collides with object
                 Laser.SetPosition(1, hit.point);
 
-                    HitEffect.transform.position = hit.point + hit.normal * HitOffset;
+                HitEffect.transform.position = hit.point + hit.normal * HitOffset;
                 if (useLaserRotation)
+                {
                     HitEffect.transform.rotation = transform.rotation;
+                }
                 else
+                {
                     HitEffect.transform.LookAt(hit.point + hit.normal);
+                }
+
+                if (hit.transform.tag == "Player")
+                {
+                    PlayerCollider.LaserHit(gameObject);
+                }
 
                 foreach (var AllPs in Effects)
                 {

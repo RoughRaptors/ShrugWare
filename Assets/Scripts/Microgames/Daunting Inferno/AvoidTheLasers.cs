@@ -52,8 +52,6 @@ namespace ShrugWare
             {
                 rotateSpeed *= -1;
             }
-
-            laserParent.SetActive(true);
         }
 
         protected override void OnMyGameTick(float timePercentLeft)
