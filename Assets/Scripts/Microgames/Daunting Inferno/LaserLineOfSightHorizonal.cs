@@ -81,7 +81,7 @@ namespace ShrugWare
             playerObject.DisableMovement();
             foreach (GameObject laserObj in laserObjs)
             {
-                laserObj.GetComponent<ShootLaser>().enabled = true;
+                laserObj.SetActive(true);
             }
         }
 

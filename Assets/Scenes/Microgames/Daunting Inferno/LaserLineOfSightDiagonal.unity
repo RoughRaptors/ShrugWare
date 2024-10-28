@@ -1385,14 +1385,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 713458990}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.9999327, w: 0.01160618}
+  m_LocalRotation: {x: -0, y: -0, z: 0.9943432, w: -0.10621536}
   m_LocalPosition: {x: 87.8, y: -32.1, z: 0.35983086}
   m_LocalScale: {x: 12.827703, y: 3.2069259, z: 0.25655407}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1103456399}
   m_Father: {fileID: 1977950688}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 178.67}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 192.194}
 --- !u!23 &713458994
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1915,7 +1915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1962479828434100, guid: b478a3c4c8ae3bb42a5785ab95bcf6d3, type: 3}
       propertyPath: m_Name
-      value: Laser
+      value: Laser 4
       objectReference: {fileID: 0}
     - target: {fileID: 1962479828434100, guid: b478a3c4c8ae3bb42a5785ab95bcf6d3, type: 3}
       propertyPath: m_Layer
