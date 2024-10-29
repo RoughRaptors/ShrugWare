@@ -11,12 +11,6 @@ namespace ShrugWare
         [SerializeField]
         GameObject playerSpriteRendererObj;
 
-        [SerializeField]
-        GameObject lasersParentObj;
-
-        [SerializeField]
-        GameObject tilesParentObj;
-
         private GameObject curTile;
 
         private const float ROTATE_TIME = 1.0f;
@@ -46,8 +40,6 @@ namespace ShrugWare
             base.OnMyGameStart();
 
             playerSpriteRendererObj.SetActive(true);
-            lasersParentObj.SetActive(true);
-            tilesParentObj.SetActive(true);
 
             RotateColors();
         }
@@ -57,7 +49,7 @@ namespace ShrugWare
             base.OnMyGameTick(timePercentLeft);
 
             // don't rotate if we're about to end the game because that's unfair
-            timeSpent += Time.deltaTime;
+            //timeSpent += Time.deltaTime;
             if(timeSpent >= ROTATE_TIME && timeElapsed <= microGameTime - 1.0f)
             {
                 timeSpent = 0;

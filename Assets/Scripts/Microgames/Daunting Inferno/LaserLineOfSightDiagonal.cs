@@ -7,13 +7,13 @@ namespace ShrugWare
     public class LaserLineOfSightDiagonal : Microgame
     {
         [SerializeField]
-        GameObject[] laserObjs;
-
-        [SerializeField]
         PlayerMover playerObject = null;
 
         [SerializeField]
         GameObject wallParent;
+
+        [SerializeField]
+        List<GameObject> laserList = new List<GameObject>();
 
         private static bool hasBeenHit = false;
         private float timeRunning = 0.0f;
@@ -71,8 +71,10 @@ namespace ShrugWare
                 // stop moving if we hit a laser
                 playerObject.DisableMovement();
             }
-
-            MoveWalls();
+            else if (timeRunning < microGameTime)
+            {
+                MoveWalls();
+            }
         }
 
         protected override bool VictoryCheck()
@@ -83,15 +85,16 @@ namespace ShrugWare
         private void EnableLasers()
         {
             playerObject.DisableMovement();
-            foreach (GameObject laserObj in laserObjs)
+            foreach (GameObject laser in laserList)
             {
-                laserObj.GetComponent<ShootLaser>().enabled = true;
+                laser.SetActive(true);
             }
         }
 
         private void LaserHit(GameObject gameObj)
         {
             hasBeenHit = true;
+            SetMicrogameEndText(false);
         }
 
         private void MoveWalls()

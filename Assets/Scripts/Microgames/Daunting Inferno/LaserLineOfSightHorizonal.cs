@@ -67,8 +67,10 @@ namespace ShrugWare
                 // stop moving if we hit a laser
                 playerObject.DisableMovement();
             }
-
-            MoveWalls();
+            else if (timeRunning < microGameTime)
+            {
+                MoveWalls();
+            }
         }
 
         protected override bool VictoryCheck()
@@ -81,7 +83,7 @@ namespace ShrugWare
             playerObject.DisableMovement();
             foreach (GameObject laserObj in laserObjs)
             {
-                laserObj.GetComponent<ShootLaser>().enabled = true;
+                laserObj.SetActive(true);
             }
         }
 
