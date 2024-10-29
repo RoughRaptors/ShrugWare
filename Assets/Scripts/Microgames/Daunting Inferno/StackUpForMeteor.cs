@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShrugWare
@@ -24,6 +25,8 @@ namespace ShrugWare
         private float timeRatio = 0;
         private Vector3 meteorStartPos;
 
+        private List<GameObject> overlapObjects = new List<GameObject>();
+
         protected override void Start()
         {
             base.Start();
@@ -34,13 +37,15 @@ namespace ShrugWare
         protected override void OnEnable()
         {
             base.OnEnable();
-            PlayerCollider.OnBadCollision += MeteorCheck;
+            PlayerCollider.OnGoodCollision += EnteredAura;
+            PlayerCollider.OnGoodExit += LeftAura;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-            PlayerCollider.OnBadCollision -= MeteorCheck;
+            PlayerCollider.OnGoodCollision -= EnteredAura;
+            PlayerCollider.OnGoodExit -= LeftAura;
         }
 
         protected override void OnMyGameTick(float timePercentLeft)
@@ -60,12 +65,7 @@ namespace ShrugWare
 
         protected override bool VictoryCheck()
         {
-            if (meteorObject.activeInHierarchy)
-            {
-                MeteorCheck(meteorObject);
-            }
-
-            return stacked;
+            return overlapObjects.Count == groupMembers.Length;
         }
 
         private void SetupPlayerObject()
@@ -75,18 +75,20 @@ namespace ShrugWare
             playerObject.transform.position = new Vector3(xPos, yPos, 0.0f);
         }
 
-        private void MeteorCheck(GameObject meteor)
+        private void EnteredAura(GameObject go)
         {
-            // be lazy, check member distance from player instead of if the meteor is colliding with all 3 objects
-            foreach(GameObject member in groupMembers)
+            if (!overlapObjects.Contains(go) && go.name != "Meteor")
             {
-                float memberDistance = Vector3.Distance(member.transform.position, playerObject.transform.position);
-                if (memberDistance < DISTANCE_FOR_VALID_STACK) continue;
-                stacked = false;
-                break;
+                overlapObjects.Add(go);
             }
-            SetMicrogameEndText(stacked);
-            meteorObject.SetActive(false);
+        }
+
+        private void LeftAura(GameObject go)
+        {
+            if (overlapObjects.Contains(go))
+            {
+                overlapObjects.Remove(go);
+            }
         }
     }
 }
