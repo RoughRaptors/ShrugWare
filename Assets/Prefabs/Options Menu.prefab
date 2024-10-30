@@ -2285,6 +2285,8 @@ MonoBehaviour:
   restrictionText: {fileID: 835900998510527687}
   addItemPopup: {fileID: 4875473049530801424}
   removeItemPopup: {fileID: 8491013426924291273}
+  openAudioClipData: {fileID: 11400000, guid: d89334a1714c17048855415c29e8438d, type: 2}
+  closeAudioClipData: {fileID: 11400000, guid: 39ea9f385fe154646b0bedaf9d98943e, type: 2}
 --- !u!1 &6943663319374791123
 GameObject:
   m_ObjectHideFlags: 0

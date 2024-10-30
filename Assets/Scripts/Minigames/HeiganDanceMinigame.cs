@@ -53,7 +53,16 @@ namespace ShrugWare
         Collider2D innerCollider;
 
         [SerializeField]
-        Canvas collectibleCanvas;
+        Canvas collectibleCanvas; 
+        
+        [SerializeField]
+        AudioClipData laserImpactSound;
+
+        [SerializeField]
+        AudioClipData collectiblePickupSound;
+
+        [SerializeField]
+        AudioClipData deathSound;
 
         private const float TIME_TO_SWITCH_COLORS = 3.5f;
         private const float PLAYER_SPEED = 50.0f;
@@ -248,6 +257,11 @@ namespace ShrugWare
             newVFX.transform.localScale *= 2.5f;
             Destroy(other.gameObject);
 
+            if(AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(collectiblePickupSound);
+            }
+
             enemyHealth -= COLLECTIBLE_DAMAGE;
             enemyHealthText.text = "Enemy Health: " + enemyHealth.ToString();
             if (enemyHealth <= 0)
@@ -315,6 +329,11 @@ namespace ShrugWare
                 }
 
                 GetComponent<Rigidbody2D>().MovePosition(targetPos);
+
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayAudioClip(laserImpactSound);
+                }
             }
             else
             {
@@ -331,6 +350,11 @@ namespace ShrugWare
         {
             if (healthRemaining <= 0)
             {
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayAudioClip(deathSound);
+                }
+
                 statusText.text = "YOU ARE DED";
                 gameRunning = false;
                 continueButton.SetActive(true);

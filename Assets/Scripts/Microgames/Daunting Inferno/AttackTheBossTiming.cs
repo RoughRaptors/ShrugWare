@@ -59,6 +59,8 @@ namespace ShrugWare
         // success if we're in the right 80% of the slider
         public void AttackButtonPressed()
         {
+            AudioManager.Instance.PlayAudioClip(DataManager.AudioType.ButtonClick);
+
             if (!attackPressed)
             {
                 attackPressed = true;

@@ -1488,8 +1488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34cc6f56f75c2f443bfdd70b690ef7f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minigameDuration: 30
-  minigameMusic: {fileID: 8300000, guid: 68f8735cb03780f4a8acfae3d0508945, type: 3}
+  minigameMusicData: {fileID: 11400000, guid: a3b645f8c3d508e49a365f50cb948d4c, type: 2}
   statusText: {fileID: 477954543}
   enemyHealthText: {fileID: 275741409}
   continueButton: {fileID: 1166657083}
@@ -1539,6 +1538,9 @@ MonoBehaviour:
   outerCollider: {fileID: 106601419}
   innerCollider: {fileID: 1538010317}
   collectibleCanvas: {fileID: 645077705}
+  laserImpactSound: {fileID: 11400000, guid: e815f089ce3f2f74fb2828d8d6af3b78, type: 2}
+  collectiblePickupSound: {fileID: 11400000, guid: c8bdf97758f7c9c4a827584f86176e9c, type: 2}
+  deathSound: {fileID: 11400000, guid: 9cc6795c6954a274dbfbc5265d0bb053, type: 2}
 --- !u!4 &332365895 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000011826580284, guid: 5b210609803658e488f512fc13a6163e, type: 3}

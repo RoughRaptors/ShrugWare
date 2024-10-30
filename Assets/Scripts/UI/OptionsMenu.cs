@@ -26,6 +26,12 @@ namespace ShrugWare
         [SerializeField]
         GameObject removeItemPopup;
 
+        [SerializeField]
+        AudioClipData openAudioClipData;
+
+        [SerializeField]
+        AudioClipData closeAudioClipData;
+
         bool casualMode = false;
 
         // our audio manager is created by now
@@ -69,6 +75,17 @@ namespace ShrugWare
                 difficultyToggle.isOn = casualMode;
                 difficultyToggle.interactable = true;
             }
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PauseMusic();
+                AudioManager.Instance.PlayAudioClip(openAudioClipData);
+            }
+        }
+
+        private void OnDisable()
+        {
+            Close();
         }
 
         private void Update()
@@ -122,11 +139,21 @@ namespace ShrugWare
 
         public void OnExitButtonPressed()
         {
+            Close();
             this.gameObject.SetActive(false);
 
             if (OverworldManager.Instance != null)
             {
                 OverworldManager.Instance.RevertTimescale();
+            }
+        }
+
+        private void Close()
+        {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.UnPauseMusic();
+                AudioManager.Instance.PlayAudioClip(closeAudioClipData);
             }
         }
     }

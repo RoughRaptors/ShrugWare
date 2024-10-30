@@ -14,7 +14,6 @@ namespace ShrugWare
             WarbossKard, 
             Tuzi,
             DodgeFireballsMinigame,
-            ShootAsteroidsMinigame,
             HeiganDanceMinigame,
             GearScreen,
             MICROGAME_START = 11, // KEEP IN SYNC
@@ -132,7 +131,8 @@ namespace ShrugWare
             MicrogameIntro,
             MicrogameOutro,
             MicrogameWin,
-            MicrogameLose
+            MicrogameLose,
+            SFX
         }
 
         public enum OverworldLevelType

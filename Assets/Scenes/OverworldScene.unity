@@ -5776,7 +5776,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelID: 5
   levelType: 3
-  sceneIDToLoad: 9
+  sceneIDToLoad: 8
   levelIDsToUnlock: 06000000
   outgoingLevelConnections:
   - {fileID: 3765666410858189917}
@@ -6346,6 +6346,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 70eb8e8f2591fde46975f9f5d3b11593, type: 3}
   - {fileID: 21300000, guid: 82604d3e470170d49befce933516fcae, type: 3}
   optionsMenu: {fileID: 611589631}
+  overworldMusicData: {fileID: 11400000, guid: f76176be4a24d4e49975bdc9df531a63, type: 2}
 --- !u!4 &5156833369945420409
 Transform:
   m_ObjectHideFlags: 0

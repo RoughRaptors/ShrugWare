@@ -8,10 +8,7 @@ namespace ShrugWare
     public abstract class Minigame : MonoBehaviour
     {
         [SerializeField]
-        protected float minigameDuration;
-
-        [SerializeField]
-        AudioClip minigameMusic;
+        AudioClipData minigameMusicData;
 
         protected int healthToAdd = 0;
 
@@ -22,8 +19,8 @@ namespace ShrugWare
 
             if (OverworldManager.Instance != null)
             {
-                OverworldManager.Instance.PlayMusicClip(minigameMusic, DataManager.AudioType.MinigameMusic);
-                Invoke("RestartMusic", minigameMusic.length);
+                OverworldManager.Instance.PlayMusicClip(minigameMusicData);
+                Invoke("RestartMusic", minigameMusicData.clip.length);
             }
         }
 
@@ -53,7 +50,7 @@ namespace ShrugWare
 
         private void RestartMusic()
         {
-            OverworldManager.Instance.PlayMusicClip(minigameMusic, DataManager.AudioType.MinigameMusic);
+            OverworldManager.Instance.PlayMusicClip(minigameMusicData);
         }
     }
 }
