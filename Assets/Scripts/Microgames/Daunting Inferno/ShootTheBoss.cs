@@ -16,6 +16,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject enemyObj;
 
+        [SerializeField]
+        List<GameObject> hitVFXList;
+
         private LineRenderer lineRenderer;
 
         private const int BULLET_SPEED = 175;
@@ -109,6 +112,10 @@ namespace ShrugWare
 
         private void OnTriggerEnter(Collider other)
         {
+            int index = UnityEngine.Random.Range(0, hitVFXList.Count);
+            Instantiate(hitVFXList[index], transform.position, Quaternion.identity);
+            gameObject.SetActive(false);
+
             enemyHit = true;
             Destroy(other.gameObject);
             SetMicrogameEndText(true);

@@ -14,6 +14,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject[] groupMembers = new GameObject[0];
 
+        [SerializeField]
+        List<GameObject> hitVFXList;
+
         private const float X_MIN = -80.0f;
         private const float X_MAX = 80.0f;
         private const float Y_MIN = -35.0f;
@@ -26,6 +29,7 @@ namespace ShrugWare
 
         private float timeRatio = 0;
         private Vector3 meteorStartPos;
+        private bool gameEnded = false;
 
         private List<GameObject> overlapObjects = new List<GameObject>();
 
@@ -39,14 +43,14 @@ namespace ShrugWare
         protected override void OnEnable()
         {
             base.OnEnable();
-            PlayerCollider.OnBadCollision += EnteredAura;
+            PlayerCollider.OnBadCollision += OverlapObject;
             PlayerCollider.OnBadExit += LeftAura;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-            PlayerCollider.OnBadCollision -= EnteredAura;
+            PlayerCollider.OnBadCollision -= OverlapObject;
             PlayerCollider.OnBadExit -= LeftAura;
         }
 
@@ -89,17 +93,33 @@ namespace ShrugWare
             member1TargetPos = new Vector3(member2TargetXPos, member2TargetYPos, 0.0f);
         }
 
-        private void EnteredAura(GameObject go)
+        private void OverlapObject(GameObject go)
         {
             if(!overlapObjects.Contains(go) && go.name != "Meteor")
             {
                 overlapObjects.Add(go);
             }
+            else if(go.name == "Meteor")
+            {
+                gameEnded = true;
+
+                int index = UnityEngine.Random.Range(0, hitVFXList.Count);
+                Instantiate(hitVFXList[index], playerObject.transform.position + new Vector3(0, 10, 0), Quaternion.identity);
+                go.SetActive(false);
+
+                if(overlapObjects.Count > 0)
+                {
+                    SetMicrogameEndText(false);
+                    Destroy(playerObject);
+                }
+
+                SetMicrogameEndText(true);
+            }
         }
 
         private void LeftAura(GameObject go)
         {
-            if (overlapObjects.Contains(go))
+            if (overlapObjects.Contains(go) && !gameEnded)
             {
                 overlapObjects.Remove(go);
             }

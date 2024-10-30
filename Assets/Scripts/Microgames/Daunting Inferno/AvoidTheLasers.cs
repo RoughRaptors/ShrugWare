@@ -17,6 +17,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject playerSpriteParent;
 
+        [SerializeField]
+        List<GameObject> hitVFXList;
+
         float delay = 0.75f;
         float rotateSpeed = 30.0f;
         bool hasBeenHit = false;
@@ -58,7 +61,7 @@ namespace ShrugWare
         {
             base.OnMyGameTick(timePercentLeft);
 
-            if (timeElapsed >= delay)
+            if (timeElapsed >= delay && !hasBeenHit)
             {
                 laserParent.transform.Rotate(0, 0, rotateSpeed * Time.deltaTime);
             }
@@ -71,6 +74,13 @@ namespace ShrugWare
 
         private void LaserHit(GameObject gameObj)
         {
+            if (!hasBeenHit)
+            {
+                int index = UnityEngine.Random.Range(0, hitVFXList.Count);
+                Instantiate(hitVFXList[index], playerObj.transform.position + new Vector3(0, 10, 0), Quaternion.identity);
+                Destroy(playerObj);
+            }
+
             SetMicrogameEndText(false);
             hasBeenHit = true;
         }

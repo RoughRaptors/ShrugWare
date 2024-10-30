@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShrugWare
@@ -9,6 +10,9 @@ namespace ShrugWare
 
         [SerializeField]
         GameObject[] fireballObjects = null;
+
+        [SerializeField]
+        List<GameObject> hitVFXList;
 
         private const float FIREBALL_MOVE_SPEED = 30.0f;
         private const float FIREBALL_X_MIN = -100.0f;
@@ -48,10 +52,17 @@ namespace ShrugWare
             }
         }
 
-        protected override bool VictoryCheck() => playerObject.activeInHierarchy;
+        protected override bool VictoryCheck()
+        {
+            return playerObject.activeInHierarchy;
+        }
 
         private void FireballHit(GameObject fireball)
         {
+            int index = UnityEngine.Random.Range(0, hitVFXList.Count);
+            Instantiate(hitVFXList[index], playerObject.transform.position + new Vector3(0, 10, 0), Quaternion.identity);
+            fireball.SetActive(false);
+
             playerObject.SetActive(false);
             SetMicrogameEndText(false);
         }

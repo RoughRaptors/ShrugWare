@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,10 +10,16 @@ namespace ShrugWare
         GameObject[] laserObjs;
 
         [SerializeField]
-        PlayerMover playerObject = null;
+        PlayerMover playerMover = null;
 
         [SerializeField]
         GameObject barrierObj;
+
+        [SerializeField]
+        List<GameObject> hitVFXList;
+
+        [SerializeField]
+        GameObject playerObj;
 
         private bool movingLeft = false;
 
@@ -56,7 +63,7 @@ namespace ShrugWare
             else if(hasBeenHit || timeRunning > microGameTime)
             {
                 // stop moving if we hit a laser
-                playerObject.DisableMovement();
+                playerMover.DisableMovement();
             }
 
             float xDir = 0.5f;
@@ -65,7 +72,7 @@ namespace ShrugWare
                 xDir *= -1.0f;
             }
 
-            barrierObj.transform.position = new Vector3(barrierObj.transform.position.x + xDir * 0.9f, barrierObj.transform.position.y, barrierObj.transform.position.z);
+            barrierObj.transform.position = new Vector3(barrierObj.transform.position.x + xDir * 0.175f, barrierObj.transform.position.y, barrierObj.transform.position.z);
         }
         
         protected override bool VictoryCheck()
@@ -75,7 +82,7 @@ namespace ShrugWare
 
         private void EnableLasers()
         {
-            playerObject.DisableMovement();
+            playerMover.DisableMovement();
             foreach (GameObject laserObj in laserObjs)
             {
                 laserObj.SetActive(true);
@@ -84,6 +91,13 @@ namespace ShrugWare
         
         public void LaserHit(GameObject gameObj)
         {
+            if (!hasBeenHit)
+            {
+                int index = UnityEngine.Random.Range(0, hitVFXList.Count);
+                Instantiate(hitVFXList[index], playerObj.transform.position, Quaternion.identity);
+                Destroy(playerObj);
+            }
+
             hasBeenHit = true;
             SetMicrogameEndText(false);
         }

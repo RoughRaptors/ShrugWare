@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShrugWare
@@ -12,6 +13,9 @@ namespace ShrugWare
 
         [SerializeField]
         GameObject healerObject = null;
+
+        [SerializeField]
+        List<GameObject> hitVFXList;
 
         private bool intercepted = false;
         private const float HEALER_X_MIN = -50;
@@ -62,7 +66,17 @@ namespace ShrugWare
             fireballObject.transform.position = Vector3.Lerp(fireballObject.transform.position, healerObject.transform.position, FIREBALL_MOVE_SPEED * Time.deltaTime);
         }
 
-        protected override bool VictoryCheck() => intercepted;
+        protected override bool VictoryCheck()
+        {
+            if(!intercepted)
+            {
+                int index = UnityEngine.Random.Range(0, hitVFXList.Count);
+                Instantiate(hitVFXList[index], healerObject.transform.position, Quaternion.identity);
+                healerObject.SetActive(false);
+            }
+
+            return intercepted;
+        }
 
         private void SetupFireball()
         {
@@ -86,6 +100,9 @@ namespace ShrugWare
 
         private void FireballHit(GameObject fireball)
         {
+            int index = UnityEngine.Random.Range(0, hitVFXList.Count);
+            Instantiate(hitVFXList[index], playerObject.transform.position, Quaternion.identity);
+
             SetMicrogameEndText(true);
             intercepted = true;
             fireballObject.SetActive(false);

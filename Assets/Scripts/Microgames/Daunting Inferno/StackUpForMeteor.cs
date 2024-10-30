@@ -14,6 +14,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject[] groupMembers = new GameObject[0];
 
+        [SerializeField]
+        List<GameObject> hitVFXList;
+
         private const float X_MIN = -65.0f;
         private const float X_MAX = 65.0f;
         private const float Y_MIN = -30.0f;
@@ -37,14 +40,14 @@ namespace ShrugWare
         protected override void OnEnable()
         {
             base.OnEnable();
-            PlayerCollider.OnGoodCollision += EnteredAura;
+            PlayerCollider.OnAnyCollision += OverlapObject;
             PlayerCollider.OnGoodExit += LeftAura;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-            PlayerCollider.OnGoodCollision -= EnteredAura;
+            PlayerCollider.OnAnyCollision -= OverlapObject;
             PlayerCollider.OnGoodExit -= LeftAura;
         }
 
@@ -65,7 +68,7 @@ namespace ShrugWare
 
         protected override bool VictoryCheck()
         {
-            return overlapObjects.Count == groupMembers.Length;
+            return overlapObjects.Count == groupMembers.Length && overlapObjects.Count > 0;
         }
 
         private void SetupPlayerObject()
@@ -75,11 +78,25 @@ namespace ShrugWare
             playerObject.transform.position = new Vector3(xPos, yPos, 0.0f);
         }
 
-        private void EnteredAura(GameObject go)
+        private void OverlapObject(GameObject go)
         {
             if (!overlapObjects.Contains(go) && go.name != "Meteor")
             {
                 overlapObjects.Add(go);
+            }
+            else if (go.name == "Meteor")
+            {
+                int index = UnityEngine.Random.Range(0, hitVFXList.Count);
+                Instantiate(hitVFXList[index], playerObject.transform.position + new Vector3(0, 10, 0), Quaternion.identity);
+                go.SetActive(false);
+
+                if (overlapObjects.Count != groupMembers.Length || overlapObjects.Count == 0)
+                {
+                    SetMicrogameEndText(false);
+                    Destroy(playerObject);
+                }
+
+                SetMicrogameEndText(true);
             }
         }
 
