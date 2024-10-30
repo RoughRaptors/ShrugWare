@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
 
@@ -22,6 +23,9 @@ namespace ShrugWare
 
         [SerializeField]
         GameObject playerPositiveObj;
+
+        [SerializeField]
+        List<GameObject> hitVFXList;
 
         private bool polarityMatched = false;
 
@@ -120,6 +124,14 @@ namespace ShrugWare
 
         private void ElectricHit(GameObject electric)
         {
+            if (!polarityMatched)
+            {
+                playerObject.SetActive(false);
+            }
+
+            int index = UnityEngine.Random.Range(0, hitVFXList.Count);
+            Instantiate(hitVFXList[index], playerObject.transform.position, Quaternion.identity);
+
             SetMicrogameEndText(polarityMatched);
             eletricityObj.SetActive(false);
         }

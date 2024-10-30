@@ -346,6 +346,7 @@ namespace ShrugWare
                         }
                     }
 
+                    AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MerchantPurchase);
                     selectedItems.Clear();
                     UpdateCurrenciesText();
                 }
@@ -370,6 +371,8 @@ namespace ShrugWare
                     selectedItems.Add(selectedItem);
                     objToChange.GetComponentInChildren<RawImage>().color = UnityEngine.Color.green;
                 }
+
+                AudioManager.Instance.PlayAudioClip(DataManager.AudioType.ButtonClick);
             }
         }
 
@@ -398,6 +401,7 @@ namespace ShrugWare
 
         public void ExitMerchantClicked()
         {
+            AudioManager.Instance.PlayAudioClip(DataManager.AudioType.ButtonClick);
             OverworldManager.Instance.ReadyScene(true);
             SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
         }
@@ -418,6 +422,8 @@ namespace ShrugWare
             armorTabButton.GetComponentInChildren<Button>().image.color = Color.red;
             potionsTabButton.GetComponentInChildren<Button>().image.color = Color.white;
             UpdateCurrenciesText();
+
+            AudioManager.Instance.PlayAudioClip(DataManager.AudioType.ButtonClick);
         }
 
         public void OnPotionsTabButtonClicked()
@@ -436,6 +442,8 @@ namespace ShrugWare
             armorTabButton.GetComponentInChildren<Button>().image.color = Color.white;
             potionsTabButton.GetComponentInChildren<Button>().image.color = Color.red;
             UpdateCurrenciesText();
+
+            AudioManager.Instance.PlayAudioClip(DataManager.AudioType.ButtonClick);
         }
 
         private int GetTotalCostForSelectedItems()

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShrugWare
@@ -15,6 +16,9 @@ namespace ShrugWare
 
         [SerializeField]
         GameObject groupOfThreeObj;
+
+        [SerializeField]
+        List<GameObject> hitVFXList;
 
         private bool stackedEqually = false;
 
@@ -96,6 +100,14 @@ namespace ShrugWare
 
         private void EqualCheck(GameObject meteor)
         {
+            if(!stackedEqually)
+            {
+                playerObject.SetActive(false);
+            }
+
+            int index = UnityEngine.Random.Range(0, hitVFXList.Count);
+            Instantiate(hitVFXList[index], playerObject.transform.position, Quaternion.identity);
+
             SetMicrogameEndText(stackedEqually);
             meteorObject.SetActive(false);
         }

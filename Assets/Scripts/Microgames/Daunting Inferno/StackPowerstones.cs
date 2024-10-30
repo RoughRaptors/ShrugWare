@@ -9,12 +9,12 @@ namespace ShrugWare
         GameObject playerObject = null;
 
         [SerializeField]
-        GameObject powerstoneObj = null;
+        List<GameObject> powerstoneObjects = new List<GameObject>();
 
-        private const float X_MIN = -65.0f;
-        private const float X_MAX = 65.0f;
-        private const float Y_MIN = -30.0f;
-        private const float Y_MAX = 14.0f;
+        private const float X_MIN = -80.0f;
+        private const float X_MAX = 80.0f;
+        private const float Y_MIN = -20.0f;
+        private const float Y_MAX = 40.0f;
 
         private const float NUM_POWERSTONES_TOTAL = 4;
         private float numPowerstonesCollected = 0;
@@ -68,11 +68,15 @@ namespace ShrugWare
                     Vector3 powerstonePos = new Vector3(xPos, yPos, 0);
                     if (Vector3.Distance(playerObject.transform.position, powerstonePos) > 15.0f)
                     {
-                        GameObject powerstone = Instantiate(powerstoneObj);
+                        int index = UnityEngine.Random.Range(0, powerstoneObjects.Count - 1);
+                        GameObject powerstone = Instantiate(powerstoneObjects[index]);
                         powerstone.transform.position = powerstonePos;
-                        powerstone.transform.localScale = new Vector3(10.0f, 10.0f, 10.0f);
+                        powerstone.layer = 8;
+                        powerstone.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                        powerstone.gameObject.AddComponent<BoxCollider2D>();
 
                         powerstones.Add(powerstone);
+                        playerObject.GetComponent<PlayerMover>().AddSpeed(10);
                         break;
                     }
                 }

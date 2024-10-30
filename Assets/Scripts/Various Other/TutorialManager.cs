@@ -32,17 +32,20 @@ namespace ShrugWare
 
         public void OnBackClicked()
         {
+            AudioManager.Instance.PlayAudioClip(DataManager.AudioType.ButtonClick);
             SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
         }
 
         public void OnToPage1Clicked()
         {
+            AudioManager.Instance.PlayAudioClip(DataManager.AudioType.ButtonClick);
             page1.SetActive(true);
             page2.SetActive(false);
         }
 
         public void OnToPage2Clicked()
         {
+            AudioManager.Instance.PlayAudioClip(DataManager.AudioType.ButtonClick);
             page1.SetActive(false);
             page2.SetActive(true);
         }

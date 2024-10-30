@@ -2871,8 +2871,12 @@ MonoBehaviour:
   - {fileID: 78712280}
   - {fileID: 1350367983}
   - {fileID: 1261405944}
-  playerObject: {fileID: 2083304488}
+  playerMover: {fileID: 2083304488}
   barrierObj: {fileID: 433176756}
+  hitVFXList:
+  - {fileID: 9027514048236820045, guid: effb650189dc5714e9e9801b1cfb3991, type: 3}
+  - {fileID: 1141330259687333427, guid: 6718dc24203da53468af9ada8fef7d6d, type: 3}
+  playerObj: {fileID: 2083304487}
 --- !u!1 &855183780
 GameObject:
   m_ObjectHideFlags: 0

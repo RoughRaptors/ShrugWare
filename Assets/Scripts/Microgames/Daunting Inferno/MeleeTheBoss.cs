@@ -9,6 +9,9 @@ namespace ShrugWare
     {
         [SerializeField]
         GameObject enemyObj;
+        
+        [SerializeField]
+        List<GameObject> hitVFXList;
 
         private bool enemyHit = false;
 
@@ -63,6 +66,10 @@ namespace ShrugWare
 
         private void OnTriggerEnter(Collider other)
         {
+            int index = UnityEngine.Random.Range(0, hitVFXList.Count);
+            Instantiate(hitVFXList[index], enemyObj.transform.position, Quaternion.identity);
+            enemyObj.SetActive(false);
+
             enemyHit = true;
             SetMicrogameEndText(true);
         }

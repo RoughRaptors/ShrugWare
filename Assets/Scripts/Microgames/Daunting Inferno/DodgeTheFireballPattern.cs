@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShrugWare
@@ -8,7 +9,7 @@ namespace ShrugWare
         GameObject playerObject = null;
 
         [SerializeField]
-        GameObject[] fireballs = new GameObject[0];
+        List<GameObject> fireballs = new List<GameObject>();
 
         [SerializeField] 
         float FIREBALL_MOVE_SPEED = 60.0f;
@@ -18,6 +19,9 @@ namespace ShrugWare
 
         [SerializeField]
         float maxBallScale = 17.5f;
+
+        [SerializeField]
+        List<GameObject> hitVFXList;
 
         const float MIN_PLAYER_X_START_POS = -80;
         const float MAX_PLAYER_X_START_POS = 0;
@@ -72,8 +76,14 @@ namespace ShrugWare
         }
 
         protected override bool VictoryCheck() => playerObject.activeInHierarchy;
+
         private void PlayerCollision(GameObject fireball)
         {
+            int index = UnityEngine.Random.Range(0, hitVFXList.Count);
+            Instantiate(hitVFXList[index], playerObject.transform.position, Quaternion.identity);
+            Destroy(fireball);
+            fireballs.Remove(fireball);
+
             playerObject.SetActive(false);
             SetMicrogameEndText(false);
         }

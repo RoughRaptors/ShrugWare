@@ -105,5 +105,10 @@ namespace ShrugWare
                 rb2D.velocity = Vector2.zero;
             }
         }
+
+        public void AddSpeed(float amount)
+        {
+            moveSpeed += amount;
+        }
     }
 }

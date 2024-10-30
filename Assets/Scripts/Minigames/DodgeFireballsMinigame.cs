@@ -3,8 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
-using UnityEngine.InputSystem.EnhancedTouch;
 
 namespace ShrugWare
 {
@@ -58,11 +56,6 @@ namespace ShrugWare
         private const float FIREBALL_Y_MAX = 50;
         private const float FIREBALL_SPEED_MIN = 45;
         private const float FIREBALL_SPEED_MAX = 75;
-
-        private const float PLAYER_X_MIN = -13;
-        private const float PLAYER_X_MAX = 115;
-        private const float PLAYER_Y_MIN = -30;
-        private const float PLAYER_Y_MAX = 35;
 
         private const int ENEMY_START_HEALTH = 100;
         private float enemyHealth = ENEMY_START_HEALTH;
@@ -127,11 +120,18 @@ namespace ShrugWare
             }
 
             continueButton.SetActive(false);
+        }
 
-            foreach (GameObject vfx in hitVFXList)
-            {
-                vfx.gameObject.transform.localScale = new Vector3(4, 4, 4);
-            }
+        private void OnEnable()
+        {
+            PlayerCollider.OnBadCollision += CollideFireball;
+            PlayerCollider.OnGoodCollision += CollideCollectible;
+        }
+
+        private void OnDisable()
+        {
+            PlayerCollider.OnBadCollision -= CollideFireball;
+            PlayerCollider.OnGoodCollision -= CollideCollectible;
         }
 
         private new void Start()
@@ -296,22 +296,22 @@ namespace ShrugWare
         private void HandlePlayerMovement()
         {
             Vector3 newPos = this.transform.position;
-            if (Input.GetKey(KeyCode.W) && transform.position.y < PLAYER_Y_MAX)
+            if (Input.GetKey(KeyCode.W))
             {
                 newPos.y += PLAYER_SPEED * Time.deltaTime;
             }
 
-            if (Input.GetKey(KeyCode.S) && transform.position.y > PLAYER_Y_MIN)
+            if (Input.GetKey(KeyCode.S))
             {
                 newPos.y -= PLAYER_SPEED * Time.deltaTime;
             }
 
-            if (Input.GetKey(KeyCode.A) && transform.position.x > PLAYER_X_MIN)
+            if (Input.GetKey(KeyCode.A))
             {
                 newPos.x -= PLAYER_SPEED * Time.deltaTime;
             }
 
-            if (Input.GetKey(KeyCode.D) && transform.position.x < PLAYER_X_MAX)
+            if (Input.GetKey(KeyCode.D))
             {
                 newPos.x += PLAYER_SPEED * Time.deltaTime;
             }
@@ -324,12 +324,12 @@ namespace ShrugWare
             if (other.gameObject.layer == 7)
             {
                 // enemy attack
-                CollideFireball(other);
+                CollideFireball(other.gameObject);
             }
             else if(other.gameObject.layer == 8)
             {
                 // friendly collider
-                CollideCollectible(other);
+                CollideCollectible(other.gameObject);
             }
         }
 
@@ -391,7 +391,7 @@ namespace ShrugWare
             }
         }
 
-        private void CollideFireball(Collider other)
+        private void CollideFireball(GameObject otherGO)
         {
             // don't get hit multiple times repeatedly from a big cluster
             bool invuln = invulnExpireTime > Time.time;
@@ -425,7 +425,7 @@ namespace ShrugWare
             for (int i = 0; i < fireballsList.Count; ++i)
             {
                 Fireball fireball = fireballsList[i];
-                if (fireball.fireballObj == other.gameObject)
+                if (fireball.fireballObj == otherGO)
                 {
                     fireballsList.RemoveAt(i);
                     Destroy(fireball.fireballObj);
@@ -438,7 +438,7 @@ namespace ShrugWare
             FlashColor();
         }
 
-        private void CollideCollectible(Collider other)
+        private void CollideCollectible(GameObject otherGO)
         {
             enemyHealth -= COLLECTIBLE_DAMAGE;
             enemyHealthText.text = "Enemy Health: " + enemyHealth;
@@ -466,8 +466,8 @@ namespace ShrugWare
             }
 
             int index = UnityEngine.Random.Range(0, collectVFXList.Count);
-            Instantiate(collectVFXList[index], other.gameObject.transform.position, Quaternion.identity);
-            Destroy(other.gameObject);
+            Instantiate(collectVFXList[index], otherGO.GetComponent<BoxCollider2D>().transform.position, Quaternion.identity);
+            Destroy(otherGO.GetComponent<BoxCollider2D>().gameObject);
         }
 
         // flash colors when we get hit
