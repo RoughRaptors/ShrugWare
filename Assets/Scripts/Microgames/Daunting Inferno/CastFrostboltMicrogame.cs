@@ -27,6 +27,12 @@ namespace ShrugWare
         [SerializeField]
         GameObject bossObj;
 
+        [SerializeField]
+        AudioClipData frostboltAudio;
+
+        [SerializeField]
+        AudioClipData buttonClickAudio;
+
         private bool castedFrostbolt = false;
 
         protected override void Start()
@@ -79,6 +85,11 @@ namespace ShrugWare
         }
         private void CastFrostboltButtonPressed()
         {
+            if(AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(frostboltAudio);
+            }
+
             castedFrostbolt = true;
 
             fireballButton.gameObject.SetActive(false);
@@ -90,6 +101,11 @@ namespace ShrugWare
 
         public void OtherButtonPressed()
         {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(buttonClickAudio);
+            }
+
             fireballButton.gameObject.SetActive(false);
             frostboltButton.gameObject.SetActive(false);
             healButton.gameObject.SetActive(false);

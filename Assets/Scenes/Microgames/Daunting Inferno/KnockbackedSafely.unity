@@ -995,23 +995,27 @@ MonoBehaviour:
       effectType: 0
       amount: 34
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 0
     addOnLoss: 1
   - effect:
       effectType: 2
       amount: 12.5
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 1
     addOnLoss: 0
   - effect:
       effectType: 3
       amount: 0.05
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 1
     addOnLoss: 1
   playerObject: {fileID: 1387725040}
   arrowObj: {fileID: 78332049}
   safeZoneObj: {fileID: 386133750}
+  knockbackAudio: {fileID: 11400000, guid: 7e31d955d9859e44d9ad689699d89ac4, type: 2}
 --- !u!1001 &839278003
 PrefabInstance:
   m_ObjectHideFlags: 0

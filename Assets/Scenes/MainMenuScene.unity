@@ -610,17 +610,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &830605310 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7993644387541279028, guid: b077235ab3b046f47b50f273856b53d8, type: 3}
-  m_PrefabInstance: {fileID: 376006983961828269}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 998e21fa9dfe06d428831deee77e44bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &904114940
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,8 +871,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startButton: {fileID: 904114942}
   tutorialButton: {fileID: 1730560846}
-  audioManager: {fileID: 830605310}
   optionsMenu: {fileID: 1607120594}
+  mainMenuMusic: {fileID: 11400000, guid: bfc582daa0a48c14aaa65b9495547d20, type: 2}
 --- !u!114 &1007673632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1997,6 +1986,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8586922171846002356, guid: ef49f3c0a4ff59c489db715b2a67ee04, type: 3}
+      propertyPath: openAudioClipData
+      value: 
+      objectReference: {fileID: 11400000, guid: d89334a1714c17048855415c29e8438d, type: 2}
+    - target: {fileID: 8586922171846002356, guid: ef49f3c0a4ff59c489db715b2a67ee04, type: 3}
+      propertyPath: closeAudioClipData
+      value: 
+      objectReference: {fileID: 11400000, guid: 39ea9f385fe154646b0bedaf9d98943e, type: 2}
+    - target: {fileID: 8586922171846002356, guid: ef49f3c0a4ff59c489db715b2a67ee04, type: 3}
+      propertyPath: optionsOpenAudioClipData
+      value: 
+      objectReference: {fileID: 11400000, guid: d89334a1714c17048855415c29e8438d, type: 2}
     - target: {fileID: 8756464607496899974, guid: ef49f3c0a4ff59c489db715b2a67ee04, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

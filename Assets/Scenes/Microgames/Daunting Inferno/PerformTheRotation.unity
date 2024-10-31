@@ -354,6 +354,9 @@ MonoBehaviour:
   iceBlastButtonObj: {fileID: 1213044723}
   instructionsText: {fileID: 1955166943}
   bossObj: {fileID: 1861609731}
+  frostboltAudio: {fileID: 11400000, guid: d0e34f72a646b2247ad07fcc29975de9, type: 2}
+  iceBlastAudio: {fileID: 11400000, guid: 0187eb06b708ddf4ea9d51962089f4fe, type: 2}
+  glacialSpikeAudio: {fileID: 11400000, guid: 39ea9f385fe154646b0bedaf9d98943e, type: 2}
 --- !u!1 &723481294
 GameObject:
   m_ObjectHideFlags: 0

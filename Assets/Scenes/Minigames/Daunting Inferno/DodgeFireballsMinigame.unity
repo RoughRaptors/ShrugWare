@@ -407,8 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1584137e85d7a2e4890cbd0c08d49c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minigameDuration: -1
-  minigameMusic: {fileID: 8300000, guid: fde902932f5ab1a4695c7857163806ba, type: 3}
+  minigameMusicData: {fileID: 11400000, guid: 881b213c9a4b8f24dabdd8d7908d422f, type: 2}
   fireballInitObj: {fileID: 1575560811}
   collectibleInitObj: {fileID: 975530326}
   playerHealthText: {fileID: 477954543}
@@ -439,6 +438,9 @@ MonoBehaviour:
   - {fileID: 8680598818964007281, guid: dcd90c4976197424b9958a7c54b6bb8c, type: 3}
   - {fileID: 1449242181322416601, guid: 052d5f6cf7d3ebc44bba49fbe653f9a8, type: 3}
   - {fileID: 8176850701479282271, guid: b219c04f384e7f345bb8ae1fef443965, type: 3}
+  fireballImpactSound: {fileID: 11400000, guid: 475cf1224006d064f8b5575a03d20d1a, type: 2}
+  collectiblePickupSound: {fileID: 11400000, guid: c8bdf97758f7c9c4a827584f86176e9c, type: 2}
+  deathSound: {fileID: 11400000, guid: 9cc6795c6954a274dbfbc5265d0bb053, type: 2}
 --- !u!61 &332365902
 BoxCollider2D:
   m_ObjectHideFlags: 0

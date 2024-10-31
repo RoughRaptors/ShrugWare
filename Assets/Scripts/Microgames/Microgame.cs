@@ -109,7 +109,7 @@ namespace ShrugWare
             {
                 // keep the music separated for now. we can remove the old stuff once we have enough new stuff
                 AudioClip audioClip;
-                float vol = 1f;
+                float vol = 1.0f;
                 bool shouldUseSOMusic = UnityEngine.Random.Range(0, 2) == 0;
                 if (shouldUseSOMusic)
                 {
@@ -126,6 +126,7 @@ namespace ShrugWare
                     vol = .7f;
                 }
 
+                // keep this until we completely get rid of the old background music
                 AudioManager.Instance.PlayMusicClip(audioClip, DataManager.AudioType.MicrogameMusic, vol);
 
                 if (InfiniteModeManager.Instance != null)

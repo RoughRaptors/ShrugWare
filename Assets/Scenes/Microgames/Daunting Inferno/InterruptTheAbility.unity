@@ -470,18 +470,21 @@ MonoBehaviour:
       effectType: 0
       amount: 34
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 0
     addOnLoss: 1
   - effect:
       effectType: 2
       amount: 12.5
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 1
     addOnLoss: 0
   - effect:
       effectType: 3
       amount: 0.05
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 1
     addOnLoss: 1
   abilityBar: {fileID: 274319489}
@@ -489,6 +492,7 @@ MonoBehaviour:
   bossObj: {fileID: 1634194059}
   attackButton1: {fileID: 401366509}
   attackButton2: {fileID: 656935073}
+  buttonClickAudio: {fileID: 11400000, guid: bef8eb7521a5856469f75f73f1763cef, type: 2}
 --- !u!1 &392852466
 GameObject:
   m_ObjectHideFlags: 0

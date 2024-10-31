@@ -50,6 +50,15 @@ namespace ShrugWare
         [SerializeField]
         List<GameObject> collectVFXList;
 
+        [SerializeField]
+        AudioClipData fireballImpactSound;
+
+        [SerializeField]
+        AudioClipData collectiblePickupSound;
+
+        [SerializeField]
+        AudioClipData deathSound;
+
         private const float FIREBALL_X_MIN = -25;
         private const float FIREBALL_X_MAX = 125;
         private const float FIREBALL_Y_MIN = -40;
@@ -415,6 +424,11 @@ namespace ShrugWare
             playerHealthText.text = "Player Health: " + healthRemaining.ToString();
             if (healthRemaining < 0)
             {
+                if(AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayAudioClip(deathSound);
+                }
+
                 DisableFireballs();
                 playerHealthText.text = "YOU ARE DED";
                 gameRunning = false;
@@ -436,6 +450,11 @@ namespace ShrugWare
             int index = UnityEngine.Random.Range(0, hitVFXList.Count);
             Instantiate(hitVFXList[index], gameObject.transform.position, Quaternion.identity);
             FlashColor();
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(fireballImpactSound);
+            }
         }
 
         private void CollideCollectible(GameObject otherGO)
@@ -468,6 +487,11 @@ namespace ShrugWare
             int index = UnityEngine.Random.Range(0, collectVFXList.Count);
             Instantiate(collectVFXList[index], otherGO.GetComponent<BoxCollider2D>().transform.position, Quaternion.identity);
             Destroy(otherGO.GetComponent<BoxCollider2D>().gameObject);
+
+            if(AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(collectiblePickupSound);
+            }
         }
 
         // flash colors when we get hit

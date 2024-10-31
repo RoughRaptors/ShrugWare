@@ -337,6 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1679338998}
+  dragAudio: {fileID: 11400000, guid: d0e34f72a646b2247ad07fcc29975de9, type: 2}
 --- !u!1 &263434994
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,6 +631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1679338998}
+  dragAudio: {fileID: 11400000, guid: d0e34f72a646b2247ad07fcc29975de9, type: 2}
 --- !u!1 &813909986
 GameObject:
   m_ObjectHideFlags: 0
@@ -1666,18 +1668,21 @@ MonoBehaviour:
       effectType: 0
       amount: 34
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 0
     addOnLoss: 1
   - effect:
       effectType: 2
       amount: 12.5
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 1
     addOnLoss: 0
   - effect:
       effectType: 3
       amount: 0.05
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 1
     addOnLoss: 1
   resource1: {fileID: 778421855}
@@ -1686,6 +1691,8 @@ MonoBehaviour:
   border1Center: {fileID: 813909986}
   border2Center: {fileID: 1344725171}
   border3Center: {fileID: 1639078715}
+  pickupAudio: {fileID: 11400000, guid: d0e34f72a646b2247ad07fcc29975de9, type: 2}
+  dropAudio: {fileID: 11400000, guid: 0187eb06b708ddf4ea9d51962089f4fe, type: 2}
 --- !u!1 &1913258693
 GameObject:
   m_ObjectHideFlags: 0
@@ -1809,6 +1816,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1679338998}
+  dragAudio: {fileID: 11400000, guid: d0e34f72a646b2247ad07fcc29975de9, type: 2}
 --- !u!1 &1985496833
 GameObject:
   m_ObjectHideFlags: 0

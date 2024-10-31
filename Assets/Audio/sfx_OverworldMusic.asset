@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: sfx_OverworldMusic
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 5b14c81759917fa49b4051789261f7f3, type: 3}
-  maxVolume: 0.5
+  maxVolume: 0.4
   pitch: 1
   randomPitch: 0
   variablePitchIfRandom: 0
   audioEffectType: 7
+  volumeMultiplier: 1

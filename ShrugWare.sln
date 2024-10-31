@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{74E1E516-C5DF-C46A-3AB1-AAB5D4CD4C28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIEffect_Demo", "UIEffect_Demo.csproj", "{D55D720F-21EA-0281-2EDD-D3E0A65A5771}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CFXRRuntime", "CFXRRuntime.csproj", "{191F9B65-45C5-C21F-004F-CF3DFB9A5560}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{1E1DE50F-1B3B-7ABD-B15C-F3B8AFB47AEF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CFXREditor", "CFXREditor.csproj", "{4227B526-85A0-C59C-9076-81F9936A7CA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIEffect_Demo", "UIEffect_Demo.csproj", "{D55D720F-21EA-0281-2EDD-D3E0A65A5771}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		{74E1E516-C5DF-C46A-3AB1-AAB5D4CD4C28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74E1E516-C5DF-C46A-3AB1-AAB5D4CD4C28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74E1E516-C5DF-C46A-3AB1-AAB5D4CD4C28}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D55D720F-21EA-0281-2EDD-D3E0A65A5771}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D55D720F-21EA-0281-2EDD-D3E0A65A5771}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D55D720F-21EA-0281-2EDD-D3E0A65A5771}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D55D720F-21EA-0281-2EDD-D3E0A65A5771}.Release|Any CPU.Build.0 = Release|Any CPU
 		{191F9B65-45C5-C21F-004F-CF3DFB9A5560}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{191F9B65-45C5-C21F-004F-CF3DFB9A5560}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{191F9B65-45C5-C21F-004F-CF3DFB9A5560}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -37,6 +33,10 @@ Global
 		{4227B526-85A0-C59C-9076-81F9936A7CA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4227B526-85A0-C59C-9076-81F9936A7CA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4227B526-85A0-C59C-9076-81F9936A7CA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D55D720F-21EA-0281-2EDD-D3E0A65A5771}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D55D720F-21EA-0281-2EDD-D3E0A65A5771}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D55D720F-21EA-0281-2EDD-D3E0A65A5771}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D55D720F-21EA-0281-2EDD-D3E0A65A5771}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -30,9 +30,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Minigames/Daunting Inferno/DodgeFireballsMinigame.unity
     guid: 8fd48e24102e05740a5de10156db859b
   - enabled: 1
-    path: Assets/Scenes/Minigames/Daunting Inferno/ShootAsteroidsMinigame.unity
-    guid: cd35a998be979cb4cbddfc9345dfa244
-  - enabled: 1
     path: Assets/Scenes/Minigames/Daunting Inferno/HeiganDanceMinigame.unity
     guid: cf80239e292d0364ca10bbbc33dbae6d
   - enabled: 1

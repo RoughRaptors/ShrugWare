@@ -16,5 +16,6 @@ namespace ShrugWare
         [Range(-1, 1)]
         public float variablePitchIfRandom;
         public DataManager.AudioType audioEffectType;
+        public float volumeMultiplier = 1.0f;
     }
 }

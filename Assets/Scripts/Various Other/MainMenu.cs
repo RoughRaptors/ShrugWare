@@ -15,10 +15,10 @@ namespace ShrugWare
         Button tutorialButton;
 
         [SerializeField]
-        AudioManager audioManager;
+        GameObject optionsMenu;
 
         [SerializeField]
-        GameObject optionsMenu;
+        AudioClipData mainMenuMusic;
 
         private void Awake()
         {
@@ -29,18 +29,20 @@ namespace ShrugWare
 
         private void Start()
         {
-            audioManager.PlayAudioClip(DataManager.AudioType.MainMenu);
+            AudioManager.Instance.PlayMusicClip(mainMenuMusic);
         }
 
         public void OnStartClicked()
         {
-            audioManager.StopAudio();
+            AudioManager.Instance.StopAudio();
+            AudioManager.Instance.PlayAudioClip(DataManager.AudioType.ButtonClick);
             SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
         }
 
         public void OnTutorialClicked()
         {
-            audioManager.StopAudio();
+            AudioManager.Instance.StopAudio();
+            AudioManager.Instance.PlayAudioClip(DataManager.AudioType.ButtonClick);
             SceneManager.LoadScene((int)DataManager.Scenes.TutorialScene);
         }
 

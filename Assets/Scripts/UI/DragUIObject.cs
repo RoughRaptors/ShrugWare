@@ -1,3 +1,4 @@
+using ShrugWare;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,11 @@ public class DragUIObject : MonoBehaviour
     [SerializeField]
     Canvas canvas;
 
+    [SerializeField]
+    AudioClipData dragAudio;
+
+    private GameObject lastPickupObject;
+
     public void DragHandler(BaseEventData data)
     {
         PointerEventData pointerData = (PointerEventData)data;
@@ -16,5 +22,11 @@ public class DragUIObject : MonoBehaviour
             pointerData.position, canvas.worldCamera, out pos);
 
         transform.position = canvas.transform.TransformPoint(pos);
+
+        if (AudioManager.Instance != null && dragAudio != null && lastPickupObject != pointerData.pointerPress)
+        {
+            lastPickupObject = pointerData.pointerPress;
+            AudioManager.Instance.PlayAudioClip(dragAudio);
+        }
     }
 }

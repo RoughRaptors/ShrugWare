@@ -9,6 +9,9 @@ namespace ShrugWare
         List<Clickable> enemies = new List<Clickable>();
         Dictionary<Clickable, Vector3> enemyTargetPositions = new Dictionary<Clickable, Vector3>();
 
+        [SerializeField]
+        AudioClipData tauntAudio;
+
         private const float ENEMY_MOVE_SPEED = 1.5f;
         private const float X_MIN = -3.20f;
         private const float X_MAX = 3.20f;
@@ -78,6 +81,11 @@ namespace ShrugWare
 
         private void Taunted(Clickable enemy)
         {
+            if(AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(tauntAudio);
+            }
+
             enemies.Remove(enemy);
             enemy.GetComponentInChildren<SkinnedMeshRenderer>().material.color = Color.green;
             enemy.Clicked -= Taunted;

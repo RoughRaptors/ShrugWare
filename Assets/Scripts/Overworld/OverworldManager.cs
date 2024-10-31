@@ -2,10 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using UnityEditor;
-using UnityEngine.EventSystems;
-using System.Diagnostics.Tracing;
-using UnityEngine.Experimental.AI;
 
 namespace ShrugWare
 {
@@ -82,6 +78,9 @@ namespace ShrugWare
 
         [SerializeField]
         OptionsMenu optionsMenu;
+
+        [SerializeField]
+        AudioClipData overworldMusicData;
 
         // don't allow the player to move multiple spaces at once
         private bool isMoving = false;
@@ -485,7 +484,7 @@ namespace ShrugWare
             if (AudioManager.Instance != null)
             {
                 AudioManager.Instance.LoopMusic(true);
-                AudioManager.Instance.PlayMusicClip(DataManager.AudioType.Overworld, 0.75f);
+                AudioManager.Instance.PlayMusicClip(overworldMusicData);
             }
         }
 
@@ -501,11 +500,11 @@ namespace ShrugWare
             }
         }
 
-        public void PlayMusicClip(AudioClip audioClip, DataManager.AudioType audioType, float volumeScale = 1)
+        public void PlayMusicClip(AudioClipData audioClipData)
         {
             if (AudioManager.Instance != null)
             {
-                AudioManager.Instance.PlayMusicClip(audioClip, audioType);
+                AudioManager.Instance.PlayMusicClip(audioClipData.clip, audioClipData.audioEffectType, audioClipData.maxVolume);
             }
         }
 

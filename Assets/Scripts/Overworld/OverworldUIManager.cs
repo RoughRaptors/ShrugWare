@@ -173,6 +173,9 @@ namespace ShrugWare
                 SetCanvasEnabled(false);
                 OverworldManager.Instance.DisableCamera();
 
+                AudioManager.Instance.StopAudio();
+                AudioManager.Instance.LoopMusic(false);
+
                 // offset our index
                 int sceneIndex = debugDropdown.value + (int)DataManager.Scenes.MICROGAME_START;
                 SceneManager.LoadScene(sceneIndex, LoadSceneMode.Additive);

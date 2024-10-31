@@ -13,6 +13,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject safeZoneObj = null;
 
+        [SerializeField]
+        AudioClipData knockbackAudio;
+
         private bool inSafeZone = false;
 
         private Vector3 platformTargetPos;
@@ -93,6 +96,11 @@ namespace ShrugWare
 
         private void ApplyKnockback()
         {
+            if(AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(knockbackAudio);
+            }
+
             Vector3 dir = playerObject.transform.position - arrowObj.transform.position;
             dir.z = 0;
             dir = dir.normalized;

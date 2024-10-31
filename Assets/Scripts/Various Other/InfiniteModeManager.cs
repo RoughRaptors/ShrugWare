@@ -162,6 +162,8 @@ public class InfiniteModeManager : MonoBehaviour
 
     public void OnStartPressed()
     {
+        AudioManager.Instance.PlayAudioClip(DataManager.AudioType.ButtonClick);
+
         started = true;
         startButton.gameObject.SetActive(false);
         if (livesLeft >= 0)
@@ -184,6 +186,7 @@ public class InfiniteModeManager : MonoBehaviour
 
     public void OnBackPressed()
     {
+        AudioManager.Instance.PlayAudioClip(DataManager.AudioType.ButtonClick);
         TryEquipAccessory();
         SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
         Destroy(gameObject);

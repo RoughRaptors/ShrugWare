@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: sfx_MainMenu
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: e7bbaf9d2fb718448b9f893459af7805, type: 3}
-  maxVolume: 0.5
+  maxVolume: 0.4
   pitch: 1
   randomPitch: 0
   variablePitchIfRandom: 0
