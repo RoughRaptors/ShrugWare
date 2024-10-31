@@ -1335,6 +1335,11 @@ MonoBehaviour:
   - {fileID: 245581523800709616, guid: 9442d241d2d8ecc47b49f256b55325c6, type: 3}
   - {fileID: 7938384439400024403, guid: b6e54acc881a03c4a9719b161a25a3e3, type: 3}
   - {fileID: 4109064841345302812, guid: 2a409ab125c5216449bc5f005ec045f0, type: 3}
+  pickupAudioList:
+  - {fileID: 11400000, guid: b5be9c71427c0c04cbc83f2171ef870f, type: 2}
+  - {fileID: 11400000, guid: 1759cfb2ca6504f42879e14a739aba0c, type: 2}
+  - {fileID: 11400000, guid: c8bdf97758f7c9c4a827584f86176e9c, type: 2}
+  - {fileID: 11400000, guid: 45e445edbcf4bd8468ef1dba1b0b108b, type: 2}
 --- !u!1 &2017965567
 GameObject:
   m_ObjectHideFlags: 0

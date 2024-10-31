@@ -11,6 +11,9 @@ namespace ShrugWare
         [SerializeField]
         List<GameObject> powerstoneObjects = new List<GameObject>();
 
+        [SerializeField]
+        List<AudioClipData> pickupAudioList = new List<AudioClipData>();
+
         private const float X_MIN = -80.0f;
         private const float X_MAX = 80.0f;
         private const float Y_MIN = -20.0f;
@@ -85,6 +88,12 @@ namespace ShrugWare
 
         private void CollectStone(GameObject stone)
         {
+            if(AudioManager.Instance != null)
+            {
+                int index = UnityEngine.Random.RandomRange(0, pickupAudioList.Count - 1);
+                AudioManager.Instance.PlayAudioClip(pickupAudioList[index]);
+            }
+
             stone.SetActive(false);
             if (++numPowerstonesCollected == NUM_POWERSTONES_TOTAL)
             {

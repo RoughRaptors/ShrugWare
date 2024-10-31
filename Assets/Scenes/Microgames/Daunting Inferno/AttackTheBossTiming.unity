@@ -386,22 +386,26 @@ MonoBehaviour:
       effectType: 0
       amount: 34
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 0
     addOnLoss: 1
   - effect:
       effectType: 2
       amount: 12.5
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 1
     addOnLoss: 0
   - effect:
       effectType: 3
       amount: 0.05
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 1
     addOnLoss: 1
   timingSlider: {fileID: 1999925865}
   boss: {fileID: 297559661}
+  buttonClickAudioData: {fileID: 11400000, guid: bef8eb7521a5856469f75f73f1763cef, type: 2}
 --- !u!1 &569523404
 GameObject:
   m_ObjectHideFlags: 0

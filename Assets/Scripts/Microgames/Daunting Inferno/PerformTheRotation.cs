@@ -24,6 +24,15 @@ namespace ShrugWare
         [SerializeField]
         GameObject bossObj;
 
+        [SerializeField]
+        AudioClipData frostboltAudio;
+
+        [SerializeField]
+        AudioClipData iceBlastAudio;
+
+        [SerializeField]
+        AudioClipData glacialSpikeAudio;
+
         private enum RotationMapping
         {
             Frostbolt = 0,
@@ -66,6 +75,22 @@ namespace ShrugWare
         {
             if(rotation[0] == rotationElement)
             {
+                if(AudioManager.Instance != null)
+                {
+                    if(rotationElement == RotationMapping.Frostbolt)
+                    {
+                        AudioManager.Instance.PlayAudioClip(frostboltAudio);
+                    }
+                    else if (rotationElement == RotationMapping.GlacialSpike)
+                    {
+                        AudioManager.Instance.PlayAudioClip(glacialSpikeAudio);
+                    }
+                    else
+                    {
+                        AudioManager.Instance.PlayAudioClip(iceBlastAudio);
+                    }
+                }
+
                 rotation.RemoveAt(0);
                 button.gameObject.SetActive(false);
             }
@@ -74,7 +99,8 @@ namespace ShrugWare
                 frostboltButtonObj.gameObject.SetActive(false);
                 glacialSpikeButtonObj.gameObject.SetActive(false);
                 iceBlastButtonObj.gameObject.SetActive(false);
-                SetMicrogameEndText(false, "Wrong rotation");
+                microGameTime += 1;
+                //SetMicrogameEndText(false, "Wrong rotation");
             }
             
             if(rotation.Count == 0)

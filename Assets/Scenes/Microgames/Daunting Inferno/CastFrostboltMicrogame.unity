@@ -1409,6 +1409,8 @@ MonoBehaviour:
   middleButtonObj: {fileID: 200610687}
   rightButtonObj: {fileID: 724258858}
   bossObj: {fileID: 965089065}
+  frostboltAudio: {fileID: 11400000, guid: 712e7d723b1abb84cb97ef7ba121945e, type: 2}
+  buttonClickAudio: {fileID: 11400000, guid: bef8eb7521a5856469f75f73f1763cef, type: 2}
 --- !u!1 &2093396462
 GameObject:
   m_ObjectHideFlags: 0

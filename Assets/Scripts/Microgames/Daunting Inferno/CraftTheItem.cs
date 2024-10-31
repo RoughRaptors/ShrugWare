@@ -26,6 +26,12 @@ namespace ShrugWare
         [SerializeField]
         GameObject border3Center;
 
+        [SerializeField]
+        AudioClipData pickupAudio;
+
+        [SerializeField]
+        AudioClipData dropAudio;
+
         private bool item1InSlot = false;
         private bool item2InSlot = false;
         private bool item3InSlot = false;
@@ -60,6 +66,11 @@ namespace ShrugWare
             // check distance from borders on mouse up
             if(Input.GetMouseButtonUp(0))
             {
+                if(AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayAudioClip(dropAudio);
+                }
+
                 item1InSlot = false;
                 item2InSlot = false;
                 item3InSlot = false;

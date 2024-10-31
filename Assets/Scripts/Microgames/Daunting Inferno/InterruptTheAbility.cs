@@ -21,6 +21,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject attackButton2;
 
+        [SerializeField]
+        AudioClipData buttonClickAudio;
+
         // take some time to spawn to make it challenging
         private bool interrupted = false;
         private float castDelay = 0.0f;
@@ -84,6 +87,11 @@ namespace ShrugWare
 
         public void InterruptButtonPressed()
         {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(buttonClickAudio);
+            }
+
             if (!abilityBar.isActiveAndEnabled)
             {
                 SetMicrogameEndText(false, "Too soon");
@@ -99,6 +107,11 @@ namespace ShrugWare
 
         public void OnAttackPressed(GameObject obj)
         {
+            if(AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(buttonClickAudio);
+            }
+
             // increase the cast percentage
             if (abilityBar.isActiveAndEnabled)
             {

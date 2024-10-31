@@ -18,3 +18,4 @@ MonoBehaviour:
   randomPitch: 0
   variablePitchIfRandom: 0
   audioEffectType: 4
+  volumeMultiplier: 1.5

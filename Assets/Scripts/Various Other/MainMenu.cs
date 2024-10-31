@@ -17,6 +17,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject optionsMenu;
 
+        [SerializeField]
+        AudioClipData mainMenuMusic;
+
         private void Awake()
         {
             // this was generating errors on dev build startup
@@ -26,7 +29,7 @@ namespace ShrugWare
 
         private void Start()
         {
-            AudioManager.Instance.PlayMusicClip(DataManager.AudioType.MainMenu);
+            AudioManager.Instance.PlayMusicClip(mainMenuMusic);
         }
 
         public void OnStartClicked()

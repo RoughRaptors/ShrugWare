@@ -19,6 +19,9 @@ namespace ShrugWare
         [SerializeField]
         List<GameObject> hitVFXList;
 
+        [SerializeField]
+        AudioClipData shootAudio;
+
         private LineRenderer lineRenderer;
 
         private const int BULLET_SPEED = 175;
@@ -91,6 +94,11 @@ namespace ShrugWare
 
         private void Shoot()
         {
+            if(AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(shootAudio);
+            }
+
             Vector3 mousePosModified = Input.mousePosition;
             mousePosModified.z = 10;
 

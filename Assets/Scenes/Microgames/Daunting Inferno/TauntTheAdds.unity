@@ -365,23 +365,27 @@ MonoBehaviour:
       effectType: 0
       amount: 34
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 0
     addOnLoss: 1
   - effect:
       effectType: 2
       amount: 12.5
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 1
     addOnLoss: 0
   - effect:
       effectType: 3
       amount: 0.05
       asPercentage: 0
+      effectDescriptionString: 
     addOnWin: 1
     addOnLoss: 1
   enemies:
   - {fileID: 1642837739}
   - {fileID: 105905187}
+  tauntAudio: {fileID: 11400000, guid: 60ab73bf725a3e24d897caebf84e83dc, type: 2}
 --- !u!1001 &871738582
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,6 +11,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject boss;
 
+        [SerializeField]
+        AudioClipData buttonClickAudioData;
+
         private bool attackPressed = false;
         private bool attackedSucceeded = false;
         private bool goingLeft = false;
@@ -59,7 +62,7 @@ namespace ShrugWare
         // success if we're in the right 80% of the slider
         public void AttackButtonPressed()
         {
-            AudioManager.Instance.PlayAudioClip(DataManager.AudioType.ButtonClick);
+            AudioManager.Instance.PlayAudioClip(buttonClickAudioData);
 
             if (!attackPressed)
             {

@@ -872,6 +872,7 @@ MonoBehaviour:
   startButton: {fileID: 904114942}
   tutorialButton: {fileID: 1730560846}
   optionsMenu: {fileID: 1607120594}
+  mainMenuMusic: {fileID: 11400000, guid: bfc582daa0a48c14aaa65b9495547d20, type: 2}
 --- !u!114 &1007673632
 MonoBehaviour:
   m_ObjectHideFlags: 0
