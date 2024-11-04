@@ -14,10 +14,10 @@ namespace ShrugWare
         [SerializeField]
         List<AudioClipData> pickupAudioList = new List<AudioClipData>();
 
-        private const float X_MIN = -80.0f;
-        private const float X_MAX = 80.0f;
-        private const float Y_MIN = -20.0f;
-        private const float Y_MAX = 40.0f;
+        private const float X_MIN = -50.0f;
+        private const float X_MAX = 50.0f;
+        private const float Y_MIN = -25.0f;
+        private const float Y_MAX = 27.0f;
 
         private const float NUM_POWERSTONES_TOTAL = 4;
         private float numPowerstonesCollected = 0;
@@ -53,6 +53,7 @@ namespace ShrugWare
                     go.SetActive(false);
                 }
             }
+
             return victory;
         }
 
@@ -68,15 +69,15 @@ namespace ShrugWare
 
                     float xPos = Random.Range(X_MIN, X_MAX);
                     float yPos = Random.Range(Y_MIN, Y_MAX);
-                    Vector3 powerstonePos = new Vector3(xPos, yPos, 0);
-                    if (Vector3.Distance(playerObject.transform.position, powerstonePos) > 15.0f)
+                    Vector3 powerstonePos = new Vector3(xPos, yPos, -20);
+                    if (Vector3.Distance(playerObject.transform.position, powerstonePos) > 35.0f)
                     {
-                        int index = UnityEngine.Random.Range(0, powerstoneObjects.Count - 1);
+                        int index = UnityEngine.Random.Range(0, powerstoneObjects.Count);
                         GameObject powerstone = Instantiate(powerstoneObjects[index]);
                         powerstone.transform.position = powerstonePos;
                         powerstone.layer = 8;
-                        powerstone.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
                         powerstone.gameObject.AddComponent<BoxCollider2D>();
+                        powerstone.SetActive(true);
 
                         powerstones.Add(powerstone);
                         playerObject.GetComponent<PlayerMover>().AddSpeed(10);
@@ -90,7 +91,7 @@ namespace ShrugWare
         {
             if(AudioManager.Instance != null)
             {
-                int index = UnityEngine.Random.RandomRange(0, pickupAudioList.Count - 1);
+                int index = UnityEngine.Random.Range(0, pickupAudioList.Count - 1);
                 AudioManager.Instance.PlayAudioClip(pickupAudioList[index]);
             }
 

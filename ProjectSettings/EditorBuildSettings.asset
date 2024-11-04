@@ -125,5 +125,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Microgames/Daunting Inferno/MeleeTheBoss.unity
     guid: 64ea714b6f4e4224cbbc7d152f90f778
+  - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/Fishing.unity
+    guid: b234df712e49ac1488be1980fc46d588
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: dd69bd027abc73c48b5382fd6cab7dda, type: 2}
