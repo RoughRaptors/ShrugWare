@@ -18,12 +18,14 @@ using UnityEngine.UI;
 Attack The Boss Timing - Click the attack button in the light green
 Cast Frostbolt - Click the frostbolt button out of three options
 Craft The Item - Drag items into slots
+Fishing - Press the button in time to catch the fish
 Taunt The Adds - Click x amount of adds running around the screen.
 Perform The Rotation - Click the shown abilities in the correct order
 
 -- 2.5D Character Movement --
-Avoid The 8Lasers - Avoid a spinning laser
-Buy Cheap/Expensive Item - Purchase the proper item at a merchant
+Avoid The Lasers - Avoid a spinning laser
+Buy Cheap Item - Purchase the more expensive item
+Buy Expensive Item - Purchase the cheaper item
 Colored Platforms - Get on the green platform
 Dodge The Fireball - Dodge a fireball coming at you
 Equalize The Two Groups -  Move to the group that will make the party member numbers even
@@ -33,7 +35,8 @@ Interrupt The Ability - Hit the interrupt ability at the proper timing as the bo
 Knockbacked Safely - Get knocked backwards into a safe zone
 Laser Line of Sight Diagonal - LOS the lasers
 Laser Line of Sight Horizontal - LOS the lasers
-Laser Line of Sight Vertical + Alternative - LOS the lasers
+Laser Line of Sight Vertical - LOS the lasers
+Laser Line of Sight Vertial Alt - LOS the lasers
 Line of Sight - LOS the boss in time
 Match Polarity - Move to the party members of the same electric positive or negative sign as you
 Melee The Boss - hit boss with your sword (just collide)
@@ -404,7 +407,7 @@ namespace ShrugWare
             if (!(curBoss is null))
             {
 #if UNITY_EDITOR
-                //amount = CurBoss.curHealth;
+                amount = CurBoss.curHealth;
 #endif
                 curBoss.TakeDamage(amount);
             }

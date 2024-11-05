@@ -330,8 +330,9 @@ namespace ShrugWare
                         pathToLevel.Clear();
                         List<int> visitedList = new List<int>();
 
+                        int steps = 0;
                         visitedList.Add(curLevel.LevelID);
-                        GeneratePathToLevel(curLevel.LevelID, newOverworldLevel.LevelID, ref visitedList);
+                        GeneratePathToLevel(curLevel.LevelID, newOverworldLevel.LevelID, ref visitedList,ref steps);
                         pathToLevel.Reverse();
 
                         StartCoroutine(FollowPathToLevel());
@@ -363,7 +364,7 @@ namespace ShrugWare
             isMoving = false;
         }
         
-        private bool GeneratePathToLevel(int lookedAtLevelID, int targetLevelID, ref List<int> visited)
+        private bool GeneratePathToLevel(int lookedAtLevelID, int targetLevelID, ref List<int> visited, ref int stepsAway)
         {
             if(lookedAtLevelID == targetLevelID)
             {
@@ -378,14 +379,16 @@ namespace ShrugWare
                     continue;
                 }
 
-                visited.Add(connectingLevelID);                
-                if(GeneratePathToLevel(connectingLevelID, targetLevelID, ref visited))
+                visited.Add(connectingLevelID);
+                ++stepsAway;
+                if(GeneratePathToLevel(connectingLevelID, targetLevelID, ref visited, ref stepsAway))
                 {
                     pathToLevel.Add(connectingLevelID);
                     return true;
                 }
             }
 
+            --stepsAway;
             pathToLevel.Remove(lookedAtLevelID);
             return false;
         }

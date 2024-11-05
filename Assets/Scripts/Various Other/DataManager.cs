@@ -48,7 +48,8 @@ namespace ShrugWare
             ShootTheBoss,
             MeleeTheBoss,
             Fishing,
-            MICROGAME_END = 40 // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            MICROGAME_END = 40, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            ElectricWallsMinigame
         }
 
         public enum StatModifierType

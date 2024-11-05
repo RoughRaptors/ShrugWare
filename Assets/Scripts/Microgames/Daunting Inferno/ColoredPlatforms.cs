@@ -49,7 +49,7 @@ namespace ShrugWare
             base.OnMyGameTick(timePercentLeft);
 
             // don't rotate if we're about to end the game because that's unfair
-            //timeSpent += Time.deltaTime;
+            timeSpent += Time.deltaTime;
             if(timeSpent >= ROTATE_TIME && timeElapsed <= microGameTime - 1.0f)
             {
                 timeSpent = 0;
