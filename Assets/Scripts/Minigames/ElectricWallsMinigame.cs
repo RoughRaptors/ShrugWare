@@ -11,13 +11,16 @@ namespace ShrugWare
     // 10s-20s come from top + right
     // 20s-30s come from top + right + bottom
 
-    public class DodgeFireballsMinigame : Minigame
+    public class ElectricWallsMinigame : Minigame
     {
         [SerializeField]
-        GameObject fireballInitObj;
+        GameObject lightningBallInitialObj;
 
         [SerializeField]
-        GameObject collectibleInitObj;
+        GameObject oscillatorInitialObj;
+
+        [SerializeField]
+        GameObject collectibleInitialObj;
 
         [SerializeField]
         TextMeshProUGUI playerHealthText;
@@ -27,12 +30,6 @@ namespace ShrugWare
 
         [SerializeField]
         TextMeshProUGUI endGameText;
-
-        [SerializeField]
-        GameObject topIndicatorObj;
-
-        [SerializeField]
-        GameObject bottomIndicatorObj;
 
         [SerializeField]
         TextMeshProUGUI enemyHealthText;
@@ -51,7 +48,7 @@ namespace ShrugWare
         List<GameObject> collectVFXList;
 
         [SerializeField]
-        AudioClipData fireballImpactSound;
+        AudioClipData lightningImpactSound;
 
         [SerializeField]
         AudioClipData collectiblePickupSound;
@@ -59,38 +56,24 @@ namespace ShrugWare
         [SerializeField]
         AudioClipData deathSound;
 
-        private const float FIREBALL_X_MIN = -25;
-        private const float FIREBALL_X_MAX = 125;
-        private const float FIREBALL_Y_MIN = -40;
-        private const float FIREBALL_Y_MAX = 50;
-        private const float FIREBALL_SPEED_MIN = 45;
-        private const float FIREBALL_SPEED_MAX = 75;
-
         private const int ENEMY_START_HEALTH = 100;
         private float enemyHealth = ENEMY_START_HEALTH;
 
         // if we've been hit within INVULN_TIME, don't do damage
         private float invulnExpireTime = 0.0f;
-        private const float INVULN_DURATION = 0.85f;
+        private const float INVULN_DURATION = 1.05f;
 
-        private const int NUM_FIREBALLS_IN_WAVE_MIN = 5;
-        private const int NUM_FIREBALLS_IN_WAVE_MAX = 9;
-        private const float COLLECTIBLE_SPAWN_DISTANCE = 30;
+        private const float COLLECTIBLE_SPAWN_DISTANCE = 300;
 #if UNITY_EDITOR
         private const int COLLECTIBLE_DAMAGE = 20;
 #else
         private const int COLLECTIBLE_DAMAGE = 10;
 #endif
 
-        private const float COLLECTIBLE_X_MIN = -5;
-        private const float COLLECTIBLE_X_MAX = 110;
-        private const float COLLECTIBLE_Y_MIN = -25;
-        private const float COLLECTIBLE_Y_MAX = 30;
-
-        private const float FIREBALL_SPAWN_INTERVAL = 0.875f;
-        private float timeSinceLastSpawn = 0.0f;
-        private bool hasSpawnedTopIndicator = false;
-        private bool hasSpawnedBottomIndicator = false;
+        private const float COLLECTIBLE_X_MIN = -825.0f;
+        private const float COLLECTIBLE_X_MAX = 825.0f;
+        private const float COLLECTIBLE_Y_MIN = -250.0f;
+        private const float COLLECTIBLE_Y_MAX = 275.0f;
 
         private float mitigation = 0.0f;
 
@@ -102,24 +85,23 @@ namespace ShrugWare
         private float healthRemaining = 100;
         private bool gameRunning = false;
 
-        private const int TOP_PATTERN_SPAWN_TIME = 7;
-        private const int BOTTOM_PATTERN_SPAWN_TIME = 12;
+        private bool hitElectricity = false;
 
-        private enum FromDirection
-        {
-            FromRight = 0,
-            FromTop,
-            FromBottom
-        }
+        private const float SPAWN_INTERVAL = 2.25f;
+        private float lastSpawnTime = float.MinValue;
 
-        protected struct Fireball
-        {
-            public GameObject fireballObj;
-            public Vector3 targetPos;
-            public float speed;
-        }
+        private const float DIST_MIN = 15.0f;
+        private const float DIST_MAX = 45.0f;
+        private const float LEFT_ORB_X_SPAWN_POS_MIN = 0.0f;
+        private const float LEFT_ORB_X_SPAWN_POS_MAX = 75.0f;
+        private const float RIGHT_ORB_X_SPAWN_POS_MIN = 15.0f;
+        private const float RIGHT_ORB_X_SPAWN_POS_MAX = 100.0f;
+        private const float WALL_X_MIN_SPAWN_POS = 0.0f;
+        private const float WALL_X_MAX_SPAWN_POS = 0.0f;
 
-        private List<Fireball> fireballsList = new List<Fireball>();
+        private const float ELECTRICITY_SPEED = .3f;
+
+        List<GameObject> electricObjs = new List<GameObject>();
 
         private void Awake()
         {
@@ -133,13 +115,13 @@ namespace ShrugWare
 
         private void OnEnable()
         {
-            PlayerCollider.OnBadCollision += CollideFireball;
+            PlayerCollider.OnBadCollision += CollideElectricity;
             PlayerCollider.OnGoodCollision += CollideCollectible;
         }
 
         private void OnDisable()
         {
-            PlayerCollider.OnBadCollision -= CollideFireball;
+            PlayerCollider.OnBadCollision -= CollideElectricity;
             PlayerCollider.OnGoodCollision -= CollideCollectible;
         }
 
@@ -147,12 +129,6 @@ namespace ShrugWare
         {
             base.Start();
             healthRemaining = START_HEALTH + healthToAdd;
-
-            // initial wave
-            for (int i = 0; i < 10; ++i)
-            {
-                SpawnFireball(FromDirection.FromRight);
-            }
 
             if (OverworldManager.Instance != null)
             {
@@ -168,137 +144,67 @@ namespace ShrugWare
 
         private void FixedUpdate()
         {
-            if(gameRunning)
+            if (gameRunning)
             {
+                if(Time.time > lastSpawnTime + SPAWN_INTERVAL)
+                {
+                    lastSpawnTime = Time.time;
+                    SpawnElectricity();
+                }
+
                 HandlePlayerMovement();
-                HandleFireballs();
+                HandleLightningMovement();
                 timeInGame += Time.deltaTime;
-
-                if (!hasSpawnedBottomIndicator && timeInGame >= BOTTOM_PATTERN_SPAWN_TIME)
-                {
-                    bottomIndicatorObj.SetActive(true);
-                    hasSpawnedBottomIndicator = true;
-                    Invoke("DeactivateBottomIndicator", 2.0f);
-                }
-                else if (!hasSpawnedTopIndicator && timeInGame >= TOP_PATTERN_SPAWN_TIME)
-                {
-                    topIndicatorObj.SetActive(true);
-                    hasSpawnedTopIndicator = true;
-                    Invoke("DeactivateTopIndicator", 2.0f);
-                }
             }
         }
 
-        private void HandleFireballs()
+        private void SpawnElectricity()
         {
-            if (timeSinceLastSpawn >= FIREBALL_SPAWN_INTERVAL)
-            {
-                timeSinceLastSpawn = 0;
+            GameObject parentObj = new GameObject();
+            parentObj.name = "Lightning Wall";
 
-                // spawn more at certain times
-                if ((int)timeInGame != 0 && (int)timeInGame % BOTTOM_PATTERN_SPAWN_TIME == 0)
-                {
-                    // spawn bottom
-                    int numInWave = UnityEngine.Random.Range(NUM_FIREBALLS_IN_WAVE_MIN, NUM_FIREBALLS_IN_WAVE_MAX + 1);
-                    for (int i = 0; i < numInWave; ++i)
-                    {
-                        SpawnFireball(FromDirection.FromBottom);
-                    }
-                }
-                else if ((int)timeInGame != 0 && (int)timeInGame % TOP_PATTERN_SPAWN_TIME == 0)
-                {
-                    // spawn top
-                    int numInWave = UnityEngine.Random.Range(NUM_FIREBALLS_IN_WAVE_MIN, NUM_FIREBALLS_IN_WAVE_MAX + 1);
-                    for (int i = 0; i < numInWave; ++i)
-                    {
-                        SpawnFireball(FromDirection.FromTop);
-                    }
-                }
+            float leftOrbPosX = UnityEngine.Random.Range(LEFT_ORB_X_SPAWN_POS_MIN, LEFT_ORB_X_SPAWN_POS_MAX);
+            GameObject leftOrb = Instantiate(lightningBallInitialObj, new Vector2(leftOrbPosX, 55.0f), Quaternion.identity);
+            leftOrb.transform.parent = parentObj.transform;
+            leftOrb.name = "Left Orb";
+            leftOrb.SetActive(true);
 
-                // spawn if enough time has been spent
-                if (timeInGame >= BOTTOM_PATTERN_SPAWN_TIME)
-                {
-                    SpawnFireball(FromDirection.FromBottom);
-                }
+            float dist = UnityEngine.Random.Range(DIST_MIN, DIST_MAX);
+            float rightOrbPosX = leftOrbPosX + dist;
+            GameObject rightOrb = Instantiate(lightningBallInitialObj, new Vector2(rightOrbPosX, 55.0f), Quaternion.identity);
+            rightOrb.transform.parent = parentObj.transform;
+            rightOrb.name = "Right Orb";
+            rightOrb.SetActive(true);
 
-                if (timeInGame >= TOP_PATTERN_SPAWN_TIME)
-                {
-                    SpawnFireball(FromDirection.FromTop);
-                }
+            GameObject leftOscillator = Instantiate(oscillatorInitialObj, new Vector2(leftOrbPosX - 51.0f, 45.0f), Quaternion.identity);
+            leftOscillator.transform.parent = parentObj.transform;
+            leftOscillator.name = "Left Oscillar";
+            leftOscillator.SetActive(true);
 
-                // always spawn from here
-                SpawnFireball(FromDirection.FromRight);
-            }
+            GameObject rightOscillator = Instantiate(oscillatorInitialObj, new Vector2(rightOrbPosX + 52.5f, 45.0f), Quaternion.identity);
+            rightOscillator.transform.parent = parentObj.transform;
+            rightOscillator.name = "Right Oscillator";
+            rightOscillator.SetActive(true);
 
-            UpdateFireballs();
-            timeSinceLastSpawn += Time.deltaTime;
+            electricObjs.Add(parentObj);
         }
 
-        private void SpawnFireball(FromDirection fromDir)
+        private void HandleLightningMovement()
         {
-            Fireball newFireball = new Fireball();
-            GameObject newFireballObj = Instantiate(fireballInitObj);
-            newFireball.fireballObj = newFireballObj;
-            newFireballObj.gameObject.SetActive(true);
-
-            float speed = UnityEngine.Random.Range(FIREBALL_SPEED_MIN, FIREBALL_SPEED_MAX);
-            newFireball.speed = speed;
-
-            float xPos = 0.0f;
-            float yPos = 0.0f;
-            if (fromDir == FromDirection.FromRight)
+            List<GameObject> objsToDelete = new List<GameObject>();
+            foreach(GameObject lightningObj in electricObjs)
             {
-                xPos = FIREBALL_X_MAX;
-                yPos = UnityEngine.Random.Range(FIREBALL_Y_MIN, FIREBALL_Y_MAX);
-                newFireballObj.transform.position = new Vector3(xPos, yPos, 0);
-
-                Vector3 targetPos = new Vector3(-50, yPos, 0);
-                newFireball.targetPos = targetPos;
-            }
-            else if (fromDir == FromDirection.FromTop)
-            {
-                xPos = UnityEngine.Random.Range(FIREBALL_X_MIN, FIREBALL_X_MAX);
-                yPos = 50;
-                newFireballObj.transform.position = new Vector3(xPos, yPos, 0);
-
-                Vector3 targetPos = new Vector3(xPos, -40, 0);
-                newFireball.targetPos = targetPos;
-            }
-            else if (fromDir == FromDirection.FromBottom)
-            {
-                xPos = UnityEngine.Random.Range(FIREBALL_X_MIN, FIREBALL_X_MAX);
-                yPos = -40;
-                newFireballObj.transform.position = new Vector3(xPos, yPos, 0);
-
-                Vector3 targetPos = new Vector3(xPos, 50, 0);
-                newFireball.targetPos = targetPos;
-            }
-
-            fireballsList.Add(newFireball);
-        }
-
-        private void UpdateFireballs()
-        {
-            for(int i = 0; i < fireballsList.Count; ++i)
-            {
-                Fireball fireball = fireballsList[i];
-
-                // not sure why but pressing 'z' triggers this to be null and break
-                if(fireball.fireballObj == null)
+                lightningObj.transform.position -= new Vector3(0, ELECTRICITY_SPEED, 0);
+                if(lightningObj.transform.position.y < -100)
                 {
-                    break;
+                    objsToDelete.Add(lightningObj);
                 }
+            }
 
-                // done with it
-                if (fireball.fireballObj.transform.position == fireball.targetPos)
-                {
-                    fireballsList.RemoveAt(i);
-                    Destroy(fireball.fireballObj);
-                    continue;
-                }
-
-                fireball.fireballObj.transform.position =
-                    Vector3.MoveTowards(fireball.fireballObj.transform.position, fireball.targetPos, fireball.speed * Time.deltaTime);
+            foreach(GameObject objToDelete in objsToDelete)
+            {
+                electricObjs.Remove(objToDelete);
+                Destroy(objToDelete);
             }
         }
 
@@ -333,9 +239,9 @@ namespace ShrugWare
             if (other.gameObject.layer == 7)
             {
                 // enemy attack
-                CollideFireball(other.gameObject);
+                CollideElectricity(other.gameObject);
             }
-            else if(other.gameObject.layer == 8)
+            else if (other.gameObject.layer == 8)
             {
                 // friendly collider
                 CollideCollectible(other.gameObject);
@@ -360,20 +266,10 @@ namespace ShrugWare
             SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
         }
 
-        private void DeactivateTopIndicator()
-        {
-            topIndicatorObj.SetActive(false);
-        }
-
-        private void DeactivateBottomIndicator()
-        {
-            bottomIndicatorObj.SetActive(false);
-        }
-
         private void SpawnCollectible()
         {
             int numTries = 0;
-            while(numTries < 10)
+            while (numTries < 10)
             {
                 float xPos = UnityEngine.Random.Range(COLLECTIBLE_X_MIN, COLLECTIBLE_X_MAX);
                 float yPos = UnityEngine.Random.Range(COLLECTIBLE_Y_MIN, COLLECTIBLE_Y_MAX);
@@ -382,15 +278,14 @@ namespace ShrugWare
                 float distance = Vector3.Distance(this.transform.position, locationVec);
                 if (distance > COLLECTIBLE_SPAWN_DISTANCE)
                 {
-                    GameObject newCollectible = Instantiate(collectibleInitObj);
-                    newCollectible.transform.position = locationVec;
+                    GameObject newCollectible = Instantiate(collectibleInitialObj, locationVec, Quaternion.identity);
 
                     int spriteIndex = UnityEngine.Random.Range(0, collectibleObjectSprites.Count);
                     newCollectible.GetComponentInChildren<Image>().sprite = collectibleObjectSprites[spriteIndex];
 
                     newCollectible.transform.SetParent(canvas.transform);
                     newCollectible.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-
+                    newCollectible.transform.localPosition = locationVec;
 
                     newCollectible.SetActive(true);
                     break;
@@ -400,13 +295,18 @@ namespace ShrugWare
             }
         }
 
-        private void CollideFireball(GameObject otherGO)
+        private void CollideElectricity(GameObject otherGO)
         {
             // don't get hit multiple times repeatedly from a big cluster
             bool invuln = invulnExpireTime > Time.time;
             if (Time.time > invulnExpireTime)
             {
                 invulnExpireTime = Time.time + INVULN_DURATION;
+            }
+
+            if(invuln)
+            {
+                return;
             }
 
             // maybe damage the player
@@ -424,27 +324,14 @@ namespace ShrugWare
             playerHealthText.text = "Player Health: " + healthRemaining.ToString();
             if (healthRemaining < 0)
             {
-                if(AudioManager.Instance != null)
+                if (AudioManager.Instance != null)
                 {
                     AudioManager.Instance.PlayAudioClip(deathSound);
                 }
 
-                DisableFireballs();
                 playerHealthText.text = "YOU ARE DED";
                 gameRunning = false;
                 continueButton.SetActive(true);
-            }
-
-            // destroy the fireball and remove it from the list
-            for (int i = 0; i < fireballsList.Count; ++i)
-            {
-                Fireball fireball = fireballsList[i];
-                if (fireball.fireballObj == otherGO)
-                {
-                    fireballsList.RemoveAt(i);
-                    Destroy(fireball.fireballObj);
-                    break;
-                }
             }
 
             int index = UnityEngine.Random.Range(0, hitVFXList.Count);
@@ -453,7 +340,7 @@ namespace ShrugWare
 
             if (AudioManager.Instance != null)
             {
-                AudioManager.Instance.PlayAudioClip(fireballImpactSound);
+                AudioManager.Instance.PlayAudioClip(lightningImpactSound);
             }
         }
 
@@ -475,8 +362,6 @@ namespace ShrugWare
                 }
 
                 enemyHealthText.text = "ded";
-
-                DisableFireballs();
                 continueButton.SetActive(true);
             }
             else
@@ -488,7 +373,7 @@ namespace ShrugWare
             Instantiate(collectVFXList[index], otherGO.GetComponent<BoxCollider2D>().transform.position, Quaternion.identity);
             Destroy(otherGO);
 
-            if(AudioManager.Instance != null)
+            if (AudioManager.Instance != null)
             {
                 AudioManager.Instance.PlayAudioClip(collectiblePickupSound);
             }
@@ -509,7 +394,7 @@ namespace ShrugWare
                 }
             }
 
-            if(invulnExpireTime > Time.time)
+            if (invulnExpireTime > Time.time)
             {
                 Invoke("FlashColor", 0.2f);
             }
@@ -520,14 +405,6 @@ namespace ShrugWare
                 {
                     renderer.color = Color.white;
                 }
-            }
-        }
-
-        private void DisableFireballs()
-        {
-            foreach(Fireball fireball in fireballsList)
-            {
-                fireball.fireballObj.SetActive(false);
             }
         }
     }
