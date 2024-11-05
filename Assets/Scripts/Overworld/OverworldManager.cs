@@ -324,7 +324,7 @@ namespace ShrugWare
             {
                 bool force = isDebugMode;
 #if UNITY_EDITOR
-                //force = true;
+                force = true;
 #endif
                 // in the beginning our curLevel will be null before it's set
                 if(curLevel == null)
@@ -384,9 +384,15 @@ namespace ShrugWare
                 return true;
             }
 
+            bool force = false;
+#if UNITY_EDITOR
+            force = true;
+#endif
             OverworldLevel level = GetOverworldLevelByID(lookedAtLevelID);
-
-            // todo - if locked, return
+            if(level.Locked && !force)
+            {
+                return false;
+            }
 
             if (inOrder)
             {
@@ -487,9 +493,9 @@ namespace ShrugWare
         public void EnterLevel(OverworldLevel level)
         {
             bool force = false;
-//#if UNITY_EDITOR
+#if UNITY_EDITOR
             force = true;
-//#endif
+#endif
 
             if (level.LevelType == DataManager.OverworldLevelType.Start || (level.Locked && !force))
             {
