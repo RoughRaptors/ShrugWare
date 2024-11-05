@@ -101,6 +101,7 @@
     <Compile Include="Assets\Art\Fire\Scripts\OscillateLightBrightness.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
     <Compile Include="Assets\Art\LowPolyNature\Scripts\FadeInOut.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StandBehindTank.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\InterceptTheFireball.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\MeleeTheBoss.cs" />
     <Compile Include="Assets\Audio\FromYahel\AudioClipData.cs" />
