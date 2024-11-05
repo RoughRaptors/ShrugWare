@@ -90,7 +90,8 @@ namespace ShrugWare
         }
 
         // when we click a non-adjacent level, we need to keep track of our path
-        private List<int> pathToLevel = new List<int>();
+        private List<int> inOrderPathToLevel = new List<int>();
+        private List<int> outOfOrderPathToLevel = new List<int>();
 
         private const float PLAYER_X_OFFSET = 13.0f;
         private const float PLAYER_Y_OFFSET = 8.0f;
@@ -286,8 +287,16 @@ namespace ShrugWare
                     OverworldLevel overworldLevelToUnlock = GetOverworldLevelByID(idToUnlock);
                     if(overworldLevelToUnlock != null)
                     {
-                        overworldLevelToUnlock.Locked = false;
-                        SetDefaultLevelColor(overworldLevelToUnlock);
+                        if (!overworldLevelToUnlock.preRequisitesFulfulled.Contains(overworldLevel.LevelID))
+                        {
+                            overworldLevelToUnlock.preRequisitesFulfulled.Add(overworldLevel.LevelID);
+                        }
+
+                        if(overworldLevelToUnlock.preRequisitesList.Count == overworldLevelToUnlock.preRequisitesFulfulled.Count)
+                        {
+                            overworldLevelToUnlock.Locked = false;
+                            SetDefaultLevelColor(overworldLevelToUnlock);
+                        }
 
                         // update the connection of our current level
                         foreach(GameObject levelConnection in overworldLevel.OutgoingLevelConnections)
@@ -327,14 +336,18 @@ namespace ShrugWare
                 {
                     if (!isMoving)
                     {
-                        pathToLevel.Clear();
+                        inOrderPathToLevel.Clear();
                         List<int> visitedList = new List<int>();
 
-                        int steps = 0;
                         visitedList.Add(curLevel.LevelID);
-                        GeneratePathToLevel(curLevel.LevelID, newOverworldLevel.LevelID, ref visitedList,ref steps);
-                        pathToLevel.Reverse();
+                        inOrderPathToLevel.Clear();
+                        GeneratePathToLevel(curLevel.LevelID, newOverworldLevel.LevelID, ref visitedList, true);
+                        visitedList.Clear();
+                        outOfOrderPathToLevel.Clear();
+                        GeneratePathToLevel(curLevel.LevelID, newOverworldLevel.LevelID, ref visitedList, false);
 
+                        inOrderPathToLevel.Reverse();
+                        outOfOrderPathToLevel.Reverse();
                         StartCoroutine(FollowPathToLevel());
                     }
 
@@ -364,32 +377,63 @@ namespace ShrugWare
             isMoving = false;
         }
         
-        private bool GeneratePathToLevel(int lookedAtLevelID, int targetLevelID, ref List<int> visited, ref int stepsAway)
+        private bool GeneratePathToLevel(int lookedAtLevelID, int targetLevelID, ref List<int> visited, bool inOrder = true)
         {
             if(lookedAtLevelID == targetLevelID)
             {
                 return true;
             }
 
+            bool force = false;
+#if UNITY_EDITOR
+            force = true;
+#endif
             OverworldLevel level = GetOverworldLevelByID(lookedAtLevelID);
-            foreach (int connectingLevelID in level.AdjacentMapLevels)
+            if(level.Locked && !force)
             {
-                if(visited.Contains(connectingLevelID))
-                {
-                    continue;
-                }
-
-                visited.Add(connectingLevelID);
-                ++stepsAway;
-                if(GeneratePathToLevel(connectingLevelID, targetLevelID, ref visited, ref stepsAway))
-                {
-                    pathToLevel.Add(connectingLevelID);
-                    return true;
-                }
+                return false;
             }
 
-            --stepsAway;
-            pathToLevel.Remove(lookedAtLevelID);
+            if (inOrder)
+            {
+                foreach (int connectingLevelID in level.AdjacentMapLevels)
+                {
+                    if (visited.Contains(connectingLevelID))
+                    {
+                        continue;
+                    }
+
+                    visited.Add(connectingLevelID);
+                    if (GeneratePathToLevel(connectingLevelID, targetLevelID, ref visited, inOrder))
+                    {
+                        inOrderPathToLevel.Add(connectingLevelID);
+                        return true;
+                    }
+                }
+
+                inOrderPathToLevel.Remove(lookedAtLevelID);
+            }
+            else
+            {
+                for (int i = level.AdjacentMapLevels.Count - 1; i >= 0; --i)
+                {
+                    int connectingLevelID = level.AdjacentMapLevels[i];
+                    if (visited.Contains(connectingLevelID))
+                    {
+                        continue;
+                    }
+
+                    visited.Add(connectingLevelID);
+                    if (GeneratePathToLevel(connectingLevelID, targetLevelID, ref visited, inOrder))
+                    {
+                        outOfOrderPathToLevel.Add(connectingLevelID);
+                        return true;
+                    }
+                }
+
+                outOfOrderPathToLevel.Remove(lookedAtLevelID);
+            }
+
             return false;
         }
 
@@ -398,17 +442,35 @@ namespace ShrugWare
             isMoving = true;
             overworldUIManager.DisableStartButton();
 
-            foreach (int levelID in pathToLevel)
+            if(inOrderPathToLevel.Count < outOfOrderPathToLevel.Count)
             {
-                OverworldLevel level = GetOverworldLevelByID(levelID);
-                StartCoroutine(MovePlayerToLevel(level));
-
-                // we're going to maybe be moving in MovePlayerToLevel. wait until we're done before going to the next level node
-                while (isMoving)
+                foreach (int levelID in inOrderPathToLevel)
                 {
-                    yield return null;
+                    OverworldLevel level = GetOverworldLevelByID(levelID);
+                    StartCoroutine(MovePlayerToLevel(level));
+
+                    // we're going to maybe be moving in MovePlayerToLevel. wait until we're done before going to the next level node
+                    while (isMoving)
+                    {
+                        yield return null;
+                    }
                 }
             }
+            else
+            {
+                foreach (int levelID in outOfOrderPathToLevel)
+                {
+                    OverworldLevel level = GetOverworldLevelByID(levelID);
+                    StartCoroutine(MovePlayerToLevel(level));
+
+                    // we're going to maybe be moving in MovePlayerToLevel. wait until we're done before going to the next level node
+                    while (isMoving)
+                    {
+                        yield return null;
+                    }
+                }
+            }
+
 
             isMoving = false;
             overworldUIManager.EnableStartButton();
@@ -431,9 +493,9 @@ namespace ShrugWare
         public void EnterLevel(OverworldLevel level)
         {
             bool force = false;
-//#if UNITY_EDITOR
+#if UNITY_EDITOR
             force = true;
-//#endif
+#endif
 
             if (level.LevelType == DataManager.OverworldLevelType.Start || (level.Locked && !force))
             {
@@ -441,7 +503,7 @@ namespace ShrugWare
                 return;
             }
 
-            // don't let them enter a level while moving, this is far safety even though we removed it in the ui
+            // don't let them enter a level while moving, this is for safety even though we removed it in the ui
             if(isMoving)
             {
                 return;
@@ -450,7 +512,7 @@ namespace ShrugWare
             // 15% chance we trigger an event
             bool isTrashOrBoss = level.LevelType == DataManager.OverworldLevelType.Trash || level.LevelType == DataManager.OverworldLevelType.Boss;
             int rand = UnityEngine.Random.Range(0, 100);
-            if (rand < 150 && isTrashOrBoss)
+            if (rand < 15 && isTrashOrBoss)
             {
                 // pick a random event
                 int randomEventIndex = UnityEngine.Random.Range(0, randomEventList.Count);

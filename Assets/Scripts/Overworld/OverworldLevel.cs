@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,6 +31,13 @@ namespace ShrugWare
 
         [SerializeField]
         List<int> adjacentMapLevels = new List<int>();
+
+        // use this for if a level requires multiple previous levels completed to unlock it
+        [SerializeField]
+        public List<int> preRequisitesList = new List<int>();
+
+        [NonSerialized]
+        public List<int> preRequisitesFulfulled = new List<int>();
 
         public List<int> AdjacentMapLevels
         {

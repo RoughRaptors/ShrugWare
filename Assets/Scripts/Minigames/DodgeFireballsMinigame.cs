@@ -98,8 +98,8 @@ namespace ShrugWare
         private const float PLAYER_SPEED = 50.0f;
 
         // float so we can take partial damage via damage mitigation
-        private const float START_HEALTH = 100;
-        private float healthRemaining = 100;
+        private const float START_HEALTH = 100.0f;
+        private float healthRemaining = 100.0f;
         private bool gameRunning = false;
 
         private const int TOP_PATTERN_SPAWN_TIME = 7;
