@@ -47,6 +47,7 @@ Sidestep The Fireball - Sidestep a fireball coming at you
 Spread Out For Meteor - Spread out from everyone else for a meteor attack
 Stack Up For Meteor - Stack up on everyone for a meteor attack
 Stack Powerstones - Collect powerups around the area
+Stand Behind Tank - Stand behind the tank out of the red area
 Steal The Chest - Collect the chest before your team members get it
 */
 
