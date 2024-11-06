@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ShrugWare
 {
@@ -19,6 +20,9 @@ namespace ShrugWare
 
         [SerializeField]
         List<GameObject> hitVFXList;
+
+        [SerializeField]
+        GameObject rotationObj;
 
         float delay = 0.75f;
         float rotateSpeed = 30.0f;
@@ -46,15 +50,26 @@ namespace ShrugWare
             PlayerCollider.OnBadCollision -= LaserHit;
         }
 
-        protected override void OnMyGameStart()
+        protected override void OnMyGameAwake()
         {
-            base.OnMyGameStart();
+            base.OnMyGameAwake();
 
             // 50/50 to rotate either direction
             if (UnityEngine.Random.Range(0, 2) == 0)
             {
                 rotateSpeed *= -1;
             }
+            else
+            {
+                rotationObj.transform.Rotate(new Vector2(0, 180));
+            }
+
+            Invoke("HideRotationArrow", 1.0f);
+        }
+
+        protected override void OnMyGameStart()
+        {
+            base.OnMyGameStart();
         }
 
         protected override void OnMyGameTick(float timePercentLeft)
@@ -83,6 +98,11 @@ namespace ShrugWare
 
             SetMicrogameEndText(false);
             hasBeenHit = true;
+        }
+
+        private void HideRotationArrow()
+        {
+            rotationObj.SetActive(false);
         }
     }
 }
