@@ -11,6 +11,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject contractObj;
 
+        [SerializeField]
+        List<GameObject> contractSpawnPositions = new List<GameObject>();
+
         private bool failedPlacement = false;
 
         private const float SPAWN_INTERVAL = 2.25f; //how often a contract spawns
@@ -20,6 +23,9 @@ namespace ShrugWare
         protected override void OnMyGameAwake()
         {
             base.OnMyGameAwake();
+
+            int contractSpawnIndex = UnityEngine.Random.Range(0, contractSpawnPositions.Count);
+            contractSpawnPositions[contractSpawnIndex].SetActive(true);
         }
 
         protected override void OnMyGameStart()

@@ -38,6 +38,9 @@ namespace ShrugWare
 
         private float timeLeft;
 
+        [NonSerialized]
+        public bool gameOver = false;
+
         protected virtual void Awake()
         {
             OnMyGameAwake();
@@ -146,6 +149,7 @@ namespace ShrugWare
 
         private void HandleMicrogameEnd(bool wonMicrogame)
         {
+            gameOver = true;
             SetMicrogameEndText(wonMicrogame);
 
             // should only be null if running the microgame scene on its own
@@ -178,11 +182,13 @@ namespace ShrugWare
 
         public void SetMicrogameEndText(bool victory)
         {
+            gameOver = true;
             string text = defaultDefeatText;
             if(victory)
             {
                 text = victoryText;
             }
+
             if(!victoryAudioHandled)
             {
                 // maybe put inside the if? probably doesn't matter
@@ -205,6 +211,7 @@ namespace ShrugWare
 
         protected void SetMicrogameEndText(bool victory, string text)
         {
+            gameOver = true;
             if (endTextSet)
             {
                 return;
@@ -288,7 +295,7 @@ namespace ShrugWare
 
         public void PrematureEndGame(bool victory)
         {
-            timeLeft = 3.0f;
+            timeLeft = 2.0f;
             SetMicrogameEndText(victory);
         }
     }
