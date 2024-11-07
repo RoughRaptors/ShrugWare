@@ -135,6 +135,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Microgames/Daunting Inferno/PlaceContract.unity
     guid: 868c5730e7c440547b1594d0127bdf22
   - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/BreathRotateAttack.unity
+    guid: 7e8680b22a0774a4c9e977543a392ade
+  - enabled: 1
     path: Assets/Scenes/Minigames/Daunting Inferno/ElectricWallsMinigame.unity
     guid: c7fb8c349e8ae104389d4e4917bcddb6
   m_configObjects:

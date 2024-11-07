@@ -24,6 +24,7 @@ Perform The Rotation - Click the shown abilities in the correct order
 
 -- 2.5D Character Movement --
 Avoid The Lasers - Avoid a spinning laser
+Breath Rotate Attack - Boss rotates, avoid his breath
 Buy Cheap Item - Purchase the more expensive item
 Buy Expensive Item - Purchase the cheaper item
 Colored Platforms - Get on the green platform

@@ -126,6 +126,7 @@
     <Compile Include="Assets\Scripts\Various Other\Clickable.cs" />
     <Compile Include="Assets\Scripts\Bosses\BossGameManager.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\KnockbackedSafely.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\BreathRotateAttack.cs" />
     <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\PerformTheRotation.cs" />
     <Compile Include="Assets\Scripts\Various Other\MainMenu.cs" />
