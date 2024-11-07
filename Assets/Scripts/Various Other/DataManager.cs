@@ -50,7 +50,8 @@ namespace ShrugWare
             Fishing,
             StandBehindTank,
             PlaceContract,
-            MICROGAME_END = 42, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            BreathRotateAttack,
+            MICROGAME_END = 43, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
             ElectricWallsMinigame
         }
 
