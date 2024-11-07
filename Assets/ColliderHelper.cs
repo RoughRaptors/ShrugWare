@@ -10,7 +10,7 @@ public class ColliderHelper : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (this.tag == "Collectible" && collision.tag == "Collectible")
+        if (this.tag == "Collectible" && collision.tag == "Collectible" && !game.gameOver)
         {
             game.PrematureEndGame(false);
         }
