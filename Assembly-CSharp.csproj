@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\LaserLineOfSightHorizonal.cs" />
     <Compile Include="Assets\Scripts\Items\ConsumableItem.cs" />
     <Compile Include="Assets\Scripts\Various Other\DataManager.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\PlaceContract.cs" />
     <Compile Include="Assets\Scripts\Overworld\OverworldUIManager.cs" />
     <Compile Include="Assets\Scripts\Microgames\MicrogameEffect.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\AvoidTheLasers.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="Assets\Scripts\Overworld\OverworldLevel.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StackPowerstones.cs" />
     <Compile Include="Assets\GearScreen.cs" />
+    <Compile Include="Assets\ColliderHelper.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\LineOfSight.cs" />
     <Compile Include="Assets\TooltipManager.cs" />
     <Compile Include="Assets\Art\KY_effects\Script\Lighting.cs" />

@@ -36,6 +36,8 @@ namespace ShrugWare
         private bool endTextSet = false;
         private bool victoryAudioHandled = false;
 
+        private float timeLeft;
+
         protected virtual void Awake()
         {
             OnMyGameAwake();
@@ -79,7 +81,7 @@ namespace ShrugWare
             OnMyGameStart();
 
             //Wait game duration
-            float timeLeft = microGameTime;
+            timeLeft = microGameTime;
             yield return new WaitUntil(() =>
             {
                 // comment this line to have infinite time to test a microgame
@@ -174,7 +176,7 @@ namespace ShrugWare
             }
         }
 
-        protected void SetMicrogameEndText(bool victory)
+        public void SetMicrogameEndText(bool victory)
         {
             string text = defaultDefeatText;
             if(victory)
@@ -282,6 +284,12 @@ namespace ShrugWare
             {
                 BossGameManager.Instance.AddToTimeScale(effect.amount);
             }
+        }
+
+        public void PrematureEndGame(bool victory)
+        {
+            timeLeft = 3.0f;
+            SetMicrogameEndText(victory);
         }
     }
 }

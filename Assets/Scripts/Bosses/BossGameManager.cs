@@ -17,7 +17,7 @@ using UnityEngine.UI;
 -- Clicking Mechanics --
 Attack The Boss Timing - Click the attack button in the light green
 Cast Frostbolt - Click the frostbolt button out of three options
-Craft The Item - Drag items into slots
+Craft The Item - (extended) Drag items into slots
 Fishing - Press the button in time to catch the fish
 Taunt The Adds - Click x amount of adds running around the screen.
 Perform The Rotation - Click the shown abilities in the correct order
@@ -41,6 +41,7 @@ Line of Sight - LOS the boss in time
 Match Polarity - Move to the party members of the same electric positive or negative sign as you
 Melee The Boss - hit boss with your sword (just collide)
 Navigate The Maze - Navigate a maze to get to the end
+PlacContract - (extended) Place circles on the ground and don't overlap them
 Run In - Leeroy run into the boss room
 Shoot The Boss - Aim with mouse, shoot enemy(s)
 Sidestep The Fireball - Sidestep a fireball coming at you

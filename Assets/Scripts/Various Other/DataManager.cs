@@ -49,7 +49,8 @@ namespace ShrugWare
             MeleeTheBoss,
             Fishing,
             StandBehindTank,
-            MICROGAME_END = 41, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            PlaceContract,
+            MICROGAME_END = 42, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
             ElectricWallsMinigame
         }
 
