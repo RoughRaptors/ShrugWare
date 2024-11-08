@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
+using UnityEngine.UIElements;
 
 namespace ShrugWare
 {
@@ -27,7 +29,7 @@ namespace ShrugWare
         private const float FIREBALL_X_MIN = -100;
         private const float FIREBALL_X_MAX = 100;
 
-        private const float FIREBALL_MOVE_SPEED = 0.75f;
+        private const float FIREBALL_MOVE_SPEED = 5.0f;
 
         protected override void Start()
         {
@@ -63,7 +65,9 @@ namespace ShrugWare
         protected override void OnMyGameTick(float timePercentLeft)
         {
             base.OnMyGameTick(timePercentLeft);
-            fireballObject.transform.position = Vector3.Lerp(fireballObject.transform.position, healerObject.transform.position, FIREBALL_MOVE_SPEED * Time.deltaTime);
+
+            float time = Vector3.Distance(fireballObject.transform.position, healerObject.transform.position) / (microGameTime - timeElapsed) * Time.deltaTime;
+            fireballObject.transform.position = Vector3.MoveTowards(fireballObject.transform.position, healerObject.transform.position, time);
         }
 
         protected override bool VictoryCheck()

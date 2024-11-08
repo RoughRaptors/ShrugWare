@@ -53,7 +53,6 @@ namespace ShrugWare
         {
             base.OnMyGameTick(timePercentLeft);
 
-            //enemyObj.transform.position = Vector3.Lerp(enemyObj.transform.position, playerObj.transform.position, bossSpeed * Time.deltaTime);
             enemyObj.transform.position = Vector3.MoveTowards(enemyObj.transform.position, playerObj.transform.position, bossSpeed * Time.deltaTime);
         }
 
