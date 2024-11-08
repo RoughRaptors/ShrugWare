@@ -18,8 +18,8 @@ namespace ShrugWare
 
         private bool hit = false;
 
-        private const float BOSS_SPEED_MIN = 17.5f;
-        private const float BOSS_SPEED_MAX = 30.0f;
+        private const float BOSS_SPEED_MIN = 15.0f;
+        private const float BOSS_SPEED_MAX = 27.5f;
         private float bossSpeed;
 
         protected override void Start()

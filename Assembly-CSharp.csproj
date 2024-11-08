@@ -115,6 +115,7 @@
     <Compile Include="Assets\Scripts\Various Other\RandomEvent.cs" />
     <Compile Include="Assets\Scripts\Overworld\OverworldManager.cs" />
     <Compile Include="Assets\Scripts\Various Other\Raid.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\FireWalls.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csParticleMove.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\DodgeTheFireballPattern.cs" />
     <Compile Include="Assets\Art\LowPolyNature\Scripts\SimpleCameraController.cs" />

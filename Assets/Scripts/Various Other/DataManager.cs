@@ -52,7 +52,8 @@ namespace ShrugWare
             PlaceContract,
             BreathRotateAttack,
             KiteTheBoss,
-            MICROGAME_END = 44, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            FireWalls,
+            MICROGAME_END = 45, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
             ElectricWallsMinigame,
         }
 
