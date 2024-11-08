@@ -91,6 +91,7 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\AttackTheBossTiming.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\MatchPolarity.cs" />
     <Compile Include="Assets\Art\Lightning Bolt\LightningBoltScript.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\KiteTheBoss.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\CastFrostboltMicrogame.cs" />
     <Compile Include="Assets\Art\Lasers\HSFiles\Scripts\Hovl_DemoLasers.cs" />
     <Compile Include="Assets\Art\StylisedWater\URP\Scripts\Bitgem\Core\FlagEnumAttribute.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Assets\Scripts\Various Other\RandomEvent.cs" />
     <Compile Include="Assets\Scripts\Overworld\OverworldManager.cs" />
     <Compile Include="Assets\Scripts\Various Other\Raid.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\FireWalls.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csParticleMove.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\DodgeTheFireballPattern.cs" />
     <Compile Include="Assets\Art\LowPolyNature\Scripts\SimpleCameraController.cs" />

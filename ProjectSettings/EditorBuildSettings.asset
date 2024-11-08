@@ -138,6 +138,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Microgames/Daunting Inferno/BreathRotateAttack.unity
     guid: 7e8680b22a0774a4c9e977543a392ade
   - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/KiteTheBoss.unity
+    guid: f73b9d0b57e2ea643be4e5ce6db71ce7
+  - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/FireWalls.unity
+    guid: 267b9709b4d378948b30416e1e92b587
+  - enabled: 1
     path: Assets/Scenes/Minigames/Daunting Inferno/ElectricWallsMinigame.unity
     guid: c7fb8c349e8ae104389d4e4917bcddb6
   m_configObjects:

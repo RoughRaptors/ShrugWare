@@ -27,8 +27,6 @@ namespace ShrugWare
         private Vector3 member0TargetPos;
         private Vector3 member1TargetPos;
 
-        private float timeRatio = 0;
-        private Vector3 meteorStartPos;
         private bool gameEnded = false;
 
         private List<GameObject> overlapObjects = new List<GameObject>();
@@ -37,7 +35,6 @@ namespace ShrugWare
         {
             base.Start();
             SetupGroupMembers();
-            meteorStartPos = meteorObject.transform.position;
         }
 
         protected override void OnEnable()
@@ -63,17 +60,15 @@ namespace ShrugWare
                 return;
             }
 
-            timeRatio += Time.deltaTime / DataManager.MICROGAME_DURATION_SECONDS;
-
             // would be nice if this wasn't hard coded and turned into a struct
             groupMembers[0].transform.position =
-                    Vector3.MoveTowards(groupMembers[0].transform.position, member0TargetPos, PLAYER_MOVE_SPEED * Time.deltaTime);
+                    Vector2.MoveTowards(groupMembers[0].transform.position, member0TargetPos, PLAYER_MOVE_SPEED * Time.deltaTime);
 
             groupMembers[1].transform.position =
-                Vector3.MoveTowards(groupMembers[1].transform.position, member1TargetPos, PLAYER_MOVE_SPEED * Time.deltaTime);
+                Vector2.MoveTowards(groupMembers[1].transform.position, member1TargetPos, PLAYER_MOVE_SPEED * Time.deltaTime);
 
-
-            meteorObject.transform.position = Vector3.Lerp(meteorStartPos, playerObject.transform.position, timeRatio);
+            float time = Vector2.Distance(meteorObject.transform.position, playerObject.transform.position) / (microGameTime - timeElapsed) * Time.deltaTime;
+            meteorObject.transform.position = Vector2.MoveTowards(meteorObject.transform.position, playerObject.transform.position, time);
         }
 
         protected override bool VictoryCheck()
@@ -86,11 +81,11 @@ namespace ShrugWare
             // pick a location to move to and go there
             float member1TargetXPos = Random.Range(X_MIN, X_MAX);
             float member1TargetYPos = Random.Range(Y_MIN, Y_MAX);
-            member0TargetPos = new Vector3(member1TargetXPos, member1TargetYPos, 0.0f);
+            member0TargetPos = new Vector2(member1TargetXPos, member1TargetYPos);
 
             float member2TargetXPos = Random.Range(X_MIN, X_MAX);
             float member2TargetYPos = Random.Range(Y_MIN, Y_MAX);
-            member1TargetPos = new Vector3(member2TargetXPos, member2TargetYPos, 0.0f);
+            member1TargetPos = new Vector2(member2TargetXPos, member2TargetYPos);
         }
 
         private void OverlapObject(GameObject go)

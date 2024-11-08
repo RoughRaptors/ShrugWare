@@ -68,7 +68,9 @@ namespace ShrugWare
         protected override void OnMyGameTick(float timePercentLeft)
         {
             base.OnMyGameTick(timePercentLeft);
-            eletricityObj.transform.position = Vector3.Lerp(eletricityObj.transform.position, playerObject.transform.position, projectileSpeed * Time.deltaTime);
+
+            float time = Vector3.Distance(eletricityObj.transform.position, playerObject.transform.position) / (microGameTime - timeElapsed) * Time.deltaTime;
+            eletricityObj.transform.position = Vector3.MoveTowards(eletricityObj.transform.position, playerObject.transform.position, time);
         }
 
         protected override bool VictoryCheck()

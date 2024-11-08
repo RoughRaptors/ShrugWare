@@ -30,9 +30,11 @@ Buy Expensive Item - Purchase the cheaper item
 Colored Platforms - Get on the green platform
 Dodge The Fireball - Dodge a fireball coming at you
 Equalize The Two Groups -  Move to the group that will make the party member numbers even
+Fire Walls - Fire walls spawn, avoid them
 Get Out Of Fire - Get out of the fire
 Intercept The Fireball -  Run into the fireball before it hits the party
 Interrupt The Ability - Hit the interrupt ability at the proper timing as the boss is casting
+Kite The Boss - Don't get hit by boss
 Knockbacked Safely - Get knocked backwards into a safe zone
 Laser Line of Sight Diagonal - LOS the lasers
 Laser Line of Sight Horizontal - LOS the lasers

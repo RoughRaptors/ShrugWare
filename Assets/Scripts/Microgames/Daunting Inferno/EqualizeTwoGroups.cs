@@ -20,10 +20,11 @@ namespace ShrugWare
         [SerializeField]
         List<GameObject> hitVFXList;
 
+        private const float BALL_SPEED = 30.0f;
+
         private bool stackedEqually = false;
 
         private Vector3 meteorStartPos;
-
 
         protected override void Start()
         {
@@ -58,7 +59,8 @@ namespace ShrugWare
         protected override void OnMyGameTick(float timePercentLeft)
         {
             base.OnMyGameTick(timePercentLeft);
-            meteorObject.transform.position = Vector3.Lerp(meteorStartPos, playerObject.transform.position, 1 - timePercentLeft);
+            float time = Vector3.Distance(meteorObject.transform.position, playerObject.transform.position) / (microGameTime - timeElapsed) * Time.deltaTime;
+            meteorObject.transform.position = Vector3.MoveTowards(meteorObject.transform.position, playerObject.transform.position, time);
         }
 
         protected override bool VictoryCheck()

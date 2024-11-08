@@ -25,16 +25,12 @@ namespace ShrugWare
         private const float MEMBER_MOVE_SPEED = 22.5f;
         private bool stacked = true;
 
-        private float timeRatio = 0;
-        private Vector3 meteorStartPos;
-
         private List<GameObject> overlapObjects = new List<GameObject>();
 
         protected override void Start()
         {
             base.Start();
             SetupPlayerObject();
-            meteorStartPos = meteorObject.transform.position;
         }
 
         protected override void OnEnable()
@@ -54,12 +50,15 @@ namespace ShrugWare
         protected override void OnMyGameTick(float timePercentLeft)
         {
             base.OnMyGameTick(timePercentLeft);
-            if (!meteorObject.activeInHierarchy) return;
+            if (!meteorObject.activeInHierarchy)
+            {
+                return;
+            }
 
-            timeRatio += Time.deltaTime / DataManager.MICROGAME_DURATION_SECONDS;
-            meteorObject.transform.position = Vector3.Lerp(meteorStartPos, playerObject.transform.position, timeRatio);
+            float time = Vector2.Distance(meteorObject.transform.position, playerObject.transform.position) / (microGameTime - timeElapsed) * Time.deltaTime;
+            meteorObject.transform.position = Vector2.MoveTowards(meteorObject.transform.position, playerObject.transform.position, time);
 
-            foreach(GameObject groupMember in groupMembers)
+            foreach (GameObject groupMember in groupMembers)
             {
                 groupMember.transform.position =
                     Vector3.MoveTowards(groupMember.transform.position, playerObject.transform.position, MEMBER_MOVE_SPEED * Time.deltaTime);
