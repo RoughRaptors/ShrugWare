@@ -91,6 +91,7 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\AttackTheBossTiming.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\MatchPolarity.cs" />
     <Compile Include="Assets\Art\Lightning Bolt\LightningBoltScript.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\KiteTheBoss.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\CastFrostboltMicrogame.cs" />
     <Compile Include="Assets\Art\Lasers\HSFiles\Scripts\Hovl_DemoLasers.cs" />
     <Compile Include="Assets\Art\StylisedWater\URP\Scripts\Bitgem\Core\FlagEnumAttribute.cs" />

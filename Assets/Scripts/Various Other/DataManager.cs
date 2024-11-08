@@ -51,8 +51,9 @@ namespace ShrugWare
             StandBehindTank,
             PlaceContract,
             BreathRotateAttack,
-            MICROGAME_END = 43, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
-            ElectricWallsMinigame
+            KiteTheBoss,
+            MICROGAME_END = 44, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            ElectricWallsMinigame,
         }
 
         public enum StatModifierType
