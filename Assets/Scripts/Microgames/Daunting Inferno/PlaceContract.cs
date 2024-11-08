@@ -11,15 +11,21 @@ namespace ShrugWare
         [SerializeField]
         GameObject contractObj;
 
+        [SerializeField]
+        List<GameObject> contractSpawnPositions = new List<GameObject>();
+
         private bool failedPlacement = false;
 
-        private const float SPAWN_INTERVAL = 2.65f; //how often a contract spawns
+        private const float SPAWN_INTERVAL = 2.25f; //how often a contract spawns
         private const float DROP_TIMER = 1.35f; // how long we have before the contract drops
         private float lastPlacedTime = 1.5f; // start with this already set to give the player a bit of time to orient themselves
 
         protected override void OnMyGameAwake()
         {
             base.OnMyGameAwake();
+
+            int contractSpawnIndex = UnityEngine.Random.Range(0, contractSpawnPositions.Count);
+            contractSpawnPositions[contractSpawnIndex].SetActive(true);
         }
 
         protected override void OnMyGameStart()
