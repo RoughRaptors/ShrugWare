@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
 namespace ShrugWare
 {
@@ -24,6 +26,12 @@ namespace ShrugWare
 
         [SerializeField]
         TextMeshProUGUI healthBarHealthText;
+
+        [SerializeField]
+        GameObject loseVFX;
+
+        [SerializeField]
+        GameObject tankObj;
 
         private const float GCD = 0.2f;
         private const float HEAL_1_COOLDOWN = GCD;
@@ -65,7 +73,10 @@ namespace ShrugWare
             HealUpdate(healButton3, ref heal3CDProgress, HEAL_3_COOLDOWN);
         }
 
-        protected override bool VictoryCheck() => tankHealth > 0;
+        protected override bool VictoryCheck()
+        {
+            return tankHealth > 0.0f;
+        }
 
         private void DamageUpdate()
         {
@@ -76,15 +87,22 @@ namespace ShrugWare
 
                 if (tankHealth <= 0)
                 {
+                    Vector3 pos = new Vector3(tankObj.transform.position.x, tankObj.transform.position.y + 25.0f, 100.0f);
+                    GameObject loseVFXGO = Instantiate(loseVFX, pos, Quaternion.identity);
+                    loseVFXGO.transform.localScale = new Vector2(3.5f, 3.5f);
+                    loseVFXGO.SetActive(true);
+
                     tankHealth = 0.0f;
                     SetMicrogameEndText(false);
                 }
+                else
+                {
+                    float nextDamageTime = UnityEngine.Random.Range(DAMAGE_INTERVAL_MIN, DAMAGE_INTERVAL_MAX);
+                    Invoke("DamageUpdate", nextDamageTime);
+                }
 
-                healthBarHealthText.text = tankHealth.ToString() + "/" + MAX_HP.ToString();
+                healthBarHealthText.text = tankHealth.ToString("F0") + "/" + MAX_HP.ToString("F0");
                 healthBarFill.GetComponent<Image>().fillAmount = tankHealth / MAX_HP;
-
-                float nextDamageTime = UnityEngine.Random.Range(DAMAGE_INTERVAL_MIN, DAMAGE_INTERVAL_MAX);
-                Invoke("DamageUpdate", nextDamageTime);
             }
         }
 
@@ -101,7 +119,7 @@ namespace ShrugWare
 
         public void Heal1ButtonPressed()
         {
-            if(heal1CDProgress >= HEAL_1_COOLDOWN)
+            if (heal1CDProgress >= HEAL_1_COOLDOWN)
             {
                 tankHealth += tankHealth * 0.1f;
                 if (tankHealth > MAX_HP)
@@ -111,7 +129,7 @@ namespace ShrugWare
 
                 heal1CDProgress = 0.0f;
                 healButton1.GetComponent<Image>().fillAmount = heal1CDProgress / HEAL_1_COOLDOWN;
-                healthBarHealthText.text = tankHealth.ToString() + "/" + MAX_HP.ToString();
+                healthBarHealthText.text = tankHealth.ToString("F0") + "/" + MAX_HP.ToString("F0");
                 healthBarFill.GetComponent<Image>().fillAmount = tankHealth / MAX_HP;
 
                 if (AudioManager.Instance != null)
@@ -133,7 +151,7 @@ namespace ShrugWare
 
                 heal2CDProgress = 0.0f;
                 healButton2.GetComponent<Image>().fillAmount = heal2CDProgress / HEAL_2_COOLDOWN;
-                healthBarHealthText.text = tankHealth.ToString() + "/" + MAX_HP.ToString();
+                healthBarHealthText.text = tankHealth.ToString("F0") + "/" + MAX_HP.ToString("F0");
                 healthBarFill.GetComponent<Image>().fillAmount = tankHealth / MAX_HP;
 
                 if (AudioManager.Instance != null)
@@ -155,7 +173,7 @@ namespace ShrugWare
 
                 heal3CDProgress = 0.0f;
                 healButton3.GetComponent<Image>().fillAmount = heal3CDProgress / HEAL_3_COOLDOWN;
-                healthBarHealthText.text = tankHealth.ToString() + "/" + MAX_HP.ToString();
+                healthBarHealthText.text = tankHealth.ToString("F0") + "/" + MAX_HP.ToString();
                 healthBarFill.GetComponent<Image>().fillAmount = tankHealth / MAX_HP;
 
                 if (AudioManager.Instance != null)
