@@ -711,5 +711,10 @@ namespace ShrugWare
         {
             return optionsMenu;
         }
+
+        public void DisablePlayer()
+        {
+            playerObj.SetActive(false);
+        }
     }
 }

@@ -53,7 +53,9 @@ namespace ShrugWare
             BreathRotateAttack,
             KiteTheBoss,
             FireWalls,
-            MICROGAME_END = 45, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            DragToPoison,
+            HealTheTank,
+            MICROGAME_END = 47, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
             ElectricWallsMinigame,
         }
 

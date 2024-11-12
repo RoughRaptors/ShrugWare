@@ -34,7 +34,6 @@ namespace ShrugWare
         private bool safe = true;
         private Quaternion targetRotation;
         private int playerPos = 1; // 0 left, 1 mid, 2 right
-        private bool gameOver = false;
 
         protected override void Start()
         {
@@ -90,7 +89,6 @@ namespace ShrugWare
         private void EndGame()
         {
             breathObj.SetActive(true);
-            gameOver = true;
             SetMicrogameEndText(safe);
         }
 
