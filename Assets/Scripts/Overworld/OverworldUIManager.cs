@@ -178,6 +178,7 @@ namespace ShrugWare
 
                 // offset our index
                 int sceneIndex = debugDropdown.value + (int)DataManager.Scenes.MICROGAME_START;
+                OverworldManager.Instance.DisablePlayer();
                 SceneManager.LoadScene(sceneIndex, LoadSceneMode.Additive);
             }
             else

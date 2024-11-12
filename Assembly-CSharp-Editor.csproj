@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Various Other\EDITOR\TextToTextMeshPro.cs" />
     <Compile Include="Assets\Art\Lightning Bolt\Editor\LightningBoltEditor.cs" />
     <Compile Include="Assets\Art\StylisedWater\URP\Scripts\Bitgem\Editor\FlagEnumAttributeDrawer.cs" />
+    <Compile Include="Assets\Art\Health System For Dummies\System\Editor\HealthSystemEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.collab-proxy@2.4.3\Lib\Editor\PlasticSCM\Localization\plastic-gui.zh-Hans.txt" />

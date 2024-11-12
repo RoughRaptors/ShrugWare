@@ -12,6 +12,8 @@ TagManager:
   - Collectible
   - Manager
   - FxTemporaire
+  - Field
+  - Ally
   layers:
   - Default
   - TransparentFX
