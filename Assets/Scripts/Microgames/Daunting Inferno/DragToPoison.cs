@@ -1,10 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using System.Collections.Generic;
 using System;
-using UnityEngine.Animations.Rigging;
-using UnityEditor.ShaderGraph.Internal;
 
 namespace ShrugWare
 {
