@@ -19,6 +19,7 @@ Attack The Boss Timing - Click the attack button in the light green
 Cast Frostbolt - Click the frostbolt button out of three options
 Craft The Item - (extended) Drag items into slots
 Fishing - Press the button in time to catch the fish
+Heal The Tank - Use heal buttons to heal the tank
 Taunt The Adds - Click x amount of adds running around the screen.
 Perform The Rotation - Click the shown abilities in the correct order
 
@@ -29,6 +30,7 @@ Buy Cheap Item - Purchase the more expensive item
 Buy Expensive Item - Purchase the cheaper item
 Colored Platforms - Get on the green platform
 Dodge The Fireball - Dodge a fireball coming at you
+Drag To Poison - Drag the boss to poison and avoid allies
 Equalize The Two Groups -  Move to the group that will make the party member numbers even
 Fire Walls - Fire walls spawn, avoid them
 Get Out Of Fire - Get out of the fire
