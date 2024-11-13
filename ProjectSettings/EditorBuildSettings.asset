@@ -150,6 +150,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Microgames/Daunting Inferno/HealTheTank.unity
     guid: 2dc26ad8f294be645a079d8a52c1fbab
   - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/TurnTheBoss.unity
+    guid: e5183ed8a8b29d848b22d3d0c5ee9ad2
+  - enabled: 1
     path: Assets/Scenes/Minigames/Daunting Inferno/ElectricWallsMinigame.unity
     guid: c7fb8c349e8ae104389d4e4917bcddb6
   m_configObjects:

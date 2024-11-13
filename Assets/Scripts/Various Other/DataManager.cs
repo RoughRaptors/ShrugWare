@@ -55,7 +55,8 @@ namespace ShrugWare
             FireWalls,
             DragToPoison,
             HealTheTank,
-            MICROGAME_END = 47, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            TurnTheBoss,
+            MICROGAME_END = 48, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
             ElectricWallsMinigame,
         }
 

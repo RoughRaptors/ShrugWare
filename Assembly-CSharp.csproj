@@ -116,6 +116,7 @@
     <Compile Include="Assets\Art\Health System For Dummies\System\NoobGameDevUtilities\Utilities.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\CraftTheItem.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\BuyTheCheapItem.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\TurnTheBoss.cs" />
     <Compile Include="Assets\Art\StylisedWater\URP\Scripts\Bitgem\VFX\StylisedWater\WateverVolumeFloater.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\LaserLineOfSightVertical.cs" />
     <Compile Include="Assets\Scripts\Various Other\RandomEvent.cs" />
