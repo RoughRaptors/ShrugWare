@@ -153,6 +153,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Microgames/Daunting Inferno/TurnTheBoss.unity
     guid: e5183ed8a8b29d848b22d3d0c5ee9ad2
   - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/AvoidAuras.unity
+    guid: 3e9e0b9f99624c146a03b1aa7440a134
+  - enabled: 1
     path: Assets/Scenes/Minigames/Daunting Inferno/ElectricWallsMinigame.unity
     guid: c7fb8c349e8ae104389d4e4917bcddb6
   m_configObjects:

@@ -56,7 +56,8 @@ namespace ShrugWare
             DragToPoison,
             HealTheTank,
             TurnTheBoss,
-            MICROGAME_END = 48, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            AvoidAuras,
+            MICROGAME_END = 49, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
             ElectricWallsMinigame,
         }
 
