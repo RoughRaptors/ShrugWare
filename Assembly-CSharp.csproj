@@ -102,6 +102,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerMover.cs" />
     <Compile Include="Assets\Art\Health System For Dummies\System\UnityEvents\OnMaximumHealthChanged\OnMaximumHealthChanged.cs" />
     <Compile Include="Assets\Tooltip.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\AvoidAuras.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\ColoredPlatforms.cs" />
     <Compile Include="Assets\Scripts\Minigames\Minigame.cs" />
     <Compile Include="Assets\Art\Fire\Scripts\OscillateLightBrightness.cs" />

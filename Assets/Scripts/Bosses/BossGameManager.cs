@@ -24,6 +24,7 @@ Taunt The Adds - Click x amount of adds running around the screen.
 Perform The Rotation - Click the shown abilities in the correct order
 
 -- 2.5D Character Movement --
+Avoid Auras - Don't let the auras touch anyone
 Avoid The Lasers - Avoid a spinning laser
 Breath Rotate Attack - Boss rotates, avoid his breath
 Buy Cheap Item - Purchase the more expensive item
