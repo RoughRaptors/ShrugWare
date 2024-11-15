@@ -109,5 +109,17 @@ namespace ShrugWare
             instructionTextUI.color = color;
             instructionTextUI.text = text.ToUpper();
         }
+
+        // used in things like simon says to convey another message or warning within a microgame
+        public void ShowInstructionText(string message)
+        {
+            instructionTextUI.text = message;
+            instructionTextUI.enabled = true;
+        }
+
+        public void DisableInstructionsText()
+        {
+            instructionTextUI.enabled = false;
+        }
     }
 }

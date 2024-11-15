@@ -61,7 +61,7 @@ namespace ShrugWare
             bossObject.SetActive(true);
             RotateBoss();
             Invoke("RotateBoss", ROTATE_TIME);
-            Invoke("EndGame", microGameTime - 0.15f);
+            Invoke("EndGame", microGameTime);
         }
 
         protected override void OnMyGameTick(float timePercentLeft)

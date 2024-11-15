@@ -51,6 +51,7 @@ PlacContract - (extended) Place circles on the ground and don't overlap them
 Run In - Leeroy run into the boss room
 Shoot The Boss - Aim with mouse, shoot enemy(s)
 Sidestep The Fireball - Sidestep a fireball coming at you
+Simon Says - Watch for the pattern and avoid the death areas
 Spread Out For Meteor - Spread out from everyone else for a meteor attack
 Stack Up For Meteor - Stack up on everyone for a meteor attack
 Stack Powerstones - Collect powerups around the area
