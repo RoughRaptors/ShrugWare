@@ -156,6 +156,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Microgames/Daunting Inferno/AvoidAuras.unity
     guid: 3e9e0b9f99624c146a03b1aa7440a134
   - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/SimonSays.unity
+    guid: 5cf9db84c5b00884f9e7931b1e46022e
+  - enabled: 1
     path: Assets/Scenes/Minigames/Daunting Inferno/ElectricWallsMinigame.unity
     guid: c7fb8c349e8ae104389d4e4917bcddb6
   m_configObjects:

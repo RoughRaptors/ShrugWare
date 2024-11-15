@@ -107,6 +107,7 @@
     <Compile Include="Assets\Scripts\Minigames\Minigame.cs" />
     <Compile Include="Assets\Art\Fire\Scripts\OscillateLightBrightness.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\EffectEditor\ShurikenEffectEditor\csShurikenEffectChanger.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\SimonSays.cs" />
     <Compile Include="Assets\Art\LowPolyNature\Scripts\FadeInOut.cs" />
     <Compile Include="Assets\Art\Health System For Dummies\System\Bar\FollowCameraRotation.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StandBehindTank.cs" />

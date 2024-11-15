@@ -168,7 +168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2434016125122565296, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: instructionText
-      value: Sidestep The Burning Breath
+      value: Remember!
       objectReference: {fileID: 0}
     - target: {fileID: 2434016125122565296, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: controlSchemeImage
@@ -5424,14 +5424,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8912454713613925213, guid: 392f146ff7fe2e1418f1c1b9a623a9b2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 815294677}
+      addedObject: {fileID: 815294678}
   m_SourcePrefab: {fileID: 100100000, guid: 392f146ff7fe2e1418f1c1b9a623a9b2, type: 3}
 --- !u!1 &815294676 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8912454713613925213, guid: 392f146ff7fe2e1418f1c1b9a623a9b2, type: 3}
   m_PrefabInstance: {fileID: 815294675}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &815294677
+--- !u!114 &815294678
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5440,11 +5440,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 815294676}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 472971671b29cf346a06eabc21e4e1d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dfd486af1257644f99c37b630831843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  victoryText: Avoided
-  defaultDefeatText: Gross Breath
+  victoryText: Paid Attention
+  defaultDefeatText: Bad Memory
   postTimerWait: 1.5
   effects:
   - effect:
@@ -5474,14 +5474,12 @@ MonoBehaviour:
   - {x: -65, y: -35}
   - {x: 0, y: -35}
   - {x: 55, y: -35}
+  bossPosList:
+  - {x: -65, y: 20}
+  - {x: 0, y: 20}
+  - {x: 55, y: 20}
   breathObj: {fileID: 855126246}
-  breathAttacks:
-  - breathRot: {x: 0, y: 0, z: 0.9238795, w: 0.38268343}
-    bossRot: {x: -0.12458955, y: 0.8735453, z: -0.3007858, w: -0.36183426}
-  - breathRot: {x: 0, y: 0, z: 1, w: -0.00000004371139}
-    bossRot: {x: -0.00000000976114, y: 0.9455185, z: -0.32556832, w: -0.000000039790816}
-  - breathRot: {x: 0, y: 0, z: 0.92387956, w: -0.3826834}
-    bossRot: {x: 0.15033065, y: 0.8386852, z: -0.2887825, w: 0.43659186}
+  microgameUI: {fileID: 1145592352}
 --- !u!1 &853430104 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 904894906584680023, guid: 5b210609803658e488f512fc13a6163e, type: 3}
@@ -5934,7 +5932,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.69803923, g: 0.31349507, b: 0.17590587, a: 1}
+      maxColor: {r: 0, g: 0, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -10487,14 +10485,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 855126246}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 33, z: 0}
-  m_LocalScale: {x: 10, y: 100, z: 1}
+  m_LocalRotation: {x: -1, y: -0, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0.89, z: 0}
+  m_LocalScale: {x: 0.33, y: 3, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 350004478}
   - {fileID: 266493989}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1928649318}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!61 &855126251
 BoxCollider2D:
@@ -10541,6 +10539,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.4211965, y: 1.4510798}
   m_EdgeRadius: 0
+--- !u!114 &1145592352 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2434016125122565296, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+  m_PrefabInstance: {fileID: 37259706}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3e475aca1402694aa2dcba283c3fd2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1308512111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10684,6 +10693,10 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1000011821036864, guid: 5b210609803658e488f512fc13a6163e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011821036864, guid: 5b210609803658e488f512fc13a6163e, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -10816,8 +10829,7 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 263555676715289244, guid: 5b210609803658e488f512fc13a6163e, type: 3}
-    - {fileID: 6047643640439186488, guid: 5b210609803658e488f512fc13a6163e, type: 3}
+    - {fileID: 0}
     - {fileID: 453963025870687660, guid: 5b210609803658e488f512fc13a6163e, type: 3}
     - {fileID: 6008722839044481440, guid: 5b210609803658e488f512fc13a6163e, type: 3}
     - {fileID: 5939575726936673359, guid: 5b210609803658e488f512fc13a6163e, type: 3}
@@ -10926,7 +10938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1090219386143568, guid: a817c29ea6847604bb2c6c51d9a74bf1, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4885079432260988, guid: a817c29ea6847604bb2c6c51d9a74bf1, type: 3}
       propertyPath: m_RootOrder
@@ -10990,12 +11002,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4885079432260988, guid: a817c29ea6847604bb2c6c51d9a74bf1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 855126250}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a817c29ea6847604bb2c6c51d9a74bf1, type: 3}
 --- !u!1 &1928649317 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1090219386143568, guid: a817c29ea6847604bb2c6c51d9a74bf1, type: 3}
+  m_PrefabInstance: {fileID: 1928649316}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1928649318 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4885079432260988, guid: a817c29ea6847604bb2c6c51d9a74bf1, type: 3}
   m_PrefabInstance: {fileID: 1928649316}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
@@ -11008,4 +11028,3 @@ SceneRoots:
   - {fileID: 37259706}
   - {fileID: 1591987680}
   - {fileID: 1928649316}
-  - {fileID: 855126250}
