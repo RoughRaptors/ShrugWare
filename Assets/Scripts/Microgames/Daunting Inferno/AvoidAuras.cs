@@ -180,7 +180,7 @@ namespace ShrugWare
                 bloodObj.SetActive(true);
                 collision.gameObject.SetActive(false);
 
-                collided = false;
+                collided = true;
                 SetMicrogameEndText(false);
             }
         }
