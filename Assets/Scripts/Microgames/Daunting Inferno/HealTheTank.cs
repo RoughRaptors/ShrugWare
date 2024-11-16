@@ -121,7 +121,7 @@ namespace ShrugWare
         {
             if (heal1CDProgress >= HEAL_1_COOLDOWN)
             {
-                tankHealth += tankHealth * 0.1f;
+                tankHealth += MAX_HP * 0.1f;
                 if (tankHealth > MAX_HP)
                 {
                     tankHealth = MAX_HP;
@@ -143,7 +143,7 @@ namespace ShrugWare
         {
             if (heal2CDProgress >= HEAL_2_COOLDOWN)
             {
-                tankHealth += tankHealth * 0.25f;
+                tankHealth += MAX_HP * 0.25f;
                 if(tankHealth > MAX_HP)
                 {
                     tankHealth = MAX_HP;

@@ -159,6 +159,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Microgames/Daunting Inferno/SimonSays.unity
     guid: 5cf9db84c5b00884f9e7931b1e46022e
   - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/DPSTheBoss.unity
+    guid: 449d6c90b5d65ac4f92b624ce125654d
+  - enabled: 1
     path: Assets/Scenes/Minigames/Daunting Inferno/ElectricWallsMinigame.unity
     guid: c7fb8c349e8ae104389d4e4917bcddb6
   m_configObjects:
