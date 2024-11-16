@@ -122,7 +122,7 @@ namespace ShrugWare
         {
             int index = UnityEngine.Random.Range(0, hitVFXList.Count);
             Instantiate(hitVFXList[index], transform.position, Quaternion.identity);
-            gameObject.SetActive(false);
+            enemyObj.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
 
             enemyHit = true;
             Destroy(other.gameObject);
