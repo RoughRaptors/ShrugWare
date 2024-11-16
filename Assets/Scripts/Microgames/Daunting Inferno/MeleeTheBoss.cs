@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using System.Collections.Generic;
 
 namespace ShrugWare
@@ -68,7 +66,7 @@ namespace ShrugWare
         {
             int index = UnityEngine.Random.Range(0, hitVFXList.Count);
             Instantiate(hitVFXList[index], enemyObj.transform.position, Quaternion.identity);
-            enemyObj.SetActive(false);
+            enemyObj.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
 
             enemyHit = true;
             SetMicrogameEndText(true);

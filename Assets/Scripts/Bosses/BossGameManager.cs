@@ -18,6 +18,7 @@ using UnityEngine.UI;
 Attack The Boss Timing - Click the attack button in the light green
 Cast Frostbolt - Click the frostbolt button out of three options
 Craft The Item - (extended) Drag items into slots
+DPS The Boss - Use damage buttons to damage boss
 Fishing - Press the button in time to catch the fish
 Heal The Tank - Use heal buttons to heal the tank
 Taunt The Adds - Click x amount of adds running around the screen.

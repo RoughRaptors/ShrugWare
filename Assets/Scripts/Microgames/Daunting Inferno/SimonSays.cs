@@ -80,7 +80,6 @@ namespace ShrugWare
             base.OnMyGameTick(timePercentLeft);
 
             HandlePlayerMovement();
-            Debug.Log(timeElapsed);
         }
 
         protected override bool VictoryCheck()
