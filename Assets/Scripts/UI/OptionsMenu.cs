@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Properties;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace ShrugWare
@@ -155,6 +157,19 @@ namespace ShrugWare
                 AudioManager.Instance.UnPauseMusic();
                 AudioManager.Instance.PlayAudioClip(closeAudioClipData);
             }
+        }
+
+        public void OnReturnToOverworldPressed()
+        {
+            if(BossGameManager.Instance != null)
+            {
+                Destroy(BossGameManager.Instance.gameObject);
+            }
+
+            Time.timeScale = 1.0f;
+            gameObject.SetActive(false);
+            OverworldManager.Instance.ReadyScene(true);
+            SceneManager.LoadScene((int)DataManager.Scenes.OverworldScene);
         }
     }
 }
