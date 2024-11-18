@@ -318,6 +318,11 @@ namespace ShrugWare
         
         public void SetCurLevelById(int levelID)
         {
+            if(optionsMenu.isActiveAndEnabled)
+            {
+                return;
+            }
+
             // only change if we've unlocked it
             OverworldLevel newOverworldLevel = GetOverworldLevelByID(levelID);
             if (newOverworldLevel != null)

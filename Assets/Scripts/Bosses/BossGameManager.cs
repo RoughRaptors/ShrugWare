@@ -26,6 +26,7 @@ Perform The Rotation - Click the shown abilities in the correct order
 
 -- 2.5D Character Movement --
 Avoid Auras - Don't let the auras touch anyone
+Avoid Ground AOEs - Avoid expanding aoes on the ground
 Avoid The Lasers - Avoid a spinning laser
 Breath Rotate Attack - Boss rotates, avoid his breath
 Buy Cheap Item - Purchase the more expensive item
@@ -101,6 +102,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject curBossObj;
 
+        [SerializeField]
+        OptionsMenu optionsMenu;
+
         private float curTimeScale = 1.0f;
         public float GetCurTimeScale() { return curTimeScale; }
         public void SetCurTimeScale(float newTimeScale) { curTimeScale = newTimeScale; }
@@ -167,7 +171,11 @@ namespace ShrugWare
                 Destroy(gameObject);
             }
 
-            AudioManager.Instance.LoopMusic(false);
+            if(AudioManager.Instance != null)
+            {
+                AudioManager.Instance.LoopMusic(false);
+            }
+
             EnableBossCamera(true);
 
             curBoss = Instance.curBoss;
@@ -213,6 +221,11 @@ namespace ShrugWare
 
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                SetupOptionsVisibility();
+            }
+
             // we will come back here whenever we load back from a microgame to the main scene
             // we need to keep playing, which means to pick and start a new microgame from our raid and boss if we're not dead
             if (gameState == GameState.BossScreen)
@@ -552,6 +565,19 @@ namespace ShrugWare
         {
             sceneTransitionControlSprite.gameObject.SetActive(false);
             sceneTransitionControlSprite.enabled = false;
+        }
+        
+        public void SetupOptionsVisibility()
+        {
+            if (optionsMenu.isActiveAndEnabled)
+            {
+                optionsMenu.gameObject.SetActive(false);
+            }
+            else
+            {
+                Time.timeScale = 0.0f;
+                optionsMenu.gameObject.SetActive(true);
+            }
         }
     }
 }
