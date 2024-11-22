@@ -60,7 +60,8 @@ namespace ShrugWare
             SimonSays,
             DPSTheBoss,
             AvoidGroundAOEs,
-            MICROGAME_END = 52, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            PickUpAdds,
+            MICROGAME_END = 53, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
             ElectricWallsMinigame,
         }
 
