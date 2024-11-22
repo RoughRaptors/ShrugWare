@@ -15,6 +15,7 @@ namespace ShrugWare
             Tuzi,
             DodgeFireballsMinigame,
             HeiganDanceMinigame,
+            ElectricWallsMinigame,
             GearScreen,
             MICROGAME_START = 10, // KEEP IN SYNC
             GetOutOfFire = 10,    // KEEP IN SYNC
@@ -62,7 +63,6 @@ namespace ShrugWare
             AvoidGroundAOEs,
             PickUpAdds,
             MICROGAME_END = 53, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
-            ElectricWallsMinigame,
         }
 
         public enum StatModifierType
