@@ -49,6 +49,7 @@ Line of Sight - LOS the boss in time
 Match Polarity - Move to the party members of the same electric positive or negative sign as you
 Melee The Boss - hit boss with your sword (just collide)
 Navigate The Maze - Navigate a maze to get to the end
+Pick Up Adds - Run into the adds to aggro them
 PlacContract - (extended) Place circles on the ground and don't overlap them
 Run In - Leeroy run into the boss room
 Shoot The Boss - Aim with mouse, shoot enemy(s)
