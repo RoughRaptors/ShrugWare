@@ -17,8 +17,8 @@ namespace ShrugWare
             HeiganDanceMinigame,
             ElectricWallsMinigame,
             GearScreen,
-            MICROGAME_START = 10, // KEEP IN SYNC
-            GetOutOfFire = 10,    // KEEP IN SYNC
+            MICROGAME_START = 11, // KEEP IN SYNC
+            GetOutOfFire = 11,    // KEEP IN SYNC
             CastFrostbolt,
             TauntTheAdds,
             InterceptTheFireball,
@@ -62,7 +62,8 @@ namespace ShrugWare
             DPSTheBoss,
             AvoidGroundAOEs,
             PickUpAdds,
-            MICROGAME_END = 53, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            DodgeCenterArrows,
+            MICROGAME_END = 55, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatModifierType

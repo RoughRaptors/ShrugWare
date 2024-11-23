@@ -36,7 +36,7 @@ namespace ShrugWare
         private bool endTextSet = false;
         private bool victoryAudioHandled = false;
 
-        private float timeLeft;
+        protected float timeLeft;
 
         [NonSerialized]
         public bool gameOver = false;

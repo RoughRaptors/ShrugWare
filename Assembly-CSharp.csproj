@@ -132,6 +132,7 @@
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csParticleMove.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\DodgeTheFireballPattern.cs" />
     <Compile Include="Assets\Art\LowPolyNature\Scripts\SimpleCameraController.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\DodgeCenterArrows.cs" />
     <Compile Include="Assets\Art\52SpecialEffectPack\Animation&amp;Script\csMouseOrbit.cs" />
     <Compile Include="Assets\Art\Health System For Dummies\System\NoobGameDevUtilities\PrefabUtilities.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\ShootTheBoss.cs" />

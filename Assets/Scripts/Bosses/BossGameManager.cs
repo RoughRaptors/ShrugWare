@@ -32,6 +32,7 @@ Breath Rotate Attack - Boss rotates, avoid his breath
 Buy Cheap Item - Purchase the more expensive item
 Buy Expensive Item - Purchase the cheaper item
 Colored Platforms - Get on the green platform
+Dodge Center Arrows - Arrow patterns will appear as warnings for death zones
 Dodge The Fireball - Dodge a fireball coming at you
 Drag To Poison - Drag the boss to poison and avoid allies
 Equalize The Two Groups -  Move to the group that will make the party member numbers even
