@@ -55,6 +55,8 @@ namespace ShrugWare
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
+
+            microGameTime *= 1.2f;
         }
 
         protected override void OnEnable()
