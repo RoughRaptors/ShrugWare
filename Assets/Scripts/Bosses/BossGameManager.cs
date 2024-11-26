@@ -32,6 +32,7 @@ Breath Rotate Attack - Boss rotates, avoid his breath
 Buy Cheap Item - Purchase the more expensive item
 Buy Expensive Item - Purchase the cheaper item
 Colored Platforms - Get on the green platform
+Colored Portals - Pick the correct portal to teleport to safety
 Dodge Center Arrows - Arrow patterns will appear as warnings for death zones
 Dodge The Fireball - Dodge a fireball coming at you
 Drag To Poison - Drag the boss to poison and avoid allies
