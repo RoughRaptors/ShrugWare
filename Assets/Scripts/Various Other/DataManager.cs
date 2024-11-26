@@ -63,7 +63,8 @@ namespace ShrugWare
             AvoidGroundAOEs,
             PickUpAdds,
             DodgeCenterArrows,
-            MICROGAME_END = 55, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            ColoredPortals,
+            MICROGAME_END = 56, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatModifierType
