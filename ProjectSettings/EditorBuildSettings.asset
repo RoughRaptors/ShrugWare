@@ -173,5 +173,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Microgames/Daunting Inferno/DodgeCenterArrows.unity
     guid: fb0a12db7d017b34e8443e29bab654c3
+  - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/ColoredPortals.unity
+    guid: 25e1aa4e0e4d1bc4ebe8f4df346a593b
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: dd69bd027abc73c48b5382fd6cab7dda, type: 2}
