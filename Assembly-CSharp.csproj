@@ -118,6 +118,7 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\MeleeTheBoss.cs" />
     <Compile Include="Assets\Audio\FromYahel\AudioClipData.cs" />
     <Compile Include="Assets\Scripts\Items\ArmorItem.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\ColoredPortals.cs" />
     <Compile Include="Assets\Art\Health System For Dummies\System\NoobGameDevUtilities\Utilities.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\CraftTheItem.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\BuyTheCheapItem.cs" />

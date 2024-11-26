@@ -14,6 +14,10 @@ TagManager:
   - FxTemporaire
   - Field
   - Ally
+  - Red
+  - Green
+  - Blue
+  - Yellow
   layers:
   - Default
   - TransparentFX

@@ -4,7 +4,7 @@ using System;
 
 namespace ShrugWare
 {
-    // to make things more fun and change things up. randomly pick two who needs to line of sight
+    // to make things more fun and change things up. randomly pick two who get chosen for the aura
     public class AvoidAuras : Microgame
     {
         [SerializeField]
