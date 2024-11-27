@@ -203,7 +203,12 @@ namespace ShrugWare
             {
                 OverworldManager.Instance.PlayerInventory.AddCurrency(DataManager.Currencies.Gold, lootAmount);
             }
-            
+
+            foreach(GameObject tile in tileObjs)
+            {
+                MakeTileGreen(tile);
+            }
+
             continueButton.SetActive(true);
         }
 
@@ -353,6 +358,11 @@ namespace ShrugWare
                 if (AudioManager.Instance != null)
                 {
                     AudioManager.Instance.PlayAudioClip(deathSound);
+                }
+
+                foreach (GameObject tile in tileObjs)
+                {
+                    MakeTileRed(tile);
                 }
 
                 statusText.text = "YOU ARE DED";
