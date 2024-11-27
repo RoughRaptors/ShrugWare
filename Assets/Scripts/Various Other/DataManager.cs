@@ -64,7 +64,8 @@ namespace ShrugWare
             PickUpAdds,
             DodgeCenterArrows,
             ColoredPortals,
-            MICROGAME_END = 56, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            FollowTheRaidLag,
+            MICROGAME_END = 57, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatModifierType

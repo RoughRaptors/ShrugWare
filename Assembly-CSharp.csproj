@@ -94,6 +94,7 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\MatchPolarity.cs" />
     <Compile Include="Assets\Art\Lightning Bolt\LightningBoltScript.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\KiteTheBoss.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\FollowTheRaidLag.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\CastFrostboltMicrogame.cs" />
     <Compile Include="Assets\Art\Health System For Dummies\System\UnityEvents\OnCurrentHealthChanged\OnCurrentHealthChanged.cs" />
     <Compile Include="Assets\Art\Health System For Dummies\System\UnityEvents\OnIsAliveChangedEvent.cs" />

@@ -38,6 +38,7 @@ Dodge The Fireball - Dodge a fireball coming at you
 Drag To Poison - Drag the boss to poison and avoid allies
 Equalize The Two Groups -  Move to the group that will make the party member numbers even
 Fire Walls - Fire walls spawn, avoid them
+Follow The Raid Lag - Stick with the raid through lagging out
 Get Out Of Fire - Get out of the fire
 Intercept The Fireball -  Run into the fireball before it hits the party
 Interrupt The Ability - Hit the interrupt ability at the proper timing as the boss is casting
