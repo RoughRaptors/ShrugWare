@@ -176,5 +176,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Microgames/Daunting Inferno/ColoredPortals.unity
     guid: 25e1aa4e0e4d1bc4ebe8f4df346a593b
+  - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/FollowTheRaidLag.unity
+    guid: 1e54259a322026443985fa5ef986b4ae
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: dd69bd027abc73c48b5382fd6cab7dda, type: 2}

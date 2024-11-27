@@ -57,7 +57,7 @@ namespace ShrugWare
             movement.canceled -= StopMove;
         }
 
-        private void EnableMovement() => movement.Enable();
+        public void EnableMovement() => movement.Enable();
         public void DisableMovement()
         {
             if(rb != null)
