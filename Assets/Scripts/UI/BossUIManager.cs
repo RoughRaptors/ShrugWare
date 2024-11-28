@@ -156,6 +156,7 @@ namespace ShrugWare
             continueGameButton.gameObject.SetActive(false);
             playerHealthBar.gameObject.SetActive(false);
             bossHealthBar.gameObject.SetActive(false);
+            BossGameManager.Instance.SetBossObjectActive(false);
             //betweenMicrogameText.gameObject.SetActive(false);
             countdownTimerRunning = true;
 

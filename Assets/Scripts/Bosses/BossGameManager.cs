@@ -584,5 +584,10 @@ namespace ShrugWare
                 optionsMenu.gameObject.SetActive(true);
             }
         }
+
+        public void SetBossObjectActive(bool active)
+        {
+            curBossObj.SetActive(active);
+        }
     }
 }
