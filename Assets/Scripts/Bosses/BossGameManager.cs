@@ -21,6 +21,7 @@ Craft The Item - (extended) Drag items into slots
 DPS The Boss - Use damage buttons to damage boss
 Fishing - Press the button in time to catch the fish
 Heal The Tank - Use heal buttons to heal the tank
+Many Whelps - Click the whelps
 Taunt The Adds - Click x amount of adds running around the screen.
 Perform The Rotation - Click the shown abilities in the correct order
 
@@ -242,7 +243,7 @@ namespace ShrugWare
                     DataManager.Scenes nextScene = curBoss.PickNextMicrogame();
                     bossUIManager.SetBossUICanvasEnabled(false);
                     EnableBossCamera(false);
-                    //curBossObj.SetActive(false);
+                    curBossObj.SetActive(false);
 
                     StartCoroutine(LoadLevel((int)nextScene));
                 }
@@ -290,7 +291,7 @@ namespace ShrugWare
         {
             gameState = GameState.BossScreen;
             EnableBossCamera(true);
-            //curBossObj.SetActive(true);
+            curBossObj.SetActive(true);
 
             if (!(curBoss is null))
             {
@@ -313,7 +314,7 @@ namespace ShrugWare
                 int lootAmount = 1500;
                 OverworldManager.Instance.PlayerInventory.AddCurrency(lootCurrency, lootAmount);
 
-                //curBossObj.SetActive(false);
+                curBossObj.SetActive(false);
                 SetTimescale(1);
                 bossUIManager.HandleBeatBoss(lootCurrency, lootAmount);
             }

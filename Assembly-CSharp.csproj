@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\Items\ConsumableItem.cs" />
     <Compile Include="Assets\Scripts\Various Other\DataManager.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\PlaceContract.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\ManyWhelps.cs" />
     <Compile Include="Assets\Scripts\Overworld\OverworldUIManager.cs" />
     <Compile Include="Assets\Scripts\Microgames\MicrogameEffect.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\AvoidTheLasers.cs" />
