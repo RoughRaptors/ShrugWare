@@ -22,9 +22,9 @@ namespace ShrugWare
         {
             base.Start();
 
-            for(int ii = 0; ii < enemies.Count; ii++)
+            for(int i = 0; i < enemies.Count; i++)
             {
-                SetupEnemy(ii);
+                SetupEnemy(i);
             }
         }
 
