@@ -22,6 +22,7 @@ DPS The Boss - Use damage buttons to damage boss
 Fishing - Press the button in time to catch the fish
 Heal The Tank - Use heal buttons to heal the tank
 Many Whelps - Click the whelps
+More DOTs - Apply x dots to boss before time limit
 Taunt The Adds - Click x amount of adds running around the screen.
 Perform The Rotation - Click the shown abilities in the correct order
 

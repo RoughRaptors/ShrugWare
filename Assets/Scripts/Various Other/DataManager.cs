@@ -66,7 +66,8 @@ namespace ShrugWare
             ColoredPortals,
             FollowTheRaidLag,
             ManyWhelps,
-            MICROGAME_END = 58, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            MoreDOTs,
+            MICROGAME_END = 59, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatModifierType

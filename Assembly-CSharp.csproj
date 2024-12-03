@@ -140,6 +140,7 @@
     <Compile Include="Assets\Art\Health System For Dummies\System\NoobGameDevUtilities\PrefabUtilities.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\ShootTheBoss.cs" />
     <Compile Include="Assets\Art\Lasers\HSFiles\Scripts\Hovl_LaserDemo.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\MoreDOTs.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\SpreadOutForMeteor.cs" />
     <Compile Include="Assets\Art\Lasers\HSFiles\Scripts\Hovl_Laser2.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHighlighter.cs" />
