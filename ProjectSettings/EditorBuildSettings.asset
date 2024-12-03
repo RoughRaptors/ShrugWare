@@ -182,5 +182,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Microgames/Daunting Inferno/ManyWhelps.unity
     guid: fc665e69f0996cb4f8e3cfbf92dfcc24
+  - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/MoreDOTs.unity
+    guid: 431fb08b8b23ca44ab90a70ae534456c
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: dd69bd027abc73c48b5382fd6cab7dda, type: 2}
