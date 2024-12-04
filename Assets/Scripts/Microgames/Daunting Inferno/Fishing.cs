@@ -63,6 +63,8 @@ namespace ShrugWare
         {
             base.OnMyGameStart();
 
+            microGameTime *= 1.25f;
+
             if (AudioManager.Instance != null)
             {
                 AudioManager.Instance.PlayAudioClip(waterAudio);
