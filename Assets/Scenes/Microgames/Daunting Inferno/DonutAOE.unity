@@ -10147,8 +10147,13 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
 =======
+<<<<<<< HEAD
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+=======
   m_LocalPosition: {x: -8.980245, y: -4.8522196, z: 29.234833}
   m_LocalScale: {x: 12.1, y: 12.100005, z: 12.100005}
+>>>>>>> main
 >>>>>>> main
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15108,8 +15113,13 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
 =======
+<<<<<<< HEAD
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+=======
   m_LocalPosition: {x: -8.980245, y: -4.8522196, z: 29.234833}
   m_LocalScale: {x: 4.9500003, y: 4.9500012, z: 4.9500012}
+>>>>>>> main
 >>>>>>> main
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25408,8 +25418,13 @@ MonoBehaviour:
   greenAura: {fileID: 2129852377}
   redAura: {fileID: 2104839089}
 =======
+<<<<<<< HEAD
+  greenAura: {fileID: 2129852377}
+  redAura: {fileID: 2104839089}
+=======
   greenAura: {fileID: 0}
   redAura: {fileID: 0}
+>>>>>>> main
 >>>>>>> main
 --- !u!1 &1622994508
 GameObject:
@@ -45455,8 +45470,13 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
 =======
+<<<<<<< HEAD
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 10}
+=======
   m_LocalPosition: {x: 8.13409, y: 5.9090548, z: -0.50144386}
   m_LocalScale: {x: 1, y: 1, z: 1}
+>>>>>>> main
 >>>>>>> main
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -45493,8 +45513,13 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 4}
 =======
+<<<<<<< HEAD
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 4}
+=======
   m_LocalPosition: {x: 8.13409, y: 5.9090548, z: -0.50144386}
   m_LocalScale: {x: 1, y: 1, z: 1}
+>>>>>>> main
 >>>>>>> main
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -45538,9 +45563,15 @@ CircleCollider2D:
   serializedVersion: 2
   m_Radius: 4.125
 =======
+<<<<<<< HEAD
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 4.125
+=======
   m_Offset: {x: -9, y: -4.5}
   serializedVersion: 2
   m_Radius: 20.5
+>>>>>>> main
 >>>>>>> main
 --- !u!1 &2144891256
 GameObject:
