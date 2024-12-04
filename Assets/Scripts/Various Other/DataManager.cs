@@ -67,7 +67,8 @@ namespace ShrugWare
             FollowTheRaidLag,
             ManyWhelps,
             MoreDOTs,
-            MICROGAME_END = 59, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            DonutAOE,
+            MICROGAME_END = 60, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatModifierType

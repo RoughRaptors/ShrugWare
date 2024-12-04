@@ -185,5 +185,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Microgames/Daunting Inferno/MoreDOTs.unity
     guid: 431fb08b8b23ca44ab90a70ae534456c
+  - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/DonutAOE.unity
+    guid: 13af40337aaf9cf41bc5dcf848eb39ef
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: dd69bd027abc73c48b5382fd6cab7dda, type: 2}
