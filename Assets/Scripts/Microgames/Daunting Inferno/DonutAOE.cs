@@ -25,6 +25,17 @@ namespace ShrugWare
         private const float STORM_SPEED_MIN = 25.0f;
         private const float STORM_SPEED_MAX = 40.0f;
 
+<<<<<<< HEAD
+        private const float AURA_SCALE_RATE = 1.0f;
+        private const float MIN_GREEN_AURA_SCALE = 3.0f;
+        private const float MAX_GREEN_AURA_SCALE = 6.0f;
+        private const float MIN_RED_AURA_SCALE = 6.5f;
+        private const float MAX_RED_AURA_SCALE = 11.5f;
+        private float greenAuraTargetScale;
+        private float redAuraTargetScale;
+
+=======
+>>>>>>> main
         private Vector2 stormTargetPos;
         private float stormSpeed;
 
@@ -57,7 +68,18 @@ namespace ShrugWare
             float newXPos = UnityEngine.Random.Range(STORM_X_MIN, STORM_X_MAX);
             float newYPos = UnityEngine.Random.Range(STORM_Y_MIN, STORM_Y_MAX);
             stormTargetPos = new Vector2(newXPos, newYPos);
+<<<<<<< HEAD
+
             stormSpeed = UnityEngine.Random.Range(STORM_SPEED_MIN, STORM_SPEED_MAX);
+
+            float newGreenScale = UnityEngine.Random.Range(MIN_GREEN_AURA_SCALE, MAX_GREEN_AURA_SCALE);
+            greenAuraTargetScale = newGreenScale;
+
+            float newRedScale = UnityEngine.Random.Range(MIN_RED_AURA_SCALE, MAX_RED_AURA_SCALE);
+            redAuraTargetScale = newRedScale;
+=======
+            stormSpeed = UnityEngine.Random.Range(STORM_SPEED_MIN, STORM_SPEED_MAX);
+>>>>>>> main
         }
 
         protected override void OnMyGameAwake()
@@ -72,6 +94,10 @@ namespace ShrugWare
             if (!gameOver)
             {
                 MoveEye();
+<<<<<<< HEAD
+                ScaleAuras();
+=======
+>>>>>>> main
             }
         }
 
@@ -111,5 +137,60 @@ namespace ShrugWare
                 }
             }
         }
+<<<<<<< HEAD
+
+        private void ScaleAuras()
+        {
+            ScaleGreenAura();
+            ScaleRedAura();
+        }
+
+        private void ScaleGreenAura()
+        {
+            // get smaller or bigger based on current scale
+            float newScale;
+            if (greenAuraTargetScale > greenAura.transform.localScale.x)
+            {
+                newScale = greenAura.transform.localScale.x + (AURA_SCALE_RATE * Time.deltaTime);
+            }
+            else
+            {
+                newScale = greenAura.transform.localScale.x - (AURA_SCALE_RATE * Time.deltaTime);
+            }
+
+            greenAura.transform.localScale = new Vector2(newScale, newScale);
+
+            // pick new scale if we reach our target
+            if (MathF.Abs(greenAura.transform.localScale.x - greenAuraTargetScale) < 0.5f)
+            {
+                float newGreenScale = UnityEngine.Random.Range(MIN_GREEN_AURA_SCALE, MAX_GREEN_AURA_SCALE);
+                greenAuraTargetScale = newGreenScale;
+            }
+        }
+
+        private void ScaleRedAura()
+        {
+            // get smaller or bigger based on current scale
+            float newScale;
+            if (redAuraTargetScale > redAura.transform.localScale.x)
+            {
+                newScale = redAura.transform.localScale.x + (AURA_SCALE_RATE * Time.deltaTime);
+            }
+            else
+            {
+                newScale = redAura.transform.localScale.x - (AURA_SCALE_RATE * Time.deltaTime);
+            }
+
+            redAura.transform.localScale = new Vector2(newScale, newScale);
+
+            // pick new scale if we reach our target
+            if (MathF.Abs(redAura.transform.localScale.x - redAuraTargetScale) < 0.5f)
+            {
+                float newRedscale = UnityEngine.Random.Range(MIN_RED_AURA_SCALE, MAX_RED_AURA_SCALE);
+                redAuraTargetScale = newRedscale;
+            }
+        }
+=======
+>>>>>>> main
     }
 }
