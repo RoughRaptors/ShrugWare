@@ -10143,8 +10143,8 @@ Transform:
   m_GameObject: {fileID: 542106222}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -8.980245, y: -4.8522196, z: 29.234833}
-  m_LocalScale: {x: 12.1, y: 12.100005, z: 12.100005}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 64018826}
@@ -15099,8 +15099,8 @@ Transform:
   m_GameObject: {fileID: 864947996}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -8.980245, y: -4.8522196, z: 29.234833}
-  m_LocalScale: {x: 4.9500003, y: 4.9500012, z: 4.9500012}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2000851656}
@@ -25394,8 +25394,8 @@ MonoBehaviour:
     addOnWin: 1
     addOnLoss: 1
   storm: {fileID: 757133491}
-  greenAura: {fileID: 0}
-  redAura: {fileID: 0}
+  greenAura: {fileID: 2129852377}
+  redAura: {fileID: 2104839089}
 --- !u!1 &1622994508
 GameObject:
   m_ObjectHideFlags: 0
@@ -45436,8 +45436,8 @@ Transform:
   m_GameObject: {fileID: 2104839089}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.13409, y: 5.9090548, z: -0.50144386}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 542106225}
@@ -45469,8 +45469,8 @@ Transform:
   m_GameObject: {fileID: 2129852377}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.13409, y: 5.9090548, z: -0.50144386}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 864947999}
@@ -45508,9 +45508,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -9, y: -4.5}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 20.5
+  m_Radius: 4.125
 --- !u!1 &2144891256
 GameObject:
   m_ObjectHideFlags: 0
