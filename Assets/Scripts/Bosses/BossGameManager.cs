@@ -37,6 +37,7 @@ Colored Platforms - Get on the green platform
 Colored Portals - Pick the correct portal to teleport to safety
 Dodge Center Arrows - Arrow patterns will appear as warnings for death zones
 Dodge The Fireball - Dodge a fireball coming at you
+Donut AOE - Stay in the center of the donut aoe
 Drag To Poison - Drag the boss to poison and avoid allies
 Equalize The Two Groups -  Move to the group that will make the party member numbers even
 Fire Walls - Fire walls spawn, avoid them

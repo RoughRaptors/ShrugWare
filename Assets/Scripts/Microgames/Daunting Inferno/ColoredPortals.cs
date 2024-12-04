@@ -100,6 +100,8 @@ namespace ShrugWare
         {
             base.OnMyGameStart();
 
+            microGameTime *= 1.33f;
+
             int enumLength = Enum.GetNames(typeof(PortalColors)).Length;
             correctPortalColor = (PortalColors)UnityEngine.Random.Range(0, enumLength);
 

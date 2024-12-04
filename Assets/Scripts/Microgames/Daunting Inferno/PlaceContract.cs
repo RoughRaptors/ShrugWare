@@ -49,7 +49,7 @@ namespace ShrugWare
         {
             base.OnMyGameTick(timePercentLeft);
 
-            if (Time.time > lastPlacedTime + SPAWN_INTERVAL)
+            if (Time.time > lastPlacedTime + SPAWN_INTERVAL && !gameOver)
             {
                 lastPlacedTime = Time.time;
                 SpawnContract();

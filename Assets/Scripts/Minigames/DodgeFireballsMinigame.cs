@@ -422,7 +422,7 @@ namespace ShrugWare
             }
 
             playerHealthText.text = "Player Health: " + healthRemaining.ToString();
-            if (healthRemaining < 0)
+            if (healthRemaining <= 0)
             {
                 if(AudioManager.Instance != null)
                 {
