@@ -25,7 +25,6 @@ namespace ShrugWare
         private const float STORM_SPEED_MIN = 25.0f;
         private const float STORM_SPEED_MAX = 40.0f;
 
-<<<<<<< HEAD
         private const float AURA_SCALE_RATE = 1.0f;
         private const float MIN_GREEN_AURA_SCALE = 3.0f;
         private const float MAX_GREEN_AURA_SCALE = 6.0f;
@@ -34,8 +33,6 @@ namespace ShrugWare
         private float greenAuraTargetScale;
         private float redAuraTargetScale;
 
-=======
->>>>>>> main
         private Vector2 stormTargetPos;
         private float stormSpeed;
 
@@ -68,7 +65,6 @@ namespace ShrugWare
             float newXPos = UnityEngine.Random.Range(STORM_X_MIN, STORM_X_MAX);
             float newYPos = UnityEngine.Random.Range(STORM_Y_MIN, STORM_Y_MAX);
             stormTargetPos = new Vector2(newXPos, newYPos);
-<<<<<<< HEAD
 
             stormSpeed = UnityEngine.Random.Range(STORM_SPEED_MIN, STORM_SPEED_MAX);
 
@@ -77,9 +73,6 @@ namespace ShrugWare
 
             float newRedScale = UnityEngine.Random.Range(MIN_RED_AURA_SCALE, MAX_RED_AURA_SCALE);
             redAuraTargetScale = newRedScale;
-=======
-            stormSpeed = UnityEngine.Random.Range(STORM_SPEED_MIN, STORM_SPEED_MAX);
->>>>>>> main
         }
 
         protected override void OnMyGameAwake()
@@ -94,10 +87,7 @@ namespace ShrugWare
             if (!gameOver)
             {
                 MoveEye();
-<<<<<<< HEAD
                 ScaleAuras();
-=======
->>>>>>> main
             }
         }
 
@@ -137,7 +127,6 @@ namespace ShrugWare
                 }
             }
         }
-<<<<<<< HEAD
 
         private void ScaleAuras()
         {
@@ -158,7 +147,7 @@ namespace ShrugWare
                 newScale = greenAura.transform.localScale.x - (AURA_SCALE_RATE * Time.deltaTime);
             }
 
-            greenAura.transform.localScale = new Vector2(newScale, newScale);
+            greenAura.transform.localScale = new Vector3(newScale, newScale, newScale);
 
             // pick new scale if we reach our target
             if (MathF.Abs(greenAura.transform.localScale.x - greenAuraTargetScale) < 0.5f)
@@ -181,7 +170,7 @@ namespace ShrugWare
                 newScale = redAura.transform.localScale.x - (AURA_SCALE_RATE * Time.deltaTime);
             }
 
-            redAura.transform.localScale = new Vector2(newScale, newScale);
+            redAura.transform.localScale = new Vector3(newScale, newScale, newScale);
 
             // pick new scale if we reach our target
             if (MathF.Abs(redAura.transform.localScale.x - redAuraTargetScale) < 0.5f)
@@ -190,7 +179,5 @@ namespace ShrugWare
                 redAuraTargetScale = newRedscale;
             }
         }
-=======
->>>>>>> main
     }
 }
