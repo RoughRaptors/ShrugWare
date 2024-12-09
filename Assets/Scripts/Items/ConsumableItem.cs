@@ -28,7 +28,8 @@ namespace ShrugWare
                 }
                 else if (effect.effectType == DataManager.StatModifierType.PlayerMoveSpeed)
                 {
-                    OverworldManager.Instance.PlayerInventory.SetMoveSpeedBonus(effect.amount);
+                    //OverworldManager.Instance.PlayerInventory.SetMoveSpeedBonus(effect.amount);
+                    OverworldManager.Instance.PlayerInventory.AddToMoveSpeedBonus(effect.amount);
                     return true;
                 }
             }

@@ -285,11 +285,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 518962355}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd39911dd65b1f48b858bc9efd6bd75, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e3d22a30e3b58546b498b437e796d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  victoryText: 
-  defaultDefeatText: 
+  victoryText: No DKP Loss
+  defaultDefeatText: 50 DKP Minus!
   postTimerWait: 0
   effects:
   - effect:
