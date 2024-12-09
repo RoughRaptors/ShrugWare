@@ -135,7 +135,7 @@ namespace ShrugWare
 
         private void RotateBoss()
         {
-            if(gameOver)
+            if(gameOver || timeLeft < ROTATE_TIME)
             {
                 return;
             }

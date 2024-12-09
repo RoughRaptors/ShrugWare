@@ -580,11 +580,13 @@ namespace ShrugWare
             if (optionsMenu.isActiveAndEnabled)
             {
                 optionsMenu.gameObject.SetActive(false);
+                curBossObj.SetActive(true);
             }
             else
             {
                 Time.timeScale = 0.0f;
                 optionsMenu.gameObject.SetActive(true);
+                curBossObj.SetActive(false);
             }
         }
 
