@@ -86,7 +86,7 @@ namespace ShrugWare
         {
             base.OnMyGameStart();
 
-            microGameTime *= 1.25f;
+            microGameTime *= 1.5f;
         }
 
         protected override void OnMyGameTick(float timePercentLeft)
