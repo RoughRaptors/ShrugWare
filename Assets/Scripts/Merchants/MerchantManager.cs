@@ -85,6 +85,18 @@ namespace ShrugWare
             armorTabButton.GetComponentInChildren<Button>().image.color = Color.red;
         }
 
+        private void Update()
+        {
+            // tilde
+            if (Input.GetKeyDown(KeyCode.BackQuote) && OverworldManager.Instance != null)
+            {
+                PlayerInventory playerInventory = OverworldManager.Instance.PlayerInventory;
+                playerInventory.AddCurrency(DataManager.Currencies.DKP, 5000);
+                playerInventory.AddCurrency(DataManager.Currencies.Gold, 5000);
+                UpdateCurrenciesText();
+            }
+        }
+
         private void SetupInventory()
         {
             CreateHealthPotion();

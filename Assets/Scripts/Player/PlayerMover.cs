@@ -40,7 +40,11 @@ namespace ShrugWare
 
             if (OverworldManager.Instance != null)
             {
-                moveSpeed = BASE_MOVE_SPEED + OverworldManager.Instance.PlayerInventory.GetMoveSpeedBonus();
+                float moveSpeedBonus = (OverworldManager.Instance.PlayerInventory.GetMoveSpeedBonus() / 100) * moveSpeed;
+                if (moveSpeedBonus > 0)
+                {
+                    moveSpeed += moveSpeedBonus;
+                }
             }
         }
 

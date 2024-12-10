@@ -458,7 +458,8 @@ namespace ShrugWare
 
         public void AddToTimeScale(float amount)
         {
-            curTimeScale += amount;
+            // nerf it a little for now, easier than changing every microgame
+            curTimeScale += amount * 0.9f;
             Time.timeScale = curTimeScale;
             bossUIManager.SetTimescaleInputFieldText("Time Scale: " + curTimeScale.ToString("F3"));
         }
@@ -579,11 +580,13 @@ namespace ShrugWare
             if (optionsMenu.isActiveAndEnabled)
             {
                 optionsMenu.gameObject.SetActive(false);
+                curBossObj.SetActive(true);
             }
             else
             {
                 Time.timeScale = 0.0f;
                 optionsMenu.gameObject.SetActive(true);
+                curBossObj.SetActive(false);
             }
         }
 

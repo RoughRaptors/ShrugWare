@@ -472,9 +472,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2301266169278598945, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4578551441229890934, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: m_LocalPosition.y
       value: -69
+      objectReference: {fileID: 0}
+    - target: {fileID: 7503696053193143754, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7503696053193143754, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7503696053193143754, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 7503696053193143754, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8499098450759406256, guid: 5494dc59fe2b87549bf88d5f711c1809, type: 3}
       propertyPath: m_LocalPosition.y

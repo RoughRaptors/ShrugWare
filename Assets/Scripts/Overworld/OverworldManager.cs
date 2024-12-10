@@ -478,7 +478,11 @@ namespace ShrugWare
 
 
             isMoving = false;
-            overworldUIManager.EnableStartButton();
+
+            if (curLevel.LevelType != DataManager.OverworldLevelType.Start)
+            {
+                overworldUIManager.EnableStartButton();
+            }
 
             overworldUIManager.UpdateUI();
         }

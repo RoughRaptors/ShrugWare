@@ -63,7 +63,7 @@ namespace ShrugWare
         {
             base.OnMyGameStart();
 
-            microGameTime *= 1.25f;
+            microGameTime *= 1.5f;
 
             if (AudioManager.Instance != null)
             {

@@ -333,6 +333,11 @@ namespace ShrugWare
             moveSpeedBonus = amount;
         }
 
+        public void AddToMoveSpeedBonus(float amount)
+        {
+            moveSpeedBonus += amount;
+        }
+
         public float GetMoveSpeedBonus()
         {
             return moveSpeedBonus;
