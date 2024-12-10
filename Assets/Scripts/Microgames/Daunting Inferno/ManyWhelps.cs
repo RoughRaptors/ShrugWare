@@ -13,12 +13,10 @@ namespace ShrugWare
         AudioClipData tauntAudio;
 
         [SerializeField]
-        GameObject whelpParent;
+        List<GameObject> whelps;
 
-        private List<GameObject> enemies = new List<GameObject>();
         private List<Vector2> enemyTargetPositions = new List<Vector2>();
 
-        private const int NUM_ENEMIES = 8;
         private const float ENEMY_MOVE_SPEED = 15.0f;
         private const float MIN_SPAWN_DISTANCE = 20.0f;
         private const float X_MIN = -90.0f;
@@ -35,14 +33,15 @@ namespace ShrugWare
         {
             base.OnMyGameStart();
 
-            microGameTime *= 1.1f;
+            microGameTime *= 1.25f;
 
-            for (int i = 0; i < NUM_ENEMIES; ++i)
+            for(int i = 0; i < whelps.Count; ++i)
             {
-                SetupEnemy(i);
+                GameObject whelp = whelps[i];
+                SetupEnemy(ref whelp);
             }
 
-            foreach (GameObject enemy in enemies)
+            foreach (GameObject enemy in whelps)
             {
                 enemy.GetComponent<Clickable>().Clicked += Taunted;
                 enemy.gameObject.SetActive(true);
@@ -58,10 +57,20 @@ namespace ShrugWare
 
         protected override bool VictoryCheck()
         {
-            return enemies.Count == 0;
+            bool allTaunted = true;
+            foreach(GameObject obj in whelps)
+            {
+                if(obj.activeInHierarchy)
+                {
+                    allTaunted = false;
+                    break;
+                }
+            }
+
+            return allTaunted;
         }
 
-        private void SetupEnemy(int index)
+        private void SetupEnemy(ref GameObject enemy)
         {
             // try 100 times to get a far enough position away from its spawn
             int numTries = 0;
@@ -81,14 +90,15 @@ namespace ShrugWare
 
                 if (Vector2.Distance(enemyPos, targetPos) > MIN_SPAWN_DISTANCE)
                 {
-                    GameObject enemy = Instantiate(whelpInitialObj, targetPos, Quaternion.identity);
+                    //GameObject enemy = Instantiate(whelpInitialObj, targetPos, Quaternion.identity);
+                    //GameObject enemy = whelps[index];
                     enemy.GetComponent<Clickable>().Clicked += Taunted;
-                    enemy.transform.parent = whelpParent.transform;
+                    //enemy.transform.parent = whelpParent.transform;
                     enemy.transform.position = enemyPos;
-                    enemy.name = "Whelp " + index.ToString();
+                    //enemy.name = "Whelp " + index.ToString();
                     enemy.SetActive(true);
 
-                    enemies.Add(enemy);
+                    //enemies.Add(enemy);
                     enemyTargetPositions.Add(targetPos);
 
                     break;
@@ -98,12 +108,12 @@ namespace ShrugWare
 
         private void MoveEnemies()
         {
-            for (int i = 0; i < enemies.Count; ++i)
+            for (int i = 0; i < whelps.Count; ++i)
             {
-                GameObject enemy = enemies[i];
+                GameObject enemy = whelps[i];
                 enemy.transform.position = Vector2.MoveTowards(enemy.transform.position, enemyTargetPositions[i], ENEMY_MOVE_SPEED * Time.deltaTime);
 
-                enemy.transform.LookAt(enemyTargetPositions[i]);
+                enemy.GetComponentInChildren<Transform>().LookAt(enemyTargetPositions[i]);
             }
         }
 
@@ -116,7 +126,7 @@ namespace ShrugWare
 
             enemy.gameObject.SetActive(false);
 
-            if (enemies.Count == 0)
+            if (VictoryCheck())
             {
                 SetMicrogameEndText(true);
             }
