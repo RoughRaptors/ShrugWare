@@ -167,8 +167,9 @@ namespace ShrugWare
 
         public void OnDebugButtonPressed()
         {
+            debugButton.gameObject.GetComponentInChildren<Text>().text = "Enter Level";
             // if the debug menu is already open, make the button enter the level
-            if(OverworldManager.Instance.IsDebugMode)
+            if (OverworldManager.Instance.IsDebugMode)
             {
                 SetCanvasEnabled(false);
                 OverworldManager.Instance.DisableCamera();
@@ -206,6 +207,7 @@ namespace ShrugWare
 
         public void OnStopDebuggingPressed()
         {
+            debugButton.gameObject.GetComponentInChildren<Text>().text = "Debug";
             debugButton.gameObject.SetActive(false);
             stopDebugButton.gameObject.SetActive(false);
             debugDropdown.gameObject.SetActive(false);
@@ -215,6 +217,7 @@ namespace ShrugWare
 
         public void EnableDebugging()
         {
+            debugButton.gameObject.GetComponentInChildren<Text>().text = "Enter Level";
             debugButton.gameObject.SetActive(true);
             stopDebugButton.gameObject.SetActive(false);
             debugDropdown.gameObject.SetActive(true);

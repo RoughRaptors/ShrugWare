@@ -59,6 +59,9 @@ namespace ShrugWare
         [SerializeField]
         AudioClipData deathSound;
 
+        [SerializeField]
+        TextMeshProUGUI instructionsText;
+
         private const float FIREBALL_X_MIN = -25;
         private const float FIREBALL_X_MAX = 125;
         private const float FIREBALL_Y_MIN = -40;
@@ -148,22 +151,15 @@ namespace ShrugWare
             base.Start();
             healthRemaining = START_HEALTH + healthToAdd;
 
-            // initial wave
-            for (int i = 0; i < 10; ++i)
-            {
-                SpawnFireball(FromDirection.FromRight);
-            }
-
             if (OverworldManager.Instance != null)
             {
                 OverworldManager.Instance.PlayerInventory.RecalculateStats();
                 mitigation = OverworldManager.Instance.PlayerInventory.GetMitigation();
             }
 
-            SpawnCollectible();
-
-            gameRunning = true;
-            playerHealthText.text = "HP: " + healthRemaining.ToString("F2");
+            Invoke("RunGame", START_DELAY);
+            playerHealthText.enabled = false;
+            enemyHealthText.enabled = false;
         }
 
         private void FixedUpdate()
@@ -186,6 +182,27 @@ namespace ShrugWare
                     hasSpawnedTopIndicator = true;
                     Invoke("DeactivateTopIndicator", 2.0f);
                 }
+            }
+        }
+
+        private void RunGame()
+        {
+            instructionsText.gameObject.SetActive(false);
+
+            playerHealthText.text = "HP: " + healthRemaining.ToString("F2");
+            playerHealthText.enabled = true;
+
+            enemyHealthText.text = "Enemy Health: " + enemyHealth;
+            enemyHealthText.enabled = true;
+
+            SpawnCollectible();
+
+            gameRunning = true;
+
+            // initial wave
+            for (int i = 0; i < 10; ++i)
+            {
+                SpawnFireball(FromDirection.FromRight);
             }
         }
 

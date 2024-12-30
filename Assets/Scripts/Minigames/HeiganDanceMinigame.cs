@@ -64,6 +64,9 @@ namespace ShrugWare
         [SerializeField]
         AudioClipData deathSound;
 
+        [SerializeField]
+        TextMeshProUGUI instructionsText;
+
         private const float TIME_TO_SWITCH_COLORS = 3.5f;
         private const float PLAYER_SPEED = 50.0f;
         private float timeSinceLastColorSwitch = 0.0f;
@@ -116,16 +119,25 @@ namespace ShrugWare
         private new void Start()
         {
             base.Start();
-            healthRemaining = START_HEALTH + healthToAdd;
 
-            gameRunning = true;
-            statusText.text = "HP: " + healthRemaining.ToString("F2");
+            Invoke("RunGame", START_DELAY);
 
             if (OverworldManager.Instance != null)
             {
                 OverworldManager.Instance.PlayerInventory.RecalculateStats();
                 mitigation = OverworldManager.Instance.PlayerInventory.GetMitigation();
             }
+        }
+
+        private void RunGame()
+        {
+            healthRemaining = START_HEALTH + healthToAdd;
+
+            enemyHealthText.text = "Enemy Health: " + enemyHealth.ToString();
+            statusText.text = "HP: " + healthRemaining.ToString("F2");
+            instructionsText.enabled = false;
+
+            SpawnCollectible();
 
             // just start everything as green
             // then randomly pick tiles to change
@@ -140,7 +152,7 @@ namespace ShrugWare
             while (numIterations < NUM_EACH_COLOR)
             {
                 ++numIterations;
-                
+
                 int randomTileIndex = Random.Range(0, greenTiles.Count);
                 GameObject randomTile = greenTiles[randomTileIndex];
                 MakeTileYellow(randomTile);
@@ -170,7 +182,7 @@ namespace ShrugWare
                 redTiles.Remove(startingTileObj);
             }
 
-            SpawnCollectible();
+            gameRunning = true;
         }
 
         private void FixedUpdate()

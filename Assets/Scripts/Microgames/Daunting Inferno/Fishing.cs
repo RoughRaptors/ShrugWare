@@ -96,6 +96,8 @@ namespace ShrugWare
 
         public void ReelInButtonPressed()
         {
+            reelInButton.SetActive(false);
+
             if (AudioManager.Instance != null)
             {
                 AudioManager.Instance.PlayAudioClip(buttonClickAudio);
