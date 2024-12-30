@@ -67,6 +67,7 @@ namespace ShrugWare
             {
                 AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameIntro);
             }
+
             SetEffects();
 
             StartCoroutine(PlayMicrogame());

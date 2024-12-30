@@ -56,6 +56,9 @@ namespace ShrugWare
         [SerializeField]
         AudioClipData deathSound;
 
+        [SerializeField]
+        TextMeshProUGUI instructionsText;
+
         private const int ENEMY_START_HEALTH = 100;
         private float enemyHealth = ENEMY_START_HEALTH;
 
@@ -136,10 +139,9 @@ namespace ShrugWare
                 mitigation = OverworldManager.Instance.PlayerInventory.GetMitigation();
             }
 
-            SpawnCollectible();
-
-            gameRunning = true;
-            playerHealthText.text = "HP: " + healthRemaining.ToString("F2");
+            Invoke("RunGame", START_DELAY);
+            playerHealthText.enabled = false;
+            enemyHealthText.enabled = false;
         }
 
         private void FixedUpdate()
@@ -156,6 +158,21 @@ namespace ShrugWare
                 HandleLightningMovement();
                 timeInGame += Time.deltaTime;
             }
+        }
+
+        private void RunGame()
+        {
+            instructionsText.gameObject.SetActive(false);
+
+            playerHealthText.text = "HP: " + healthRemaining.ToString("F2");
+            playerHealthText.enabled = true;
+
+            enemyHealthText.text = "Enemy Health: " + enemyHealth;
+            enemyHealthText.enabled = true;
+
+            SpawnCollectible();
+
+            gameRunning = true;
         }
 
         private void SpawnElectricity()

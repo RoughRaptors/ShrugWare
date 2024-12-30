@@ -11,6 +11,7 @@ namespace ShrugWare
         AudioClipData minigameMusicData;
 
         protected int healthToAdd = 0;
+        protected const float START_DELAY = 1.5f;
 
         protected virtual void Start()
         {
