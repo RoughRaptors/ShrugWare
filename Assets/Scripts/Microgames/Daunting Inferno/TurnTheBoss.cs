@@ -83,25 +83,20 @@ namespace ShrugWare
 
             if (!gameOver)
             {
-                transform.position = Vector3.MoveTowards(transform.position, playerObj.transform.position, bossSpeed * Time.deltaTime);
-
-                Vector3 lookPos = playerObj.transform.position - transform.position;
-                lookPos.y = 0;
-                Quaternion rotation = Quaternion.LookRotation(lookPos);
-
-                float xDist = Math.Abs(transform.position.x - playerObj.transform.position.x);
-                if (xDist <= 20.0f)
+                Vector2 targetPos;
+                if (transform.position.x < playerObj.transform.position.x)
                 {
-                    if (playerObj.transform.position.y > transform.position.y)
-                    {
-                        rotation.y = 0.0f;
-                    }
-                    else
-                    {
-                        rotation.y = 180.0f;
-                    }
+                    targetPos = new Vector2(playerObj.transform.position.x - 15, playerObj.transform.position.y);
+                }
+                else
+                {
+                    targetPos = new Vector2(playerObj.transform.position.x + 15, playerObj.transform.position.y);
                 }
 
+                transform.position = Vector2.MoveTowards(transform.position, targetPos, bossSpeed * Time.deltaTime);
+
+                Vector3 lookPos = playerObj.transform.position - transform.position;
+                Quaternion rotation = Quaternion.LookRotation(lookPos);
                 transform.rotation = rotation;
             }
         }
