@@ -63,16 +63,14 @@ namespace ShrugWare
             ParticleSystem ps = breathObj.GetComponent<ParticleSystem>();
             ParticleSystem.MainModule mainModule = ps.main;
             SetupBossPositionQueue();
-
-            Invoke("HandleBossMovement", NEXT_MOVE_TIME_DELAY);
         }
 
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
 
-            microGameTime = 10.5f;
-            bossObject.SetActive(true);
+            microGameTime = 11.5f;
+            Invoke("HandleBossMovement", NEXT_MOVE_TIME_DELAY);
         }
 
         protected override void OnMyGameTick(float timePercentLeft)
@@ -130,7 +128,8 @@ namespace ShrugWare
 
         private void HandleBossMovement()
         {
-            if(bossPosQueueMove.Count > 0 && !gameOver)
+            bossObject.SetActive(true);
+            if (bossPosQueueMove.Count > 0 && !gameOver)
             {
                 int posIndex = bossPosQueueMove.Dequeue();
                 Vector2 nextPos = bossPosList[posIndex];
