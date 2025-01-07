@@ -60,6 +60,10 @@ namespace ShrugWare
             base.OnMyGameStart();
 
             microGameTime *= 1.25f;
+
+            dpsButton1.GetComponent<Button>().interactable = true;
+            dpsButton2.GetComponent<Button>().interactable = true;
+            dpsButton3.GetComponent<Button>().interactable = true;
         }
 
         protected override void OnMyGameTick(float timePercentLeft)

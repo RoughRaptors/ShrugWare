@@ -44,7 +44,7 @@ namespace ShrugWare
         {
             base.OnDisable();
 
-            PlayerCollider.OnBadCollision += HitAOE;
+            PlayerCollider.OnBadCollision -= HitAOE;
         }
 
         protected override void OnMyGameStart()
