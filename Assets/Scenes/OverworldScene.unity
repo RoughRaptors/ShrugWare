@@ -9194,6 +9194,7 @@ GameObject:
   - component: {fileID: 5943835486158398743}
   - component: {fileID: 1537019720093785677}
   - component: {fileID: 2293697899820635138}
+  - component: {fileID: 8921413384888291908}
   m_Layer: 5
   m_Name: Template
   m_TagString: Untagged
@@ -9449,6 +9450,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 2}
   m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &8921413384888291908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8696822020962992366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 0, y: 0}
 --- !u!222 &8944179670639868012
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -56,7 +56,14 @@ namespace ShrugWare
         {
             base.OnMyGameStart();
 
-            microGameTime *= 1.25f;
+            float extraTime = 0.0f;
+            if (BossGameManager.Instance != null)
+            {
+                extraTime = BossGameManager.Instance.GetCurTimeScale() * 1.75f;
+            }
+
+            microGameTime *= 1.5f + extraTime;
+
             float nextDamageTime = UnityEngine.Random.Range(DAMAGE_INTERVAL_MIN, DAMAGE_INTERVAL_MAX);
             Invoke("DamageUpdate", nextDamageTime);
 
