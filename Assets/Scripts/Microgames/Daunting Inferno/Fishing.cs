@@ -1,9 +1,6 @@
-using System.Collections.Generic;
-using Unity.Mathematics;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
-using static UnityEngine.GraphicsBuffer;
 
 namespace ShrugWare
 {
@@ -69,6 +66,8 @@ namespace ShrugWare
             {
                 AudioManager.Instance.PlayAudioClip(waterAudio);
             }
+
+            reelInButton.GetComponent<Button>().interactable = true;
         }
 
         protected override void OnMyGameTick(float timePercentLeft)

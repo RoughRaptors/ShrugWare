@@ -42,17 +42,20 @@ namespace ShrugWare
         {
             base.Start();
         }
-
-        protected override void OnMyGameStart()
-        {
-            base.OnMyGameStart();
-        }
-
         protected override void OnMyGameAwake()
         {
             base.OnMyGameAwake();
 
             debuffIconText.text = numDotsApplied.ToString() + "/" + NUM_DOTS_REQUIRED.ToString();
+        }
+
+        protected override void OnMyGameStart()
+        {
+            base.OnMyGameStart();
+
+            dotButton1.GetComponent<Button>().interactable = true;
+            dotButton2.GetComponent<Button>().interactable = true;
+            dotButton3.GetComponent<Button>().interactable = true;
         }
 
         protected override void OnMyGameTick(float timePercentLeft)

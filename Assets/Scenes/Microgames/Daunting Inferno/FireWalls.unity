@@ -25915,7 +25915,6 @@ GameObject:
   - component: {fileID: 796943961}
   - component: {fileID: 796943965}
   - component: {fileID: 796943964}
-  - component: {fileID: 796943963}
   - component: {fileID: 796943962}
   m_Layer: 10
   m_Name: Right Wall
@@ -25984,33 +25983,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0000004, y: 1.0000002}
   m_EdgeRadius: 0
---- !u!50 &796943963
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 796943960}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
 --- !u!23 &796943964
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -26205,7 +26177,6 @@ GameObject:
   - component: {fileID: 823468829}
   - component: {fileID: 823468833}
   - component: {fileID: 823468832}
-  - component: {fileID: 823468831}
   - component: {fileID: 823468830}
   m_Layer: 10
   m_Name: Ceiling
@@ -26274,33 +26245,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!50 &823468831
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 823468828}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
 --- !u!23 &823468832
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -71884,7 +71828,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.23808634, y: 4.2764044}
@@ -71938,7 +71882,6 @@ GameObject:
   - component: {fileID: 1615060989}
   - component: {fileID: 1615060993}
   - component: {fileID: 1615060992}
-  - component: {fileID: 1615060991}
   - component: {fileID: 1615060990}
   m_Layer: 10
   m_Name: Floor
@@ -72007,33 +71950,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!50 &1615060991
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1615060988}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
 --- !u!23 &1615060992
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -77173,7 +77089,6 @@ GameObject:
   - component: {fileID: 1964848444}
   - component: {fileID: 1964848448}
   - component: {fileID: 1964848447}
-  - component: {fileID: 1964848446}
   - component: {fileID: 1964848445}
   m_Layer: 10
   m_Name: Left Wall
@@ -77242,33 +77157,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0000004, y: 1.0000002}
   m_EdgeRadius: 0
---- !u!50 &1964848446
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1964848443}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
 --- !u!23 &1964848447
 MeshRenderer:
   m_ObjectHideFlags: 0

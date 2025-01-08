@@ -1652,6 +1652,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff3dd417bb566b849b752ce57810bbf5, type: 3}
+--- !u!1 &1558939958 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100102, guid: ff3dd417bb566b849b752ce57810bbf5, type: 3}
+  m_PrefabInstance: {fileID: 1558939957}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1568023500
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2092,7 +2097,7 @@ MonoBehaviour:
   ally2Obj: {fileID: 925155401}
   ally3Obj: {fileID: 1488499081}
   tankObj: {fileID: 1568023502}
-  bossObj: {fileID: 0}
+  bossObj: {fileID: 1558939958}
   bloodVFX: {fileID: 379229034}
   allyPositionLayoutListWrapper:
   - positionList:

@@ -84,6 +84,9 @@ namespace ShrugWare
         protected override void OnDisable()
         {
             base.OnDisable();
+
+            PlayerCollider.OnBadCollision -= HitAOE;
+            PlayerCollider.OnGoodCollision -= HitPortal;
         }
 
         protected override void Awake()
