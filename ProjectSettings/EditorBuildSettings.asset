@@ -135,9 +135,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Microgames/Daunting Inferno/StandBehindTank.unity
     guid: cc85a31d10a47c84da13d4c16af605b9
   - enabled: 1
-    path: Assets/Scenes/Microgames/Daunting Inferno/PlaceContract.unity
-    guid: 868c5730e7c440547b1594d0127bdf22
-  - enabled: 1
     path: Assets/Scenes/Microgames/Daunting Inferno/BreathRotateAttack.unity
     guid: 7e8680b22a0774a4c9e977543a392ade
   - enabled: 1
@@ -181,7 +178,7 @@ EditorBuildSettings:
     guid: 1e54259a322026443985fa5ef986b4ae
   - enabled: 1
     path: Assets/Scenes/Microgames/Daunting Inferno/ManyWhelps.unity
-    guid: fc665e69f0996cb4f8e3cfbf92dfcc24
+    guid: 7177192a3801d20448d839c309ae2e36
   - enabled: 1
     path: Assets/Scenes/Microgames/Daunting Inferno/MoreDOTs.unity
     guid: 431fb08b8b23ca44ab90a70ae534456c

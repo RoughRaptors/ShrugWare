@@ -50,7 +50,6 @@ namespace ShrugWare
             MeleeTheBoss,
             Fishing,
             StandBehindTank,
-            PlaceContract,
             BreathRotateAttack,
             KiteTheBoss,
             FireWalls,
@@ -68,7 +67,7 @@ namespace ShrugWare
             ManyWhelps,
             MoreDOTs,
             DonutAOE,
-            MICROGAME_END = 60, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            MICROGAME_END = 59, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatModifierType
