@@ -58,7 +58,7 @@ namespace ShrugWare
             Instance.SetCanvasEnabled(true);
 
 #if UNITY_EDITOR
-            curLevelText.gameObject.SetActive(true);
+            //curLevelText.gameObject.SetActive(true);
             debugButton.gameObject.SetActive(true);
 #endif
         }
