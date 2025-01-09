@@ -34,6 +34,7 @@ namespace ShrugWare
             if(SystemInfo.deviceType != DeviceType.Desktop)
             {
                 Debug.Log("PC only, sorry :-(");
+                Application.Quit();
             }
         }
 

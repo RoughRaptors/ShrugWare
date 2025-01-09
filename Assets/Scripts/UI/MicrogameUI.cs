@@ -73,7 +73,7 @@ namespace ShrugWare
         {
             if (BossGameManager.Instance != null)
             {
-                BossGameManager.Instance.SetTransitionControlImage(false, false);
+                //BossGameManager.Instance.SetTransitionControlImage(false, false);
             }
 
             controlSchemeImage.SetActive(false);
