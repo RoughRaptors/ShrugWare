@@ -386,7 +386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   victoryText: Good Deeps
   defaultDefeatText: Keyboardsmash Harder
-  postTimerWait: 0
+  postTimerWait: 1
   effects:
   - effect:
       effectType: 0

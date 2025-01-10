@@ -121,6 +121,7 @@ namespace ShrugWare
                     {
                         bossHealth = 0.0f;
                         SetMicrogameEndText(true);
+                        timeLeft = 0;
                     }
 
                     dps1CDProgress = 0.0f;
