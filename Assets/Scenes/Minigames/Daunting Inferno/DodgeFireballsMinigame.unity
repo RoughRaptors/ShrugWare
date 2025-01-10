@@ -3284,6 +3284,10 @@ PrefabInstance:
       propertyPath: InitialModule.startSize.scalar
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 6ff1350c2a91520479532984ca642474, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 19800006, guid: 6ff1350c2a91520479532984ca642474, type: 3}
       propertyPath: EmissionModule.enabled
       value: 0

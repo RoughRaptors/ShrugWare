@@ -62,7 +62,7 @@ namespace ShrugWare
             float extraTime = 0.0f;
             if (BossGameManager.Instance != null)
             {
-                extraTime = BossGameManager.Instance.GetCurTimeScale() * 1.75f;
+                extraTime = BossGameManager.Instance.GetCurTimeScale();
             }
 
             microGameTime *= 1.5f + extraTime;
@@ -121,6 +121,7 @@ namespace ShrugWare
                     {
                         bossHealth = 0.0f;
                         SetMicrogameEndText(true);
+                        timeLeft = 0;
                     }
 
                     dps1CDProgress = 0.0f;

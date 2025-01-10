@@ -30,6 +30,12 @@ namespace ShrugWare
         private void Start()
         {
             AudioManager.Instance.PlayMusicClip(mainMenuMusic);
+
+            if(SystemInfo.deviceType != DeviceType.Desktop)
+            {
+                Debug.Log("PC only, sorry :-(");
+                Application.Quit();
+            }
         }
 
         public void OnStartClicked()

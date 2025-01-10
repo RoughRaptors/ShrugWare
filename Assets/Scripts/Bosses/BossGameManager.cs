@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 /* 
     to add a new microgame: 
@@ -111,6 +112,15 @@ namespace ShrugWare
 
         [SerializeField]
         OptionsMenu optionsMenu;
+
+        [SerializeField]
+        VideoPlayer sceneTransitionControlVideoPlayer;
+
+        [SerializeField]
+        VideoClip wasdAnimation;
+
+        [SerializeField]
+        VideoClip mouseClickAnimation;
 
         private float curTimeScale = 1.0f;
         public float GetCurTimeScale() { return curTimeScale; }
@@ -557,22 +567,24 @@ namespace ShrugWare
 
         public void SetTransitionControlImage(bool enabled, bool isWASD)
         {
-            sceneTransitionControlSprite.enabled = enabled;
+            //sceneTransitionControlVideoPlayer.gameObject.SetActive(enabled);
             sceneTransitionControlSprite.gameObject.SetActive(true);
             if(isWASD)
             {
                 sceneTransitionControlSprite.sprite = wasdSprite;
+                //sceneTransitionControlVideoPlayer.clip = wasdAnimation;
             }
             else
             {
                 sceneTransitionControlSprite.sprite = mouseClickSprite;
+                //sceneTransitionControlVideoPlayer.clip = mouseClickAnimation;
             }
         }
 
         private void DisableControlSchemeImage()
         {
             sceneTransitionControlSprite.gameObject.SetActive(false);
-            sceneTransitionControlSprite.enabled = false;
+            //sceneTransitionControlVideoPlayer.gameObject.SetActive(false);
         }
         
         public void SetupOptionsVisibility()
