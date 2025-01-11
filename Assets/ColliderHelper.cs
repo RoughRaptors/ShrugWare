@@ -6,13 +6,26 @@ using UnityEngine;
 public class ColliderHelper : MonoBehaviour
 {
     [SerializeField]
-    Microgame game;
+    Microgame microgame;
+
+    [SerializeField]
+    Minigame minigame;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (this.tag == "Collectible" && collision.tag == "Collectible" && !game.gameOver)
+        if(microgame != null)
         {
-            game.PrematureEndGame(false);
+            if (this.tag == "Collectible" && collision.tag == "Collectible" && !microgame.gameOver)
+            {
+                microgame.PrematureEndGame(false);
+            }
+        }
+        else if(minigame != null)
+        {
+            if (this.tag == "Collectible" && collision.tag == "Collectible" && !minigame.gameOver)
+            {
+                minigame.PrematureEndGame(false);
+            }
         }
     }
 }

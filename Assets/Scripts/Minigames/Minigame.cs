@@ -10,6 +10,11 @@ namespace ShrugWare
         [SerializeField]
         AudioClipData minigameMusicData;
 
+        protected float minigameDuration = float.MaxValue;
+        protected float timeElapsed = 0.0f;
+        [NonSerialized] public bool gameOver = false;
+        protected bool gameStarted = false;
+
         protected int healthToAdd = 0;
         protected const float START_DELAY = 1.5f;
 
@@ -22,6 +27,19 @@ namespace ShrugWare
             {
                 OverworldManager.Instance.PlayMusicClip(minigameMusicData);
                 Invoke("RestartMusic", minigameMusicData.clip.length);
+            }
+        }
+
+        protected virtual void Update()
+        {
+            if (gameStarted)
+            {
+                timeElapsed += Time.deltaTime;
+            }
+
+            if (timeElapsed >= minigameDuration && !gameOver)
+            {
+                EndGame(true);
             }
         }
 
@@ -52,6 +70,16 @@ namespace ShrugWare
         private void RestartMusic()
         {
             OverworldManager.Instance.PlayMusicClip(minigameMusicData);
+        }
+        
+        public void PrematureEndGame(bool victory)
+        {
+            EndGame(false);
+        }
+
+        protected virtual void EndGame(bool success)
+        {
+            gameOver = true;
         }
     }
 }
