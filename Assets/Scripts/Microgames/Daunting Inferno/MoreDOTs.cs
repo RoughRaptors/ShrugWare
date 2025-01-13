@@ -27,11 +27,9 @@ namespace ShrugWare
         private const int NUM_DOTS_REQUIRED = 10;
         private int numDotsApplied = 0;
 
-        private bool stoppedDOTs = true;
-
-        private const float GCD = 0.33f;
+        private const float GCD = 0.29f;
         private const float DOT_1_COOLDOWN = GCD;
-        private const float DOT_2_COOLDOWN = 1.5f;
+        private const float DOT_2_COOLDOWN = float.MaxValue;
 
         private bool hasUsedDOT3 = false;
 
@@ -76,7 +74,7 @@ namespace ShrugWare
 
         protected override bool VictoryCheck()
         {
-            return numDotsApplied >= NUM_DOTS_REQUIRED && stoppedDOTs;
+            return numDotsApplied >= NUM_DOTS_REQUIRED;
         }
 
         private void DOTUpdate(GameObject dotButton, ref float dotCDProgress, float cooldown)
@@ -117,7 +115,7 @@ namespace ShrugWare
                 {
                     dot2CDProgress = 0.0f;
                     dotButton2.GetComponent<Image>().fillAmount = dot2CDProgress / DOT_2_COOLDOWN;
-                    numDotsApplied += 3;
+                    numDotsApplied += 5;
                     debuffIconText.text = numDotsApplied.ToString() + "/" + NUM_DOTS_REQUIRED.ToString();
 
                     if (AudioManager.Instance != null)

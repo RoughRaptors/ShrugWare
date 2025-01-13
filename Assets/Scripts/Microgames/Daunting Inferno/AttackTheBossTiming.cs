@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ShrugWare
@@ -13,6 +14,9 @@ namespace ShrugWare
 
         [SerializeField]
         AudioClipData buttonClickAudioData;
+
+        [SerializeField]
+        Button attackButton;
 
         private bool attackPressed = false;
         private bool attackedSucceeded = false;
@@ -32,6 +36,7 @@ namespace ShrugWare
             base.OnMyGameStart();
 
             boss.SetActive(true);
+            attackButton.interactable = true;
         }
 
         protected override void OnMyGameTick(float timePercentLeft)
@@ -59,10 +64,14 @@ namespace ShrugWare
 
         protected override bool VictoryCheck() => attackedSucceeded;
 
+
         // success if we're in the right 80% of the slider
         public void AttackButtonPressed()
         {
-            AudioManager.Instance.PlayAudioClip(buttonClickAudioData);
+            if (OverworldManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(buttonClickAudioData);
+            }
 
             if (!attackPressed)
             {

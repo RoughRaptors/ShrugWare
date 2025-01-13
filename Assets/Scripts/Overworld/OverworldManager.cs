@@ -389,7 +389,7 @@ namespace ShrugWare
                 return true;
             }
 
-            bool force = false;
+            bool force = isDebugMode;
 #if UNITY_EDITOR
             force = true;
 #endif
@@ -501,7 +501,7 @@ namespace ShrugWare
 
         public void EnterLevel(OverworldLevel level)
         {
-            bool force = false;
+            bool force = IsDebugMode;
 #if UNITY_EDITOR
             force = true;
 #endif

@@ -36,7 +36,7 @@ namespace ShrugWare
         [SerializeField]
         GameObject bossObj;
 
-        private const float GCD = 0.175f;
+        private const float GCD = 0.15f;
         private const float DPS_1_COOLDOWN = GCD;
         private const float DPS_2_COOLDOWN = 1.5f;
 
@@ -65,7 +65,7 @@ namespace ShrugWare
                 extraTime = BossGameManager.Instance.GetCurTimeScale();
             }
 
-            microGameTime *= 1.5f + extraTime;
+            //microGameTime += extraTime;
 
             dpsButton1.GetComponent<Button>().interactable = true;
             dpsButton2.GetComponent<Button>().interactable = true;
@@ -116,8 +116,8 @@ namespace ShrugWare
             {
                 if (dps1CDProgress >= DPS_1_COOLDOWN)
                 {
-                    bossHealth -= MAX_HP * 0.05f;
-                    if (bossHealth < 0.0f)
+                    bossHealth -= MAX_HP * 0.10f;
+                    if (bossHealth <= 0.0f)
                     {
                         bossHealth = 0.0f;
                         SetMicrogameEndText(true);

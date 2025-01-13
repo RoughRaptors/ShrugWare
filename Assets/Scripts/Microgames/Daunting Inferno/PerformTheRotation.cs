@@ -92,14 +92,13 @@ namespace ShrugWare
                 }
 
                 rotation.RemoveAt(0);
-                button.gameObject.SetActive(false);
+                button.interactable = false;
             }
             else
             {
-                frostboltButtonObj.gameObject.SetActive(false);
-                glacialSpikeButtonObj.gameObject.SetActive(false);
-                iceBlastButtonObj.gameObject.SetActive(false);
-                microGameTime += 1;
+                frostboltButtonObj.interactable = false;
+                glacialSpikeButtonObj.interactable = false;
+                iceBlastButtonObj.interactable = false;
                 //SetMicrogameEndText(false, "Wrong rotation");
             }
             

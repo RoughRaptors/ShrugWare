@@ -580,6 +580,7 @@ GameObject:
   - component: {fileID: 401366513}
   - component: {fileID: 401366512}
   - component: {fileID: 401366511}
+  - component: {fileID: 401366514}
   m_Layer: 5
   m_Name: Attack Button
   m_TagString: Untagged
@@ -701,6 +702,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401366509}
   m_CullTransparentMesh: 1
+--- !u!114 &401366514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401366509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10dadeddd4ac8e74386f733a3b18b48f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonPressed: 0
 --- !u!1 &656935073
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,6 +970,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1100847505513626143, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1100847505513626143, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1100847505513626143, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2329941026598198678, guid: 2b00be64b8b6edb4ab8df67fc508dc0d, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1172,6 +1198,7 @@ GameObject:
   - component: {fileID: 1325052457}
   - component: {fileID: 1325052456}
   - component: {fileID: 1325052455}
+  - component: {fileID: 1325052458}
   m_Layer: 5
   m_Name: Interrupt Button
   m_TagString: Untagged
@@ -1293,6 +1320,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1325052453}
   m_CullTransparentMesh: 1
+--- !u!114 &1325052458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325052453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10dadeddd4ac8e74386f733a3b18b48f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonPressed: 0
 --- !u!1 &1572512021
 GameObject:
   m_ObjectHideFlags: 0

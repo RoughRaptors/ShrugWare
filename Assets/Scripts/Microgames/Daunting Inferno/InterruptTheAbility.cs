@@ -102,7 +102,9 @@ namespace ShrugWare
                 SetMicrogameEndText(true);
             }
 
-            interruptButton.SetActive(false);
+            interruptButton.GetComponent<Button>().interactable = false;
+            attackButton1.GetComponent<Button>().interactable = false;
+            attackButton2.GetComponent<Button>().interactable = false;
         }
 
         public void OnAttackPressed(GameObject obj)

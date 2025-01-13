@@ -32,7 +32,7 @@ namespace ShrugWare
 
         private const float GCD = 0.2f;
         private const float HEAL_1_COOLDOWN = GCD;
-        private const float HEAL_2_COOLDOWN = 1.0f;
+        private const float HEAL_2_COOLDOWN = float.MaxValue;
         private const float HEAL_3_COOLDOWN = 4.0f;
 
         private float heal1CDProgress = HEAL_1_COOLDOWN;
@@ -44,8 +44,8 @@ namespace ShrugWare
 
         private const float DAMAGE_INTERVAL_MIN = 0.185f;
         private const float DAMAGE_INTERVAL_MAX = 0.475f;
-        private const float MIN_DAMAGE = 6.0f;
-        private const float MAX_DAMAGE = 18.0f;
+        private const float MIN_DAMAGE = 10.0f;
+        private const float MAX_DAMAGE = 25.0f;
 
         protected override void Start()
         {
@@ -55,14 +55,6 @@ namespace ShrugWare
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
-
-            float extraTime = 0.0f;
-            if (BossGameManager.Instance != null)
-            {
-                extraTime = BossGameManager.Instance.GetCurTimeScale();
-            }
-
-            microGameTime *= 1.3f + extraTime;
 
             float nextDamageTime = UnityEngine.Random.Range(DAMAGE_INTERVAL_MIN, DAMAGE_INTERVAL_MAX);
             Invoke("DamageUpdate", nextDamageTime);
@@ -151,8 +143,9 @@ namespace ShrugWare
         {
             if (heal2CDProgress >= HEAL_2_COOLDOWN)
             {
-                tankHealth += MAX_HP * 0.25f;
-                if(tankHealth > MAX_HP)
+                //tankHealth += MAX_HP * 0.25f;
+                tankHealth = MAX_HP;
+                if (tankHealth > MAX_HP)
                 {
                     tankHealth = MAX_HP;
                 }

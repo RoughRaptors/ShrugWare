@@ -35,8 +35,9 @@ namespace ShrugWare
         [SerializeField]
         HealthBar bossHealthBar = null;
 
-        bool countdownTimerRunning = false;
-        bool gameOver = false;
+        private int countdownNum = 3; // this is to play a countdown sound every x:00
+        private bool countdownTimerRunning = false;
+        private bool gameOver = false;
 
         private void Awake()
         {
@@ -97,10 +98,11 @@ namespace ShrugWare
             if (countdownTimerRunning)
             {
                 // play a sound effect on every even number except for 0. just do a countdown then a ding at 0
-                if (timeLeft > 0 && (timeLeft % 1 < 0.05f ))
+                if (timeLeft > 0 && (timeLeft % 1 < 0.05f ) && Mathf.Floor(timeLeft) == countdownNum)
                 {
                     if (AudioManager.Instance != null)
                     {
+                        --countdownNum;
                         AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameTimerTick);
                     }
 
