@@ -116,8 +116,8 @@ namespace ShrugWare
             {
                 if (dps1CDProgress >= DPS_1_COOLDOWN)
                 {
-                    bossHealth -= MAX_HP * 0.05f;
-                    if (bossHealth < 0.0f)
+                    bossHealth -= MAX_HP * 0.10f;
+                    if (bossHealth <= 0.0f)
                     {
                         bossHealth = 0.0f;
                         SetMicrogameEndText(true);
