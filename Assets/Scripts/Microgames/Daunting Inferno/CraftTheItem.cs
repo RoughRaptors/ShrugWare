@@ -82,6 +82,7 @@ namespace ShrugWare
                 if (item1InSlot && item2InSlot && item3InSlot)
                 {
                     SetMicrogameEndText(true);
+                    timeLeft = 0;
                 }
             }
         }

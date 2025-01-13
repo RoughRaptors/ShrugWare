@@ -113,6 +113,8 @@ namespace ShrugWare
                 caughtFish = true;
                 SetMicrogameEndText(true);
             }
+
+            timeLeft = 0;
         }
 
         private void MoveFish()

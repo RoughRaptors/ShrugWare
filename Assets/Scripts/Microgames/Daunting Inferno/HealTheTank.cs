@@ -44,8 +44,8 @@ namespace ShrugWare
 
         private const float DAMAGE_INTERVAL_MIN = 0.185f;
         private const float DAMAGE_INTERVAL_MAX = 0.475f;
-        private const float MIN_DAMAGE = 8.0f;
-        private const float MAX_DAMAGE = 20.0f;
+        private const float MIN_DAMAGE = 10.0f;
+        private const float MAX_DAMAGE = 25.0f;
 
         protected override void Start()
         {
@@ -55,14 +55,6 @@ namespace ShrugWare
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
-
-            float extraTime = 0.0f;
-            if (BossGameManager.Instance != null)
-            {
-                extraTime = BossGameManager.Instance.GetCurTimeScale();
-            }
-
-            microGameTime *= 1.3f + extraTime;
 
             float nextDamageTime = UnityEngine.Random.Range(DAMAGE_INTERVAL_MIN, DAMAGE_INTERVAL_MAX);
             Invoke("DamageUpdate", nextDamageTime);
