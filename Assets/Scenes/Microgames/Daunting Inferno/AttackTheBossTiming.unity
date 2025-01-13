@@ -406,6 +406,7 @@ MonoBehaviour:
   timingSlider: {fileID: 1999925865}
   boss: {fileID: 297559661}
   buttonClickAudioData: {fileID: 11400000, guid: bef8eb7521a5856469f75f73f1763cef, type: 2}
+  attackButton: {fileID: 1325052455}
 --- !u!1 &569523404
 GameObject:
   m_ObjectHideFlags: 0
@@ -857,6 +858,7 @@ GameObject:
   - component: {fileID: 1325052457}
   - component: {fileID: 1325052456}
   - component: {fileID: 1325052455}
+  - component: {fileID: 1325052458}
   m_Layer: 5
   m_Name: Attack Button
   m_TagString: Untagged
@@ -923,7 +925,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1325052456}
   m_OnClick:
     m_PersistentCalls:
@@ -978,6 +980,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1325052453}
   m_CullTransparentMesh: 1
+--- !u!114 &1325052458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325052453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10dadeddd4ac8e74386f733a3b18b48f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonPressed: 0
 --- !u!1 &1816632856
 GameObject:
   m_ObjectHideFlags: 0
