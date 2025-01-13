@@ -329,7 +329,7 @@ namespace ShrugWare
             {
                 bool force = isDebugMode;
 #if UNITY_EDITOR
-                //force = true;
+                force = true;
 #endif
                 // in the beginning our curLevel will be null before it's set
                 if(curLevel == null)

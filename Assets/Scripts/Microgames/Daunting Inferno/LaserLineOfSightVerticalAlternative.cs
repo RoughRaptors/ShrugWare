@@ -72,7 +72,7 @@ namespace ShrugWare
                 xDir *= -1.0f;
             }
 
-            barrierObj.transform.position = new Vector3(barrierObj.transform.position.x + xDir * 0.175f, barrierObj.transform.position.y, barrierObj.transform.position.z);
+            barrierObj.transform.position = new Vector3(barrierObj.transform.position.x + xDir * 0.9f, barrierObj.transform.position.y, barrierObj.transform.position.z);
         }
         
         protected override bool VictoryCheck()
