@@ -7,7 +7,6 @@ Library/
 *.csproj
 *.unityproj
 *.sln
-*.sln
 /ShrugWare.sln
 /Assembly-CSharp.csproj
 /Assembly-CSharp-Editor.csproj
