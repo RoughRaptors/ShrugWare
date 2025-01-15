@@ -21649,6 +21649,7 @@ MonoBehaviour:
   hitVFXList:
   - {fileID: 9027514048236820045, guid: effb650189dc5714e9e9801b1cfb3991, type: 3}
   - {fileID: 1141330259687333427, guid: 6718dc24203da53468af9ada8fef7d6d, type: 3}
+  electricitySound: {fileID: 11400000, guid: 35fc43bc735124349a63617c011794e7, type: 2}
 --- !u!1 &750333484
 GameObject:
   m_ObjectHideFlags: 0

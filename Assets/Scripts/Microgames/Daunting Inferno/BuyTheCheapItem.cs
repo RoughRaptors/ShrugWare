@@ -36,6 +36,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject signsObj;
 
+        [SerializeField]
+        AudioClipData buySound;
+
         private bool merchant1Correct = false;
         private bool merchant2Correct = false;
         private bool merchant3Correct = false;
@@ -136,6 +139,11 @@ namespace ShrugWare
             else
             {
                 SetMicrogameEndText(false);
+            }
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(buySound);
             }
         }
     }

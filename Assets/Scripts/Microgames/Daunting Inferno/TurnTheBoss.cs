@@ -25,6 +25,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject breathInitialObj;
 
+        [SerializeField]
+        AudioClipData fireSound;
+
         [Serializable]
         public struct PositionLayout
         {
@@ -103,6 +106,11 @@ namespace ShrugWare
 
         protected override bool VictoryCheck()
         {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(fireSound);
+            }
+
             GameObject breathObj1 = Instantiate(breathInitialObj, transform);
             bool lookingAtAlly1 = IsLookingAtAlly(ref ally1, ref breathObj1);
 

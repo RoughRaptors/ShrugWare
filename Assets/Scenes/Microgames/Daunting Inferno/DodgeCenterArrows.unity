@@ -10914,6 +10914,7 @@ MonoBehaviour:
   vertHorizBreathObj: {fileID: 371082440}
   diagonalBreathObj: {fileID: 1621153141}
   microgameUI: {fileID: 75627191}
+  fireSound: {fileID: 11400000, guid: 475cf1224006d064f8b5575a03d20d1a, type: 2}
 --- !u!61 &346147939
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -368,6 +368,7 @@ MonoBehaviour:
   ally1: {fileID: 855138208}
   ally2: {fileID: 925155401}
   bloodVFX: {fileID: 1502949373}
+  poisonSound: {fileID: 11400000, guid: f5aa3d22b2a6e9b4291b2d98bc7f141f, type: 2}
 --- !u!50 &76374420
 Rigidbody2D:
   serializedVersion: 4

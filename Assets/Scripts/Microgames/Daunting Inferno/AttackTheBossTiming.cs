@@ -73,6 +73,7 @@ namespace ShrugWare
                 AudioManager.Instance.PlayAudioClip(buttonClickAudioData);
             }
 
+            attackButton.interactable = false;
             if (!attackPressed)
             {
                 attackPressed = true;

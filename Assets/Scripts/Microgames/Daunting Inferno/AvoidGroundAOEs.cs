@@ -14,6 +14,9 @@ namespace ShrugWare
         [SerializeField]
         List<GameObject> aoeInitialObjs = new List<GameObject>();
 
+        [SerializeField]
+        AudioClipData spawnSound;
+
         private List<GameObject> aoeObjects = new List<GameObject>();
 
         private float lastSpawnTime = -1.0f;
@@ -60,6 +63,11 @@ namespace ShrugWare
             {
                 lastSpawnTime = Time.time;
                 SpawnAOE();
+
+                if(AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayAudioClip(spawnSound);
+                }
             }
 
             foreach(GameObject aoeObj in aoeObjects)
@@ -77,6 +85,8 @@ namespace ShrugWare
         private void HitAOE(GameObject go)
         {
             hit = true;
+            playerObject.gameObject.SetActive(false);
+            SetMicrogameEndText(false);
         }
 
         private void SpawnAOE()
@@ -100,6 +110,11 @@ namespace ShrugWare
                     spawned = true;
                 }
             }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log("asdf");
         }
     }
 }

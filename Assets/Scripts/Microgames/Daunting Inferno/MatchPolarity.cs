@@ -27,6 +27,9 @@ namespace ShrugWare
         [SerializeField]
         List<GameObject> hitVFXList;
 
+        [SerializeField]
+        AudioClipData electricitySound;
+
         private bool polarityMatched = false;
 
         private bool playerPositive = false;
@@ -129,6 +132,11 @@ namespace ShrugWare
             if (!polarityMatched)
             {
                 playerObject.SetActive(false);
+            }
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(electricitySound);
             }
 
             int index = UnityEngine.Random.Range(0, hitVFXList.Count);

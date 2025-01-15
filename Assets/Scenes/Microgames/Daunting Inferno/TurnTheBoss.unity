@@ -330,6 +330,7 @@ MonoBehaviour:
     ally1Pos: {x: 70, y: 20, z: 0}
     ally2Pos: {x: 70, y: -20, z: 0}
   breathInitialObj: {fileID: 576679482}
+  fireSound: {fileID: 11400000, guid: 475cf1224006d064f8b5575a03d20d1a, type: 2}
 --- !u!65 &76374426
 BoxCollider:
   m_ObjectHideFlags: 0

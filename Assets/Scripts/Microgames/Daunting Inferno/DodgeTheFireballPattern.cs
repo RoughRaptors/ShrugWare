@@ -23,6 +23,9 @@ namespace ShrugWare
         [SerializeField]
         List<GameObject> hitVFXList;
 
+        [SerializeField]
+        AudioClipData fireballSound;
+
         const float MIN_PLAYER_X_START_POS = -80;
         const float MAX_PLAYER_X_START_POS = 0;
         const float MIN_PLAYER_Y_START_POS = -50f;
@@ -79,6 +82,11 @@ namespace ShrugWare
 
         private void PlayerCollision(GameObject fireball)
         {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(fireballSound);
+            }
+
             int index = UnityEngine.Random.Range(0, hitVFXList.Count);
             Instantiate(hitVFXList[index], playerObject.transform.position, Quaternion.identity);
             Destroy(fireball);

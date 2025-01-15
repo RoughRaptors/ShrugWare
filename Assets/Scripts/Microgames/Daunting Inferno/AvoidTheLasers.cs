@@ -24,6 +24,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject rotationObj;
 
+        [SerializeField]
+        AudioClipData laserAudio;
+
         float delay = 0.75f;
         float rotateSpeed = 30.0f;
         bool hasBeenHit = false;
@@ -70,6 +73,11 @@ namespace ShrugWare
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(laserAudio);
+            }
         }
 
         protected override void OnMyGameTick(float timePercentLeft)

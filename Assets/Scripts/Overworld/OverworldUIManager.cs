@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System;
 using UnityEditor;
 using System.Linq;
+using System.Collections.Specialized;
+using System.Xml.Schema;
+using UnityEngine.TextCore.Text;
 
 namespace ShrugWare
 {
@@ -168,19 +171,46 @@ namespace ShrugWare
         public void OnDebugButtonPressed()
         {
             debugButton.gameObject.GetComponentInChildren<Text>().text = "Enter Level";
+
             // if the debug menu is already open, make the button enter the level
             if (OverworldManager.Instance.IsDebugMode)
             {
+                SortedDictionary<string, int> sortedScenes = new SortedDictionary<string, int>();
+                for (int microgameSceneIndex = (int)DataManager.Scenes.MICROGAME_START; microgameSceneIndex <= (int)DataManager.Scenes.MICROGAME_END; ++microgameSceneIndex)
+                {
+                    sortedScenes.Add(SceneUtility.GetScenePathByBuildIndex(microgameSceneIndex), microgameSceneIndex);
+                }
+
+                // it needs to be sorted and we can't access by index, but we can keep track of an index manually
+                int index = 0;
+                int sceneIndex = -1;
+                foreach (KeyValuePair<string, int> scene in sortedScenes)
+                {
+                    if(index == debugDropdown.value)
+                    {
+                        sceneIndex = scene.Value;
+                        break;
+                    }
+
+                    ++index;
+                }
+
                 SetCanvasEnabled(false);
                 OverworldManager.Instance.DisableCamera();
 
                 AudioManager.Instance.StopAudio();
                 AudioManager.Instance.LoopMusic(false);
 
-                // offset our index
-                int sceneIndex = debugDropdown.value + (int)DataManager.Scenes.MICROGAME_START;
                 OverworldManager.Instance.DisablePlayer();
-                SceneManager.LoadScene(sceneIndex, LoadSceneMode.Additive);
+
+                if(sceneIndex != -1)
+                {
+                    SceneManager.LoadScene(sceneIndex, LoadSceneMode.Additive);
+                }
+                else
+                {
+                    Debug.LogError("Scene index is somehow not set");
+                }
             }
             else
             {
@@ -195,13 +225,13 @@ namespace ShrugWare
         void PopulateDebugDropdown()
         {
             List<string> debugScenes = new List<string>();
-            string[] scenes = new string[SceneManager.sceneCountInBuildSettings];
             for (int sceneIndex = (int)DataManager.Scenes.MICROGAME_START; sceneIndex <= (int)DataManager.Scenes.MICROGAME_END; ++sceneIndex)
             {
-                scenes[sceneIndex] = SceneUtility.GetScenePathByBuildIndex(sceneIndex);
-                debugScenes.Add("Scene Id: " + sceneIndex.ToString() + ": " + scenes[sceneIndex]);
+                string sceneName = SceneUtility.GetScenePathByBuildIndex(sceneIndex);
+                debugScenes.Add(sceneName);
             }
 
+            debugScenes = debugScenes.OrderBy(sc => sc).ToList();
             debugDropdown.AddOptions(debugScenes);
         }
 

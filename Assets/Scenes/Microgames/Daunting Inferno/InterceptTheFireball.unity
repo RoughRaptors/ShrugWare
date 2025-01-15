@@ -1962,6 +1962,7 @@ MonoBehaviour:
   hitVFXList:
   - {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
   - {fileID: 725748389856807714, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+  fireballSound: {fileID: 11400000, guid: 475cf1224006d064f8b5575a03d20d1a, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -1092,6 +1092,7 @@ MonoBehaviour:
   - {fileID: 1415462640}
   merchantsAndItemsObj: {fileID: 1289737825}
   signsObj: {fileID: 1743291121}
+  buySound: {fileID: 11400000, guid: b5be9c71427c0c04cbc83f2171ef870f, type: 2}
 --- !u!1 &842858760 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1000011181302222, guid: 7ac6bdc2e4b5e47468b8b460ca863a5f, type: 3}
