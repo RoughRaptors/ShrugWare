@@ -198,11 +198,11 @@ namespace ShrugWare
                 {
                     if (victory)
                     {
-                        AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameWin);
+                        AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameWin, true);
                     }
                     else 
                     { 
-                        AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameLose);
+                        AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameLose, true);
                     }
                 }
             }
