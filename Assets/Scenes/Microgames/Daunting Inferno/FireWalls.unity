@@ -26166,6 +26166,7 @@ MonoBehaviour:
   - {fileID: 2097197332}
   - {fileID: 1975447243}
   - {fileID: 1138664089}
+  fireSound: {fileID: 11400000, guid: 475cf1224006d064f8b5575a03d20d1a, type: 2}
 --- !u!1 &823468828
 GameObject:
   m_ObjectHideFlags: 0

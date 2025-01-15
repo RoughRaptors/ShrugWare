@@ -24,6 +24,9 @@ namespace ShrugWare
         [SerializeField]
         MicrogameUI microgameUI;
 
+        [SerializeField]
+        AudioClipData fireSound;
+
         private const float HIDE_BOSS_DELAY = .9f;
         private const float HIDE_WARNING_DELAY = 1.5f;
         private const float NEXT_MOVE_TIME_DELAY = 1.125f;
@@ -157,6 +160,11 @@ namespace ShrugWare
         {
             if (bossPosQueueMoveAndBreathe.Count > 0 && !gameOver)
             {
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayAudioClip(fireSound);
+                }
+
                 bossObject.SetActive(true);
                 breathObj.SetActive(true);
 

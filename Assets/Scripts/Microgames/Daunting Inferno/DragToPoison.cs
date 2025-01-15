@@ -33,6 +33,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject bloodVFX;
 
+        [SerializeField]
+        AudioClipData poisonSound;
+
         [Serializable]
         public struct PositionLayout
         {
@@ -145,6 +148,11 @@ namespace ShrugWare
         {
             if (collision.tag == "Field")
             {
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayAudioClip(poisonSound);
+                }
+
                 GameObject deathObj = Instantiate(enemyDeathVFX, this.transform.position, Quaternion.identity);
                 deathObj.transform.localScale = new Vector2(10, 10);
                 this.transform.position = new Vector2(100, 100);

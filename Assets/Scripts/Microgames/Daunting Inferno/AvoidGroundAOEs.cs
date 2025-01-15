@@ -14,6 +14,9 @@ namespace ShrugWare
         [SerializeField]
         List<GameObject> aoeInitialObjs = new List<GameObject>();
 
+        [SerializeField]
+        AudioClipData spawnSound;
+
         private List<GameObject> aoeObjects = new List<GameObject>();
 
         private float lastSpawnTime = -1.0f;
@@ -37,14 +40,14 @@ namespace ShrugWare
         {
             base.OnEnable();
 
-            PlayerCollider.OnBadCollision += HitAOE;
+            PlayerCollider.OnAnyCollision += HitAOE;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
 
-            PlayerCollider.OnBadCollision -= HitAOE;
+            PlayerCollider.OnAnyCollision -= HitAOE;
         }
 
         protected override void OnMyGameStart()
@@ -56,16 +59,24 @@ namespace ShrugWare
         {
             base.OnMyGameTick(timePercentLeft);
 
-            if(Time.time >= lastSpawnTime + AOE_SPAWN_TIMER)
+            if (!gameOver)
             {
-                lastSpawnTime = Time.time;
-                SpawnAOE();
-            }
+                if (Time.time >= lastSpawnTime + AOE_SPAWN_TIMER)
+                {
+                    lastSpawnTime = Time.time;
+                    SpawnAOE();
 
-            foreach(GameObject aoeObj in aoeObjects)
-            {
-                float scale = aoeObj.transform.localScale.x + (AOE_SCALE_RATE * Time.deltaTime);
-                aoeObj.transform.localScale = new Vector3(scale, scale, scale);
+                    if (AudioManager.Instance != null)
+                    {
+                        AudioManager.Instance.PlayAudioClip(spawnSound);
+                    }
+                }
+
+                foreach (GameObject aoeObj in aoeObjects)
+                {
+                    float scale = aoeObj.transform.localScale.x + (AOE_SCALE_RATE * Time.deltaTime);
+                    aoeObj.transform.localScale = new Vector3(scale, scale, scale);
+                }
             }
         }
 
@@ -77,6 +88,8 @@ namespace ShrugWare
         private void HitAOE(GameObject go)
         {
             hit = true;
+            playerObject.gameObject.SetActive(false);
+            SetMicrogameEndText(false);
         }
 
         private void SpawnAOE()

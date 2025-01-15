@@ -28,6 +28,9 @@ namespace ShrugWare
         [SerializeField]
         List<BreathAttack> breathAttacks = new List<BreathAttack>();
 
+        [SerializeField]
+        AudioClipData breathSound;
+
         private const float ROTATE_TIME = 1.00f;
         private const float ROTATE_SPEED = 5.0f;
 
@@ -61,24 +64,22 @@ namespace ShrugWare
             bossObject.SetActive(true);
             RotateBoss();
             Invoke("RotateBoss", ROTATE_TIME);
-            Invoke("EndGame", microGameTime);
+            Invoke("Breathe", microGameTime - 0.5f);
         }
 
         protected override void OnMyGameTick(float timePercentLeft)
         {
             base.OnMyGameTick(timePercentLeft);
 
-            if(gameOver)
+            if (!gameOver)
             {
-                //return;
-            }
+                if (bossObject.transform.rotation != targetRotation)
+                {
+                    bossObject.transform.rotation = Quaternion.Slerp(bossObject.transform.rotation, targetRotation, ROTATE_SPEED * Time.deltaTime);
+                }
 
-            if(bossObject.transform.rotation != targetRotation)
-            {
-                bossObject.transform.rotation = Quaternion.Slerp(bossObject.transform.rotation, targetRotation, ROTATE_SPEED * Time.deltaTime);
+                HandlePlayerMovement();
             }
-
-            HandlePlayerMovement();
         }
 
         protected override bool VictoryCheck()
@@ -86,10 +87,14 @@ namespace ShrugWare
             return safe;
         }
 
-        private void EndGame()
+        private void Breathe()
         {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(breathSound);
+            }
+
             breathObj.SetActive(true);
-            SetMicrogameEndText(safe);
         }
 
         private void HandlePlayerMovement()
@@ -163,7 +168,7 @@ namespace ShrugWare
         private void BreathHit(GameObject obj)
         {
             safe = false;
-            EndGame();
+            SetMicrogameEndText(false);
         }
     }
 }

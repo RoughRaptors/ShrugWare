@@ -10833,6 +10833,7 @@ MonoBehaviour:
   portalParent: {fileID: 2086275391}
   fireExplosionInitialObj: {fileID: 1563524074}
   firewallInitialObject: {fileID: 80456707}
+  portalSound: {fileID: 11400000, guid: 712e7d723b1abb84cb97ef7ba121945e, type: 2}
 --- !u!1001 &379229033
 PrefabInstance:
   m_ObjectHideFlags: 0

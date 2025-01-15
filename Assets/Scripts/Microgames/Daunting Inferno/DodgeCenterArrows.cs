@@ -1,7 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
-using System;
-using static UnityEngine.GraphicsBuffer;
 
 namespace ShrugWare
 {
@@ -24,6 +21,9 @@ namespace ShrugWare
 
         [SerializeField]
         MicrogameUI microgameUI;
+
+        [SerializeField]
+        AudioClipData fireSound;
 
         private bool safe = true;
         private bool isDiagonalArrowPattern = false;
@@ -147,6 +147,11 @@ namespace ShrugWare
         {
             GetComponent<PlayerMover>().enabled = false;
             gameOver = true;
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(fireSound);
+            }
 
             if (isDiagonalArrowPattern)
             {

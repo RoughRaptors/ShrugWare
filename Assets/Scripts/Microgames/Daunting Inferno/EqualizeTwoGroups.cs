@@ -20,6 +20,9 @@ namespace ShrugWare
         [SerializeField]
         List<GameObject> hitVFXList;
 
+        [SerializeField]
+        AudioClipData fireballSound;
+
         private const float BALL_SPEED = 30.0f;
 
         private bool stackedEqually = false;
@@ -105,6 +108,11 @@ namespace ShrugWare
             if(!stackedEqually)
             {
                 playerObject.SetActive(false);
+            }
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(fireballSound);
             }
 
             int index = UnityEngine.Random.Range(0, hitVFXList.Count);

@@ -21,6 +21,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject playerObj;
 
+        [SerializeField]
+        AudioClipData laserAudio;
+
         private static bool hasBeenHit = false;
         private float timeRunning = 0.0f;
         private int negative = 1;
@@ -90,6 +93,11 @@ namespace ShrugWare
             foreach (GameObject laserObj in laserObjs)
             {
                 laserObj.SetActive(true);
+            }
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(laserAudio);
             }
         }
 

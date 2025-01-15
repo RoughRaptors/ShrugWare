@@ -17,6 +17,9 @@ namespace ShrugWare
         [SerializeField]
         List<GameObject> spawnPositions = new List<GameObject>();
 
+        [SerializeField]
+        AudioClipData agroSound;
+
         private List<GameObject> healerObjs = new List<GameObject>();
         private List<GameObject> addObjs = new List<GameObject>();
         private List<GameObject> aggroedAdds = new List<GameObject>();
@@ -102,9 +105,14 @@ namespace ShrugWare
 
         private void EnemyCollide(GameObject collideGO)
         {
-            if(aggroedAdds.Contains(collideGO))
+            if (aggroedAdds.Contains(collideGO))
             {
                 return;
+            }
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(agroSound);
             }
 
             ++numAddsAggroed;

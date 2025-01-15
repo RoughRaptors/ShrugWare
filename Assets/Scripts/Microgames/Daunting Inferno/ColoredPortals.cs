@@ -42,6 +42,9 @@ namespace ShrugWare
         [SerializeField]
         GameObject firewallInitialObject;
 
+        [SerializeField]
+        AudioClipData portalSound;
+
         List<GameObject> explosions = new List<GameObject>();
         private const int MAX_EXPLOSIONS = 75;
         private const float EXPLOSION_X_MIN = -100.0f;
@@ -131,6 +134,11 @@ namespace ShrugWare
 
         private void HitPortal(GameObject portalObject)
         {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(portalSound);
+            }
+
             if (portalObject.tag == "Red")
             {
                 transform.position = new Vector2(portalExits[PortalColors.Red].transform.position.x, portalExits[PortalColors.Red].transform.position.y - 6.0f);

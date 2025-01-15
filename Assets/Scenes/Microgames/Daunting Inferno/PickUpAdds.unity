@@ -6310,6 +6310,7 @@ MonoBehaviour:
   - {fileID: 1118139559}
   - {fileID: 1768928942}
   - {fileID: 440393348}
+  agroSound: {fileID: 11400000, guid: 9cc6795c6954a274dbfbc5265d0bb053, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

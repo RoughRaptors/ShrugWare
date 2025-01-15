@@ -17,6 +17,9 @@ namespace ShrugWare
         [SerializeField]
         List<GameObject> hitVFXList;
 
+        [SerializeField]
+        AudioClipData fireballSound;
+
         private const float X_MIN = -65.0f;
         private const float X_MAX = 65.0f;
         private const float Y_MIN = -30.0f;
@@ -85,6 +88,11 @@ namespace ShrugWare
             }
             else if (go.name == "Meteor")
             {
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlayAudioClip(fireballSound);
+                }
+
                 int index = UnityEngine.Random.Range(0, hitVFXList.Count);
                 Instantiate(hitVFXList[index], playerObject.transform.position + new Vector3(0, 10, 0), Quaternion.identity);
                 go.SetActive(false);

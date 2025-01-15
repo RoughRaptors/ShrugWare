@@ -17,6 +17,9 @@ namespace ShrugWare
         [SerializeField]
         List<GameObject> hitVFXList;
 
+        [SerializeField]
+        AudioClipData fireballSound;
+
         private bool intercepted = false;
         private const float HEALER_X_MIN = -50;
         private const float HEALER_X_MAX = 50;
@@ -102,6 +105,11 @@ namespace ShrugWare
 
         private void FireballHit(GameObject fireball)
         {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(fireballSound);
+            }
+
             int index = UnityEngine.Random.Range(0, hitVFXList.Count);
             Instantiate(hitVFXList[index], playerObject.transform.position, Quaternion.identity);
 

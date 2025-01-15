@@ -15,6 +15,9 @@ namespace ShrugWare
         [SerializeField]
         List<GameObject> leftFireWalls = new List<GameObject>();
 
+        [SerializeField]
+        AudioClipData fireSound;
+
         private List<GameObject> objsToEnable = new List<GameObject>();
 
         private bool hitFire = false;
@@ -82,7 +85,12 @@ namespace ShrugWare
 
         private void SpawnFire()
         {
-            foreach(GameObject fireWall in objsToEnable)
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(fireSound);
+            }
+
+            foreach (GameObject fireWall in objsToEnable)
             {
                 foreach (Transform child in fireWall.transform)
                 {
