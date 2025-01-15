@@ -4,7 +4,9 @@ UserSettings/
 obj/
 Temp/
 Library/
-
 *.csproj
 *.unityproj
 *.sln
+/ShrugWare.sln
+/Assembly-CSharp.csproj
+/Assembly-CSharp-Editor.csproj
