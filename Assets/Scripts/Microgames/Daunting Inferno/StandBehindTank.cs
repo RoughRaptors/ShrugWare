@@ -14,8 +14,6 @@ namespace ShrugWare
         [SerializeField]
         List<GameObject> hitVFXList;
 
-        private bool intercepted = false;
-
         private const float TANK_X_MIN = -85.0f;
         private const float TANK_X_MAX = 85.0f;
         private const float TANK_Y_MIN = -17.5f;
