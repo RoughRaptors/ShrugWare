@@ -89,7 +89,7 @@ namespace ShrugWare
             yield return new WaitUntil(() =>
             {
                 // comment this line to have infinite time to test a microgame
-                timeLeft -= Time.deltaTime;
+                // timeLeft -= Time.deltaTime;
                 timeElapsed += Time.deltaTime;
                 float timePercentLeft = timeLeft / microGameTime;
                 OnMyGameTick(timePercentLeft);
