@@ -69,7 +69,8 @@ namespace ShrugWare
             MoreDOTs,
             DonutAOE,
             ReportChatMessage,
-            MICROGAME_END = 61, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
+            PickCorrectRole,
+            MICROGAME_END = 62, // PUT ALL MICROGAMES BEFORE THIS AND KEEP THE VALUE UP TO DATE
         }
 
         public enum StatModifierType
