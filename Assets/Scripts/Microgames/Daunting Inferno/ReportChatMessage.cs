@@ -21,15 +21,15 @@ namespace ShrugWare
         [SerializeField]
         ScrollRect scrollRect;
 
-        private const int NUM_MESSAGES_TO_DISPLAY = 12;
-        private const float CHAT_DELAY_MIN = 0.45f;
-        private const float CHAT_DELAY_MAX = 0.85f;
+        private const int NUM_MESSAGES_TO_DISPLAY = 7;
+        private const float CHAT_DELAY_MIN = 0.35f;
+        private const float CHAT_DELAY_MAX = 0.65f;
 
         private int curMessageIndex = -1;
         private int chosenBadChatMessageIndex = -1; // which bad message we choose
         private int badChatMessageLocation = -1; // where in the whole message list we are placing the bad message
         private List<string> badChatMessages = new List<string> { "what the fuck is wrong with you", "fuck you", "go fuck yourself", "you're a bitch",
-            "fuck you shithead", "you're an asshole", "i fucking hate you", "die in a fucking fire", "eat shit", " kys ", "piece of shit", "i wipe my face with your ass"};
+            "fuck you shithead", "you're an asshole", "i fucking hate you", "die in a fucking fire", "eat shit", "kys", "piece of shit", "i wipe my face with your ass"};
 
         private List<string> chatMessages = new List<string> { "hey everyone", "how are you?", "hello", "i love you", "good job", "good dps", 
             "good healing", "what's up?", "nice cat", "longcat is long", "more dots", "whelps left side", "at least i have chicken", "i like animals",
@@ -60,6 +60,7 @@ namespace ShrugWare
 
             float newMessageTime = UnityEngine.Random.Range(CHAT_DELAY_MIN, CHAT_DELAY_MAX);
             Invoke("PostNewMessage", newMessageTime);
+            Invoke("MakeButtonsNonInteractable", microGameTime);
         }
 
         protected override void OnMyGameTick(float timePercentLeft)
@@ -74,44 +75,61 @@ namespace ShrugWare
 
         private void PostNewMessage()
         {
-            scrollRect.verticalNormalizedPosition = 0;
-
-            GameObject newChatMessage = Instantiate(chatMessageInitialObj, scrollViewContent.transform);
-            //GameObject newChatMessage = Instantiate(chatMessageInitialObj);
-            string message = "";
-
-            // if we have enough chat messages, put the bad one in instead
-            if (scrollViewContent.transform.childCount - 1 == badChatMessageLocation) 
+            if (!gameOver)
             {
-                message = badChatMessages[chosenBadChatMessageIndex];
-            }
-            else if (scrollViewContent.transform.childCount < NUM_MESSAGES_TO_DISPLAY)
-            {
-                int messageIndex = UnityEngine.Random.Range(0, chatMessages.Count);
-                message = chatMessages[messageIndex];
-                chatMessages.RemoveAt(messageIndex);
-            }
+                scrollRect.verticalNormalizedPosition = 0;
+                
+                GameObject newChatMessage = Instantiate(chatMessageInitialObj, scrollViewContent.transform);
+                string message = "";
 
-            int currentMessageIndex = ++curMessageIndex;
-            newChatMessage.GetComponent<Button>().onClick.AddListener(() => OnMessageClick(currentMessageIndex));
-            newChatMessage.GetComponentInChildren<TextMeshProUGUI>().text = message;
-            newChatMessage.SetActive(true);
+                // if we have enough chat messages, put the bad one in instead
+                if (scrollViewContent.transform.childCount - 1 == badChatMessageLocation)
+                {
+                    message = badChatMessages[chosenBadChatMessageIndex];
+                }
+                else if (scrollViewContent.transform.childCount <= NUM_MESSAGES_TO_DISPLAY)
+                {
+                    int messageIndex = UnityEngine.Random.Range(0, chatMessages.Count);
+                    message = chatMessages[messageIndex];
+                    chatMessages.RemoveAt(messageIndex);
+                }
 
-            if (scrollViewContent.transform.childCount < NUM_MESSAGES_TO_DISPLAY)
-            {
-                float newMessageTime = UnityEngine.Random.Range(CHAT_DELAY_MIN, CHAT_DELAY_MAX);
-                Invoke("PostNewMessage", newMessageTime);
+                int currentMessageIndex = ++curMessageIndex;
+                newChatMessage.GetComponent<Button>().onClick.AddListener(() => OnMessageClick(currentMessageIndex));
+                newChatMessage.GetComponentInChildren<TextMeshProUGUI>().text = message;
+                newChatMessage.SetActive(true);
+
+                if (scrollViewContent.transform.childCount < NUM_MESSAGES_TO_DISPLAY)
+                {
+                    float newMessageTime = UnityEngine.Random.Range(CHAT_DELAY_MIN, CHAT_DELAY_MAX);
+                    Invoke("PostNewMessage", newMessageTime);
+                }
             }
         }
 
         public void OnMessageClick(int messageIndex)
         {
-            if(messageIndex == badChatMessageLocation)
+            MakeButtonsNonInteractable();
+
+            if (OverworldManager.Instance != null)
+            {
+                AudioManager.Instance.PlayAudioClip(buttonClickAudio);
+            }
+
+            if (messageIndex == badChatMessageLocation)
             {
                 clickedCorrectMessage = true;
             }
 
             SetMicrogameEndText(clickedCorrectMessage);
+        }
+
+        public void MakeButtonsNonInteractable()
+        {
+            foreach (Button button in scrollViewContent.GetComponentsInChildren<Button>())
+            {
+                button.interactable = false;
+            }
         }
     }
 }
