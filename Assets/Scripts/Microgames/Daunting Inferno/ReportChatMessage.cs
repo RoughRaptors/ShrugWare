@@ -20,7 +20,6 @@ namespace ShrugWare
         [SerializeField]
         ScrollRect scrollRect;
 
-        int index = 0;
         private List<string> characterNames = new List<string> { "1", "2", "3", "4"};
 
         private List<string> chatMessages = new List<string> { "a", "b", "c", "d"};
@@ -43,11 +42,19 @@ namespace ShrugWare
 
             scrollRect.verticalNormalizedPosition = 0;
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && chatMessages.Count > 0)
             {
                 GameObject newChatMessage = Instantiate(chatMessageInitialObj, scrollViewContent.transform);
-                newChatMessage.GetComponentInChildren<TextMeshPro>().text = index++.ToString();
-                //Resize(5, new Vector2(1, 0), ref newChatMessage);
+
+                int charNameIndex = UnityEngine.Random.Range(0, characterNames.Count);
+                string charName = characterNames[charNameIndex];
+                characterNames.RemoveAt(charNameIndex);
+
+                int messageIndex = UnityEngine.Random.Range(0, chatMessages.Count);
+                string message = chatMessages[messageIndex];
+                chatMessages.RemoveAt(messageIndex);
+
+                newChatMessage.GetComponentInChildren<TextMeshProUGUI>().text = charName + ": " + message;
                 newChatMessage.SetActive(true);
             }
         }
@@ -55,12 +62,6 @@ namespace ShrugWare
         protected override bool VictoryCheck()
         {
             return clickedCorrectMessage;
-        }
-
-        private void Resize(float amount, Vector3 direction, ref GameObject go)
-        {
-            go.transform.position += direction * amount / 2; // Move the object in the direction of scaling, so that the corner on ther side stays in place
-            go.transform.localScale += direction * amount; // Scale object in the specified direction
         }
     }
 }
