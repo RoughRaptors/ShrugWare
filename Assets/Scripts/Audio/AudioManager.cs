@@ -134,7 +134,7 @@ namespace ShrugWare
             }
         }
 
-        private void PlayMusicClipSetupHelper(DataManager.AudioType audioType)
+        private void PlayMusicClipSetupHelper(DataManager.AudioType audioType, float extraTimePercent = 1.0f)
         {
             if (audioSourceMusic == null)
             {
@@ -157,6 +157,10 @@ namespace ShrugWare
                 }
 
                 audioSourceMusic.pitch = curTimeScale * MUSIC_PITCH_MULTIPLY_VALUE;
+                if(extraTimePercent > 1.0f)
+                {
+                    audioSourceMusic.pitch *= extraTimePercent - 1;
+                }
             }
         }
 
@@ -169,9 +173,9 @@ namespace ShrugWare
             audioSourceMusic.Play();
         }
 
-        public void PlayMusicClip(AudioClip audioClip, DataManager.AudioType audioType, float volumeScale = 1)
+        public void PlayMusicClip(AudioClip audioClip, DataManager.AudioType audioType, float volumeScale = 1, float extraTimePercent = 1.0f)
         {
-            PlayMusicClipSetupHelper(audioType);
+            PlayMusicClipSetupHelper(audioType, extraTimePercent);
             audioSourceMusic.volume = volumeScale;
             audioSourceMusic.clip = audioClip;
             audioSourceMusic.Play();

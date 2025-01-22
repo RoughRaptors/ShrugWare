@@ -77,7 +77,7 @@ namespace ShrugWare
         private void FireHit(GameObject obj)
         {
             hitFire = true;
-            SetMicrogameEndText(hitFire);
+            SetMicrogameEndText(!hitFire);
         }
 
         private void SpawnFire()

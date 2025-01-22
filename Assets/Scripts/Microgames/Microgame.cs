@@ -89,7 +89,7 @@ namespace ShrugWare
             yield return new WaitUntil(() =>
             {
                 // comment this line to have infinite time to test a microgame
-                // timeLeft -= Time.deltaTime;
+                timeLeft -= Time.deltaTime;
                 timeElapsed += Time.deltaTime;
                 float timePercentLeft = timeLeft / microGameTime;
                 OnMyGameTick(timePercentLeft);
@@ -111,7 +111,7 @@ namespace ShrugWare
         protected virtual void OnMyGameStart()
         {
             // on start pick a random audio piece and sprite
-            if(AudioManager.Instance != null)
+            if (AudioManager.Instance != null)
             {
                 // keep the music separated for now. we can remove the old stuff once we have enough new stuff
                 AudioClip audioClip;
@@ -123,7 +123,6 @@ namespace ShrugWare
                     var clipData = AudioManager.Instance.GetMicrogameAudioClipFromIndexSO(randMusicIndexSO);
                     audioClip = clipData.clip;
                     vol = clipData.maxVolume;
-
                 }
                 else
                 {
@@ -132,8 +131,12 @@ namespace ShrugWare
                     vol = .7f;
                 }
 
+                // some microgames are longer, change the pitch to accomodate
+                float timePercentLonger = microGameTime / DataManager.MICROGAME_DURATION_SECONDS;
+                Debug.Log(timePercentLonger);
+
                 // keep this until we completely get rid of the old background music
-                AudioManager.Instance.PlayMusicClip(audioClip, DataManager.AudioType.MicrogameMusic, vol);
+                AudioManager.Instance.PlayMusicClip(audioClip, DataManager.AudioType.MicrogameMusic, vol, timePercentLonger);
 
                 if (InfiniteModeManager.Instance != null)
                 {
