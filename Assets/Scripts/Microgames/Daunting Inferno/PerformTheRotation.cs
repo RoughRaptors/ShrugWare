@@ -42,6 +42,17 @@ namespace ShrugWare
 
         private List<RotationMapping> rotation = new List<RotationMapping>();
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            // this is a hard microgame when too fast and, there's not enough time, give it a time boost the faster the timescale is
+            if (BossGameManager.Instance != null)
+            {
+                microGameTime += BossGameManager.Instance.GetCurTimeScale() * 2;
+            }
+        }
+
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
@@ -59,12 +70,6 @@ namespace ShrugWare
             frostboltButtonObj.onClick.AddListener(() => ButtonPressed(frostboltButtonObj, RotationMapping.Frostbolt));
             glacialSpikeButtonObj.onClick.AddListener(() => ButtonPressed(glacialSpikeButtonObj, RotationMapping.GlacialSpike));
             iceBlastButtonObj.onClick.AddListener(() => ButtonPressed(iceBlastButtonObj, RotationMapping.IceBlast));
-
-            // this is a hard microgame when too fast and, there's not enough time, give it a time boost the faster the timescale is
-            if(BossGameManager.Instance != null)
-            {
-                microGameTime += BossGameManager.Instance.GetCurTimeScale() * 2;
-            }
 
             bossObj.SetActive(true);
         }

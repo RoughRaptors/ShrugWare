@@ -43,12 +43,14 @@ namespace ShrugWare
 
         protected virtual void Awake()
         {
+            microGameTime = DataManager.MICROGAME_DURATION_SECONDS;
+
             OnMyGameAwake();
         }
 
         protected virtual void Start()
         {
-            microGameTime = DataManager.MICROGAME_DURATION_SECONDS;
+            // microGameTime = DataManager.MICROGAME_DURATION_SECONDS;
 
             // will be null if individually loading scenes
             if (BossGameManager.Instance)
@@ -63,7 +65,7 @@ namespace ShrugWare
                 }
             }
 
-            if(AudioManager.Instance != null)
+            if (AudioManager.Instance != null)
             {
                 AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameIntro);
             }
@@ -111,7 +113,7 @@ namespace ShrugWare
         protected virtual void OnMyGameStart()
         {
             // on start pick a random audio piece and sprite
-            if(AudioManager.Instance != null)
+            if (AudioManager.Instance != null)
             {
                 // keep the music separated for now. we can remove the old stuff once we have enough new stuff
                 AudioClip audioClip;
@@ -123,7 +125,6 @@ namespace ShrugWare
                     var clipData = AudioManager.Instance.GetMicrogameAudioClipFromIndexSO(randMusicIndexSO);
                     audioClip = clipData.clip;
                     vol = clipData.maxVolume;
-
                 }
                 else
                 {
@@ -132,8 +133,12 @@ namespace ShrugWare
                     vol = .7f;
                 }
 
+                // some microgames are longer, change the pitch to accomodate
+                //float timePercentLonger = microGameTime / DataManager.MICROGAME_DURATION_SECONDS;
+                float timePercentLonger = DataManager.MICROGAME_DURATION_SECONDS / microGameTime;
+
                 // keep this until we completely get rid of the old background music
-                AudioManager.Instance.PlayMusicClip(audioClip, DataManager.AudioType.MicrogameMusic, vol);
+                AudioManager.Instance.PlayMusicClip(audioClip, DataManager.AudioType.MicrogameMusic, vol, timePercentLonger);
 
                 if (InfiniteModeManager.Instance != null)
                 {

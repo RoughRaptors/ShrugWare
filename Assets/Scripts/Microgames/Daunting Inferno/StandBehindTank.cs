@@ -14,8 +14,6 @@ namespace ShrugWare
         [SerializeField]
         List<GameObject> hitVFXList;
 
-        private bool intercepted = false;
-
         private const float TANK_X_MIN = -85.0f;
         private const float TANK_X_MAX = 85.0f;
         private const float TANK_Y_MIN = -17.5f;
@@ -73,7 +71,10 @@ namespace ShrugWare
         {
             base.OnMyGameTick(timePercentLeft);
 
-            MoveTank();
+            if (!gameOver)
+            {
+                MoveTank();
+            }
         }
 
         protected override bool VictoryCheck()

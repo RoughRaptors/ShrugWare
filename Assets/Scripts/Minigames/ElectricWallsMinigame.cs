@@ -88,8 +88,6 @@ namespace ShrugWare
         private float healthRemaining = 100;
         private bool gameRunning = false;
 
-        private bool hitElectricity = false;
-
         private const float SPAWN_INTERVAL = 2.25f;
         private float lastSpawnTime = float.MinValue;
 

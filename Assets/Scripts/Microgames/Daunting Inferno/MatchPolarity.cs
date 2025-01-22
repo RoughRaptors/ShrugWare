@@ -33,7 +33,6 @@ namespace ShrugWare
         private bool polarityMatched = false;
 
         private bool playerPositive = false;
-        private float projectileSpeed = 0.75f;
 
         private const float PLAYER_X_MIN = -90;
         private const float PLAYER_X_MAX = 90;

@@ -69,7 +69,10 @@ namespace ShrugWare
         {
             base.OnMyGameTick(timePercentLeft);
 
-            enemyObj.transform.position = Vector3.MoveTowards(enemyObj.transform.position, playerObj.transform.position, bossSpeed * Time.deltaTime);
+            if (!gameOver)
+            {
+                enemyObj.transform.position = Vector3.MoveTowards(enemyObj.transform.position, playerObj.transform.position, bossSpeed * Time.deltaTime);
+            }
         }
 
         protected override bool VictoryCheck()
@@ -82,7 +85,11 @@ namespace ShrugWare
             int index = UnityEngine.Random.Range(0, hitVFXList.Count);
             GameObject bloodObj = Instantiate(hitVFXList[index], playerObj.transform.position, Quaternion.identity);
             bloodObj.SetActive(true);
-            playerObj.SetActive(false);
+
+            foreach (SpriteRenderer renderer in GetComponentsInChildren<SpriteRenderer>())
+            {
+                renderer.enabled = false;
+            }
 
             hit = true;
             SetMicrogameEndText(false);

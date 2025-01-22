@@ -42,6 +42,17 @@ namespace ShrugWare
         const float Y_MIN = -600;
         const float Y_MAX = 900;
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            // this is a hard microgame when too fast and, there's not enough time, give it a time boost the faster the timescale is
+            if (BossGameManager.Instance != null)
+            {
+                microGameTime += BossGameManager.Instance.GetCurTimeScale() * 3.0f;
+            }
+        }
+
         protected override void Start()
         {
             base.Start();
@@ -51,12 +62,6 @@ namespace ShrugWare
         {
             base.OnMyGameStart();
             SpawnResources();
-
-            // this is a hard microgame when too fast and, there's not enough time, give it a time boost the faster the timescale is
-            if (BossGameManager.Instance != null)
-            {
-                microGameTime += BossGameManager.Instance.GetCurTimeScale() * 3.0f;
-            }
         }
 
         protected override void OnMyGameTick(float timePercentLeft)

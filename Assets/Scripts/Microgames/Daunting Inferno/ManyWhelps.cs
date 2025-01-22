@@ -24,6 +24,13 @@ namespace ShrugWare
         private const float Y_MIN = -35;
         private const float Y_MAX = 20;
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            microGameTime *= 1.25f;
+        }
+
         protected override void Start()
         {
             base.Start();
@@ -32,8 +39,6 @@ namespace ShrugWare
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
-
-            microGameTime *= 1.25f;
 
             for(int i = 0; i < whelps.Count; ++i)
             {

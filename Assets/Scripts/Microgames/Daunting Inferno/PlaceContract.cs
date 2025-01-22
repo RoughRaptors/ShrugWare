@@ -49,8 +49,6 @@ namespace ShrugWare
 
         private int contractSpawnIndex;
 
-        private bool failedPlacement = false;
-
         private const float PLAYER_SPEED = 50.0f;
         private const float SPAWN_INTERVAL = 2.75f; // how often a contract spawns
         private const float DROP_TIMER = 1.75f; // how long we have before the contract drops

@@ -26,7 +26,6 @@ namespace ShrugWare
         private const float Y_MAX = 0.0f;
         private const float DISTANCE_FOR_VALID_STACK = 10.0f;
         private const float MEMBER_MOVE_SPEED = 22.5f;
-        private bool stacked = true;
 
         private List<GameObject> overlapObjects = new List<GameObject>();
 

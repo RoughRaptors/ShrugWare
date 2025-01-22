@@ -54,13 +54,13 @@ namespace ShrugWare
 
             float prepareDelay = UnityEngine.Random.Range(1.0f, 2.3f);
             Invoke("PrepareFishToBite", prepareDelay);
+
+            microGameTime *= 1.5f;
         }
 
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
-
-            microGameTime *= 1.5f;
 
             if (AudioManager.Instance != null)
             {

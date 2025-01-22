@@ -65,8 +65,6 @@ namespace ShrugWare
                 extraTime = BossGameManager.Instance.GetCurTimeScale();
             }
 
-            //microGameTime += extraTime;
-
             dpsButton1.GetComponent<Button>().interactable = true;
             dpsButton2.GetComponent<Button>().interactable = true;
             dpsButton3.GetComponent<Button>().interactable = true;

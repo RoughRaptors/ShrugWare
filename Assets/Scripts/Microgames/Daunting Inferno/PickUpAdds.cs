@@ -37,6 +37,8 @@ namespace ShrugWare
         {
             base.OnMyGameAwake();
 
+            microGameTime *= 1.5f;
+
             int chosenSpawnIndex = UnityEngine.Random.Range(0, spawnPositions.Count);
             GameObject spawnPosObj = spawnPositions[chosenSpawnIndex];
             spawnPosObj.SetActive(true);
@@ -58,8 +60,6 @@ namespace ShrugWare
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
-
-            microGameTime *= 1.5f;
         }
 
         protected override void OnEnable()

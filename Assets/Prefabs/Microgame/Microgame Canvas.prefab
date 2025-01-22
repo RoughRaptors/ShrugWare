@@ -472,6 +472,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Timer Bar
       objectReference: {fileID: 0}
+    - target: {fileID: 8101785762507012295, guid: dbabc0eaad358044d83c94120c3582d9, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

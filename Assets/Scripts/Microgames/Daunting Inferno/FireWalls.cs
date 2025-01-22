@@ -7,9 +7,6 @@ namespace ShrugWare
     public class FireWalls : Microgame
     {
         [SerializeField]
-        GameObject playerObject = null;
-
-        [SerializeField]
         List<GameObject> bottomFireWalls = new List<GameObject>();
 
         [SerializeField]
@@ -80,7 +77,7 @@ namespace ShrugWare
         private void FireHit(GameObject obj)
         {
             hitFire = true;
-            SetMicrogameEndText(hitFire);
+            SetMicrogameEndText(!hitFire);
         }
 
         private void SpawnFire()
