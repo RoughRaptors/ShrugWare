@@ -66,13 +66,13 @@ namespace ShrugWare
             {
                 rotationObj.transform.Rotate(new Vector2(0, 180));
             }
-
-            Invoke("HideRotationArrow", 1.0f);
         }
 
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
+
+            rotationObj.SetActive(false);
 
             if (AudioManager.Instance != null)
             {
@@ -106,11 +106,6 @@ namespace ShrugWare
 
             SetMicrogameEndText(false);
             hasBeenHit = true;
-        }
-
-        private void HideRotationArrow()
-        {
-            rotationObj.SetActive(false);
         }
     }
 }

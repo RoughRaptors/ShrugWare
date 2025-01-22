@@ -188,5 +188,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Microgames/Daunting Inferno/DonutAOE.unity
     guid: 13af40337aaf9cf41bc5dcf848eb39ef
+  - enabled: 1
+    path: Assets/Scenes/Microgames/Daunting Inferno/ReportChatMessage.unity
+    guid: ff8eed463839b204cbf5b5c664aaa1f6
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: dd69bd027abc73c48b5382fd6cab7dda, type: 2}
