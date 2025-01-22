@@ -164,6 +164,7 @@
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\StackPowerstones.cs" />
     <Compile Include="Assets\GearScreen.cs" />
     <Compile Include="Assets\ColliderHelper.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\PickCorrectRole.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\LineOfSight.cs" />
     <Compile Include="Assets\TooltipManager.cs" />
     <Compile Include="Assets\Art\KY_effects\Script\Lighting.cs" />

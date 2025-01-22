@@ -25,6 +25,7 @@ Heal The Tank - Use heal buttons to heal the tank
 Many Whelps - Click the whelps
 More DOTs - Apply x dots to boss before time limit
 Perform The Rotation - Click the shown abilities in the correct order
+Pick Correct Role - Click the missing role to queue
 Report Chat Message - click the bad chat message
 Taunt The Adds - Click x amount of adds running around the screen.
 
