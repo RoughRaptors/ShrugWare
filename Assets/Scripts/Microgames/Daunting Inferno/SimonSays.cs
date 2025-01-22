@@ -63,6 +63,8 @@ namespace ShrugWare
         {
             base.OnMyGameAwake();
 
+            microGameTime = 11.5f;
+
             ParticleSystem ps = breathObj.GetComponent<ParticleSystem>();
             ParticleSystem.MainModule mainModule = ps.main;
             SetupBossPositionQueue();
@@ -72,7 +74,6 @@ namespace ShrugWare
         {
             base.OnMyGameStart();
 
-            microGameTime = 11.5f;
             Invoke("HandleBossMovement", NEXT_MOVE_TIME_DELAY);
         }
 

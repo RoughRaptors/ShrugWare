@@ -39,6 +39,13 @@ namespace ShrugWare
 
         private bool clickedCorrectMessage = false;
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            microGameTime *= 1.5f;
+        }
+
         protected override void Start()
         {
             base.Start();
@@ -46,8 +53,6 @@ namespace ShrugWare
 
         protected override void OnMyGameStart()
         {
-            microGameTime *= 1.5f;
-
             base.OnMyGameStart();
 
             chosenBadChatMessageIndex = UnityEngine.Random.Range(0, badChatMessages.Count);

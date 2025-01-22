@@ -59,13 +59,13 @@ namespace ShrugWare
         protected override void Awake()
         {
             base.Awake();
+
+            microGameTime *= 1.25f;
         }
 
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
-
-            microGameTime *= 1.25f;
         }
 
         protected override void OnMyGameAwake()

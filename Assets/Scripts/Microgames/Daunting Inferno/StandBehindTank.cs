@@ -71,7 +71,10 @@ namespace ShrugWare
         {
             base.OnMyGameTick(timePercentLeft);
 
-            MoveTank();
+            if (!gameOver)
+            {
+                MoveTank();
+            }
         }
 
         protected override bool VictoryCheck()

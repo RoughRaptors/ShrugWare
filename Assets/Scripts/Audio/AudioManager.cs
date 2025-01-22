@@ -157,9 +157,9 @@ namespace ShrugWare
                 }
 
                 audioSourceMusic.pitch = curTimeScale * MUSIC_PITCH_MULTIPLY_VALUE;
-                if(extraTimePercent > 1.0f)
+                if(extraTimePercent != 0.0f)
                 {
-                    audioSourceMusic.pitch *= extraTimePercent - 1;
+                    audioSourceMusic.pitch *= extraTimePercent;
                 }
             }
         }

@@ -64,11 +64,17 @@ namespace ShrugWare
             PlayerCollider.OnGoodExit -= RaidLeft;
         }
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            microGameTime *= 1.2f;
+        }
+
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
 
-            microGameTime *= 1.2f;
             if (BossGameManager.Instance != null)
             {
                 initialTimescale = BossGameManager.Instance.GetCurTimeScale();

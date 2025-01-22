@@ -100,13 +100,13 @@ namespace ShrugWare
         protected override void OnMyGameAwake()
         {
             base.OnMyGameAwake();
+
+            microGameTime *= 1.33f;
         }
 
         protected override void OnMyGameStart()
         {
             base.OnMyGameStart();
-
-            microGameTime *= 1.33f;
 
             int enumLength = Enum.GetNames(typeof(PortalColors)).Length;
             correctPortalColor = (PortalColors)UnityEngine.Random.Range(0, enumLength);

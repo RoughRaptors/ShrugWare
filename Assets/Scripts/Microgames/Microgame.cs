@@ -43,12 +43,14 @@ namespace ShrugWare
 
         protected virtual void Awake()
         {
+            microGameTime = DataManager.MICROGAME_DURATION_SECONDS;
+
             OnMyGameAwake();
         }
 
         protected virtual void Start()
         {
-            microGameTime = DataManager.MICROGAME_DURATION_SECONDS;
+            // microGameTime = DataManager.MICROGAME_DURATION_SECONDS;
 
             // will be null if individually loading scenes
             if (BossGameManager.Instance)
@@ -63,7 +65,7 @@ namespace ShrugWare
                 }
             }
 
-            if(AudioManager.Instance != null)
+            if (AudioManager.Instance != null)
             {
                 AudioManager.Instance.PlayAudioClip(DataManager.AudioType.MicrogameIntro);
             }
@@ -132,8 +134,8 @@ namespace ShrugWare
                 }
 
                 // some microgames are longer, change the pitch to accomodate
-                float timePercentLonger = microGameTime / DataManager.MICROGAME_DURATION_SECONDS;
-                Debug.Log(timePercentLonger);
+                //float timePercentLonger = microGameTime / DataManager.MICROGAME_DURATION_SECONDS;
+                float timePercentLonger = DataManager.MICROGAME_DURATION_SECONDS / microGameTime;
 
                 // keep this until we completely get rid of the old background music
                 AudioManager.Instance.PlayMusicClip(audioClip, DataManager.AudioType.MicrogameMusic, vol, timePercentLonger);
