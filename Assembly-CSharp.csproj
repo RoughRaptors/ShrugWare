@@ -153,6 +153,7 @@
     <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\PerformTheRotation.cs" />
     <Compile Include="Assets\Scripts\Various Other\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\Microgames\Daunting Inferno\ElevatorBoss.cs" />
     <Compile Include="Assets\Art\KY_effects\Script\ConGUI.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonPressedHelper.cs" />
     <Compile Include="Assets\Scripts\UI\DragUIObject.cs" />

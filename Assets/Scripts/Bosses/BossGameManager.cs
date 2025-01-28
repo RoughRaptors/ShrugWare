@@ -42,6 +42,7 @@ Dodge Center Arrows - Arrow patterns will appear as warnings for death zones
 Dodge The Fireball - Dodge a fireball coming at you
 Donut AOE - Stay in the center of the donut aoe
 Drag To Poison - Drag the boss to poison and avoid allies
+Elevator Boss - Get on the elevator
 Equalize The Two Groups -  Move to the group that will make the party member numbers even
 Fire Walls - Fire walls spawn, avoid them
 Follow The Raid Lag - Stick with the raid through lagging out
